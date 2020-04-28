@@ -233,48 +233,49 @@ death,county,age,gender,travel_related,juristiction,date_case_counted
 232,Collier,83,Female,Yes,FL resident,04/05/20
 233,Collier,90,Female,No,FL resident,04/09/20
 234,Collier,85,Male,No,FL resident,04/10/20
-235,Collier,101 Female,No,Yes,236,Collier
-85,Male,Yes,NY,Unknown,237,Collier
-81,Female,No,Yes,FL resident,238,Collier
-88,Female,No,Yes,FL resident,239,Collier
-32,Female,No,Yes,FL resident,240,Collier
-74,Male,No,Yes,FL resident,241,Dade
-56,Male,Yes,NY,Yes,242,Dade
-88,Male,Unknown,Unknown,FL resident,243,Dade
-71,Female,No,Unknown,FL resident,244,Dade
-69,Male,No,Yes,FL resident,245,Dade
-83,Male,No,Yes,FL resident,246,Dade
-83,Male,No,Yes,FL resident,247,Dade
-67,Male,No,Yes,FL resident,248,Dade
-40,Male,No,Yes,FL resident,249,Dade
-57,Male,No,Unknown,FL resident,250,Dade
-74,Female,No,Yes,FL resident,251,Dade
-78,Male,No,No,FL resident,252,Dade
-94,Male,No,Unknown,FL resident,253,Dade
-63,Male,Yes,NC,No,254,Dade
-61,Male,No,No,FL resident,255,Dade
-69,Female,No,Unknown,FL resident,256,Dade
-84,Male,No,Yes,FL resident,257,Dade
-75,Male,No,Unknown,FL resident,258,Dade
-81,Female,No,Yes,FL resident,259,Dade
-61,Male,Unknown,Unknown,FL resident,260,Dade
-71,Male,No,No,FL resident,261,Dade
-77,Male,No,Yes,FL resident,262,Dade
-68,Female,No,Yes,FL resident,263,Dade
-71,Male,Yes,ECUADOR; FL,Yes,264,Dade
-72,Male,No,Unknown,FL resident,265,Dade
-79,Male,Unknown,Unknown,FL resident,266,Dade
-75,Female,No,No,FL resident,267,Dade
-76,Male,No,Yes,FL resident,268,Dade
-49,Male,No,Yes,FL resident,269,Dade
-75,Male,No,Yes,FL resident,270,Dade
-80,Male,No,Yes,FL resident,271,Dade
-66,Male,No,Unknown,FL resident,272,Dade
-85,Male,Yes,FL; SPAIN,Yes,273,Dade
-74,Female,Unknown,Yes,FL resident,274,Dade
-49,Male,Unknown,Yes,FL resident,275,Dade
-81,Male,No,Yes,FL resident,276,Dade
-71,Male,Unknown,Yes,FL resident,FL resident,03/28/20
+235,Collier,101,Female,No,FL resident,04/12/20
+236,Collier,85,Male,Yes,FL resident,04/13/20
+237,Collier,81,Female,No,FL resident,04/14/20
+238,Collier,88,Female,No,FL resident,04/15/20
+239,Collier,32,Female,No,FL resident,04/16/20
+240,Collier,74,Male,No,FL resident,04/21/20
+241,Dade,56,Male,Yes,FL resident,03/16/20
+242,Dade,88,Male,Unknown,FL resident,03/17/20
+243,Dade,71,Female,No,FL resident,03/20/20
+244,Dade,69,Male,No,FL resident,03/20/20
+245,Dade,83,Male,No,FL resident,03/22/20
+246,Dade,83,Male,No,FL resident,03/22/20
+247,Dade,67,Male,No,FL resident,03/22/20
+248,Dade,40,Male,No,FL resident,03/22/20
+249,Dade,57,Male,No,FL resident,03/22/20
+250,Dade,74,Female,No,FL resident,03/22/20
+251,Dade,78,Male,No,FL resident,03/24/20
+252,Dade,94,Male,No,FL resident,03/24/20
+253,Dade,63,Male,Yes,FL resident,03/24/20
+254,Dade,61,Male,No,FL resident,03/24/20
+255,Dade,69,Female,No,FL resident,03/25/20
+256,Dade,84,Male,No,FL resident,03/25/20
+257,Dade,75,Male,No,FL resident,03/25/20
+258,Dade,81,Female,No,FL resident,03/25/20
+259,Dade,61,Male,Unknown,FL resident,03/25/20
+260,Dade,71,Male,No,FL resident,03/26/20
+261,Dade,77,Male,No,FL resident,03/26/20
+262,Dade,68,Female,No,FL resident,03/26/20
+263,Dade,71,Male,Yes,FL resident,03/27/20
+264,Dade,72,Male,No,FL resident,03/27/20
+265,Dade,79,Male,Unknown,FL resident,03/27/20
+266,Dade,75,Female,No,FL resident,03/27/20
+267,Dade,76,Male,No,FL resident,03/27/20
+268,Dade,49,Male,No,FL resident,03/27/20
+269,Dade,75,Male,No,FL resident,03/27/20
+270,Dade,80,Male,No,FL resident,03/27/20
+271,Dade,66,Male,No,FL resident,03/27/20
+272,Dade,85,Male,Yes,FL resident,03/27/20
+273,Dade,74,Female,Unknown,FL resident,03/28/20
+274,Dade,49,Male,Unknown,FL resident,03/28/20
+275,Dade,81,Male,No,FL resident,03/28/20
+276,Dade,71,Male,Unknown,FL resident,03/28/20
+277,Dade,101,Female,Unknown,FL resident,03/28/20
 278,Dade,79,Male,No,FL resident,03/28/20
 279,Dade,74,Male,No,FL resident,03/28/20
 280,Dade,71,Male,No,FL resident,03/28/20
@@ -587,42 +588,52 @@ death,county,age,gender,travel_related,juristiction,date_case_counted
 587,Highlands,61,Male,Yes,FL resident,04/08/20
 588,Highlands,59,Male,No,FL resident,04/09/20
 589,Highlands,62,Female,No,FL resident,04/11/20
-590,Hillsborough 69,Male,Unknown,No,FL resident,03/24/20
-592,Hillsborough 63,Male,Unknown,Yes,FL resident,03/24/20
-594,Hillsborough 68,Female,Yes,EGYPT,FL resident,03/26/20
-596,Hillsborough 62,Male,No,Yes,FL resident,03/29/20
-598,Hillsborough 93,Female,Unknown,Yes,FL resident,03/30/20
-600,Hillsborough 74,Male,Unknown,Yes,FL resident,04/02/20
-602,Hillsborough 73,Male,No,Unknown,FL resident,04/06/20
-604,Hillsborough 55,Male,Unknown,Unknown,FL resident,04/10/20
-606,Hillsborough 66,Male,Unknown,Unknown,FL resident,04/12/20
-608,Hillsborough 35,Female,Unknown,No,FL resident,04/16/20
-610,Hillsborough 92,Female,Unknown,Yes,611,Indian River
-88,Female,No,No,FL resident,612,Indian River
-83,Male,No,Yes,FL resident,613,Indian River
-90,Male,No,Yes,FL resident,614,Indian River
-92,Male,No,Yes,FL resident,615,Indian River
-91,Male,No,Yes,FL resident,616,Jefferson
-93,Female,No,Yes,FL resident,617,Jefferson
-89,Male,No,Yes,FL resident,618,Lake
-70,Female,Yes,FL; NY,Yes,619,Lake
-74,Female,Yes,EUROPE,Yes,620,Lake
-60,Female,Yes,TN,Yes,621,Lake
-84,Male,Yes,ECUADOR; FL,Yes,622,Lake
-70,Female,No,No,FL resident,623,Lake
-86,Male,Yes,FL; FRANCE; PUERTO RICO,Yes,624,Lake
-81,Female,No,Yes,FL resident,625,Lake
-83,Female,No,No,FL resident,626,Lake
-71,Male,No,Yes,FL resident,627,Lake
-85,Male,No,No,FL resident,628,Lee
-77,Female,Yes,DOMINICAN REPUBLIC,Yes,629,Lee
-77,Male,No,Yes,FL resident,630,Lee
-65,Female,Yes,FL; JAMAICA,Yes,631,Lee
-67,Male,No,Yes,FL resident,632,Lee
-67,Male,No,No,FL resident,633,Lee
-39,Male,No,Yes,FL resident,634,Lee
-94,Male,No,No,FL resident,635,Lee
-65,Male,No,Yes,FL resident,FL resident,03/27/20
+590,Hillsborough,69,Male,Unknown,FL resident,03/23/20
+591,Hillsborough,73,Male,Yes,FL resident,03/24/20
+592,Hillsborough,63,Male,Unknown,FL resident,03/24/20
+593,Hillsborough,86,Female,No,FL resident,03/24/20
+594,Hillsborough,68,Female,Yes,FL resident,03/25/20
+595,Hillsborough,71,Female,No,FL resident,03/26/20
+596,Hillsborough,62,Male,No,FL resident,03/29/20
+597,Hillsborough,77,Male,Unknown,FL resident,03/29/20
+598,Hillsborough,93,Female,Unknown,FL resident,03/30/20
+599,Hillsborough,92,Female,No,FL resident,03/30/20
+600,Hillsborough,74,Male,Unknown,FL resident,03/31/20
+601,Hillsborough,74,Male,Yes,FL resident,04/02/20
+602,Hillsborough,73,Male,No,FL resident,04/04/20
+603,Hillsborough,78,Male,Unknown,FL resident,04/06/20
+604,Hillsborough,55,Male,Unknown,FL resident,04/07/20
+605,Hillsborough,64,Female,Yes,FL resident,04/10/20
+606,Hillsborough,66,Male,Unknown,FL resident,04/12/20
+607,Hillsborough,94,Female,Unknown,FL resident,04/12/20
+608,Hillsborough,35,Female,Unknown,FL resident,04/13/20
+609,Hillsborough,57,Male,No,FL resident,04/16/20
+610,Hillsborough,92,Female,Unknown,FL resident,04/21/20
+611,Indian,River,88,Female,FL resident,04/02/20
+612,Indian,River,83,Male,FL resident,04/11/20
+613,Indian,River,90,Male,FL resident,04/11/20
+614,Indian,River,92,Male,FL resident,04/15/20
+615,Indian,River,91,Male,FL resident,04/16/20
+616,Jefferson,93,Female,No,FL resident,04/05/20
+617,Jefferson,89,Male,No,FL resident,04/11/20
+618,Lake,70,Female,Yes,FL resident,03/23/20
+619,Lake,74,Female,Yes,FL resident,03/25/20
+620,Lake,60,Female,Yes,FL resident,03/28/20
+621,Lake,84,Male,Yes,FL resident,03/29/20
+622,Lake,70,Female,No,FL resident,03/29/20
+623,Lake,86,Male,Yes,FL resident,04/01/20
+624,Lake,81,Female,No,FL resident,04/10/20
+625,Lake,83,Female,No,FL resident,04/13/20
+626,Lake,71,Male,No,FL resident,04/15/20
+627,Lake,85,Male,No,FL resident,04/17/20
+628,Lee,77,Female,Yes,FL resident,03/07/20
+629,Lee,77,Male,No,FL resident,03/13/20
+630,Lee,65,Female,Yes,FL resident,03/15/20
+631,Lee,67,Male,No,FL resident,03/19/20
+632,Lee,67,Male,No,FL resident,03/24/20
+633,Lee,39,Male,No,FL resident,03/25/20
+634,Lee,94,Male,No,FL resident,03/26/20
+635,Lee,65,Male,No,FL resident,03/27/20
 636,Lee,77,Male,Yes,FL resident,03/27/20
 637,Lee,62,Female,No,FL resident,03/28/20
 638,Lee,71,Male,No,FL resident,03/30/20
@@ -635,52 +646,52 @@ death,county,age,gender,travel_related,juristiction,date_case_counted
 645,Lee,80,Female,Yes,FL resident,04/02/20
 646,Lee,68,Male,No,FL resident,04/02/20
 647,Lee,71,Female,No,FL resident,04/03/20
-648,Lee,100 Male,No,Yes,649,Lee
-62,Female,No,No,FL resident,650,Lee
-86,Male,Yes,NJ,Yes,651,Lee
-94,Female,Yes,FL; NJ,Yes,652,Lee
-74,Male,No,No,FL resident,653,Lee
-70,Male,No,No,FL resident,654,Lee
-79,Female,No,Yes,FL resident,655,Lee
-93,Female,No,No,FL resident,656,Lee
-97,Female,No,Yes,FL resident,657,Lee
-93,Male,No,Unknown,FL resident,658,Lee
-61,Male,Unknown,Unknown,FL resident,659,Lee
-94,Male,No,Unknown,FL resident,660,Lee
-80,Male,No,Unknown,FL resident,661,Lee
-92,Female,No,No,FL resident,662,Lee
-90,Female,Unknown,FL resident,04/21/20,663,Lee
-89,Male,No,Unknown,FL resident,664,Lee
-67,Male,Unknown,FL resident,04/22/20,665,Leon
-62,Male,No,Yes,FL resident,666,Leon
-81,Female,No,No,FL resident,667,Madison
-89,Male,No,Yes,FL resident,668,Madison
-86,Male,No,Yes,FL resident,669,Manatee
-70,Male,No,Yes,FL resident,670,Manatee
-75,Male,No,No,FL resident,671,Manatee
-71,Male,No,Yes,FL resident,672,Manatee
-68,Male,Yes,FRANCE,Yes,673,Manatee
-57,Male,No,No,FL resident,674,Manatee
-81,Male,No,No,FL resident,675,Manatee
-77,Male,No,No,FL resident,676,Manatee
-69,Male,No,No,FL resident,677,Manatee
-55,Female,No,Unknown,FL resident,678,Manatee
-79,Female,No,No,FL resident,679,Manatee
-75,Female,No,Yes,FL resident,680,Manatee
-75,Male,No,Yes,FL resident,681,Manatee
-80,Female,No,Yes,FL resident,682,Manatee
-75,Female,No,No,FL resident,683,Manatee
-78,Male,No,No,FL resident,684,Manatee
-82,Male,No,No,FL resident,685,Manatee
-81,Female,No,No,FL resident,686,Manatee
-84,Male,No,Yes,FL resident,687,Manatee
-74,Male,No,No,FL resident,688,Manatee
-73,Male,No,No,FL resident,689,Manatee
-91,Male,No,Unknown,FL resident,690,Manatee
-90,Male,No,No,FL resident,691,Manatee
-81,Female,No,Unknown,FL resident,692,Manatee
-90,Male,No,Yes,FL resident,693,Manatee
-49,Female,No,Yes,FL resident,FL resident,04/12/20
+648,Lee,100,Male,No,FL resident,04/03/20
+649,Lee,62,Female,No,FL resident,04/06/20
+650,Lee,86,Male,Yes,FL resident,04/08/20
+651,Lee,94,Female,Yes,FL resident,04/08/20
+652,Lee,74,Male,No,FL resident,04/08/20
+653,Lee,70,Male,No,FL resident,04/09/20
+654,Lee,79,Female,No,FL resident,04/09/20
+655,Lee,93,Female,No,FL resident,04/11/20
+656,Lee,97,Female,No,FL resident,04/13/20
+657,Lee,93,Male,No,FL resident,04/14/20
+658,Lee,61,Male,Unknown,FL resident,04/14/20
+659,Lee,94,Male,No,FL resident,04/16/20
+660,Lee,80,Male,No,FL resident,04/19/20
+661,Lee,92,Female,No,FL resident,04/19/20
+662,Lee,90,Female,Unknown,FL resident,04/21/20
+663,Lee,89,Male,No,FL resident,04/22/20
+664,Lee,67,Male,Unknown,FL resident,04/22/20
+665,Leon,62,Male,No,FL resident,04/09/20
+666,Leon,81,Female,No,FL resident,04/19/20
+667,Madison,89,Male,No,FL resident,04/20/20
+668,Madison,86,Male,No,FL resident,04/20/20
+669,Manatee,70,Male,No,FL resident,03/16/20
+670,Manatee,75,Male,No,FL resident,03/17/20
+671,Manatee,71,Male,No,FL resident,03/17/20
+672,Manatee,68,Male,Yes,FL resident,03/23/20
+673,Manatee,57,Male,No,FL resident,03/28/20
+674,Manatee,81,Male,No,FL resident,03/29/20
+675,Manatee,77,Male,No,FL resident,03/30/20
+676,Manatee,69,Male,No,FL resident,03/31/20
+677,Manatee,55,Female,No,FL resident,04/01/20
+678,Manatee,79,Female,No,FL resident,04/01/20
+679,Manatee,75,Female,No,FL resident,04/03/20
+680,Manatee,75,Male,No,FL resident,04/04/20
+681,Manatee,80,Female,No,FL resident,04/04/20
+682,Manatee,75,Female,No,FL resident,04/04/20
+683,Manatee,78,Male,No,FL resident,04/06/20
+684,Manatee,82,Male,No,FL resident,04/07/20
+685,Manatee,81,Female,No,FL resident,04/07/20
+686,Manatee,84,Male,No,FL resident,04/08/20
+687,Manatee,74,Male,No,FL resident,04/09/20
+688,Manatee,73,Male,No,FL resident,04/09/20
+689,Manatee,91,Male,No,FL resident,04/11/20
+690,Manatee,90,Male,No,FL resident,04/11/20
+691,Manatee,81,Female,No,FL resident,04/11/20
+692,Manatee,90,Male,No,FL resident,04/11/20
+693,Manatee,49,Female,No,FL resident,04/12/20
 694,Manatee,52,Male,No,FL resident,04/13/20
 695,Manatee,73,Male,Unknown,FL resident,04/13/20
 696,Manatee,83,Male,No,FL resident,04/14/20
@@ -742,7 +753,7 @@ death,county,age,gender,travel_related,juristiction,date_case_counted
 752,Orange,77,Female,No,FL resident,04/16/20
 753,Orange,42,Male,No,FL resident,04/19/20
 754,Orange,95,Male,Unknown,FL resident,04/19/20
-755,Orange,68,Female,Yes,Not diagnosed/isolated in FL,03/13/20
+755,Orange,68,Female,Yes,FL,03/13/20
 756,Osceola,58,Male,No,FL resident,03/21/20
 757,Osceola,91,Male,Yes,FL resident,03/28/20
 758,Osceola,55,Male,No,FL resident,03/28/20
