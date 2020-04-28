@@ -5,11 +5,34 @@ from dateutil.parser import parse
 import fitz
 import pandas as pd
 
+
+def is_date(string, fuzzy=False):
+    """
+    Return whether the string can be interpreted as a date.
+
+    :param string: str, string to check for date
+    :param fuzzy: bool, ignore unknown tokens in string if True
+    """
+    try:
+        parse(string, fuzzy=fuzzy)
+        return True
+
+    except ValueError:
+        return False
+
+
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--date', type=str, required=True, help='Date of data publication to process')
-parser.add_argument('--death-start', type=int, required=True, help='Page on which the death data starts')
-parser.add_argument('--death-end', type=int, required=True, help='Page on which the death data ends')
+
+parser.add_argument(
+    "--date", type=str, required=True, help="Date of data publication to process"
+)
+parser.add_argument(
+    "--death-start", type=int, required=True, help="Page on which the death data starts"
+)
+parser.add_argument(
+    "--death-end", type=int, required=True, help="Page on which the death data ends"
+)
 # parser.add_argument('--cases-start', type=int, required=True, help='Page on which the cases data starts')
 # parser.add_argument('--cases-end', type=int, required=True, help='Page on which the cases data ends')
 
@@ -31,6 +54,21 @@ for page in range(args.death_start, args.death_end):
 
     lines = doc.getPageText(page).splitlines()
 
+    # Clip off the page header.
+    lines = lines[16:]
+    for i in range(len(lines)):
+        if not lines[i] in [
+            "FL resident",
+            "Non-FL resident",
+            "Palm Beach",
+            "Santa Rosa",
+            "St. Johns",
+            "St. Lucie",
+        ]:
+            temp = lines[i].split(" ")
+            if len(temp) > 1:
+                lines = lines[:i] + temp + lines[i + 1 :]
+
     # Loop over the lines to find the locations of the starts of the table lines.
     for loc, line in enumerate(lines):
         # case Id column are integers.
@@ -49,13 +87,21 @@ for page in range(args.death_start, args.death_end):
     for id_start, id_end in zip(id_locs[:-1], id_locs[1:]):
         values = lines[id_start:id_end]
         # Remove the last column if it is the "Deaths verified today" column.
-        if values[-1] == 'Yes':
+        if values[-1] == "Yes":
             values = values[:-1]
         # Clip out the desired columns.
         values = values[:5] + values[-2:]
         table.append(values)
 
-columns = ['death', 'county', 'age', 'gender', 'travel_related', 'juristiction', 'date_case_counted']
+columns = [
+    "death",
+    "county",
+    "age",
+    "gender",
+    "travel_related",
+    "juristiction",
+    "date_case_counted",
+]
 
 # Make a pandas table.
 pd_table = pd.DataFrame(table)
@@ -65,20 +111,8 @@ pd_table.columns = columns
 os.makedirs(f"data/{args.date}/florida/", exist_ok=True)
 pd_table.to_csv(f"data/{args.date}/florida/line_data_deaths.csv", index=False)
 
-# # Sometimes date is missing. 
-# def is_date(string, fuzzy=False):
-#     """
-#     Return whether the string can be interpreted as a date.
+# # Sometimes date is missing.
 
-#     :param string: str, string to check for date
-#     :param fuzzy: bool, ignore unknown tokens in string if True
-#     """
-#     try: 
-#         parse(string, fuzzy=fuzzy)
-#         return True
-
-#     except ValueError:
-#         return False
 
 # # Loop over cases pages.
 # table = []
