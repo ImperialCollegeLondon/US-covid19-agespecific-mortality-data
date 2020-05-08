@@ -25,6 +25,10 @@ wget --no-check-certificate -O pdfs/$today/new_jersey.pdf https://www.nj.gov/hea
 ## mass
 # https://www.mass.gov/doc/covid-19-dashboard-april-30-2020/download
 
-## florida, connecticut
+## florida, connecticut, nyc
 python scripts/age_extraction.py
 
+## NYC
+## first get the commit hash and dates
+# curl https://api.github.com/repos/nychealth/coronavirus-data/commits > data/nyc/nyc_commits.json
+## now process to only include the latest commit for each day

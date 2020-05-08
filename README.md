@@ -29,3 +29,4 @@ First we download the raw files to `data/$today` using `download_files.sh`. Then
 | Connecticut| 2020-03-22 | [link](https://portal.ct.gov/-/media/Coronavirus/CTDPHCOVID19summary3222020.pdf?la=en); file string `https://portal.ct.gov/-/media/Coronavirus/CTDPHCOVID19summary${monthWithout0}${dayWith0}$year.pdf?la=en`; data as images, so need a mixture of fitz and OpenCV-ish tools|
 | Massachusetts| 2020-04-20 | [link](https://www.mass.gov/doc/covid-19-dashboard-april-20-2020/download); similar to florida |
 | New Jersey| 2020-03-26 | [link](https://www.nj.gov/health/cd/documents/topics/NCOV/COVID_Confirmed_Case_Summary.pdf); cumulative, need extracting daily |
+| New York City| 2020-04-14 | [link](https://www1.nyc.gov/assets/doh/downloads/pdf/imm/covid-19-deaths-confirmed-probable-daily-04142020.pdf); daily cumulative, need extracting daily|
