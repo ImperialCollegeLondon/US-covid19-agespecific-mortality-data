@@ -79,6 +79,22 @@ class AgeExtractor:
 
         # TODO: extract the data from the graphs, a mixture of PDFS/SVGS and JPEG
 
+    def get_massachusetts(self):
+        # check existing assets
+        existing_assets = list(map(basename, glob("pdfs/massachusetts/*.pdf")))
+        api_base_url = "https://www.mass.gov/doc/"
+        date_diff = date.today() - date(2020, 4, 20)
+        covid_links = []
+
+        for i in range(date_diff.days + 1):
+            day = date(2020, 4, 20) + timedelta(days=i)
+            day = day.strftime("%B-%-d-%Y").lower()
+            pdf_name = "covid-19-dashboard-{}/download".format(day)
+            covid_links.append(pdf_name)
+
+            if pdf_name not in existing_assets:
+                print(join(api_base_url, pdf_name))
+                system("wget --no-check-certificate -O pdfs/massachusetts/{} {}".format(pdf_name[:-9] + ".pdf", join(api_base_url, pdf_name)))
 
     def get_all(self):
         """TODO: running get_*() for every state
@@ -88,6 +104,7 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
-    ageExtractor.get_new_jersey()
-    ageExtractor.get_florida()
-    ageExtractor.get_connecticut()
+    # ageExtractor.get_new_jersey()
+    # ageExtractor.get_florida()
+    # ageExtractor.get_connecticut()
+    ageExtractor.get_massachusetts()
