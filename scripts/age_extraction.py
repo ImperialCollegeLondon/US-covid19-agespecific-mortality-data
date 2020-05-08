@@ -1,5 +1,5 @@
 import fitz
-from datetime import date
+from datetime import date, timedelta
 import json
 from os.path import basename, join
 from os import system
@@ -60,6 +60,24 @@ class AgeExtractor:
         # TODO: extract the by-age deaths data using the same trick as get_new_jersey()
         # TODO: filter the links after march the 26th
 
+    def get_connecticut(self):
+        # check existing assets
+        existing_assets = list(map(basename, glob("pdfs/connecticut/*.pdf")))
+        api_base_url = "https://portal.ct.gov/-/media/Coronavirus/"
+        date_diff = date.today() - date(2020, 3, 22)
+        covid_links = []
+
+        for i in range(date_diff.days + 1):
+            day = date(2020, 3, 22) + timedelta(days=i)
+            day = day.strftime("%-m%d%Y")
+            pdf_name = "CTDPHCOVID19summary{}.pdf?la=en".format(day)
+            covid_links.append(pdf_name)
+
+            if pdf_name not in existing_assets:
+                print(pdf_name, join(api_base_url, pdf_name))
+                system("wget --no-check-certificate -O pdfs/connecticut/{} {}".format(pdf_name, join(api_base_url, pdf_name)))
+
+
     def get_all(self):
         """TODO: running get_*() for every state
         """
@@ -70,3 +88,4 @@ if __name__ == "__main__":
     ageExtractor = AgeExtractor()
     ageExtractor.get_new_jersey()
     ageExtractor.get_florida()
+    ageExtractor.get_connecticut()

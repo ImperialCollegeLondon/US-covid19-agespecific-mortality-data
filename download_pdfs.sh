@@ -5,4 +5,6 @@
 mkdir -p pdfs/${date}/
 # mkdir -p ../data/GoogleMobility/data/
 
+# florida
 curl -s -o pdfs/${date}/florida_daily_report.pdf https://floridadisaster.org/globalassets/covid19/dailies/covid-19-data---daily-report-${florida_date}.pdf
+

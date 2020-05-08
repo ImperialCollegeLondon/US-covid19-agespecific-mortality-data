@@ -26,7 +26,7 @@ First we download the raw files to `data/$today` using `download_files.sh`. Then
 | Country        | Date record start           | Notes and link  |
 | ------------- |:-------------:| -----:|
 | Florida| 2020-03-26 |[link](https://www.floridadisaster.org/covid19/covid-19-data-reports/); file string; age data on page 3 table: `covid-19-data---daily-report-$year-$month-$day-$time.pdf` |
-| Florida| 2020-03-26 | [link](https://www.floridadisaster.org/covid19/covid-19-data-reports/) |
-| Florida| 2020-03-26 | [link](https://www.floridadisaster.org/covid19/covid-19-data-reports/) |
-| Florida| 2020-03-26 | [link](https://www.floridadisaster.org/covid19/covid-19-data-reports/) |
+| Connecticut| 2020-03-22 | [link](https://portal.ct.gov/-/media/Coronavirus/CTDPHCOVID19summary3222020.pdf?la=en); file string `https://portal.ct.gov/-/media/Coronavirus/CTDPHCOVID19summary${monthWithout0}${dayWith0}$year.pdf?la=en`; data as images, so need a mixture of fitz and OpenCV-ish tools|
+| Massachussetts| 2020-03-26 | [link](https://www.floridadisaster.org/covid19/covid-19-data-reports/) |
+| New Jersey| 2020-03-26 | [link](https://www.floridadisaster.org/covid19/covid-19-data-reports/) |
 | Florida| 2020-03-26 | [link](https://www.floridadisaster.org/covid19/covid-19-data-reports/) |
