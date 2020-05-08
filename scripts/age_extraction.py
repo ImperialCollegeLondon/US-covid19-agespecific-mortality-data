@@ -77,6 +77,8 @@ class AgeExtractor:
                 print(pdf_name, join(api_base_url, pdf_name))
                 system("wget --no-check-certificate -O pdfs/connecticut/{} {}".format(pdf_name, join(api_base_url, pdf_name)))
 
+        # TODO: extract the data from the graphs, a mixture of PDFS/SVGS and JPEG
+
 
     def get_all(self):
         """TODO: running get_*() for every state
