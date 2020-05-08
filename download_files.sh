@@ -20,7 +20,8 @@ wget --no-check-certificate -O data/$today/texas.xlsx https://dshs.texas.gov/cor
 wget --no-check-certificate -O pdfs/$today/new_jersey.pdf https://www.nj.gov/health/cd/documents/topics/NCOV/COVID_Confirmed_Case_Summary.pdf
 
 ## mass
-https://www.mass.gov/doc/covid-19-dashboard-april-30-2020/download
+# https://www.mass.gov/doc/covid-19-dashboard-april-30-2020/download
 
-## florida
+## florida, connecticut
 python scripts/age_extraction.py
+
