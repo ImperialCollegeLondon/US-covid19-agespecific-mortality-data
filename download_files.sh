@@ -4,6 +4,9 @@ echo "$today"
 mkdir -p data/$today/
 mkdir -p pdfs/$today/
 # csvs, excel sheets
+## CDC official cumulative
+wget --no-check-certificate -O data/$today/cdc.csv https://data.cdc.gov/api/views/9bhg-hcku/rows.csv
+
 # washington
 wget --no-check-certificate -O data/$today/washington.xlsx https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx
 ## new york
