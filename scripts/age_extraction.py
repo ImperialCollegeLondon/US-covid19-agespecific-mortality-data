@@ -95,16 +95,66 @@ class AgeExtractor:
             if pdf_name not in existing_assets:
                 print(join(api_base_url, pdf_name))
                 system("wget --no-check-certificate -O pdfs/massachusetts/{} {}".format(pdf_name[:-9] + ".pdf", join(api_base_url, pdf_name)))
+    # def get_nyc(self):
+    #     with open('data/nyc/nyc_commits.json', "rb") as json_file: 
+    #         data = json.load(json_file) 
+
+    #     commit_hist = [(f["sha"], f["commit"]["author"]["date"][:10]) for f in data]
+    #     commit_hist.reverse()
+    #     commit_hist_latest = {}
+    #     # now only take the latest commit daily
+    #     for commit in commit_hist:
+    #         commit_hist_latest[commit[1]] = commit[0]
+        
+    #     for date in commit_hist_latest.keys():
+    #         system("wget --no-check-certificate -O data/nyc/{}.csv https://raw.githubusercontent.com/nychealth/coronavirus-data/{}/by-age.csv".format(date, commit_hist_latest[date]))
+
+    def get_nyc(self):
+        # check existing assets
+        existing_assets = list(map(basename, glob("pdfs/nyc/*.pdf")))
+        api_base_url = "https://www1.nyc.gov/assets/doh/downloads/pdf/imm/"
+        date_diff = date.today() - date(2020, 4, 14)
+        covid_links = []
+
+        for i in range(date_diff.days + 1):
+            day = date(2020, 4, 14) + timedelta(days=i)
+            day_old_format = day.strftime("%Y-%m-%d")
+            day = day.strftime("%m%d%Y").lower()
+            pdf_name = "covid-19-deaths-confirmed-probable-daily-{}.pdf".format(day)
+            covid_links.append(pdf_name)
+
+            if pdf_name not in existing_assets:
+                print(join(api_base_url, pdf_name))
+                system("wget --no-check-certificate -O pdfs/nyc/{} {}".format(pdf_name, join(api_base_url, pdf_name)))
+                # now scrape the PDFs
+            age_data = {}
+            doc = fitz.Document("pdfs/nyc/covid-19-deaths-confirmed-probable-daily-{}.pdf".format(day))
+            lines = doc.getPageText(0).splitlines()
+            ## find key word to point to the age data table
+            for num, l in enumerate(lines):
+                if "0 to 17" in l:
+                    line_num = num
+                    break
+
+            lines = lines[line_num:]
+            age_data["0-17"] = [lines[1], lines[2]]
+            age_data["18-44"] = [lines[4], lines[5]]
+            age_data["45-64"] = [lines[7], lines[8]]
+            age_data["65-76"] = [lines[10], lines[11]]
+            age_data["75+"] = [lines[13], lines[14]]
+            age_data["unknown"] = [lines[16], lines[17]]
+            with open("data/{}/nyc.json".format(day_old_format), "w") as f:
+                json.dump(age_data, f)
 
     def get_all(self):
         """TODO: running get_*() for every state
         """
         return NotImplementedError()
 
-
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
     # ageExtractor.get_new_jersey()
     # ageExtractor.get_florida()
     # ageExtractor.get_connecticut()
-    ageExtractor.get_massachusetts()
+    # ageExtractor.get_massachusetts()
+    ageExtractor.get_nyc()
