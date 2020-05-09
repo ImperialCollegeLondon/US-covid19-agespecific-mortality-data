@@ -1,5 +1,5 @@
 import fitz
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 import json
 from os.path import basename, join
 from os import system
@@ -49,7 +49,10 @@ class AgeExtractor:
             if link and "/global" == link[:7]:
                 pdf_name = basename(link)
                 # check if pdf is already up to date
-                if pdf_name not in existing_assets:
+                if (
+                    pdf_name not in existing_assets
+                    and pdf_name != "covid-19-data---daily-report-2020-03-24-1657.pdf"
+                ):
                     covid_links.append(pdf_name)
 
         # download these assets
@@ -62,8 +65,31 @@ class AgeExtractor:
                 )
             )
 
-        # TODO: extract the by-age deaths data using the same trick as get_new_jersey()
-        # TODO: filter the links after march the 26th
+        # extract the latest data for each day
+        existing_assets = glob("pdfs/florida/*.pdf")
+        existing_assets.sort()
+        usable_assets = {}
+        for pdf_path in existing_assets:
+            pdf_date = basename(pdf_path).split("report-")[1][:10]
+            if datetime.strptime(pdf_date, "%Y-%m-%d") >= datetime.strptime(
+                "2020-03-27", "%Y-%m-%d"
+            ):
+                usable_assets[pdf_date] = pdf_path
+
+        for day in usable_assets.keys():
+            age_data = {}
+            doc = fitz.Document(usable_assets[day])
+            lines = doc.getPageText(1).splitlines()
+            lines += doc.getPageText(2).splitlines()
+            lines += doc.getPageText(3).splitlines()
+            ## find key word to point to the age data table
+            for num, l in enumerate(lines):
+                if "years" in l:
+                    line_num = num
+                    age_data[lines[line_num]] = lines[line_num + 5]
+
+            with open("data/{}/florida.json".format(day), "w") as f:
+                json.dump(age_data, f)
 
     def get_connecticut(self):
         # check existing assets
@@ -80,7 +106,11 @@ class AgeExtractor:
 
             if pdf_name not in existing_assets:
                 print(pdf_name, join(api_base_url, pdf_name))
-                system("wget --no-check-certificate -O pdfs/connecticut/{} {}".format(pdf_name, join(api_base_url, pdf_name)))
+                system(
+                    "wget --no-check-certificate -O pdfs/connecticut/{} {}".format(
+                        pdf_name, join(api_base_url, pdf_name)
+                    )
+                )
 
         # TODO: extract the data from the graphs, a mixture of PDFS/SVGS and JPEG
 
@@ -99,10 +129,15 @@ class AgeExtractor:
 
             if pdf_name not in existing_assets:
                 print(join(api_base_url, pdf_name))
-                system("wget --no-check-certificate -O pdfs/massachusetts/{} {}".format(pdf_name[:-9] + ".pdf", join(api_base_url, pdf_name)))
+                system(
+                    "wget --no-check-certificate -O pdfs/massachusetts/{} {}".format(
+                        pdf_name[:-9] + ".pdf", join(api_base_url, pdf_name)
+                    )
+                )
+
     # def get_nyc(self):
-    #     with open('data/nyc/nyc_commits.json', "rb") as json_file: 
-    #         data = json.load(json_file) 
+    #     with open('data/nyc/nyc_commits.json', "rb") as json_file:
+    #         data = json.load(json_file)
 
     #     commit_hist = [(f["sha"], f["commit"]["author"]["date"][:10]) for f in data]
     #     commit_hist.reverse()
@@ -110,7 +145,7 @@ class AgeExtractor:
     #     # now only take the latest commit daily
     #     for commit in commit_hist:
     #         commit_hist_latest[commit[1]] = commit[0]
-        
+
     #     for date in commit_hist_latest.keys():
     #         system("wget --no-check-certificate -O data/nyc/{}.csv https://raw.githubusercontent.com/nychealth/coronavirus-data/{}/by-age.csv".format(date, commit_hist_latest[date]))
 
@@ -130,10 +165,16 @@ class AgeExtractor:
 
             if pdf_name not in existing_assets:
                 print(join(api_base_url, pdf_name))
-                system("wget --no-check-certificate -O pdfs/nyc/{} {}".format(pdf_name, join(api_base_url, pdf_name)))
+                system(
+                    "wget --no-check-certificate -O pdfs/nyc/{} {}".format(
+                        pdf_name, join(api_base_url, pdf_name)
+                    )
+                )
                 # now scrape the PDFs
             age_data = {}
-            doc = fitz.Document("pdfs/nyc/covid-19-deaths-confirmed-probable-daily-{}.pdf".format(day))
+            doc = fitz.Document(
+                "pdfs/nyc/covid-19-deaths-confirmed-probable-daily-{}.pdf".format(day)
+            )
             lines = doc.getPageText(0).splitlines()
             ## find key word to point to the age data table
             for num, l in enumerate(lines):
@@ -156,10 +197,11 @@ class AgeExtractor:
         """
         return NotImplementedError()
 
+
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
-    ageExtractor.get_new_jersey()
-    # ageExtractor.get_florida()
+    # ageExtractor.get_new_jersey()
+    ageExtractor.get_florida()
     # ageExtractor.get_connecticut()
     # ageExtractor.get_massachusetts()
     # ageExtractor.get_nyc()
