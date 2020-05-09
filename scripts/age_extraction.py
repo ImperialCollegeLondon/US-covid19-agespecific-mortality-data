@@ -110,7 +110,6 @@ class AgeExtractor:
 
         else:
             pdf_date = pdf_date.strftime("%Y-%m-%d")
-            print(pdf_date)
             system(
                 "wget --no-check-certificate -O pdfs/new_jersey/{}.pdf https://www.nj.gov/health/cd/documents/topics/NCOV/COVID_Confirmed_Case_Summary.pdf".format(
                     pdf_date
@@ -161,7 +160,6 @@ class AgeExtractor:
         # download these assets
         api_base_url = "https://www.floridadisaster.org/globalassets/covid19/dailies"
         for pdf_name in covid_links:
-            print(pdf_name)
             subprocess(
                 "wget --no-check-certificate -O pdfs/florida/{} {}".format(
                     pdf_name, join(api_base_url, pdf_name)
@@ -279,7 +277,6 @@ class AgeExtractor:
             covid_links.append(pdf_name)
 
             if pdf_name not in existing_assets:
-                print(join(api_base_url, pdf_name))
                 try:
                     subprocess(
                         "wget --no-check-certificate -O pdfs/nyc/{} {}".format(
@@ -310,7 +307,7 @@ class AgeExtractor:
                     with open("data/{}/nyc.json".format(day_old_format), "w") as f:
                         json.dump(age_data, f)
                 except:
-                    print("Warning: Report for  NYC {} is not available".format(day))
+                    warnings.warn("Warning: Report for  NYC {} is not available".format(day))
 
     def get_all(self):
         """TODO: running get_*() for every state
