@@ -15,6 +15,59 @@ class AgeExtractor:
     def __init__(self):
         self.today = date.today().strftime("%Y-%m-%d")
 
+    def get_cdc(self):
+        ## now obtain PDF update date
+        r = requests.get(
+            "https://data.cdc.gov/api/views/9bhg-hcku/rows.csv", verify=False,
+        )
+        ## the reports are always published 1 day later (possibly!)
+        data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
+        # check if this data is in the data folder already
+        existing_assets = list(map(basename, glob("data/{}/cdc.csv".format(data_date))))
+        if existing_assets:
+            warnings.warn("CDC data already up to date up to {}".format(data_date))
+        else:
+            system(
+                "wget --no-check-certificate -O data/{}/cdc.csv https://data.cdc.gov/api/views/9bhg-hcku/rows.csv".format(
+                    data_date
+                )
+            )
+    def get_georgia(self):
+        ## now obtain PDF update date
+        r = requests.head(
+            "https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip"
+        )
+        ## the reports are always published 1 day later (possibly!)
+        data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
+        # check if this data is in the data folder already
+        existing_assets = list(
+            map(basename, glob("data/{}/georgia.csv".format(data_date)))
+        )
+        if existing_assets:
+            warnings.warn("Georgia data already up to date up to {}".format(data_date))
+        else:
+            system("unzip georgia.zip; rm countycases.csv demographics.csv georgia.zip; mv deaths.csv data/{}/georgia.csv".format(data_date))
+
+    def get_washington(self):
+        ## now obtain PDF update date
+        r = requests.head(
+            "https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx"
+        )
+        ## the reports are always published 1 day later (possibly!)
+        data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
+        # check if this data is in the data folder already
+        existing_assets = list(
+            map(basename, glob("data/{}/washington.xlsx".format(data_date)))
+        )
+        if existing_assets:
+            warnings.warn("Washington data already up to date up to {}".format(data_date))
+        else:
+            system(
+                "wget --no-check-certificate -O data/{}/washington.xlsx https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx".format(
+                    data_date
+                )
+            )
+
     def get_texas(self):
         ## now obtain PDF update date
         r = requests.head(
@@ -45,7 +98,9 @@ class AgeExtractor:
             "https://www.nj.gov/health/cd/documents/topics/NCOV/COVID_Confirmed_Case_Summary.pdf"
         )
         ## the reports are always published 1 day later (possibly!)
-        pdf_date = (parsedate(r.headers["Last-modified"]) - timedelta(days=1)).strftime("%Y-%m-%d")
+        pdf_date = (parsedate(r.headers["Last-modified"]) - timedelta(days=1)).strftime(
+            "%Y-%m-%d"
+        )
         if pdf_date in existing_dates:
             warnings.warn(
                 "PDF last updated on {}. Please wait for the latest published report".format(
@@ -265,9 +320,12 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
+    ageExtractor.get_georgia()
+    ageExtractor.get_cdc()
+    ageExtractor.get_washington()
     ageExtractor.get_texas()
-    # ageExtractor.get_new_jersey()
-    # ageExtractor.get_florida()
-    # ageExtractor.get_connecticut()
-    # ageExtractor.get_massachusetts()
-    # ageExtractor.get_nyc()
+    ageExtractor.get_new_jersey()
+    ageExtractor.get_florida()
+    ageExtractor.get_connecticut()
+    ageExtractor.get_massachusetts()
+    ageExtractor.get_nyc()

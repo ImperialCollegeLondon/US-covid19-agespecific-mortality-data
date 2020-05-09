@@ -4,25 +4,7 @@ echo "$today"
 mkdir -p data/$today/
 mkdir -p pdfs/$today/
 # csvs, excel sheets
-## CDC official cumulative
-wget --no-check-certificate -O data/$today/cdc.csv https://data.cdc.gov/api/views/9bhg-hcku/rows.csv
-
-# washington
-wget --no-check-certificate -O data/$today/washington.xlsx https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx
-## new york
-wget--no-check-certificate -O data/$today/new_york.csv https://raw.githubusercontent.com/nychealth/coronavirus-data/master/by-age.csv
 ## georgia
-wget --no-check-certificate -O georgia.zip https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip
-unzip georgia.zip
-rm countycases.csv demographics.csv georgia.zip
-mv deaths.csv data/$today/georgia.csv
-## texas
-wget --no-check-certificate -O data/$today/texas.xlsx https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx 
 
-## florida, connecticut, nyc
+## Get most data
 python scripts/age_extraction.py
-
-## NYC
-## first get the commit hash and dates
-# curl https://api.github.com/repos/nychealth/coronavirus-data/commits > data/nyc/nyc_commits.json
-## now process to only include the latest commit for each day
