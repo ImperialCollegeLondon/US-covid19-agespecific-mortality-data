@@ -18,14 +18,19 @@ class AgeExtractor:
         lines = doc.getPageText(0).splitlines()
         # remove \xa0 separators
         lines = list(map(lambda v: v.replace("\xa0", " "), lines))
-        lines = lines[37:60]
-        age_data["0-4"] = lines[4]
-        age_data["5-17"] = lines[7]
-        age_data["18-29"] = lines[10]
-        age_data["30-49"] = lines[13]
-        age_data["50-64"] = lines[16]
-        age_data["65-79"] = lines[19]
-        age_data["80+"] = lines[22]
+        ## find key word to point to the age data table
+        for num, l in enumerate(lines):
+            if "0 to 4" in l:
+                line_num = num
+                break
+        lines = lines[line_num:]
+        age_data["0-4"] = lines[1]
+        age_data["5-17"] = lines[4]
+        age_data["18-29"] = lines[7]
+        age_data["30-49"] = lines[10]
+        age_data["50-64"] = lines[13]
+        age_data["65-79"] = lines[16]
+        age_data["80+"] = lines[19]
 
         with open("data/{}/new_jersey.json".format(self.today), "w") as f:
             json.dump(age_data, f)
@@ -153,8 +158,8 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
-    # ageExtractor.get_new_jersey()
+    ageExtractor.get_new_jersey()
     # ageExtractor.get_florida()
     # ageExtractor.get_connecticut()
     # ageExtractor.get_massachusetts()
-    ageExtractor.get_nyc()
+    # ageExtractor.get_nyc()
