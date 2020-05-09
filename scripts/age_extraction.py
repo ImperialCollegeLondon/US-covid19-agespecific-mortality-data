@@ -1,39 +1,87 @@
 import fitz
 from datetime import date, timedelta, datetime
+from dateutil.parser import parse as parsedate
 import json
 from os.path import basename, join
+from os import system
 from glob import glob
 from bs4 import BeautifulSoup, SoupStrainer
 import requests
 import subprocess
 import warnings
 
+
 class AgeExtractor:
     def __init__(self):
         self.today = date.today().strftime("%Y-%m-%d")
 
-    def get_new_jersey(self):
-        age_data = {}
-        doc = fitz.Document("pdfs/{}/new_jersey.pdf".format(self.today))
-        lines = doc.getPageText(0).splitlines()
-        # remove \xa0 separators
-        lines = list(map(lambda v: v.replace("\xa0", " "), lines))
-        ## find key word to point to the age data table
-        for num, l in enumerate(lines):
-            if "0 to 4" in l:
-                line_num = num
-                break
-        lines = lines[line_num:]
-        age_data["0-4"] = lines[1]
-        age_data["5-17"] = lines[4]
-        age_data["18-29"] = lines[7]
-        age_data["30-49"] = lines[10]
-        age_data["50-64"] = lines[13]
-        age_data["65-79"] = lines[16]
-        age_data["80+"] = lines[19]
+    def get_texas(self):
+        ## now obtain PDF update date
+        r = requests.head(
+            "https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx",
+            verify=False,
+        )
+        ## the reports are always published 1 day later (possibly!)
+        data_date = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+        # check if this data is in the data folder already
+        existing_assets = list(
+            map(basename, glob("data/{}/texas.xlsx".format(data_date)))
+        )
+        if existing_assets:
+            warnings.warn("Texas data already up to date up to {}".format(data_date))
+        else:
+            system(
+                "wget --no-check-certificate -O data/{}/texas.xlsx https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx".format(
+                    data_date
+                )
+            )
 
-        with open("data/{}/new_jersey.json".format(self.today), "w") as f:
-            json.dump(age_data, f)
+    def get_new_jersey(self):
+        existing_assets = list(map(basename, glob("pdfs/new_jersey/*.pdf")))
+        existing_dates = [pdf_date.split(".")[0] for pdf_date in existing_assets]
+
+        ## now obtain PDF update date
+        r = requests.head(
+            "https://www.nj.gov/health/cd/documents/topics/NCOV/COVID_Confirmed_Case_Summary.pdf"
+        )
+        ## the reports are always published 1 day later (possibly!)
+        pdf_date = (parsedate(r.headers["Last-modified"]) - timedelta(days=1)).strftime("%Y-%m-%d")
+        if pdf_date in existing_dates:
+            warnings.warn(
+                "PDF last updated on {}. Please wait for the latest published report".format(
+                    pdf_date
+                )
+            )
+
+        else:
+            pdf_date = pdf_date.strftime("%Y-%m-%d")
+            print(pdf_date)
+            system(
+                "wget --no-check-certificate -O pdfs/new_jersey/{}.pdf https://www.nj.gov/health/cd/documents/topics/NCOV/COVID_Confirmed_Case_Summary.pdf".format(
+                    pdf_date
+                )
+            )
+            age_data = {}
+            doc = fitz.Document("pdfs/new_jersey/{}.pdf".format(pdf_date))
+            lines = doc.getPageText(0).splitlines()
+            # remove \xa0 separators
+            lines = list(map(lambda v: v.replace("\xa0", " "), lines))
+            ## find key word to point to the age data table
+            for num, l in enumerate(lines):
+                if "0 to 4" in l:
+                    line_num = num
+                    break
+            lines = lines[line_num:]
+            age_data["0-4"] = lines[1]
+            age_data["5-17"] = lines[4]
+            age_data["18-29"] = lines[7]
+            age_data["30-49"] = lines[10]
+            age_data["50-64"] = lines[13]
+            age_data["65-79"] = lines[16]
+            age_data["80+"] = lines[19]
+
+            with open("data/{}/new_jersey.json".format(pdf_date), "w") as f:
+                json.dump(age_data, f)
 
     def get_florida(self):
         # check existing assets
@@ -105,14 +153,18 @@ class AgeExtractor:
             covid_links.append(pdf_name)
 
             if pdf_name not in existing_assets:
-                try :
+                try:
                     subprocess(
                         "wget --no-check-certificate -O pdfs/connecticut/{} {}".format(
                             pdf_name, join(api_base_url, pdf_name)
                         )
                     )
                 except:
-                    warnings.warn("Warning: Report for Connecticut {} is not available".format(day))
+                    warnings.warn(
+                        "Warning: Report for Connecticut {} is not available".format(
+                            day
+                        )
+                    )
 
         # TODO: extract the data from the graphs, a mixture of PDFS/SVGS and JPEG
 
@@ -137,7 +189,11 @@ class AgeExtractor:
                         )
                     )
                 except:
-                    warnings.warn("Warning: Report for Massachusetts {} is not available".format(day))
+                    warnings.warn(
+                        "Warning: Report for Massachusetts {} is not available".format(
+                            day
+                        )
+                    )
 
     # def get_nyc(self):
     #     with open('data/nyc/nyc_commits.json', "rb") as json_file:
@@ -178,7 +234,9 @@ class AgeExtractor:
                     # now scrape the PDFs
                     age_data = {}
                     doc = fitz.Document(
-                        "pdfs/nyc/covid-19-deaths-confirmed-probable-daily-{}.pdf".format(day)
+                        "pdfs/nyc/covid-19-deaths-confirmed-probable-daily-{}.pdf".format(
+                            day
+                        )
                     )
                     lines = doc.getPageText(0).splitlines()
                     ## find key word to point to the age data table
@@ -207,8 +265,9 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
-    ageExtractor.get_new_jersey()
-    ageExtractor.get_florida()
-    ageExtractor.get_connecticut()
-    ageExtractor.get_massachusetts()
-    ageExtractor.get_nyc()
+    ageExtractor.get_texas()
+    # ageExtractor.get_new_jersey()
+    # ageExtractor.get_florida()
+    # ageExtractor.get_connecticut()
+    # ageExtractor.get_massachusetts()
+    # ageExtractor.get_nyc()
