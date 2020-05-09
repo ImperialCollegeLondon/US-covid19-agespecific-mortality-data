@@ -2,11 +2,11 @@ import fitz
 from datetime import date, timedelta, datetime
 import json
 from os.path import basename, join
-from os import system
 from glob import glob
 from bs4 import BeautifulSoup, SoupStrainer
 import requests
-
+import subprocess
+import warnings
 
 class AgeExtractor:
     def __init__(self):
@@ -59,7 +59,7 @@ class AgeExtractor:
         api_base_url = "https://www.floridadisaster.org/globalassets/covid19/dailies"
         for pdf_name in covid_links:
             print(pdf_name)
-            system(
+            subprocess(
                 "wget --no-check-certificate -O pdfs/florida/{} {}".format(
                     pdf_name, join(api_base_url, pdf_name)
                 )
@@ -93,7 +93,7 @@ class AgeExtractor:
 
     def get_connecticut(self):
         # check existing assets
-        existing_assets = list(map(basename, glob("pdfs/connecticut/*.pdf")))
+        existing_assets = list(map(basename, glob("pdfs/connecticut/*.pdf*")))
         api_base_url = "https://portal.ct.gov/-/media/Coronavirus/"
         date_diff = date.today() - date(2020, 3, 22)
         covid_links = []
@@ -105,12 +105,14 @@ class AgeExtractor:
             covid_links.append(pdf_name)
 
             if pdf_name not in existing_assets:
-                print(pdf_name, join(api_base_url, pdf_name))
-                system(
-                    "wget --no-check-certificate -O pdfs/connecticut/{} {}".format(
-                        pdf_name, join(api_base_url, pdf_name)
+                try :
+                    subprocess(
+                        "wget --no-check-certificate -O pdfs/connecticut/{} {}".format(
+                            pdf_name, join(api_base_url, pdf_name)
+                        )
                     )
-                )
+                except:
+                    warnings.warn("Warning: Report for Connecticut {} is not available".format(day))
 
         # TODO: extract the data from the graphs, a mixture of PDFS/SVGS and JPEG
 
@@ -127,13 +129,15 @@ class AgeExtractor:
             pdf_name = "covid-19-dashboard-{}/download".format(day)
             covid_links.append(pdf_name)
 
-            if pdf_name not in existing_assets:
-                print(join(api_base_url, pdf_name))
-                system(
-                    "wget --no-check-certificate -O pdfs/massachusetts/{} {}".format(
-                        pdf_name[:-9] + ".pdf", join(api_base_url, pdf_name)
+            if pdf_name.split("/")[0] + ".pdf" not in existing_assets:
+                try:
+                    subprocess(
+                        "wget --no-check-certificate -O pdfs/massachusetts/{} {}".format(
+                            pdf_name[:-9] + ".pdf", join(api_base_url, pdf_name)
+                        )
                     )
-                )
+                except:
+                    warnings.warn("Warning: Report for Massachusetts {} is not available".format(day))
 
     # def get_nyc(self):
     #     with open('data/nyc/nyc_commits.json', "rb") as json_file:
@@ -147,7 +151,7 @@ class AgeExtractor:
     #         commit_hist_latest[commit[1]] = commit[0]
 
     #     for date in commit_hist_latest.keys():
-    #         system("wget --no-check-certificate -O data/nyc/{}.csv https://raw.githubusercontent.com/nychealth/coronavirus-data/{}/by-age.csv".format(date, commit_hist_latest[date]))
+    #         subprocess("wget --no-check-certificate -O data/nyc/{}.csv https://raw.githubusercontent.com/nychealth/coronavirus-data/{}/by-age.csv".format(date, commit_hist_latest[date]))
 
     def get_nyc(self):
         # check existing assets
@@ -165,32 +169,35 @@ class AgeExtractor:
 
             if pdf_name not in existing_assets:
                 print(join(api_base_url, pdf_name))
-                system(
-                    "wget --no-check-certificate -O pdfs/nyc/{} {}".format(
-                        pdf_name, join(api_base_url, pdf_name)
+                try:
+                    subprocess(
+                        "wget --no-check-certificate -O pdfs/nyc/{} {}".format(
+                            pdf_name, join(api_base_url, pdf_name)
+                        )
                     )
-                )
-                # now scrape the PDFs
-            age_data = {}
-            doc = fitz.Document(
-                "pdfs/nyc/covid-19-deaths-confirmed-probable-daily-{}.pdf".format(day)
-            )
-            lines = doc.getPageText(0).splitlines()
-            ## find key word to point to the age data table
-            for num, l in enumerate(lines):
-                if "0 to 17" in l:
-                    line_num = num
-                    break
+                    # now scrape the PDFs
+                    age_data = {}
+                    doc = fitz.Document(
+                        "pdfs/nyc/covid-19-deaths-confirmed-probable-daily-{}.pdf".format(day)
+                    )
+                    lines = doc.getPageText(0).splitlines()
+                    ## find key word to point to the age data table
+                    for num, l in enumerate(lines):
+                        if "0 to 17" in l:
+                            line_num = num
+                            break
 
-            lines = lines[line_num:]
-            age_data["0-17"] = [lines[1], lines[2]]
-            age_data["18-44"] = [lines[4], lines[5]]
-            age_data["45-64"] = [lines[7], lines[8]]
-            age_data["65-76"] = [lines[10], lines[11]]
-            age_data["75+"] = [lines[13], lines[14]]
-            age_data["unknown"] = [lines[16], lines[17]]
-            with open("data/{}/nyc.json".format(day_old_format), "w") as f:
-                json.dump(age_data, f)
+                    lines = lines[line_num:]
+                    age_data["0-17"] = [lines[1], lines[2]]
+                    age_data["18-44"] = [lines[4], lines[5]]
+                    age_data["45-64"] = [lines[7], lines[8]]
+                    age_data["65-76"] = [lines[10], lines[11]]
+                    age_data["75+"] = [lines[13], lines[14]]
+                    age_data["unknown"] = [lines[16], lines[17]]
+                    with open("data/{}/nyc.json".format(day_old_format), "w") as f:
+                        json.dump(age_data, f)
+                except:
+                    print("Warning: Report for  NYC {} is not available".format(day))
 
     def get_all(self):
         """TODO: running get_*() for every state
@@ -200,8 +207,8 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
-    # ageExtractor.get_new_jersey()
+    ageExtractor.get_new_jersey()
     ageExtractor.get_florida()
-    # ageExtractor.get_connecticut()
-    # ageExtractor.get_massachusetts()
-    # ageExtractor.get_nyc()
+    ageExtractor.get_connecticut()
+    ageExtractor.get_massachusetts()
+    ageExtractor.get_nyc()
