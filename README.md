@@ -9,11 +9,17 @@ beautifulsoup4
 requests
 ```
 
-To extract and process, run
+1. To extract and clean, run
 ```
 make files
 ```
 This will get you the latest data in `data/$DATE` and `pdfs/$DATE`.
+
+2. To process, run
+```
+Rscript scripts/process.data.R
+```
+This will get you csv files for every state with variables *age*, *date*, *daily.deaths* or *weekly.deaths* and *code* in `data/processed`.
 
 ## PDF extractions
 We use Requests to make HTTP/HTTPS requests to a web API, BeautifulSoup to extract the download links in the HTML page and Fitz to extract the data within the PDF. The resulting data is stored in a `.json` file in `data/$DATE`.
