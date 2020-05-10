@@ -1,4 +1,4 @@
-"WeekStartDate","age","weekly.deaths","code"
+"date","age","weekly.deaths","code"
 "2020-02-02","0-19",0,"WA"
 "2020-02-02","20-39",0,"WA"
 "2020-02-02","40-59",0,"WA"
