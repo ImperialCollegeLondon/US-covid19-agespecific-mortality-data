@@ -6,7 +6,9 @@ path_to_data = "data"
 
 obtain.nyc.data = function(first.day.nyc, last.day){
   cat("\n Processing New York City \n")
+  
   dates = seq.Date(first.day.nyc, last.day, by = "day")
+  
   data.nyc = NULL
   for(t in 1:length(dates)){
     Date = dates[t]
@@ -30,6 +32,11 @@ obtain.nyc.data = function(first.day.nyc, last.day){
     }
     data.nyc = rbind(data.nyc, tmp)
   }
+  
+  # Reorder data
+  data.nyc <- with(data.nyc, data.nyc[order(date, age, cum.deaths, daily.deaths, code), ])
+  data.nyc <- data.nyc[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
+  
   return(data.nyc)
 }
 
@@ -63,15 +70,16 @@ obtain.fl.data = function(first.day.fl, last.day){
   cat("\n Processing Florida \n")
   
   dates = seq.Date(first.day.fl, last.day, by = "day")
+  
   data.fl = NULL
   for(t in 1:length(dates)){
     Date = dates[t] 
     json_file <- file.path(path_to_data, Date, "florida.json")
     fl_data <- suppressWarnings(fromJSON(paste(readLines(json_file))))
-    tmp = data.table(age = names(fl_data), cum.deaths = NA_integer_, daily.deaths = NA_integer_, 
+    tmp = data.table(age = gsub("(.+) years", "\\1",names(fl_data)), cum.deaths = NA_integer_, daily.deaths = NA_integer_, 
                      code = "FL", date = Date)
     for(age_group in tmp$age){
-      cum.deaths= as.numeric(fl_data[[age_group]][1])
+      cum.deaths = as.numeric(fl_data[[paste(age_group, "years")]][1])
       stopifnot(is.numeric(cum.deaths))
       tmp[which(age == age_group),]$cum.deaths = cum.deaths
       if(Date > first.day.fl){
@@ -84,6 +92,11 @@ obtain.fl.data = function(first.day.fl, last.day){
     }
     data.fl = rbind(data.fl, tmp)
   }
+  
+  # Reorder data
+  data.fl <- with(data.fl, data.fl[order(date, age, cum.deaths, daily.deaths, code), ])
+  data.fl <- data.fl[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
+  
   return(data.fl)
 }
 
@@ -98,7 +111,13 @@ obtain.wa.data = function(last.monday){
       summarise(weekly.deaths = sum(value)) %>%
       mutate(age = gsub("Age (.+)", "\\1",variable),
              code = "WA") %>%
-      select(WeekStartDate, age, weekly.deaths, code)
+      select(WeekStartDate, age, weekly.deaths, code) %>%
+      rename(date = WeekStartDate)
+    
+    # Reorder data
+    data.wa <- with(data.wa, data.wa[order(date, age, weekly.deaths, code), ])
+    data.wa <- data.wa[, c("date", "age", "weekly.deaths", "code")]
+    
     return(data.wa)
 }
 
@@ -133,6 +152,7 @@ obtain.ga.data = function(first.day.ga, last.day){
   cat("\n Processing Georgia \n")
   
   dates = seq.Date(first.day.ga, last.day, by = "day")
+  
   data.ga = NULL
   for(t in 1:length(dates)){
     Date = dates[t]
@@ -152,11 +172,17 @@ obtain.ga.data = function(first.day.ga, last.day){
       cum.death.t_1 = tmp[which(tmp$date == Date),]$cum.deaths
       cum.death.t_0 =  data.ga[which(data.ga$date == (Date-1)),]$cum.deaths
       daily.deaths = cum.death.t_1 - cum.death.t_0 
+      daily.deaths[which(daily.deaths < 0)] = 0
       stopifnot(is.numeric(daily.deaths))
       tmp[which(tmp$date == Date),]$daily.deaths = daily.deaths
     }
     data.ga = rbind(data.ga, tmp)
   }
+  
+  # Reorder data
+  data.ga <- with(data.ga, data.ga[order(date, age, cum.deaths, daily.deaths, code), ])
+  data.ga <- data.ga[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
+  
   return(data.ga)
 }
 
@@ -164,9 +190,11 @@ obtain.cdc.data = function(first.day.cdc, last.wednesday){
   cat("\n Processing CDC \n")
   
   dates = seq.Date(first.day.cdc, last.wednesday, by = "week")
+  
   states = c("California", "Connecticut", "Colorado", "Illinois", "Indiana", "Louisiana", "Massachusetts","Maryland","Michigan","New Jersey", 
              "Pennsylvania", "Texas", "Florida", "Georgia", "New York", "Ohio", "Washington")
   coderef = data.table(code = c("CA", "CT", "CO", "IL", "IN", "LA", "MA", "MD", "MI", "NJ", "PA", "TX", "FL", "GA", "NY", "OH", "WA"), State = states)
+  
   data.cdc = NULL
   for(t in 1:length(dates)){
     Date = dates[t]
@@ -179,20 +207,28 @@ obtain.cdc.data = function(first.day.cdc, last.wednesday){
       group_by(Start.week, End.Week, State, age) %>%
       summarise(cum.deaths = sum(COVID.19.Deaths)) %>%
       merge(coderef, by = "State") %>%
-      mutate(daily.deaths = NA_integer_)
+      mutate(daily.deaths = NA_integer_) %>%
+      rename(state = State, date = End.Week) %>%
+      select(state, date, age, cum.deaths, daily.deaths, code)
     tmp[is.na(tmp$cum.deaths),]$cum.deaths = 0
+    
     if(Date > first.day.cdc){
-      for(state in states){
+      for(State in states){
         for(Age in tmp$age){
-          cum.death.t_1 = tmp[which(tmp$date == Date & tmp$State == state & tmp$age == Age),]$cum.deaths
-          cum.death.t_0 =  data.ga[which(data.ga$date == (Date-1)& data.ga$State == state & data.ga$age == Age),]$cum.deaths
+          cum.death.t_1 = tmp[which(tmp$date == Date & tmp$state == State & tmp$age == Age),]$cum.deaths
+          cum.death.t_0 =  data.cdc[which(data.cdc$date == (Date-7) & data.cdc$state == State & data.cdc$age == Age),]$cum.deaths
           daily.deaths = cum.death.t_1 - cum.death.t_0 
           stopifnot(is.numeric(daily.deaths))
-          tmp[which(tmp$date == Date& tmp$State == state& tmp$age == Age),]$daily.deaths = daily.deaths 
+          tmp[which(tmp$date == Date & tmp$state == State & tmp$age == Age),]$daily.deaths = daily.deaths 
         }
       }
     }
     data.cdc = rbind(data.cdc, tmp)
   }
+  
+  # Reorder data
+  data.cdc <- with(data.cdc, data.cdc[order(date, state, code, age, cum.deaths, daily.deaths), ])
+  data.cdc <- data.cdc[, c("date", "state", "code", "age", "cum.deaths", "daily.deaths")]
+  
   return(data.cdc)
 }
