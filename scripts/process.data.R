@@ -17,22 +17,22 @@ first.day.states = data.table(code = c("GA", "NY", "NYC", "TX", "NJ", "FL", "CDC
                               first.day = as.Date(c("2020-05-07", "2020-05-07", "2020-04-14", "2020-05-06", "2020-05-06",  "2020-03-27", "2020-05-06")))
 
 data.nyc = obtain.nyc.data(first.day.states[which(first.day.states$code == "NYC"),]$first.day, last.day-1)
-write.csv(data.nyc, file = file.path("data", "processed", "DeathsByAge_NYC.csv"))
+write.csv(data.nyc, file = file.path("data", "processed", "DeathsByAge_NYC.csv"), row.names=FALSE)
 
 data.fl = obtain.fl.data(first.day.states[which(first.day.states$code == "FL"),]$first.day, last.day-1)
-write.csv(data.fl, file = file.path("data", "processed", "DeathsByAge_FL.csv"))
+write.csv(data.fl, file = file.path("data", "processed", "DeathsByAge_FL.csv"), row.names=FALSE)
 
 data.wa = obtain.wa.data(last.monday)
-write.csv(data.wa, file = file.path("data", "processed", "DeathsByAge_WA.csv"))
+write.csv(data.wa, file = file.path("data", "processed", "DeathsByAge_WA.csv"), row.names=FALSE)
 
 data.tx = obtain.tx.data(first.day.states[which(first.day.states$code == "TX"),]$first.day, last.day-1)
-write.csv(data.tx, file = file.path("data", "processed", "DeathsByAge_TX.csv"))
+write.csv(data.tx, file = file.path("data", "processed", "DeathsByAge_TX.csv"), row.names=FALSE)
 
 data.ga = obtain.ga.data(first.day.states[which(first.day.states$code == "GA"),]$first.day, last.day)
-write.csv(data.ga, file = file.path("data", "processed", "DeathsByAge_GA.csv"))
+write.csv(data.ga, file = file.path("data", "processed", "DeathsByAge_GA.csv"), row.names=FALSE)
 
 data.cdc = obtain.cdc.data(first.day.states[which(first.day.states$code == "CDC"),]$first.day, last.wednesday)
-write.csv(data.cdc, file = file.path("data", "processed", "DeathsByAge_CDC.csv"))
+write.csv(data.cdc, file = file.path("data", "processed", "DeathsByAge_CDC.csv"), row.names=FALSE)
 
 cat("\n End Processing \n")
 cat("\n Processed data are in data/processed \n")
