@@ -32,11 +32,10 @@ class AgeExtractor:
                     data_date
                 )
             )
+
     def get_georgia(self):
         ## now obtain PDF update date
-        r = requests.head(
-            "https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip"
-        )
+        r = requests.head("https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip")
         ## the reports are always published 1 day later (possibly!)
         data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
         # check if this data is in the data folder already
@@ -46,7 +45,11 @@ class AgeExtractor:
         if existing_assets:
             warnings.warn("Georgia data already up to date up to {}".format(data_date))
         else:
-            system("unzip georgia.zip; rm countycases.csv demographics.csv georgia.zip; mv deaths.csv data/{}/georgia.csv".format(data_date))
+            system(
+                "wget --no-check-certificate -O georgia.zip https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip;unzip georgia.zip; rm countycases.csv demographics.csv georgia.zip; mv deaths.csv data/{}/georgia.csv".format(
+                    data_date
+                )
+            )
 
     def get_washington(self):
         ## now obtain PDF update date
@@ -60,7 +63,9 @@ class AgeExtractor:
             map(basename, glob("data/{}/washington.xlsx".format(data_date)))
         )
         if existing_assets:
-            warnings.warn("Washington data already up to date up to {}".format(data_date))
+            warnings.warn(
+                "Washington data already up to date up to {}".format(data_date)
+            )
         else:
             system(
                 "wget --no-check-certificate -O data/{}/washington.xlsx https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx".format(
@@ -160,10 +165,14 @@ class AgeExtractor:
         # download these assets
         api_base_url = "https://www.floridadisaster.org/globalassets/covid19/dailies"
         for pdf_name in covid_links:
-            subprocess(
-                "wget --no-check-certificate -O pdfs/florida/{} {}".format(
-                    pdf_name, join(api_base_url, pdf_name)
-                )
+            subprocess.run(
+                [
+                    "wget",
+                    "--no-check-certificate",
+                    "-O",
+                    "pdfs/florida/{}".format(pdf_name),
+                    join(api_base_url, pdf_name),
+                ]
             )
 
         # extract the latest data for each day
@@ -207,11 +216,16 @@ class AgeExtractor:
 
             if pdf_name not in existing_assets:
                 try:
-                    subprocess(
-                        "wget --no-check-certificate -O pdfs/connecticut/{} {}".format(
-                            pdf_name, join(api_base_url, pdf_name)
-                        )
+                    subprocess.run(
+                        [
+                            "wget",
+                            "--no-check-certificate",
+                            "-O",
+                            "pdfs/connecticut/{}".format(pdf_name),
+                            join(api_base_url, pdf_name),
+                        ]
                     )
+
                 except:
                     warnings.warn(
                         "Warning: Report for Connecticut {} is not available".format(
@@ -236,10 +250,13 @@ class AgeExtractor:
 
             if pdf_name.split("/")[0] + ".pdf" not in existing_assets:
                 try:
-                    subprocess(
-                        "wget --no-check-certificate -O pdfs/massachusetts/{} {}".format(
-                            pdf_name[:-9] + ".pdf", join(api_base_url, pdf_name)
-                        )
+                    subprocess.run(
+                        [
+                            "wget --no-check-certificate",
+                            "-O",
+                            "pdfs/massachusetts/{}".format(pdf_name[:-9] + ".pdf"),
+                            join(api_base_url, pdf_name),
+                        ]
                     )
                 except:
                     warnings.warn(
@@ -278,10 +295,14 @@ class AgeExtractor:
 
             if pdf_name not in existing_assets:
                 try:
-                    subprocess(
-                        "wget --no-check-certificate -O pdfs/nyc/{} {}".format(
-                            pdf_name, join(api_base_url, pdf_name)
-                        )
+                    subprocess.run(
+                        [
+                            "wget",
+                            "--no-check-certificate",
+                            "-O",
+                            "pdfs/nyc/{} {}".format(pdf_name),
+                            join(api_base_url, pdf_name),
+                        ]
                     )
                     # now scrape the PDFs
                     age_data = {}
@@ -307,7 +328,9 @@ class AgeExtractor:
                     with open("data/{}/nyc.json".format(day_old_format), "w") as f:
                         json.dump(age_data, f)
                 except:
-                    warnings.warn("Warning: Report for  NYC {} is not available".format(day))
+                    warnings.warn(
+                        "Warning: Report for  NYC {} is not available".format(day)
+                    )
 
     def get_all(self):
         """TODO: running get_*() for every state
