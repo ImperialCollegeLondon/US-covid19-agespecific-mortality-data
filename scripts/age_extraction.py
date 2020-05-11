@@ -33,6 +33,7 @@ class AgeExtractor:
                 )
             )
 
+
     def get_georgia(self):
         ## now obtain PDF update date
         r = requests.head("https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip")
@@ -200,40 +201,56 @@ class AgeExtractor:
             with open("data/{}/florida.json".format(day), "w") as f:
                 json.dump(age_data, f)
 
+    # def get_connecticut(self):
+    #     # check existing assets
+    #     existing_assets = list(map(basename, glob("pdfs/connecticut/*.pdf*")))
+    #     api_base_url = "https://portal.ct.gov/-/media/Coronavirus/"
+    #     date_diff = date.today() - date(2020, 3, 22)
+    #     covid_links = []
+
+    #     for i in range(date_diff.days + 1):
+    #         day = date(2020, 3, 22) + timedelta(days=i)
+    #         day = day.strftime("%-m%d%Y")
+    #         pdf_name = "CTDPHCOVID19summary{}.pdf?la=en".format(day)
+    #         covid_links.append(pdf_name)
+
+    #         if pdf_name not in existing_assets:
+    #             try:
+    #                 subprocess.run(
+    #                     [
+    #                         "wget",
+    #                         "--no-check-certificate",
+    #                         "-O",
+    #                         "pdfs/connecticut/{}".format(pdf_name),
+    #                         join(api_base_url, pdf_name),
+    #                     ]
+    #                 )
+
+    #             except:
+    #                 warnings.warn(
+    #                     "Warning: Report for Connecticut {} is not available".format(
+    #                         day
+    #                     )
+    #                 )
+
+    #     # TODO: extract the data from the graphs, a mixture of PDFS/SVGS and JPEG
     def get_connecticut(self):
-        # check existing assets
-        existing_assets = list(map(basename, glob("pdfs/connecticut/*.pdf*")))
-        api_base_url = "https://portal.ct.gov/-/media/Coronavirus/"
-        date_diff = date.today() - date(2020, 3, 22)
-        covid_links = []
-
-        for i in range(date_diff.days + 1):
-            day = date(2020, 3, 22) + timedelta(days=i)
-            day = day.strftime("%-m%d%Y")
-            pdf_name = "CTDPHCOVID19summary{}.pdf?la=en".format(day)
-            covid_links.append(pdf_name)
-
-            if pdf_name not in existing_assets:
-                try:
-                    subprocess.run(
-                        [
-                            "wget",
-                            "--no-check-certificate",
-                            "-O",
-                            "pdfs/connecticut/{}".format(pdf_name),
-                            join(api_base_url, pdf_name),
-                        ]
-                    )
-
-                except:
-                    warnings.warn(
-                        "Warning: Report for Connecticut {} is not available".format(
-                            day
-                        )
-                    )
-
-        # TODO: extract the data from the graphs, a mixture of PDFS/SVGS and JPEG
-
+        ## now obtain PDF update date
+        r = requests.get(
+            "https://data.ct.gov/api/views/ypz6-8qyf/rows.csv", verify=False,
+        )
+        ## the reports are always published 1 day later (possibly!)
+        data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
+        # check if this data is in the data folder already
+        existing_assets = list(map(basename, glob("data/{}/connecticut.csv".format(data_date))))
+        if existing_assets:
+            warnings.warn("Connecticut data already up to date up to {}".format(data_date))
+        else:
+            system(
+                "wget --no-check-certificate -O data/{}/connecticut.csv https://data.ct.gov/api/views/ypz6-8qyf/rows.csv".format(
+                    data_date
+                )
+            )
     def get_massachusetts(self):
         # check existing assets
         existing_assets = list(map(basename, glob("pdfs/massachusetts/*.pdf")))
