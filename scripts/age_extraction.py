@@ -54,7 +54,7 @@ class AgeExtractor:
     def get_washington(self):
         ## now obtain PDF update date
         r = requests.head(
-            "https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx"
+            "https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_CDC_Event_Date_SARS.xlsx"
         )
         ## the reports are always published 1 day later (possibly!)
         data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
@@ -68,7 +68,7 @@ class AgeExtractor:
             )
         else:
             system(
-                "wget --no-check-certificate -O data/{}/washington.xlsx https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx".format(
+                "wget --no-check-certificate -O data/{}/washington.xlsx https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_CDC_Event_Date_SARS.xlsx".format(
                     data_date
                 )
             )
@@ -114,7 +114,6 @@ class AgeExtractor:
             )
 
         else:
-            pdf_date = pdf_date.strftime("%Y-%m-%d")
             system(
                 "wget --no-check-certificate -O pdfs/new_jersey/{}.pdf https://www.nj.gov/health/cd/documents/topics/NCOV/COVID_Confirmed_Case_Summary.pdf".format(
                     pdf_date
