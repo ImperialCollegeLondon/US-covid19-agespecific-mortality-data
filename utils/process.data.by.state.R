@@ -87,6 +87,10 @@ obtain.fl.data = function(first.day.fl, last.day){
         cum.death.t_0 =  data.fl[which(data.fl$age == age_group & data.fl$date == (Date-1)),]$cum.deaths
         daily.deaths = cum.death.t_1 - cum.death.t_0 
         stopifnot(is.numeric(daily.deaths))
+        if(daily.deaths<0){
+          data.fl[which(data.fl$age == age_group & data.fl$date == (Date-1)),]$cum.deaths = cum.death.t_0 + daily.deaths
+          daily.deaths = 0
+        }
         tmp[which(age == age_group & date == Date),]$daily.deaths = daily.deaths
       }
     }
@@ -131,20 +135,28 @@ obtain.tx.data = function(first.day.tx, last.day){
     tmp = read_excel(xlsx_file, sheet = "Fatalities by Age Group", col_names = c("age", "cum.deaths", "perc"))
     tmp = tmp[-c(1:2, 15:19), 1:2]
     tmp = tmp %>%
-      mutate(age = ifelse(age == "<1 year", "0-1", gsub("(.+) years", "\\1", age)),
+      mutate(age = ifelse(age == "<1 year", "0-9", 
+                          ifelse(age == "1-9 years", "0-9", gsub("(.+) years", "\\1", age))), # group 0-1 and 2-9 for analysis
              code = "TX", 
              date = Date,
              cum.deaths = as.numeric(cum.deaths), 
-             daily.deaths = NA_integer_)
+             daily.deaths = NA_integer_) %>%
+      group_by(age, code, date, daily.deaths) %>%
+      summarise(cum.deaths = sum(cum.deaths))
+    
     if(Date > first.day.tx){
       cum.death.t_1 = tmp[which(tmp$date == Date),]$cum.deaths
       cum.death.t_0 =  data.tx[which(data.tx$date == (Date-1)),]$cum.deaths
       daily.deaths = cum.death.t_1 - cum.death.t_0 
       stopifnot(is.numeric(daily.deaths))
       tmp[which(tmp$date == Date),]$daily.deaths = daily.deaths
-    }
+  }
     data.tx = rbind(data.tx, tmp)
   }
+  # Reorder data
+  data.tx <- with(data.tx, data.tx[order(date, age, cum.deaths, daily.deaths, code), ])
+  data.tx <- data.tx[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
+  
   return(data.tx)
 }
 
@@ -155,30 +167,38 @@ obtain.ga.data = function(first.day.ga, last.day){
   
   data.ga = NULL
   for(t in 1:length(dates)){
-    Date = dates[t]
+    Date = dates[t] 
     csv_file = file.path(path_to_data, Date, "georgia.csv")
     tmp = read.csv(csv_file)
     tmp = subset(tmp, !is.na(age))
-    agedf = data.table(age = 0:max(101,max(tmp$age)))
+    agedf = data.table(age = 0:109, age_cat = cut(0:109, breaks = seq(0, 110, 5), include.highest = FALSE, right = FALSE))
     tmp = as.data.table(tmp) %>%
-      group_by(age) %>%
-      summarise(cum.deaths = n()) %>%
       merge(agedf, by = "age", all.y = T) %>%
+      group_by(age_cat) %>%
+      summarise(cum.deaths = n()) %>%
       mutate(date = Date,
              code = "GA",
-             daily.deaths = NA_integer_)
+             age = paste0(as.numeric(gsub("\\[(.+),.*", "\\1", age_cat)), "-", as.numeric( sub("[^,]*,([^]]*)\\)", "\\1", age_cat))-1),
+             daily.deaths = NA_integer_) %>%
+      select(age, cum.deaths, daily.deaths, code, date)
     tmp[is.na(tmp$cum.deaths),]$cum.deaths = 0
     if(Date > first.day.ga){
       cum.death.t_1 = tmp[which(tmp$date == Date),]$cum.deaths
       cum.death.t_0 =  data.ga[which(data.ga$date == (Date-1)),]$cum.deaths
       daily.deaths = cum.death.t_1 - cum.death.t_0 
-      daily.deaths[which(daily.deaths < 0)] = 0
       stopifnot(is.numeric(daily.deaths))
+      if(any(daily.deaths<0)){
+        index = which(daily.deaths<0)
+        data.ga[which(data.ga$date == (Date-1)),]$cum.deaths[index] = cum.death.t_0[index] + daily.deaths[index]
+        daily.deaths[index] = 0
+      }
       tmp[which(tmp$date == Date),]$daily.deaths = daily.deaths
     }
     data.ga = rbind(data.ga, tmp)
   }
   
+  # remove age > 100 for analysis
+  data.ga <- subset(data.ga, age != "100-104" & age != "105-109")
   # Reorder data
   data.ga <- with(data.ga, data.ga[order(date, age, cum.deaths, daily.deaths, code), ])
   data.ga <- data.ga[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
@@ -232,3 +252,46 @@ obtain.cdc.data = function(first.day.cdc, last.wednesday){
   
   return(data.cdc)
 }
+
+obtain.ct.data = function(last.day){
+  cat("\n Processing Connecticut \n")
+  
+  csv_file = file.path(path_to_data, last.day, "connecticut.csv")
+ 
+  tmp = read.csv(csv_file) %>%
+    mutate(AgeGroups = as.character(AgeGroups),
+           age = ifelse(AgeGroups == "0 - 9", "0-9",
+                        ifelse(AgeGroups == "10 -19" | AgeGroups == "19-Oct", "10-19",
+                               ifelse(AgeGroups == "20 -29", "20-29",
+                                      ifelse(AgeGroups == "30 - 39", "30-39",
+                                             ifelse(AgeGroups == "40 -49", "40-49",
+                                                    ifelse(AgeGroups == "50 -59", "50-59", 
+                                                           ifelse(AgeGroups == "60 - 69", "60-69",
+                                                                  ifelse(AgeGroups == "70 - 79", "70-79",
+                                                                         ifelse(AgeGroups == "80 and older", "80+", AgeGroups))))))))),
+           date = as.Date(DateUpdated, format = "%m/%d/%y"),
+           code = "CT", 
+           daily.deaths = NA_integer_) %>%
+    rename(cum.deaths = Deaths) %>%
+    select(age, date, code, cum.deaths, daily.deaths)
+  for(t in 1:(length(unique(tmp$date))-1)){
+    for(Age in unique(tmp$age)){
+      Date = sort(unique(tmp$date))[-1][t]
+      cum.death.t_1 = tmp[which(tmp$date == Date & tmp$age == Age),]$cum.deaths
+      cum.death.t_0 = tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$cum.deaths
+      daily.deaths = cum.death.t_1 - cum.death.t_0 
+      stopifnot(is.numeric(daily.deaths))
+      if(daily.deaths < 0) daily.deaths = 0
+      tmp[which(tmp$date == Date & tmp$age == Age),]$daily.deaths = daily.deaths 
+    }
+  }
+  
+  # Reorder data
+  data.ct <- with(tmp, tmp[order(date, code, age, cum.deaths, daily.deaths), ])
+  data.ct <- data.ct[, c("date", "code", "age", "cum.deaths", "daily.deaths")]
+  
+return(data.ct)
+}
+
+
+
