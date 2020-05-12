@@ -25,14 +25,13 @@ class AgeExtractor:
         # check if this data is in the data folder already
         existing_assets = list(map(basename, glob("data/{}/cdc.csv".format(data_date))))
         if existing_assets:
-            warnings.warn("CDC data already up to date up to {}".format(data_date))
+            print("==> CDC data already up to date up to {}".format(data_date))
         else:
             system(
                 "wget --no-check-certificate -O data/{}/cdc.csv https://data.cdc.gov/api/views/9bhg-hcku/rows.csv".format(
                     data_date
                 )
             )
-
 
     def get_georgia(self):
         ## now obtain PDF update date
@@ -44,7 +43,7 @@ class AgeExtractor:
             map(basename, glob("data/{}/georgia.csv".format(data_date)))
         )
         if existing_assets:
-            warnings.warn("Georgia data already up to date up to {}".format(data_date))
+            print("==> Georgia data already up to date up to {}".format(data_date))
         else:
             system(
                 "wget --no-check-certificate -O georgia.zip https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip;unzip georgia.zip; rm countycases.csv demographics.csv georgia.zip; mv deaths.csv data/{}/georgia.csv".format(
@@ -64,9 +63,7 @@ class AgeExtractor:
             map(basename, glob("data/{}/washington.xlsx".format(data_date)))
         )
         if existing_assets:
-            warnings.warn(
-                "Washington data already up to date up to {}".format(data_date)
-            )
+            print("==> Washington data already up to date up to {}".format(data_date))
         else:
             system(
                 "wget --no-check-certificate -O data/{}/washington.xlsx https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_CDC_Event_Date_SARS.xlsx".format(
@@ -87,7 +84,7 @@ class AgeExtractor:
             map(basename, glob("data/{}/texas.xlsx".format(data_date)))
         )
         if existing_assets:
-            warnings.warn("Texas data already up to date up to {}".format(data_date))
+            print("==> Texas data already up to date up to {}".format(data_date))
         else:
             system(
                 "wget --no-check-certificate -O data/{}/texas.xlsx https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx".format(
@@ -108,8 +105,8 @@ class AgeExtractor:
             "%Y-%m-%d"
         )
         if pdf_date in existing_dates:
-            warnings.warn(
-                "PDF last updated on {}. Please wait for the latest published report".format(
+            print(
+                "==> PDF last updated on {}. Please wait for the latest published report".format(
                     pdf_date
                 )
             )
@@ -242,15 +239,18 @@ class AgeExtractor:
         ## the reports are always published 1 day later (possibly!)
         data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
         # check if this data is in the data folder already
-        existing_assets = list(map(basename, glob("data/{}/connecticut.csv".format(data_date))))
+        existing_assets = list(
+            map(basename, glob("data/{}/connecticut.csv".format(data_date)))
+        )
         if existing_assets:
-            warnings.warn("Connecticut data already up to date up to {}".format(data_date))
+            print("==> Connecticut data already up to date up to {}".format(data_date))
         else:
             system(
                 "wget --no-check-certificate -O data/{}/connecticut.csv https://data.ct.gov/api/views/ypz6-8qyf/rows.csv".format(
                     data_date
                 )
             )
+
     def get_massachusetts(self):
         # check existing assets
         existing_assets = list(map(basename, glob("pdfs/massachusetts/*.pdf")))
@@ -266,19 +266,22 @@ class AgeExtractor:
 
             if pdf_name.split("/")[0] + ".pdf" not in existing_assets:
                 try:
+                    r = requests.get(join(api_base_url, pdf_name))
+                    r.raise_for_status()
+                except requests.exceptions.HTTPError as err:
+                    print(err)
+                    print(
+                        "==> Report for Massachusetts {} is not available".format(day)
+                    )
+                else:
                     subprocess.run(
                         [
-                            "wget --no-check-certificate",
+                            "wget",
+                            "--no-check-certificate",
                             "-O",
                             "pdfs/massachusetts/{}".format(pdf_name[:-9] + ".pdf"),
                             join(api_base_url, pdf_name),
                         ]
-                    )
-                except:
-                    warnings.warn(
-                        "Warning: Report for Massachusetts {} is not available".format(
-                            day
-                        )
                     )
 
     # def get_nyc(self):
@@ -311,16 +314,20 @@ class AgeExtractor:
 
             if pdf_name not in existing_assets:
                 try:
+                    r = requests.get(join(api_base_url, pdf_name))
+                    r.raise_for_status()
+                except requests.exceptions.HTTPError as err:
+                    print(err, "\n ==> Report for  NYC {} is not available")
+                else:
                     subprocess.run(
                         [
                             "wget",
                             "--no-check-certificate",
                             "-O",
-                            "pdfs/nyc/{} {}".format(pdf_name),
+                            "pdfs/nyc/{}".format(pdf_name),
                             join(api_base_url, pdf_name),
                         ]
                     )
-                    # now scrape the PDFs
                     age_data = {}
                     doc = fitz.Document(
                         "pdfs/nyc/covid-19-deaths-confirmed-probable-daily-{}.pdf".format(
@@ -343,10 +350,6 @@ class AgeExtractor:
                     age_data["unknown"] = [lines[16], lines[17]]
                     with open("data/{}/nyc.json".format(day_old_format), "w") as f:
                         json.dump(age_data, f)
-                except:
-                    warnings.warn(
-                        "Warning: Report for  NYC {} is not available".format(day)
-                    )
 
     def get_all(self):
         """TODO: running get_*() for every state
