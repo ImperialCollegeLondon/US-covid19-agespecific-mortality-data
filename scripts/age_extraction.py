@@ -251,6 +251,26 @@ class AgeExtractor:
                 )
             )
 
+    def get_colorado(self):
+        ## now obtain PDF update date
+        r = requests.get(
+            "https://opendata.arcgis.com/datasets/882fd53e0c1b43c2b769a4fbdc1c6448_0.csv"
+        )
+        ## the reports are always published 1 day later (possibly!)
+        data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
+        # check if this data is in the data folder already
+        existing_assets = list(
+            map(basename, glob("data/{}/colorado.csv".format(data_date)))
+        )
+        if existing_assets:
+            print("==> Colorado data already up to date up to {}".format(data_date))
+        else:
+            system(
+                "wget --no-check-certificate -O data/{}/colorado.csv https://opendata.arcgis.com/datasets/882fd53e0c1b43c2b769a4fbdc1c6448_0.csv".format(
+                    data_date
+                )
+            )
+
     def get_massachusetts(self):
         # check existing assets
         existing_assets = list(map(basename, glob("pdfs/massachusetts/*.pdf")))
@@ -368,3 +388,4 @@ if __name__ == "__main__":
     ageExtractor.get_connecticut()
     ageExtractor.get_massachusetts()
     ageExtractor.get_nyc()
+    ageExtractor.get_colorado()
