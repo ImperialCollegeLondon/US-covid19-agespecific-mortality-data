@@ -47,12 +47,12 @@ class AgeExtractor:
                             url,
                         ]
                     )
-                    '''
-                    url = join(api_base_url, pdf_name)
-                    with open("pdfs/massachusetts/" + pdf_name.split("/")[0] + ".pdf", "wb") as f:
-                        response = requests.get(url)
-                        f.write(response.content)
-                    '''
+                    #'''
+                    #url = join(api_base_url, pdf_name)
+                    #with open("pdfs/massachusetts/" + pdf_name.split("/")[0] + ".pdf", "wb") as f:
+                    #    response = requests.get(url)
+                    #    f.write(response.content)
+                    #'''
                     # now scrape the PDFs
                     age_data = {}
                     doc = fitz.Document(
