@@ -30,7 +30,7 @@ class AgeExtractor:
 
         for i in range(date_diff.days + 1):
             dayy = date(2020, 4, 20) + timedelta(days=i)
-            day = dayy.strftime("%B-%d-%Y").lower()
+            day = dayy.strftime("%B-%-d-%Y").lower()
             pdf_name = "covid-19-dashboard-{}/download".format(day)
             #covid_links.append(pdf_name)
             url = join(api_base_url, pdf_name)
@@ -38,7 +38,7 @@ class AgeExtractor:
             if pdf_name.split("/")[0] + ".pdf" not in existing_assets:
                 
                 if requests.get(url).status_code == 200:
-                '''
+                    #'''
                     subprocess.run(
                         [
                             "wget --no-check-certificate",
@@ -47,12 +47,12 @@ class AgeExtractor:
                             url,
                         ]
                     )
-                '''
+                    '''
                     url = join(api_base_url, pdf_name)
                     with open("pdfs/massachusetts/" + pdf_name.split("/")[0] + ".pdf", "wb") as f:
                         response = requests.get(url)
                         f.write(response.content)
-                    
+                    '''
                     # now scrape the PDFs
                     age_data = {}
                     doc = fitz.Document(
@@ -96,7 +96,7 @@ class AgeExtractor:
                         json.dump(age_data, f)
 
                 else:
-                    warnings.warn(
+                    print(
                         "Warning: Report for Massachusetts {} is not available".format(
                             day
                         )
