@@ -54,8 +54,9 @@ class AgeExtractor:
     def get_washington(self):
         ## now obtain PDF update date
         r = requests.head(
-            "https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_CDC_Event_Date_SARS.xlsx"
+            "https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx"
         )
+        # use https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_CDC_Event_Date_SARS.xlsx if not working
         ## the reports are always published 1 day later (possibly!)
         data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
         # check if this data is in the data folder already
@@ -63,7 +64,7 @@ class AgeExtractor:
             map(basename, glob("data/{}/washington.xlsx".format(data_date)))
         )
         if existing_assets:
-            print("==> Washington data already up to date up to {}".format(data_date))
+            print("==> Washingston data already up to date up to {}".format(data_date))
         else:
             system(
                 "wget --no-check-certificate -O data/{}/washington.xlsx https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_CDC_Event_Date_SARS.xlsx".format(
