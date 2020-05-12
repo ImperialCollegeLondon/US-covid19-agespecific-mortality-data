@@ -20,10 +20,10 @@ last.wednesday = days_week[which(weekdays(days_week) == "Wednesday")]
 first.day.states = data.table(code = c("GA", "NY", "NYC", "TX", "NJ", "FL", "CDC"),
                               first.day = as.Date(c("2020-05-07", "2020-05-07", "2020-04-14", "2020-05-06", "2020-05-06",  "2020-03-27", "2020-05-06")))
 
-data.nyc = obtain.nyc.data(first.day.states[which(first.day.states$code == "NYC"),]$first.day, last.day-3)
+data.nyc = obtain.nyc.data(first.day.states[which(first.day.states$code == "NYC"),]$first.day, last.day-4)
 write.csv(data.nyc, file = file.path("data", last.day, "processed", "DeathsByAge_NYC.csv"), row.names=FALSE)
 
-data.fl = obtain.fl.data(first.day.states[which(first.day.states$code == "FL"),]$first.day, last.day-3)
+data.fl = obtain.fl.data(first.day.states[which(first.day.states$code == "FL"),]$first.day, last.day-4)
 write.csv(data.fl, file = file.path("data", last.day, "processed", "DeathsByAge_FL.csv"), row.names=FALSE)
 
 data.wa = obtain.wa.data(last.monday)
@@ -38,10 +38,13 @@ write.csv(data.ga, file = file.path("data", last.day, "processed", "DeathsByAge_
 data.cdc = obtain.cdc.data(first.day.states[which(first.day.states$code == "CDC"),]$first.day, last.wednesday)
 write.csv(data.cdc, file = file.path("data", last.day, "processed", "DeathsByAge_CDC.csv"), row.names=FALSE)
 
-data.ct = obtain.ct.data(last.day)
+data.ct = obtain.ct.data(last.day-1)
 write.csv(data.ct, file = file.path("data", last.day, "processed", "DeathsByAge_CT.csv"), row.names=FALSE)
 
-data.overall = dplyr::bind_rows(data.fl, data.tx, data.ga, data.ct) # do not include WA because problematic delay nor NYC because not overall data yet
+data.co = obtain.co.data(last.day)
+write.csv(data.co, file = file.path("data", last.day, "processed", "DeathsByAge_CO.csv"), row.names=FALSE)
+
+data.overall = dplyr::bind_rows(data.fl, data.tx, data.ga, data.ct, data.co) # do not include WA because problematic delay nor NYC because not overall data yet
 write.csv(data.overall, file = file.path("data", last.day, "processed", "DeathsByAge_US.csv"), row.names=FALSE)
 
 cat("\n End Processing \n")
