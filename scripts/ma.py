@@ -31,8 +31,8 @@ class AgeExtractor:
             covid_links.append(pdf_name)
 
             if pdf_name.split("/")[0] + ".pdf" not in existing_assets:
-                
-                try:
+                url = join(api_base_url, pdf_name)
+                if requests.get(url).status_code == 200:
                     subprocess.run(
                         [
                             "wget --no-check-certificate",
@@ -87,7 +87,7 @@ class AgeExtractor:
                     with open("data/{}/ma.json".format(day), "w") as f:
                         json.dump(age_data, f)
 
-                except:
+                else:
                     warnings.warn(
                         "Warning: Report for Massachusetts {} is not available".format(
                             day
