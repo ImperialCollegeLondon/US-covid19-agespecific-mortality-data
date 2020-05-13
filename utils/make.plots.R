@@ -71,7 +71,7 @@ make.comparison.plots = function(State, Code){
       theme(legend.position="right")+ 
       guides(fill = guide_legend(title="Age")) +
       labs(title = State, y = "Weekly deaths (overall population)") 
-    ggsave(paste0("figures/comparison.ihme.jhu.depthealth_", Code, ".pdf"), p, w = 8, h =6)
+    ggsave(paste0("figures/comparison.ihme.jhu.depthealth_", Code, ".png"), p, w = 8, h =6)
     
   } else{
     
@@ -104,7 +104,7 @@ make.comparison.plots = function(State, Code){
       theme(legend.position="right")+ 
       guides(fill = guide_legend(title="Age")) +
       labs(title = State, y = "Daily deaths (overall population)") 
-    ggsave(paste0("figures/comparison.ihme.jhu.depthealth_", Code, ".pdf"), p, w = 8, h =6)
+    ggsave(paste0("figures/comparison.ihme.jhu.depthealth_", Code, ".png"), p, w = 8, h =6)
   }
 }
 
