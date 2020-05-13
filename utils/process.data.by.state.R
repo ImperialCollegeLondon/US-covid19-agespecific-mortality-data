@@ -291,7 +291,7 @@ obtain.ct.data = function(last.day){
       daily.deaths = cum.death.t_1 - cum.death.t_0 
       stopifnot(is.numeric(daily.deaths))
       if(daily.deaths < 0){
-        tmp[which(tmp$date == (Date-1)),]$cum.deaths = cum.death.t_0 + daily.deaths
+        tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$cum.deaths = cum.death.t_0 + daily.deaths
         daily.deaths = 0
         }
       tmp[which(tmp$date == Date & tmp$age == Age),]$daily.deaths = daily.deaths 
