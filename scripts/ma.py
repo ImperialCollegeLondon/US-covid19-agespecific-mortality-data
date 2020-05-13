@@ -41,7 +41,8 @@ class AgeExtractor:
                     #'''
                     subprocess.run(
                         [
-                            "wget --no-check-certificate",
+                            "wget",
+                            "--no-check-certificate",
                             "-O",
                             "pdfs/massachusetts/{}".format(pdf_name[:-9] + ".pdf"),
                             url,
