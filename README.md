@@ -45,6 +45,7 @@ We use Requests to make HTTP/HTTPS requests to a web API, checking whether the d
 ## Warnings
 - Florida did not publish a report on 2020-05-09
 - NY and NJ have a 1 day latency, meaning that the cumulative deaths we extract on day t are the cumulative deaths in day t-1
+- For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
 
 ## Time series of extracted data as of 2020-05-12
 ![](figures/time.series_allstates.png)

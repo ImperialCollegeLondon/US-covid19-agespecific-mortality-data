@@ -11,7 +11,6 @@ time.daily.update = strptime("16:00:00", "%H:%M:%S")
   
 if(Sys.time() > time.daily.update) last.day = Sys.Date() # today
 if(Sys.time() < time.daily.update) last.day = Sys.Date() - 1 # yesterday 
-
 dir.create(file.path("data", last.day, "processed"), showWarnings = FALSE)
 
 days_week = last.day - 0:6
