@@ -53,9 +53,13 @@ class AgeExtractor:
 
     def get_washington(self):
         ## now obtain PDF update date
+        # r = requests.head(
+        #     "https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx"
+        # )
         r = requests.head(
-            "https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx"
+            "https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_CDC_Event_Date_SARS.xlsx"
         )
+
         # use https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_CDC_Event_Date_SARS.xlsx if not working
         ## the reports are always published 1 day later (possibly!)
         data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
