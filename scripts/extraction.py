@@ -48,7 +48,7 @@ class AgeExtractor:
                 json.dump(age_data, f)
         except:
             print(
-                "Warning: Report for Massachusetts {} is not available".format(
+                "Warning: Report for louisiana {} is not available".format(
                     day
                 )
             )
