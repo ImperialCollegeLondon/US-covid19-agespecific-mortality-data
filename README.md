@@ -7,6 +7,7 @@ pandas
 pyjson
 beautifulsoup4
 requests
+selenium
 ```
 
 1. To extract and clean, run
