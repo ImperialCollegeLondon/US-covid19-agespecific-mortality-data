@@ -31,7 +31,7 @@ We use Requests to make HTTP/HTTPS requests to a web API, checking whether the d
 
 ## Dynamic websites
 
-We use webdriver from selenium to extract the elements.
+We use webdriver from selenium to find the elements and extract the corresponding data. However, since some data in the plot is on the canvas cannot be extract, we use the screenshot.
 
 ## State specifications
 | Country        | Date record start           | Notes and link  |
@@ -51,12 +51,14 @@ We use webdriver from selenium to extract the elements.
 | North Carolina| 2020-05-13| [link](https://covid19.ncdhhs.gov/dashboard#by-age); daily updated and replaced, need extracting daily; no historical archive|
 | Mississippi| 2020-05-12| [link](https://msdh.ms.gov/msdhsite/_static/14,0,420.html); daily updated and replaced, need exreacting daily; no historical archive|
 | Missouri| 2020-05-13| [link](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php);  daily updated and replaced, need exreacting daily; no historical archive|
-
+| Delaware| 2020-05-12| [link](https://myhealthycommunity.dhss.delaware.gov/locations/state); daily updated and replaced, need exreacting daily; no historical archive|
+| Vermont| 2020-05-13| [link](https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/6128a0bc9ae14e98a686b635001ef7a7); daily updated and replaced, need exreacting daily; no historical archive| 
 
 ## Warnings
 - Florida did not publish a report on 2020-05-09
 - NY and NJ have a 1 day latency, meaning that the cumulative deaths we extract on day t are the cumulative deaths in day t-1
 - For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
+- For North Carolina, the total death number is updated daily, but the age death data is not updated daily
 
 ## Time series of extracted data as of 2020-05-12
 ![](figures/time.series_allstates.png)
