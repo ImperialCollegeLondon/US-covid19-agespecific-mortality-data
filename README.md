@@ -31,7 +31,7 @@ We use Requests to make HTTP/HTTPS requests to a web API, checking whether the d
 
 ## Dynamic websites
 
-We use webdriver from selenium to find the elements and extract the corresponding data. However, since some data in the plot is on the canvas cannot be extract, we use the screenshot.
+We use webdriver from selenium to find the elements and extract the corresponding data. 
 
 ## State specifications
 | Country        | Date record start           | Notes and link  |
@@ -53,6 +53,18 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | Missouri| 2020-05-13| [link](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php);  daily updated and replaced, need exreacting daily; no historical archive|
 | Delaware| 2020-05-12| [link](https://myhealthycommunity.dhss.delaware.gov/locations/state); daily updated and replaced, need exreacting daily; no historical archive|
 | Vermont| 2020-05-13| [link](https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/6128a0bc9ae14e98a686b635001ef7a7); daily updated and replaced, need exreacting daily; no historical archive| 
+
+| Idaho| 2020-05-13| [link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard_V2/Story1); daily updated and replaced, need exreacting daily; no historical archive| 
+| Arizona| 2020-05-13| [link](https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/covid-19/dashboards/index.php); daily updated and replaced, need exreacting daily; no historical archive| 
+| Kansas| 2020-05-13| [link](https://www.coronavirus.kdheks.gov/160/COVID-19-in-Kansas); daily updated and replaced, need exreacting daily; no historical archive| 
+| South Carolina| 2020-05-13| [link](https://www.scdhec.gov/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/sc-demographic-data-covid-19); updated not daily; no historical archive| 
+|Ioawa| 2020-05-13| [link](https://coronavirus.iowa.gov/pages/case-counts); daily updated and replaced, need exreacting daily; no historical archive| 
+| North Dakota| 2020-05-14| [link](https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases); daily updated and replaced, need exreacting daily; no historical archive| 
+| Kentucky| 2020-05-13| [link](https://kygeonet.maps.arcgis.com/apps/opsdashboard/index.html#/543ac64bc40445918cf8bc34dc40e334); daily updated and replaced, need exreacting daily; no historical archive| 
+| California| 2020-05-13| [link](https://public.tableau.com/views/COVID-19PublicDashboard/Covid-19Public?%3Aembed=y&%3Adisplay_count=no&%3AshowVizHome=no); daily updated and replaced, need exreacting daily; no historical archive| 
+| Indiana| 2020-05-13| [link](https://www.coronavirus.in.gov/); daily updated and replaced, need exreacting daily; no historical archive| 
+| Maryland| 2020-05-14| [link](https://coronavirus.maryland.gov/); daily updated and replaced, need exreacting daily; no historical archive| 
+
 
 ## Warnings
 - Florida did not publish a report on 2020-05-09
