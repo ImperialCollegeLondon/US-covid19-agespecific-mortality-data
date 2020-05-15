@@ -29,6 +29,10 @@ We use Requests to make HTTP/HTTPS requests to a web API, BeautifulSoup to extra
 
 We use Requests to make HTTP/HTTPS requests to a web API, checking whether the data is up-to-date. We then download the raw files to `data/$date`, via `scripts/age_extraction.py`. This is summarised in `Makefile` in the `make files` directive.
 
+## Dynamic websites
+
+We use webdriver from selenium to extract the elements.
+
 ## State specifications
 | Country        | Date record start           | Notes and link  |
 | ------------- |:-------------:| -----:|
@@ -42,6 +46,10 @@ We use Requests to make HTTP/HTTPS requests to a web API, checking whether the d
 | Washington| 2020-05-04 | [link](https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx); daily cumulative, need extracting daily; no historical archive|
 | CDC| 2020-05-06 | [link](https://data.cdc.gov/api/views/9bhg-hcku/rows.csv); daily cumulative, need extracting daily; no historical archive|
 | Texas| 2020-05-06 | [link](https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx); daily cumulative, need extracting daily; no historical archive|
+| Louisiana| 2020-05-12| [link](http://ldh.la.gov/coronavirus/); daily updated and replaced, need extracting daily; no historical archive|
+| Oklahoma| 2020-05-13| [link](https://looker-dashboards.ok.gov/embed/dashboards/42); daily updated and replaced, need extracting daily; no historical archive|
+| North Carolina| 2020-05-13| [link](https://covid19.ncdhhs.gov/dashboard#by-age); daily updated and replaced, need extracting daily; no historical archive|
+
 
 ## Warnings
 - Florida did not publish a report on 2020-05-09
