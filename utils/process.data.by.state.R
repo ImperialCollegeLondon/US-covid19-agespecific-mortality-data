@@ -71,6 +71,8 @@ obtain.fl.data = function(first.day.fl, last.day){
   
   dates = seq.Date(first.day.fl, last.day, by = "day")
   
+  dates = dates[-which(dates == as.Date("2020-05-09"))] # no report on this day
+  
   data.fl = NULL
   for(t in 1:length(dates)){
     Date = dates[t] 
@@ -86,6 +88,14 @@ obtain.fl.data = function(first.day.fl, last.day){
         cum.death.t_1 = tmp[which(age == age_group & date == Date),]$cum.deaths
         cum.death.t_0 =  data.fl[which(data.fl$age == age_group & data.fl$date == (Date-1)),]$cum.deaths
         daily.deaths = cum.death.t_1 - cum.death.t_0 
+        if(Date == as.Date("2020-05-10")){
+          cum.death.t_1_2 = tmp[which(age == age_group & date == Date),]$cum.deaths
+          cum.death.t_0 =  data.fl[which(data.fl$age == age_group & data.fl$date == (Date-2)),]$cum.deaths
+          daily.deaths = round((cum.death.t_1_2 - cum.death.t_0 )/2)
+          # cum death are divided equally among the last two days
+          data.fl = rbind(data.fl, data.table(age = age_group, date = (Date-1), cum.deaths = round(cum.death.t_1_2/2), daily.deaths = daily.deaths, code = "FL"))
+          tmp[which(age == age_group & date == Date),]$cum.deaths = round(cum.death.t_1_2/2)
+        }
         stopifnot(is.numeric(daily.deaths))
         if(daily.deaths<0){
           data.fl[which(data.fl$age == age_group & data.fl$date == (Date-1)),]$cum.deaths = cum.death.t_0 + daily.deaths
@@ -232,12 +242,13 @@ obtain.cdc.data = function(first.day.cdc, last.wednesday){
     tmp = select(tmp, c("Start.week", "End.Week", "State", "Age.group", "COVID.19.Deaths")) %>%
       subset(State %in% states & Age.group != "Male, all ages" & Age.group != "Female, all ages" & Age.group != "All ages") %>%
       mutate(age = ifelse(Age.group == "85 years and over", "85+",
-                          ifelse(Age.group == "Under 1 year", "0-1", gsub("(.+) years", "\\1", Age.group)))) %>%
-      group_by(Start.week, End.Week, State, age) %>%
+                          ifelse(Age.group == "Under 1 year", "0-1", gsub("(.+) years", "\\1", Age.group))),
+             date = as.Date(End.Week, format = "%m/%d/%y")) %>%
+      group_by(date, State, age) %>%
       summarise(cum.deaths = sum(COVID.19.Deaths)) %>%
       merge(coderef, by = "State") %>%
       mutate(daily.deaths = NA_integer_) %>%
-      rename(state = State, date = End.Week) %>%
+      rename(state = State) %>%
       select(state, date, age, cum.deaths, daily.deaths, code)
     tmp[is.na(tmp$cum.deaths),]$cum.deaths = 0
     
@@ -347,4 +358,128 @@ obtain.co.data = function(last.day){
 
   return(data.co)
 }
+
+obtain.id.data = function(first.day.id, last.day){
+  cat("\n Processing Idaho \n")
+  
+  dates = seq.Date(first.day.id, last.day, by = "day")
+  
+  data.id = NULL
+  for(t in 1:length(dates)){
+    Date = dates[t]
+    csv_file = file.path(path_to_data, Date, "Idaho.csv")
+    tmp = read.csv(csv_file)  %>%
+      mutate(age = ifelse(Age.Group.Ten == "<18", "0-19", 
+                          ifelse(Age.Group.Ten == "18-29 years", "20-29", Age.Group.Ten)), # group 0-1 and 2-9 for analysis
+             code = "ID", 
+             date = Date,
+             cum.deaths = as.numeric(Deaths), 
+             daily.deaths = NA_integer_) %>%
+      group_by(age, code, date, daily.deaths) 
+    
+    if(Date > first.day.id){
+      cum.death.t_1 = tmp[which(tmp$date == Date),]$cum.deaths
+      cum.death.t_0 =  data.id[which(data.id$date == (Date-1)),]$cum.deaths
+      daily.deaths = cum.death.t_1 - cum.death.t_0 
+      stopifnot(is.numeric(daily.deaths))
+      tmp[which(tmp$date == Date),]$daily.deaths = daily.deaths
+    }
+    data.id = rbind(data.id, tmp)
+  }
+  # Reorder data
+  data.id <- with(data.id, data.id[order(date, age, cum.deaths, daily.deaths, code), ])
+  data.id <- data.id[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
+  
+  return(data.id)
+}
+
+obtain.json.data = function(first.day, last.day, state_name, state_code){
+  cat(paste0("\n Processing ", state_name,"\n"))
+  
+  dates = seq.Date(first.day, last.day, by = "day")
+  
+  data = NULL
+  for(t in 1:length(dates)){
+    Date = dates[t]
+    json_file <- file.path(path_to_data, Date, paste0(state_name, ".json"))
+    json_data <- suppressWarnings(fromJSON(paste(readLines(json_file))))
+    tmp = data.table(age = names(json_data), cum.deaths = NA_integer_, daily.deaths = NA_integer_, 
+                     code = state_code, date = Date)
+    tmp = tmp[which(tmp$age != "Unknown"),]; tmp = tmp[which(tmp$age != "unknown"),]
+    
+    for(age_group in tmp$age){
+      if(grepl(",", json_data[[age_group]])) json_data[[age_group]] = as.numeric(gsub(",", "", json_data[[age_group]]))
+      cum.deaths = as.integer(json_data[[age_group]])[1]
+      tmp[which(age == age_group),]$cum.deaths = cum.deaths
+      if(Date > first.day){
+        cum.death.t_1 = tmp[which(age == age_group & date == Date),]$cum.deaths
+        cum.death.t_0 =  data[which(data$age == age_group & data$date == (Date-1)),]$cum.deaths
+        daily.deaths = cum.death.t_1 - cum.death.t_0 
+        stopifnot(is.numeric(daily.deaths))
+        tmp[which(age == age_group & date == Date),]$daily.deaths = daily.deaths
+      }
+    }
+    data = rbind(data, tmp)
+  }
+  
+  # Reorder data
+  data <- with(data, data[order(date, age, cum.deaths, daily.deaths, code), ])
+  data <- data[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
+  
+  # change age label for some states
+  if(state_name == "delaware"){
+    data = data %>%
+      mutate(age = ifelse(age == "5-17", "5-19", 
+                          ifelse(age =="18-34", "20-34", age)))
+  }
+  
+  if(state_name == "arizona"){
+    data = data %>%
+      mutate(age = ifelse(age == "<20", "0-19", age))
+  }
+  
+  if(state_name == "louisiana"){
+    data = data %>%
+      mutate(age = ifelse(age == "70+", age,
+                          ifelse(age == "< 18", "0-19",
+                                 ifelse(age == "18 - 29", "20-29",
+                                        paste0(gsub("(.+) \\-.*", "\\1", age), "-",gsub(".*\\- (.+)", "\\1", age))))))
+      
+  }
+  
+  if(state_name == "iowa"){
+    data = data %>%
+      mutate(age = ifelse(age == "18-40", "19-39", 
+                          ifelse(age == "41-60", "40-59",
+                                 ifelse(age == "61-80", "59-79",
+                                        "80+"))))
+  }
+  
+  if(state_name == "missouri"){
+    data = data %>%
+      mutate(age = ifelse(age == "Under 20", "0-19", age))
+  }
+  
+  if(state_name == "SouthCarolina"){
+    data = data %>%
+      mutate(age = ifelse(age == "81+", "80+", 
+                          paste0(as.numeric(gsub("(.+)\\-.*", "\\1", age))-1, "-", as.numeric(gsub(".*\\-(.+)", "\\1", age))-1)))
+  }
+
+  if(state_name == "oklahoma"){
+    data = data %>%
+      mutate(age = ifelse(age == "00-04", "0-4", 
+                          ifelse(age == "05-17", "5-19",
+                                 ifelse(age == "18-35", "20-34",
+                                        ifelse(age == "36-49", "35-49", age)))))
+  }
+  
+  if(state_name == "vermont"){
+    data = data %>%
+      mutate(age = ifelse(age == "80 plus", "80+", age))
+  }
+  
+  return(data)
+}
+
 
