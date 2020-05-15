@@ -53,7 +53,6 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | Missouri| 2020-05-13| [link](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php);  daily updated and replaced, need exreacting daily; no historical archive|
 | Delaware| 2020-05-12| [link](https://myhealthycommunity.dhss.delaware.gov/locations/state); daily updated and replaced, need exreacting daily; no historical archive|
 | Vermont| 2020-05-13| [link](https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/6128a0bc9ae14e98a686b635001ef7a7); daily updated and replaced, need exreacting daily; no historical archive| 
-
 | Idaho| 2020-05-13| [link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard_V2/Story1); daily updated and replaced, need exreacting daily; no historical archive| 
 | Arizona| 2020-05-13| [link](https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/covid-19/dashboards/index.php); daily updated and replaced, need exreacting daily; no historical archive| 
 | Kansas| 2020-05-13| [link](https://www.coronavirus.kdheks.gov/160/COVID-19-in-Kansas); daily updated and replaced, need exreacting daily; no historical archive| 
