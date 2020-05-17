@@ -59,7 +59,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | California| 2020-05-13| [link](https://public.tableau.com/views/COVID-19PublicDashboard/Covid-19Public?%3Aembed=y&%3Adisplay_count=no&%3AshowVizHome=no); daily updated and replaced, need exreacting daily; no historical archive| 
 | Indiana| 2020-05-13| [link](https://www.coronavirus.in.gov/); daily updated and replaced, need exreacting daily; no historical archive| 
 | Maryland| 2020-05-14| [link](https://coronavirus.maryland.gov/); daily updated and replaced, need exreacting daily; no historical archive| 
-| Alabama| 2020-04-08| [link](https://www.alabamapublichealth.gov/covid19/); daily report, missing data for 2020-04-20,2020-04-24, from 2020-04-26 to 2020-05-02 and 2020-05-10| 
+| Alabama| 2020-04-08| [link](https://www.alabamapublichealth.gov/covid19/); daily report, missing data for 2020-04-20,2020-04-24, 2020-04-26, 2020-04-27, from 2020-04-29 to 2020-05-02 and 2020-05-10| 
 
 
 ## Warnings
