@@ -1,6 +1,7 @@
 library(data.table)
 library(ggplot2)
 library(scales)
+library(gridExtra)
 
 # ihme
 death_data_ihme = read.csv(file.path("data", "official", "ihme_death_data.csv"))
@@ -9,10 +10,10 @@ death_data_ihme = read.csv(file.path("data", "official", "ihme_death_data.csv"))
 death_data_jhu = read.csv(file.path("data", "official", "jhu_death_data.csv"))
 
 # scrapped data
-path_to_data = function(state) file.path("data", date, "processed", paste0("DeathsByAge_", state, ".csv"))
+path_to_data = function(state) file.path("data", last.day, "processed", paste0("DeathsByAge_", state, ".csv"))
 
 
-make.comparison.plots = function(State, Code){
+make.comparison.plot = function(State, Code){
   
   if(Code == "WA"){ # Washington had weekly update
     
@@ -71,7 +72,7 @@ make.comparison.plots = function(State, Code){
       theme(legend.position="right")+ 
       guides(fill = guide_legend(title="Age")) +
       labs(title = State, y = "Weekly deaths (overall population)") 
-    ggsave(paste0("figures/comparison.ihme.jhu.depthealth_", Code, ".png"), p, w = 8, h =6)
+     ggsave(paste0("figures/comparison.ihme.jhu.depthealth_", Code, ".png"), p, w = 8, h =6)
     
   } else{
     
@@ -106,8 +107,18 @@ make.comparison.plots = function(State, Code){
       labs(title = State, y = "Daily deaths (overall population)") 
     ggsave(paste0("figures/comparison.ihme.jhu.depthealth_", Code, ".png"), p, w = 8, h =6)
   }
+  
+  return(p)
 }
 
+make.comparison.plots = function(names, codes){
+  p = list()
+  for(i in 1:length(names)){
+    p[[i]] = make.comparison.plot(names[i], codes[i])
+  }
+  q = do.call(grid.arrange,p)
+  ggsave(paste0("figures/comparison.ihme.jhu.depthealth_overall.png"), q, w = 18, h = 14)
+}
 
 make.time.series.plots = function(codes){
   
