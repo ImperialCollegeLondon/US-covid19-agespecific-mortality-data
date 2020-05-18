@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup, SoupStrainer
 import requests
 import subprocess
 import warnings
-
+import re
 
 class AgeExtractor:
     def __init__(self):
@@ -182,11 +182,21 @@ class AgeExtractor:
         existing_assets.sort()
         usable_assets = {}
         for pdf_path in existing_assets:
-            pdf_date = basename(pdf_path).split("report-")[1][:10]
-            if datetime.strptime(pdf_date, "%Y-%m-%d") >= datetime.strptime(
-                "2020-03-27", "%Y-%m-%d"
-            ):
-                usable_assets[pdf_date] = pdf_path
+            pdf_base = basename(pdf_path)
+            pdf_date = None
+            tmp = re.search('[0-9]+-[0-9]+-[0-9]+', pdf_base)
+            if tmp is not None:
+                pdf_date = datetime.strptime( tmp.group(0), "%Y-%m-%d")
+            tmp = re.search('[0-9]+\\.[0-9]+\\.[0-9]{4}', pdf_base)
+            if tmp is not None:
+                pdf_date = datetime.strptime( tmp.group(0), "%m.%d.%Y")
+            tmp = re.search('[0-9]+\\.[0-9]+\\.[0-9]{2}', pdf_base)
+            if tmp is not None:
+                pdf_date = datetime.strptime( tmp.group(0), "%m.%d.%y")            
+            if pdf_date is None:
+                raise ValueError()
+            if pdf_date >= datetime.strptime("2020-03-27", "%Y-%m-%d"):
+                usable_assets[pdf_date.strftime('%Y-%m-%d')] = pdf_path
 
         for day in usable_assets.keys():
             age_data = {}
