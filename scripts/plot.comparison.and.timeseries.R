@@ -1,3 +1,5 @@
+library(tidyverse)
+
 # 1. compare official data (JHU, IHME) on overall death and to scrapped data by age
 
 # 2. time series of all states
