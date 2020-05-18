@@ -2,6 +2,7 @@ library(data.table)
 library(ggplot2)
 library(scales)
 library(gridExtra)
+library(tidyverse)
 
 # ihme
 death_data_ihme = read.csv(file.path("data", "official", "ihme_death_data.csv"))
