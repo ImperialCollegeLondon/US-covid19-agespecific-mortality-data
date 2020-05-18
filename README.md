@@ -22,6 +22,15 @@ Rscript scripts/process.data.R
 ```
 This will get you csv files for every state with variables *age*, *date*, *daily.deaths* or *weekly.deaths* and *code* in `data/$DATE/processed`.
 
+3. To create the figures, run
+```
+Rscript scripts/plot.comparison.and.timeseries.R
+```
+This will get you pngs in `figures/` of 
+* Comparison between extracted data from the Department of Health and IHME and JHU overall deaths as well as,
+* Time series of overall deaths for every state.
+
+
 ## PDF extractions
 We use Requests to make HTTP/HTTPS requests to a web API, BeautifulSoup to extract the download links in the HTML page and Fitz to extract the data within the PDF. The resulting data is stored in a `.json` file in `data/$DATE`.
 
@@ -74,5 +83,9 @@ We use webdriver from selenium to find the elements and extract the correspondin
 - For North Carolina, the total death number is updated daily, but the age death data is not updated daily
 - For Kansa, data has not been updated since 202-05-15 
 
-## Time series of extracted data as of 2020-05-12
+## Figures
+### Time series of extracted data as of 2020-05-16
 ![](figures/time.series_allstates.png)
+
+### Comparison to IHME and JHU overall death as of 2020-05-16
+![](figures/comparison.ihme.jhu.depthealth_overall.png)
