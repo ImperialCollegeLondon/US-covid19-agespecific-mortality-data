@@ -32,8 +32,7 @@ obtain.FL.data = function(first.day.fl, last.day){
           cum.death.t_0 =  data.fl[which(data.fl$age == age_group & data.fl$date == (Date-2)),]$cum.deaths
           daily.deaths = round((cum.death.t_1_2 - cum.death.t_0 )/2)
           # cum death are divided equally among the last two days
-          data.fl = rbind(data.fl, data.table(age = age_group, date = (Date-1), cum.deaths = round(cum.death.t_1_2/2), daily.deaths = daily.deaths, code = "FL"))
-          tmp[which(age == age_group & date == Date),]$cum.deaths = round(cum.death.t_1_2/2)
+          data.fl = rbind(data.fl, data.table(age = age_group, date = (Date-1), cum.deaths = round(cum.death.t_0 + daily.deaths), daily.deaths = daily.deaths, code = "FL"))
         }
         stopifnot(is.numeric(daily.deaths))
         if(daily.deaths<0){
