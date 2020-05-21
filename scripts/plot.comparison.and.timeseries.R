@@ -9,6 +9,8 @@ time.daily.update = strptime("22:00:00", "%H:%M:%S")
 if(Sys.time() > time.daily.update) last.day = Sys.Date() - 1 # yesterday
 if(Sys.time() < time.daily.update) last.day = Sys.Date() - 2 # two days ago 
 
+last.day = as.Date("2020-05-16")
+
 days_week = last.day - 0:6
 last.monday = days_week[which(weekdays(days_week) == "Monday")]
 last.wednesday = days_week[which(weekdays(days_week) == "Wednesday")]
