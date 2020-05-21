@@ -7,7 +7,7 @@ time.daily.update = strptime("22:00:00", "%H:%M:%S")
 
 if(Sys.time() > time.daily.update) last.day = Sys.Date() - 1 # yesterday
 if(Sys.time() < time.daily.update) last.day = Sys.Date() - 2 # two days ago 
-
+ 
 days_week = last.day - 0:6
 last.monday = days_week[which(weekdays(days_week) == "Monday")]
 last.wednesday = days_week[which(weekdays(days_week) == "Wednesday")]
@@ -37,6 +37,7 @@ for(i in 1:nrow(json.states)){
   data.overall = dplyr::bind_rows(data, data.overall)
 }
 
+data.overall = subset(data.overall, code != "WA" & code != "TX")# data does not match with JHU or IHME.
 write.csv(data.overall, file = file.path("data", last.day, "processed", "DeathsByAge_US.csv"), row.names=FALSE)
 
 cat("\n End Processing \n")
