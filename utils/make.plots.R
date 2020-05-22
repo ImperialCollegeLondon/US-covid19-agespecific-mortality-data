@@ -159,9 +159,17 @@ make.time.series.plots = function(codes){
   
   cat("\n Make time series plot \n")
   
-  data = NULL
+  databyage = NULL; data = NULL
   for(Code in codes){
     if(Code == "WA"){
+      death_data_scrapping = read.csv(path_to_data(Code)) %>%
+        mutate(update = "weekly", 
+               code = as.character(code),
+               date = as.character(date),
+               daily.deaths = weekly.deaths) %>%
+        select(code, update, daily.deaths,date,age)
+      databyage = rbind(databyage, death_data_scrapping)
+      
       death_data_scrapping = read.csv(path_to_data(Code)) %>%
         group_by(date, code) %>%
         summarise(daily_deaths = sum(weekly.deaths)) %>%
@@ -171,6 +179,13 @@ make.time.series.plots = function(codes){
                date = as.character(date))
       data = rbind(data, death_data_scrapping)
     }else{
+      death_data_scrapping = read.csv(path_to_data(Code)) %>%
+        mutate(update = "daily", 
+               code = as.character(code),
+               date = as.character(date))%>%
+        select(code, update, daily.deaths,date,age)
+      databyage = rbind(databyage, death_data_scrapping)
+      
       death_data_scrapping = read.csv(path_to_data(Code)) %>%
         group_by(date, code) %>%
         summarise(daily_deaths = sum(daily.deaths)) %>%
@@ -196,4 +211,19 @@ make.time.series.plots = function(codes){
     guides(fill = guide_legend(title="Age")) +
     labs(title = "Time series from Dept of Health", y = "Daily or weekly deaths (overall population)") 
   ggsave(paste0("figures/time.series_allstates.png"), p, w = 15, h = 10)
+  
+  databyage$date = as.Date(databyage$date)
+  p = ggplot(databyage, aes(x = date, y = daily.deaths, linetype = update, color = age)) +
+    geom_line() +
+    geom_point(size = 0.5) +
+    facet_wrap(~code, scale = "free", ncol = 1) +
+    scale_x_date(date_breaks = "months", labels = date_format("%e %b"), 
+                 limits = c(min(databyage$date), 
+                            max(databyage$date))) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    theme(legend.position="bottom")+ 
+    guides(fill = guide_legend(title="Age")) +
+    labs(title = "Time series from Dept of Health", y = "Daily or weekly deaths (overall population)") 
+  ggsave(paste0("figures/time.series_allstates_byage.png"), p, w = 5, h = 50,limitsize = FALSE)
 }
