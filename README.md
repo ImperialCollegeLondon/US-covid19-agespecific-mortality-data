@@ -82,7 +82,8 @@ We use webdriver from selenium to find the elements and extract the correspondin
 - For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
 - For North Carolina, the total death number is updated daily, but the age death data is not updated daily. The website format changes from 2020-05-20 
 - For Kansa, data has not been updated since 2020-05-15, then updated on 2020-05-18
-- For South Carolina, data has not been updated since 2020-05-17 
+- For South Carolina, data has not been updated since 2020-05-17, updated on 2020-05-20
+- For Missouri, the website is changed on 2020-05-21, cannot find the timestamp
 
 ## Figures
 ### Time series of extracted data as of 2020-05-16
