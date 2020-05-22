@@ -61,10 +61,11 @@ obtain.WA.data = function(first.day.wa, last.monday){
       reshape2::melt(id.vars = c("County", "WeekStartDate")) %>%
       group_by(WeekStartDate, variable) %>%
       summarise(weekly.deaths = sum(value)) %>%
+      ungroup() %>%
       mutate(age = gsub("Age (.+)", "\\1",variable),
-             code = "WA") %>%
-      select(WeekStartDate, age, weekly.deaths, code) %>%
-      rename(date = WeekStartDate)
+             code = "WA",
+             date = as.Date(WeekStartDate)) %>%
+      select(date, age, weekly.deaths, code) 
     
     # Reorder data
     data.wa <- with(data.wa, data.wa[order(date, age, weekly.deaths, code), ])
