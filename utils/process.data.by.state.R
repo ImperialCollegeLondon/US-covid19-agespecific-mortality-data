@@ -36,7 +36,7 @@ obtain.FL.data = function(first.day.fl, last.day){
         }
         stopifnot(is.numeric(daily.deaths))
         if(daily.deaths<0){
-          data.fl[which(data.fl$age == age_group & data.fl$date == (Date-1)),]$cum.deaths = cum.death.t_0 + daily.deaths
+          data.fl[which(data.fl$age == age_group & data.fl$date == (Date-1)),]$daily.deaths = max(data.fl[which(data.fl$age == age_group & data.fl$date == (Date-1)),]$daily.deaths + daily.deaths,0)
           daily.deaths = 0
         }
         tmp[which(age == age_group & date == Date),]$daily.deaths = daily.deaths
@@ -98,6 +98,11 @@ obtain.TX.data = function(first.day.tx, last.day){
       cum.death.t_0 =  data.tx[which(data.tx$date == (Date-1)),]$cum.deaths
       daily.deaths = cum.death.t_1 - cum.death.t_0 
       stopifnot(is.numeric(daily.deaths))
+      if(any(daily.deaths<0)){
+        index = which(daily.deaths<0)
+        data.tx[which(data.tx$date == (Date-1)),]$daily.deaths[index] = sapply(data.tx[which(data.tx$date == (Date-1)),]$daily.deaths[index] + daily.deaths[index], function(x) max(x,0))
+        daily.deaths[index] = 0
+      }
       tmp[which(tmp$date == Date),]$daily.deaths = daily.deaths
   }
     data.tx = rbind(data.tx, tmp)
@@ -147,7 +152,7 @@ obtain.GA.data = function(first.day.ga, last.day){
       stopifnot(is.numeric(daily.deaths))
       if(any(daily.deaths<0)){
         index = which(daily.deaths<0)
-        data.ga[which(data.ga$date == (Date-1)),]$cum.deaths[index] = cum.death.t_0[index] + daily.deaths[index]
+        data.ga[which(data.ga$date == (Date-1)),]$daily.deaths[index] = sapply(data.ga[which(data.ga$date == (Date-1)),]$daily.deaths[index] + daily.deaths[index], function(x) max(x,0))
         daily.deaths[index] = 0
       }
       tmp[which(tmp$date == Date),]$daily.deaths = daily.deaths
@@ -241,7 +246,7 @@ obtain.CT.data = function(first.day.ct, last.day){
       daily.deaths = cum.death.t_1 - cum.death.t_0 
       stopifnot(is.numeric(daily.deaths))
       if(daily.deaths < 0){
-        tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$cum.deaths = cum.death.t_0 + daily.deaths
+        tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$daily.deaths =  max(tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$daily.deaths + daily.deaths, 0)
         daily.deaths = 0
         }
       tmp[which(tmp$date == Date & tmp$age == Age),]$daily.deaths = daily.deaths 
@@ -273,22 +278,22 @@ obtain.CO.data = function(first.day.co, last.day){
     mutate(daily.deaths = NA_integer_, 
            code = "CO",
            age = as.character(age))
-  
+
   for(t in 2:length(unique(df2$date))){
     for(a in 1:length(unique(df2$age))){
-      Date = unique(df2$date)[t]; Age = unique(df2$age)[a]
+      Date = sort(unique(df2$date))[t]; Age = unique(df2$age)[a]
       cum.deaths.t1 = df2[which(df2$date == Date & df2$age == Age),]$cum.deaths
       cum.deaths.t0 = df2[which(df2$date == (Date-1) & df2$age == Age),]$cum.deaths
       daily.deaths = cum.deaths.t1 - cum.deaths.t0
       stopifnot(is.numeric(daily.deaths))
       if(daily.deaths < 0){
-        df2[which(df2$date == (Date-1)),]$cum.deaths = cum.deaths.t0 + daily.deaths
+        df2[which(df2$date == (Date-1) & df2$age == Age),]$daily.deaths = max(df2[which(df2$date == (Date-1) & df2$age == Age),]$daily.deaths + daily.deaths, 0)
         daily.deaths = 0
       }
-      df2[which(df2$date == Date & df2$age == Age),]$daily.deaths = cum.deaths.t1 - cum.deaths.t0
+      df2[which(df2$date == Date & df2$age == Age),]$daily.deaths = daily.deaths
     }
   }
-  
+
   # remove unknown age
   df2 <- subset(df2, age != "Unknown")
   # Reorder data
@@ -321,6 +326,11 @@ obtain.ID.data = function(first.day.id, last.day){
       cum.death.t_0 =  data.id[which(data.id$date == (Date-1)),]$cum.deaths
       daily.deaths = cum.death.t_1 - cum.death.t_0 
       stopifnot(is.numeric(daily.deaths))
+      if(any(daily.deaths<0)){
+        index = which(daily.deaths<0)
+        data.id[which(data.id$date == (Date-1)),]$daily.deaths[index] = sapply(data.id[which(data.id$date == (Date-1)),]$daily.deaths[index] + daily.deaths[index], function(x) max(x,0))
+        daily.deaths[index] = 0
+      }
       tmp[which(tmp$date == Date),]$daily.deaths = daily.deaths
     }
     data.id = rbind(data.id, tmp)
@@ -371,7 +381,7 @@ obtain.json.data = function(first.day, last.day, state_name, state_code){
         daily.deaths = cum.death.t_1 - cum.death.t_0 
         stopifnot(is.numeric(daily.deaths) & !is.null(daily.deaths))
         if(daily.deaths<0){
-          data[which(data$age == age_group & data$date == (Date-1)),]$cum.deaths = cum.death.t_0 + daily.deaths
+          data[which(data$age == age_group & data$date == (Date-1)),]$daily.deaths = max(data[which(data$age == age_group & data$date == (Date-1)),]$daily.deaths + daily.deaths,0)
           daily.deaths = 0
         }
         tmp[which(age == age_group & date == Date),]$daily.deaths = daily.deaths
