@@ -8,7 +8,7 @@ library(tidyverse)
 death_data_ihme = read.csv(file.path("data", "official", "ihme_death_data.csv"))
 
 # jhu
-death_data_jhu = read.csv(file.path("data", "official", "jhu_death_data.csv"))
+death_data_jhu = read.csv(file.path("data", "official", "jhu_death_data_210520.csv"))
 
 # jhu
 death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200518.csv"))
@@ -19,6 +19,8 @@ path_to_data = function(state) file.path("data", last.day, "processed", paste0("
 
 
 make.comparison.plot = function(State, Code){
+  
+  cat(paste("\n Make comparison plot for", State, "\n"))
   
   if(Code == "WA"){ # Washington had weekly update
     
@@ -155,6 +157,8 @@ make.comparison.plots = function(names, codes){
 
 make.time.series.plots = function(codes){
   
+  cat("\n Make time series plot \n")
+  
   data = NULL
   for(Code in codes){
     if(Code == "WA"){
@@ -182,7 +186,8 @@ make.time.series.plots = function(codes){
   p = ggplot(data, aes(x = date, y = daily_deaths, linetype = update, color = code)) +
     geom_line() +
     geom_point(size = 0.5) +
-    scale_x_date(date_breaks = "weeks", labels = date_format("%e %b"), 
+    facet_wrap(~code, scale = "free") +
+    scale_x_date(date_breaks = "months", labels = date_format("%e %b"), 
                  limits = c(min(data$date), 
                             max(data$date))) + 
     theme_bw() + 
@@ -190,7 +195,5 @@ make.time.series.plots = function(codes){
     theme(legend.position="right")+ 
     guides(fill = guide_legend(title="Age")) +
     labs(title = "Time series from Dept of Health", y = "Daily or weekly deaths (overall population)") 
-  ggsave(paste0("figures/time.series_allstates.png"), p, w = 8, h =6)
+  ggsave(paste0("figures/time.series_allstates.png"), p, w = 15, h = 10)
 }
-
-
