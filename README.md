@@ -70,7 +70,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | Maryland| 2020-05-14| [link](https://coronavirus.maryland.gov/); daily updated and replaced, need exreacting daily; no historical archive| 
 | Alabama| 2020-04-08| [link](https://www.alabamapublichealth.gov/covid19/); daily report, missing data for 2020-04-20,2020-04-24, 2020-04-26, 2020-04-27, from 2020-04-29 to 2020-05-02 and 2020-05-10|
 | Idaho| 2020-05-13| [link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard_V2/Story1); daily updated and replaced, need exreacting daily; no historical archive| 
-| Kansas| 2020-05-13| [link](https://www.coronavirus.kdheks.gov/160/COVID-19-in-Kansas); daily updated and replaced, need exreacting daily; no historical archive| 
+| Kansas| 2020-05-13| [link](https://www.coronavirus.kdheks.gov/160/COVID-19-in-Kansas); updated and replaced every two days; no historical archive| 
 | South Carolina| 2020-05-13| [link](https://www.scdhec.gov/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/sc-demographic-data-covid-19); updated not daily; no historical archive| 
 |Ioawa| 2020-05-13| [link](https://coronavirus.iowa.gov/pages/case-counts); daily updated and replaced, need exreacting daily; no historical archive| 
 
@@ -81,7 +81,6 @@ We use webdriver from selenium to find the elements and extract the correspondin
 - NY and NJ have a 1 day latency, meaning that the cumulative deaths we extract on day t are the cumulative deaths in day t-1
 - For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
 - For North Carolina, the total death number is updated daily, but the age death data is not updated daily. The website format changes from 2020-05-20 
-- For Kansa, data has not been updated since 2020-05-15, then updated on 2020-05-18
 - For South Carolina, data has not been updated since 2020-05-17, updated on 2020-05-20
 - For Missouri, the website is changed on 2020-05-21, cannot find the timestamp
 
