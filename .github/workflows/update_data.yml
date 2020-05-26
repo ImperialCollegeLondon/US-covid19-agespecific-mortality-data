@@ -21,14 +21,14 @@ jobs:
         pip install -r requirements.txt
 
     - name: Clone data from yesterday
-      working-directory: update_data
+      working-directory: .
       run: |
         git clone https://@github.com/MJHutchinson/US-covid19-data-scraping --single-branch -b update_data output 
         git config --global user.name "GitHub Actions"
         git config --global user.email action@github.com
 
-	- name: update data sources
-	  working-directory: update_data
+	- name: Update Data Sources
+	  working-directory: .
 	  run: |
       make files
       today=$(date +'%Y-%m-%d')
