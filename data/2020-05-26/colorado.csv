@@ -1,4 +1,13 @@
-[{"agegroups":"0-9","cases":"459","deaths":"1","rate":"121","dateupdated":"2020-05-24T00:00:00.000"}
+[{"agegroups":"0-9","cases":"465","deaths":"1","rate":"123","dateupdated":"2020-05-25T00:00:00.000"}
+,{"agegroups":"10-19","cases":"1040","deaths":"1","rate":"226","dateupdated":"2020-05-25T00:00:00.000"}
+,{"agegroups":"20-29","cases":"4650","deaths":"4","rate":"998","dateupdated":"2020-05-25T00:00:00.000"}
+,{"agegroups":"30-39","cases":"5747","deaths":"19","rate":"1305","dateupdated":"2020-05-25T00:00:00.000"}
+,{"agegroups":"40-49","cases":"5882","deaths":"53","rate":"1335","dateupdated":"2020-05-25T00:00:00.000"}
+,{"agegroups":"50-59","cases":"7184","deaths":"153","rate":"1357","dateupdated":"2020-05-25T00:00:00.000"}
+,{"agegroups":"60-69","cases":"6021","deaths":"472","rate":"1392","dateupdated":"2020-05-25T00:00:00.000"}
+,{"agegroups":"70-79","cases":"4016","deaths":"808","rate":"1541","dateupdated":"2020-05-25T00:00:00.000"}
+,{"agegroups":"80 and older","cases":"6165","deaths":"2257","rate":"3755","dateupdated":"2020-05-25T00:00:00.000"}
+,{"agegroups":"0-9","cases":"459","deaths":"1","rate":"121","dateupdated":"2020-05-24T00:00:00.000"}
 ,{"agegroups":"10-19","cases":"1016","deaths":"1","rate":"221","dateupdated":"2020-05-24T00:00:00.000"}
 ,{"agegroups":"20-29","cases":"4590","deaths":"4","rate":"985","dateupdated":"2020-05-24T00:00:00.000"}
 ,{"agegroups":"30-39","cases":"5705","deaths":"19","rate":"1296","dateupdated":"2020-05-24T00:00:00.000"}
