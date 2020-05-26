@@ -1,7 +1,7 @@
 name: Run daily update
 on:
   schedule:
-    - cron: "27 14 * * *"
+    - cron: "31 15 * * *"
 
 jobs:
   build-and-deploy:
