@@ -346,39 +346,6 @@ class AgeExtractor:
 
             
             
-            
-         '''   
-            if browser.execute_script("return document.readyState") == "complete":
-
-        ## https://public.tableau.com/thumb/views/COVID-19TableauVersion2/CaseSummary.pdf
-
-        data = browser.find_elements_by_css_selector('span')
-        data = [e for e in data if e.get_attribute("style")]
-        day = '2020-05-18'
-        if not os.access("data/{}/kansas.json".format(day), os.F_OK):
-            if browser.execute_script("return document.readyState") == "complete":
-            ### TODO: get the
-                age_data = {}
-                age_data['35-44'] = 4
-                age_data['45-54'] = 7
-                age_data['55-64'] = 25
-                age_data['65-74'] = 30
-                age_data['75-84'] = 39
-                age_data['85+'] = 68
-
-                path = "data/{}".format(day)
-                if not os.path.exists(path):
-                    os.mkdir(path)
-                with open("data/{}/kansas.json".format(day), "w") as f:
-                    json.dump(age_data, f)
-            else:
-                print('error for extracting')
-        else:
-            print('Report for Kansas {} is already exist'.format(day))
-
-        browser.close()
-        browser.quit()
-    '''
     def get_nc(self):
         ## do manually, download the pdf
         chromed = "D:\chromedriver.exe"
@@ -427,63 +394,6 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
-        ## find key word to point to the age data table
-
-        #case_pdf = 'https://public.tableau.com/views/NCDHHS_COVID-19_Dashboard_Cases/NCDHHS_Dashboard_Cases2.pdf?:showVizHome=no'
-        #browser.get(url)
-        #browser.implicitly_wait(5)
-        #browser.find_element_by_xpath('//*[@id="[Parameters].[Parameter 3]_2"]/div[2]').click()
-        
-        #day = browser.find_element_by_xpath('//*[@id="node-103"]/div/div[1]/div/div/p[1]').text.split('.,')[-1]
-        #day = parsedate(day).strftime("%Y-%m-%d")
-        #if not os.access("data/{}/NorthCarolina.json".format(day), os.F_OK):
-        #    browser.implicitly_wait(5)
-        #    #ifbrowser.execute_script("return document.readyState") == "complete":
-        #    total = int(browser.find_element_by_xpath('//*[@id="node-103"]/div/div[1]/div/div/table/tbody/tr/td[2]').text)
-        #    browser.implicitly_wait(5)
-        #    browser.maximize_window()
-        #    browser.implicitly_wait(5)
-        #    #data = browser.find_element_by_xpath('//*[@id="ui-accordion-ui-id-1-panel-3"]/section/p[5]/img')
-        #    #data_web = data.get_attribute("src")
-        #    data = browser.find_elements_by_css_selector('img')
-        #    data_web = [e.get_attribute('src') for e in data if e.get_attribute('alt') == 'COVID-19 Deaths by Age'][0]
-
-        #    path = "pngs/NorthCarolina"
-        #    if not os.path.exists(path):
-        #        os.mkdir(path)
-        #    response = requests.get(data_web)
-        #    with open("pngs/NorthCarolina/{}.png".format(day), "wb") as f:
-        #        for data in response.iter_content(128):
-        #            f.write(data)
-            #image1 = Image.open(r"pngs/NorthCarolina/{}.png".format(day))
-            #im1 = image1.convert('RGB')
-            #im1.save(r'pdfs/NorthCarolina/{}.pdf'.format(day))
-        #   path = "data/{}".format(day)
-            
-
-
-
-
-    #age_data = {}
-    #day = '2020-05-21'
-    #total = 716
-    #age_data['0-17'] = 0
-    #age_data['18-24'] = 1
-    #age_data['25-49'] = 28
-    #age_data['50-64'] = 83
-    #age_data['65-74'] = 150
-    #age_data['75+'] = 454
-
-    #age_data['total'] = total
-
-    #path = "data/{}".format(day)
-    #if not os.path.exists(path):
-    #    os.mkdir(path)
-    #with open("data/{}/NorthCarolina.json".format(day), "w") as f:
-    #    json.dump(age_data, f)
-    #'''
-
-    #'''
     def get_sc(self):
         ## TODO: find the .pdf
         url = "https://www.scdhec.gov/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/sc-demographic-data-covid-19"
@@ -534,33 +444,6 @@ class AgeExtractor:
             browser.close()
             browser.quit()
 
-    #            data = browser.find_element_by_xpath('//*[@id="title10223277918472557951_1535545040336048298"]/div[1]/div/span/div/span')
-    #            # get the total deaths
-    #            total_idx = re.search( r'(=.*)', data.text).span()
-    #            total = data.text[total_idx[0] + 1 : total_idx[1] - 2]
-    #            total = int(total)
-    #            age_data = {}
-    #            age_data['21-30'] = round(0.005*total)
-    #            age_data['31-40'] = round(0.005 * total)
-    #            age_data['41-50'] = round(0.028 * total)
-    #            age_data['51-60'] = round(0.088 * total)
-    #            age_data['61-70'] = round(0.221 * total)
-    #            age_data['71-80'] = round(0.303 * total)
-    #            age_data['81+'] = round(0.351 * total)
-    #            path = "data/{}".format(day)
-    #            if not os.path.exists(path):
-    #                os.mkdir(path)
-    #            with open("data/{}/SouthCarolina.json".format(day), "w") as f:
-    #                json.dump(age_data, f)
-
-    #             browser.save_screenshot('pngs/SouthCarolina/{}.png'.format(day))
-    #         else:
-    #            print('error for extracting')
-    #    else:
-    #        print('Report for SouthCarolina {} is already exist'.format(day))
-    #    browser.close()
-    #    browser.quit()
-    #'''
 
     def get_mississippi(self):
         r = requests.get("https://www.scdhec.gov/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/sc-demographic-data-covid-19")
@@ -636,21 +519,6 @@ with open("data/{}/mississippi.json".format(day), "w") as f:
             print('Report for Missouri {} is already exist'.format(day))
         browser.close()
         browser.quit()
-        #day = browser.find_element_by_xpath('//*[@id="main-content"]/p[5]').text.split(",")[-1]
-        #day = parsedate(" ".join(['2020',day])).strftime('%Y-%m-%d')
-        #if not os.access("data/{}/missouri.json".format(day), os.F_OK):
-        #    browser.implicitly_wait(5)
-        #    if browser.execute_script("return document.readyState") == "complete":
-        #        browser.find_element_by_xpath('//*[@id="accordion"]/div[6]/a/div').click()
-        #        age_data = {}
-        #        for i in range(8):
-        #            path1 = '//*[@id="collapsedeathages"]/div/div/table/tbody/tr[' + str(i + 1) + ']/td[' + str(1) + ']'
-        #            path2 = '//*[@id="collapsedeathages"]/div/div/table/tbody/tr[' + str(i + 1) + ']/td[' + str(2) + ']'
-        #            data1 = browser.find_element_by_xpath(path1)
-        #            data2 = browser.find_element_by_xpath(path2)
-        #            age_data[data1.text] = data2.text
-
-
 
     def get_kentucky(self):
         url = "https://kygeonet.maps.arcgis.com/apps/opsdashboard/index.html#/543ac64bc40445918cf8bc34dc40e334"
@@ -762,13 +630,6 @@ with open("data/{}/mississippi.json".format(day), "w") as f:
         browser.close()
         browser.quit()
 
-        ###################################################
-        ## install Pillow
-        from PIL import Image
-
-        ##################################################
-
-
     def get_california(self):
         url = 'https://public.tableau.com/views/COVID-19PublicDashboard/Covid-19Public?%3Aembed=y&%3Adisplay_count=no&%3AshowVizHome=no'
         url = 'https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/COVID-19/Race-Ethnicity.aspx'
@@ -796,40 +657,6 @@ with open("data/{}/mississippi.json".format(day), "w") as f:
                 print('error for extracting')
         browser.close()
         browser.quit()
-
-#browser.maximize_window()
-        #day = browser.find_element_by_xpath('//*[@id="title8860806102834544352_18161636954798804938"]/div[1]/div/span/div/span[2]').text
-        #day = parsedate(day).strftime('%Y-%m-%d')
-        #if not os.access("pngs/California/{}.png".format(day), os.F_OK):
-        #    if browser.execute_script("return document.readyState") == "complete":
-                # change to the death web
-                #browser.find_element_by_xpath('//*[@id="tableau_base_widget_ParameterControl_0"]/div/div[2]/span/div[1]').click()
-                # the xpath will change
-                #browser.find_element_by_xpath('//*[@id="tab-menuItem24"]/div').click()
-                #button = browser.find_elements_by_css_selector('span.tabMenuItemName')
-                #[e for e in button if e.text == 'Deaths'][0].click()
-                #browser.implicitly_wait(5)
-                #data = browser.find_element_by_xpath('//*[@id="tabZoneId257"]/div/div/div/div[1]')
-
-                #path = "pngs/California"
-                #if not os.path.exists(path):
-                #    os.mkdir(path)
-                #browser.implicitly_wait(5)
-                #browser.save_screenshot('pngs/California/{}.png'.format(day))
-                #left = data.location['x']
-                #top = data.location['y']
-                #right = data.location['x'] + data.size['width']
-                #bottom = data.location['y'] + data.size['height']
-
-                #im = Image.open('pngs/California/{}.png'.format(day))
-                #im = im.crop((left, top, right, bottom))
-                #im.save('pngs/California/{}.png'.format(day))
-
-
-
-    
-    
-    
 
     def get_illinois(self):
         ## TODO: extract
@@ -872,25 +699,6 @@ with open("data/{}/mississippi.json".format(day), "w") as f:
 
         browser.close()
         browser.quit()
-
-#age_data = {}
-#day = '2020-05-21'
-#age_data['<20'] = 3
-#age_data['20-29'] = 18
-#age_data['30-39'] = 72
-#age_data['40-49'] = 157
-#age_data['50-59'] = 387
-#age_data['60-69'] = 813
-#age_data['70-79'] = 1113
-#age_data['80+'] = 2044
-
-#browser.save_screenshot('pngs/Illinois/{}.png'.format(day))
-#path = "data/{}".format(day)
-#if not os.path.exists(path):
-#    os.mkdir(path)
-#with open("data/{}/illinois.json".format(day), "w") as f:
-#    json.dump(age_data, f)
-#    '''
 
     def get_indiana(self):
         #url = 'https://www.coronavirus.in.gov/'
