@@ -26,14 +26,14 @@ jobs:
         git config --global user.name "GitHub Actions"
         git config --global user.email action@github.com
 
-	- name: Update Data Sources
-	  run: |
-      make files
-      today=$(date +'%Y-%m-%d')
-      mv data/$today output/data
-      cd output
-      git add -f .
-      git commit -m "Automate data update"
-      git push \
-        "https://${GITHUB_ACTOR}:${{ secrets.GITHB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
-        HEAD:update_data
+    - name: Update Data Sources
+      run: |
+        make files
+        today=$(date +'%Y-%m-%d')
+        mv data/$today output/data
+        cd output
+        git add -f .
+        git commit -m "Automate data update"
+        git push \
+          "https://${GITHUB_ACTOR}:${{ secrets.GITHB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
+          HEAD:update_data
