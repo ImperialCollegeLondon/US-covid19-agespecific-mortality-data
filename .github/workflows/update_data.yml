@@ -30,10 +30,17 @@ jobs:
       run: |
         make files
         today=$(date +'%Y-%m-%d')
-        mv data/$today output/data
+        
+        # check the data for today is there already
+        if [ -d "data/$today"]; then
+          cp data/$today/* output/data/$today
+        else
+          mv data/$today/* output/data/$today
+        fi
+
         cd output
         git add -f .
-        git commit -m "Automate data update"
+        git commit -m "Automated data update"
         git push \
           "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
           HEAD:update_data
