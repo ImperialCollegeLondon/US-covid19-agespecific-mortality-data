@@ -1,0 +1,41 @@
+name: Run daily update
+on:
+  schedule:
+    - cron: "0 12 * * *"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+   
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Clone data from yesterday
+      working-directory: update_data
+      run: |
+        git clone https://@github.com/MJHutchinson/US-covid19-data-scraping --single-branch -b update_data output 
+		git config --global user.name "GitHub Actions"
+		git config --global user.email action@github.com
+
+	- name: update data sources
+	  working-directory: update_data
+	  run: |
+		make files
+		today=$(date +'%Y-%m-%d')
+		mv data/$today output/data
+		cd output
+		git add -f .
+		git commit -m "Automate data update"
+		git push \
+		  "https://${GITHUB_ACTOR}:${{ secrets.GITHB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
+			HEAD:update_data
