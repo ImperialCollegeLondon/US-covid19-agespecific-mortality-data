@@ -1,3 +1,5 @@
+![.github/workflows/update_data.yml](https://github.com/MJHutchinson/US-covid19-data-scraping/workflows/.github/workflows/update_data.yml/badge.svg)
+
 # US-covid19-data-scraping
 Extract and data from various states in the US related to COVID-19. We need the Python dependencies
 ```
