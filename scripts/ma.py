@@ -10,7 +10,8 @@ import requests
 import subprocess
 import warnings
 import os
-import wget
+#import wget
+
 
 class AgeExtractor:
     def __init__(self):
@@ -20,10 +21,9 @@ class AgeExtractor:
     def get_massachusetts(self):
         # check existing assets
         # os.getcwd() # check current path
+        if not os.path.exists("pdfs/massachusetts"):
+            os.mkdir("pdfs/massachusetts")
         existing_assets = list(map(basename, glob("pdfs/massachusetts/*.pdf")))
-        if existing_assets == []:
-            if not os.path.exists("pdfs/massachusetts"):
-                os.mkdir("pdfs/massachusetts")
         api_base_url = "https://www.mass.gov/doc/"
         date_diff = date.today() - date(2020, 4, 20)
         #covid_links = []
@@ -36,35 +36,38 @@ class AgeExtractor:
             url = join(api_base_url, pdf_name)
 
             if pdf_name.split("/")[0] + ".pdf" not in existing_assets:
-                
                 if requests.get(url).status_code == 200:
-                    '''
-                    subprocess.run(
-                        [
-                            "wget --no-check-certificate",
-                            "-O",
-                            "pdfs/massachusetts/{}".format(pdf_name[:-9] + ".pdf"),
-                            url,
-                        ]
-                    )
-                    '''
+                    
+                    #subprocess.run(
+                    #    [
+                    #        "wget --no-check-certificate",
+                    #        "-O",
+                    #        "pdfs/massachusetts/{}".format(pdf_name[:-9] + ".pdf"),
+                    #        url,
+                    #    ]
+                    #)
+                   
                     url = join(api_base_url, pdf_name)
                     with open("pdfs/massachusetts/" + pdf_name.split("/")[0] + ".pdf", "wb") as f:
                         response = requests.get(url)
                         f.write(response.content)
-                    
+                   
                     # now scrape the PDFs
+                    #day = 'may-19-2020'
+                    #dayy = date(2020,5,19)
                     age_data = {}
-                    doc = fitz.Document(
+                    doc = fitz.open(
                         "pdfs/massachusetts/covid-19-dashboard-{}.pdf".format(day)
                     )
                     # find the page
                     lines = doc.getPageText(0).splitlines()
                     lines += doc.getPageText(1).splitlines()
+                    lines += doc.getPageText(2).splitlines()
                     ## find key word to point to the age data table
                     for num, l in enumerate(lines):
-                        if "Deaths and Death Rate by Age Group" in l.split(".")[0]:
+                        if "Deaths and Death Rate by Age Group" in l:
                             begin_page = l.split()[-1]
+                            break
                     # april-20-2020, on page 10 but in it was written as on page 11, need to check more days       
                     lines = doc.getPageText(int(begin_page) - 2).splitlines()
                     lines += doc.getPageText(int(begin_page) - 1).splitlines()
@@ -94,6 +97,7 @@ class AgeExtractor:
                         os.mkdir(path)
                     with open("data/{}/ma.json".format(dayy.strftime("%Y-%m-%d")), "w") as f:
                         json.dump(age_data, f)
+                    doc.close()
 
                 else:
                     print(
@@ -102,7 +106,7 @@ class AgeExtractor:
                         )
                     )
 
- 
+
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
     ageExtractor.get_massachusetts()
