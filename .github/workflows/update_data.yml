@@ -24,18 +24,18 @@ jobs:
       working-directory: update_data
       run: |
         git clone https://@github.com/MJHutchinson/US-covid19-data-scraping --single-branch -b update_data output 
-		git config --global user.name "GitHub Actions"
-		git config --global user.email action@github.com
+        git config --global user.name "GitHub Actions"
+        git config --global user.email action@github.com
 
 	- name: update data sources
 	  working-directory: update_data
 	  run: |
-		make files
-		today=$(date +'%Y-%m-%d')
-		mv data/$today output/data
-		cd output
-		git add -f .
-		git commit -m "Automate data update"
-		git push \
-		  "https://${GITHUB_ACTOR}:${{ secrets.GITHB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
-			HEAD:update_data
+      make files
+      today=$(date +'%Y-%m-%d')
+      mv data/$today output/data
+      cd output
+      git add -f .
+      git commit -m "Automate data update"
+      git push \
+        "https://${GITHUB_ACTOR}:${{ secrets.GITHB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
+        HEAD:update_data
