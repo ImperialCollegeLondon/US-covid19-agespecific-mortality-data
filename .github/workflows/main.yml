@@ -1,7 +1,9 @@
 name: Run daily update
 on:
-  schedule:
-    - cron: "34 13 * * *"
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build-and-deploy:
@@ -28,7 +30,7 @@ jobs:
       run: |
         make files
         today=$(date +'%Y-%m-%d')
-        mv data/$today output/data
+        mv data/$today output/
         mv deaths.csv output/deaths.csv
         cd output
         git add -f .
