@@ -378,7 +378,7 @@ if __name__ == "__main__":
     ageExtractor.get_cdc()
     ageExtractor.get_washington()
     ageExtractor.get_texas()
-    ageExtractor.get_new_jersey()
+    # ageExtractor.get_new_jersey()
     ageExtractor.get_florida()
     ageExtractor.get_connecticut()
     ageExtractor.get_massachusetts()
