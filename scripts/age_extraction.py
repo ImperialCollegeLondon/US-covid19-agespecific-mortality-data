@@ -2,14 +2,15 @@ import fitz
 from datetime import date, timedelta, datetime
 from dateutil.parser import parse as parsedate
 import json
-from os.path import basename, join
-from os import system
+from os.path import basename, join, exists
+from os import system, mkdir
 from glob import glob
 from bs4 import BeautifulSoup, SoupStrainer
 import requests
 import subprocess
 import warnings
 import re
+
 
 class AgeExtractor:
     def __init__(self):
@@ -184,19 +185,19 @@ class AgeExtractor:
         for pdf_path in existing_assets:
             pdf_base = basename(pdf_path)
             pdf_date = None
-            tmp = re.search('[0-9]+-[0-9]+-[0-9]+', pdf_base)
+            tmp = re.search("[0-9]+-[0-9]+-[0-9]+", pdf_base)
             if tmp is not None:
-                pdf_date = datetime.strptime( tmp.group(0), "%Y-%m-%d")
-            tmp = re.search('[0-9]+\\.[0-9]+\\.[0-9]{4}', pdf_base)
+                pdf_date = datetime.strptime(tmp.group(0), "%Y-%m-%d")
+            tmp = re.search("[0-9]+\\.[0-9]+\\.[0-9]{4}", pdf_base)
             if tmp is not None:
-                pdf_date = datetime.strptime( tmp.group(0), "%m.%d.%Y")
-            tmp = re.search('[0-9]+\\.[0-9]+\\.[0-9]{2}', pdf_base)
+                pdf_date = datetime.strptime(tmp.group(0), "%m.%d.%Y")
+            tmp = re.search("[0-9]+\\.[0-9]+\\.[0-9]{2}", pdf_base)
             if tmp is not None:
-                pdf_date = datetime.strptime( tmp.group(0), "%m.%d.%y")            
+                pdf_date = datetime.strptime(tmp.group(0), "%m.%d.%y")
             if pdf_date is None:
                 raise ValueError()
             if pdf_date >= datetime.strptime("2020-03-27", "%Y-%m-%d"):
-                usable_assets[pdf_date.strftime('%Y-%m-%d')] = pdf_path
+                usable_assets[pdf_date.strftime("%Y-%m-%d")] = pdf_path
 
         for day in usable_assets.keys():
             age_data = {}
@@ -213,39 +214,6 @@ class AgeExtractor:
             with open("data/{}/florida.json".format(day), "w") as f:
                 json.dump(age_data, f)
 
-    # def get_connecticut(self):
-    #     # check existing assets
-    #     existing_assets = list(map(basename, glob("pdfs/connecticut/*.pdf*")))
-    #     api_base_url = "https://portal.ct.gov/-/media/Coronavirus/"
-    #     date_diff = date.today() - date(2020, 3, 22)
-    #     covid_links = []
-
-    #     for i in range(date_diff.days + 1):
-    #         day = date(2020, 3, 22) + timedelta(days=i)
-    #         day = day.strftime("%-m%d%Y")
-    #         pdf_name = "CTDPHCOVID19summary{}.pdf?la=en".format(day)
-    #         covid_links.append(pdf_name)
-
-    #         if pdf_name not in existing_assets:
-    #             try:
-    #                 subprocess.run(
-    #                     [
-    #                         "wget",
-    #                         "--no-check-certificate",
-    #                         "-O",
-    #                         "pdfs/connecticut/{}".format(pdf_name),
-    #                         join(api_base_url, pdf_name),
-    #                     ]
-    #                 )
-
-    #             except:
-    #                 warnings.warn(
-    #                     "Warning: Report for Connecticut {} is not available".format(
-    #                         day
-    #                     )
-    #                 )
-
-    #     # TODO: extract the data from the graphs, a mixture of PDFS/SVGS and JPEG
     def get_connecticut(self):
         ## now obtain PDF update date
         r = requests.get(
@@ -266,38 +234,20 @@ class AgeExtractor:
                 )
             )
 
-    # def get_colorado(self):
-    #     ## now obtain PDF update date
-    #     r = requests.get(
-    #         "https://opendata.arcgis.com/datasets/882fd53e0c1b43c2b769a4fbdc1c6448_0.csv"
-    #     )
-    #     ## the reports are always published 1 day later (possibly!)
-    #     data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
-    #     # check if this data is in the data folder already
-    #     existing_assets = list(
-    #         map(basename, glob("data/{}/colorado.csv".format(data_date)))
-    #     )
-    #     if existing_assets:
-    #         print("==> Colorado data already up to date up to {}".format(data_date))
-    #     else:
-    #         system(
-    #             "wget --no-check-certificate -O data/{}/colorado.csv https://opendata.arcgis.com/datasets/882fd53e0c1b43c2b769a4fbdc1c6448_0.csv".format(
-    #                 data_date
-    #             )
-    #         )
-
     def get_massachusetts(self):
         # check existing assets
+        # os.getcwd() # check current path
+        if not exists("pdfs/massachusetts"):
+            mkdir("pdfs/massachusetts")
         existing_assets = list(map(basename, glob("pdfs/massachusetts/*.pdf")))
         api_base_url = "https://www.mass.gov/doc/"
         date_diff = date.today() - date(2020, 4, 20)
-        covid_links = []
 
         for i in range(date_diff.days + 1):
             day = date(2020, 4, 20) + timedelta(days=i)
+            day_string = day.strftime("%Y-%m-%d")
             day = day.strftime("%B-%-d-%Y").lower()
             pdf_name = "covid-19-dashboard-{}/download".format(day)
-            covid_links.append(pdf_name)
 
             if pdf_name.split("/")[0] + ".pdf" not in existing_assets:
                 try:
@@ -309,39 +259,69 @@ class AgeExtractor:
                         "==> Report for Massachusetts {} is not available".format(day)
                     )
                 else:
-                    subprocess.run(
-                        [
-                            "wget",
-                            "--no-check-certificate",
-                            "-O",
-                            "pdfs/massachusetts/{}".format(pdf_name[:-9] + ".pdf"),
-                            join(api_base_url, pdf_name),
-                        ]
+
+                    url = join(api_base_url, pdf_name)
+                    with open(
+                        "pdfs/massachusetts/" + pdf_name.split("/")[0] + ".pdf", "wb"
+                    ) as f:
+                        response = requests.get(url)
+                        f.write(response.content)
+
+                    # now scrape the PDFs
+                    # day = 'may-19-2020'
+                    # dayy = date(2020,5,19)
+                    age_data = {}
+                    doc = fitz.open(
+                        "pdfs/massachusetts/covid-19-dashboard-{}.pdf".format(day)
                     )
+                    # find the page
+                    lines = doc.getPageText(0).splitlines()
+                    lines += doc.getPageText(1).splitlines()
+                    lines += doc.getPageText(2).splitlines()
+                    ## find key word to point to the age data table
+                    for num, l in enumerate(lines):
+                        if "Deaths and Death Rate by Age Group" in l:
+                            begin_page = l.split()[-1]
+                            break
+                    # april-20-2020, on page 10 but in it was written as on page 11, need to check more days
+                    lines = doc.getPageText(int(begin_page) - 2).splitlines()
+                    lines += doc.getPageText(int(begin_page) - 1).splitlines()
+                    lines += doc.getPageText(int(begin_page)).splitlines()
+                    ## find key word to point to the age data plot
+                    for num, l in enumerate(lines):
+                        if "Deaths by Age Group in Confirmed COVID-19" in l:
+                            begin_num = num
 
-    # def get_nyc(self):
-    #     with open('data/nyc/nyc_commits.json', "rb") as json_file:
-    #         data = json.load(json_file)
+                    for num, l in enumerate(lines[begin_num:]):
+                        if "Count" in l:
+                            line_num = num
+                            break
+                        
+                    lines = lines[begin_num:][line_num:]
+                    age_data["0-19"] = [lines[1], lines[9]]
+                    age_data["20-29"] = [lines[2], lines[10]]
+                    age_data["30-39"] = [lines[3], lines[11]]
+                    age_data["40-49"] = [lines[4], lines[12]]
+                    age_data["50-59"] = [lines[5], lines[13]]
+                    age_data["60-69"] = [lines[6], lines[14]]
+                    age_data["70-79"] = [lines[7], lines[15]]
+                    age_data["80+"] = [lines[8], lines[16]]
 
-    #     commit_hist = [(f["sha"], f["commit"]["author"]["date"][:10]) for f in data]
-    #     commit_hist.reverse()
-    #     commit_hist_latest = {}
-    #     # now only take the latest commit daily
-    #     for commit in commit_hist:
-    #         commit_hist_latest[commit[1]] = commit[0]
-
-    #     for date in commit_hist_latest.keys():
-    #         subprocess("wget --no-check-certificate -O data/nyc/{}.csv https://raw.githubusercontent.com/nychealth/coronavirus-data/{}/by-age.csv".format(date, commit_hist_latest[date]))
+                    with open(
+                        "data/{}/ma.json".format(day_string), "w"
+                    ) as f:
+                        json.dump(age_data, f)
+                    doc.close()
 
     def get_nyc(self):
         # check existing assets
         existing_assets = list(map(basename, glob("pdfs/nyc/*.pdf")))
         api_base_url = "https://www1.nyc.gov/assets/doh/downloads/pdf/imm/"
-        date_diff = date.today() - date(2020, 4, 14)
+        date_diff = date.today() - date(2020, 4, 20)
         covid_links = []
 
         for i in range(date_diff.days + 1):
-            day = date(2020, 4, 14) + timedelta(days=i)
+            day = date(2020, 4, 20) + timedelta(days=i)
             day_old_format = day.strftime("%Y-%m-%d")
             day = day.strftime("%m%d%Y").lower()
             pdf_name = "covid-19-deaths-confirmed-probable-daily-{}.pdf".format(day)
