@@ -1,7 +1,7 @@
 name: Run daily update
 on:
   schedule:
-    - cron: "0 14 * * *"
+    - cron: "27 14 * * *"
 
 jobs:
   build-and-deploy:
@@ -31,7 +31,6 @@ jobs:
         make files
         today=$(date +'%Y-%m-%d')
         mv data/$today output/data
-        mv deaths.csv output/deaths.csv
         cd output
         git add -f .
         git commit -m "Automate data update"
