@@ -403,4 +403,3 @@ if __name__ == "__main__":
     ageExtractor.get_connecticut()
     ageExtractor.get_massachusetts()
     ageExtractor.get_nyc()
-    ageExtractor.get_colorado()
