@@ -35,5 +35,5 @@ jobs:
         git add -f .
         git commit -m "Automate data update"
         git push \
-          "https://${GITHUB_ACTOR}:${{ secrets.GITHB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
+          "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
           HEAD:update_data
