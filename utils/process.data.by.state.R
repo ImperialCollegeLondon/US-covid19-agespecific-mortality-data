@@ -459,6 +459,13 @@ obtain.json.data = function(first.day, last.day, state_name, state_code){
                           ifelse(age == "18-29", "20-49", age)))
   }
   
+  if(state_name == "nyc"){
+    data = data %>%
+      mutate(age = ifelse(age == "0-17", "0-19", 
+                          ifelse(age == "18-44", "20-44", 
+                                 ifelse(age == "65-76", "65-74", age))))
+  }
+  
   return(data)
 }
 
