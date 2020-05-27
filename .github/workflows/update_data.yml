@@ -35,7 +35,7 @@ jobs:
         if [ -d "data/$today"]; then
           cp data/$today/* output/data/$today
         else
-          mv data/$today/* output/data/
+          mv data/$today output/data/
         fi
 
         cd output
