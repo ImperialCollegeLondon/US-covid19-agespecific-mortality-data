@@ -14,7 +14,7 @@ import re
 
 class AgeExtractor:
     def __init__(self):
-        self.today = date.today().strftime("%Y-%m-%d")
+        self.today = date.today()
 
     def get_cdc(self):
         ## now obtain PDF update date
@@ -241,7 +241,7 @@ class AgeExtractor:
             mkdir("pdfs/massachusetts")
         existing_assets = list(map(basename, glob("pdfs/massachusetts/*.pdf")))
         api_base_url = "https://www.mass.gov/doc/"
-        date_diff = date.today() - date(2020, 4, 20)
+        date_diff = self.today - date(2020, 4, 20)
 
         for i in range(date_diff.days + 1):
             day = date(2020, 4, 20) + timedelta(days=i)
@@ -317,7 +317,7 @@ class AgeExtractor:
         # check existing assets
         existing_assets = list(map(basename, glob("pdfs/nyc/*.pdf")))
         api_base_url = "https://www1.nyc.gov/assets/doh/downloads/pdf/imm/"
-        date_diff = date.today() - date(2020, 4, 20)
+        date_diff = self.today - date(2020, 4, 20)
         covid_links = []
 
         for i in range(date_diff.days + 1):
