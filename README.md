@@ -74,7 +74,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | Idaho| 2020-05-13| [link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard_V2/Story1); daily updated and replaced, need exreacting daily; no historical archive| 
 | Kansas| 2020-05-13| [link](https://www.coronavirus.kdheks.gov/160/COVID-19-in-Kansas); updated every monday, wednesday and friday; no historical archive| 
 | South Carolina| 2020-05-13| [link](https://www.scdhec.gov/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/sc-demographic-data-covid-19); updated every tuesday and friday; no historical archive| 
-|Ioawa| 2020-05-13| [link](https://coronavirus.iowa.gov/pages/case-counts); daily updated and replaced, need extraction daily; no historical archive| 
+|Iowa| 2020-05-13| [link](https://coronavirus.iowa.gov/pages/case-counts); daily updated and replaced, need extraction daily; no historical archive| 
 |Illinois| 2020-05-14 | [link](https://www.dph.illinois.gov/covid19/covid19-statistics); daily updated and replaced, need extraction daily; no historical archive| 
 
 
@@ -87,7 +87,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 - For South Carolina, data has not been updated since 2020-05-17, updated on 2020-05-20
 - For Missouri, the website is changed on 2020-05-21, cannot find the timestamp
 - Delware did not update the website on 2020-05-21
-- Ioawa did not update the website on 2020-05-18
+- Iowa did not update the website on 2020-05-18
 - Idaho did not update the website on 2020-05-18
 
 ## Figures
