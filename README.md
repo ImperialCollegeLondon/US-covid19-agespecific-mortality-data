@@ -67,7 +67,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | Arizona| 2020-05-13| [link](https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/covid-19/dashboards/index.php); daily updated and replaced, need exreacting daily; no historical archive| 
 | North Dakota| 2020-05-14| [link](https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases); daily updated and replaced, need exreacting daily; no historical archive| 
 | Kentucky| 2020-05-13| [link](https://kygeonet.maps.arcgis.com/apps/opsdashboard/index.html#/543ac64bc40445918cf8bc34dc40e334); daily updated and replaced, need exreacting daily; no historical archive| 
-| California| 2020-05-13| [link](https://public.tableau.com/views/COVID-19PublicDashboard/Covid-19Public?%3Aembed=y&%3Adisplay_count=no&%3AshowVizHome=no); daily updated and replaced, need exreacting daily; no historical archive| 
+| California| 2020-05-13| [link](https://public.tableau.com/views/COVID-19PublicDashboard/Covid-19Public?%3Aembed=y&%3Adisplay_count=no&%3AshowVizHome=no) and [link](https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/COVID-19/Race-Ethnicity.aspx#) (from 2020-05-25); daily updated and replaced, need exreacting daily; no historical archive| 
 | Indiana| 2020-05-13| [link](https://www.coronavirus.in.gov/); daily updated and replaced, need exreacting daily; no historical archive| 
 | Maryland| 2020-05-14| [link](https://coronavirus.maryland.gov/); daily updated and replaced, need exreacting daily; no historical archive| 
 | Alabama| 2020-04-08| [link](https://www.alabamapublichealth.gov/covid19/); daily report, missing data for 2020-04-20,2020-04-24, 2020-04-26, 2020-04-27, from 2020-04-29 to 2020-05-02 and 2020-05-10|
