@@ -1,15 +1,20 @@
-import fitz
-from datetime import date, timedelta, datetime
-from dateutil.parser import parse as parsedate
+import os
+import re
 import json
-from os.path import basename, join, exists
-from os import system, mkdir
-from glob import glob
-from bs4 import BeautifulSoup, SoupStrainer
+
+import fitz
+import warnings
 import requests
 import subprocess
-import warnings
-import re
+
+from glob import glob
+from shutil import copyfile
+from os import system, mkdir
+from os.path import basename, join, exists
+from datetime import date, timedelta, datetime
+from dateutil.parser import parse as parsedate
+
+from bs4 import BeautifulSoup, SoupStrainer
 
 
 class AgeExtractor:
@@ -296,7 +301,7 @@ class AgeExtractor:
                         if "Count" in l:
                             line_num = num
                             break
-                        
+
                     lines = lines[begin_num:][line_num:]
                     age_data["0-19"] = [lines[1], lines[9]]
                     age_data["20-29"] = [lines[2], lines[10]]
@@ -307,9 +312,7 @@ class AgeExtractor:
                     age_data["70-79"] = [lines[7], lines[15]]
                     age_data["80+"] = [lines[8], lines[16]]
 
-                    with open(
-                        "data/{}/ma.json".format(day_string), "w"
-                    ) as f:
+                    with open("data/{}/ma.json".format(day_string), "w") as f:
                         json.dump(age_data, f)
                     doc.close()
 
@@ -366,6 +369,58 @@ class AgeExtractor:
                     with open("data/{}/nyc.json".format(day_old_format), "w") as f:
                         json.dump(age_data, f)
 
+    def get_michigan(self):
+        subprocess.run(
+            [
+                "wget",
+                "--no-check-certificate",
+                "-O",
+                "html/michigan/temp.html",
+                "https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html",
+            ]
+        )
+        with open("html/michigan/temp.html") as f:
+            soup = BeautifulSoup(f, "html.parser")
+
+        tables = soup.find_all("table")
+
+        html_date = tables[0].caption.text.split(" ")[-1]
+        html_date = datetime.strptime(html_date, "%m/%d/%Y").strftime("%d/%m/%Y")
+        html_date = html_date.replace("/", "-")
+
+        copyfile("html/michigan/temp.html", f"html/michigan/{html_date}.html")
+
+        os.remove("html/michigan/temp.html")
+
+        def process_michigan_day(file_date):
+            print(file_date)
+            file_date = datetime.strptime(file_date, "%d-%m-%Y")
+
+            with open(f"html/michigan/{file_date.strftime('%d-%m-%Y')}.html") as f:
+                soup = BeautifulSoup(f, "html.parser")
+
+            tables = soup.find_all("table")
+
+            county_table = tables[0]
+            age_table = tables[4]
+
+            total_deaths = int(county_table.find_all("tr")[-1].find_all("td")[-1].text)
+
+            age_rows = age_table.find_all("tr")[1:]
+            data = dict()
+            for row in age_rows:
+                row = row.find_all("td")
+                data[row[0].text] = row[2].text
+
+            data["N"] = total_deaths
+
+            with open(f"data/{file_date.strftime('%Y-%m-%d')}/michigan.json", "w") as f:
+                json.dump(data, f)
+
+        files = os.listdir("html/michigan")
+        for f in files:
+            process_michigan_day(f.split(".")[0])
+
     def get_all(self):
         """TODO: running get_*() for every state
         """
@@ -383,3 +438,4 @@ if __name__ == "__main__":
     ageExtractor.get_connecticut()
     ageExtractor.get_massachusetts()
     ageExtractor.get_nyc()
+    ageExtractor.get_michigan()
