@@ -8,3 +8,5 @@ requests
 selenium
 numpy 
 matplotlib
+webdriver_manager
+pillow
