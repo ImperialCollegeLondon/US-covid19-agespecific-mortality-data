@@ -20,8 +20,10 @@ cat("\n Begin Processing \n")
 dir.create(file.path("data", last.day, "processed"), showWarnings = FALSE)
 
 ## STATES WITH RULE BASED FUNCTION
-rulebased.states = subset(table.states, json == 0 & code != "CDC")
+rulebased.states = subset(table.states, json == 0 & code != "CDC" & code != "ID")
 data.overall = NULL
+# remove Idaho because there is missing days and we are not sure about the update frequency
+
 for(i in 1:nrow(rulebased.states)){
   data = obtain.rulebased.data(rulebased.states$first.day[i], rulebased.states$last.day[i],  rulebased.states$code[i])
   write.csv(data, file = file.path("data", last.day, "processed", paste0("DeathsByAge_",rulebased.states$code[i],".csv")), row.names=FALSE)
@@ -30,7 +32,9 @@ for(i in 1:nrow(rulebased.states)){
 
 
 ## STATES WITH .JSON file
-json.states = subset(table.states, json == 1 & name != "kansas" & name != "new_jersey" & name != "ma")
+json.states = subset(table.states, json == 1 & name != "kansas" & name != "iowa" & name != "SouthCarolina")
+# remove kansas because not sure about the update days and iowa because change of age cat
+
 for(i in 1:nrow(json.states)){
   data = obtain.json.data(json.states$first.day[i], json.states$last.day[i], json.states$name[i], json.states$code[i])
   write.csv(data, file = file.path("data", last.day, "processed", paste0("DeathsByAge_",json.states$code[i],".csv")), row.names=FALSE)

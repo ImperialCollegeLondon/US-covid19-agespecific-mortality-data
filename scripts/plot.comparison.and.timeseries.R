@@ -20,7 +20,7 @@ source("utils/make.plots.R")
 
 # processed states
 
-table.states.process = subset(table.states, state_name %notin% c("Kansas", "New Jersey", "Massachusetts", "CDC"))
+table.states.process = subset(table.states, state_name %notin% c("Kansas", "South Carolina", "Iowa", "Idaho", "CDC"))
 
 # 1.
 
