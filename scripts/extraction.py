@@ -38,7 +38,7 @@ class AgeExtractor:
         browser = webdriver.Chrome(executable_path=chromed)
         browser.get(url)
         browser.implicitly_wait(5) # Let the page load
-         button1 = browser.find_elements_by_css_selector('div.flex-fluid.overflow-hidden')
+        button1 = browser.find_elements_by_css_selector('div.flex-fluid.overflow-hidden')
         time.sleep(2)
         day = button1[0].text
         idx = re.search( r'Data updated:.*/2020', day).span()
