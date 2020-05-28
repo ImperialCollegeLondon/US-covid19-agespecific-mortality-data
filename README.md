@@ -82,7 +82,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 ## Warnings
 ### Updates
 - Florida did not publish a report on 2020-05-09
-- For South Carolina, data has not been updated since 2020-05-17, updated on 2020-05-20
+- South Carolina data have not been updated on 2020-05-17
 - Iowa did not update the website on 2020-05-18
 - Idaho did not update the website on 2020-05-18
 - Missouri change website on the 2020-05-20 and did not update
