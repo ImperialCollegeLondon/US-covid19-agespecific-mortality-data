@@ -128,9 +128,7 @@ class AgeExtractor:
         url = "https://www.arcgis.com/apps/opsdashboard/index.html#/69b726e2b82e408f89c3a54f96e8f776"
         # chromed = "D:\chromedriver.exe"
         # os.chdir("/mnt/d")
-        chromed = "D://chromedriver.exe"
-        # chromed = '/chromedriver.exe'
-        browser = webdriver.Chrome(executable_path=chromed)
+        browser = webdriver.Chrome(ChromeDriverManager().install())
         # browser = webdriver.Chrome()
         # browser.get("http://ldh.la.gov/coronavirus/") # Load page
         # url = "http://ldh.la.gov/coronavirus/"
@@ -191,8 +189,7 @@ class AgeExtractor:
     def get_oklahoma(self):
         ## just have the percentage
         url = "https://looker-dashboards.ok.gov/embed/dashboards/42"
-        chromed = "D:\chromedriver.exe"
-        browser = webdriver.Chrome(executable_path=chromed)
+        browser = webdriver.Chrome(ChromeDriverManager().install())
         browser.get(url)
         browser.implicitly_wait(5)
         data = browser.find_elements_by_css_selector("tspan.highcharts-data-label")
@@ -241,11 +238,10 @@ class AgeExtractor:
 
     def get_nd(self):
         url = "https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases"
-        chromed = "D:\chromedriver.exe"
-        chrome_options = Options()
-        chrome_options.add_argument("headless")
+        options = Options()
+        options.add_argument("headless")
         browser = webdriver.Chrome(
-            executable_path=chromed, chrome_options=chrome_options
+            ChromeDriverManager().install(), options=options
         )
         browser.get(url)
         day = (
@@ -376,7 +372,7 @@ class AgeExtractor:
         # Need to get the pdf
 
         chromed = "D:\chromedriver.exe"
-        browser = webdriver.Chrome(executable_path=chromed)
+        browser = webdriver.Chrome(ChromeDriverManager().install())
         # url = "https://www.coronavirus.kdheks.gov/160/COVID-19-in-Kansas"
         url = "https://public.tableau.com/views/COVID-19TableauVersion2/CaseSummary?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Fpublic.tableau.com%2F&:embed_code_version=3&:tabs=no&:toolbar=yes&:animate_transition=yes&:display_static_image=no&:display_spinner=no&:display_overlay=yes&:display_count=yes&:loadOrderID=0"
         # url = 'https://public.tableau.com/views/COVID-19TableauVersion2/DeathSummary?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3AloadOrderID=0'
@@ -454,8 +450,7 @@ class AgeExtractor:
 
     def get_nc(self):
         ## do manually, download the pdf
-        chromed = "D:\chromedriver.exe"
-        browser = webdriver.Chrome(executable_path=chromed)
+        browser = webdriver.Chrome(ChromeDriverManager().install())
         # browser.get("https://covid19.ncdhhs.gov/dashboard#by-age")
         ###  from 2020-05-20 change the web....   can download
         url = "https://covid19.ncdhhs.gov/dashboard/cases"
@@ -540,8 +535,7 @@ class AgeExtractor:
         url = "https://www.scdhec.gov/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/sc-demographic-data-covid-19"
         r = requests.get(url)
         day = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
-        chromed = "D:\chromedriver.exe"
-        browser = webdriver.Chrome(executable_path=chromed)
+        browser = webdriver.Chrome(ChromeDriverManager().install())
         # in reported deaths, find the proportion and the url
         browser.get(
             "https://public.tableau.com/views/EpiProfile/DemoStory?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Fpublic.tableau.com%2F&:embed_code_version=3&:tabs=no&:toolbar=yes&:animate_transition=yes&:display_static_image=no&:display_spinner=no&:display_overlay=yes&:display_count=yes&publish=yes&:loadOrderID=0"
@@ -619,8 +613,9 @@ class AgeExtractor:
     def get_mississippi(self):
         ## the reports are always published 1 day later (possibly!)
         # data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
-        chromed = "D:\chromedriver.exe"
-        browser = webdriver.Chrome(executable_path=chromed)
+        # chromed = "D:\chromedriver.exe"
+        # browser = webdriver.Chrome(executable_path=chromed)
+        browser = webdriver.Chrome(ChromeDriverManager().install())
         browser.get("https://msdh.ms.gov/msdhsite/_static/14,0,420.html#Mississippi")
 
         day = " ".join(
@@ -679,8 +674,7 @@ class AgeExtractor:
         url = "https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php"
         ## change web from 2020-05-21
         url = "https://mophep.maps.arcgis.com/apps/opsdashboard/index.html#/0c6d8b9da4494eb1bcc0c7e2187e48aa"
-        chromed = "D:\chromedriver.exe"
-        browser = webdriver.Chrome(executable_path=chromed)
+        browser = webdriver.Chrome(ChromeDriverManager().install())
         browser.get(url)
         day = requests.get(url).headers["Date"]
         day = "/".join(day.split(",")[1].split()[0:3])
@@ -730,10 +724,10 @@ class AgeExtractor:
         # 5 pm BST update
         day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
         chromed = "D:\chromedriver.exe"
-        chrome_options = Options()
-        chrome_options.add_argument("headless")
+        options = Options()
+        options.add_argument("headless")
         browser = webdriver.Chrome(
-            ChromeDriverManager().install(), options=chrome_options
+            ChromeDriverManager().install(), options=options
         )
         browser.get(url)
         ## //*[@id="ember57"]/div/div/svg/g[7]/g/g/g[1]
@@ -774,10 +768,10 @@ class AgeExtractor:
         ## the reports are always published 1 day later (possibly!)
         # day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
         chromed = "D:\chromedriver.exe"
-        chrome_options = Options()
-        chrome_options.add_argument("headless")
+        options = Options()
+        options.add_argument("headless")
         browser = webdriver.Chrome(
-            executable_path=chromed, chrome_options=chrome_options
+            ChromeDriverManager().install(), options=options
         )
 
         browser.get(url)
@@ -866,8 +860,7 @@ class AgeExtractor:
 
     def get_vermont(self):
         url = "https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/6128a0bc9ae14e98a686b635001ef7a7"
-        chromed = "D:\chromedriver.exe"
-        browser = webdriver.Chrome(executable_path=chromed)
+        browser = webdriver.Chrome(ChromeDriverManager().install())
         browser.get(url)
         browser.implicitly_wait(5)
         # r = requests.get(url).headers['Last-Modified'] : 4.28
@@ -931,10 +924,10 @@ class AgeExtractor:
         url = "https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/COVID-19/Race-Ethnicity.aspx"
         # soup = BeautifulSoup(url)
         chromed = "D:\chromedriver.exe"
-        chrome_options = Options()
-        chrome_options.add_argument("headless")
+        options = Options()
+        options.add_argument("headless")
         browser = webdriver.Chrome(
-            executable_path=chromed, chrome_options=chrome_options
+            ChromeDriverManager().install(), options=options
         )
         browser.get(url)
         browser.implicitly_wait(5)
@@ -1019,8 +1012,7 @@ class AgeExtractor:
         ## TODO: extract
         url = "https://www.dph.illinois.gov/covid19/covid19-statistics"
 
-        chromed = "D:\chromedriver.exe"
-        browser = webdriver.Chrome(executable_path=chromed)
+        browser = webdriver.Chrome(ChromeDriverManager().install())
         browser.get(url)
         browser.implicitly_wait(5)
         day = parsedate(
@@ -1080,10 +1072,10 @@ class AgeExtractor:
         # url = 'https://www.coronavirus.in.gov/'
         url = "https://www.coronavirus.in.gov/map/test.htm"
         chromed = "D:\chromedriver.exe"
-        chrome_options = Options()
-        chrome_options.add_argument("headless")
+        options = Options()
+        options.add_argument("headless")
         browser = webdriver.Chrome(
-            executable_path=chromed, chrome_options=chrome_options
+            ChromeDriverManager().install(), options=options
         )
         browser.get(url)
         browser.implicitly_wait(5)
@@ -1164,11 +1156,11 @@ class AgeExtractor:
         day = parsedate(
             "/".join(requests.get(url).headers["Date"].split()[1:4])
         ).strftime("%Y-%m-%d")
-        chromed = "D:\chromedriver.exe"
-        chrome_options = Options()
-        chrome_options.add_argument("headless")
+        options = Options()
+        options.add_argument("headless")
+
         browser = webdriver.Chrome(
-            executable_path=chromed, chrome_options=chrome_options
+            ChromeDriverManager().install(), options=options
         )
         browser.get(url)
         browser.implicitly_wait(5)
