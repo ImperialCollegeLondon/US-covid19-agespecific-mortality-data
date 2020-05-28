@@ -80,15 +80,22 @@ We use webdriver from selenium to find the elements and extract the correspondin
 
 
 ## Warnings
+### Updates
 - Florida did not publish a report on 2020-05-09
-- NY and NJ have a 1 day latency, meaning that the cumulative deaths we extract on day t are the cumulative deaths in day t-1
-- For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
-- For North Carolina, the total death number is updated daily, but the age death data is not updated daily. The website format changes from 2020-05-20 
 - For South Carolina, data has not been updated since 2020-05-17, updated on 2020-05-20
-- For Missouri, the website is changed on 2020-05-21, cannot find the timestamp
-- Delware did not update the website on 2020-05-21
 - Iowa did not update the website on 2020-05-18
 - Idaho did not update the website on 2020-05-18
+- Missouri change website on the 2020-05-20 and did not update
+
+### Website dynamics
+- For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
+- For Missouri, the website is changed on 2020-05-21, cannot find the timestamp
+- Delware did not update the website on 2020-05-21
+
+### About the data
+- For North Carolina, the total death number is updated daily, but the age death data is not updated daily. The website format changes from 2020-05-20 
+- NY and NJ have a 1 day latency, meaning that the cumulative deaths we extract on day t are the cumulative deaths in day t-1
+
 
 ## Figures
 ### Time series of extracted data as of 2020-05-16
