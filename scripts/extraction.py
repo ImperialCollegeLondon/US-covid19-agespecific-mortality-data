@@ -126,62 +126,46 @@ class AgeExtractor:
 
     def get_louisiana(self):
         url = "https://www.arcgis.com/apps/opsdashboard/index.html#/69b726e2b82e408f89c3a54f96e8f776"
-        # chromed = "D:\chromedriver.exe"
-        # os.chdir("/mnt/d")
+        #chromed = "D:\chromedriver.exe"
+        #os.chdir("/mnt/d")
         browser = webdriver.Chrome(ChromeDriverManager().install())
-        # browser = webdriver.Chrome()
-        # browser.get("http://ldh.la.gov/coronavirus/") # Load page
-        # url = "http://ldh.la.gov/coronavirus/"
         browser.get(url)
-        browser.implicitly_wait(5)  # Let the page load
-        # find the update day
-        # find_day = browser.find_element_by_xpath('//*[@id="ember58"]').text
-        # day_idx = re.search( r':.*/20', find_day).span()
-        # day = find_day.text[day_idx[0]+1 : day_idx[1]]
-        # day = parsedate(day).strftime('%Y-%m-%d')
-        day = requests.get(url).headers["Date"].split(",")[1].split()[0:3]
-        day = parsedate("/".join(day)).strftime("%Y-%m-%d")
+        browser.implicitly_wait(5) # Let the page load
+        button1 = browser.find_elements_by_css_selector('div.flex-fluid.overflow-hidden')
+        time.sleep(2)
+        day = button1[0].text
+        idx = re.search( r'Data updated:.*/2020', day).span()
+        day = day[idx[0]: idx[1]].split(':')[1]
+        day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/louisiana.json".format(day), os.F_OK):
-            if browser.execute_script("return document.readyState") == "complete":
-                ## get the bottom to select the figure
-                ## path change from 2020-05-21 path would change so use the class name
-                # board = browser.find_element_by_id('ember292').click()
-                # board = browser.find_element_by_id('ember254').click()
-                # board = browser.find_element_by_id('ember292').click()
-                browser.find_element_by_css_selector(
-                    "button#ember293.dropdown-outside.drop-up.btn.btn-white.dropdown-btn.ember-view"
-                ).click()
-                browser.find_element_by_css_selector(
-                    "div#ember254.text-ellipsis.ember-view"
-                ).click()
-                browser.find_element_by_css_selector(
-                    "button#ember293.dropdown-outside.drop-up.btn.btn-white.dropdown-btn.ember-view"
-                ).click()
+            browser.implicitly_wait(2)
+            button = [e for e in button1 if e.text == 'State Map of Cases by Parish'][0]
+            time.sleep(2)
+            button.click()
+            browser.implicitly_wait(2)
+            button = browser.find_elements_by_css_selector('div.flex-fluid')
+            time.sleep(2)
+            button = [e for e in button if e.text == 'State Map of Cases by Parish'or e.text == 'Cases and Deaths by Age']
+            time.sleep(2)
+            button[1].click()
+            browser.implicitly_wait(1)
+            button[2].click()
+            browser.implicitly_wait(1)
+            board = browser.find_elements_by_css_selector('g.amcharts-graph-column')#.amcharts-graph-graphAuto1_1589372672251')
+            data = [e.get_attribute('aria-label') for e in board if e.get_attribute('aria-label') and 'death' in e.get_attribute('aria-label')]
+            browser.implicitly_wait(5)
+            age_data ={}
+            for a in data:
+                age_data[" ".join(a.split()[1:-1])] = a.split()[-1]
 
-                board = browser.find_elements_by_css_selector(
-                    "g.amcharts-graph-column"
-                )  # .amcharts-graph-graphAuto1_1589372672251')
-                data = [
-                    e.get_attribute("aria-label")
-                    for e in board
-                    if e.get_attribute("aria-label")
-                    and "death" in e.get_attribute("aria-label")
-                ]
-                browser.implicitly_wait(5)
-                age_data = {}
-                for a in data:
-                    age_data[" ".join(a.split()[1:-1])] = a.split()[-1]
-
-                path = "data/{}".format(day)
-                if not os.path.exists(path):
-                    os.mkdir(path)
-                with open("data/{}/louisiana.json".format(day), "w") as f:
-                    json.dump(age_data, f)
-                browser.save_screenshot("pngs/louisiana/{}.png".format(day))
-            else:
-                print("error for extracting")
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/louisiana.json".format(day), "w") as f:
+                json.dump(age_data, f)
+            browser.save_screenshot('pngs/louisiana/{}.png'.format(day))
         else:
-            print("Report for Louisiana {} is already exist".format(day))
+            print('Report for Louisiana {} is already exist'.format(day))
 
         browser.close()
         browser.quit()
@@ -192,18 +176,10 @@ class AgeExtractor:
         browser = webdriver.Chrome(ChromeDriverManager().install())
         browser.get(url)
         browser.implicitly_wait(5)
-        data = browser.find_elements_by_css_selector("tspan.highcharts-data-label")
-        data = [
-            e.text for e in data if e.text and e.text[0] >= "0" and e.text[0] <= "9"
-        ]
-        # total_pdf = browser.find_element_by_xpath('//*[@id="dashboard"]/div/div[2]/div/div/div/div/div[2]/div[2]/div/lk-dashboard-text/div/div/div[4]/div/p/a')
-        # find the total deaths from the summary pdf
-        # total_pdf = browser.find_element_by_xpath('//*[@id="dashboard"]/div/div[2]/div/div/div/div/div[2]/div[2]/div/lk-dashboard-text/div/div/div[4]/div/p/a').click()
-        # .get_attribute(
-        #'href')
-        # browser.find_element_by_xpath('//*[@id="dashboard"]/div/div[2]/div/div/div/div/div[2]/div/div/lk-dashboard-text/div/div/div[4]/div/p[1]/a').get_attribute('href')
-        ##
-        pdf_url = "https://storage.googleapis.com/ok-covid-gcs-public-download/covid19_cases_summary.pdf"
+        data = browser.find_elements_by_css_selector('tspan.highcharts-data-label')
+        data = [e.text for e in data if e.text and e.text[0] >= '0' and e.text[0] <= '9']
+
+        pdf_url = 'https://storage.googleapis.com/ok-covid-gcs-public-download/covid19_cases_summary.pdf'
 
         r = requests.get(pdf_url).headers["Last-Modified"]
         day = parsedate(r).strftime("%Y-%m-%d")
@@ -292,25 +268,6 @@ class AgeExtractor:
 
         browser.close()
         browser.quit()
-
-        # window_height = browser.get_window_size()['height']
-
-        # page_height = browser.execute_script('return document.documentElement.scrollHeight')
-        # browser.save_screenshot('pngs/NorthDakota/{}.png'.format(day))
-
-        # if page_height > window_height:
-        # the numbers of scroll times
-        #    n = page_height // window_height
-        #    base_mat = np.atleast_2d(Image.open('pngs/NorthDakota/{}.png'.format(day)))
-
-        #    for i in range(n):
-        #        browser.execute_script(f'document.documentElement.scrollTop={window_height * (i + 1)};')
-        #        time.sleep(1)
-        #        browser.save_screenshot(f'pngs_{i}.png')
-        #        mat = np.atleast_2d(Image.open(f'pngs_{i}.png'))
-        #        base_mat = np.append(base_mat, mat, axis=0)
-        #    Image.fromarray(base_mat).save('pngs/NorthDakota/{}.png'.format(day))
-        ## thanks https://www.cnblogs.com/superhin/p/11482188.html
 
     def get_az(self):
         ##
@@ -651,23 +608,6 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
-        #   '''
-        # age_data = {}
-        # age_data['<18'] = 0
-        # age_data['18-29'] = 2
-        # age_data['30-39'] = 10
-        # age_data['40-49'] = 21
-        # age_data['50-59'] = 48
-        # age_data['60-69'] = 141
-        # age_data['70-79'] = 177
-        # age_data['80-89'] = 151
-        # age_data['90+'] = 85
-
-        # path = "data/{}".format(day)
-        # if not os.path.exists(path):
-        #    os.mkdir(path)
-        # with open("data/{}/mississippi.json".format(day), "w") as f:
-        #    json.dump(age_data, f)
 
     def get_missouri(self):
 
@@ -702,19 +642,6 @@ class AgeExtractor:
 
         browser.close()
         browser.quit()
-        # day = browser.find_element_by_xpath('//*[@id="main-content"]/p[5]').text.split(",")[-1]
-        # day = parsedate(" ".join(['2020',day])).strftime('%Y-%m-%d')
-        # if not os.access("data/{}/missouri.json".format(day), os.F_OK):
-        #    browser.implicitly_wait(5)
-        #    if browser.execute_script("return document.readyState") == "complete":
-        #        browser.find_element_by_xpath('//*[@id="accordion"]/div[6]/a/div').click()
-        #        age_data = {}
-        #        for i in range(8):
-        #            path1 = '//*[@id="collapsedeathages"]/div/div/table/tbody/tr[' + str(i + 1) + ']/td[' + str(1) + ']'
-        #            path2 = '//*[@id="collapsedeathages"]/div/div/table/tbody/tr[' + str(i + 1) + ']/td[' + str(2) + ']'
-        #            data1 = browser.find_element_by_xpath(path1)
-        #            data2 = browser.find_element_by_xpath(path2)
-        #            age_data[data1.text] = data2.text
 
     def get_kentucky(self):
         url = "https://kygeonet.maps.arcgis.com/apps/opsdashboard/index.html#/543ac64bc40445918cf8bc34dc40e334"
@@ -740,21 +667,19 @@ class AgeExtractor:
         ]
         browser.implicitly_wait(5)
         if not os.access("data/{}/kentucky.json".format(day), os.F_OK):
-            if browser.execute_script("return document.readyState") == "complete":
+            #if browser.execute_script("return document.readyState") == "complete":
                 # begin at data[9]
-                browser.implicitly_wait(5)
-                age_data = {}
-                data = data[9:15]
-                for i in data:
-                    age_data[i.split()[0]] = i.split()[1]
-                path = "data/{}".format(day)
-                if not os.path.exists(path):
-                    os.mkdir(path)
-                with open("data/{}/kentucky.json".format(day), "w") as f:
-                    json.dump(age_data, f)
-                browser.save_screenshot("pngs/kentucky/{}.png".format(day))
-            else:
-                print("error for extracting")
+            browser.implicitly_wait(5)
+            age_data = {}
+            data = data[9:15]
+            for i in data:
+                age_data[i.split()[0]] = i.split()[1]
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/kentucky.json".format(day), "w") as f:
+                json.dump(age_data, f)
+            browser.save_screenshot("pngs/kentucky/{}.png".format(day))
         else:
             print("Report for kentucky {} is already exist".format(day))
 
@@ -764,9 +689,6 @@ class AgeExtractor:
     def get_delware(self):
         ## TODO: get the update day
         url = "https://myhealthycommunity.dhss.delaware.gov/about/acceptable-use"
-        # r = requests.get(url)
-        ## the reports are always published 1 day later (possibly!)
-        # day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
         chromed = "D:\chromedriver.exe"
         options = Options()
         options.add_argument("headless")
@@ -823,40 +745,10 @@ class AgeExtractor:
             else:
                 print("error for extracting")
         else:
-            print("Report for Delaware {} is already exist".format(day))
-
-        ## ## thanks https://www.cnblogs.com/superhin/p/11482188.html
-        # window_height = browser.get_window_size()['height']
-
-        # page_height = browser.execute_script('return document.documentElement.scrollHeight')
-        # browser.save_screenshot('pngs/delaware/{}.png'.format(day))
-
-        # if page_height > window_height:
-        # the numbers of scroll times
-        #    n = page_height // window_height
-        #    base_mat = np.atleast_2d(Image.open('pngs/delaware/{}.png'.format(day)))
-
-        #    for i in range(n):
-        #        browser.execute_script(f'document.documentElement.scrollTop={window_height * (i + 1)};')
-        #        time.sleep(1)
-        #        browser.save_screenshot(f'pngs_{i}.png')
-        #        mat = np.atleast_2d(Image.open(f'pngs_{i}.png'))
-        #        base_mat = np.append(base_mat, mat, axis=0)
-        #    Image.fromarray(base_mat).save('pngs/delaware/{}.png'.format(day))
+            print('Report for Delaware {} is already exist'.format(day))
 
         browser.close()
         browser.quit()
-
-        # png = browser.find_element_by_xpath('//*[@id="total-deaths-by-age"]/div[2]/div/div[2]')
-
-        # left = png.location['x']
-        # top = png.location['y']
-        # right = png.location['x'] + png.size['width']
-        # bottom = png.location['y'] + png.size['height']
-
-        # im = Image.open('pngs/delaware/{}.png'.format(day))
-        # im = im.crop((left, top, right, bottom))
-        # im.save('pngs/delaware/{}.png'.format(day))
 
     def get_vermont(self):
         url = "https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/6128a0bc9ae14e98a686b635001ef7a7"
@@ -911,13 +803,6 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
-        ###################################################
-        ## install Pillow
-        from PIL import Image
-
-        from io import BytesIO
-
-        ##################################################
 
     def get_california(self):
         url = "https://public.tableau.com/views/COVID-19PublicDashboard/Covid-19Public?%3Aembed=y&%3Adisplay_count=no&%3AshowVizHome=no"
@@ -954,59 +839,11 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/california.json".format(day), "w") as f:
                 json.dump(age_data, f)
-            ## get the screenshot  does not work....
-            ## TODO: get the full screenshot. the problem maybe that it cannot scroll automatically?
-            # width = browser.execute_script("return document.documentElement.scrollWidth")
-            # height = browser.execute_script("return document.documentElement.scrollHeight")
-            # print(width, height)
-            # browser.set_window_size(width, height)
-            # time.sleep(1)
-            # browser.save_screenshot('pngs/California/{}.png'.format(day))
-
-            # browser.save_screenshot('pngs/California/{}.png'.format(day))
-            # im = Image.open('pngs/California/{}.png'.format(day))
-            # head = browser.find_element_by_xpath('//*[@id="WebPartWPQ4"]/div[1]/div[1]/h3[1]')
-            # down = browser.find_element_by_xpath('//*[@id="WebPartWPQ4"]/div[1]/div[1]/p[2]')
-
-            # top = head.location['y']
-            # left = head.location['x']
-            # bottom = down.location['y'] + down.size['height']
-            # right = head.location['x'] + head.size['width']
-            # im = im.crop((left, top, right, bottom))
-            # im.save('pngs/California/{}.png'.format(day))
         else:
             print("Report for California {} is already exist".format(day))
 
         browser.close()
         browser.quit()
-
-    # browser.maximize_window()
-    # day = browser.find_element_by_xpath('//*[@id="title8860806102834544352_18161636954798804938"]/div[1]/div/span/div/span[2]').text
-    # day = parsedate(day).strftime('%Y-%m-%d')
-    # if not os.access("pngs/California/{}.png".format(day), os.F_OK):
-    #    if browser.execute_script("return document.readyState") == "complete":
-    # change to the death web
-    # browser.find_element_by_xpath('//*[@id="tableau_base_widget_ParameterControl_0"]/div/div[2]/span/div[1]').click()
-    # the xpath will change
-    # browser.find_element_by_xpath('//*[@id="tab-menuItem24"]/div').click()
-    # button = browser.find_elements_by_css_selector('span.tabMenuItemName')
-    # [e for e in button if e.text == 'Deaths'][0].click()
-    # browser.implicitly_wait(5)
-    # data = browser.find_element_by_xpath('//*[@id="tabZoneId257"]/div/div/div/div[1]')
-
-    # path = "pngs/California"
-    # if not os.path.exists(path):
-    #    os.mkdir(path)
-    # browser.implicitly_wait(5)
-    # browser.save_screenshot('pngs/California/{}.png'.format(day))
-    # left = data.location['x']
-    # top = data.location['y']
-    # right = data.location['x'] + data.size['width']
-    # bottom = data.location['y'] + data.size['height']
-
-    # im = Image.open('pngs/California/{}.png'.format(day))
-    # im = im.crop((left, top, right, bottom))
-    # im.save('pngs/California/{}.png'.format(day))
 
     def get_illinois(self):
         ## TODO: extract
@@ -1049,119 +886,27 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
-    # age_data = {}
-    # day = '2020-05-21'
-    # age_data['<20'] = 3
-    # age_data['20-29'] = 18
-    # age_data['30-39'] = 72
-    # age_data['40-49'] = 157
-    # age_data['50-59'] = 387
-    # age_data['60-69'] = 813
-    # age_data['70-79'] = 1113
-    # age_data['80+'] = 2044
-
-    # browser.save_screenshot('pngs/Illinois/{}.png'.format(day))
-    # path = "data/{}".format(day)
-    # if not os.path.exists(path):
-    #    os.mkdir(path)
-    # with open("data/{}/illinois.json".format(day), "w") as f:
-    #    json.dump(age_data, f)
-    #    '''
-
     def get_indiana(self):
-        # url = 'https://www.coronavirus.in.gov/'
-        url = "https://www.coronavirus.in.gov/map/test.htm"
-        chromed = "D:\chromedriver.exe"
-        options = Options()
-        options.add_argument("headless")
-        browser = webdriver.Chrome(
-            ChromeDriverManager().install(), options=options
-        )
-        browser.get(url)
-        browser.implicitly_wait(5)
-        # browser.find_element_by_xpath('//*[@id="prefix-overlay-header"]/button').click()
-        day = browser.find_element_by_xpath(
-            '//*[@id="root"]/div[1]/div/div[1]/div[2]/p[1]/b[1]'
-        ).text.split(",")[0]
-        day = parsedate(day).strftime("%Y-%m-%d")
-        if not os.access("data/{}/indiana.json".format(day), os.F_OK):
-            if browser.execute_script("return document.readyState") == "complete":
+        url = 'https://hub.mph.in.gov/dataset/62ddcb15-bbe8-477b-bb2e-175ee5af8629/resource/2538d7f1-391b-4733-90b3-9e95cd5f3ea6/download/covid_report_demographics.xlsx'
+        r = requests.get(url)
+        day = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
+        req = requests.get(url)
+        url_content = req.content
+        file = open("data/{}/indiana.xlsx".format(day), 'wb')
+        file.write(url_content)
+        file.close()
 
-                total = browser.find_element_by_xpath(
-                    '//*[@id="main-content"]/div[2]/div[5]/div/h2'
-                ).text
-                total = int("".join(total.split(",")))
-                # change to death page
-                browser.find_element_by_xpath(
-                    '//*[@id="demographics-charts-tab-demographics-deaths"]'
-                ).click()
-                browser.implicitly_wait(5)
-                time.sleep(3)
-                data = browser.find_elements_by_css_selector("text")
-                # delete the '%'
-                data = [e.text[0:-1] for e in data if e.get_attribute("x") == "80"][
-                    1:10
-                ]
-                time.sleep(3)
-                group = browser.find_elements_by_css_selector("tspan")
-                group = [e.text for e in group if e.get_attribute("x") == "72"][0:9]
-                time.sleep(2)
-                age_data = {}
-                for i in range(len(data)):
-                    age_data[group[i]] = round(float(data[i]) * 0.01 * total)
-                time.sleep(3)
-                path = "data/{}".format(day)
-                if not os.path.exists(path):
-                    os.mkdir(path)
-                with open("data/{}/indiana.json".format(day), "w") as f:
-                    json.dump(age_data, f)
-                ###  get the full screenshot:
-                # thanks https://zhuanlan.zhihu.com/p/73255362
-                browser.save_screenshot("pngs/indiana/{}.png".format(day))
-                width = browser.execute_script(
-                    "return document.documentElement.scrollWidth"
-                )
-                height = browser.execute_script(
-                    "return document.documentElement.scrollHeight"
-                )
-                # print(width, height)
 
-                browser.set_window_size(width, height)
-                time.sleep(1)
-
-                browser.save_screenshot("pngs/indiana/{}.png".format(day))
-            else:
-                print("error for extracting")
-            # png = browser.find_element_by_xpath(
-            #    '//*[@id="demographics-charts-tabpane-demographics-deaths"]/div[2]/div[1]/div[1]/div[1]')
-
-            # left = png.location['x']
-            # top = png.location['y']
-            # right = png.location['x'] + png.size['width']
-            # bottom = png.location['y'] + png.size['height']
-
-            # im = Image.open('pngs/indiana/{}.png'.format(day))
-            # im = im.crop((left, top, right, bottom))
-            # im.save('pngs/indiana/{}.png'.format(day))
-
-        else:
-            print("Report for indiana {} is already exist".format(day))
-
-        browser.close()
-        browser.quit()
 
     def get_maryland(self):
         ## update
-        url = "https://coronavirus.maryland.gov/"
-        day = parsedate(
-            "/".join(requests.get(url).headers["Date"].split()[1:4])
-        ).strftime("%Y-%m-%d")
-        options = Options()
-        options.add_argument("headless")
-
-        browser = webdriver.Chrome(
-            ChromeDriverManager().install(), options=options
-        )
+        url = 'https://coronavirus.maryland.gov/'
+        #day = parsedate("/".join(requests.get(url).headers['Date'].split()[1:4])).strftime('%Y-%m-%d')
+        day = parsedate(requests.get(url).headers['Date']).strftime('%Y-%m-%d')
+        chromed = "D:\chromedriver.exe"
+        chrome_options = Options()
+        chrome_options.add_argument('headless')
+        browser = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
         browser.get(url)
         browser.implicitly_wait(5)
         if not os.access("data/{}/maryland.json".format(day), os.F_OK):
@@ -1261,15 +1006,14 @@ if __name__ == "__main__":
     # with one # can run step by step
     # with two # path would change
     ageExtractor = AgeExtractor()
-    ageExtractor.get_massachusetts()
-    ##ageExtractor.get_louisiana()
+    ageExtractor.get_louisiana()
     ageExtractor.get_oklahoma()
     ageExtractor.get_nd()
     ageExtractor.get_az()
     ###ageExtractor.get_nc()
     ###ageExtractor.get_mississippi()
-    # ageExtractor.get_missouri()
-    # ageExtractor.get_kentucky()
+    ageExtractor.get_missouri()
+    #ageExtractor.get_kentucky()
     ageExtractor.get_delware()
     ageExtractor.get_vermont()
     ageExtractor.get_california()
