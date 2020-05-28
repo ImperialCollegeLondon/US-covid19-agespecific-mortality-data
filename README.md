@@ -86,6 +86,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 - For North Carolina, the total death number is updated daily, but the age death data is not updated daily. The website format changes from 2020-05-20 
 - For South Carolina, data has not been updated since 2020-05-17, updated on 2020-05-20
 - For Missouri, the website is changed on 2020-05-21, cannot find the timestamp
+- Delware did not update the website on 2020-05-21
 
 ## Figures
 ### Time series of extracted data as of 2020-05-16
