@@ -2,7 +2,7 @@ import os
 import re
 import json
 
-# import fitz
+import fitz
 import warnings
 import requests
 import subprocess
@@ -429,13 +429,13 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
-    # ageExtractor.get_georgia()
-    # ageExtractor.get_cdc()
-    # ageExtractor.get_washington()
-    # ageExtractor.get_texas()
-    # # ageExtractor.get_new_jersey()
-    # ageExtractor.get_florida()
-    # ageExtractor.get_connecticut()
-    # ageExtractor.get_massachusetts()
-    # ageExtractor.get_nyc()
+    ageExtractor.get_georgia()
+    ageExtractor.get_cdc()
+    ageExtractor.get_washington()
+    ageExtractor.get_texas()
+    # ageExtractor.get_new_jersey()
+    ageExtractor.get_florida()
+    ageExtractor.get_connecticut()
+    ageExtractor.get_massachusetts()
+    ageExtractor.get_nyc()
     ageExtractor.get_michigan()
