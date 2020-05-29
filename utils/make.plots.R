@@ -8,10 +8,10 @@ library(tidyverse)
 death_data_ihme = read.csv(file.path("data", "official", "ihme_death_data.csv"))
 
 # jhu
-death_data_jhu = read.csv(file.path("data", "official", "jhu_death_data_210520.csv"))
+death_data_jhu = read.csv(file.path("data", "official", "jhu_death_data_padded_270520.csv"))
 
 # jhu
-death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200518.csv"))
+death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200528.csv"))
 
 
 # scrapped data
@@ -42,7 +42,7 @@ make.comparison.plot = function(State, Code){
       mutate(date = sundays) %>%
       select(source, code, weekly_deaths, date)
     
-    death_data_WA_jhu = data.table(subset(death_data_jhu, state_name == State)) %>%
+    death_data_WA_jhu = data.table(subset(death_data_jhu, code == Code)) %>%
       select(code, daily_deaths, date) %>%
       mutate(source = "JHU",
              date = as.Date(date)) 
@@ -83,15 +83,15 @@ make.comparison.plot = function(State, Code){
     
   } else if(Code == "NYC"){ 
     death_data_nyc = data.table(death_data_nyc) %>%
-      select(Deaths, DATE_OF_INTEREST) %>%
-      rename(daily_deaths = Deaths) %>%
+      select(DEATH_COUNT, DATE_OF_INTEREST) %>%
+      rename(daily_deaths = DEATH_COUNT) %>%
       mutate(source = "City",
              date = as.Date(DATE_OF_INTEREST, format = "%m/%d/%y"))
     
     death_data_scrapping = read.csv(path_to_data(Code)) %>%
       group_by(date, code) %>%
       summarise(daily_deaths = sum(daily.deaths)) %>%
-      mutate(source = "Dept of Health")
+      mutate(source = "City by age")
     death_data_scrapping$date = as.Date(death_data_scrapping$date)
     
     death_data = dplyr::bind_rows(death_data_nyc, death_data_scrapping)
@@ -116,7 +116,7 @@ make.comparison.plot = function(State, Code){
       mutate(source = "IHME")
     death_data_ihme$date = as.Date(death_data_ihme$date)
     
-    death_data_jhu = data.table(subset(death_data_jhu, state_name == State)) %>%
+    death_data_jhu = data.table(subset(death_data_jhu, code == Code)) %>%
       select(code, daily_deaths, date) %>%
       mutate(source = "JHU")
     death_data_jhu$date = as.Date(death_data_jhu$date)
