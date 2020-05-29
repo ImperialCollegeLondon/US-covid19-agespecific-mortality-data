@@ -420,7 +420,7 @@ obtain.json.data = function(first.day, last.day, state_name, state_code){
     json_file <- file.path(path_to_data, Date, paste0(state_name, ".json"))
     json_data <- suppressWarnings(fromJSON(paste(readLines(json_file))))
 
-    if(state_name == "california" & Date > as.Date("2020-05-24")){ # Yu changed the age groups
+    if(state_name == "california" & Date > as.Date("2020-05-24") & !is.null(json_data[["<5"]])){ # Yu changed the age groups
       json_data = list("0-17" = as.numeric(gsub(",", "", json_data[["<5"]])) + as.numeric(gsub(",", "", json_data[["5-17"]])),
                        "18-49" = as.numeric(gsub(",", "", json_data[["18-34"]])) + as.numeric(gsub(",", "", json_data[["35-49"]])),
                        "50-64" = as.numeric(gsub(",", "", json_data[["50-59"]])) + as.numeric(gsub(",", "", json_data[["60-64"]])),
