@@ -38,7 +38,7 @@ jobs:
           mv data/$today output/data/
         fi
         
-        cp -r html/michigan/* output/html/michigan/*
+        cp -r html/michigan/* output/html/michigan/
 
         cd output
         git add -f .
