@@ -1,7 +1,7 @@
 name: Run daily update
 on:
   schedule:
-    - cron: "30 23 * * *"
+    - cron: "00 22 * * *"
 
 jobs:
   build-and-deploy:
@@ -32,7 +32,7 @@ jobs:
         today=$(date +'%Y-%m-%d')
         
         # check the data for today is there already
-        if [ -d "output/data/$today"]; then
+        if [ -d "output/data/$today" ]; then
           cp data/$today/* output/data/$today
         else
           mv data/$today output/data/
