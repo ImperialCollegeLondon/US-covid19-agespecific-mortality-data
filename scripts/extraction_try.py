@@ -374,11 +374,11 @@ class AgeExtractor:
     def get_delware(self):
         ## TODO: get the update day
         url = "https://myhealthycommunity.dhss.delaware.gov/about/acceptable-use"
-        chromed = "D:\chromedriver.exe"
+        #chromed = "D:\chromedriver.exe"
         chrome_options = Options()
         chrome_options.add_argument('headless')
-        browser = webdriver.Chrome(executable_path=chromed, chrome_options=chrome_options)
-
+        #browser = webdriver.Chrome(executable_path=chromed, chrome_options=chrome_options)
+        browser = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
         browser.get(url)
         browser.find_element_by_xpath('//*[@id="accept"]').click()
         browser.find_element_by_xpath('/html/body/main/div/div/div[2]/section/form/button').click()
@@ -419,8 +419,9 @@ class AgeExtractor:
 
     def get_vermont(self):
         url = "https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/6128a0bc9ae14e98a686b635001ef7a7"
-        chromed = "D:\chromedriver.exe"
-        browser = webdriver.Chrome(executable_path=chromed)
+        #chromed = "D:\chromedriver.exe"
+        #browser = webdriver.Chrome(executable_path=chromed)
+        browser = webdriver.Chrome(ChromeDriverManager().install())
         browser.get(url)
         browser.implicitly_wait(5)
         #r = requests.get(url).headers['Last-Modified'] : 4.28
@@ -506,10 +507,11 @@ class AgeExtractor:
         url = 'https://coronavirus.maryland.gov/'
         #day = parsedate("/".join(requests.get(url).headers['Date'].split()[1:4])).strftime('%Y-%m-%d')
         day = parsedate(requests.get(url).headers['Date']).strftime('%Y-%m-%d')
-        chromed = "D:\chromedriver.exe"
+        #chromed = "D:\chromedriver.exe"
         chrome_options = Options()
         chrome_options.add_argument('headless')
-        browser = webdriver.Chrome(executable_path=chromed, chrome_options=chrome_options)
+        #browser = webdriver.Chrome(executable_path=chromed, chrome_options=chrome_options)
+        browser = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
         browser.get(url)
         browser.implicitly_wait(5)
         if not os.access("data/{}/maryland.json".format(day), os.F_OK):
