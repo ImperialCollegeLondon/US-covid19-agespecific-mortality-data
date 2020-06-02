@@ -346,11 +346,9 @@ class AgeExtractor:
         day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
         #chromed = "D:\chromedriver.exe"
         options = Options()
-        # options.add_argument('headless')
+        options.add_argument('headless')
         #browser = webdriver.Chrome(executable_path=chromed, options=options)
-        browser = webdriver.Chrome(
-            ChromeDriverManager().install(), options=options
-        )
+        browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         browser.get(url)
         ## //*[@id="ember57"]/div/div/svg/g[7]/g/g/g[1]
         browser.implicitly_wait(40)
