@@ -76,6 +76,7 @@ class AgeExtractor:
         if existing_assets:
             print("==> Washingston data already up to date up to {}".format(data_date))
         else:
+            os.makedirs(f"data/{data_date}", exist_ok=True)
             system(
                 "wget --no-check-certificate -O data/{}/washington.xlsx https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_CDC_Event_Date_SARS.xlsx".format(
                     data_date
@@ -312,6 +313,8 @@ class AgeExtractor:
                     age_data["70-79"] = [lines[7], lines[15]]
                     age_data["80+"] = [lines[8], lines[16]]
 
+                    os.makedirs("data/{}".format(day_string), exist_ok=True)
+
                     with open("data/{}/ma.json".format(day_string), "w") as f:
                         json.dump(age_data, f)
                     doc.close()
@@ -393,7 +396,6 @@ class AgeExtractor:
         os.remove("html/michigan/temp.html")
 
         def process_michigan_day(file_date):
-            print(file_date)
             file_date = datetime.strptime(file_date, "%d-%m-%Y")
 
             with open(f"html/michigan/{file_date.strftime('%d-%m-%Y')}.html") as f:
