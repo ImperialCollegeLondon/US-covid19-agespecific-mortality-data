@@ -8,4 +8,7 @@ mkdir -p pdfs/$today/
 
 ## Get most data
 python scripts/age_extraction.py
+
 GET https://data.ct.gov/resource/ypz6-8qyf.json > data/$today/connecticut_2.csv
+
+python scripts/extraction_try.py
