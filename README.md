@@ -96,6 +96,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 ### About the data
 - For North Carolina, the total death number is updated daily, but the age death data is not updated daily. The website format changes from 2020-05-20 
 - NY and NJ have a 1 day latency, meaning that the cumulative deaths we extract on day t are the cumulative deaths in day t-1
+- From 2020-06-04, age band 0-9 was added for Kentucky 
 
 
 ## Figures
