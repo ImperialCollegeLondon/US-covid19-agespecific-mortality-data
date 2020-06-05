@@ -362,7 +362,8 @@ class AgeExtractor:
                 # begin at data[9]
             browser.implicitly_wait(5)
             age_data = {}
-            data = data[9:15]
+            # change the age band from 6.4
+            data = data[9:16]
             for i in data:
                 age_data[i.split()[0]] = i.split()[1]
             path = "data/{}".format(day)
@@ -528,8 +529,8 @@ class AgeExtractor:
             if browser.execute_script("return document.readyState") == "complete":
                 age_data = {}
                 for i in range(9):
-                    group = browser.find_element_by_xpath('//*[@id="ember89"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[1]').text
-                    data = browser.find_element_by_xpath('//*[@id="ember89"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[3]').text
+                    group = browser.find_element_by_xpath('//*[@id="ember112"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[1]').text
+                    data = browser.find_element_by_xpath('//*[@id="ember112"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[3]').text
                     if data == '':
                         data = '0'
                     else:
