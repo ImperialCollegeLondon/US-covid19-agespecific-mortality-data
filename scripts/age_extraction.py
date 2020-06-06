@@ -438,6 +438,6 @@ if __name__ == "__main__":
     #ageExtractor.get_new_jersey()
     #ageExtractor.get_florida()
     ageExtractor.get_connecticut()
-    ageExtractor.get_massachusetts()
+    #ageExtractor.get_massachusetts()
     ageExtractor.get_nyc()
     ageExtractor.get_michigan()
