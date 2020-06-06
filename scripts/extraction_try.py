@@ -88,50 +88,62 @@ class AgeExtractor:
         browser.quit()
 
     def get_oklahoma(self):
-        ## just have the percentage
-        url = "https://looker-dashboards.ok.gov/embed/dashboards/42"
-        options = Options()
-        options.add_argument('headless')
-        #browser = webdriver.Chrome(executable_path=chromed, options=options)
-        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        # check existing assets
+        # os.getcwd() # check current path
+        if not os.path.exists("pdfs/oklahoma"):
+            os.mkdir("pdfs/oklahoma")
+        existing_assets = list(map(basename, glob("pdfs/oklahoma/*.pdf")))
+        date_diff = date.today() - date(2020, 6, 5)
+        for i in range(date_diff.days + 1):
+            dayy = date(2020,6,5) + timedelta(days=i)
+            day = dayy.strftime("%-m-%-d-%y").lower()
+            url = "https://coronavirus.health.ok.gov/sites/g/files/gmc786/f/eo_-_covid-19_report_-_{}.pdf".format(day)
+            if url.split("/")[-1] not in existing_assets:
+                if requests.get(url).status_code == 200:
 
-        browser.get(url)
-        browser.implicitly_wait(5)
-        data = browser.find_elements_by_css_selector('tspan.highcharts-data-label')
-        data = [e.text for e in data if e.text and e.text[0] >= '0' and e.text[0] <= '9']
+                     #subprocess.run(
+                     #   [
+                     #       "wget --no-check-certificate",
+                     #       "-O",
+                     #       "pdfs/oklahoma/" + url.split("/")[-1],
+                     #       url,
+                     #   ]
+                     #)
+                     with open(
+                             "pdfs/oklahoma/" + url.split("/")[-1], "wb"
+                     ) as f:
+                         response = requests.get(url)
+                         f.write(response.content)
+                     age_data = {}
+                     doc = fitz.open(
+                         "pdfs/oklahoma/eo_-_covid-19_report_-_{}.pdf".format(day)
+                     )
+                     lines = doc.getPageText(1).splitlines()
+                     ## find key word to point to the age data table
+                     for num, l in enumerate(lines):
+                         if "Age Group" in l:
+                             begin = num
+                             break
+                     lines = lines[begin:]
+                     age_data[lines[4]] = lines[6]
+                     age_data[lines[7]] = lines[9]
+                     age_data[lines[10]] = lines[12]
+                     age_data[lines[13]] = lines[15]
+                     age_data[lines[16]] = lines[18]
+                     age_data[lines[19]] = lines[21]
+                     path = "data/{}".format(dayy.strftime("%Y-%m-%d"))
+                     if not os.path.exists(path):
+                         os.mkdir(path)
+                     with open("data/{}/oklahoma.json".format(dayy.strftime("%Y-%m-%d")), "w") as f:
+                         json.dump(age_data, f)
+                     doc.close()
 
-        pdf_url = 'https://storage.googleapis.com/ok-covid-gcs-public-download/covid19_cases_summary.pdf'
-
-        r = requests.get(pdf_url).headers['Last-Modified']
-        day = parsedate(r).strftime('%Y-%m-%d')
-        if not os.access("data/{}/oklahoma.json".format(day), os.F_OK):
-            path = "pdfs/oklahoma"
-            if not os.path.exists(path):
-                os.mkdir(path)
-            with open("pdfs/oklahoma/" + day + ".pdf", "wb") as f:
-                response = requests.get(pdf_url)
-                f.write(response.content)
-            ##
-            doc = fitz.Document(
-                "pdfs/oklahoma/{}.pdf".format(day)
-            )
-            # find the page
-            lines = doc.getPageText(0).splitlines()
-            total = int(lines[2])
-            age_data = {}
-            for i in data:
-               age_data[i.split()[0]] = int(round(total * float(i.split()[1][0:-1])* 0.01, 0))
-            path = "data/{}".format(day)
-            if not os.path.exists(path):
-                os.mkdir(path)
-            with open("data/{}/oklahoma.json".format(day), "w") as f:
-                json.dump(age_data, f)
-            browser.save_screenshot('pngs/oklahoma/{}.png'.format(day))
-        else:
-            print('Report for Oklahoma {} is already exist'.format(day))
-
-        browser.close()
-        browser.quit()
+                else:
+                    print(
+                        "Warning: Report for Oklahoma {} is not available".format(
+                            day
+                        )
+                    )
 
     def get_nd(self):
         url = "https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases"
@@ -613,11 +625,12 @@ if __name__ == "__main__":
     # with one # can run step by step
     ageExtractor = AgeExtractor()
     ageExtractor.get_louisiana()
-    #ageExtractor.get_oklahoma()
+    ageExtractor.get_oklahoma()
     ageExtractor.get_nd()
     ageExtractor.get_az()
     ###ageExtractor.get_nc()
-    ###ageExtractor.get_mississippi()
+    # get the figure
+    ageExtractor.get_mississippi()
     ageExtractor.get_missouri()
     # #:
     ageExtractor.get_kentucky()
