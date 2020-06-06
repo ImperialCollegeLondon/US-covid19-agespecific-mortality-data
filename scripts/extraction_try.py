@@ -363,7 +363,8 @@ class AgeExtractor:
             browser.implicitly_wait(5)
             age_data = {}
             # change the age band from 6.4
-            data = data[9:16]
+            # add group for cases from 6.6
+            data = data[10:17]
             for i in data:
                 age_data[i.split()[0]] = i.split()[1]
             path = "data/{}".format(day)
@@ -612,7 +613,7 @@ if __name__ == "__main__":
     # with one # can run step by step
     ageExtractor = AgeExtractor()
     ageExtractor.get_louisiana()
-    ageExtractor.get_oklahoma()
+    #ageExtractor.get_oklahoma()
     ageExtractor.get_nd()
     ageExtractor.get_az()
     ###ageExtractor.get_nc()
