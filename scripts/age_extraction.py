@@ -284,6 +284,7 @@ class AgeExtractor:
                     lines = doc.getPageText(0).splitlines()
                     lines += doc.getPageText(1).splitlines()
                     lines += doc.getPageText(2).splitlines()
+                    lines += doc.getPageText(3).splitlines()
                     ## find key word to point to the age data table
                     for num, l in enumerate(lines):
                         if "Deaths and Death Rate by Age Group" in l:
@@ -295,7 +296,7 @@ class AgeExtractor:
                     lines += doc.getPageText(int(begin_page)).splitlines()
                     ## find key word to point to the age data plot
                     for num, l in enumerate(lines):
-                        if "Deaths by Age Group in Confirmed COVID-19" in l:
+                        if "Deaths by Age Group" in l:
                             begin_num = num
 
                     for num, l in enumerate(lines[begin_num:]):
@@ -438,6 +439,6 @@ if __name__ == "__main__":
     #ageExtractor.get_new_jersey()
     #ageExtractor.get_florida()
     ageExtractor.get_connecticut()
-    #ageExtractor.get_massachusetts()
+    ageExtractor.get_massachusetts()
     ageExtractor.get_nyc()
     ageExtractor.get_michigan()
