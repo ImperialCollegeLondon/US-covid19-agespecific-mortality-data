@@ -76,6 +76,9 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | South Carolina| 2020-05-13| [link](https://www.scdhec.gov/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/sc-demographic-data-covid-19); updated every tuesday and friday; no historical archive| 
 |Iowa| 2020-05-13| [link](https://coronavirus.iowa.gov/pages/case-counts); daily updated and replaced, need extraction daily; no historical archive| 
 |Illinois| 2020-05-14 | [link](https://www.dph.illinois.gov/covid19/covid19-statistics); daily updated and replaced, need extraction daily; no historical archive| 
+|Nevada| 2020-06-07 | [link](https://nvhealthresponse.nv.gov); daily updated and replaced, need extraction daily; no historical archive| 
+|Oregon| 2020-06-05 | [link](https://govstatus.egov.com/OR-OHA-COVID-19); updated and replaced on weekdays, need extraction daily; no historical archive|
+|Pennsylvania| 2020-06-07 | [link](https://experience.arcgis.com/experience/cfb3803eb93d42f7ab1c2cfccca78bf7); daily updated and replaced, need extraction daily; no historical archive|
 
 
 
@@ -92,6 +95,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 - For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
 - For Missouri, the website is changed on 2020-05-21, cannot find the timestamp
 - Delware did not update the website on 2020-05-21
+- For Oklahoma, website changed on 2020-06-06
 
 ### About the data
 - For North Carolina, the total death number is updated daily, but the age death data is not updated daily. The website format changes from 2020-05-20 
