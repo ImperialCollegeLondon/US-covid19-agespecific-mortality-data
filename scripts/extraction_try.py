@@ -88,6 +88,51 @@ class AgeExtractor:
         browser.quit()
 
     def get_oklahoma(self):
+        ## just have the percentage
+        url = "https://looker-dashboards.ok.gov/embed/dashboards/76"
+        options = Options()
+        options.add_argument('headless')
+        #browser = webdriver.Chrome(executable_path=chromed, options=options)
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(5)
+        data = browser.find_elements_by_css_selector('tspan.highcharts-data-label')
+        data = [e.text for e in data if e.text and e.text[0] >= '0' and e.text[0] <= '9']
+
+        pdf_url = 'https://storage.googleapis.com/ok-covid-gcs-public-download/covid19_cases_summary.pdf'
+
+        r = requests.get(pdf_url).headers['Last-Modified']
+        day = parsedate(r).strftime('%Y-%m-%d')
+        if not os.access("data/{}/oklahoma.json".format(day), os.F_OK):
+            path = "pdfs/oklahoma"
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("pdfs/oklahoma/" + day + ".pdf", "wb") as f:
+                response = requests.get(pdf_url)
+                f.write(response.content)
+            ##
+            doc = fitz.Document(
+                "pdfs/oklahoma/{}.pdf".format(day)
+            )
+            # find the page
+            lines = doc.getPageText(0).splitlines()
+            total = int(lines[2])
+            age_data = {}
+            for i in data:
+               age_data[i.split()[0]] = int(round(total * float(i.split()[1][0:-1])* 0.01, 0))
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/oklahoma.json".format(day), "w") as f:
+                json.dump(age_data, f)
+            browser.save_screenshot('pngs/oklahoma/{}.png'.format(day))
+        else:
+            print('Report for Oklahoma {} is already exist'.format(day))
+
+        browser.close()
+        browser.quit()
+
+    def get_oklahoma2(self):
         # check existing assets
         # os.getcwd() # check current path
         if not os.path.exists("pdfs/oklahoma"):
@@ -134,7 +179,7 @@ class AgeExtractor:
                      path = "data/{}".format(dayy.strftime("%Y-%m-%d"))
                      if not os.path.exists(path):
                          os.mkdir(path)
-                     with open("data/{}/oklahoma.json".format(dayy.strftime("%Y-%m-%d")), "w") as f:
+                     with open("data/{}/oklahoma2.json".format(dayy.strftime("%Y-%m-%d")), "w") as f:
                          json.dump(age_data, f)
                      doc.close()
 
@@ -620,12 +665,211 @@ class AgeExtractor:
                         )
                     )
 
+    def get_oregon(self):
+        url = 'https://govstatus.egov.com/OR-OHA-COVID-19'
+        r = requests.get(url)
+        day = r.headers['Last-Modified']
+        day = parsedate(day).strftime('%Y-%m-%d')
+        if not os.access("data/{}/oregon.json".format(day), os.F_OK):
+            path = "html/oregon"
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("html/oregon/{}.html".format(day), "wb") as f:
+                f.write(r.content)
+            html = r.text
+            soup = BeautifulSoup(html, "html.parser")
+            tables = soup.find_all("table")[2]
+            rows = tables.find_all("td")
+            data = [e.text for e in rows]
+            age_data = {}
+            for i in range(10):
+                age_data[data[i*5]] = data[i*5 + 4]
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/oregon.json".format(day), "w") as f:
+                json.dump(age_data, f)
+        else:
+            print('Report for Oregon {} is already exist'.format(day))
+
+    def get_pennsylvania(self):
+        url= 'https://experience.arcgis.com/experience/cfb3803eb93d42f7ab1c2cfccca78bf7'
+        url= 'https://pema.maps.arcgis.com/apps/opsdashboard/index.html#/034bec0bab3b450888a32012f81b8fe4'
+        # the main page
+        url = 'https://pema.maps.arcgis.com/apps/opsdashboard/index.html#/90e80f49696e43458fdf4d40e796dd0e'
+        options = Options()
+        options.add_argument('headless')
+        #browser = webdriver.Chrome(executable_path=chromed, options=options)
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(5)
+        day = browser.find_element_by_xpath('//*[@id="ember49"]/div/p/em').text
+        day = day.split()[7]
+        day = parsedate(day).strftime('%Y-%m-%d')
+        browser.close()
+        browser.quit()
+        if not os.access("data/{}/pennsylvania.json".format(day), os.F_OK):
+            # the age death page
+            url = 'https://pema.maps.arcgis.com/apps/opsdashboard/index.html#/859002d9094b47c7a21092c7c0f25845'
+            options = Options()
+            options.add_argument('headless')
+            # browser = webdriver.Chrome(executable_path=chromed, options=options)
+            browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+            browser.get(url)
+            browser.implicitly_wait(5)
+            time.sleep(2)
+            data = browser.find_elements_by_css_selector('g.amcharts-graph-column')
+            data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label')][4:13]
+            time.sleep(2)
+            age_data = {}
+            for i in range(len(data)):
+                age_data[data[i].split()[0]] = data[i].split()[-1]
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/pennsylvania.json".format(day), "w") as f:
+                json.dump(age_data, f)
+            browser.save_screenshot('pngs/pennsylvania/{}.png'.format(day))
+            browser.close()
+            browser.quit()
+        else:
+            print('Report for Pennsylvania {} is already exist'.format(day))
+
+    def get_nevada(self):
+        #url = 'https://nvhealthresponse.nv.gov/'
+        #html = requests.get(url).text
+        #soup = BeautifulSoup(html, "html.parser")
+        #day = soup.find_all("p", {'class':'announcement__message'})[0].text
+        #day = day.split()[0]
+        #day = parsedate(day).strftime('%Y-%m-%d')
+        url = 'https://app.powerbigov.us/view?r=eyJrIjoiMjA2ZThiOWUtM2FlNS00MGY5LWFmYjUtNmQwNTQ3Nzg5N2I2IiwidCI6ImU0YTM0MGU2LWI4OWUtNGU2OC04ZWFhLTE1NDRkMjcwMzk4MCJ9'
+        options = Options()
+        options.add_argument('headless')
+        #browser = webdriver.Chrome(executable_path=chromed, options=options)
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(5)
+        time.sleep(2)
+        day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[3]/span[1]').text
+        day = day.split()[3]
+        day = parsedate(day).strftime('%Y-%m-%d')
+        if not os.access("data/{}/nevada.json".format(day), os.F_OK):
+            time.sleep(1)
+            total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[13]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            browser.find_element_by_xpath(
+                '//*[@id="pbiAppPlaceHolder"]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[3]/i').click()
+            time.sleep(2)
+            browser.find_element_by_xpath(
+                '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div/div').click()
+            time.sleep(2)
+            browser.find_element_by_xpath(
+                '/html/body/div[5]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/div/span').click()
+            browser.implicitly_wait(2)
+            time.sleep(1)
+            data = []
+            for i in range(7):
+                data.append(browser.find_element_by_xpath(
+                    '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[6]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="g"]/*[name()="path"][' + str(i+1) + ']').get_attribute('aria-label')
+                            )
+            age_data = {}
+            for i in data:
+                age_data[i.split()[0]] = i.split()[1:]
+            age_data['total'] = total
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/nevada.json".format(day), "w") as f:
+                json.dump(age_data, f)
+            browser.save_screenshot('pngs/nevada/{}.png'.format(day))
+        else:
+            print('Report for Nevada {} is already exist'.format(day))
+        browser.close()
+        browser.quit()
+
+    def get_michigan(self):
+        url = 'https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html'
+        url = 'https://app.powerbigov.us/view?r=eyJrIjoiMWNjYjU1YWQtNzFlMC00N2ZlLTg3NjItYmQxMWI4OWIwMGY1IiwidCI6ImQ1ZmI3MDg3LTM3NzctNDJhZC05NjZhLTg5MmVmNDcyMjVkMSJ9'
+        options = Options()
+        options.add_argument('headless')
+        #browser = webdriver.Chrome(executable_path=chromed, options=options)
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(5)
+        time.sleep(10)
+        day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group[2]/transform/div/div[2]/visual-container-modern[2]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+        day = parsedate(day).strftime('%Y-%m-%d')
+        if not os.access("data/{}/michigan.json".format(day), os.F_OK):
+            browser.implicitly_wait(2)
+            browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group[3]/transform/div/div[2]/visual-container-modern[4]/transform/div/div[3]/div/visual-modern/div/button').click()
+            browser.implicitly_wait(5)
+            browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group/transform/div/div[2]/visual-container-modern[2]/transform/div/div[3]/div/visual-modern/div/button').click()
+            browser.implicitly_wait(5)
+            age_data = {}
+            for i in range(9):
+                data = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[15]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"]/*[name()="rect"][' + str(i+1) + ']').get_attribute('aria-label')
+                age_data[data.split()[2][0:-1]] = data.split()[-1][0:-1]
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/michigan.json".format(day), "w") as f:
+                json.dump(age_data, f)
+            browser.save_screenshot('pngs/michigan/{}.png'.format(day))
+        else:
+            print('Report for Michigan {} is already exist'.format(day))
+        browser.close()
+        browser.quit()
+
+    def get_washington(self):
+        url = 'https://www.doh.wa.gov/Emergencies/Coronavirus#CovidDataTables'
+        options = Options()
+        options.add_argument('headless')
+        # browser = webdriver.Chrome(executable_path=chromed, options=options)
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(5)
+        day = browser.find_element_by_xpath('//*[@id="dnn_ctr33855_HtmlModule_lblContent"]/p[3]/strong').text
+        day = day.split()[-1]
+        day = parsedate(day).strftime('%Y-%m-%d')
+        if not os.access("data/{}/washington.json".format(day), os.F_OK):
+            browser.implicitly_wait(2)
+            browser.find_element_by_xpath('//*[@id="togConfirmedCasesDeathsTbl"]').click()
+            browser.implicitly_wait(2)
+            time.sleep(2)
+            browser.find_element_by_xpath('//*[@id="togCasesDeathsByAgeTbl"]').click()
+            browser.implicitly_wait(2)
+            time.sleep(2)
+            total = browser.find_element_by_xpath('//*[@id="pnlConfirmedCasesDeathsTbl"]/div/div/table/tbody/tr[41]/td[3]').text
+            time.sleep(2)
+            age_data = {}
+            for i in range(6):
+                group = browser.find_element_by_xpath('//*[@id="pnlCasesDeathsByAgeTbl"]/div/div/table/tbody/tr[' + str(i+1) + ']/td[1]').text
+                data = browser.find_element_by_xpath('//*[@id="pnlCasesDeathsByAgeTbl"]/div/div/table/tbody/tr[' + str(i+1) + ']/td[4]').text
+                age_data[group] = data
+            age_data['total'] = total
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/washington.json".format(day), "w") as f:
+                json.dump(age_data, f)
+            width = browser.execute_script("return document.documentElement.scrollWidth")
+            height = browser.execute_script("return document.documentElement.scrollHeight")
+            #print(width, height)
+            browser.set_window_size(width, height)
+            time.sleep(1)
+            browser.save_screenshot('pngs/washington/{}.png'.format(day))
+        else:
+            print('Report for Washington {} is already exist'.format(day))
+        browser.close()
+        browser.quit()
+
+
 
 if __name__ == "__main__":
     # with one # can run step by step
     ageExtractor = AgeExtractor()
     ageExtractor.get_louisiana()
     ageExtractor.get_oklahoma()
+    ageExtractor.get_oklahoma2()
     ageExtractor.get_nd()
     ageExtractor.get_az()
     ###ageExtractor.get_nc()
@@ -639,3 +883,8 @@ if __name__ == "__main__":
     ###ageExtractor.get_california()
     ageExtractor.get_indiana()
     ageExtractor.get_maryland()
+    ageExtractor.get_oregon()
+    ageExtractor.get_pennsylvania()
+    ageExtractor.get_nevada()
+    ageExtractor.get_michigan()
+    ageExtractor.get_washington()
