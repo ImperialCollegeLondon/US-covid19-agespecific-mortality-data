@@ -862,6 +862,50 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
+    def get_illinois(self):
+        ## TODO: extract
+        # try again
+        url = 'https://www.dph.illinois.gov/covid19/covid19-statistics'
+        options = Options()
+        options.add_argument('headless')
+        # browser = webdriver.Chrome(executable_path=chromed, options=options)
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(5)
+        day = parsedate(browser.find_element_by_xpath('//*[@id="updatedDate"]').text).strftime('%Y-%m-%d')
+        if not os.access("data/{}/illinois.json".format(day), os.F_OK):
+            browser.implicitly_wait(2)
+            browser.find_element_by_xpath('//*[@id="liAgeChartDeaths"]/a').click()
+            browser.implicitly_wait(3)
+            time.sleep(2)
+            age_data = {}
+            group = ['Unknown','<20','20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80+']
+            # j the age_groups
+            for j in range(9):
+                # i the race
+                data = []
+                for i in range(8):
+                    s = browser.find_elements_by_xpath('//*[@id="pieAge"]/div/div/*[name()="svg"][1]/*[name()="g"][4]/*[name()="g"]/*[name()="g"][8]/*[name()="g"][1]/*[name()="g"][' + str(i+1) + ']/*[name()="g"]/*[name()="g"][' + str(j+1) + ']/*[name()="text"]')
+                    if len(s) != 0:
+                        data.append(int(s[0].text))
+                    else:
+                        data.append(0)
+                age_data[group[j]] = sum(data)
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/illinois.json".format(day), "w") as f:
+                json.dump(age_data, f)
+            width = browser.execute_script("return document.documentElement.scrollWidth")
+            height = browser.execute_script("return document.documentElement.scrollHeight")
+            #print(width, height)
+            browser.set_window_size(width, height)
+            time.sleep(1)
+            browser.save_screenshot('pngs/Illinois/{}.png'.format(day))
+        else:
+            print('Report for Illinois {} is already exist'.format(day))
+        browser.close()
+        browser.quit()
 
 
 if __name__ == "__main__":
@@ -888,3 +932,4 @@ if __name__ == "__main__":
     ageExtractor.get_nevada()
     ageExtractor.get_michigan()
     ageExtractor.get_washington()
+    ageExtractor.get_illinois()
