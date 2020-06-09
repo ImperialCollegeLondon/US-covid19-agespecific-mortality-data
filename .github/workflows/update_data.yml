@@ -44,9 +44,11 @@ jobs:
         fi
         
         cp -a html/. output/html/
+        cp -a csvs/. output/csvs/
 
         cd output
         git add -f .
+        git status
         git commit -m "Automated data update"
         git push \
           "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
