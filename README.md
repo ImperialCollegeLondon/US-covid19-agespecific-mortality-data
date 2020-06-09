@@ -79,7 +79,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 |Nevada| 2020-06-07 | [link](https://nvhealthresponse.nv.gov); daily updated and replaced, need extraction daily; no historical archive| 
 |Oregon| 2020-06-05 | [link](https://govstatus.egov.com/OR-OHA-COVID-19); updated and replaced on weekdays, need extraction daily; no historical archive|
 |Pennsylvania| 2020-06-07 | [link](https://experience.arcgis.com/experience/cfb3803eb93d42f7ab1c2cfccca78bf7); daily updated and replaced, need extraction daily; no historical archive|
-
+|New Hampshire| 2020-06-08 | [link](https://www.nh.gov/covid19/dashboard/summary.htm); daily updated and replaced, need extraction daily; no historical archive|
 
 
 ## Warnings
