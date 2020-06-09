@@ -43,7 +43,7 @@ jobs:
           mv data/$today output/data/
         fi
         
-        cp -r html/* output/html/
+        cp -a html/. output/html/
 
         cd output
         git add -f .

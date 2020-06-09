@@ -420,9 +420,59 @@ class AgeExtractor:
             with open(f"data/{file_date.strftime('%Y-%m-%d')}/michigan.json", "w") as f:
                 json.dump(data, f)
 
+            print(f'Processed {file_date} for Michigan')
+
         files = os.listdir("html/michigan")
         for f in files:
             process_michigan_day(f.split(".")[0])
+
+    def get_minnesota(self):
+        subprocess.run(
+            [
+                "wget",
+                "--no-check-certificate",
+                "-O",
+                "html/minnesota/temp.html",
+                "https://www.health.state.mn.us/diseases/coronavirus/situation.html",
+            ]
+        )   
+
+        with open("html/minnesota/temp.html") as f:
+            soup = BeautifulSoup(f, "html.parser")
+
+        html_date = soup.find('p', class_='small').find('strong').text[9:]
+        html_date = datetime.strptime(html_date, '%B %d, %Y').strftime("%d/%m/%Y")
+        html_date = html_date.replace("/", "-")
+
+        copyfile("html/minnesota/temp.html", f"html/minnesota/{html_date}.html")
+
+        os.remove("html/minnesota/temp.html")
+
+        def process_minnesota_day(file_date):
+            file_date = datetime.strptime(html_date, "%d-%m-%Y")
+
+            with open(f"html/minnesota/{file_date.strftime('%d-%m-%Y')}.html") as f:
+                soup = BeautifulSoup(f, "html.parser")
+
+            table = soup.find("table", id='agetable')
+            table_rows = table.find_all('tr')
+
+            data = dict()
+
+            for row in table_rows[1:]:
+                age_band = row.find('th').text
+                deaths = row.find_all('td')[1].text.strip(' ')
+                data[age_band] = deaths
+
+            os.makedirs(f"data/{file_date.strftime('%Y-%m-%d')}", exist_ok=True)
+            with open(f"data/{file_date.strftime('%Y-%m-%d')}/minnesota.json", "w") as f:
+                json.dump(data, f)
+
+            print(f'Processed {file_date} for Minnesota')
+
+        files = os.listdir("html/minnesota")
+        for f in files:
+            process_minnesota_day(f.split(".")[0])
 
     def get_all(self):
         """TODO: running get_*() for every state
@@ -432,13 +482,14 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
-    ageExtractor.get_georgia()
-    ageExtractor.get_cdc()
-    ageExtractor.get_washington()
-    ageExtractor.get_texas()
-    #ageExtractor.get_new_jersey()
-    #ageExtractor.get_florida()
-    ageExtractor.get_connecticut()
-    ageExtractor.get_massachusetts()
-    ageExtractor.get_nyc()
-    ageExtractor.get_michigan()
+    # ageExtractor.get_georgia()
+    # ageExtractor.get_cdc()
+    # ageExtractor.get_washington()
+    # ageExtractor.get_texas()
+    # #ageExtractor.get_new_jersey()
+    # #ageExtractor.get_florida()
+    # ageExtractor.get_connecticut()
+    # ageExtractor.get_massachusetts()
+    # ageExtractor.get_nyc()
+    # ageExtractor.get_michigan()
+    ageExtractor.get_minnesota()
