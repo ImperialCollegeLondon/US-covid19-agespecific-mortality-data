@@ -331,30 +331,24 @@ class AgeExtractor:
         browser.quit()
 
     def get_mississippi(self):
-        ## the reports are always published 1 day later (possibly!)
-        #data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
-        options = Options()
-        options.add_argument('headless')
-        #browser = webdriver.Chrome(executable_path=chromed, options=options)
-        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        existing_assets = list(map(basename, glob("pngs/mississippi/*.png")))
+        date_diff = date.today() - date(2020, 4, 27)
+        for i in range(date_diff.days + 1):
+            dayy = date(2020, 4, 27) + timedelta(days=i)
+            day = dayy.strftime('%Y-%m-%d')
+            url = 'https://msdh.ms.gov/msdhsite/_static/images/graphics/covid19-chart-age-' + str(day[5:]) + '.png'
+            if day + '.png' not in existing_assets:
+                if requests.get(url).status_code == 200:
+                    path = "pngs/Mississippi"
+                    if not os.path.exists(path):
+                        os.mkdir(path)
+                    response = requests.get(url)
+                    with open("pngs/Mississippi/{}.png".format(day), "wb") as f:
+                        for data in response.iter_content(128):
+                            f.write(data)
+                else:
+                    print('Report for Mississippi {} is not exist'.format(day))
 
-        browser.get("https://msdh.ms.gov/msdhsite/_static/14,0,420.html#Mississippi")
-
-        day = " ".join(['2020', " ".join(browser.find_element_by_xpath('//*[@id="article"]/div/h3[1]').text.split()[-2:])])
-        day = parsedate(day).strftime('%Y-%m-%d')
-        if not os.access("pngs/Mississippi/{}.png".format(day), os.F_OK):
-            data_web = 'https://msdh.ms.gov/msdhsite/_static/images/graphics/covid19-chart-age-' + str(day[5:]) + '.png'
-            path = "pngs/Mississippi"
-            if not os.path.exists(path):
-                os.mkdir(path)
-            response = requests.get(data_web)
-            with open("pngs/Mississippi/{}.png".format(day), "wb") as f:
-                for data in response.iter_content(128):
-                    f.write(data)
-        else:
-            print('Report for Mississippi {} is already exist'.format(day))
-        browser.close()
-        browser.quit()
 
 
     def get_missouri(self):
@@ -875,6 +869,7 @@ class AgeExtractor:
         day = parsedate(browser.find_element_by_xpath('//*[@id="updatedDate"]').text).strftime('%Y-%m-%d')
         if not os.access("data/{}/illinois.json".format(day), os.F_OK):
             browser.implicitly_wait(2)
+            time.sleep(2)
             browser.find_element_by_xpath('//*[@id="liAgeChartDeaths"]/a').click()
             browser.implicitly_wait(3)
             time.sleep(2)
