@@ -45,6 +45,7 @@ jobs:
         
         cp -a html/. output/html/
         cp -a csvs/. output/csvs/
+        cp -a pngs/. output/pngs/
 
         cd output
         git add -f .
