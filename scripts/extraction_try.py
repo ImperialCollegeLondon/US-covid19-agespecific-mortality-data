@@ -444,16 +444,15 @@ class AgeExtractor:
         browser.find_element_by_xpath('//*[@id="accept"]').click()
         browser.find_element_by_xpath('/html/body/main/div/div/div[2]/section/form/button').click()
         ##  website change from 2020-05-20
-        day = browser.find_element_by_xpath('//*[@id="total-deaths-by-age"]/div[2]/div/div[1]/div/div').text
-        day = day.split()[1]
+        day = browser.find_element_by_xpath('//*[@id="outcomes"]/div/article[1]/div/div/div[2]/div[1]/div[1]/div/div/span[2]').text
         #day = browser.find_element_by_xpath('//*[@id="outcomes"]/div/div[2]/div[1]/div/div[1]/div/span').text.split(':')[1]
         day = parsedate(day).strftime("%Y-%m-%d")
         if not os.access("data/{}/delaware.json".format(day), os.F_OK):
             if browser.execute_script("return document.readyState") == "complete":
                 age_data = {}
                 for i in range(6):
-                    path1 = browser.find_element_by_xpath('//*[@id="total-deaths-by-age"]/div[2]/div/div[2]/div/div/table/tbody/tr[' + str(i + 1) + ']/td[1]')
-                    path2 = browser.find_element_by_xpath('//*[@id="total-deaths-by-age"]/div[2]/div/div[2]/div/div/table/tbody/tr['+ str(i + 1) + ']/td[2]')
+                    path1 = browser.find_element_by_xpath('//*[@id="total-deaths-by-age"]/div[2]/div/table/tbody/tr[' + str(i + 1) + ']/td[1]/span/span')
+                    path2 = browser.find_element_by_xpath('//*[@id="total-deaths-by-age"]/div[2]/div/table/tbody/tr['+ str(i + 1) + ']/td[2]')
                     age_data[path1.text] = path2.text.split()[0]
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
