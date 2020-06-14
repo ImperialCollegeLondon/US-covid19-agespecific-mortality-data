@@ -909,6 +909,7 @@ class AgeExtractor:
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
         browser.implicitly_wait(5)
+        time.sleep(2)
         day = parsedate(browser.find_element_by_xpath('//*[@id="updatedDate"]').text).strftime('%Y-%m-%d')
         if not os.access("data/{}/illinois.json".format(day), os.F_OK):
             browser.implicitly_wait(2)
