@@ -80,6 +80,7 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/louisiana.json".format(day), "w") as f:
                 json.dump(age_data, f)
+            print('\n------ Processed Louisiana {} ------\n'.format(day))
             browser.save_screenshot('pngs/louisiana/{}.png'.format(day))
         else:
             print('Report for Louisiana {} is already exist'.format(day))
@@ -125,6 +126,7 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/oklahoma.json".format(day), "w") as f:
                 json.dump(age_data, f)
+            print('\n------ Processed Oklahoma {} ------\n'.format(day))
             browser.save_screenshot('pngs/oklahoma/{}.png'.format(day))
         else:
             print('Report for Oklahoma {} is already exist'.format(day))
@@ -181,6 +183,7 @@ class AgeExtractor:
                          os.mkdir(path)
                      with open("data/{}/oklahoma2.json".format(dayy.strftime("%Y-%m-%d")), "w") as f:
                          json.dump(age_data, f)
+                     print('\n------ Processed Oklahoma2 {} ------\n'.format(day))
                      doc.close()
 
                 else:
@@ -217,6 +220,7 @@ class AgeExtractor:
                     os.mkdir(path)
                 with open("data/{}/NorthDakota.json".format(day), "w") as f:
                     json.dump(age_data, f)
+                print('\n------ Processed North Dakota {} ------\n'.format(day))
             #else:
             #    print('error for extracting')
             # take the full screenshot
@@ -240,43 +244,52 @@ class AgeExtractor:
         # url = "https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/covid-19/dashboards/index.php"
         url = 'https://tableau.azdhs.gov/views/COVID-19Deaths/Deaths/sheet.pdf'
         ## updated daily
-        r = requests.get(url)
-        day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
-        if not os.access("data/{}/arizona.json".format(day), os.F_OK):
-            with open("pdfs/arizona/{}.pdf".format(day), "wb") as f:
-                f.write(r.content)
-            doc = fitz.Document("pdfs/arizona/{}.pdf".format(day))
-            # find the page
-            lines = doc.getPageText(0).splitlines()
-            day = parsedate(lines[1]).strftime('%Y-%m-%d')
-            for num, l in enumerate(lines):
-                if 'COVID-19 Deaths by Gender' in l:
-                    data_num = num
-                    break
-            lines = lines[data_num + 1 : ]
-            age_data = {}
-             ## need to worry about the order
-            #age_data[lines[4]] = lines[9]
-            #age_data[lines[0]] = lines[6]
-            #age_data[lines[1]] = lines[7]
-            #age_data[lines[2]] = lines[8]
-            #age_data[lines[3]] = lines[5]
-            data = lines[5:10]
-            data = sorted([int(e) for e in data])
-            age_data[lines[4]] = data[0]
-            age_data[lines[0]] = data[1]
-            age_data[lines[1]] = data[2]
-            age_data[lines[2]] = data[3]
-            age_data[lines[3]] = data[4]
-
-            path = "data/{}".format(day)
-            if not os.path.exists(path):
-                os.mkdir(path)
-
-            with open("data/{}/arizona.json".format(day), "w") as f:
-                json.dump(age_data, f)
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for Arizona {} is not available".date.today().strftime('%Y-%m-%d')
+            )
         else:
-            print('Data for Arizona {} is already exist'.format(day))
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/arizona.json".format(day), os.F_OK):
+                with open("pdfs/arizona/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+                doc = fitz.Document("pdfs/arizona/{}.pdf".format(day))
+                # find the page
+                lines = doc.getPageText(0).splitlines()
+                day = parsedate(lines[1]).strftime('%Y-%m-%d')
+                for num, l in enumerate(lines):
+                    if 'COVID-19 Deaths by Gender' in l:
+                        data_num = num
+                        break
+                lines = lines[data_num + 1 : ]
+                age_data = {}
+                 ## need to worry about the order
+                #age_data[lines[4]] = lines[9]
+                #age_data[lines[0]] = lines[6]
+                #age_data[lines[1]] = lines[7]
+                #age_data[lines[2]] = lines[8]
+                #age_data[lines[3]] = lines[5]
+                data = lines[5:10]
+                data = sorted([int(e) for e in data])
+                age_data[lines[4]] = data[0]
+                age_data[lines[0]] = data[1]
+                age_data[lines[1]] = data[2]
+                age_data[lines[2]] = data[3]
+                age_data[lines[3]] = data[4]
+
+                path = "data/{}".format(day)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+
+                with open("data/{}/arizona.json".format(day), "w") as f:
+                    json.dump(age_data, f)
+                print('\n------ Processed Arizona {} ------\n'.format(day))
+            else:
+                print('Data for Arizona {} is already exist'.format(day))
 
     def get_nc(self):
         ## do manually, download the pdf
@@ -325,6 +338,7 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/NorthCarolina.json".format(day), "w") as f:
                 json.dump(age_data, f)
+            print('\n------ Processed North Carolina {} ------\n'.format(day))
         else:
             print('Report for NorthCarolina {} is already exist'.format(day))
         browser.close()
@@ -346,6 +360,7 @@ class AgeExtractor:
                     with open("pngs/Mississippi/{}.png".format(day), "wb") as f:
                         for data in response.iter_content(128):
                             f.write(data)
+                    print('\n------ Processed Mississippi pngs {} ------\n'.format(day))
                 else:
                     print('Report for Mississippi {} is not exist'.format(day))
 
@@ -378,6 +393,7 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/missouri.json".format(day), "w") as f:
                 json.dump(age_data, f)
+            print('\n------ Processed Missouri {} ------\n'.format(day))
             browser.save_screenshot('pngs/missouri/{}.png'.format(day))
         else:
             print('Report for Missouri {} is already exist'.format(day))
@@ -423,6 +439,7 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/kentucky.json".format(day), "w") as f:
                 json.dump(age_data, f)
+            print('\n------ Processed Kentucky {} ------\n'.format(day))
             browser.save_screenshot('pngs/kentucky/{}.png'.format(day))
             #else:
             #    print('error for extracting')
@@ -459,6 +476,7 @@ class AgeExtractor:
                     os.mkdir(path)
                 with open("data/{}/delaware.json".format(day), "w") as f:
                     json.dump(age_data, f)
+                print('\n------ Processed Delaware {} ------\n'.format(day))
 
                 #### get the full snapshot:
                 # thanks #https://zhuanlan.zhihu.com/p/73255362
@@ -486,13 +504,20 @@ class AgeExtractor:
 
         browser.get(url)
         browser.implicitly_wait(5)
+        time.sleep(2)
         #r = requests.get(url).headers['Last-Modified'] : 4.28
         day = browser.find_element_by_xpath('//*[@id="ember78"]/div/p/strong').text.split(',')[0]
+        browser.implicitly_wait(2)
+        time.sleep(2)
         day = parsedate(day).strftime("%Y-%m-%d")
+        time.sleep(2)
         if not os.access("data/{}/vermont.json".format(day), os.F_OK):
+            browser.implicitly_wait(2)
             if browser.execute_script("return document.readyState") == "complete":
                 data = browser.find_elements_by_css_selector('g.amcharts-graph-column')
+                time.sleep(1)
                 full_data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label') and e.get_attribute('aria-label').split()[1] == 'Without']
+                time.sleep(1)
                 death_data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label') and e.get_attribute('aria-label') .split()[1] == 'Resulting']
                 age_death = {}
                 for i in full_data:
@@ -511,6 +536,7 @@ class AgeExtractor:
                     os.mkdir(path)
                 with open("data/{}/vermont.json".format(day), "w") as f:
                     json.dump(age_death, f)
+                print('\n------ Processed Vermont {} ------\n'.format(day))
                 browser.save_screenshot('pngs/vermont/{}.png'.format(day))
             else:
                 print('error for extracting')
@@ -553,15 +579,21 @@ class AgeExtractor:
 
     def get_indiana(self):
         url = 'https://hub.mph.in.gov/dataset/62ddcb15-bbe8-477b-bb2e-175ee5af8629/resource/2538d7f1-391b-4733-90b3-9e95cd5f3ea6/download/covid_report_demographics.xlsx'
-        r = requests.get(url)
-        day = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
-        if not os.access("data/{}/indiana.xlsx".format(day), os.F_OK):
-            req = requests.get(url)
-            url_content = req.content
-            file = open("data/{}/indiana.xlsx".format(day), 'wb')
-            file.write(url_content)
-            file.close()
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err, "\n ==> Report for  Indiana {} is not available".format(self.today.strftime('%Y-%m-%d')))
         else:
+            day = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/indiana.xlsx".format(day), os.F_OK):
+                req = requests.get(url)
+                url_content = req.content
+                file = open("data/{}/indiana.xlsx".format(day), 'wb')
+                file.write(url_content)
+                file.close()
+                print('\n------ Processed Indiana {} ------\n'.format(day))
+            else:
                 print('Report for Indiana {} is already exist'.format(day))
 
     def get_maryland(self):
@@ -594,6 +626,7 @@ class AgeExtractor:
                     os.mkdir(path)
                 with open("data/{}/maryland.json".format(day), "w") as f:
                     json.dump(age_data, f)
+                print('\n------ Processed Maryland {} ------\n'.format(day))
                 width = browser.execute_script("return document.documentElement.scrollWidth")
                 height = browser.execute_script("return document.documentElement.scrollHeight")
                 browser.set_window_size(width, height)
@@ -660,30 +693,37 @@ class AgeExtractor:
 
     def get_oregon(self):
         url = 'https://govstatus.egov.com/OR-OHA-COVID-19'
-        r = requests.get(url)
-        day = r.headers['Last-Modified']
-        day = parsedate(day).strftime('%Y-%m-%d')
-        if not os.access("data/{}/oregon.json".format(day), os.F_OK):
-            path = "html/oregon"
-            if not os.path.exists(path):
-                os.mkdir(path)
-            with open("html/oregon/{}.html".format(day), "wb") as f:
-                f.write(r.content)
-            html = r.text
-            soup = BeautifulSoup(html, "html.parser")
-            tables = soup.find_all("table")[2]
-            rows = tables.find_all("td")
-            data = [e.text for e in rows]
-            age_data = {}
-            for i in range(10):
-                age_data[data[i*5]] = data[i*5 + 4]
-            path = "data/{}".format(day)
-            if not os.path.exists(path):
-                os.mkdir(path)
-            with open("data/{}/oregon.json".format(day), "w") as f:
-                json.dump(age_data, f)
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err, "\n ==> Report for Oregon {} is not available".format(self.today.strftime('%Y-%m-%d')))
         else:
-            print('Report for Oregon {} is already exist'.format(day))
+
+            day = r.headers['Last-Modified']
+            day = parsedate(day).strftime('%Y-%m-%d')
+            if not os.access("data/{}/oregon.json".format(day), os.F_OK):
+                path = "html/oregon"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("html/oregon/{}.html".format(day), "wb") as f:
+                    f.write(r.content)
+                html = r.text
+                soup = BeautifulSoup(html, "html.parser")
+                tables = soup.find_all("table")[2]
+                rows = tables.find_all("td")
+                data = [e.text for e in rows]
+                age_data = {}
+                for i in range(10):
+                    age_data[data[i*5]] = data[i*5 + 4]
+                path = "data/{}".format(day)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("data/{}/oregon.json".format(day), "w") as f:
+                    json.dump(age_data, f)
+                print('\n------ Processed Oregon {} ------\n'.format(day))
+            else:
+                print('Report for Oregon {} is already exist'.format(day))
 
     def get_pennsylvania(self):
         url= 'https://experience.arcgis.com/experience/cfb3803eb93d42f7ab1c2cfccca78bf7'
@@ -722,6 +762,7 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/pennsylvania.json".format(day), "w") as f:
                 json.dump(age_data, f)
+            print('\n------ Processed Pennsylvania {} ------\n'.format(day))
             browser.save_screenshot('pngs/pennsylvania/{}.png'.format(day))
             browser.close()
             browser.quit()
@@ -773,6 +814,7 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/nevada.json".format(day), "w") as f:
                 json.dump(age_data, f)
+            print('\n------ Processed Nevada {} ------\n'.format(day))
             browser.save_screenshot('pngs/nevada/{}.png'.format(day))
         else:
             print('Report for Nevada {} is already exist'.format(day))
@@ -806,6 +848,7 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/michigan.json".format(day), "w") as f:
                 json.dump(age_data, f)
+            print('\n------ Processed Michigan {} ------\n'.format(day))
             browser.save_screenshot('pngs/michigan/{}.png'.format(day))
         else:
             print('Report for Michigan {} is already exist'.format(day))
@@ -844,6 +887,7 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/washington.json".format(day), "w") as f:
                 json.dump(age_data, f)
+            print('\n------ Processed Washington {} ------\n'.format(day))
             width = browser.execute_script("return document.documentElement.scrollWidth")
             height = browser.execute_script("return document.documentElement.scrollHeight")
             #print(width, height)
@@ -890,6 +934,7 @@ class AgeExtractor:
                 os.mkdir(path)
             with open("data/{}/illinois.json".format(day), "w") as f:
                 json.dump(age_data, f)
+            print('\n------ Processed Illinois {} ------\n'.format(day))
             width = browser.execute_script("return document.documentElement.scrollWidth")
             height = browser.execute_script("return document.documentElement.scrollHeight")
             #print(width, height)
@@ -909,7 +954,6 @@ if __name__ == "__main__":
     ageExtractor.get_oklahoma()
     ageExtractor.get_oklahoma2()
     ageExtractor.get_nd()
-    ageExtractor.get_az()
     ###ageExtractor.get_nc()
     # get the figure
     ageExtractor.get_mississippi()
@@ -917,7 +961,6 @@ if __name__ == "__main__":
     # #:
     ageExtractor.get_kentucky()
     ageExtractor.get_delware()
-    ageExtractor.get_vermont()
     ###ageExtractor.get_california()
     ageExtractor.get_indiana()
     ageExtractor.get_maryland()
@@ -927,3 +970,6 @@ if __name__ == "__main__":
     ageExtractor.get_michigan()
     ageExtractor.get_washington()
     ageExtractor.get_illinois()
+    ###
+    ageExtractor.get_vermont()
+    ageExtractor.get_az()
