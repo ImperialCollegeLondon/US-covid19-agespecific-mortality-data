@@ -1,6 +1,7 @@
 name: Run daily update
 on:
   schedule:
+    - cron: "18 20 * * *"
     - cron: "48 22 * * *"
 
 jobs:
