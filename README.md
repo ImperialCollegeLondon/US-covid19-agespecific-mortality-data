@@ -90,6 +90,8 @@ We use webdriver from selenium to find the elements and extract the correspondin
 - Idaho did not update the website on 2020-05-18
 - Missouri change website on the 2020-05-20 and did not update
 - Indiana did not update the data on 2020-05-30
+- Washingtin did not update the website on 2020-06-12
+- Mississippi did not update the website on 2020-06-10
 
 ### Website dynamics
 - For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
