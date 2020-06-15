@@ -1,0 +1,57 @@
+name: Run daily update
+on:
+  schedule:
+    - cron: "18 20 * * *"
+    - cron: "48 22 * * *"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+   
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Install Chromium
+      run: |
+        sudo apt-get update
+        sudo apt-get install chromium-browser
+
+    - name: Clone data from yesterday
+      run: |
+        git clone https://@github.com/MJHutchinson/US-covid19-data-scraping --single-branch -b update_data output 
+        git config --global user.name "GitHub Actions"
+        git config --global user.email action@github.com
+
+    - name: Update Data Sources
+      run: |
+        make files
+        today=$(date +'%Y-%m-%d')
+        
+        # check the data for today is there already
+        if [ -d "output/data/$today" ]; then
+          cp data/$today/* output/data/$today
+        else
+          mv data/$today output/data/
+        fi
+        
+        cp -a html/. output/html/
+        cp -a csvs/. output/csvs/
+        cp -a pngs/. output/pngs/
+
+        cd output
+        git add -f .
+        git status
+        git commit -m "Automated data update"
+        git push \
+          "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
+          HEAD:update_data
