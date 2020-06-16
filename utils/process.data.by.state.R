@@ -5,79 +5,46 @@ library(tidyverse)
 path_to_data = "data"
 
 ## STATES WITH RULE BASED FUNCTION
-obtain.FL.data = function(first.day.fl, last.day){
-  cat("\n Processing Florida \n")
-  
-  dates = seq.Date(first.day.fl, last.day, by = "day")
-  
-  dates = dates[-which(dates == as.Date("2020-05-09"))] # no report on this day
-  
-  data.fl = NULL
-  for(t in 1:length(dates)){
-    Date = dates[t] 
-    
-    json_file <- file.path(path_to_data, Date, "florida.json")
-    fl_data <- suppressWarnings(fromJSON(paste(readLines(json_file))))
-    tmp = data.table(age = gsub("(.+) years", "\\1",names(fl_data)), cum.deaths = NA_integer_, daily.deaths = NA_integer_, 
-                     code = "FL", date = Date)
-    for(age_group in tmp$age){
-      cum.deaths = as.numeric(fl_data[[paste(age_group, "years")]][1])
-      stopifnot(is.numeric(cum.deaths))
-      tmp[which(age == age_group),]$cum.deaths = cum.deaths
-      if(Date > first.day.fl){
-        cum.death.t_1 = tmp[which(age == age_group & date == Date),]$cum.deaths
-        cum.death.t_0 =  data.fl[which(data.fl$age == age_group & data.fl$date == (Date-1)),]$cum.deaths
-        daily.deaths = cum.death.t_1 - cum.death.t_0 
-        if(Date == as.Date("2020-05-10")){
-          cum.death.t_1_2 = tmp[which(age == age_group & date == Date),]$cum.deaths
-          cum.death.t_0 =  data.fl[which(data.fl$age == age_group & data.fl$date == (Date-2)),]$cum.deaths
-          daily.deaths = round((cum.death.t_1_2 - cum.death.t_0 )/2)
-          # cum death are divided equally among the last two days
-          data.fl = rbind(data.fl, data.table(age = age_group, date = (Date-1), cum.deaths = round(cum.death.t_0 + daily.deaths), daily.deaths = daily.deaths, code = "FL"))
-        }
-        stopifnot(is.numeric(daily.deaths))
-        if(daily.deaths<0){
-          data.fl[which(data.fl$age == age_group & data.fl$date == (Date-1)),]$daily.deaths = max(data.fl[which(data.fl$age == age_group & data.fl$date == (Date-1)),]$daily.deaths + daily.deaths,0)
-          daily.deaths = 0
-        }
-        tmp[which(age == age_group & date == Date),]$daily.deaths = daily.deaths
-      }
-    }
-    data.fl = rbind(data.fl, tmp)
-  }
-  
-  # Reorder data
-  data.fl <- with(data.fl, data.fl[order(date, age, cum.deaths, daily.deaths, code), ])
-  data.fl <- data.fl[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
-  
-  return(data.fl)
-}
-
-obtain.WA.data = function(first.day.wa, last.monday){
+obtain.WA.data = function(last.day){
   cat("\n Processing Washington \n")
   
-    xlsx_file = file.path(path_to_data, last.monday, "washington.xlsx")
-    tmp = read_excel(xlsx_file, sheet = "Deaths")
-    data.wa = select(tmp, -c("Deaths", "dtm_updated", "Positive UnkAge")) %>%
-      reshape2::melt(id.vars = c("County", "WeekStartDate")) %>%
-      group_by(WeekStartDate, variable) %>%
-      summarise(weekly.deaths = sum(value)) %>%
-      ungroup() %>%
-      mutate(age = gsub("Age (.+)", "\\1",variable),
-             code = "WA",
-             date = as.Date(WeekStartDate)) %>%
-      select(date, age, weekly.deaths, code) 
+  dates = seq.Date(as.Date("2020-03-22"), last.day, by = "week") # stop when we first started to record the json
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("washington.xlsx"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  last.day = max(dates)
+  
+  xlsx_file = file.path(path_to_data, last.day, "washington.xlsx")
+  tmp = read_excel(xlsx_file, sheet = "Deaths")
+  data.wa = select(tmp, -c("Deaths", "dtm_updated", "Positive UnkAge")) %>%
+    reshape2::melt(id.vars = c("County", "WeekStartDate")) %>%
+    group_by(WeekStartDate, variable) %>%
+    summarise(weekly.deaths = sum(value)) %>%
+    ungroup() %>%
+    mutate(age = gsub("Age (.+)", "\\1",variable),
+           code = "WA",
+           date = as.Date(WeekStartDate)) %>%
+    select(date, age, weekly.deaths, code) 
     
-    # Reorder data
-    data.wa <- with(data.wa, data.wa[order(date, age, weekly.deaths, code), ])
-    data.wa <- data.wa[, c("date", "age", "weekly.deaths", "code")]
     
-    return(data.wa)
+  # Reorder data
+  data.wa <- with(data.wa, data.wa[order(date, age, weekly.deaths, code), ])
+  data.wa <- data.wa[, c("date", "age", "weekly.deaths", "code")]
+    
+  return(data.wa)
 }
-
-obtain.TX.data = function(first.day.tx, last.day){
+ 
+obtain.TX.data = function(last.day){
   cat("\n Processing Texas \n")
-  dates = seq.Date(first.day.tx, last.day, by = "day")
+
+  dates = seq.Date(as.Date("2020-03-22"), last.day, by = "week")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("texas.xlsx"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  first.day = min(dates)
+  
   data.tx = NULL
   for(t in 1:length(dates)){
     Date = dates[t]
@@ -94,10 +61,26 @@ obtain.TX.data = function(first.day.tx, last.day){
       group_by(age, code, date, daily.deaths) %>%
       summarise(cum.deaths = sum(cum.deaths))
     
-    if(Date > first.day.tx){
+    if(Date > first.day){
       cum.death.t_1 = tmp[which(tmp$date == Date),]$cum.deaths
       cum.death.t_0 =  data.tx[which(data.tx$date == (Date-1)),]$cum.deaths
-      daily.deaths = cum.death.t_1 - cum.death.t_0 
+      daily.deaths = cum.death.t_1 - cum.death.t_0
+      
+      if((Date-1) %notin% dates){
+        n.lost.days = as.numeric(Date - dates[which(dates == Date)-1])-1
+        lost.days = Date - c(n.lost.days:1)
+        for(age_group in tmp$age){
+          cum.death.t_lag = tmp[which(tmp$date == Date & tmp$age == age_group),]$cum.deaths
+          cum.death.t_0 = data.tx[which(data.tx$date == (Date-n.lost.days-1) & data.tx$age == age_group ),]$cum.deaths
+          daily.deaths = round((cum.death.t_lag - cum.death.t_0 )/(n.lost.days+1))
+          # cum death are divided equally among the last two days
+          data.tx = dplyr::bind_rows(data.tx, data.frame(age = as.character(age_group), 
+                                              date = as.Date(lost.days), 
+                                              cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.lost.days)), 
+                                              daily.deaths = rep(daily.deaths, n.lost.days), code = "TX")) 
+        }
+      }
+      
       stopifnot(is.numeric(daily.deaths))
       if(any(daily.deaths<0)){
         index = which(daily.deaths<0)
@@ -115,15 +98,15 @@ obtain.TX.data = function(first.day.tx, last.day){
   return(data.tx)
 }
 
-obtain.GA.data = function(first.day.ga, last.day){
+obtain.GA.data = function(last.day){
   cat("\n Processing Georgia \n")
   
-  dates = seq.Date(first.day.ga, last.day, by = "day")
+  dates = seq.Date(as.Date("2020-03-22"), last.day, by = "week")
   
-  days.lost = seq.Date(as.Date("2020-05-15"), as.Date("2020-05-22"), by = "day")
-  n.days.lost = length(days.lost)
-  
-  dates = dates[-which(dates %in% days.lost)]
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("georgia", ".csv"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  first.day = min(dates)
 
   data.ga = NULL
   for(t in 1:length(dates)){
@@ -152,21 +135,23 @@ obtain.GA.data = function(first.day.ga, last.day){
       select(age, cum.deaths, daily.deaths, code, date)
     tmp[is.na(tmp$cum.deaths),]$cum.deaths = 0
     
-    if(Date > first.day.ga){
+    if(Date > first.day){
       cum.death.t_1 = tmp[which(tmp$date == Date),]$cum.deaths
       cum.death.t_0 =  data.ga[which(data.ga$date == (Date-1)),]$cum.deaths
       daily.deaths = cum.death.t_1 - cum.death.t_0 
       
-      if(Date == as.Date("2020-05-23")){ #recovery date
+      if((Date-1) %notin% dates){
+        n.lost.days = as.numeric(Date - dates[which(dates == Date)-1]) - 1
+        lost.days = Date - c(n.lost.days:1)
         for(age_group in tmp$age){
-          cum.death.t_r = tmp[which(tmp$date == Date & tmp$age == age_group),]$cum.deaths
-          cum.death.t_0 =  data.ga[which(data.ga$date == (Date-n.days.lost-1) & data.ga$age == age_group ),]$cum.deaths
-          daily.deaths = round((cum.death.t_r - cum.death.t_0 )/(n.days.lost+1))
+          cum.death.t_lag = tmp[which(tmp$date == Date & tmp$age == age_group),]$cum.deaths
+          cum.death.t_0 =  data.ga[which(data.ga$date == (Date-n.lost.days-1) & data.ga$age == age_group ),]$cum.deaths
+          daily.deaths = round((cum.death.t_lag - cum.death.t_0 )/(n.lost.days+1))
           # cum death are divided equally among the last two days
           data.ga = rbind(data.ga, data.table(age = age_group, 
-                                              date = days.lost, 
-                                              cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.days.lost)), 
-                                              daily.deaths = rep(daily.deaths, n.days.lost), code = "GA")) 
+                                              date = lost.days, 
+                                              cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.lost.days)), 
+                                              daily.deaths = rep(daily.deaths, n.lost.days), code = "GA")) 
         }
       }
       
@@ -190,10 +175,15 @@ obtain.GA.data = function(first.day.ga, last.day){
   return(data.ga)
 }
 
-obtain.CDC.data = function(first.day.cdc, last.wednesday){
+obtain.CDC.data = function(last.day){
   cat("\n Processing CDC \n")
   
-  dates = seq.Date(first.day.cdc, last.wednesday, by = "week")
+  dates = seq.Date(as.Date("2020-03-22"), last.day, by = "week")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("cdc", ".csv"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  first.day = min(dates)
   
   states = c("California", "Connecticut", "Colorado", "Illinois", "Indiana", "Louisiana", "Massachusetts","Maryland","Michigan","New Jersey", 
              "Pennsylvania", "Texas", "Florida", "Georgia", "New York", "Ohio", "Washington")
@@ -217,7 +207,7 @@ obtain.CDC.data = function(first.day.cdc, last.wednesday){
       select(state, date, age, cum.deaths, daily.deaths, code)
     tmp[is.na(tmp$cum.deaths),]$cum.deaths = 0
     
-    if(Date > first.day.cdc){
+    if(Date > first.day){
       for(State in states){
         for(Age in tmp$age){
           cum.death.t_1 = tmp[which(tmp$date == Date & tmp$state == State & tmp$age == Age),]$cum.deaths
@@ -238,8 +228,15 @@ obtain.CDC.data = function(first.day.cdc, last.wednesday){
   return(data.cdc)
 }
 
-obtain.CT.data = function(first.day.ct, last.day){
+obtain.CT.data = function(last.day){
   cat("\n Processing Connecticut \n")
+  
+  seq.Date(as.Date("2020-03-22"), last.day, by = "day")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("connecticut", ".csv"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  last.day = max(dates)
   
   csv_file = file.path(path_to_data, last.day, "connecticut.csv")
  
@@ -257,7 +254,7 @@ obtain.CT.data = function(first.day.ct, last.day){
            date = as.Date(DateUpdated, format = "%m/%d/%y"),
            code = "CT", 
            daily.deaths = NA_integer_) %>%
-    rename(cum.deaths = Deaths) %>%
+    rename(cum.deaths = Total.deaths) %>%
     select(age, date, code, cum.deaths, daily.deaths)
   for(t in 1:(length(unique(tmp$date))-1)){
     for(Age in unique(tmp$age)){
@@ -281,18 +278,20 @@ obtain.CT.data = function(first.day.ct, last.day){
 return(data.ct)
 }
 
-obtain.CO.data = function(first.day.co, last.day){
+obtain.CO.data = function(last.day){
   cat("\n Processing Colorado \n")
+  
+  dates=seq.Date(as.Date("2020-03-22"), last.day, by = "day")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("colorado", ".csv"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  last.day = max(dates)
   
   csv_file = file.path(path_to_data, last.day, "colorado.csv")
   tmp = read.csv(csv_file)
   
-  # subset(tmp, description == "COVID-19 in Colorado by Age Group") # they changed the name of the variable on may 16th
-  # subset(tmp, Desc_ == "COVID-19 in Colorado by Age Group")
-  
   tmp$rep_date = as.Date(tmp$rep_date, format = "%m/%d/%y")
-  
-  tmp = subset(tmp, rep_date <= last.day)
   
   df = tmp[grepl(", Deaths", tmp$attribute),] %>%
     mutate(age = gsub("(.+), Deaths", "\\1", attribute)) %>%
@@ -330,15 +329,15 @@ obtain.CO.data = function(first.day.co, last.day){
   return(data.co)
 }
 
-obtain.ID.data = function(first.day.id, last.day){
+obtain.ID.data = function(last.day){
   cat("\n Processing Idaho \n")
   
-  dates = seq.Date(first.day.id, last.day, by = "day")
+  dates = seq.Date(as.Date("2020-03-22"), last.day, by = "day")
   
-  days.lost = c(as.Date("2020-05-18"))
-  n.days.lost = length(days.lost)
-  
-  dates = dates[-which(dates %in% days.lost)] # no report on this day
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("idaho", ".csv"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  first.day = dates[1]
   
   data.id = NULL
   for(t in 1:length(dates)){
@@ -353,17 +352,22 @@ obtain.ID.data = function(first.day.id, last.day){
              daily.deaths = NA_integer_) %>%
       select(age, code, date, daily.deaths, cum.deaths) 
     
-    if(Date > first.day.id){
+    if(Date > first.day){
       cum.death.t_1 = tmp[which(tmp$date == Date),]$cum.deaths
       cum.death.t_0 =  data.id[which(data.id$date == (Date-1)),]$cum.deaths
       daily.deaths = cum.death.t_1 - cum.death.t_0 
-      if(Date == as.Date("2020-05-10")){
+      if((Date-1) %notin% dates){
+        n.lost.days = as.numeric(Date - dates[which(dates == Date)-1])-1
+        lost.days = Date - c(n.lost.days:1)
         for(age_group in tmp$age){
-          cum.death.t_1_2 = tmp[which(tmp$age == age_group & tmp$date == Date),]$cum.deaths
-          cum.death.t_0 =  data.id[which(data.id$age == age_group & data.id$date == (Date-n.days.lost-1)),]$cum.deaths
-          daily.deaths = round((cum.death.t_1_2 - cum.death.t_0 )/(n.days.lost+1))
+          cum.death.t_lag = tmp[which(tmp$age == age_group & tmp$date == Date),]$cum.deaths
+          cum.death.t_0 =  data.id[which(data.id$age == age_group & data.id$date == (Date-n.lost.days-1)),]$cum.deaths
+          daily.deaths = round((cum.death.t_lag - cum.death.t_0 )/(n.lost.days+1))
           # cum death are divided equally among the last two days
-          data.id = rbind(data.id, data.table(age = age_group, date = days.lost, cum.deaths = round(cum.death.t_0 + daily.deaths), daily.deaths = daily.deaths, code = "ID")) 
+          data.id = rbind(data.id, data.table(age = age_group, 
+                                              date = lost.days, 
+                                              cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.lost.days)), 
+                                              daily.deaths = rep(daily.deaths, n.lost.days), code = "ID")) 
         }
       }
       stopifnot(is.numeric(daily.deaths))
@@ -384,73 +388,235 @@ obtain.ID.data = function(first.day.id, last.day){
   return(data.id)
 }
 
-obtain.rulebased.data = function(first.day, last.day, state_code){
+obtain.AK.data = function(last.day){
+  cat("\n Processing Alaska \n")
   
-  data = do.call(paste0("obtain.", state_code, ".data"), list(first.day, last.day))
+  dates = seq.Date(as.Date("2020-03-22"), last.day, by = "day")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("alaska", ".csv"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  first.day = dates[1]
+  
+  data.ak = NULL
+  for(t in 1:length(dates)){
+    
+    Date = dates[t]
+    csv_file = file.path(path_to_data, Date, "alaska.csv")
+    tmp = subset(read.csv(csv_file), grepl("Years", Demographic)) %>%
+      mutate(age = gsub("(.+) Years", "\\1", ifelse(Demographic == "<10 Years", "0-9 Years", as.character(Demographic))),
+             code = "AK", 
+             date = Date,
+             cum.deaths = as.numeric(Deaths), 
+             daily.deaths = NA_integer_) %>%
+      select(age, code, date, daily.deaths, cum.deaths) 
+    
+    if(Date > first.day){
+      cum.death.t_1 = tmp[which(tmp$date == Date),]$cum.deaths
+      cum.death.t_0 =  data.ak[which(data.ak$date == (Date-1)),]$cum.deaths
+      daily.deaths = cum.death.t_1 - cum.death.t_0 
+      if((Date-1) %notin% dates){
+        n.lost.days = as.numeric(Date - dates[which(dates == Date)-1])-1
+        lost.days = Date - c(n.lost.days:1)
+        for(age_group in tmp$age){
+          cum.death.t_lag = tmp[which(tmp$age == age_group & tmp$date == Date),]$cum.deaths
+          cum.death.t_0 =  data.ak[which(data.ak$age == age_group & data.ak$date == (Date-n.lost.days-1)),]$cum.deaths
+          daily.deaths = round((cum.death.t_lag - cum.death.t_0 )/(n.lost.days+1))
+          # cum death are divided equally among the last two days
+          data.ak = rbind(data.ak, data.table(age = age_group, 
+                                              date = lost.days, 
+                                              cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.lost.days)), 
+                                              daily.deaths = rep(daily.deaths, n.lost.days), code = "AK")) 
+        }
+      }
+      stopifnot(is.numeric(daily.deaths))
+      if(any(daily.deaths<0)){
+        index = which(daily.deaths<0)
+        data.ak[which(data.ak$date == (Date-1)),]$daily.deaths[index] = sapply(data.ak[which(data.ak$date == (Date-1)),]$daily.deaths[index] + 
+                                                                                 daily.deaths[index], function(x) max(x,0))
+        daily.deaths[index] = 0
+      }
+      tmp[which(tmp$date == Date),]$daily.deaths = daily.deaths
+    }
+    data.ak = rbind(data.ak, tmp)
+  }
+  # Reorder data
+  data.ak <- with(data.ak, data.ak[order(date, age, cum.deaths, daily.deaths, code), ])
+  data.ak <- data.ak[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
+  
+  return(data.ak)
+}
+
+obtain.RI.data = function(last.day){
+  cat("\n Processing Rhode Island \n")
+  
+  dates = seq.Date(as.Date("2020-03-22"), last.day, by = "day")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("rhode_island", ".csv"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  first.day = dates[1]
+  
+  data.ri = NULL
+  for(t in 1:length(dates)){
+    
+    Date = dates[t]
+    csv_file = file.path(path_to_data, Date, "rhode_island.csv")
+    tmp = read.csv(csv_file)
+    colnames(tmp)[1] = "age"
+    tmp = tmp[6:16,] %>%
+      mutate(code = "RI", 
+             date = Date,
+             cum.deaths = ifelse(grepl("<", Deaths), 0, as.numeric(Deaths)), 
+             daily.deaths = NA_integer_) %>%
+      select(age, code, date, daily.deaths, cum.deaths) 
+    
+    if(Date > first.day){
+      cum.death.t_1 = tmp[which(tmp$date == Date),]$cum.deaths
+      cum.death.t_0 =  data.ri[which(data.ri$date == (Date-1)),]$cum.deaths
+      daily.deaths = cum.death.t_1 - cum.death.t_0 
+      if((Date-1) %notin% dates){
+        n.lost.days = as.numeric(Date - dates[which(dates == Date)-1])-1
+        lost.days = Date - c(n.lost.days:1)
+        for(age_group in tmp$age){
+          cum.death.t_lag = tmp[which(tmp$age == age_group & tmp$date == Date),]$cum.deaths
+          cum.death.t_0 =  data.ri[which(data.ri$age == age_group & data.ri$date == (Date-n.lost.days-1)),]$cum.deaths
+          daily.deaths = round((cum.death.t_lag - cum.death.t_0 )/(n.lost.days+1))
+          # cum death are divided equally among the last two days
+          data.ri = rbind(data.ri, data.table(age = age_group, 
+                                              date = lost.days, 
+                                              cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.lost.days)), 
+                                              daily.deaths = rep(daily.deaths, n.lost.days), code = "RI")) 
+        }
+      }
+      stopifnot(is.numeric(daily.deaths))
+      if(any(daily.deaths<0)){
+        index = which(daily.deaths<0)
+        data.ri[which(data.ri$date == (Date-1)),]$daily.deaths[index] = sapply(data.ri[which(data.ri$date == (Date-1)),]$daily.deaths[index] + 
+                                                                                 daily.deaths[index], function(x) max(x,0))
+        daily.deaths[index] = 0
+      }
+      tmp[which(tmp$date == Date),]$daily.deaths = daily.deaths
+    }
+    data.ri = rbind(data.ri, tmp)
+  }
+  # Reorder data
+  data.ri <- with(data.ri, data.ri[order(date, age, cum.deaths, daily.deaths, code), ])
+  data.ri <- data.ri[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
+  
+  return(data.ri)
+}
+
+obtain.TN.data = function(last.day){
+  cat("\n Processing Tennessee \n")
+  
+  dates = seq.Date(as.Date("2020-03-22"), last.day, by = "day")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("tn", ".xlsx"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  last.day = max(dates)
+  
+  xlsx_file = file.path(path_to_data, last.day, "tn.xlsx")
+  
+  tmp = subset(read_excel(xlsx_file), AGE_RANGE != "Pending") %>%
+    mutate(age = ifelse(AGE_RANGE == "0-10 years", "0-9",
+                        ifelse(AGE_RANGE == "81+ years", "80+", 
+                               paste0(as.numeric(gsub("(.+)\\-.*", "\\1", AGE_RANGE))-1, "-",as.numeric(gsub(".*\\-(.+) years", "\\1", AGE_RANGE))-1) )),
+           date = as.Date(DATE),
+           code = "TN", 
+           daily.deaths = NA_integer_) %>%
+    rename(cum.deaths = AR_TOTALDEATHS) %>%
+    select(age, date, code, cum.deaths, daily.deaths) 
+
+    # keep first day without NA
+    tmp = subset(tmp, !is.na(cum.deaths))
+  
+  data.tn = NULL
+  
+  for(t in 1:(length(unique(tmp$date))-1)){
+    for(Age in unique(tmp$age)){
+      Date = sort(unique(tmp$date))[-1][t]
+      cum.death.t_1 = tmp[which(tmp$date == Date & tmp$age == Age),]$cum.deaths
+      cum.death.t_0 = tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$cum.deaths
+      daily.deaths = cum.death.t_1 - cum.death.t_0 
+      stopifnot(is.numeric(daily.deaths))
+      if(daily.deaths < 0){
+        tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$daily.deaths =  max(tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$daily.deaths + daily.deaths, 0)
+        daily.deaths = 0
+      }
+      tmp[which(tmp$date == Date & tmp$age == Age),]$daily.deaths = daily.deaths 
+    }
+  }
+  
+  # Reorder data
+  data.tn <- with(tmp, tmp[order(date, code, age, cum.deaths, daily.deaths), ])
+  data.tn <- data.tn[, c("date", "code", "age", "cum.deaths", "daily.deaths")]
+  
+  return(data.tn)
+}
+
+obtain.rulebased.data = function(last.day, state_code){
+  
+  data = do.call(paste0("obtain.", state_code, ".data"), list(last.day))
   return(data)
 
 }
 
 ## STATES WITH .JSON file
-obtain.json.data = function(first.day, last.day, state_name, state_code){
+obtain.json.data = function(last.day, state_name, state_code){
   cat(paste0("\n Processing ", state_name,"\n"))
   
-  dates = seq.Date(first.day, last.day, by = "day")
+  dates = seq.Date(as.Date("2020-03-22"), last.day, by = "day")
   
-  # States with missing dates
-  if(state_name %in% c("delaware", "iowa", "missouri", "SouthCarolina", "new_jersey")){
-    
-    if(state_name == "delaware") lost.days = as.Date("2020-05-21")
-    if(state_name == "iowa") lost.days = as.Date("2020-05-18")
-    if(state_name == "missouri") lost.days = as.Date("2020-05-20")
-    if(state_name == "SouthCarolina") lost.days = as.Date("2020-05-17")
-    if(state_name == "new_jersey") lost.days = seq.Date(as.Date("2020-05-14"), as.Date("2020-05-22"), by = "day")
-      
-    n.lost.days = length(lost.days)
-    dates = dates[-which(dates %in% lost.days)]
-  
-    }
-  
+  # check on which date there is indeed data (sometimes states do not update)
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0(state_name, ".json"), data_files)]
+  if(state_name == "ma")  data_files_state = data_files_state[!grepl("oklahoma.json", data_files_state)] # we named massasschussets as ma ....
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  first.day = dates[1]
 
   data = NULL
+  
   for(t in 1:length(dates)){
     
     Date = dates[t]
 
     json_file <- file.path(path_to_data, Date, paste0(state_name, ".json"))
     json_data <- suppressWarnings(fromJSON(paste(readLines(json_file))))
-
-    if(state_name == "california" & Date > as.Date("2020-05-24") & !is.null(json_data[["<5"]])){ # Yu changed the age groups
-      json_data = list("0-17" = as.numeric(gsub(",", "", json_data[["<5"]])) + as.numeric(gsub(",", "", json_data[["5-17"]])),
-                       "18-49" = as.numeric(gsub(",", "", json_data[["18-34"]])) + as.numeric(gsub(",", "", json_data[["35-49"]])),
-                       "50-64" = as.numeric(gsub(",", "", json_data[["50-59"]])) + as.numeric(gsub(",", "", json_data[["60-64"]])),
-                       "65+" = as.numeric(gsub(",", "", json_data[["65-69"]])) + as.numeric(gsub(",", "", json_data[["70-74"]])) +
-                                       as.numeric(gsub(",", "", json_data[["75-79"]])) + as.numeric(gsub(",", "", json_data[["80+"]]))
-                                                                                              
-      )
-    }
     
-    if(state_name == "NorthCarolina" & Date > as.Date("2020-05-19")){ # Yu changed the age groups
+    # age groups changed for some states
+    if(state_name == "NorthCarolina" & Date > as.Date("2020-05-19")){ 
       json_data_ = json_data[which(names(json_data) %in% c("0-17", "18-24", "25-49", "50-64"))]
       json_data_[["65+"]] = json_data[["65-74"]] + json_data[["75+"]]
       json_data = json_data_       
     }
-    
     if(state_name == "arizona" & t > 2) names(json_data) = unique(data$age)
-    
     if(state_name == "missouri" & Date > as.Date("2020-05-21")) names(json_data)[which(names(json_data) == "under 20")] = "Under 20"
+    if(state_name == "pennsylvania" & Date > as.Date("2020-06-12")) names(json_data)[which(names(json_data) == "100+")] = ">100"
+    if(state_name == "florida") names(json_data) = gsub("(.+) years", "\\1",names(json_data))
+    
+    # make sure that there is no space in the age group
+    names(json_data) = gsub(" ", "", names(json_data), fixed = TRUE)
     
     tmp = data.table(age = names(json_data), cum.deaths = NA_integer_, daily.deaths = NA_integer_, 
                      code = state_code, date = Date)
-    
-    tmp = tmp[which(tmp$age != "Unknown"),]; tmp = tmp[which(tmp$age != "unknown"),]; 
-    tmp = tmp[which(tmp$age != "total"),]; tmp = tmp[which(tmp$age != "Total"),]
+
+    # remove unknown and total groups
+    tmp = tmp[which(tmp$age != "Unknown"),]; tmp = tmp[which(tmp$age != "unknown"),]
+    tmp = tmp[which(tmp$age != "total"),]; tmp = tmp[which(tmp$age != "Total"),]; tmp = tmp[which(tmp$age != "N"),]
+    tmp = tmp[which(tmp$age != "Notavailable"),]; tmp = tmp[which(tmp$age != "Missing"),]
     
     for(age_group in tmp$age){
-    #  if(state_name == "ma") json_data[[age_group]] = json_data[[age_group]][2]
+    
       if(state_name == "nyc"){
         cum.deaths = suppressWarnings(as.numeric(gsub("(.+) \\(.*", "\\1", json_data[[age_group]][1])))
         if(is.na(cum.deaths)) cum.deaths = as.numeric(gsub("(.+) \\(.*\\(.*", "\\1", json_data[[age_group]][1])) # sometimes mismatch 
+        json_data[[age_group]] = cum.deaths
+      }
+      
+      if(state_name == "washington"){
+        cum.deaths = as.numeric(gsub("(.+)\\%", "\\1", json_data[[age_group]][1])) * as.numeric(gsub(",", "", json_data[["total"]])) / 100
         json_data[[age_group]] = cum.deaths
       }
       
@@ -459,11 +625,11 @@ obtain.json.data = function(first.day, last.day, state_name, state_code){
         json_data[[age_group]][index_comma] = as.numeric(gsub(",", "", json_data[[age_group]][index_comma]))
       }
       
+      # index inside the json varies states by state
       index = 1
       if(state_name == "ma") index = 2
       
       cum.deaths = as.integer(json_data[[age_group]][index])
-      
       tmp[which(age == age_group),]$cum.deaths = cum.deaths
       
       if(Date > first.day){
@@ -471,15 +637,19 @@ obtain.json.data = function(first.day, last.day, state_name, state_code){
         cum.death.t_0 =  data[which(data$age == age_group & data$date == (Date-1)),]$cum.deaths
         daily.deaths = cum.death.t_1 - cum.death.t_0 
         
-        if(Date == as.Date("2020-05-22") & state_name == "delaware" | Date == as.Date("2020-05-19") & state_name == "iowa" | 
-           Date == as.Date("2020-05-21") & state_name == "missouri" | Date == as.Date("2020-05-18") & state_name == "SouthCarolina"|
-           Date == as.Date("2020-05-23") & state_name == "new_jersey"){
-          cum.death.t_1_2 = tmp[which(age == age_group & date == Date),]$cum.deaths
+        if((Date - 1) %notin% dates){
+          n.lost.days = as.numeric(Date - dates[which(dates == Date)-1] -1)
+          lost.days = Date - c(n.lost.days:1)
+          cum.death.t_lag = tmp[which(age == age_group & date == Date),]$cum.deaths
           cum.death.t_0 =  data[which(data$age == age_group & data$date == (Date-n.lost.days-1)),]$cum.deaths
-          daily.deaths = round((cum.death.t_1_2 - cum.death.t_0 )/(n.lost.days+1))
+          daily.deaths = round((cum.death.t_lag - cum.death.t_0 )/(n.lost.days+1))
           # cum death are divided equally among the last two days
-          data = rbind(data, data.table(age = age_group, date = lost.days, cum.deaths = round(cum.death.t_0 + daily.deaths*1:n.lost.days), daily.deaths = daily.deaths, code = state_code))
+          data = rbind(data, data.table(age = age_group, 
+                                        date = lost.days, 
+                                        cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.lost.days)), 
+                                        daily.deaths = rep(daily.deaths, n.lost.days), code = state_code))
         }
+        
         stopifnot(is.numeric(daily.deaths) & !is.null(daily.deaths))
         
         if(daily.deaths<0){
@@ -510,10 +680,8 @@ obtain.json.data = function(first.day, last.day, state_name, state_code){
   
   if(state_name == "louisiana"){
     data = suppressWarnings(data %>%
-      mutate(age = ifelse(age == "70+", age,
-                          ifelse(age == "< 18", "0-19",
-                                 ifelse(age == "18 - 29", "20-29",
-                                        paste0(gsub("(.+) \\-.*", "\\1", age), "-",gsub(".*\\- (.+)", "\\1", age)))))))
+      mutate(age = ifelse(age == "<18", "0-19",
+                          ifelse(age == "18-29", "20-29", age))))
       
   }
   
@@ -527,7 +695,7 @@ obtain.json.data = function(first.day, last.day, state_name, state_code){
   
   if(state_name == "missouri"){
     data = data %>%
-      mutate(age = ifelse(age == "Under 20", "0-19", age))
+      mutate(age = ifelse(age == "Under20", "0-19", age))
   }
   
   if(state_name == "SouthCarolina"){
@@ -546,13 +714,19 @@ obtain.json.data = function(first.day, last.day, state_name, state_code){
   
   if(state_name == "vermont"){
     data = data %>%
-      mutate(age = ifelse(age == "80 plus", "80+", age))
+      mutate(age = ifelse(age == "80plus", "80+", age))
   }
   
-  if(state_name == "california" | state_name == "NorthCarolina"){
+  if(state_name == "california"){
     data = data %>%
       mutate(age = ifelse(age == "0-17", "0-19", 
                           ifelse(age == "18-49", "20-49", age)))
+  }
+  
+  if(state_name == "NorthCarolina"){
+    data = data %>%
+      mutate(age = ifelse(age == "0-17", "0-19", 
+                          ifelse(age == "18-24", "20-24", age)))
   }
   
   if(state_name == "mississippi"){
@@ -568,7 +742,40 @@ obtain.json.data = function(first.day, last.day, state_name, state_code){
                                  ifelse(age == "65-76", "65-74", age))))
   }
   
+  if(state_name == "pennsylvania"){
+    data = data %>%
+      mutate(age = ifelse(age == ">100", "100+", age))
+  }
+  
+  if(state_name == "new_jersey"){
+    data = data %>%
+      mutate(age = ifelse(age == "5-17", "5-19", 
+                          ifelse(age == "18-29", "20-29",age)))
+  }
+  
+  if(state_name == "oregon"){
+    data = suppressWarnings(data %>%
+                              mutate(age = ifelse(age == "80andover", "80+", 
+                                                  paste0(as.numeric(gsub("(.+)to.*", "\\1", age)), "-", as.numeric(gsub(".*to(.+)", "\\1", age))))))
+  }
+  
+  ## Check that the first age group start at 0 - if not include a 0-(min(age)-1) with 0 deaths
+  age_group_lower_bound = gsub("(.+)\\-.*", "\\1", unique(data$age))
+  if("0" %notin% age_group_lower_bound){
+    new_age_group = paste0("0-",as.character(  min(na.omit(as.numeric(age_group_lower_bound))) - 1) ) # there is one NA for the last age group age+
+    data = rbind(data, data.table(age = new_age_group,
+                                  date = unique(data$date),
+                                  cum.deaths = 0,
+                                  daily.deaths = c(NA_real_, rep(0, (length(unique(data$date))-1) )),
+                                  code = state_code)
+                 )
+  }
+  
+  # Reorder data
+  data <- with(data, data[order(date, code, age, cum.deaths, daily.deaths), ])
+  data <- data[, c("date", "code", "age", "cum.deaths", "daily.deaths")]
+  
   return(data)
-}
+} 
 
-
+`%notin%` = Negate(`%in%`)
