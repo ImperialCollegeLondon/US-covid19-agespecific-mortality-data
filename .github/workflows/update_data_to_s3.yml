@@ -1,7 +1,7 @@
-name: Run daily update
+name: Run daily update to s3
 on:
   schedule:
-    - cron: "02 14 * * *"
+    - cron: "25 14 * * *"
 
 jobs:
   build-and-deploy:
