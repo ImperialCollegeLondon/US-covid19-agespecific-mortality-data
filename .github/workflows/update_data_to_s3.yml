@@ -1,7 +1,7 @@
 name: Run daily update
 on:
   schedule:
-    - cron: "01 14 * * *"
+    - cron: "02 14 * * *"
 
 jobs:
   build-and-deploy:
@@ -35,7 +35,7 @@ jobs:
         aws s3 cp html s3://usaage/update_data/html/ --recursive
         aws s3 cp csvs s3://usaage/update_data/csvs/ --recursive
         aws s3 cp pngs s3://usaage/update_data/pngs/ --recursive
-      with:
+      env:
         aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
         aws_bucket: ${{ secrets.AWS_BUCKET }}
