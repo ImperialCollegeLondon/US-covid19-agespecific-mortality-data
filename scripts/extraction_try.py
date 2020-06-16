@@ -756,9 +756,10 @@ class AgeExtractor:
             data = browser.find_elements_by_css_selector('g.amcharts-graph-column')
             data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label')][4:13]
             time.sleep(2)
+            browser.implicitly_wait(2)
             age_data = {}
-            for i in range(len(data)):
-                age_data[data[i].split()[0]] = data[i].split()[-1]
+            for i in data:
+                age_data[i.split()[1]] = i.split()[-1]
             path = "data/{}".format(day)
             if not os.path.exists(path):
                 os.mkdir(path)
