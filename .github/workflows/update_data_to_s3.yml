@@ -1,7 +1,7 @@
 name: Run daily update to s3
 on:
   schedule:
-    - cron: "00 15 * * *"
+    - cron: "00 22 * * *"
 
 jobs:
   build-and-deploy:
@@ -29,11 +29,11 @@ jobs:
         today=$(date +'%Y-%m-%d')
         
         # check the data for today is there already
-        aws s3 cp data/$today/ s3://$aws_bucket/update_data/data/$today/ --recursive
-        aws s3 cp html s3://$aws_bucket/update_data/html/ --recursive
-        aws s3 cp csvs s3://$aws_bucket/update_data/csvs/ --recursive
-        aws s3 cp pngs s3://$aws_bucket/update_data/pngs/ --recursive
+        aws s3 cp data/$today/ s3://$AWS_BUCKET/update_data/data/$today/ --recursive
+        aws s3 cp html s3://$AWS_BUCKET/update_data/html/ --recursive
+        aws s3 cp csvs s3://$AWS_BUCKET/update_data/csvs/ --recursive
+        aws s3 cp pngs s3://$AWS_BUCKET/update_data/pngs/ --recursive
       env:
-        aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-        aws_bucket: ${{ secrets.AWS_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_BUCKET: ${{ secrets.AWS_BUCKET }}
