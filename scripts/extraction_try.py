@@ -432,6 +432,8 @@ class AgeExtractor:
             # change the age band from 6.4
             # add group for cases from 6.6
             data = data[10:17]
+            age_data['10-19'] = '0'
+            age_data['20-29'] = '0'
             for i in data:
                 age_data[i.split()[0]] = i.split()[1]
             path = "data/{}".format(day)
