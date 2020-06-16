@@ -29,8 +29,6 @@ jobs:
         today=$(date +'%Y-%m-%d')
         
         # check the data for today is there already
-        aws s3 cp data/$today/ s3://usaage/update_data/data/$today --recursive
-        
         aws s3 cp data/$today/ s3://usaage/update_data/data/ 
         aws s3 cp html s3://usaage/update_data/html/ --recursive
         aws s3 cp csvs s3://usaage/update_data/csvs/ --recursive
