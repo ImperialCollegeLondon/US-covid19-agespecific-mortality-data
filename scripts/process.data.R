@@ -32,7 +32,7 @@ for(i in 1:nrow(json.states)){
   data.overall = dplyr::bind_rows(data, data.overall)
 }
 
-data.overall = subset(data.overall, code != "NJ" & code != "TX" & code != "RI") # data does not match with JHU or IHME.
+data.overall = subset(data.overall, code != "TX") # data does not match with JHU or IHME.
 write.csv(data.overall, file = file.path("data", last.day, "processed", "DeathsByAge_US.csv"), row.names=FALSE)
 
 cat("\n End Processing \n")

@@ -464,10 +464,10 @@ obtain.RI.data = function(last.day){
     csv_file = file.path(path_to_data, Date, "rhode_island.csv")
     tmp = read.csv(csv_file)
     colnames(tmp)[1] = "age"
-    tmp = tmp[6:16,] %>%
+      tmp = tmp[6:16,] %>%
       mutate(code = "RI", 
              date = Date,
-             cum.deaths = ifelse(grepl("<", Deaths), 0, as.numeric(Deaths)), 
+             cum.deaths = ifelse(grepl("<", Deaths), 0, as.numeric(as.character(Deaths))), 
              daily.deaths = NA_integer_) %>%
       select(age, code, date, daily.deaths, cum.deaths) 
     
@@ -617,6 +617,11 @@ obtain.json.data = function(last.day, state_name, state_code){
       
       if(state_name == "washington"){
         cum.deaths = as.numeric(gsub("(.+)\\%", "\\1", json_data[[age_group]][1])) * as.numeric(gsub(",", "", json_data[["total"]])) / 100
+        json_data[[age_group]] = cum.deaths
+      }
+      
+      if(state_name == "new_jersey"){
+        cum.deaths = as.numeric(json_data[[age_group]][1]) * as.numeric(json_data[["N"]]) / 100
         json_data[[age_group]] = cum.deaths
       }
       
