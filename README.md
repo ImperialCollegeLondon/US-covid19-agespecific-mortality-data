@@ -1,4 +1,4 @@
-![Run daily update](https://github.com/MJHutchinson/US-covid19-data-scraping/workflows/Run%20daily%20update/badge.svg?branch=master)
+![Run daily update](https://github.com/MJHutchinson/US-covid19-data-scraping/workflows/Run%20daily%20update/badge.svg?branch=master) ![Run daily update to s3](https://github.com/MJHutchinson/US-covid19-data-scraping/workflows/Run%20daily%20update%20to%20s3/badge.svg)
 
 # US-covid19-data-scraping
 Extract and data from various states in the US related to COVID-19. We need the Python dependencies
