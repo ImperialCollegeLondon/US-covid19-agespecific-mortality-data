@@ -627,10 +627,15 @@ class AgeExtractor:
         browser.implicitly_wait(5)
         if not os.access("data/{}/maryland.json".format(day), os.F_OK):
             if browser.execute_script("return document.readyState") == "complete":
+                width = browser.execute_script("return document.documentElement.scrollWidth")
+                height = browser.execute_script("return document.documentElement.scrollHeight")
+                browser.set_window_size(width, height)
+                time.sleep(1)
+                browser.save_screenshot('pngs/maryland/{}.png'.format(day))
                 age_data = {}
                 for i in range(9):
-                    group = browser.find_element_by_xpath('//*[@id="ember112"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[1]').text
-                    data = browser.find_element_by_xpath('//*[@id="ember112"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[3]').text
+                    group = browser.find_element_by_xpath('//*[@id="ember111"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[1]').text
+                    data = browser.find_element_by_xpath('//*[@id="ember111"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[3]').text
                     if data == '':
                         data = '0'
                     else:
@@ -644,11 +649,6 @@ class AgeExtractor:
                 with open("data/{}/maryland.json".format(day), "w") as f:
                     json.dump(age_data, f)
                 print('\n------ Processed Maryland {} ------\n'.format(day))
-                width = browser.execute_script("return document.documentElement.scrollWidth")
-                height = browser.execute_script("return document.documentElement.scrollHeight")
-                browser.set_window_size(width, height)
-                time.sleep(1)
-                browser.save_screenshot('pngs/maryland/{}.png'.format(day))
             else:
                  print('error for extracting')
         else:
@@ -982,7 +982,6 @@ if __name__ == "__main__":
     ageExtractor.get_delware()
     ###ageExtractor.get_california()
     ageExtractor.get_indiana()
-    ageExtractor.get_maryland()
     ageExtractor.get_oregon()
     ageExtractor.get_pennsylvania()
     ageExtractor.get_nevada()
@@ -992,3 +991,4 @@ if __name__ == "__main__":
     ###
     ageExtractor.get_vermont()
     ageExtractor.get_az()
+    ageExtractor.get_maryland()
