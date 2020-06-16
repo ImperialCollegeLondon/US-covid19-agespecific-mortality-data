@@ -1,6 +1,7 @@
 # pip install selenium
 # pip install webdriver_manager
 ## updated:  for arizona
+# pip install xlrd
 import os
 import re
 import csv
@@ -15,7 +16,7 @@ from os.path import basename, join
 from shutil import copyfile
 from datetime import date, timedelta, datetime
 from dateutil.parser import parse as parsedate
-
+import xlrd
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
@@ -594,6 +595,20 @@ class AgeExtractor:
                 file = open("data/{}/indiana.xlsx".format(day), 'wb')
                 file.write(url_content)
                 file.close()
+                print('\n------ Processed Indiana file {} ------\n'.format(day))
+
+                wb = xlrd.open_workbook("data/{}/indiana.xlsx".format(day))
+                sh = wb.sheet_by_index(0)
+                age_data = {}
+                for rownum in range(1, sh.nrows):
+                    row_values = sh.row_values(rownum)
+                    age_data[row_values[0]] = int(row_values[2])
+                # Write to file
+                path = "data/{}".format(day)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("data/{}/indiana.json".format(day), "w") as f:
+                    json.dump(age_data, f)
                 print('\n------ Processed Indiana {} ------\n'.format(day))
             else:
                 print('Report for Indiana {} is already exist'.format(day))

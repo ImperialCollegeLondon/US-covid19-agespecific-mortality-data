@@ -10,3 +10,4 @@ numpy
 matplotlib
 webdriver_manager
 pillow
+xlrd
