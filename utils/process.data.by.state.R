@@ -572,8 +572,10 @@ obtain.json.data = function(last.day, state_name, state_code){
   # check on which date there is indeed data (sometimes states do not update)
   data_files = list.files(file.path(path_to_data, dates), full.names = T)
   data_files_state = data_files[grepl(paste0(state_name, ".json"), data_files)]
-  if(state_name == "ma")  data_files_state = data_files_state[!grepl("oklahoma.json", data_files_state)] # we named massasschussets as ma ....
+  if(state_name == "ma")  data_files_state = data_files_state[!grepl("oklahoma.json|alabama.json", data_files_state)] # we named massasschussets as ma ....
+  
   dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  if(state_name == "alabama") dates = dates[which(dates >= as.Date("2020-05-03"))] # they changed age groups at this date
   first.day = dates[1]
 
   data = NULL
