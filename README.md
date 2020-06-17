@@ -1,4 +1,4 @@
-![Run daily update](https://github.com/MJHutchinson/US-covid19-data-scraping/workflows/Run%20daily%20update/badge.svg?branch=master)
+![Run daily update](https://github.com/MJHutchinson/US-covid19-data-scraping/workflows/Run%20daily%20update/badge.svg?branch=master) ![Run daily update to s3](https://github.com/MJHutchinson/US-covid19-data-scraping/workflows/Run%20daily%20update%20to%20s3/badge.svg)
 
 # US-covid19-data-scraping
 Extract and data from various states in the US related to COVID-19. We need the Python dependencies
@@ -106,8 +106,8 @@ We use webdriver from selenium to find the elements and extract the correspondin
 
 
 ## Figures
-### Time series of extracted data as of 2020-05-16
+### Time series of extracted data as of 2020-06-15
 ![](figures/time.series_allstates.png)
 
-### Comparison to IHME and JHU overall death as of 2020-05-16
+### Comparison to IHME and JHU overall death as of 2020-06-15
 ![](figures/comparison.ihme.jhu.depthealth_overall.png)
