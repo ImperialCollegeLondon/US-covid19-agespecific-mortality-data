@@ -42,12 +42,7 @@ jobs:
         today=$(date +'%Y-%m-%d')
         
         # check the data for today is there already
-        if [ -d "data/$today"]; then
-          cp data/$today/* output/data/$today
-        else
-          mv data/$today output/data/
-        fi
-
+        cp -a data/. output/data/
         cp -a html/. output/html/
         cp -a csvs/. output/csvs/
         cp -a pngs/. output/pngs/
