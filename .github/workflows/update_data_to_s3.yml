@@ -28,6 +28,9 @@ jobs:
         make files
         today=$(date +'%Y-%m-%d')
         
+        # check existing assets in florida
+        aws s3 ls s3://$AWS_BUCKET/update_data/pdfs/florida/ > existing_assets_florida
+        
         # check the data for today is there already
         aws s3 cp data/$today/ s3://$AWS_BUCKET/update_data/data/$today/ --recursive
         aws s3 cp html s3://$AWS_BUCKET/update_data/html/ --recursive
