@@ -20,42 +20,42 @@ from bs4 import BeautifulSoup, SoupStrainer
 
 def get_florida():
     # check existing assets
-    existing_assets = list(map(basename, glob("pdfs/florida/*.pdf")))
-    # with open("existing_assets_florida") as f:
-    #     #https://stackoverflow.com/questions/3277503/how-to-read-a-file-line-by-line-into-a-list
-    #     existing_assets = f.readlines()
-    #     # you may also want to remove whitespace characters like `\n` at the end of each line
-    #     existing_assets = [x.strip().split(" ")[-1] for x in existing_assets] 
+    # existing_assets = list(map(basename, glob("pdfs/florida/*.pdf")))
+    with open("existing_assets_florida") as f:
+        #https://stackoverflow.com/questions/3277503/how-to-read-a-file-line-by-line-into-a-list
+        existing_assets = f.readlines()
+        # you may also want to remove whitespace characters like `\n` at the end of each line
+        existing_assets = [x.strip().split(" ")[-1] for x in existing_assets] 
 
-    # headers = requests.utils.default_headers()
-    # url = "https://www.floridadisaster.org/covid19/covid-19-data-reports/"
-    # req = requests.get(url, headers)
-    # soup = BeautifulSoup(req.content, "html.parser")
-    # covid_links = []
-    # for links in soup.find_all("a"):
-    #     link = links.get("href")
-    #     if link and "/global" == link[:7]:
-    #         pdf_name = basename(link)
-    #         # check if pdf is already up to date
-    #         if (
-    #             pdf_name not in existing_assets
-    #             and pdf_name != "covid-19-data---daily-report-2020-03-24-1657.pdf"
-    #         ):
-    #             covid_links.append(pdf_name)
-    # print(covid_links)
+    headers = requests.utils.default_headers()
+    url = "https://www.floridadisaster.org/covid19/covid-19-data-reports/"
+    req = requests.get(url, headers)
+    soup = BeautifulSoup(req.content, "html.parser")
+    covid_links = []
+    for links in soup.find_all("a"):
+        link = links.get("href")
+        if link and "/global" == link[:7]:
+            pdf_name = basename(link)
+            # check if pdf is already up to date
+            if (
+                pdf_name not in existing_assets
+                and pdf_name != "covid-19-data---daily-report-2020-03-24-1657.pdf"
+            ):
+                covid_links.append(pdf_name)
+    print(covid_links)
 
-    # # download these assets
-    # api_base_url = "https://www.floridadisaster.org/globalassets/covid19/dailies"
-    # for pdf_name in covid_links:
-    #     subprocess.run(
-    #         [
-    #             "wget",
-    #             "--no-check-certificate",
-    #             "-O",
-    #             "pdfs/florida/{}".format(pdf_name),
-    #             join(api_base_url, pdf_name),
-    #         ]
-    #     )
+    # download these assets
+    api_base_url = "https://www.floridadisaster.org/globalassets/covid19/dailies"
+    for pdf_name in covid_links:
+        subprocess.run(
+            [
+                "wget",
+                "--no-check-certificate",
+                "-O",
+                "pdfs/florida/{}".format(pdf_name),
+                join(api_base_url, pdf_name),
+            ]
+        )
 
     # extract the latest data for each day
     existing_assets = glob("pdfs/florida/*.pdf")
