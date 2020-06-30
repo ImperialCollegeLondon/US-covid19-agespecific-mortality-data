@@ -283,7 +283,7 @@ class AgeExtractor:
                 age_data['45-54y'] = data[2]
                 age_data['55-64y'] = data[3]
                 age_data['65+'] = data[4]
-
+                doc.close()
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
                     os.mkdir(path)
@@ -463,14 +463,16 @@ class AgeExtractor:
     def get_delware(self):
         ## TODO: get the update day
         url = "https://myhealthycommunity.dhss.delaware.gov/about/acceptable-use"
+        # changed from 6.30
+        url = 'https://myhealthycommunity.dhss.delaware.gov/locations/state#outcomes'
         #chromed = "D:\chromedriver.exe"
         options = Options()
         options.add_argument('headless')
         #browser = webdriver.Chrome(executable_path=chromed, options=options)
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
-        browser.find_element_by_xpath('//*[@id="accept"]').click()
-        browser.find_element_by_xpath('/html/body/main/div/div/div[2]/section/form/button').click()
+        #browser.find_element_by_xpath('//*[@id="accept"]').click()
+        #browser.find_element_by_xpath('/html/body/main/div/div/div[2]/section/form/button').click()
         ##  website change from 2020-05-20
         day = browser.find_element_by_xpath('//*[@id="outcomes"]/div/article[1]/div/div/div[2]/div[1]/div[1]/div/div/span[2]').text
         #day = browser.find_element_by_xpath('//*[@id="outcomes"]/div/div[2]/div[1]/div/div[1]/div/span').text.split(':')[1]
@@ -536,10 +538,11 @@ class AgeExtractor:
             browser.maximize_window()
             time.sleep(2)
             if browser.execute_script("return document.readyState") == "complete":
+                time.sleep(2)
                 data = browser.find_elements_by_css_selector('g.amcharts-graph-column')
-                time.sleep(1)
+                time.sleep(2)
                 full_data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label') and e.get_attribute('aria-label').split()[1] == 'Without']
-                time.sleep(1)
+                time.sleep(2)
                 death_data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label') and e.get_attribute('aria-label') .split()[1] == 'Resulting']
                 time.sleep(2)
                 age_death = {}
@@ -1028,7 +1031,6 @@ if __name__ == "__main__":
     ageExtractor.get_missouri()
     # #:
     ageExtractor.get_kentucky()
-    ageExtractor.get_delware()
     ###ageExtractor.get_california()
     ageExtractor.get_indiana()
     ageExtractor.get_oregon()
@@ -1043,5 +1045,6 @@ if __name__ == "__main__":
     ageExtractor.get_az()
     ageExtractor.get_maryland()
     ageExtractor.get_vermont()
+    ageExtractor.get_delware()
     # get the figure
     ageExtractor.get_mississippi()
