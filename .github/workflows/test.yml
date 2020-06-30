@@ -33,7 +33,7 @@ jobs:
 
     - name: Clone data from yesterday
       run: |
-        git clone https://@github.com/MJHutchinson/US-covid19-data-scraping --single-branch -b update_data output 
+        git clone https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping --single-branch -b update_data output 
         git config --global user.name "GitHub Actions"
         git config --global user.email action@github.com
     - name: Cache, process and update
