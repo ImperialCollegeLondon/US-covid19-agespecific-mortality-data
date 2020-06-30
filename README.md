@@ -106,8 +106,8 @@ We use webdriver from selenium to find the elements and extract the correspondin
 
 
 ## Figures
-### Time series of extracted data as of 2020-06-25
+### Time series of extracted data as of 2020-06-29
 ![](figures/time.series_allstates.png)
 
-### Comparison to IHME and JHU overall death as of 2020-06-25
+### Comparison to IHME and JHU overall death as of 2020-06-29
 ![](figures/comparison.ihme.jhu.depthealth_overall.png)
