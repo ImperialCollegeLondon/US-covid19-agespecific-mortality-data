@@ -347,6 +347,52 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
+    def get_nc2(self):
+        path = "pdfs/nc2"
+        if not os.path.exists(path):
+            os.mkdir(path)
+        url = 'https://covid19.ncdhhs.gov/dashboard/about-data'
+        day = requests.get(url).headers['Last-Modified']
+        day = parsedate(day).strftime('%Y-%m-%d')
+        url = 'https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/Demographics.pdf?:showVizHome=no'
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for North Carolina2 {} is not available".format(day)
+            )
+        else:
+            if not os.access("data/{}/NorthCarolina2.json".format(day), os.F_OK):
+                with open("pdfs/nc2/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+                doc = fitz.Document("pdfs/nc2/{}.pdf".format(day))
+                # find the page
+                lines = doc.getPageText(0).splitlines()
+                for num, l in enumerate(lines):
+                    if '0-17' in l:
+                        data_num = num
+                        break
+                data = lines[data_num:]
+                age_data = {}
+                age_data[data[0]] = data[29]
+                age_data[data[1]] = data[28]
+                age_data[data[2]] = data[11]
+                age_data[data[3]] = data[9]
+                age_data[data[4]] = data[8]
+                age_data[data[5]] = data[7]
+                doc.close()
+                path = "data/{}".format(day)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+
+                with open("data/{}/NorthCarolina2.json".format(day), "w") as f:
+                    json.dump(age_data, f)
+                print('\n------ Processed North Carolina2 {} ------\n'.format(day))
+            else:
+                print('Data for North Carolina2 {} is already exist'.format(day))
+
     def get_mississippi(self):
         existing_assets = list(map(basename, glob("pngs/mississippi/*.png")))
         date_diff = date.today() - date(2020, 4, 27)
@@ -897,6 +943,7 @@ class AgeExtractor:
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
         browser.implicitly_wait(5)
+        time.sleep(3)
         day = browser.find_element_by_xpath('//*[@id="dnn_ctr33855_HtmlModule_lblContent"]/p[3]/strong').text
         day = day.split()[-1]
         day = parsedate(day).strftime('%Y-%m-%d')
@@ -1028,6 +1075,7 @@ if __name__ == "__main__":
     ageExtractor.get_oklahoma2()
     ageExtractor.get_nd()
     ###ageExtractor.get_nc()
+    ageExtractor.get_nc2()
     ageExtractor.get_missouri()
     # #:
     ageExtractor.get_kentucky()
@@ -1037,7 +1085,6 @@ if __name__ == "__main__":
     ageExtractor.get_pennsylvania()
     ageExtractor.get_nevada()
     ageExtractor.get_michigan()
-    ageExtractor.get_washington()
     ageExtractor.get_illinois()
     ageExtractor.get_utah()
     ###
@@ -1048,3 +1095,4 @@ if __name__ == "__main__":
     ageExtractor.get_delware()
     # get the figure
     ageExtractor.get_mississippi()
+    ageExtractor.get_washington()
