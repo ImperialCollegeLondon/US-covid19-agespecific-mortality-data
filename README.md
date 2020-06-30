@@ -81,6 +81,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 |Pennsylvania| 2020-06-07 | [link](https://experience.arcgis.com/experience/cfb3803eb93d42f7ab1c2cfccca78bf7); daily updated and replaced, need extraction daily; no historical archive|
 |New Hampshire| 2020-06-08 | [link](https://www.nh.gov/covid19/dashboard/summary.htm); daily updated and replaced, need extraction daily; no historical archive|
 |Rhode Island| 2020-06-01 | [link](https://ri-department-of-health-covid-19-data-rihealth.hub.arcgis.com); weekly updated and replaced, need extraction weekly; no historical archive|
+|Utah| 2020-06-17 | [link](https://coronavirus.utah.gov/case-counts/); daily updated and replaced, need extraction daily; no historical archive|
 
 ## Warnings
 ### Updates
