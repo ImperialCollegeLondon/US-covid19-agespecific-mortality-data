@@ -1,0 +1,13 @@
+fiona 
+fitz
+PyMuPDF
+pandas
+pyjson
+beautifulsoup4
+requests
+selenium
+numpy 
+matplotlib
+webdriver_manager
+pillow
+xlrd

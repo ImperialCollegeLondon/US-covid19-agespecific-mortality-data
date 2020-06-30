@@ -1,0 +1,154 @@
+library(data.table)
+library(ggplot2)
+library(scales)
+library(gridExtra)
+library(tidyverse)
+
+# ihme
+death_data_ihme = read.csv(file.path("data", "official", "ihme_death_data.csv"))
+
+# jhu
+death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_200616.rds"))
+
+# NYC
+death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200616.csv"))
+
+
+# scrapped data
+path_to_data = function(state) file.path("data", last.day, "processed", paste0("DeathsByAge_", state, ".csv"))
+
+
+make.comparison.plot = function(State, Code){
+  
+  cat(paste("\n Make comparison plot for", State, "\n"))
+  
+  if(Code == "NYC"){ 
+    death_data_nyc = data.table(death_data_nyc) %>%
+      select(DEATH_COUNT, DATE_OF_INTEREST) %>%
+      rename(daily_deaths = DEATH_COUNT) %>%
+      mutate(source = "City",
+             date = as.Date(DATE_OF_INTEREST, format = "%m/%d/%y"),
+             cum.deaths = cumsum(daily_deaths))
+    
+    death_data_scrapping = read.csv(path_to_data(Code)) %>%
+      group_by(date, code) %>%
+      summarise(cum.deaths = sum(cum.deaths)) %>%
+      mutate(source = "City by age")
+    death_data_scrapping$date = as.Date(death_data_scrapping$date)
+    
+    death_data = dplyr::bind_rows(death_data_nyc, death_data_scrapping)
+    
+    p = ggplot(data = death_data, aes(x = date, y = cum.deaths, col = source)) +
+      geom_point() +
+      geom_line()  +
+      scale_x_date(date_breaks = "weeks", labels = date_format("%e %b"), 
+                   limits = c(death_data$date[1], 
+                              death_data$date[length(death_data$date)])) + 
+      theme_bw() + 
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+      theme(legend.position="right")+ 
+      guides(fill = guide_legend(title="Age")) +
+      labs(title = State, y = "Daily deaths (overall population)") 
+    ggsave(paste0("figures/comparison.ihme.jhu.depthealth_", Code, ".png"), p, w = 8, h =6)
+  
+  } else{
+    
+    death_data_ihme = data.table(subset(death_data_ihme, state_name == State)) %>%
+      select(code, daily_deaths, date) %>%
+      mutate(source = "IHME",
+             cum.deaths = cumsum(daily_deaths))
+    death_data_ihme$date = as.Date(death_data_ihme$date)
+    
+    death_data_jhu = data.table(subset(death_data_jhu, code == Code)) %>%
+      select(code, daily_deaths, date) %>%
+      mutate(source = "JHU",
+             cum.deaths = cumsum(daily_deaths)) 
+    death_data_jhu$date = as.Date(death_data_jhu$date)
+    
+    death_data_scrapping = read.csv(path_to_data(Code)) %>%
+      group_by(date, code) %>%
+      summarise(cum.deaths = sum(cum.deaths)) %>%
+      mutate(source = "Dept of Health")
+    death_data_scrapping$date = as.Date(death_data_scrapping$date)
+    
+    death_data = dplyr::bind_rows(death_data_jhu, death_data_ihme, death_data_scrapping)
+    
+    p = ggplot(data = death_data, aes(x = date, y = cum.deaths, col = source)) +
+      geom_point() +
+      geom_line()  +
+      scale_x_date(date_breaks = "weeks", labels = date_format("%e %b"), 
+                   limits = c(death_data$date[1], 
+                              death_data$date[length(death_data$date)])) + 
+      theme_bw() + 
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+      theme(legend.position="right")+ 
+      guides(fill = guide_legend(title="Age")) +
+      labs(title = State, y = "Daily deaths (overall population)") 
+    ggsave(paste0("figures/comparison.ihme.jhu.depthealth_", Code, ".png"), p, w = 8, h =6)
+  }
+  
+  return(p)
+}
+
+make.comparison.plots = function(names, codes){
+  p = list()
+  for(i in 1:length(names)){
+    p[[i]] = make.comparison.plot(names[i], codes[i])
+  }
+  q = do.call(grid.arrange, c(p, ncol =1))
+  ggsave(paste0("figures/comparison.ihme.jhu.depthealth_overall.png"), q, w = 8, h = 75, limitsize = FALSE)
+}
+
+make.time.series.plots = function(codes){
+  
+  cat("\n Make time series plot \n")
+  
+  databyage = NULL; data = NULL
+  for(Code in codes){
+    death_data_scrapping = read.csv(path_to_data(Code)) %>%
+        mutate(update = "daily", 
+               code = as.character(code),
+               date = as.character(date))%>%
+        select(code, update, daily.deaths,date,age)
+      databyage = rbind(databyage, death_data_scrapping)
+      
+      death_data_scrapping = read.csv(path_to_data(Code)) %>%
+        group_by(date, code) %>%
+        summarise(daily_deaths = sum(daily.deaths)) %>%
+        ungroup() %>%
+        mutate(update = "daily", 
+               code = as.character(code),
+               date = as.character(date))
+      data = rbind(data, death_data_scrapping)
+  }
+
+  data$date = as.Date(data$date)
+  p = ggplot(data, aes(x = date, y = daily_deaths, linetype = update, color = code)) +
+    geom_line() +
+    geom_point(size = 0.5) +
+    facet_wrap(~code, scale = "free", ncol = 1) +
+    scale_x_date(date_breaks = "months", labels = date_format("%e %b"), 
+                 limits = c(min(data$date), 
+                            max(data$date))) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    theme(legend.position="right")+ 
+    guides(fill = guide_legend(title="Age")) +
+    labs(title = "Time series from Dept of Health", y = "Daily or weekly deaths (overall population)") 
+  ggsave(paste0("figures/time.series_allstates.png"), p, w = 8, h = 75,limitsize = FALSE)
+  
+  databyage$date = as.Date(databyage$date)
+  p = ggplot(databyage, aes(x = date, y = daily.deaths, linetype = update, color = age)) +
+    geom_line() +
+    geom_point(size = 0.5) +
+    facet_wrap(~code, scale = "free", ncol = 1) +
+    scale_x_date(date_breaks = "months", labels = date_format("%e %b"), 
+                 limits = c(min(databyage$date), 
+                            max(databyage$date))) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    theme(legend.position="bottom")+ 
+    guides(fill = guide_legend(title="Age")) +
+    labs(title = "Time series from Dept of Health", y = "Daily or weekly deaths (overall population)") 
+  ggsave(paste0("figures/time.series_allstates_byage.png"), p, w = 5, h = 75,limitsize = FALSE)
+}
