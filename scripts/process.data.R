@@ -19,7 +19,7 @@ dir.create(file.path("data", last.day, "processed"), showWarnings = FALSE)
 rulebased.states = subset(table.states, json == 0 & code != "CDC")
 data.overall = NULL
 for(i in 1:nrow(rulebased.states)){
-  data = obtain.rulebased.data(last.day,  rulebased.states$code[i])
+  data = obtain.rulebased.data(last.day, rulebased.states$name[i], rulebased.states$code[i])
   write.csv(data, file = file.path("data", last.day, "processed", paste0("DeathsByAge_",rulebased.states$code[i],".csv")), row.names=FALSE)
   data.overall = dplyr::bind_rows(data, data.overall)
 }
