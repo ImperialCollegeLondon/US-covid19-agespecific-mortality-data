@@ -815,7 +815,7 @@ class AgeExtractor:
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
         browser.implicitly_wait(5)
-        day = browser.find_element_by_xpath('//*[@id="ember49"]/div/p/em').text
+        day = browser.find_element_by_xpath('//*[@id="ember48"]/div/p/em').text
         day = day.split()[7]
         day = parsedate(day).strftime('%Y-%m-%d')
         browser.close()
