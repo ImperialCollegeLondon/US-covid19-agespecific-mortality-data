@@ -512,18 +512,20 @@ class AgeExtractor:
         # changed from 6.30
         url = 'https://myhealthycommunity.dhss.delaware.gov/locations/state#outcomes'
         #chromed = "D:\chromedriver.exe"
-        options = Options()
-        options.add_argument('headless')
-        #browser = webdriver.Chrome(executable_path=chromed, options=options)
-        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
-        browser.get(url)
-        #browser.find_element_by_xpath('//*[@id="accept"]').click()
-        #browser.find_element_by_xpath('/html/body/main/div/div/div[2]/section/form/button').click()
-        ##  website change from 2020-05-20
-        day = browser.find_element_by_xpath('//*[@id="outcomes"]/div/article[1]/div/div/div[2]/div[1]/div[1]/div/div/span[2]').text
-        #day = browser.find_element_by_xpath('//*[@id="outcomes"]/div/div[2]/div[1]/div/div[1]/div/span').text.split(':')[1]
-        day = parsedate(day).strftime("%Y-%m-%d")
+        day = requests.get(url).headers['Last-Modified']
+        day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/delaware.json".format(day), os.F_OK):
+            options = Options()
+            options.add_argument('headless')
+            #browser = webdriver.Chrome(executable_path=chromed, options=options)
+            browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+            browser.get(url)
+            #browser.find_element_by_xpath('//*[@id="accept"]').click()
+            #browser.find_element_by_xpath('/html/body/main/div/div/div[2]/section/form/button').click()
+            ##  website change from 2020-05-20
+            #day = browser.find_element_by_xpath('//*[@id="outcomes"]/div/article[1]/div/div/div[2]/div[1]/div[1]/div/div/span[2]').text
+            #day = browser.find_element_by_xpath('//*[@id="outcomes"]/div/div[2]/div[1]/div/div[1]/div/span').text.split(':')[1]
+            #day = parsedate(day).strftime("%Y-%m-%d")
             if browser.execute_script("return document.readyState") == "complete":
                 age_data = {}
                 for i in range(6):
@@ -1093,6 +1095,6 @@ if __name__ == "__main__":
     ageExtractor.get_maryland()
     ageExtractor.get_vermont()
     ageExtractor.get_delware()
+    ageExtractor.get_washington()
     # get the figure
     ageExtractor.get_mississippi()
-    ageExtractor.get_washington()
