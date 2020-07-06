@@ -247,23 +247,53 @@ obtain.TN.data = function(xlsx_file, Date){
   # keep first day without NA
   tmp = subset(tmp, !is.na(cum.deaths))
   
-  data.tn = NULL
+  dates = unique(tmp$date)
+  print(sort(dates))
   
-  print(sort(unique(tmp$date)))
-  
-  for(t in 1:(length(unique(tmp$date))-1)){
+  for(t in 1:(length(dates)-1)){
     for(Age in unique(tmp$age)){
-      Date = sort(unique(tmp$date))[-1][t]
+      Date = sort(dates)[-1][t]
       cum.death.t_1 = tmp[which(tmp$date == Date & tmp$age == Age),]$cum.deaths
       cum.death.t_0 = tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$cum.deaths
       daily.deaths = cum.death.t_1 - cum.death.t_0 
-      stopifnot(is.numeric(daily.deaths))
-      if(daily.deaths < 0){
-        tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$daily.deaths =  max(tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$daily.deaths + daily.deaths, 0)
-        daily.deaths = 0
+      
+      if((Date-1) %notin% dates){
+        n.lost.days = as.numeric(Date - unique(tmp$date)[which(unique(tmp$date) == Date)-1])-1
+        lost.days = Date - c(n.lost.days:1)
+        
+        cum.death.t_lag = tmp[which(tmp$date == Date & tmp$age == Age),]$cum.deaths
+        cum.death.t_0 = tmp[which(tmp$date == (Date-n.lost.days-1) & tmp$age == Age ),]$cum.deaths
+        daily.deaths = round((cum.death.t_lag - cum.death.t_0 )/(n.lost.days+1))
+        
+        stopifnot(is.numeric(daily.deaths))
+        
+        if( daily.deaths < 0 ) {
+          daily.deaths = 0
+          tmp[which(tmp$date == (Date-n.lost.days-1) & tmp$age == Age),]$daily.deaths = 
+            max(0, tmp[which(tmp$date == (Date-n.lost.days-1)& tmp$age == Age),]$daily.deaths + daily.deaths)
+        }
+        # cum death are divided equally among the last two days
+        tmp = dplyr::bind_rows(tmp, data.table(age = as.character(Age), 
+                                                 date = as.Date(lost.days), 
+                                                 cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.lost.days)), 
+                                                 daily.deaths = rep(daily.deaths, n.lost.days), code = "TN")) 
+        
+        tmp[which(tmp$date == Date & tmp$age == Age ),]$daily.deaths = daily.deaths
+        tmp[which(tmp$date == Date & tmp$age == Age ),]$cum.deaths = daily.deaths + tmp[which(tmp$date == (Date-1) & tmp$age == Age ),]$cum.deaths
+        
+        
+      } else{
+        
+        stopifnot(is.numeric(daily.deaths))
+        if(daily.deaths<0){
+          index = which(daily.deaths<0)
+          tmp[which(tmp$date == (Date-1)& tmp$age == Age),]$daily.deaths[index] = sapply(tmp[which(tmp$date == (Date-1)& tmp$age == Age),]$daily.deaths[index] + daily.deaths[index], function(x) max(x,0))
+          daily.deaths[index] = 0
+          
+        }
+        tmp[which(tmp$date == Date & tmp$age == Age),]$daily.deaths = daily.deaths
+        tmp[which(tmp$date == Date & tmp$age == Age),]$cum.deaths = daily.deaths + tmp[which(tmp$date == (Date-1) & tmp$age == Age),]$cum.deaths
       }
-      tmp[which(tmp$date == Date & tmp$age == Age),]$daily.deaths = daily.deaths 
-      tmp[which(tmp$age == Age & tmp$date == Date),]$cum.deaths = daily.deaths + tmp[which(tmp$age == Age & tmp$date == (Date-1)),]$cum.deaths
     }
   }
   
