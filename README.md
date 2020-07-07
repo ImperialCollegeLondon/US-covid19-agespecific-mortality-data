@@ -58,8 +58,8 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | CDC| 2020-05-06 | [link](https://data.cdc.gov/api/views/9bhg-hcku/rows.csv); daily cumulative, need extracting daily; no historical archive|
 | Texas| 2020-05-06 | [link](https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx); daily cumulative, need extracting daily; no historical archive|
 | Louisiana| 2020-05-12| [link](http://ldh.la.gov/coronavirus/); daily updated and replaced, need extracting daily; no historical archive|
-| Oklahoma| 2020-05-13| [link](https://looker-dashboards.ok.gov/embed/dashboards/42); daily updated and replaced, need extracting daily; no historical archive. Website changed from 06-06, pdf: [link](https://coronavirus.health.ok.gov/executive-order-reports); file string, age deaths on page 2|
-| North Carolina| 2020-05-13| [link](https://covid19.ncdhhs.gov/dashboard#by-age); daily updated and replaced, need extracting daily; no historical archive|
+| Oklahoma| 2020-05-13| [link](https://looker-dashboards.ok.gov/embed/dashboards/75); daily updated and replaced, need extracting daily; no historical archive. Website changed from 06-06, pdf: [link](https://coronavirus.health.ok.gov/executive-order-reports); file string, age deaths on page 2|
+| North Carolina| 2020-05-13| [link](https://covid19.ncdhhs.gov/dashboard/about-data); daily updated and replaced, need extracting daily; no historical archive|
 | Mississippi| 2020-05-12| [link](https://msdh.ms.gov/msdhsite/_static/14,0,420.html); daily updated and replaced, need exreacting daily; no historical archive|
 | Missouri| 2020-05-13| [link](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php);  daily updated and replaced, need exreacting daily; no historical archive|
 | Delaware| 2020-05-12| [link](https://myhealthycommunity.dhss.delaware.gov/locations/state); daily updated and replaced, need exreacting daily; no historical archive|
@@ -82,6 +82,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 |New Hampshire| 2020-06-08 | [link](https://www.nh.gov/covid19/dashboard/summary.htm); daily updated and replaced, need extraction daily; no historical archive|
 |Rhode Island| 2020-06-01 | [link](https://ri-department-of-health-covid-19-data-rihealth.hub.arcgis.com); weekly updated and replaced, need extraction weekly; no historical archive|
 |Utah| 2020-06-17 | [link](https://coronavirus.utah.gov/case-counts/); daily updated and replaced, need extraction daily; no historical archive|
+|Maine| 2020-03-13 | [link](https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml); daily updated; historical archive|
 
 ## Warnings
 ### Updates
