@@ -215,8 +215,18 @@ class AgeExtractor:
             # data from 24 to 33
             data = data[24:33]
             age_data = {}
-            for i in data:
-                age_data[i.split(',')[0].split('.')[1]] = i.split(',')[1].split('.')[0]
+            #for i in data:
+            #    age_data[i.split(',')[0].split('.')[1]] = i.split(',')[1].split('.')[0]
+            age_data[" 0-9"] = data[0].split(',')[1].split('.')[0]
+            age_data[" 10-19"] = data[1].split(',')[1].split('.')[0]
+            age_data[" 20-29"] = data[2].split(',')[1].split('.')[0]
+            age_data[" 30-39"] = data[3].split(',')[1].split('.')[0]
+            age_data[" 40-49"] = data[4].split(',')[1].split('.')[0]
+            age_data[" 50-59"] = data[5].split(',')[1].split('.')[0]
+            age_data[" 60-69"] = data[6].split(',')[1].split('.')[0]
+            age_data[" 70-79"] = data[7].split(',')[1].split('.')[0]
+            age_data[" 80+"] = data[8].split(',')[1].split('.')[0]
+
             if age_data:
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
@@ -314,7 +324,7 @@ class AgeExtractor:
         ##########
 
         #########################
-        if not os.access("data/{}/NorthCarolina.json".format(day), os.F_OK):
+        if not os.access("data/{}/NorthCarolina2.json".format(day), os.F_OK):
             doc = fitz.Document("pdfs/nc/{}.pdf".format(day))
             lines = doc.getPageText(0).splitlines()
             for num, l in enumerate(lines):
@@ -339,7 +349,7 @@ class AgeExtractor:
             path = "data/{}".format(day)
             if not os.path.exists(path):
                 os.mkdir(path)
-            with open("data/{}/NorthCarolina.json".format(day), "w") as f:
+            with open("data/{}/NorthCarolina2.json".format(day), "w") as f:
                 json.dump(age_data, f)
             print('\n------ Processed North Carolina {} ------\n'.format(day))
         else:
@@ -361,10 +371,10 @@ class AgeExtractor:
         except requests.exceptions.HTTPError as err:
             print(err)
             print(
-                "==> Report for North Carolina2 {} is not available".format(day)
+                "==> Report for North Carolina {} is not available".format(day)
             )
         else:
-            if not os.access("data/{}/NorthCarolina2.json".format(day), os.F_OK):
+            if not os.access("data/{}/NorthCarolina.json".format(day), os.F_OK):
                 with open("pdfs/nc2/{}.pdf".format(day), "wb") as f:
                     f.write(r.content)
                 doc = fitz.Document("pdfs/nc2/{}.pdf".format(day))
@@ -387,11 +397,11 @@ class AgeExtractor:
                 if not os.path.exists(path):
                     os.mkdir(path)
 
-                with open("data/{}/NorthCarolina2.json".format(day), "w") as f:
+                with open("data/{}/NorthCarolina.json".format(day), "w") as f:
                     json.dump(age_data, f)
-                print('\n------ Processed North Carolina2 {} ------\n'.format(day))
+                print('\n------ Processed North Carolina {} ------\n'.format(day))
             else:
-                print('Data for North Carolina2 {} is already exist'.format(day))
+                print('Data for North Carolina {} is already exist'.format(day))
 
     def get_mississippi(self):
         existing_assets = list(map(basename, glob("pngs/mississippi/*.png")))
