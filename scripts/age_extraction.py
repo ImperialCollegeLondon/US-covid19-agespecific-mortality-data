@@ -453,7 +453,7 @@ class AgeExtractor:
         os.makedirs('csvs/district_of_columbia/', exist_ok=True)
         i = 0
         while True:
-            url = f"https://coronavirus.dc.gov/sites/default/files/dc/sites/coronavirus/page_content/attachments/DC-COVID-19-Data-for-{(self.today-timedelta(days=i)).strftime('%B-%d-%Y')}.xlsx"
+            url = f"https://coronavirus.dc.gov/sites/default/files/dc/sites/coronavirus/page_content/attachments/DC-COVID-19-Data-for-{(self.today-timedelta(days=i)).strftime('%B-%-d-%Y')}.xlsx"
             ret = subprocess.run(
                 [
                     "wget",
