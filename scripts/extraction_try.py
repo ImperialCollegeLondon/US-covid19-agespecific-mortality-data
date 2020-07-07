@@ -1083,28 +1083,123 @@ class AgeExtractor:
 if __name__ == "__main__":
     # with one # can run step by step
     ageExtractor = AgeExtractor()
-    ageExtractor.get_oklahoma()
-    ageExtractor.get_oklahoma2()
-    ageExtractor.get_nd()
-    ###ageExtractor.get_nc()
-    ageExtractor.get_nc2()
-    ageExtractor.get_missouri()
-    # #:
-    ageExtractor.get_kentucky()
-    ###ageExtractor.get_california()
-    ageExtractor.get_indiana()
-    ageExtractor.get_oregon()
-    ageExtractor.get_pennsylvania()
-    ageExtractor.get_nevada()
-    ageExtractor.get_michigan()
-    ageExtractor.get_illinois()
-    ageExtractor.get_utah()
-    ###
-    ageExtractor.get_louisiana()
-    ageExtractor.get_az()
-    ageExtractor.get_maryland()
-    ageExtractor.get_vermont()
-    ageExtractor.get_delware()
-    ageExtractor.get_washington()
-    # get the figure
-    ageExtractor.get_mississippi()
+
+    try:
+        print("\n### Running Oklahoma ###\n")
+        ageExtractor.get_oklahoma()
+    except:
+        print("\n!!! OKLAHOMA FAILED !!!\n")
+
+    try:
+        print("\n### Running Oklahoma2 ###\n")
+        ageExtractor.get_oklahoma2()
+    except:
+        print("\n!!! OKLAHOMA 2 FAILED !!!\n")
+
+    try:
+        print("\n### Running North Dakota ###\n")
+        ageExtractor.get_nd()
+    except:
+        print("\n!!! DOC NORTH DAKOTA !!!\n")
+
+    try:
+        print("\n### Running North Carolina 2 ###\n")
+        ageExtractor.get_nc2()
+    except:
+        print("\n!!! NORTH CAROLINA 2 FAILED !!!\n")
+
+    try:
+        print("\n### Missouri DOC ###\n")
+        ageExtractor.get_missouri()
+    except:
+        print("\n!!! MISSOURI FAILED !!!\n")
+
+    try:
+        print("\n### Running Kentucky ###\n")
+        ageExtractor.get_kentucky()
+    except:
+        print("\n!!! KENTUCKY FAILED !!!\n")
+
+    try:
+        print("\n### Running Indiana ###\n")
+        ageExtractor.get_indiana()
+    except:
+        print("\n!!! INDIANA FAILED !!!\n")
+
+    try:
+        print("\n### Running Oregon ###\n")
+        ageExtractor.get_oregon()
+    except:
+        print("\n!!! OREGON FAILED !!!\n")
+
+    try:
+        print("\n### Running Pennsylvania ###\n")
+        ageExtractor.get_pennsylvania()
+    except:
+        print("\n!!! PENNSYLVANIA FAILED !!!\n")
+
+    try:
+        print("\n### Running Nevade ###\n")
+        ageExtractor.get_nevada()
+    except:
+        print("\n!!! NEVADA FAILED !!!\n")
+
+    try:
+        print("\n### Running Michigan ###\n")
+        ageExtractor.get_michigan()
+    except:
+        print("\n!!! MICHIGAN FAILED !!!\n")
+
+    try:
+        print("\n### Running Illinois ###\n")
+        ageExtractor.get_illinois()
+    except:
+        print("\n!!! ILLINOIS FAILED !!!\n")
+
+    try:
+        print("\n### Running Utah ###\n")
+        ageExtractor.get_utah()
+    except:
+        print("\n!!! UTAH FAILED !!!\n")
+
+    try:
+        print("\n### Running Louisiana ###\n")
+        ageExtractor.get_louisiana()
+    except:
+        print("\n!!! LOUISIANA FAILED !!!\n")
+
+    try:
+        print("\n### Running Arizona ###\n")
+        ageExtractor.get_az()
+    except:
+        print("\n!!! ARIZONA FAILED !!!\n")
+
+    try:
+        print("\n### Running Maryland ###\n")
+        ageExtractor.get_maryland()
+    except:
+        print("\n!!! MARYLAND FAILED !!!\n")
+
+    try:
+        print("\n### Running Vermont ###\n")
+        ageExtractor.get_vermont()
+    except:
+        print("\n!!! VERMONT FAILED !!!\n")
+
+    try:
+        print("\n### Running Delaware ###\n")
+        ageExtractor.get_delware()
+    except:
+        print("\n!!! DELAWARE FAILED !!!\n")
+
+    try:
+        print("\n### Running Washington ###\n")
+        ageExtractor.get_washington()
+    except:
+        print("\n!!! WASHINGTON FAILED !!!\n")
+
+    try:
+        print("\n### Running Mississippi ###\n")
+        ageExtractor.get_mississippi()
+    except:
+        print("\n!!! MISSISSIPPI FAILED !!!\n")

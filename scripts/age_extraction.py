@@ -486,16 +486,62 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
-    ageExtractor.get_georgia()
-    ageExtractor.get_cdc()
-    ageExtractor.get_washington()
-    ageExtractor.get_texas()
+
+    try:
+        print("\n### Running Georgia ###\n")
+        ageExtractor.get_georgia()
+    except:
+        print("\n!!! GEORGIA FAILED !!!\n")
+
+    try:
+        print("\n### Running CDC ###\n")
+        ageExtractor.get_cdc()
+    except:
+        print("\n!!! CDC FAILED !!!\n")
+
+    try:
+        print("\n### Running Washington###\n")
+        ageExtractor.get_washington()
+    except:
+        print("\n!!! WASHINGTON FAILED !!!\n")
+
+    try:
+        print("\n### Running Texas ###\n")
+        ageExtractor.get_texas()
+    except:
+        print("\n!!! TEXAS FAILED !!!\n")
+
+    try:
+        print("\n### Running Connecticut ###\n")
+        ageExtractor.get_connecticut()
+    except:
+        print("\n!!! CONNECTICUT FAILED !!!\n")
+
+    try:
+        print("\n### Running Minnesota ###\n")
+        ageExtractor.get_minnesota()
+    except:
+        print("\n!!! MINNESOTA FAILED !!!\n")
+
+    try:
+        print("\n### Running Virginia ###\n")
+        ageExtractor.get_virginia()
+    except:
+        print("\n!!! VIRGINIA FAILED !!!\n")
+
+    try:
+        print("\n### Running DOC ###\n")
+        ageExtractor.get_district_of_columbia()
+    except:
+        print("\n!!! DOC FAILED !!!\n")
+
+    try:
+        print("\n### Running NYC ###\n")
+        ageExtractor.get_nyc()
+    except:
+        print("\n!!! NYC FAILED !!!\n")
+    
     #ageExtractor.get_new_jersey()
     #ageExtractor.get_florida()
-    ageExtractor.get_connecticut()
-    ageExtractor.get_massachusetts()
     # ageExtractor.get_michigan()
-    ageExtractor.get_minnesota()
-    ageExtractor.get_virginia()
-    ageExtractor.get_district_of_columbia()
-    ageExtractor.get_nyc()
+    
