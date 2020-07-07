@@ -405,9 +405,9 @@ class AgeExtractor:
 
     def get_mississippi(self):
         existing_assets = list(map(basename, glob("pngs/mississippi/*.png")))
-        date_diff = date.today() - date(2020, 4, 27)
+        date_diff = date.today() - date(2020, 7, 3)
         for i in range(date_diff.days + 1):
-            dayy = date(2020, 4, 27) + timedelta(days=i)
+            dayy = date(2020, 7, 3) + timedelta(days=i)
             day = dayy.strftime('%Y-%m-%d')
             url = 'https://msdh.ms.gov/msdhsite/_static/images/graphics/covid19-chart-age-' + str(day[5:]) + '.png'
             if day + '.png' not in existing_assets:
@@ -442,15 +442,17 @@ class AgeExtractor:
         options.add_argument('headless')
         #browser = webdriver.Chrome(executable_path=chromed, options=options)
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
-
         browser.get(url)
+        browser.implicitly_wait(5)
         day = browser.find_element_by_xpath('//*[@id="ember10"]/div/h6/span').text
+        time.sleep(2)
         day = day.split()[-1]
         day = parsedate(day).strftime('%Y-%m-%d')
-
+        time.sleep(1)
         if not os.access("data/{}/missouri.json".format(day), os.F_OK):
             browser.implicitly_wait(5)
             data = browser.find_elements_by_css_selector('g.amcharts-graph-column')
+            time.sleep(2)
             data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label') and 'Total' in e.get_attribute('aria-label')]
             time.sleep(2)
             age_data = {}
