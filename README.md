@@ -54,7 +54,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | New Jersey| 2020-05-06 | [link](https://www.nj.gov/health/cd/documents/topics/NCOV/COVID_Confirmed_Case_Summary.pdf); cumulative, need extracting daily |
 | New York City| 2020-04-14 | [link](https://www1.nyc.gov/assets/doh/downloads/pdf/imm/covid-19-deaths-confirmed-probable-daily-04142020.pdf) and [link](https://github.com/nychealth/coronavirus-data/blob/master/by-age.csv); daily cumulative, need extracting daily|
 | Georgia| 2020-04-27 | [link](https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip); daily cumulative, need extracting daily; no historical archive; missing data between 2020-04-27 and 2020-05-06|
-| Washington| 2020-05-04 | [link](https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx); daily cumulative, need extracting daily; no historical archive|
+| Washington| 2020-05-04 | [link](https://www.doh.wa.gov/Emergencies/Coronavirus#CovidDataTables); daily updated and replaced, need exreacting daily; no historical archive|
 | CDC| 2020-05-06 | [link](https://data.cdc.gov/api/views/9bhg-hcku/rows.csv); daily cumulative, need extracting daily; no historical archive|
 | Texas| 2020-05-06 | [link](https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx); daily cumulative, need extracting daily; no historical archive|
 | Louisiana| 2020-05-12| [link](http://ldh.la.gov/coronavirus/); daily updated and replaced, need extracting daily; no historical archive|
@@ -83,6 +83,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 |Rhode Island| 2020-06-01 | [link](https://ri-department-of-health-covid-19-data-rihealth.hub.arcgis.com); weekly updated and replaced, need extraction weekly; no historical archive|
 |Utah| 2020-06-17 | [link](https://coronavirus.utah.gov/case-counts/); daily updated and replaced, need extraction daily; no historical archive|
 |Maine| 2020-03-13 | [link](https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml); daily updated; historical archive|
+|Michigan| 2020-04-30 | [link](https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html); daily updated and replaced, need extraction daily; no historical archive|
 
 ## Warnings
 ### Updates
