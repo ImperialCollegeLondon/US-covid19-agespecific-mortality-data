@@ -436,19 +436,22 @@ class AgeExtractor:
         url = "https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php"
         ## change web from 2020-05-21
         url = 'https://mophep.maps.arcgis.com/apps/opsdashboard/index.html#/0c6d8b9da4494eb1bcc0c7e2187e48aa'
+        # 2020-07-07
+        url = 'https://mophep.maps.arcgis.com/apps/opsdashboard/index.html#/c1f2a0115b0b4e4e9cc9ded149d0ae09'
         options = Options()
         options.add_argument('headless')
         #browser = webdriver.Chrome(executable_path=chromed, options=options)
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
 
         browser.get(url)
-        day = requests.get(url).headers['Date']
-        day = "/".join(day.split(',')[1].split()[0:3])
+        day = browser.find_element_by_xpath('//*[@id="ember10"]/div/h6/span').text
+        day = day.split()[-1]
         day = parsedate(day).strftime('%Y-%m-%d')
+
         if not os.access("data/{}/missouri.json".format(day), os.F_OK):
             browser.implicitly_wait(5)
             data = browser.find_elements_by_css_selector('g.amcharts-graph-column')
-            data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label')]
+            data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label') and 'Total' in e.get_attribute('aria-label')]
             time.sleep(2)
             age_data = {}
             for i in range(len(data)):
@@ -456,10 +459,13 @@ class AgeExtractor:
             path = "data/{}".format(day)
             if not os.path.exists(path):
                 os.mkdir(path)
-            with open("data/{}/missouri.json".format(day), "w") as f:
-                json.dump(age_data, f)
-            print('\n------ Processed Missouri {} ------\n'.format(day))
-            browser.save_screenshot('pngs/missouri/{}.png'.format(day))
+            if age_data:
+                with open("data/{}/missouri.json".format(day), "w") as f:
+                    json.dump(age_data, f)
+                print('\n------ Processed Missouri {} ------\n'.format(day))
+                browser.save_screenshot('pngs/missouri/{}.png'.format(day))
+            else:
+                print('\n------ Processed Missouri error ------\n')
         else:
             print('Report for Missouri {} is already exist'.format(day))
 
@@ -1083,7 +1089,6 @@ class AgeExtractor:
 if __name__ == "__main__":
     # with one # can run step by step
     ageExtractor = AgeExtractor()
-
     try:
         print("\n### Running Oklahoma ###\n")
         ageExtractor.get_oklahoma()
