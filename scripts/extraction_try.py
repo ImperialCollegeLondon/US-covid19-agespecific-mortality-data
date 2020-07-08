@@ -457,7 +457,7 @@ class AgeExtractor:
             time.sleep(2)
             age_data = {}
             for i in range(len(data)):
-                age_data[' '.join(data[i].split()[0:-1])] = data[i].split()[-1]
+                age_data[data[i].split()[1]] = data[i].split()[-1]
             path = "data/{}".format(day)
             if not os.path.exists(path):
                 os.mkdir(path)
