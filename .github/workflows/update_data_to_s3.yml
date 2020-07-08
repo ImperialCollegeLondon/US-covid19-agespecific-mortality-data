@@ -32,9 +32,9 @@ jobs:
       run: |
         # check existing assets in florida
         aws s3 ls s3://$AWS_BUCKET/update_data/pdfs/florida/ > existing_assets_florida        
-        python scripts/florida_extraction.py
         make files
         today=$(date +'%Y-%m-%d')
+        python scripts/florida_extraction.py
         # check the data for today is there already
         aws s3 cp data/$today/ s3://$AWS_BUCKET/update_data/data/$today/ --recursive
         aws s3 cp html s3://$AWS_BUCKET/update_data/html/ --recursive
