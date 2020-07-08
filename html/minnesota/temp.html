@@ -1,0 +1,5641 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- JAVASCRIPT --> 
+<script type="text/javascript" src="/macros/js/jquery.min.js"></script>
+<script type="text/javascript" src="/macros/js/bootstrap.js"></script>
+<script type="text/javascript" src="/macros/js/banner.js"></script>
+<script type="text/javascript">
+var $window = $(window);
+
+function checkWidth() {
+    if ($window.width() < 600) {
+	var el1 = document.getElementById('sidebar_left');
+	var el2 = document.getElementById('sidebar_right');
+	if (el1 && el2) {
+  	while (el2.firstChild) el1.appendChild(el2.firstChild);
+	}
+
+	// Remove el2 if required
+	el2.parentNode.removeChild(el2);
+    };
+}
+
+</script>
+
+<!-- CSS STYLES --->
+<link rel="stylesheet" type="text/css" href="/macros/css/bootstrap/bootstrap.css" />
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/macros/responsive/styles.css"> 
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body onLoad="checkWidth()">
+<div id="skiptocontent"><a href="#body" class="skip">Skip to Content</a></div>
+<script>
+   $( document ).ready(function() {
+        $(".skip").click(function(event){   
+            var skipTo="#"+this.href.split('#')[1];
+            $(skipTo).attr('tabindex', -1).on('blur focusout', function () {
+                $(this).removeAttr('tabindex');    
+            }).focus();
+        });
+    });
+</script>
+<!-- MDH CURRENT BANNER CONTENT --->
+<!-- Start Banner Include -->
+
+<!-- Specify MDH main phone numbers for Google Searches; added 3-14-15 --> 
+<script type="application/ld+json">
+{ "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "url" : "http://www.health.state.mn.us",
+  "contactPoint" : [
+    { "@type" : "ContactPoint",
+      "telephone" : "+1-888-345-0823",
+      "contactType" : "customer service",
+      "contactOption" : "TollFree",
+      "areaServed" : "US"
+    } , {
+      "@type" : "ContactPoint",
+      "telephone" : "+1-651-201-5000",
+      "contactType" : "customer service"
+    } ] }
+</script>
+
+<!-- MDH BANNER HTML --------------------------------------------------------------------------->
+<div id="mdhHeaderDiv">
+  <header class="banner"> <a href="/index.html"><img class="bannerImg no_print" src="/images/logo-reverse.png" alt="Department of Health Logo"/></a>
+    <img class="bannerImg-small hidden" src="/images/portal-logo-screen_tcm1077-226393.png" alt="Minnesota logo" /><img src="/images/logo_print.png" alt="MDH Logo" width="250" height="37" class="printOnly" />
+	
+	  
+    <div class="title hidden" tabindex=0>Minnesota Department of Health</div>
+  
+    <div id="navigation">
+      <ul id="navbar" class="clearfix">
+        <li><a href="/index.html" id="home">HOME</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" id="topic">TOPICS <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/data/index.html">Data, Statistics and Legislation</a></li>
+            <li><a href="/diseases/index.html">Diseases and Conditions</a></li>
+            <li><a href="/facilities/index.html">Health Care Facilities, Providers, and Insurance</a></li>
+            <li><a href="/communities/index.html">Healthy Communities, Environment and Workplaces</a></li>
+            <li><a href="/people/index.html">Individual and Family Health</a></li>
+          </ul>
+        </li>
+        <li><a href="/about/index.html" id="about">ABOUT US</a></li>
+      </ul>
+
+	<div id="searchform">
+            <form id="cse-search-box" name="seek" action="https://mn.gov/mdh/search/" onsubmit="return validateSearch(this);">
+      <div id="searchbox">
+        <label style="position: absolute; left:-1100px" for="q">search input field</label>
+        <button type="submit" class="searchbutton" alt="search">
+ Search
+ </button>
+        <input type="text" name="query" placeholder="Search" id="q" size="30" class="searchtext" value="" onfocus="return clearSearchDefault;" 
+         />
+			   
+        
+      </div>
+      </form>
+    </div>         
+  </div>	
+  </header>
+	
+	</div>
+	
+	
+	
+<!--------------------------------------------------------------------------------------------->
+
+<!-- End Banner Include -->
+
+<!-- Begin Main Content -->
+
+<title>Situation Update for COVID-19 - Minnesota Dept. of Health</title>
+
+<!-- Start Dublin Core - Please add content for the Tags in This Block -->
+
+<meta name="DC.Title" content="Situation Update for COVID-19 - Minnesota Dept. of Health">
+<meta name="DC.Creator.CorporateName" scheme="AACR2" content="Minnesota Dept. of Health">
+<meta name="DC.Creator.PersonalName" scheme="AACR2" content="Como-Sabetti, Kathy">
+<meta name="DC.Creator.PersonalName" scheme="AACR2" content="Pretzel, Elly">
+<meta name="DC.Date.Created" scheme="ISO 8601" content="2020-01-18">
+<meta name="DC.Date.Modified" scheme="ISO 8601" content="2020-07-08">
+<meta name="DC.Language" scheme="ISO639-1" content="en">
+<link rel="schema.dc" href="http://purl.org/metadata/dublin_core_elements">
+
+<!-- End Dublin Core - Please Modify This Block -->
+
+<link rel="stylesheet" href="/macros/responsive/styles.css">
+</head>
+<body>
+<!-- Begin Main Content -->
+<div id="container">
+	<div id="content" class="clearfix">
+		<div id="sidebar_left">
+
+
+<h2>COVID-19</h2>
+<ul>
+<li><a href="/diseases/coronavirus/index.html">COVID-19 Home</a></li>
+<li><a href="/diseases/coronavirus/situation.html">Situation Update</a></li>
+<li><a href="/diseases/coronavirus/basics.html">About COVID-19</a></li>
+<li><a href="/diseases/coronavirus/symptoms.html">Symptoms &amp; Testing</a></li>
+<li><a href="/diseases/coronavirus/sick.html">If You Are Sick</a></li>
+<li><a href="/diseases/coronavirus/prevention.html">Protect Yourself &amp; Others</a></li>
+<li><a href="/diseases/coronavirus/cope.html">Daily Life &amp; Coping</a></li>
+<li><a href="/diseases/coronavirus/materials/index.html">Materials and Resources</a></li>
+<li><a href="/diseases/coronavirus/guidance.html">Guidance Library</a></li>
+</ul>
+<p><strong>Information for:</strong></p>
+<ul>
+  <li><a href="/diseases/coronavirus/hcp/index.html">Health Care</a></li>
+  <li><a href="/diseases/coronavirus/communities.html">Community Settings</a></li>
+  <li><a href="/diseases/coronavirus/businesses.html">Businesses &amp; Employers</a></li>
+  <li><a href="/diseases/coronavirus/schools/index.html">Schools &amp; Child Care</a></li>
+  <li><a href="/diseases/coronavirus/schools/ihe.html">Institutes of Higher Education</a></li>
+</ul>
+<h2>Related Topics</h2>
+<ul>
+	<li><a href="/diseases/coronavirus/study.html">COVID-19 Research Studies in Minnesota</a></li>
+	<li><a href="/communities/equity/funding/covidcontracts.html">COVID-19 Contracts for Diverse Media Messaging and Community Outreach</a></li>
+	<li><a href="/diseases/respiratory/index.html">Infectious Respiratory Illness</a></li>
+</ul>
+
+		</div>
+<!---- for mobile menu. Do not edit ---->
+<input type="checkbox" id="nav-trigger" class="nav-trigger" >
+<label for="nav-trigger"><span class="sr-only"> Open Menu </span></label>
+
+
+<div class="site-wrap">
+		<div id="body">
+
+
+<h1>Situation Update for COVID-19</h1>
+<p class="small">
+  <a href="javascript:window.open('http://service.govdelivery.com/service/subscribe.html?code=MNMDH_486', 'Popup','width=700,height=440,toolbar=no,scrollbars=yes,resizable=yes'); void('');" onClick="window.status='Subscribe'; return true" onMouseOver="window.status='Subscribe'; return true" onMouseOut="window.status=''; return true" class="email" alt="Subscribe Coronavirus Disease 2029 (COVID-19) Updates">Subscribe: COVID-19 updates</a> <br>Sign up to receive email or mobile alerts when this data is updated, as well as other periodic COVID-19 updates.</p>
+
+<!-- DATE-->	
+<p class="small"><strong>Updated July 8, 2020</strong><br>
+	Updated daily at 11 a.m., with data current as of 4 p.m. the previous day.</p>
+<p>Data is for cases that were tested and returned positive. All data is preliminary and may change as  cases are investigated. Many data  points are collected during case interviews. Data presented below is for all  cases, regardless of interview status. Data for cases pending interview  may be listed as &quot;unknown/missing.&quot;</p>
+	<p>Not  all suspected cases of COVID-19 are tested, so this data is not representative  of the total number of people in Minnesota who have or had COVID-19. Cumulative numbers are since Jan. 20, 2020. </p>
+
+	<p class="small"><strong>On this page:</strong><br>
+	<a href="#daily2">Daily Update</a><br>
+	<a href="#test2">Testing</a><br>
+	<a href="#overview2">Minnesota Case Overview </a><br>
+	<a href="#hospital2">Hospitalization</a><br>
+	<a href="#case2">Case Demographics</a><br>
+	<a href="#expo2">Likely Exposure</a><br>
+	<a href="#map2">Residence</a><br>
+	<a href="#weekly2">Weekly Report</a><br>
+	<a href="#care2">Care Facilities</a>
+	</p>
+
+		<script type="text/javascript"> $( document ).ready(function() { $('.expandAll').on('click', function () { $('#accordion .collapse').collapse('show'); }); $('.contractAll').on('click', function () { $('#accordion .collapse').collapse('hide'); }); });</script>
+		<div class="panel-group" id="accordion">
+		<p class="small" align="right"><a href="#exp" class="expandAll">Expand All</a>&nbsp; &nbsp;
+		<a href="#cont" class="contractAll">Contract All</a></p>
+
+	<div class="well">
+		<h2 id="daily2">Daily Update:</h2>
+		<p class="small">Because all data is preliminary, the change in number of cumulative positive cases and deaths from one day to the next may not equal the newly reported cases or deaths.</p>
+
+			<table id="daily" width="100%" border="1">
+	<tbody><tr align="center">
+	  <td colspan="2" class="table_background_shade"><strong>39,589</strong><br>
+<span class="small">Total positive cases (cumulative)</span></td></tr>
+    <tr align="center">
+    <td class="table_background_shade"><strong>463</strong><br><span class="small">Newly reported cases</span></td>
+    <td class="table_background_shade"><strong>8</strong><br><span class="small">Newly reported deaths</span></td>
+    </tr></tbody></table>
+	<div class="panel panel-default"><div class="panel-heading"> <a data-toggle="collapse" data-target="#dailyc" href="#dailyc1">
+		<span class="small">Newly reported cases detail</span></a></div><div id="dailyc" class="panel-collapse collapse"><div class="panel-body">
+<table id="dailycase" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+			  <th scope="col" width="70%">County</th>
+            <th scope="col">Number of newly reported cases</th>
+          </tr>
+<!-- ADD NEW CASE ROWS HERE -->
+  <tr>
+    <td>Anoka</td>
+    <td>24</td>
+  </tr>
+  <tr>
+    <td>Beltrami</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Benton</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Big Stone</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Blue Earth</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>Brown</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>Carlton</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Carver</td>
+    <td>24</td>
+  </tr>
+  <tr>
+    <td>Cass</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>Clay</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>Cottonwood</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Crow Wing</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Dakota</td>
+    <td>59</td>
+  </tr>
+  <tr>
+    <td>Dodge</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>Douglas</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Freeborn</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Goodhue</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Hennepin</td>
+    <td>109</td>
+  </tr>
+  <tr>
+    <td>Houston</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Isanti</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Itasca</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Kandiyohi</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>Le Sueur</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Lincoln</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Lyon</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>McLeod</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Mower</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>Murray</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Nicollet</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>Norman</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Olmsted</td>
+    <td>22</td>
+  </tr>
+  <tr>
+    <td>Pine</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>Pipestone</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>Polk</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Ramsey</td>
+    <td>51</td>
+  </tr>
+  <tr>
+    <td>Rice</td>
+    <td>11</td>
+  </tr>
+  <tr>
+    <td>St. Louis</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>Scott</td>
+    <td>21</td>
+  </tr>
+  <tr>
+    <td>Sherburne</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>Stearns</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>Steele</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Stevens</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Swift</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Todd</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Traverse</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Wabasha</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Washington</td>
+    <td>28</td>
+  </tr>
+  <tr>
+    <td>Watonwan</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Winona</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Wright</td>
+    <td>8</td>
+  </tr>
+  <!-- DON"T FORGET MISSING & REMOVED -->
+  <tr>
+    <td>Unknown/missing</td>
+    <td>2</td>
+  </tr>
+			
+ </tbody>
+</table>
+<br>
+<ul class="small">
+<li>Cases removed*: 7</li></ul>
+
+	<p class="small">* Cases are removed for many reasons including residence in another state, duplication of cases, and false positive reports.</p></div></div>
+	<div class="panel-heading"> <a data-toggle="collapse" data-target="#dailyd" href="#dailyd1">
+		<span class="small">Newly reported deaths detail</span></a></div>
+	<div id="dailyd" class="panel-collapse collapse">
+    <div class="panel-body">	
+<table id="dailydeathar" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+			  <th scope="col">County of residence</th>
+			  <th scope="col">Age group</th>			  
+            <th scope="col" width="25%">Number of newly reported deaths</th></tr>
+          <tr>
+            <td>Anoka</td>
+            <td> 60-69 years </td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Dakota</td>
+            <td> 90-99 years </td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Hennepin</td>
+            <td> 30-39 years </td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Hennepin</td>
+            <td> 80-89 years </td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Olmsted</td>
+            <td> 60-69 years </td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Olmsted</td>
+            <td> 80-89 years </td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Ramsey</td>
+            <td> 40-49 years </td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>St. Louis</td>
+            <td> 90-99 years </td>
+            <td>1</td>
+          </tr>
+          <!-- INSERT NEW DEATHS DATA FROM THE TABLE (no headers or end of table) HERE -->
+     </tbody>
+</table><br>
+			<table id="dailydeathrt" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+			<th scope="col">Residence type</th>
+            <th scope="col" width="25%">Number of newly reported deaths</th></tr>
+			<!-- INSERT NEW DEATHS location DATA (no headers or end of table) HERE -->
+		
+ <tr>
+    <td>Private Residence</td>
+    <td>3</td>
+  </tr>
+			
+ <tr>
+    <td>Long-term care facility/Assisted living</td>
+    <td>5</td>
+  </tr>
+			
+<!--   <tr>
+    <td>Group Home/Residential Behavioral Health</td>
+    <td>0</td>
+  </tr> -->
+			</tbody>
+			</table>	
+    </div></div></div> 
+	</div>
+			
+<!--TESTING-->
+	<h2 id="test2">Testing</h2>
+<p><strong>Total approximate number of completed tests:</strong> 692,970</p>
+	<p><img src="/diseases/coronavirus/stats/2labgraph.png" width="100%" alt="Graph of Laboratory testing for COVID-19 (SARS-COV-2), data in table below."/></p>
+			
+	<div class="panel panel-default"><div class="panel-heading"> <a data-toggle="collapse" data-target="#testing" href="#testing1">
+    <p>Testing data table</p></a></div>
+  	<div id="testing" class="panel-collapse collapse"><div class="panel-body">
+<table id="labtable" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+            <th scope="col">Date reported to MDH</th>
+            <th scope="col">Completed tests reported from the MDH Public Health Lab (daily)</th>
+            <th scope="col">Completed tests reported from external laboratories (daily)</th>
+            <th scope="col">Total approximate number of completed tests </th>
+          </tr>
+          
+          <tr>
+            <td>3/28</td>
+            <td>470 </td>
+            <td>1,054 </td>
+            <td>18,081 </td>
+          </tr>
+          <tr>
+            <td>3/29</td>
+            <td>245 </td>
+            <td>964 </td>
+            <td>19,290 </td>
+          </tr>
+          <tr>
+            <td>3/30</td>
+            <td>156 </td>
+            <td>890 </td>
+            <td>20,336 </td>
+          </tr>
+          <tr>
+            <td>3/31</td>
+            <td>176 </td>
+            <td>1,340 </td>
+            <td>21,852 </td>
+          </tr>
+          <tr>
+            <td>4/1</td>
+            <td>300 </td>
+            <td>703 </td>
+            <td>22,855 </td>
+          </tr>
+          <tr>
+            <td>4/2</td>
+            <td>102 </td>
+            <td>1,881 </td>
+            <td>24,838 </td>
+          </tr>
+          <tr>
+            <td>4/3</td>
+            <td>56 </td>
+            <td>1,290 </td>
+            <td>26,184 </td>
+          </tr>
+          <tr>
+            <td>4/4</td>
+            <td>108 </td>
+            <td>1,555 </td>
+            <td>27,847 </td>
+          </tr>
+          <tr>
+            <td>4/5</td>
+            <td>30 </td>
+            <td>1,435 </td>
+            <td>29,312 </td>
+          </tr>
+          <tr>
+            <td>4/6</td>
+            <td>46 </td>
+            <td>1,133 </td>
+            <td>30,491 </td>
+          </tr>
+          <tr>
+            <td>4/7</td>
+            <td>90 </td>
+            <td>1,461 </td>
+            <td>32,042 </td>
+          </tr>
+          <tr>
+            <td>4/8</td>
+            <td>80 </td>
+            <td>1,373 </td>
+            <td>33,495 </td>
+          </tr>
+          <tr>
+            <td>4/9</td>
+            <td>93 </td>
+            <td>1,738 </td>
+            <td>35,326 </td>
+          </tr>
+          <tr>
+            <td>4/10</td>
+            <td>107 </td>
+            <td>1,652 </td>
+            <td>37,085 </td>
+          </tr>
+          <tr>
+            <td>4/11</td>
+            <td>93 </td>
+            <td>1,533 </td>
+            <td>38,711 </td>
+          </tr>
+          <tr>
+            <td>4/12</td>
+            <td>56 </td>
+            <td>1,134 </td>
+            <td>39,901 </td>
+          </tr>
+          <tr>
+            <td>4/13</td>
+            <td>39 </td>
+            <td>746 </td>
+            <td>40,686 </td>
+          </tr>
+          <tr>
+            <td>4/14</td>
+            <td>128 </td>
+            <td>1,063 </td>
+            <td>41,877 </td>
+          </tr>
+          <tr>
+            <td>4/15</td>
+            <td>137 </td>
+            <td>1,559 </td>
+            <td>43,573 </td>
+          </tr>
+          <tr>
+            <td>4/16</td>
+            <td>110 </td>
+            <td>1,346 </td>
+            <td>45,029 </td>
+          </tr>
+          <tr>
+            <td>4/17</td>
+            <td>126 </td>
+            <td>1,340 </td>
+            <td>46,495 </td>
+          </tr>
+          <tr>
+            <td>4/18</td>
+            <td>123 </td>
+            <td>1,358 </td>
+            <td>47,976 </td>
+          </tr>
+          <tr>
+            <td>4/19</td>
+            <td>66 </td>
+            <td>1,165 </td>
+            <td>49,207 </td>
+          </tr>
+          <tr>
+            <td>4/20</td>
+            <td>124 </td>
+            <td>716 </td>
+            <td>50,047 </td>
+          </tr>
+          <tr>
+            <td>4/21</td>
+            <td>214 </td>
+            <td>1,535 </td>
+            <td>51,796 </td>
+          </tr>
+          <tr>
+            <td>4/22</td>
+            <td>230 </td>
+            <td>1,899 </td>
+            <td>53,925 </td>
+          </tr>
+          <tr>
+            <td>4/23</td>
+            <td>216 </td>
+            <td>2,274 </td>
+            <td>56,415 </td>
+          </tr>
+          <tr>
+            <td>4/24</td>
+            <td>296 </td>
+            <td>2,793 </td>
+            <td>59,504 </td>
+          </tr>
+          <tr>
+            <td>4/25</td>
+            <td>172 </td>
+            <td>2,448 </td>
+            <td>62,124 </td>
+          </tr>
+          <tr>
+            <td>4/26</td>
+            <td>71 </td>
+            <td>2,493 </td>
+            <td>64,688 </td>
+          </tr>
+          <tr>
+            <td>4/27</td>
+            <td>149 </td>
+            <td>1,868 </td>
+            <td>66,705 </td>
+          </tr>
+          <tr>
+            <td>4/28</td>
+            <td>268 </td>
+            <td>3,078 </td>
+            <td>70,051 </td>
+          </tr>
+          <tr>
+            <td>4/29</td>
+            <td>253 </td>
+            <td>6,829 </td>
+            <td>77,133 </td>
+          </tr>
+          <tr>
+            <td>4/30</td>
+            <td>429 </td>
+            <td>3,919 </td>
+            <td>81,481 </td>
+          </tr>
+          <tr>
+            <td>5/1</td>
+            <td>277 </td>
+            <td>4,206 </td>
+            <td>85,964 </td>
+          </tr>
+          <tr>
+            <td>5/2</td>
+            <td>302 </td>
+            <td>3,427 </td>
+            <td>89,693 </td>
+          </tr>
+          <tr>
+            <td>5/3</td>
+            <td>70 </td>
+            <td>3,090 </td>
+            <td>92,853 </td>
+          </tr>
+          <tr>
+            <td>5/4</td>
+            <td>231 </td>
+            <td>3,837 </td>
+            <td>96,921 </td>
+          </tr>
+          <tr>
+            <td>5/5</td>
+            <td>266 </td>
+            <td>2,900 </td>
+            <td>100,087 </td>
+          </tr>
+          <tr>
+            <td>5/6</td>
+            <td>323 </td>
+            <td>4,156 </td>
+            <td>104,566 </td>
+          </tr>
+          <tr>
+            <td>5/7</td>
+            <td>336 </td>
+            <td>4,675 </td>
+            <td>109,577 </td>
+          </tr>
+          <tr>
+            <td>5/8</td>
+            <td>254 </td>
+            <td>4,624 </td>
+            <td>114,455 </td>
+          </tr>
+          <tr>
+            <td>5/9</td>
+            <td>232 </td>
+            <td>4,680 </td>
+            <td>119,367 </td>
+          </tr>
+          <tr>
+            <td>5/10</td>
+            <td>68 </td>
+            <td>5,230 </td>
+            <td>124,665 </td>
+          </tr>
+          <tr>
+            <td>5/11</td>
+            <td>278 </td>
+            <td>5,026 </td>
+            <td>129,969 </td>
+          </tr>
+          <tr>
+            <td>5/12</td>
+            <td>355 </td>
+            <td>3,659 </td>
+            <td>133,983 </td>
+          </tr>
+          <tr>
+            <td>5/13</td>
+            <td>301 </td>
+            <td>6,993 </td>
+            <td>141,277 </td>
+          </tr>
+          <tr>
+            <td>5/14</td>
+            <td>1,074 </td>
+            <td>5,659 </td>
+            <td>148,010 </td>
+          </tr>
+          <tr>
+            <td>5/15</td>
+            <td>548 </td>
+            <td>8,579 </td>
+            <td>157,137 </td>
+          </tr>
+          <tr>
+            <td>5/16</td>
+            <td>717 </td>
+            <td>7,250 </td>
+            <td>165,104 </td>
+          </tr>
+          <tr>
+            <td>5/17</td>
+            <td>232 </td>
+            <td>5,749 </td>
+            <td>171,085 </td>
+          </tr>
+          <tr>
+            <td>5/18</td>
+            <td>132 </td>
+            <td>6,258 </td>
+            <td>177,475 </td>
+          </tr>
+          <tr>
+            <td>5/19</td>
+            <td>601 </td>
+            <td>5,773 </td>
+            <td>183,849 </td>
+          </tr>
+          <tr>
+            <td>5/20</td>
+            <td>531 </td>
+            <td>6,423 </td>
+            <td>190,803 </td>
+          </tr>
+          <tr>
+            <td>5/21</td>
+            <td>394 </td>
+            <td>7,865 </td>
+            <td>199,062 </td>
+          </tr>
+          <tr>
+            <td>5/22</td>
+            <td>742 </td>
+            <td>8,980 </td>
+            <td>208,784 </td>
+          </tr>
+          <tr>
+            <td>5/23</td>
+            <td>1,069 </td>
+            <td>7,827 </td>
+            <td>217,680 </td>
+          </tr>
+          <tr>
+            <td>5/24</td>
+            <td>86 </td>
+            <td>6,895 </td>
+            <td>224,661 </td>
+          </tr>
+          <tr>
+            <td>5/25</td>
+            <td>86 </td>
+            <td>6,562 </td>
+            <td>231,309 </td>
+          </tr>
+          <tr>
+            <td>5/26</td>
+            <td>162 </td>
+            <td>6,775 </td>
+            <td>238,246 </td>
+          </tr>
+          <tr>
+            <td>5/27</td>
+            <td>254 </td>
+            <td>9,274 </td>
+            <td>247,774 </td>
+          </tr>
+          <tr>
+            <td>5/28</td>
+            <td>652 </td>
+            <td>9,247 </td>
+            <td>257,673 </td>
+          </tr>
+          <tr>
+            <td>5/29</td>
+            <td>667 </td>
+            <td>9,717 </td>
+            <td>268,057 </td>
+          </tr>
+          <tr>
+            <td>5/30</td>
+            <td>0</td>
+            <td>8,437 </td>
+            <td>276,494 </td>
+          </tr>
+          <tr>
+            <td>5/31</td>
+            <td>0 </td>
+            <td>6,883 </td>
+            <td>283,377 </td>
+          </tr>
+          <tr>
+            <td>6/1</td>
+            <td>0</td>
+            <td>4,180 </td>
+            <td>287,557 </td>
+          </tr>
+          <tr>
+            <td>6/2</td>
+            <td>1,061 </td>
+            <td>6,610 </td>
+            <td>295,228 </td>
+          </tr>
+          <tr>
+            <td>6/3</td>
+            <td>653 </td>
+            <td>15,247 </td>
+            <td>311,128 </td>
+          </tr>
+          <tr>
+            <td>6/4</td>
+            <td>379 </td>
+            <td>10,562 </td>
+            <td>322,069 </td>
+          </tr>
+          <tr>
+            <td>6/5</td>
+            <td>930 </td>
+            <td>10,113 </td>
+            <td>333,112 </td>
+          </tr>
+          <tr>
+            <td>6/6</td>
+            <td>1,086 </td>
+            <td>9,316 </td>
+            <td>343,514 </td>
+          </tr>
+          <tr>
+            <td>6/7</td>
+            <td>735 </td>
+            <td>8,790 </td>
+            <td>353,039 </td>
+          </tr>
+          <tr>
+            <td>6/8</td>
+            <td>44 </td>
+            <td>7,720 </td>
+            <td>360,803 </td>
+          </tr>
+          <tr>
+            <td>6/9</td>
+            <td>300 </td>
+            <td>8,580 </td>
+            <td>369,683 </td>
+          </tr>
+          <tr>
+            <td>6/10</td>
+            <td>674 </td>
+            <td>11,366 </td>
+            <td>381,723 </td>
+          </tr>
+          <tr>
+            <td>6/11</td>
+            <td>765 </td>
+            <td>12,629 </td>
+            <td>395,117 </td>
+          </tr>
+          <tr>
+            <td>6/12</td>
+            <td>1,031 </td>
+            <td>11,768 </td>
+            <td>407,916 </td>
+          </tr>
+          <tr>
+            <td>6/13</td>
+            <td>828 </td>
+            <td>8,968 </td>
+            <td>417,712 </td>
+          </tr>
+          <tr>
+            <td>6/14</td>
+            <td>254 </td>
+            <td>4,766 </td>
+            <td>422,732 </td>
+          </tr>
+          <tr>
+            <td>6/15</td>
+            <td>22 </td>
+            <td>6,187 </td>
+            <td>428,941 </td>
+          </tr>
+          <tr>
+            <td>6/16</td>
+            <td>356 </td>
+            <td>19,206 </td>
+            <td>448,503 </td>
+          </tr>
+          <tr>
+            <td>6/17</td>
+            <td>484 </td>
+            <td>12,013 </td>
+            <td>461,000 </td>
+          </tr>
+          <tr>
+            <td>6/18</td>
+            <td>916 </td>
+            <td>13,275 </td>
+            <td>475,191 </td>
+          </tr>
+          <tr>
+            <td>6/19</td>
+            <td>1,112 </td>
+            <td>15,657 </td>
+            <td>491,960 </td>
+          </tr>
+          <tr>
+            <td>6/20</td>
+            <td>822 </td>
+            <td>11,320 </td>
+            <td>504,102 </td>
+          </tr>
+          <tr>
+            <td>6/21</td>
+            <td>401 </td>
+            <td>8,206 </td>
+            <td>512,709 </td>
+          </tr>
+          <tr>
+            <td>6/22</td>
+            <td>23 </td>
+            <td>7,223 </td>
+            <td>519,955 </td>
+          </tr>
+          <tr>
+            <td>6/23</td>
+            <td>339 </td>
+            <td>9,332 </td>
+            <td>529,626 </td>
+          </tr>
+          <tr>
+            <td>6/24</td>
+            <td>904 </td>
+            <td>12,059 </td>
+            <td>542,589 </td>
+          </tr>
+          <tr>
+            <td>6/25</td>
+            <td>1,057 </td>
+            <td>13,535 </td>
+            <td>557,181 </td>
+          </tr>
+          <tr>
+            <td>6/26</td>
+            <td>456 </td>
+            <td>12,486 </td>
+            <td>570,123 </td>
+          </tr>
+          <tr>
+            <td>6/27</td>
+            <td>818 </td>
+            <td>14,097 </td>
+            <td>585,038 </td>
+          </tr>
+          <tr>
+            <td>6/28</td>
+            <td>187 </td>
+            <td>7,328 </td>
+            <td>592,553 </td>
+          </tr>
+          <tr>
+            <td>6/29</td>
+            <td>0  </td>
+            <td>12,445 </td>
+            <td>604,998 </td>
+          </tr>
+          <tr>
+            <td>6/30</td>
+            <td>260 </td>
+            <td>11,661 </td>
+            <td>616,919 </td>
+          </tr>
+          <tr>
+            <td>7/1</td>
+            <td>461 </td>
+            <td>13,092 </td>
+            <td>630,472 </td>
+          </tr>
+          <tr>
+            <td>7/2</td>
+            <td>871 </td>
+            <td>13,786 </td>
+            <td>645,129 </td>
+          </tr>
+          <tr>
+            <td>7/3</td>
+            <td>405 </td>
+            <td>13,721 </td>
+            <td>659,255 </td>
+          </tr>
+          <tr>
+            <td>7/4</td>
+            <td>205 </td>
+            <td>14,239 </td>
+            <td>673,699 </td>
+          </tr>
+          <tr>
+            <td>7/5</td>
+            <td>32 </td>
+            <td>5,662 </td>
+            <td>679,393 </td>
+          </tr>
+          <tr>
+            <td>7/6</td>
+            <td>0 </td>
+            <td>5,941 </td>
+            <td>685,334 </td>
+          </tr>
+          <tr>
+            <td>7/7</td>
+            <td>225 </td>
+            <td>7,411 </td>
+            <td>692,970 </td>
+          </tr>
+        </tbody>
+      </table>
+		<p class="small">Due to delays in deduplication of results data are subject to change.</p>
+		</div></div>
+		<div class="panel-heading"> <a data-toggle="collapse" data-target="#testingm" href="#testingm1">
+    <p class="small">More about testing data</p></a></div>
+  	<div id="testingm" class="panel-collapse collapse"><div class="panel-body">
+		<ul class="small">
+			<li>Testing numbers show how many total tests have been done for people who live in Minnesota. Some people get tested more than once.
+				<ul><li>As of 6/5, tests are reported per test instead of per person to account for changes in testing capacity and for individuals who are tested more than once over the course of the pandemic.</li></ul></li>
+			<li>Due to civil unrest in St. Paul and surrounding areas, the MDH Public Health Lab was closed from 5/30 - 6/1. COVID-19 specimens were not accepted and no tests were run during this time. When possible, samples were re-routed to partner laboratories.</li>	
+			<li>Results from 4/29 and 6/3 included a backlog of tests loaded into our system. Previously we were not updating tests reported for past dates; going forward we will be updating that historical data.</li></ul>
+	</div></div></div>
+	
+<!--CASES-->
+	<h2 id="overview2">Minnesota Case Overview</h2>
+<ul>
+  <li><strong>Total positive cases: </strong>39,589
+    <ul>
+	  <li>Number of health care workers: 3,862</li>
+	</ul>
+</li></ul>
+	<img src="/diseases/coronavirus/stats/3casegraph.png" width="100%" alt="Graph of confirmed cases of COVID-19 by specimen collection date, data in table below."/>
+	<div class="panel panel-default"><div class="panel-heading"> <a data-toggle="collapse" data-target="#cases" href="#cases1">
+    <p>Positive cases by date specimen collected data table</p></a></div>
+  	<div id="cases" class="panel-collapse collapse"><div class="panel-body">
+
+      <table id="casetable" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+            <th scope="col">Specimen collection date</th>
+            <th scope="col">Positive cases</th>
+			  <th scope="col">Cumulative positive cases</th>
+			</tr>
+
+          <tr>
+            <td>3/5</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>3/6</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>3/7</td>
+            <td>1</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>3/8</td>
+            <td>0</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>3/9</td>
+            <td>3</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>3/10</td>
+            <td>6</td>
+            <td>11</td>
+          </tr>
+          <tr>
+            <td>3/11</td>
+            <td>10</td>
+            <td>21</td>
+          </tr>
+          <tr>
+            <td>3/12</td>
+            <td>22</td>
+            <td>43</td>
+          </tr>
+          <tr>
+            <td>3/13</td>
+            <td>19</td>
+            <td>62</td>
+          </tr>
+          <tr>
+            <td>3/14</td>
+            <td>28</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td>3/15</td>
+            <td>38</td>
+            <td>128</td>
+          </tr>
+          <tr>
+            <td>3/16</td>
+            <td>51</td>
+            <td>179</td>
+          </tr>
+          <tr>
+            <td>3/17</td>
+            <td>67</td>
+            <td>246</td>
+          </tr>
+          <tr>
+            <td>3/18</td>
+            <td>23</td>
+            <td>269</td>
+          </tr>
+          <tr>
+            <td>3/19</td>
+            <td>18</td>
+            <td>287</td>
+          </tr>
+          <tr>
+            <td>3/20</td>
+            <td>16</td>
+            <td>303</td>
+          </tr>
+          <tr>
+            <td>3/21</td>
+            <td>24</td>
+            <td>327</td>
+          </tr>
+          <tr>
+            <td>3/22</td>
+            <td>22</td>
+            <td>349</td>
+          </tr>
+          <tr>
+            <td>3/23</td>
+            <td>44</td>
+            <td>393</td>
+          </tr>
+          <tr>
+            <td>3/24</td>
+            <td>51</td>
+            <td>444</td>
+          </tr>
+          <tr>
+            <td>3/25</td>
+            <td>58</td>
+            <td>502</td>
+          </tr>
+          <tr>
+            <td>3/26</td>
+            <td>63</td>
+            <td>565</td>
+          </tr>
+          <tr>
+            <td>3/27</td>
+            <td>75</td>
+            <td>640</td>
+          </tr>
+          <tr>
+            <td>3/28</td>
+            <td>47</td>
+            <td>687</td>
+          </tr>
+          <tr>
+            <td>3/29</td>
+            <td>38</td>
+            <td>725</td>
+          </tr>
+          <tr>
+            <td>3/30</td>
+            <td>98</td>
+            <td>823</td>
+          </tr>
+          <tr>
+            <td>3/31</td>
+            <td>93</td>
+            <td>916</td>
+          </tr>
+          <tr>
+            <td>4/1</td>
+            <td>57</td>
+            <td>973</td>
+          </tr>
+          <tr>
+            <td>4/2</td>
+            <td>83</td>
+            <td>1,056</td>
+          </tr>
+          <tr>
+            <td>4/3</td>
+            <td>63</td>
+            <td>1,119</td>
+          </tr>
+          <tr>
+            <td>4/4</td>
+            <td>39</td>
+            <td>1,158</td>
+          </tr>
+          <tr>
+            <td>4/5</td>
+            <td>60</td>
+            <td>1,218</td>
+          </tr>
+          <tr>
+            <td>4/6</td>
+            <td>112</td>
+            <td>1,330</td>
+          </tr>
+          <tr>
+            <td>4/7</td>
+            <td>103</td>
+            <td>1,433</td>
+          </tr>
+          <tr>
+            <td>4/8</td>
+            <td>102</td>
+            <td>1,535</td>
+          </tr>
+          <tr>
+            <td>4/9</td>
+            <td>103</td>
+            <td>1,638</td>
+          </tr>
+          <tr>
+            <td>4/10</td>
+            <td>95</td>
+            <td>1,733</td>
+          </tr>
+          <tr>
+            <td>4/11</td>
+            <td>74</td>
+            <td>1,807</td>
+          </tr>
+          <tr>
+            <td>4/12</td>
+            <td>58</td>
+            <td>1,865</td>
+          </tr>
+          <tr>
+            <td>4/13</td>
+            <td>148</td>
+            <td>2,013</td>
+          </tr>
+          <tr>
+            <td>4/14</td>
+            <td>156</td>
+            <td>2,169</td>
+          </tr>
+          <tr>
+            <td>4/15</td>
+            <td>157</td>
+            <td>2,326</td>
+          </tr>
+          <tr>
+            <td>4/16</td>
+            <td>171</td>
+            <td>2,497</td>
+          </tr>
+          <tr>
+            <td>4/17</td>
+            <td>182</td>
+            <td>2,679</td>
+          </tr>
+          <tr>
+            <td>4/18</td>
+            <td>121</td>
+            <td>2,800</td>
+          </tr>
+          <tr>
+            <td>4/19</td>
+            <td>126</td>
+            <td>2,926</td>
+          </tr>
+          <tr>
+            <td>4/20</td>
+            <td>276</td>
+            <td>3,202</td>
+          </tr>
+          <tr>
+            <td>4/21</td>
+            <td>262</td>
+            <td>3,464</td>
+          </tr>
+          <tr>
+            <td>4/22</td>
+            <td>309</td>
+            <td>3,773</td>
+          </tr>
+          <tr>
+            <td>4/23</td>
+            <td>525</td>
+            <td>4,298</td>
+          </tr>
+          <tr>
+            <td>4/24</td>
+            <td>519</td>
+            <td>4,817</td>
+          </tr>
+          <tr>
+            <td>4/25</td>
+            <td>339</td>
+            <td>5,156</td>
+          </tr>
+          <tr>
+            <td>4/26</td>
+            <td>386</td>
+            <td>5,542</td>
+          </tr>
+          <tr>
+            <td>4/27</td>
+            <td>680</td>
+            <td>6,222</td>
+          </tr>
+          <tr>
+            <td>4/28</td>
+            <td>604</td>
+            <td>6,826</td>
+          </tr>
+          <tr>
+            <td>4/29</td>
+            <td>682</td>
+            <td>7,508</td>
+          </tr>
+          <tr>
+            <td>4/30</td>
+            <td>648</td>
+            <td>8,156</td>
+          </tr>
+          <tr>
+            <td>5/1</td>
+            <td>622</td>
+            <td>8,778</td>
+          </tr>
+          <tr>
+            <td>5/2</td>
+            <td>335</td>
+            <td>9,113</td>
+          </tr>
+          <tr>
+            <td>5/3</td>
+            <td>340</td>
+            <td>9,453</td>
+          </tr>
+          <tr>
+            <td>5/4</td>
+            <td>823</td>
+            <td>10,276</td>
+          </tr>
+          <tr>
+            <td>5/5</td>
+            <td>645</td>
+            <td>10,921</td>
+          </tr>
+          <tr>
+            <td>5/6</td>
+            <td>635</td>
+            <td>11,556</td>
+          </tr>
+          <tr>
+            <td>5/7</td>
+            <td>818</td>
+            <td>12,374</td>
+          </tr>
+          <tr>
+            <td>5/8</td>
+            <td>711</td>
+            <td>13,085</td>
+          </tr>
+          <tr>
+            <td>5/9</td>
+            <td>281</td>
+            <td>13,366</td>
+          </tr>
+          <tr>
+            <td>5/10</td>
+            <td>231</td>
+            <td>13,597</td>
+          </tr>
+          <tr>
+            <td>5/11</td>
+            <td>826</td>
+            <td>14,423</td>
+          </tr>
+          <tr>
+            <td>5/12</td>
+            <td>663</td>
+            <td>15,086</td>
+          </tr>
+          <tr>
+            <td>5/13</td>
+            <td>731</td>
+            <td>15,817</td>
+          </tr>
+          <tr>
+            <td>5/14</td>
+            <td>794</td>
+            <td>16,611</td>
+          </tr>
+          <tr>
+            <td>5/15</td>
+            <td>799</td>
+            <td>17,410</td>
+          </tr>
+          <tr>
+            <td>5/16</td>
+            <td>344</td>
+            <td>17,754</td>
+          </tr>
+          <tr>
+            <td>5/17</td>
+            <td>311</td>
+            <td>18,065</td>
+          </tr>
+          <tr>
+            <td>5/18</td>
+            <td>973</td>
+            <td>19,038</td>
+          </tr>
+          <tr>
+            <td>5/19</td>
+            <td>857</td>
+            <td>19,895</td>
+          </tr>
+          <tr>
+            <td>5/20</td>
+            <td>767</td>
+            <td>20,662</td>
+          </tr>
+          <tr>
+            <td>5/21</td>
+            <td>982</td>
+            <td>21,644</td>
+          </tr>
+          <tr>
+            <td>5/22</td>
+            <td>790</td>
+            <td>22,434</td>
+          </tr>
+          <tr>
+            <td>5/23</td>
+            <td>399</td>
+            <td>22,833</td>
+          </tr>
+          <tr>
+            <td>5/24</td>
+            <td>359</td>
+            <td>23,192</td>
+          </tr>
+          <tr>
+            <td>5/25</td>
+            <td>412</td>
+            <td>23,604</td>
+          </tr>
+          <tr>
+            <td>5/26</td>
+            <td>795</td>
+            <td>24,399</td>
+          </tr>
+          <tr>
+            <td>5/27</td>
+            <td>682</td>
+            <td>25,081</td>
+          </tr>
+          <tr>
+            <td>5/28</td>
+            <td>576</td>
+            <td>25,657</td>
+          </tr>
+          <tr>
+            <td>5/29</td>
+            <td>457</td>
+            <td>26,114</td>
+          </tr>
+          <tr>
+            <td>5/30</td>
+            <td>168</td>
+            <td>26,282</td>
+          </tr>
+          <tr>
+            <td>5/31</td>
+            <td>142</td>
+            <td>26,424</td>
+          </tr>
+          <tr>
+            <td>6/1</td>
+            <td>583</td>
+            <td>27,007</td>
+          </tr>
+          <tr>
+            <td>6/2</td>
+            <td>486</td>
+            <td>27,493</td>
+          </tr>
+          <tr>
+            <td>6/3</td>
+            <td>522</td>
+            <td>28,015</td>
+          </tr>
+          <tr>
+            <td>6/4</td>
+            <td>403</td>
+            <td>28,418</td>
+          </tr>
+          <tr>
+            <td>6/5</td>
+            <td>411</td>
+            <td>28,829</td>
+          </tr>
+          <tr>
+            <td>6/6</td>
+            <td>163</td>
+            <td>28,992</td>
+          </tr>
+          <tr>
+            <td>6/7</td>
+            <td>138</td>
+            <td>29,130</td>
+          </tr>
+          <tr>
+            <td>6/8</td>
+            <td>477</td>
+            <td>29,607</td>
+          </tr>
+          <tr>
+            <td>6/9</td>
+            <td>460</td>
+            <td>30,067</td>
+          </tr>
+          <tr>
+            <td>6/10</td>
+            <td>404</td>
+            <td>30,471</td>
+          </tr>
+          <tr>
+            <td>6/11</td>
+            <td>345</td>
+            <td>30,816</td>
+          </tr>
+          <tr>
+            <td>6/12</td>
+            <td>308</td>
+            <td>31,124</td>
+          </tr>
+          <tr>
+            <td>6/13</td>
+            <td>153</td>
+            <td>31,277</td>
+          </tr>
+          <tr>
+            <td>6/14</td>
+            <td>150</td>
+            <td>31,427</td>
+          </tr>
+          <tr>
+            <td>6/15</td>
+            <td>399</td>
+            <td>31,826</td>
+          </tr>
+          <tr>
+            <td>6/16</td>
+            <td>412</td>
+            <td>32,238</td>
+          </tr>
+          <tr>
+            <td>6/17</td>
+            <td>429</td>
+            <td>32,667</td>
+          </tr>
+          <tr>
+            <td>6/18</td>
+            <td>388</td>
+            <td>33,055</td>
+          </tr>
+          <tr>
+            <td>6/19</td>
+            <td>341</td>
+            <td>33,396</td>
+          </tr>
+          <tr>
+            <td>6/20</td>
+            <td>218</td>
+            <td>33,614</td>
+          </tr>
+          <tr>
+            <td>6/21</td>
+            <td>197</td>
+            <td>33,811</td>
+          </tr>
+          <tr>
+            <td>6/22</td>
+            <td>484</td>
+            <td>34,295</td>
+          </tr>
+          <tr>
+            <td>6/23</td>
+            <td>588</td>
+            <td>34,883</td>
+          </tr>
+          <tr>
+            <td>6/24</td>
+            <td>513</td>
+            <td>35,396</td>
+          </tr>
+          <tr>
+            <td>6/25</td>
+            <td>478</td>
+            <td>35,874</td>
+          </tr>
+          <tr>
+            <td>6/26</td>
+            <td>508</td>
+            <td>36,382</td>
+          </tr>
+          <tr>
+            <td>6/27</td>
+            <td>273</td>
+            <td>36,655</td>
+          </tr>
+          <tr>
+            <td>6/28</td>
+            <td>225</td>
+            <td>36,880</td>
+          </tr>
+          <tr>
+            <td>6/29</td>
+            <td>529</td>
+            <td>37,409</td>
+          </tr>
+          <tr>
+            <td>6/30</td>
+            <td>489</td>
+            <td>37,898</td>
+          </tr>
+          <tr>
+            <td>7/1</td>
+            <td>544</td>
+            <td>38,442</td>
+          </tr>
+          <tr>
+            <td>7/2</td>
+            <td>459</td>
+            <td>38,901</td>
+          </tr>
+          <tr>
+            <td>7/3</td>
+            <td>296</td>
+            <td>39,197</td>
+          </tr>
+          <tr>
+            <td>7/4</td>
+            <td>81</td>
+            <td>39,278</td>
+          </tr>
+          <tr>
+            <td>7/5</td>
+            <td>184</td>
+            <td>39,462</td>
+          </tr>
+          <tr>
+            <td>7/6</td>
+            <td>119</td>
+            <td>39,581</td>
+          </tr>
+          <tr>
+            <td>7/7</td>
+            <td>6</td>
+            <td>39,587</td>
+          </tr>
+          <!-- DON'T FORGET UNKNOWN/MISSING -->
+        
+          <tr>
+          <td>Unknown/missing</td>
+          <td>2</td>
+          <td>39,589</td>	  
+        </tr>		
+        </tbody>
+      </table>
+		<p class="small">Due to the need to confirm reports and reporting delays, current week data may be incomplete.</p>
+		</div></div>
+		<div class="panel-heading"> <a data-toggle="collapse" data-target="#casesm" href="#casesm1">
+    <p class="small">More about positive cases</p></a></div>
+  	<div id="casesm" class="panel-collapse collapse"><div class="panel-body">
+		<ul class="small">
+			<li>Positive cases are individual people who live in Minnesota that tested positive for COVID-19.<ul>
+				<li>As of 5/13, total case data is represented by the date of specimen collection.</li></ul></li></ul>
+    </div></div></div>
+
+<!--NOISO-->
+	<h3>Patients no longer needing isolation</h3>
+
+<ul>
+  <li><strong>Patients no longer needing isolation: </strong>34,902</li></ul>
+
+	<div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#noiso" href="#noiso1"><span class="small">More about patients no longer needing isolation</span></a></div>
+  	<div id="noiso" class="panel-collapse collapse"><div class="panel-body">
+	<ul class="small">
+		<li>Patients no longer needing isolation represents individuals with confirmed COVID-19 who no longer need to self-isolate. </li>
+		<li>As of 5/18 patients no longer needing isolation does not include those who have died.</li>
+		</ul>
+		</div></div></div>
+<!--DEATHS-->
+	<h3>Deaths</h3>
+<ul>
+	<li><strong>Deaths: </strong>1,485
+	  <ul>
+	    <li>Deaths among cases that resided in long-term care or assisted living facilities: 1,161</li></ul></li>
+	  
+	<li><strong>Probable COVID-19 Deaths*:</strong> 38<br>
+		<span class="small">* COVID-19 listed on death certificate but a positive test not documented for the person.</span></li>
+</ul>
+	<img src="/diseases/coronavirus/stats/5deathgraph.png" width="100%" alt="Deaths of confirmed cases in Minnesota, data in table below"/><div class="panel panel-default">
+  	<div class="panel-heading"><a data-toggle="collapse" data-target="#death" href="#death1">
+    <p>Deaths data table</p></a></div>
+  	<div id="death" class="panel-collapse collapse"><div class="panel-body">
+<table id="deathtable" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+            <th scope="col">Date reported</th>
+            <th scope="col">Newly reported deaths (daily)</th>
+            <th scope="col">Total deaths</th>
+          </tr>
+          <tr>
+            <th scope="row">3/21</th>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <th scope="row">3/22</th>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <th scope="row">3/23</th>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <th scope="row">3/24</th>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <th scope="row">3/25</th>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <th scope="row">3/26</th>
+            <td>1</td>
+            <td>2</td>
+          </tr>
+            <tr>
+    <th scope="row">3/27</th>
+    <td>2</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <th scope="row">3/28</th>
+    <td>1</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <th scope="row">3/29</th>
+    <td>4</td>
+    <td>9</td>
+  </tr>
+  <tr>
+    <th scope="row">3/30</th>
+    <td>1</td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <th scope="row">3/31</th>
+    <td>2</td>
+    <td>12</td>
+  </tr>
+  <tr>
+<th scope="row">4/1</th>
+    <td>5</td>
+    <td>17</td>
+  </tr>
+  <tr>
+<th scope="row">4/2</th>
+    <td>1</td>
+    <td>18</td>
+  </tr>
+  <tr>
+<th scope="row">4/3</th>
+    <td>4</td>
+    <td>22</td>
+  </tr>
+  <tr>
+<th scope="row">4/4</th>
+    <td>2</td>
+    <td>24</td>
+  </tr>
+  <tr>
+<th scope="row">4/5</th>
+    <td>5</td>
+    <td>29</td>
+  </tr>
+  <tr>
+<th scope="row">4/6</th>
+    <td>1</td>
+    <td>30</td>
+  </tr>
+  <tr>
+<th scope="row">4/7</th>
+    <td>4</td>
+    <td>34</td>
+  </tr>
+  <tr>
+<th scope="row">4/8</th>
+    <td>5</td>
+    <td>39</td>
+  </tr>
+  <tr>
+<th scope="row">4/9</th>
+    <td>11</td>
+    <td>50</td>
+  </tr>
+  <tr>
+<th scope="row">4/10</th>
+    <td>7</td>
+    <td>57</td>
+  </tr>
+  <tr>
+<th scope="row">4/11</th>
+    <td>7</td>
+    <td>64</td>
+  </tr>
+  <tr>
+<th scope="row">4/12</th>
+    <td>6</td>
+    <td>70</td>
+  </tr>
+  <tr>
+<th scope="row">4/13</th>
+    <td>0</td>
+    <td>70</td>
+  </tr>
+  <tr>
+<th scope="row">4/14</th>
+    <td>9</td>
+    <td>79</td>
+  </tr>
+  <tr>
+<th scope="row">4/15</th>
+    <td>8</td>
+    <td>87</td>
+  </tr>
+  <tr>
+<th scope="row">4/16</th>
+    <td>7</td>
+    <td>94</td>
+  </tr>
+  <tr>
+<th scope="row">4/17</th>
+    <td>17</td>
+    <td>111</td>
+  </tr>
+  <tr>
+<th scope="row">4/18</th>
+    <td>10</td>
+    <td>121</td>
+  </tr>
+  <tr>
+<th scope="row">4/19</th>
+    <td>13</td>
+    <td>134</td>
+  </tr>
+  <tr>
+<th scope="row">4/20</th>
+    <td>9</td>
+    <td>143</td>
+  </tr>
+  <tr>
+<th scope="row">4/21</th>
+    <td>17</td>
+    <td>160</td>
+  </tr>
+  <tr>
+<th scope="row">4/22</th>
+    <td>19</td>
+    <td>179</td>
+  </tr>
+  <tr>
+<th scope="row">4/23</th>
+    <td>21</td>
+    <td>200</td>
+  </tr>
+  <tr>
+<th scope="row">4/24</th>
+    <td>21</td>
+    <td>221</td>
+  </tr>
+  <tr>
+<th scope="row">4/25</th>
+    <td>23</td>
+    <td>244</td>
+  </tr>
+  <tr>
+<th scope="row">4/26</th>
+    <td>28</td>
+    <td>272</td>
+  </tr>
+  <tr>
+<th scope="row">4/27</th>
+    <td>14</td>
+    <td>286</td>
+  </tr>
+  <tr>
+<th scope="row">4/28</th>
+    <td>15</td>
+    <td>301</td>
+  </tr>
+  <tr>
+<th scope="row">4/29</th>
+    <td>18</td>
+    <td>319</td>
+  </tr>
+  <tr>
+<th scope="row">4/30</th>
+    <td>24</td>
+    <td>343</td>
+  </tr>
+  <tr>
+<th scope="row">5/1</th>
+    <td>28</td>
+    <td>371</td>
+  </tr>
+  <tr>
+<th scope="row">5/2</th>
+    <td>24</td>
+    <td>395</td>
+  </tr>
+  <tr>
+<th scope="row">5/3</th>
+    <td>24</td>
+    <td>419</td>
+  </tr>
+  <tr>
+<th scope="row">5/4</th>
+    <td>9</td>
+    <td>428</td>
+  </tr>
+  <tr>
+<th scope="row">5/5</th>
+    <td>27</td>
+    <td>455</td>
+  </tr>
+  <tr>
+<th scope="row">5/6</th>
+    <td>29</td>
+    <td>484</td>
+  </tr>
+  <tr>
+<th scope="row">5/7</th>
+    <td>23</td>
+    <td>507</td>
+  </tr>
+  <tr>
+<th scope="row">5/8</th>
+    <td>26</td>
+    <td>533</td>
+  </tr>
+  <tr>
+<th scope="row">5/9</th>
+    <td>24</td>
+    <td>557</td>
+  </tr>
+  <tr>
+<th scope="row">5/10</th>
+    <td>20</td>
+    <td>577</td>
+  </tr>
+  <tr>
+<th scope="row">5/11</th>
+    <td>13</td>
+    <td>590</td>
+  </tr>
+  <tr>
+<th scope="row">5/12</th>
+    <td>23</td>
+    <td>613</td>
+  </tr>
+  <tr>
+<th scope="row">5/13</th>
+    <td>24</td>
+    <td>637</td>
+  </tr>
+  <tr>
+<th scope="row">5/14</th>
+    <td>25</td>
+    <td>662</td>
+  </tr>
+  <tr>
+<th scope="row">5/15</th>
+    <td>20</td>
+    <td>682</td>
+  </tr>
+  <tr>
+<th scope="row">5/16</th>
+    <td>17</td>
+    <td>699</td>
+  </tr>
+  <tr>
+<th scope="row">5/17</th>
+    <td>22</td>
+    <td>721</td>
+  </tr>
+  <tr>
+<th scope="row">5/18</th>
+    <td>9</td>
+    <td>730</td>
+  </tr>
+  <tr>
+<th scope="row">5/19</th>
+    <td>17</td>
+    <td>747</td>
+  </tr>
+  <tr>
+<th scope="row">5/20</th>
+    <td>29</td>
+    <td>776</td>
+  </tr>
+  <tr>
+<th scope="row">5/21</th>
+    <td>32</td>
+    <td>808</td>
+  </tr>
+  <tr>
+<th scope="row">5/22</th>
+    <td>33</td>
+    <td>841</td>
+  </tr>
+  <tr>
+<th scope="row">5/23</th>
+    <td>10</td>
+    <td>851</td>
+  </tr>
+  <tr>
+<th scope="row">5/24</th>
+    <td>17</td>
+
+    <td>868</td>
+  </tr>
+  <tr>
+<th scope="row">5/25</th>
+    <td>12</td>
+    <td>880</td>
+  </tr>
+  <tr>
+<th scope="row">5/26</th>
+    <td>18</td>
+    <td>898</td>
+  </tr>
+  <tr>
+<th scope="row">5/27</th>
+    <td>33</td>
+    <td>931</td>
+  </tr>
+  <tr>
+<th scope="row">5/28</th>
+    <td>35</td>
+    <td>966</td>
+  </tr>
+  <tr>
+<th scope="row">5/29</th>
+    <td>29</td>
+    <td>995</td>
+  </tr>
+  <tr>
+<th scope="row">5/30</th>
+    <td>30</td>
+    <td>1,025</td>
+  </tr>
+  <tr>
+<th scope="row">5/31</th>
+    <td>14</td>
+    <td>1,039</td>
+  </tr>
+  <tr>
+<th scope="row">6/1</th>
+    <td>10</td>
+    <td>1,049</td>
+  </tr>
+  <tr>
+<th scope="row">6/2</th>
+    <td>22</td>
+    <td>1,071</td>
+  </tr>
+  <tr>
+<th scope="row">6/3</th>
+    <td>14</td>
+    <td>1,085</td>
+  </tr>
+  <tr>
+<th scope="row">6/4</th>
+    <td>29</td>
+    <td>1,114</td>
+  </tr>
+  <tr>
+<th scope="row">6/5</th>
+    <td>33</td>
+    <td>1,147</td>
+  </tr>
+  <tr>
+<th scope="row">6/6</th>
+    <td>22</td>
+    <td>1,169</td>
+  </tr>
+  <tr>
+<th scope="row">6/7</th>
+    <td>16</td>
+    <td>1,185</td>
+  </tr>
+  <tr>
+<th scope="row">6/8</th>
+    <td>11</td>
+    <td>1,196</td>
+  </tr>
+  <tr>
+<th scope="row">6/9</th>
+    <td>20</td>
+    <td>1,216</td>
+  </tr>
+  <tr>
+<th scope="row">6/10</th>
+    <td>19</td>
+    <td>1,235</td>
+  </tr>
+  <tr>
+<th scope="row">6/11</th>
+    <td>12</td>
+    <td>1,247</td>
+  </tr>
+  <tr>
+<th scope="row">6/12</th>
+    <td>25</td>
+    <td>1,272</td>
+  </tr>
+  <tr>
+<th scope="row">6/13</th>
+    <td>9</td>
+    <td>1,281</td>
+  </tr>
+  <tr>
+<th scope="row">6/14</th>
+    <td>15</td>
+    <td>1,296</td>
+  </tr>
+  <tr>
+<th scope="row">6/15</th>
+    <td>6</td>
+    <td>1,302</td>
+  </tr>
+  <tr>
+<th scope="row">6/16</th>
+    <td>9</td>
+    <td>1,311</td>
+  </tr>
+  <tr>
+<th scope="row">6/17</th>
+    <td>12</td>
+    <td>1,323</td>
+  </tr>
+  <tr>
+<th scope="row">6/18</th>
+    <td>19</td>
+    <td>1,342</td>
+  </tr>
+  <tr>
+<th scope="row">6/19</th>
+    <td>17</td>
+    <td>1,359</td>
+  </tr>
+  <tr>
+<th scope="row">6/20</th>
+    <td>12</td>
+    <td>1,371</td>
+  </tr>
+  <tr>
+<th scope="row">6/21</th>
+    <td>8</td>
+    <td>1,379</td>
+  </tr>
+  <tr>
+<th scope="row">6/22</th>
+    <td>4</td>
+    <td>1,383</td>
+  </tr>
+  <tr>
+<th scope="row">6/23</th>
+    <td>9</td>
+    <td>1,392</td>
+  </tr>
+  <tr>
+<th scope="row">6/24</th>
+    <td>5</td>
+    <td>1,397</td>
+  </tr>
+  <tr>			
+<th scope="row">6/25</th>
+    <td>9</td>
+    <td>1,406</td>
+  </tr>
+  <tr>
+    <th scope="row">6/26</th>
+    <td>5</td>
+    <td>1,411</td>
+  </tr>
+  <tr>
+    <th scope="row">6/27</th>
+    <td>6</td>
+    <td>1,417</td>
+  </tr>
+  <tr>
+    <th scope="row">6/28</th>
+    <td>8</td>
+    <td>1,425</td>
+  </tr>
+  <tr>
+    <th scope="row">6/29</th>
+    <td>10</td>
+    <td>1,435</td>
+  </tr>
+  <tr>
+    <th scope="row">6/30</th>
+    <td>6</td>
+    <td>1,441</td>
+  </tr>
+  <tr>
+    <th scope="row">7/1</th>
+    <td>4</td>
+    <td>1,445</td>
+  </tr>		
+<tr>
+    <th scope="row">7/2</th>
+    <td>13</td>
+    <td>1,458</td>
+  </tr>
+<tr>
+  <th scope="row">7/3</th>
+  <td>8</td>
+  <td>1,466</td>
+</tr>
+<tr>
+  <th scope="row">7/4</th>
+  <td>-</td>
+  <td>1,466</td>
+</tr>
+<tr>
+  <th scope="row">7/5</th>
+  <td>5</td>
+  <td>1,471</td>
+</tr>
+<tr>
+  <th scope="row">7/6</th>
+  <td>3</td>
+  <td>1,474</td>
+</tr>
+<tr>
+  <th scope="row">7/7</th>
+  <td>3</td>
+  <td>1,477</td>
+</tr>
+<tr>
+  <th scope="row">7/8</th>
+  <td>8</td>
+  <td>1,485</td>
+</tr>	
+        </tbody>
+      </table>
+	</div></div>
+	<div class="panel-heading"> <a data-toggle="collapse" data-target="#deathm" href="#deathm1">
+		<span class="small">More about deaths</span></a></div>
+  	<div id="deathm" class="panel-collapse collapse"><div class="panel-body">
+	<ul class="small">
+	<li>Deaths are for those who have died from COVID-19.</li>
+	<li>Probable COVID-19 Deaths have COVID-19 listed on death certificate but a positive test not documented for the person. Because there was no positive test, these individuals are not included in total positive cases or total deaths from COVID-19.</li>
+	<li>A death previously reported on 6/11 was removed on 6/20 due to data cleaning.</li>
+		<li>A death previously reported on 5/6 was removed on 6/24 due to data cleaning.</li>
+		<li>Deaths are represented by the date reported. This means our data will show no report for 7/4.</li></ul>
+	</div></div></div>
+			
+<!--HOSPITALIZATION-->
+	<h2 id="hospital2">Hospitalization</h2>
+<strong>Total cases requiring hospitalization: </strong>4,272
+<ul>
+  <li>Hospitalized as of today: 265
+    <ul>
+      <li>Hospitalized in ICU as of today: 122</li></ul></li></ul>
+	<img src="/diseases/coronavirus/stats/6hospgraph.png" width="100%" alt="Minnesota COVID-19 hospitalizations, data in table below"/>
+	<div class="panel panel-default"><div class="panel-heading"> <a data-toggle="collapse" data-target="#hosp" href="#hosp1">
+    <p>Hospitalization data table</p></a></div>
+  	<div id="hosp" class="panel-collapse collapse"><div class="panel-body">
+
+      <table id="hosptable" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+            <th scope="col">Date reported</th>
+            <th scope="col">Hospitalized in ICU (daily)</th>
+            <th scope="col">Hospitalized, not in ICU (daily)</th>
+            <th scope="col">Total hospitalizations</th>
+            <th scope="col">Total ICU hospitalizations</th>
+          </tr>
+          <tr>
+            <th scope="row">3/19</th>
+            <td>1</td>
+            <td>6</td>
+            <td>7</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <th scope="row">3/20</th>
+            <td>2</td>
+            <td>3</td>
+            <td>7</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <th scope="row">3/21</th>
+            <td>4</td>
+            <td>2</td>
+            <td>12</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <th scope="row">3/22</th>
+            <td>5</td>
+            <td>5</td>
+            <td>12</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <th scope="row">3/23</th>
+            <td>5</td>
+            <td>7</td>
+            <td>21</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <th scope="row">3/24</th>
+            <td>7</td>
+            <td>8</td>
+            <td>25</td>
+            <td>7</td>
+          </tr>
+          <tr>
+            <th scope="row">3/25</th>
+            <td>12</td>
+            <td>14</td>
+            <td>35</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <th scope="row">3/26</th>
+            <td>13</td>
+            <td>18</td>
+            <td>41</td>
+            <td>13</td>
+          </tr>
+          <tr>
+            <th scope="row">3/27</th>
+            <td>17</td>
+            <td>17</td>
+            <td>51</td>
+            <td>17</td>
+          </tr>
+          <tr>
+            <th scope="row">3/28</th>
+            <td>13</td>
+            <td>17</td>
+            <td>57</td>
+            <td>17</td>
+          </tr>
+          <tr>
+            <th scope="row">3/29</th>
+            <td>16</td>
+            <td>23</td>
+            <td>75</td>
+            <td>24</td>
+          </tr>
+          <tr>
+            <th scope="row">3/30</th>
+            <td>24</td>
+            <td>32</td>
+            <td>92</td>
+            <td>25</td>
+          </tr>
+          <tr>
+            <th scope="row">3/31</th>
+            <td>26</td>
+            <td>30</td>
+            <td>112</td>
+            <td>32</td>
+          </tr>
+          <tr>
+            <th scope="row">4/1</th>
+            <td>27</td>
+            <td>27</td>
+            <td>122</td>
+            <td>40</td>
+          </tr>
+          <tr>
+            <th scope="row">4/2</th>
+            <td>38</td>
+            <td>37</td>
+            <td>138</td>
+            <td>49</td>
+          </tr>
+          <tr>
+            <th scope="row">4/3</th>
+            <td>40</td>
+            <td>46</td>
+            <td>156</td>
+            <td>32</td>
+          </tr>
+          <tr>
+            <th scope="row">4/4</th>
+            <td>42</td>
+            <td>53</td>
+            <td>180</td>
+            <td>69</td>
+          </tr>
+          <tr>
+            <th scope="row">4/5</th>
+            <td>48</td>
+            <td>58</td>
+            <td>202</td>
+            <td>77</td>
+          </tr>
+          <tr>
+            <th scope="row">4/6</th>
+            <td>57</td>
+            <td>58</td>
+            <td>223</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <th scope="row">4/7</th>
+            <td>64</td>
+            <td>56</td>
+            <td>242</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <th scope="row">4/8</th>
+            <td>64</td>
+            <td>71</td>
+            <td>271</td>
+            <td>105</td>
+          </tr>
+          <tr>
+            <th scope="row">4/9</th>
+            <td>63</td>
+            <td>82</td>
+            <td>293</td>
+            <td>119</td>
+          </tr>
+			<tr>
+            <th scope="row">4/10</th>
+            <td>64</td>
+            <td>79</td>
+            <td>317</td>
+            <td>131</td>
+          </tr>
+			<tr>
+            <th scope="row">4/11</th>
+            <td>69</td>
+            <td>76</td>
+            <td>340</td>
+            <td>138</td>
+          </tr>
+			<tr>
+            <th scope="row">4/12</th>
+            <td>74</td>
+            <td>83</td>
+            <td>361</td>
+            <td>146</td>
+          </tr>
+			<tr>
+            <th scope="row">4/13</th>
+            <td>74</td>
+            <td>83</td>
+            <td>361</td>
+            <td>146</td>
+          </tr>
+			<tr>
+            <th scope="row">4/14</th>
+            <td>75</td>
+            <td>102</td>
+            <td>405</td>
+            <td>155</td>
+          </tr>
+			<tr>
+            <th scope="row">4/15</th>
+            <td>93</td>
+            <td>104</td>
+            <td>445</td>
+            <td>175</td>
+          </tr>
+			<tr>
+            <th scope="row">4/16</th>
+            <td>103</td>
+            <td>110</td>
+            <td>475</td>
+            <td>188</td>
+          </tr>
+			<tr>
+            <th scope="row">4/17</th>
+            <td>106</td>
+            <td>117</td>
+            <td>518</td>
+            <td>202</td>
+          </tr>
+			<tr>
+            <th scope="row">4/18</th>
+            <td>111</td>
+            <td>128</td>
+            <td>561</td>
+            <td>215</td>
+          </tr>
+			<tr>
+            <th scope="row">4/19</th>
+            <td>116</td>
+            <td>112</td>
+            <td>574</td>
+            <td>226</td>
+          </tr>	
+			<tr>
+            <th scope="row">4/20</th>
+            <td>126</td>
+            <td>111</td>
+            <td>602</td>
+            <td>241</td>
+          </tr>	
+			<tr>
+            <th scope="row">4/21</th>
+            <td>117</td>
+            <td>120</td>
+            <td>629</td>
+            <td>253</td>
+          </tr>	
+			<tr>
+            <th scope="row">4/22</th>
+            <td>107</td>
+            <td>133</td>
+            <td>660</td>
+            <td>262</td>
+          </tr>
+			<tr>
+            <th scope="row">4/23</th>
+            <td>104</td>
+            <td>164</td>
+            <td>712</td>
+            <td>274</td>
+          </tr>	
+			<tr>
+            <th scope="row">4/24</th>
+            <td>111</td>
+            <td>167</td>
+            <td>756</td>
+            <td>281</td>
+          </tr>	
+			<tr>
+            <th scope="row">4/25</th>
+            <td>109</td>
+            <td>179</td>
+            <td>797</td>
+            <td>291</td>
+          </tr>
+			<tr>
+            <th scope="row">4/26</th>
+            <td>115</td>
+            <td>170</td>
+            <td>829</td>
+            <td>301</td>
+          </tr>	
+			<tr>
+            <th scope="row">4/27</th>
+            <td>122</td>
+            <td>170</td>
+            <td>861</td>
+            <td>316</td>
+          </tr>	
+			<tr>
+            <th scope="row">4/28</th>
+            <td>120</td>
+            <td>194</td>
+            <td>912</td>
+            <td>324</td>
+          </tr>
+			<tr>
+            <th scope="row">4/29</th>
+            <td>119</td>
+            <td>201</td>
+            <td>950</td>
+            <td>337</td>
+          </tr>
+			<tr>
+            <th scope="row">4/30</th>
+            <td>130</td>
+            <td>235</td>
+            <td>1,044</td>
+            <td>358</td>
+          </tr>
+			<tr>
+            <th scope="row">5/1</th>
+            <td>118</td>
+            <td>251</td>
+            <td>1,096</td>
+            <td>380</td>
+          </tr>
+			<tr>
+            <th scope="row">5/2</th>
+            <td>135</td>
+            <td>254</td>
+            <td>1,159</td>
+            <td>404</td>
+          </tr>
+			<tr>
+            <th scope="row">5/3</th>
+            <td>155</td>
+            <td>218</td>
+            <td>1,199</td>
+            <td>426</td>
+          </tr>
+			<tr>
+            <th scope="row">5/4</th>
+            <td>166</td>
+            <td>230</td>
+            <td>1,271</td>
+            <td>444</td>
+          </tr>
+			<tr>
+            <th scope="row">5/5</th>
+            <td>182</td>
+            <td>252</td>
+            <td>1,350</td>
+            <td>475</td>
+          </tr>
+			<tr>
+            <th scope="row">5/6</th>
+            <td>180</td>
+            <td>263</td>
+            <td>1,405</td>
+            <td>488</td>
+          </tr>
+			<tr>
+            <th scope="row">5/7</th>
+            <td>182</td>
+            <td>253</td>
+            <td>1,459</td>
+            <td>512</td>
+          </tr>
+			<tr>
+            <th scope="row">5/8</th>
+            <td>198</td>
+            <td>275</td>
+            <td>1,549</td>
+            <td>540</td>
+          </tr>
+			<tr>
+            <th scope="row">5/9</th>
+            <td>180</td>
+            <td>296</td>
+            <td>1,612</td>
+            <td>556</td>
+          </tr>
+			<tr>
+            <th scope="row">5/10</th>
+            <td>199</td>
+            <td>235</td>
+            <td>1,657</td>
+            <td>581</td>
+          </tr>		
+			<tr>
+            <th scope="row">5/11</th>
+            <td>194</td>
+            <td>258</td>
+            <td>1,716</td>
+            <td>600</td>
+          </tr>	
+			<tr>
+            <th scope="row">5/12</th>
+            <td>199</td>
+            <td>297</td>
+            <td>1,799</td>
+            <td>625</td>
+          </tr>	
+			<tr>
+            <th scope="row">5/13</th>
+            <td>199</td>
+            <td>295</td>
+            <td>1,851</td>
+            <td>647</td>
+          </tr>	
+			<tr>
+            <th scope="row">5/14</th>
+            <td>203</td>
+            <td>295</td>
+            <td>1,915</td>
+            <td>663</td>
+          </tr>
+			<tr>
+			  <th scope="row">5/15</th>
+			  <td>200</td>
+			  <td>298</td>
+			  <td>1,985</td>
+			  <td>679</td>
+		  </tr>
+			<tr>
+			  <th scope="row">5/16</th>
+			  <td>225</td>
+			  <td>268</td>
+			  <td>2,039</td>
+			  <td>700</td>
+		  </tr>
+			<tr>
+			  <th scope="row">5/17</th>
+			  <td>221</td>
+			  <td>266</td>
+			  <td>2,090</td>
+			  <td>716</td>
+		  </tr>
+			<tr>
+			  <th scope="row">5/18</th>
+			  <td>229</td>
+			  <td>259</td>
+			  <td>2,128</td>
+			  <td>731</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">5/19</th>
+			  <td>229</td>
+			  <td>316</td>
+			  <td>2,221</td>
+			  <td>750</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">5/20</th>
+			  <td>212</td>
+			  <td>338</td>
+			  <td>2,308</td>
+			  <td>773</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">5/21</th>
+			  <td>229</td>
+			  <td>337</td>
+			  <td>2,380</td>
+			  <td>787</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">5/22</th>
+			  <td>233</td>
+			  <td>301</td>
+			  <td>2,432</td>
+			  <td>806</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">5/23</th>
+			  <td>215</td>
+			  <td>353</td>
+			  <td>2,534</td>
+			  <td>832</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">5/24</th>
+			  <td>207</td>
+			  <td>346</td>
+			  <td>2,588</td>
+			  <td>841</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">5/25</th>
+			  <td>248</td>
+			  <td>357</td>
+			  <td>2,676</td>
+			  <td>869</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">5/26</th>
+			  <td>258</td>
+			  <td>312</td>
+			  <td>2,709</td>
+			  <td>886</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">5/27</th>
+			  <td>260</td>
+			  <td>338</td>
+			  <td>2,796</td>
+			  <td>902</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">5/28</th>
+			  <td>242</td>
+			  <td>364</td>
+			  <td>2,880</td>
+			  <td>924</td>
+		  </tr>
+			<tr>
+			  <th scope="row">5/29</th>
+			  <td>259</td>
+			  <td>333</td>
+			  <td>2,936</td>
+			  <td>938</td>
+		  </tr>
+			<tr>
+			  <th scope="row">5/30</th>
+			  <td>263</td>
+			  <td>326</td>
+			  <td>3,011</td>
+			  <td>960</td>
+		  </tr>
+			<tr>
+			  <th scope="row">5/31</th>
+			  <td>257</td>
+			  <td>298</td>
+			  <td>3,047</td>
+			  <td>971</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/1</th>
+			  <td>253</td>
+			  <td>296</td>
+			  <td>3,086</td>
+			  <td>981</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/2</th>
+			  <td>248</td>
+			  <td>289</td>
+			  <td>3,134</td>
+			  <td>1,003</td>
+		  </tr>		
+			<tr>
+			  <th scope="row">6/3</th>
+			  <td>254</td>
+			  <td>283</td>
+			  <td>3,203</td>
+			  <td>1,022</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">6/4</th>
+			  <td>244</td>
+			  <td>268</td>
+			  <td>3,253</td>
+			  <td>1,033</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/5</th>
+			  <td>220</td>
+			  <td>258</td>
+			  <td>3,289</td>
+			  <td>1,044</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/6</th>
+			  <td>206</td>
+			  <td>267</td>
+			  <td>3,336</td>
+			  <td>1,044</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/7</th>
+			  <td>199</td>
+			  <td>251</td>
+			  <td>3,367</td>
+			  <td>1,043</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">6/8</th>
+			  <td>198</td>
+			  <td>254</td>
+			  <td>3,401</td>
+			  <td>1,052</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/9</th>
+			  <td>199</td>
+			  <td>256</td>
+			  <td>3,441</td>
+			  <td>1,068</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/10</th>
+			  <td>193</td>
+			  <td>234</td>
+			  <td>3,482</td>
+			  <td>1,083</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/11</th>
+			  <td>196</td>
+			  <td>215</td>
+			  <td>3,522</td>
+			  <td>1,091</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/12</th>
+			  <td>191</td>
+			  <td>212</td>
+			  <td>3,557</td>
+			  <td>1,093</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/13</th>
+			  <td>191</td>
+			  <td>199</td>
+			  <td>3,581</td>
+			  <td>1,104</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/14</th>
+			  <td>186</td>
+			  <td>183</td>
+			  <td>3,610</td>
+			  <td>1,110</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/15</th>
+			  <td>186</td>
+			  <td>167</td>
+			  <td>3,630</td>
+			  <td>1,121</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/16</th>
+			  <td>185</td>
+			  <td>172</td>
+			  <td>3,658</td>
+			  <td>1,128</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/17</th>
+			  <td>181</td>
+			  <td>170</td>
+			  <td>3,689</td>
+			  <td>1,136</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/18</th>
+			  <td>171</td>
+			  <td>174</td>
+			  <td>3,718</td>
+			  <td>1,144</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/19</th>
+			  <td>168</td>
+			  <td>171</td>
+			  <td>3,748</td>
+			  <td>1,150</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/20</th>
+			  <td>161</td>
+			  <td>163</td>
+			  <td>3,767</td>
+			  <td>1,155</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/21</th>
+			  <td>160</td>
+			  <td>162</td>
+			  <td>3,797</td>
+			  <td>1,163</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/22</th>
+			  <td>156</td>
+			  <td>176</td>
+			  <td>3,830</td>
+			  <td>1,180</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/23</th>
+			  <td>158</td>
+			  <td>181</td>
+			  <td>3,860</td>
+			  <td>1,191</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">6/24</th>
+			  <td>160</td>
+			  <td>180</td>
+			  <td>3,897</td>
+			  <td>1,203</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">6/25</th>
+			  <td>162</td>
+			  <td>174</td>
+			  <td>3,943</td>
+			  <td>1,218</td>
+		  </tr>	
+			<tr>
+			  <th scope="row">6/26</th>
+			  <td>157</td>
+			  <td>178</td>
+			  <td>3,966</td>
+			  <td>1,221</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/27</th>
+			  <td>155</td>
+			  <td>145</td>
+			  <td>3,986</td>
+			  <td>1,233</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/28</th>
+			  <td>143</td>
+			  <td>145</td>
+			  <td>4,010</td>
+			  <td>1,241</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/29</th>
+			  <td>140</td>
+			  <td>138</td>
+			  <td>4,031</td>
+			  <td>1,249</td>
+		  </tr>
+			<tr>
+			  <th scope="row">6/30</th>
+			  <td>136</td>
+			  <td>134</td>
+			  <td>4,054</td>
+			  <td>1,258</td>
+		  </tr>		
+			<tr>
+			  <th scope="row">7/1</th>
+			  <td>125</td>
+			  <td>135</td>
+			  <td>4,081</td>
+			  <td>1,258</td>
+		  </tr>
+			<tr>
+			  <th scope="row">7/2</th>
+			  <td>123</td>
+			  <td>151</td>
+			  <td>4,112</td>
+			  <td>1,266</td>
+		  </tr>
+			<tr>
+			  <th scope="row">7/3</th>
+			  <td>132</td>
+			  <td>138</td>
+			  <td>4,139</td>
+			  <td>1,277</td>
+		  </tr>
+			<tr>
+			  <th scope="row">7/4</th>
+			  <td>-</td>
+			  <td>-</td>
+			  <td>4,139</td>
+			  <td>1,277</td>
+		  </tr>
+			<tr>
+			  <th scope="row">7/5</th>
+			  <td>132</td>
+			  <td>121</td>
+			  <td>4,170</td>
+			  <td>1,287</td>
+		  </tr>
+			<tr>
+			  <th scope="row">7/6</th>
+			  <td>125</td>
+			  <td>133</td>
+			  <td>4,219</td>
+			  <td>1,290</td>
+		  </tr>
+			<tr>
+			  <th scope="row">7/7</th>
+			  <td>121</td>
+			  <td>146</td>
+			  <td>4,252</td>
+			  <td>1,295</td>
+		  </tr>
+			<tr>
+			  <th scope="row">7/8</th>
+			  <td>122</td>
+			  <td>143</td>
+			  <td>4,272</td>
+			  <td>1,302</td>
+		  </tr>
+        </tbody>
+      </table>
+    </div></div>
+	<div class="panel-heading"> <a data-toggle="collapse" data-target="#hospm" href="#hospm1">
+		<span class="small">More about hospitalizations</span></a></div>
+  	<div id="hospm" class="panel-collapse collapse"><div class="panel-body">
+	<ul class="small">
+	<li>Hospitalizations and ICU data was not collected on 7/3, therefore no hospitalizations are reported for 7/4.</li>
+</ul>
+	</div></div></div>
+	
+	<h2 id="case2">Case Demographics</h2>
+<!--AGE-->
+	<h3>Age</h3>
+	<iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="MN COVID-19 Cases by Age Group" src="https://mndps.maps.arcgis.com/apps/opsdashboard/index.html#/1a77e6b78c5c4ba1b20eca0cbcee28be"></iframe>
+	<div class="panel panel-default"><div class="panel-heading"> <a data-toggle="collapse" data-target="#ageg" href="#ageg1">
+    <p>Age group data table:<br> Including age group of deaths</p></a></div>
+	<div id="ageg" class="panel-collapse collapse">
+    <div class="panel-body">
+<table id="agetable" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+            <th scope="col">Age Group</th>
+            <th scope="col">Number of Cases</th>
+            <th scope="col">Number of Deaths</th>
+          </tr>
+          <tr>
+            <th>0-5 years</th>
+            <td >847</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>6-19 years</th>
+            <td>3,672</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>20-29 years</th>
+            <td>8,818</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <th>30-39 years</th>
+            <td>7,631</td>
+            <td>11</td>
+          </tr>
+			<tr>
+            <th>40-49 years</th>
+            <td>5,960</td>
+            <td>19</td>
+          </tr>
+			<tr>
+            <th>50-59 years</th>
+            <td>5,261</td>
+            <td>75</td>
+          </tr>
+			<tr>
+            <th>60-69 years</th>
+            <td>3,123</td>
+            <td>178</td>
+          </tr>
+          <tr>
+              <th>70-79 years</th>
+              <td>1,758</td>
+              <td>284</td>
+          </tr>
+          <tr>
+            <th>80-89 years</th>
+            <td>1,614</td>
+            <td>509</td>
+          </tr>
+          <tr>
+            <th>90-99 years</th>
+            <td>856</td>
+            <td>379</td>
+          </tr>
+          <tr>
+            <th>100+ years</th>
+            <td>49</td>
+            <td>28</td>
+          </tr>
+          <tr>
+            <th>Unknown/missing</th>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+		</table>
+
+	  </div></div></div>
+			
+<!--GENDER-->
+	<h3>Gender</h3>
+	<iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="MN COVID-19 Cases by Gender" src="https://mndps.maps.arcgis.com/apps/opsdashboard/index.html#/afd7c940e1854d87aeee64d9eba28a28"></iframe>
+	<div class="panel panel-default"><div class="panel-heading"> <a data-toggle="collapse" data-target="#gend" href="#gend1">
+    <p>Gender data table</p></a></div>
+  	<div id="gend" class="panel-collapse collapse"><div class="panel-body">
+<table id="gendtable" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+            <th scope="col">Gender</th>
+            <th scope="col">Number of Cases</th>
+          </tr>
+          <tr>
+            <th scope="row">Male</th>
+            <td>19,080</td>
+          </tr>
+          <tr>
+            <th scope="row">Female</th>
+            <td>19,830</td>
+          </tr>
+          <tr>
+            <th scope="row">Other</th>
+            <td>11</td>
+          </tr>
+          <tr>
+            <th scope="row">Unknown/missing</th>
+            <td>668</td>
+          </tr>
+        </tbody>
+		</table>
+	</div></div></div>
+			
+<!--RACE-->
+	<h3>Race &amp; Ethnicity</h3>
+	<iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="MN COVID-19 Cases by Race" src="https://mndps.maps.arcgis.com/apps/opsdashboard/index.html#/e6b1fce47ee34a4e93366721b3d46411"></iframe><iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="MN COVID-19 Cases by Ethnicity" src="https://mndps.maps.arcgis.com/apps/opsdashboard/index.html#/18bb0a6fc4224ec6a0bb055816ba40ab"></iframe>
+	<div class="panel panel-default"><div class="panel-heading"> <a data-toggle="collapse" data-target="#raceeth" href="#raceeth1"><p>Race and ethnicity data table:<br>Including race and ethnicity of deaths</p></a></div><div id="raceeth" class="panel-collapse collapse"><div class="panel-body">
+<table id="raceethtable" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+            <th scope="col">Race<br></th>
+            <th scope="col">Number of Cases</th>
+            <th scope="col">Number of Deaths</th>
+          </tr>
+          <tr>
+            <th>White</th>
+            <td>16,424</td>
+            <td>1,134</td>
+          </tr>
+          <tr>
+            <th>Black</th>
+            <td>8,083</td>
+            <td>131</td>
+          </tr>
+          <tr>
+            <th>Asian</th>
+            <td>2,847</td>
+            <td>53</td>
+          </tr>
+         <tr>
+            <th>American Indian/ Alaska Native</th>
+            <td>336</td>
+            <td>23</td>
+          </tr>
+			 <tr>
+            <th>Native Hawaiian/ Pacific Islander</th>
+            <td>88</td>
+            <td>3</td>
+             </tr>
+			 <tr>
+            <th>Multiple races</th>
+            <td>839</td>
+            <td>10</td>
+             </tr>
+          <tr>
+            <th>Other</th>
+            <td>4,883</td>
+            <td>23</td>
+          </tr>
+          <tr>
+            <th>Unknown/missing</th>
+            <td>6,089</td>
+            <td>108</td>
+          </tr>
+          <tr class="table_head_shade">
+            <th>Ethnicity</th>
+            <th scope="col">Number of Cases</th>
+            <th scope="col">Number of Deaths</th>
+          </tr>
+          <tr>
+            <th>Hispanic</th>
+            <td>8,649</td>
+            <td>51</td>
+          </tr>
+          <tr>
+            <th>Non-Hispanic</th>
+            <td>24,240</td>
+            <td>1,240</td>
+          </tr>
+          <tr>
+            <th>Unknown/missing</th>
+            <td>6,700</td>
+            <td>194</td>
+          </tr>
+        </tbody>
+      </table>
+
+	 </div></div></div>
+<!--EXPOSURE-->
+	<h2 id="expo2">Likely Exposure</h2>
+	<iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="MN COVID-19 Cases by Likely Exposure" src="https://mndps.maps.arcgis.com/apps/opsdashboard/index.html#/7617eaea86354a539356545ee5a11eba"></iframe>
+	<div class="panel panel-default"><div class="panel-heading"> <a data-toggle="collapse" data-target="#expo" href="#expo1"><p>Likely exposure data table</p></a></div>
+  	<div id="expo" class="panel-collapse collapse"><div class="panel-body">
+<table id="expotable" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+            <th scope="col">Likely Exposure</th>
+            <th scope="col">Number of Cases</th>
+          </tr>
+          <tr>
+            <th>Travel</th>
+            <td>2,020</td>
+          </tr>
+          <tr>
+            <th>Congregate Care Setting (staff, resident, or visitor)</th>
+            <td>7,171</td>
+          </tr>
+          <tr>
+            <th>Corrections (staff, inmate, or visitor)</th>
+            <td>522</td>
+          </tr>
+          <tr>
+            <th>Homeless/Shelter (staff or resident)</th>
+            <td>181</td>
+          </tr>
+          <tr>
+            <th>Health Care (staff or patient)</th>
+            <td>2,707</td>
+          </tr>
+          <tr>
+            <th>Community: outbreak outside of congregate living or health care</th>
+            <td>5,182</td>
+          </tr>				
+          <tr>
+            <th>Community: known contact with confirmed case</th>
+            <td>7,392</td>
+          </tr>
+          <tr>
+            <th>Community: no known contact with confirmed case</th>
+            <td>8,441</td>
+          </tr>	
+          <tr>
+            <th>Unknown/missing</th>
+            <td>5,973</td>
+          </tr>
+        </tbody>
+      </table>
+    </div></div>
+		<div class="panel-heading"> <a data-toggle="collapse" data-target="#expom" href="#expom1"><span class="small">More about likely exposure</span></a></div>
+  	<div id="expom" class="panel-collapse collapse"><div class="panel-body">
+		<ul class="small">
+			<li>Travel: Case traveled outside of Minnesota in the 2 weeks before illness.</li>
+			<li>Congregate Care Setting: Case lived, worked, or visited a long-term care facility (LTCF), assisted living facility, group home, or residential behavioral health (RBH) facility.</li>
+			<li>Corrections: Case lived, worked, or visited a jail/prison setting.</li>
+			<li>Homeless/Shelter: Case was experiencing homelessness, or lived or worked at a shelter.</li>
+			<li>Health Care: Case worked in an acute care facility (hospital, clinic, detox) or was a patient in an acute care facility.</li>
+			<li>Community (outbreak): Case is part of an outbreak not associated with a congregate care, corrections, shelter, or health care setting.</li>
+			<li>Community (known contact with confirmed case): Case had known contact with confirmed case.</li>
+			<li>Community (no known contact with confirmed case): Case had no known contact with confirmed case.</li>
+			<li>Unknown/missing: Interview pending.</li></ul>
+		</div></div></div>
+	<p class="small">Not all cases among health care workers have a likely exposure as health care staff.</p>
+			
+<!--RESIDENCE-->
+<h2 id="map2">Residence</h2>
+	<h3>Cases by County of Residence</h3>
+	<p>County of residence is confirmed  during the case interview. At the time of this posting not all interviews have  been completed.</p>
+	<iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="MN COVID-19 Case Tracking Web Map" src="https://mndps.maps.arcgis.com/apps/opsdashboard/index.html#/0513877b0c074a21a61d292365626a21"></iframe>
+	<div class="panel panel-default"><div class="panel-heading"> <a data-toggle="collapse" data-target="#map" href="#map1"><p>County of residence data table:<br> Including county of residence of deaths</p></a></div>
+  	<div id="map" class="panel-collapse collapse"> <div class="panel-body">
+<table id="maptable" width="100%" border="1">
+        <tbody class="small">
+          <tr class="table_head_shade">
+            <th scope="col">County</th>
+            <th scope="col">Cases</th>
+            <th scope="col">Deaths</th>
+          </tr>
+          <tr>
+            <td>Aitkin</td>
+            <td>15</td>
+            <td>0</td>
+          </tr>			
+          <tr>
+            <td>Anoka</td>
+            <td>2,293</td>
+            <td>110</td>
+          </tr>
+			<tr>
+            <td>Becker</td>
+            <td>57</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Beltrami</td>
+            <td>35</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Benton</td>
+            <td>221</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>Big Stone</td>
+            <td>17</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Blue Earth</td>
+            <td>510</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Brown</td>
+            <td>37</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Carlton</td>
+            <td>88</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Carver</td>
+            <td>417</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Cass</td>
+            <td>19</td>
+            <td>2</td>
+          </tr>
+			<tr>
+            <td>Chippewa</td>
+            <td>79</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Chisago</td>
+            <td>102</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Clay</td>
+            <td>595</td>
+            <td>38</td>
+          </tr>
+          <tr>
+            <td>Clearwater</td>
+            <td>9</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Cook</td>
+            <td>1</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Cottonwood</td>
+            <td>137</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Crow Wing</td>
+            <td>109</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>Dakota</td>
+            <td>2,479</td>
+            <td>93</td>
+          </tr>
+          <tr>
+            <td>Dodge</td>
+            <td>92</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Douglas</td>
+            <td>66</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Faribault</td>
+            <td>60</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Fillmore</td>
+            <td>30</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Freeborn</td>
+            <td>298</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Goodhue</td>
+            <td>132</td>
+            <td>8</td>
+          </tr>
+			<tr>
+            <td>Grant</td>
+            <td>17</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Hennepin</td>
+            <td>12,703</td>
+            <td>789</td>
+          </tr>
+          <tr>
+            <td>Houston</td>
+            <td>28</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Hubbard</td>
+            <td>8</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Isanti</td>
+            <td>76</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Itasca</td>
+            <td>65</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>Jackson</td>
+            <td>55</td>
+            <td>0</td>
+          </tr>
+			<tr>
+            <td>Kanabec</td>
+            <td>15</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Kandiyohi</td>
+            <td>582</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Kittson</td>
+            <td>2</td>
+            <td>0</td>
+          </tr>			
+          <tr>
+            <td>Koochiching</td>
+            <td>17</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Lac qui Parle</td>
+            <td>4</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Lake</td>
+            <td>6</td>
+            <td>0</td>
+          </tr>			
+          <tr>
+            <td>Lake of the Woods</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Le Sueur</td>
+            <td>110</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Lincoln</td>
+            <td>11</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Lyon</td>
+            <td>327</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>McLeod</td>
+            <td>94</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Mahnomen</td>
+            <td>10</td>
+            <td>1</td>
+          </tr>			
+          <tr>
+            <td>Marshall</td>
+            <td>12</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Martin</td>
+            <td>171</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>Meeker</td>
+            <td>61</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Mille Lacs</td>
+            <td>34</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Morrison</td>
+            <td>61</td>
+            <td>1</td>
+          </tr>			
+          <tr>
+            <td>Mower</td>
+            <td>965</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Murray</td>
+            <td>66</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Nicollet</td>
+            <td>176</td>
+            <td>12</td>
+          </tr>
+			<tr>
+            <td>Nobles</td>
+            <td>1,672</td>
+            <td>6</td>
+          </tr>
+			<tr>
+            <td>Norman</td>
+            <td>21</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Olmsted</td>
+            <td>1,168</td>
+            <td>17</td>
+          </tr>
+          <tr>
+            <td>Otter Tail</td>
+            <td>100</td>
+            <td>1</td>
+          </tr>
+			<tr>
+            <td>Pennington</td>
+            <td>52</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Pine</td>
+            <td>110</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Pipestone</td>
+            <td>63</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Polk</td>
+            <td>84</td>
+            <td>2</td>
+          </tr>
+			<tr>
+            <td>Pope</td>
+            <td>12</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Ramsey</td>
+            <td>5,013</td>
+            <td>230</td>
+          </tr>
+			<tr>
+            <td>Red Lake</td>
+            <td>4</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Redwood</td>
+            <td>20</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Renville</td>
+            <td>36</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Rice</td>
+            <td>859</td>
+            <td>8</td>
+          </tr>
+			<tr>
+            <td>Rock</td>
+            <td>31</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Roseau</td>
+            <td>17</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>St. Louis</td>
+            <td>198</td>
+            <td>16</td>
+          </tr>
+          <tr>
+            <td>Scott</td>
+            <td>783</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>Sherburne</td>
+            <td>327</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>Sibley</td>
+            <td>55</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Stearns</td>
+            <td>2,429</td>
+            <td>19</td>
+          </tr>
+          <tr>
+            <td>Steele</td>
+            <td>239</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Stevens</td>
+            <td>6</td>
+            <td>0</td>
+          </tr>			
+          <tr>
+            <td>Swift</td>
+            <td>23</td>
+            <td>1</td>
+          </tr>
+			<tr>
+            <td>Todd</td>
+            <td>402</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Traverse</td>
+            <td>6</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Wabasha</td>
+            <td>35</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Wadena</td>
+            <td>15</td>
+            <td>0</td>
+          </tr>
+			<tr>
+            <td>Waseca</td>
+            <td>71</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Washington</td>
+            <td>1,163</td>
+            <td>40</td>
+          </tr>
+          <tr>
+            <td>Watonwan</td>
+            <td>240</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Wilkin</td>
+            <td>21</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>Winona</td>
+            <td>131</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>Wright</td>
+            <td>492</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>Yellow Medicine</td>
+            <td>30</td>
+            <td>0</td>
+          </tr>
+			<tr>
+            <td>Unknown/missing</td>
+            <td>87</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+		<p class="small">County of residence is confirmed  during the case interview. At the time of this posting not all interviews have  been completed. The county residence data may not equal the total number of reported positive cases.</p></div></div>
+  	<div class="panel-heading"> <a data-toggle="collapse" data-target="#mapa" href="#mapa1">
+    <span class="small">More about location data</span></a></div>
+  	<div id="mapa" class="panel-collapse collapse"><div class="panel-body">
+		<ul class="small">
+			<!-- <li>Cases by zip code of residence is provided in the <a href="/diseases/coronavirus/stats/index.html#wmaps">Weekly Report Interactive Zip Code Maps</a></li> 
+			-->
+			<li>We will not release specific locations for any patients being tested in order to protect patient privacy.</li></ul>
+	</div></div></div>
+
+<!--RESIDENCE TYPE-->
+	<h3>Residence Type</h3>
+	<iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="MN COVID-19 Cases by Residence Type" src="https://mndps.maps.arcgis.com/apps/opsdashboard/index.html#/948ab946c75d4398baca73b7520aef51"></iframe>
+  <div class="panel panel-default">
+    <div class="panel-heading"> <a data-toggle="collapse" data-target="#res" href="#res1">
+      <p>Residence type data table</p>
+    </a></div>
+    <div id="res" class="panel-collapse collapse">
+      <div class="panel-body">
+		  <table id="restable" width="100%" border="1">
+          <tbody class="small">
+            <tr class="table_head_shade">
+              <th scope="col">Residence Type</th>
+              <th scope="col">Number of Cases</th>
+            </tr>
+            <tr>
+              <th>Private residence</th>
+              <td>28,969</td>
+            </tr>
+            <tr>
+              <th>Hotel/Motel</th>
+              <td>58</td>
+            </tr>
+            <tr>
+              <th>Long-term care facility/Assisted living (LTCF)</th>
+              <td>3,560</td>
+            </tr>
+            <tr>
+              <th>Residential behavioral health (RBH)</th>
+              <td>545</td>
+            </tr>
+            <tr>
+              <th>Homeless (sheltered)</th>
+              <td>104</td>
+            </tr>
+            <tr>
+              <th>Homeless (unsheltered)</th>
+              <td>35</td>
+            </tr>
+            <tr>
+              <th>Jail/Prison</th>
+              <td>402</td>
+            </tr>
+            <tr>
+              <th>College/University/Camp Dormitory</th>
+              <td>19</td>
+            </tr>
+            <tr>
+              <th>Work dormitory</th>
+              <td>4</td>
+            </tr>
+			  <tr>
+              <th>Other</th>
+              <td>72</td>
+            </tr>
+            <tr>
+              <th>Unknown/missing</th>
+              <td>5,821</td>
+            </tr>
+          </tbody>
+        </table>
+		</div></div></div>
+	<ul class="small"><li><a href="https://mn.gov/doc/about/covid-19-updates/">MN DOC: COVID-19 Testing of People Incarcerated in MN Prisons</a></li></ul>
+		
+<div class="well">
+<h2 id="weekly2">Weekly Report</h2>
+	<ul>
+	  <li><a href="/diseases/coronavirus/stats/covidweekly27.pdf">Weekly COVID-19 Report: 7/2/2020 (PDF)</a>
+	  <br>This report includes more detailed information, including demographics and more data on cases among health care workers. <span class="small">Updated every Thursday.</span>
+		<ul>
+		  <li><a href="/diseases/coronavirus/stats/index.html">COVID-19 Weekly Report</a><br>
+			Includes an archive of past weekly reports.</li></ul></li>
+	</ul></div>
+			
+<!--FACILITIES-->			
+<h2 id="care2">Care Facilities</h2>
+	<div class="panel panel-default"><div class="panel-heading"> <a data-toggle="collapse" data-target="#ccf" href="#ccf1">
+    <p>Congregate  Care Facilities with Exposures, by County</p></a></div>
+	<div id="ccf" class="panel-collapse collapse"><div class="panel-body">
+	<p class="small">Exposure is defined as a person diagnosed with COVID-19 who either visited, worked, or lived at a congregate care facility while they were contagious.</p>
+
+<table id="ccftable" width="100%" border="1">
+  <tbody class="small">
+    <tr class="table_head_shade">
+      <th scope="col">County</th>
+      <th scope="col">Facility</th>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka</th>
+      <td>Arbor Oaks Senior Living</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Anoka</th>
+      <td>Autumn Glen Senior Living</td>
+    </tr>	  
+	  <tr>
+	    <th scope="row">Anoka </th>
+	    <td>Blaine White Pine I</td>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>Blaine White Pine II</td>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>Camilla Rose Care Center LLC</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Anoka </th>
+	    <td>Cherrywood Advanced Living - Andover</td>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>Crest View Lutheran Home</td>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>Crest View on 42nd</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>Crest View Senior Communities Blaine</td>
+    </tr>		  
+     <tr>
+      <th scope="row">Anoka </th>
+      <td>Edgemont Place Alzheimer's Special Care Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>Edgewood Blaine LLC</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Anoka</th>
+	    <td>Epiphany Assisted Living</td>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>Homestead at Anoka</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Anoka</th>
+	    <td>Landmark of Fridley</td>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>New Perspective Columbia Heights</td>
+    </tr>
+    <tr>
+        <th scope="row">Anoka</th>
+        <td>River Oaks of Anoka</td>
+    </tr>
+    <tr>
+      <th scope="row">Anoka</th>
+      <td>Royce Place Assisted Living</td>
+    </tr>
+    <tr>
+      <th scope="row">Anoka </th>
+      <td>Select Senior Living of Coon Rapids</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Anoka </th>
+	    <td>The Estates at Fridley</td>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>The Estates at Twin Rivers</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Anoka</th>
+	    <td>The Farmstead</td>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka</th>
+      <td>The Harbors Senior Living</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>The Homestead at Coon Rapids</td>
+    </tr>
+	  <tr>
+      <th scope="row">Anoka </th>
+      <td>Walker Methodist Plaza</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Beltrami</th>
+	    <td>WoodsEdge Senior Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Benton</th>
+	    <td>Carefree Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Benton</th>
+	    <td>Good Shepherd Lutheran Home</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Blue Earth</th>
+	    <td>Autumn Grace Memory Care</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Blue Earth</th>
+	    <td>Cottagewood Senior Community Mankato</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Blue Earth</th>
+	    <td>Crystal Seasons Living Center</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Blue Earth</th>
+	    <td>Hillcrest Rehabilitation Center</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Blue Earth</th>
+	    <td>Laurels Peak and Rehabilitation Center</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Blue Earth</th>
+	    <td>Pillars of Mankato</td>
+    </tr>
+	  <tr>
+      <th scope="row">Blue Earth</th>
+      <td>Waters Edge</td>
+    </tr>	
+    <tr>
+      <th scope="row">Brown</th>
+      <td>St. John Lutheran Home</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Carver</th>
+	    <td>Auburn Courts</td>
+    </tr>	  
+	  <tr>
+	    <th scope="row">Carver</th>
+	    <td>Auburn Meadows Assisted Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Carver</th>
+	    <td>Chaska Heights Senior Living</td>
+    </tr>
+	  <tr>
+      <th scope="row">Carver</th>
+      <td>Nagel Assisted Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Carver</th>
+	    <td>River Oaks at Watertown</td>
+    </tr>
+	  <tr>
+      <th scope="row">Carver</th>
+      <td>SummerWood of Chanhassen</td>
+    </tr>
+	  <tr>
+      <th scope="row">Chippewa</th>
+      <td>Clara City Care Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Chippewa</th>
+      <td>Luther Haven</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Clay</th>
+      <td>Eventide Lutheran Home</td>
+    </tr>
+	  <tr>
+      <th scope="row">Clay</th>
+      <td>Lilac Homes Assisted Living</td>
+    </tr>
+    <tr>
+        <th scope="row">Clay</th>
+        <td>Lilac Homes Assisted Living &amp; Memory Care Dilworth</td>
+    </tr>
+    <tr>
+      <th scope="row">Clay</th>
+      <td>Moorhead Rehab and HCC</td>
+    </tr>
+	  <tr>
+      <th scope="row">Cottonwood</th>
+      <td>Good Samaritan Society Windom</td>
+    </tr>
+	  <tr>
+      <th scope="row">Cottonwood</th>
+      <td>The Lodge at Mountain Lake</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Crow Wing</th>
+	    <td>Good Samaritian Society Bethany</td>
+    </tr>
+    <tr>
+      <th scope="row">Crow Wing</th>
+      <td>Minnesota Teen Challenge</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Dakota</th>
+	    <td>Arbors at Ridges</td>
+    </tr>
+	  <tr>
+      <th scope="row">Dakota</th>
+      <td>Augustana Health Care Center of Apple Valley</td>
+    </tr>
+    <tr>
+      <th scope="row">Dakota</th>
+      <td>Benedictine Living Community Northfield</td>
+    </tr>
+	  <tr>
+      <th scope="row">Dakota</th>
+      <td>Brookdale West St. Paul</td>
+    </tr>
+    <tr>
+        <th scope="row">Dakota</th>
+        <td>Centennial House of Apple Valley </td>
+    </tr>
+    <tr>
+        <th scope="row">Dakota</th>
+        <td>Eagan Pointe Senior Living</td>
+    </tr>
+    <tr>
+        <th scope="row">Dakota</th>
+        <td>Emerald Crest Burnsville</td>
+    </tr>
+    <tr>
+      <th scope="row">Dakota</th>
+      <td>Havenwood of Burnsville</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Dakota</th>
+      <td>Inverwood Senior Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Dakota</th>
+	    <td>Lilydale Senior Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Dakota</th>
+	    <td>Orchard Path</td>
+    </tr>
+	  <tr>
+      <th scope="row">Dakota</th>
+      <td>Sanctuary at West St. Paul</td>
+    </tr>
+	  <tr>
+      <th scope="row">Dakota</th>
+      <td>Southview Acres Healthcare Center</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Dakota</th>
+	    <td>The Commons on Marice</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Dakota</th>
+	    <td>The Moments of Lakeville</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Dakota</th>
+	    <td>The Rivers</td>
+    </tr>
+	  <tr>
+      <th scope="row">Dakota</th>
+      <td>The Rosemount Senior Living at Steeple Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Dakota</th>
+      <td>Vista Prairie at River Heights</td>
+    </tr>
+    <tr>
+      <th scope="row">Dakota</th>
+      <td>Walker Methodist Highview Hills</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Dakota</th>
+      <td>Woodlyn Heights Healthcare Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Dodge</th>
+      <td>Fairview Care Center Dodge Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Douglas</th>
+      <td>Grand Arbor</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Faribault</th>
+      <td>Friendship Court</td>
+    </tr>
+    <tr>
+      <th scope="row">Freeborn</th>
+      <td>Fountain Centers</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Freeborn</th>
+      <td>Good Samaritan Society Albert Lea</td>
+    </tr>
+	    <tr>
+      <th scope="row">Freeborn</th>
+      <td>St. John's Lutheran Assisted Living</td>
+    </tr>
+      <tr>
+	      <th scope="row">Freeborn</th>
+	      <td>St. John's Lutheran Home</td>
+    </tr>
+      <tr>
+        <th scope="row">Freeborn</th>
+        <td>St. John's Lutheran The Woodlands</td>
+      </tr>
+      <tr>
+        <th scope="row">Goodhue</th>
+        <td>Pine Haven Care Center</td>
+      </tr>
+      <tr>
+      <th scope="row">Goodhue</th>
+      <td>The Gardens at Cannon Falls</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Goodhue</th>
+	    <td>Valentines Assisted Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>Arbor Lakes Senior Living</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Augustana Assisted Living</td>
+    </tr>
+	   <tr>
+      <th scope="row">Hennepin</th>
+      <td>Augustana Chapel View Care Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Augustana Emerald Crest</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Aurora on France</td>
+    </tr>	
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Benedictine Health Center of Minneapolis</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Benedictine Senior Living at Steeple Pointe</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Bethany Residence and Rehabilitation Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Brookdale Plymouth</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Brookview a Villa Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Bywood East Health Care</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Castle Ridge Care Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Catholic Eldercare on Main</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Cedars at St. Louis Park A Villa Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Centennial Gardens</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Champlin Shores</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Cherrywood Pointe of Plymouth</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Copperfield Hill - The Lodge</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Copperfield Hill - The Manor</td>
+    </tr>
+	   <tr>
+	     <th scope="row">Hennepin</th>
+	     <td>Cornerstone Assisted Living</td>
+    </tr>
+	   <tr>
+      <th scope="row">Hennepin</th>
+      <td>Covenant Living of Golden Valley</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>CSL Rose Arbor LLC</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>Deephaven Woods</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Ebenezer Care Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Ecumen Prairie Lodge</td>
+    </tr>
+	    <tr>
+	      <th scope="row">Hennepin</th>
+	      <td>Eden Prairie Senior Living</td>
+    </tr>
+	    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Edenbrook of Edina</td>
+    </tr>
+	   <tr>
+      <th scope="row">Hennepin</th>
+      <td>Friendship Village of Bloomington</td>
+    </tr>
+    <tr>
+         <th scope="row">Hennepin</th>
+         <td>Global Pointe Senior Living</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Good Samaritan Ambassador</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Good Samaritan Specialty Care</td>
+    </tr>
+    <tr>
+        <th scope="row">Hennepin</th>
+        <td>Harrison Bay Senior Living</td>
+    </tr>
+    <tr>
+        <th scope="row">Hennepin</th>
+        <td>Havenwood of Richfield</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Heathers Manor</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Heritage of Edina Inc</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Homeward Bound Inc. Brooklyn Park</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Hopkins Health Services</td>
+    </tr>
+	   <tr>
+      <th scope="row">Hennepin</th>
+      <td>Jones Harrison Residence </td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Long Lake Assisted Living</td>
+    </tr>
+    <tr>
+        <th scope="row">Hennepin</th>
+        <td>Mainstreet Village</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Martin Luther Care Center</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Meadow Ridge Senior Living</td>
+    </tr>	  
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>Meadow Woods</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Meridian Manor</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>Minnehaha Senior Living</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Minnesota Masonic Home Care</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Mission Nursing Home</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>MN Adult and Teen Challenge</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>MN Veterans Home Minneapolis</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Mount Olivet Careview Home</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>New Perspective Carlson Parkway</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>North Ridge Health and Rehab</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Orchards of Minnetonka</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Park Health A Villa Center</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Parks' Place</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Parkshore Senior Campus LLC</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>Pillars of Prospect Park</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>Prairie Bluffs Senior Living</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Presbyterian Homes - Lake Minnetonka Shores</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Presbyterian Homes and Services Maranatha</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Presbyterian Homes of Bloomington</td>
+    </tr>
+     <tr>
+      <th scope="row">Hennepin</th>
+      <td>Providence Place</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>Richfield A Villa Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Robbinsdale A Villa Center</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Roitenberg Assisted Living</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Rose Arbor</td>
+    </tr>	  	  
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Saint Terese of New Hope</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Saint Therese of Oxbow Lake</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Sholom Home West</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Sholom Menorah Plaza</td>
+    </tr> 
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>SilverCreek on Main</td>
+    </tr> 
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>SummerWood of Plymouth</td>
+    </tr>
+    <tr>
+        <th scope="row">Hennepin</th>
+        <td>Summit Place</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Sunrise of Edina</td>
+    </tr>
+	   <tr>
+      <th scope="row">Hennepin</th>
+      <td>Sunrise of Golden Valley</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Birches at Trillium Woods</td>
+    </tr>
+     <tr>
+        <th scope="row">Hennepin</th>
+        <td>The Estates at Bloomington</td>
+    </tr>
+     <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Encore at Camplin</td>
+    </tr>	
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Estates at Chateau</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Estates at Excelsior LLC</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Estates at St. Louis Park</td>
+    </tr>
+	   <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Glenn Hopkins</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Glenn Minnetonka</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>The Legacy of St. Anthony</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Lodge of Eden Prairie</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Pillars of Shorewood Landing</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>The Pines Senior and Assisted Living</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Sanctuary at Brooklyn Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Villa at Bryn Mawr</td>
+    </tr>
+	   <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Villa at Osseo</td>
+    </tr>
+	   <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Villa at St. Louis Park</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Waterford</td>
+    </tr>
+    <tr>
+        <th scope="row">Hennepin</th>
+        <td>The Waters of Eden Prairie</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Waters of Edina</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>The Waters of Excelsior</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Waters of Plymouth</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>The Waters on 50th</td>
+    </tr>
+	   <tr>
+      <th scope="row">Hennepin</th>
+      <td>Tower Light</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Tradition</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Trails of Orono</td>
+    </tr>
+    <tr>
+        <th scope="row">Hennepin</th>
+        <td>Trouvailee Memory Care Suites</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Vernon Terrace</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Victory Health and Rehab Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Village Shores</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Hennepin</th>
+      <td>Walker Methodist Care Suites</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Walker Methodist Health Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Wayzata Bay Senior Housing Inc. - Folkestone</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Wealshire of Medina</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>Wellstead of Rogers</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Hennepin</th>
+	    <td>Willows of Arbor Lakes</td>
+    </tr>
+	  <tr>
+      <th scope="row">Hennepin</th>
+      <td>York Gardens Senior Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Houston</th>
+	    <td>SpringBrook Village of La Crescent</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Houston</th>
+	    <td>Valley View Healthcare and Rehab</td>
+    </tr>
+	  <tr>
+      <th scope="row">Isanti</th>
+      <td>Rosewood Senior Living</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Itasca</th>
+      <td>The Emeralds at Grand Rapids</td>
+    </tr>
+	  <tr>
+      <th scope="row">Jackson</th>
+      <td>Good Samaritan Society Jackson</td>
+    </tr>
+	  <tr>
+      <th scope="row">Kandiyohi</th>
+      <td>Bethesda Grand</td>
+    </tr>
+    <tr>
+        <th scope="row">Kandiyohi</th>
+        <td>GlenOaks Senior Living Campus</td>
+    </tr>
+    <tr>
+      <th scope="row">Koochiching</th>
+      <td>Good Samaritan Society -International Falls </td>
+    </tr>
+    <tr>
+      <th scope="row">Lincoln</th>
+      <td>Divine Providence Health Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Lyon</th>
+      <td>Minneota Manor Health Care Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Mahnomen</th>
+      <td>Mahnomen Health Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Martin</th>
+      <td>Temperance Lake Ridge</td>
+    </tr>
+	  <tr>
+	    <th scope="row">McLeod</th>
+	    <td>River Oaks at Shady Ridge</td>
+    </tr>
+	  <tr>
+	    <th scope="row">McLeod</th>
+	    <td>Woodstone Senior Living </td>
+    </tr>
+	  <tr>
+      <th scope="row">Meeker</th>
+      <td>Augustana Care Lakeside Campus</td>
+    </tr>		  
+	  <tr>
+      <th scope="row">Meeker</th>
+      <td>Meeker Manor Rehab Center LLC</td>
+    </tr>	
+	  <tr>
+	    <th scope="row">Mille Lacs</th>
+	    <td>Sterling Pointe Senior Living</td>
+    </tr>
+	  <tr>
+      <th scope="row">Morrison</th>
+      <td>Diamond Willow Assisted Living</td>
+    </tr>
+	  <tr>
+      <th scope="row">Morrison</th>
+      <td>St. Otto's Care Center</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Mower</th>
+	    <td>Adams Health Care Center</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Mower</th>
+	    <td>Cedar Court Assisted Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Mower</th>
+	    <td>Cedars of Austin</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Mower</th>
+	    <td>Primrose Retirement Community</td>
+    </tr>
+	  <tr>
+      <th scope="row">Mower</th>
+      <td>Sacred Heart Care Center</td>
+    </tr>		  
+	  <tr>
+	    <th scope="row">Mower</th>
+	    <td>St. Mark's Lutheran Home</td>
+    </tr>
+	  <tr>
+      <th scope="row">Murray</th>
+      <td>Maple Lawn Senior Care</td>
+    </tr>
+    <tr>
+      <th scope="row">Nicollet</th>
+      <td>Oak Terrace Assisted Living</td>
+    </tr> 
+		<tr>
+		  <th scope="row">Nicollet</th>
+		  <td>Pheasants Ridge</td>
+    </tr>
+		<tr>
+		  <th scope="row">Nicollet</th>
+		  <td>Vista Prairie at Monarch Meadows</td>
+    </tr>
+		<tr>
+      <th scope="row">Nobles</th>
+      <td>Parkview Manor Nursing Home</td>
+    </tr>
+	  <tr>
+      <th scope="row">Nobles</th>
+      <td>South Shore Care Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Nobles</th>
+      <td>Worthinton Golden Horizons</td>
+    </tr>	  
+	  <tr>
+	    <th scope="row">Norman</th>
+	    <td>Benedictine Living Community of Ada</td>
+    </tr>
+	  <tr>
+      <th scope="row">Olmsted</th>
+      <td>Arbor Terrace</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Olmsted</th>
+      <td>Charter House</td>
+    </tr>	 
+	  <tr>
+	    <th scope="row">Olmsted</th>
+	    <td>Cottagewood Senior Community Rochester</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Olmsted</th>
+	    <td>Edenbrook of Rochester</td>
+    </tr>
+	  <tr>
+      <th scope="row">Olmsted</th>
+      <td>Madonna Towers of Rochester</td>
+    </tr>
+	  <tr>
+      <th scope="row">Olmsted</th>
+      <td>Meadow Lakes</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Olmsted</th>
+	    <td>River Bend Assisted Living and Memory Care </td>
+    </tr>
+	  <tr>
+      <th scope="row">Olmsted</th>
+      <td>Rochester East Health Services</td>
+    </tr>
+    <tr>
+      <th scope="row">Olmsted</th>
+      <td>Rochester Rehabilitation and Living Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Olmsted</th>
+      <td>Rochester West Health Services</td>
+    </tr>
+    <tr>
+      <th scope="row">Olmsted</th>
+      <td>Samaritan Bethany Home on Eighth</td>
+    </tr>
+    <tr>
+      <th scope="row">Olmsted</th>
+      <td>Shorewood Commons</td>
+    </tr>
+    <tr>
+      <th scope="row">Olmsted</th>
+      <td>Stewartville Care Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Otter Tail</th>
+      <td>Woodland Lodge</td>
+    </tr>
+    <tr>
+      <th scope="row">Pennington</th>
+      <td>Oakland Park Communities</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Pennington</th>
+      <td>Valley Assisted Living</td>
+    </tr>
+    <tr>
+      <th scope="row">Pipestone</th>
+      <td>Edgebrook Care Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Pipestone</th>
+      <td>Good Samaritan Society of Pipestone</td>
+    </tr>
+    <tr>
+      <th scope="row">Polk</th>
+      <td>Pioneer Memorial Care Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Polk</th>
+      <td>Prairie Pines Community</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Bel Rae Senior Living</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Benedictine Health Center Innsbruck</td>
+    </tr>
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Brightondale Memory Care</td>
+    </tr>
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Capitol View Transitional Care Center</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Cardigan Ridge Senior Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Ramsey</th>
+	    <td>Carefree Cottages of Maplewood</td>
+    </tr>  
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Carondelet Village</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Ramsey</th>
+	    <td>Cerenity Marian St. Paul</td>
+    </tr>
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Cerenity Senior Care Humboldt</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Cerenity Senior Care White Bear Lake</td>
+    </tr> 	  
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Chandler Place Senior Living</td>
+    </tr>
+    <tr>
+        <th scope="row">Ramsey</th>
+        <td>Cherrywood Pointe at Lexington</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Cherrywood Pointe of Roseville (on  Cleveland) LLC</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Ramsey</th>
+	    <td>Dellwood Gardens</td>
+    </tr>
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Ecumen Seasons at Maplewood</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Emeralds at St. Paul LLC</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Ramsey</th>
+	    <td>Episcopal Church Home of Minnesota</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Ramsey</th>
+	    <td>Episcopal Homes of Minnesota - The Gardens</td>
+    </tr>
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Galtier A Villa Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Gracewood Senior Living of Highland</td>
+    </tr>	  
+    <tr>
+        <th scope="row">Ramsey</th>
+        <td>Hayes Residence</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Langton Shores</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Little Sisters of the Poor</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Lyngblomsten Care Center</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Ramsey</th>
+	    <td>Maple Hill Senior Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Ramsey</th>
+	    <td>Maplewood Care Center</td>
+    </tr>	  
+	  <tr>
+	    <th scope="row">Ramsey</th>
+	    <td>New Brighton A Villa Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>New Brighton Care Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>New Perspective Highland Park</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>New Perspective Roseville</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Polar Ridge Senior Living</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Prelude Homes and Services White Bear Lake</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Presbyterian Homes of Arden Hills</td>
+    </tr>
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Ramsey County Care Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Rose of Sharon A Villa Center</td>
+    </tr>
+	   <tr>
+      <th scope="row">Ramsey</th>
+      <td>Shirley Chapman Sholom Home East</td>
+    </tr>
+    <tr>
+         <th scope="row">Ramsey</th>
+         <td>Shores Of Lake Phalen</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Shoreview Senior Living</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>St. Anthony Health and Rehabilitation</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Suite Living of Little Canada</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>Sunrise of Roseville</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>The Alton Memory Care</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>The Encore at Maplewood</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>The Estates at Lynnhurst</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>The Estates at Roseville LLC</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>The Pillars of White Bear Lake</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>The Waters of Highland Park</td>
+    </tr>
+    <tr>
+      <th scope="row">Ramsey</th>
+      <td>The Waters of White Bear Lake</td>
+    </tr>
+	  <tr>
+      <th scope="row">Ramsey</th>
+      <td>Waverly Gardens</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Ramsey</th>
+	    <td>Willows of Ramsey Hill</td>
+    </tr>
+	  <tr>
+      <th scope="row">Redwood</th>
+      <td>Valley View Manor</td>
+    </tr>	  
+    <tr>
+        <th scope="row">Renville</th>
+        <td>RenVilla Health Center</td>
+    </tr>
+    <tr>
+        <th scope="row">Rice</th>
+        <td>Faribault Senior Living</td>
+    </tr>
+    <tr>
+      <th scope="row">Rice</th>
+      <td>Mill City Senior Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Rice</th>
+	    <td>Northfield Care Center Inc</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Rice</th>
+	    <td>Pleasant Manor</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Rice</th>
+	    <td>The Villages of Lonsdale</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Rice</th>
+	    <td>Three Links Care Center</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Rice</th>
+	    <td>Valleyview of Northfield</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Rock</th>
+	    <td>Good Samaritan Society Luverne</td>
+    </tr>
+	  <tr>
+	    <th scope="row">St. Louis</th>
+	    <td>At Home Living Wesley Residence</td>
+    </tr>
+	  <tr>
+	    <th scope="row">St. Louis</th>
+	    <td>Benedictine Living Community of Duluth</td>
+    </tr>
+	  <tr>
+	    <th scope="row">St. Louis</th>
+	    <td>Ecumen Lakeshore</td>
+    </tr>	  
+	  <tr>
+	    <th scope="row">St. Louis</th>
+	    <td>St. Ann's Residence</td>
+    </tr>
+	  <tr>
+	    <th scope="row">St. Louis</th>
+	    <td>Superior View Apartments</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Scott</th>
+	    <td>All Saints Senior Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Scott</th>
+	    <td>Emerald Crest Shakopee</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Scott</th>
+	    <td>Kingsway Retirement Living</td>
+    </tr>
+	  <tr>
+      <th scope="row">Scott</th>
+      <td>McKenna Crossing</td>
+    </tr>	  
+	  <tr>
+	    <th scope="row">Scott</th>
+	    <td>Shakopee Friendship Manor</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Scott</th>
+	    <td>St. Gertrude's Health and Rehabilitation Center</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Sherburne</th>
+	    <td>Benedict Homes</td>
+    </tr>
+	  <tr>
+      <th scope="row">Sherburne</th>
+      <td>CentraCare St. Benedict's Community</td>
+    </tr>
+	  <tr>
+      <th scope="row">Sherburne</th>
+      <td>Elk River Senior Care LLC</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Sherburne</th>
+	    <td>Guardian Angels Care Center Elk River</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Sherburne</th>
+	    <td>Nature's Point Assisted Living</td>
+    </tr>
+	  <tr>
+      <th scope="row">Sherburne</th>
+      <td>St. Scholastica Convent</td>
+    </tr>
+	  <tr>
+      <th scope="row">Sherburne</th>
+      <td>The Sanctuary at St. Cloud</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Sibley</th>
+	    <td>Good Samaritan Society Arlington</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Sibley</th>
+	    <td>Oak Terrace Health Care Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Stearns</th>
+      <td>Belgrade Nursing Home</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Stearns</th>
+      <td>CentraCare Health Sauk Centre</td>
+    </tr>
+	  <tr>
+	     <th scope="row">Stearns</th>
+	     <td>CentraCare Melrose</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Stearns</th>
+	    <td>Edgewood Sartell</td>
+    </tr>
+	  <tr>
+      <th scope="row">Stearns</th>
+      <td>Mother of Mercy Senior Living</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Stearns</th>
+      <td>Skylight Gardens Assisted Living</td>
+    </tr>
+	   <tr>
+	     <th scope="row">Stearns</th>
+	     <td>St Benedicts Senior Community Therapy Suites</td>
+    </tr>
+	   <tr>
+	     <th scope="row">Stearns</th>
+	     <td>Sterling Park HCC</td>
+    </tr>
+	   <tr>
+      <th scope="row">Stearns</th>
+      <td>Woodcrest of Country Manor</td>
+    </tr>
+      <tr>
+         <th scope="row">Steele</th>
+         <td>Medford Senior Care</td>
+    </tr>
+      <tr>
+         <th scope="row">Steele</th>
+         <td>Prairie Manor Care Center</td>
+    </tr>
+      <tr>
+         <th scope="row">Steele</th>
+         <td>Timberdale Trace</td>
+    </tr>	  
+      <tr>
+         <th scope="row">Steele</th>
+         <td>Valleyview Assisted Living</td>
+    </tr>	  
+      <tr>
+        <th scope="row">Todd</th>
+        <td>CentraCare - Long Prairie Care Center</td>
+      </tr>
+      <tr>
+         <th scope="row">Todd</th>
+         <td>CentraCare - Long Prairie Meadow Place</td>
+    </tr>
+      
+      <tr>
+      <th scope="row">Todd</th>
+      <td>Lakewood Manor</td>
+    </tr>
+	  <tr>
+      <th scope="row">Wabasha</th>
+      <td>St. Elizabeth's Health Care Center</td>
+    </tr>
+    <tr>
+        <th scope="row">Washington</th>
+        <td>Croixdale Assisted Living</td>
+    </tr>
+    <tr>
+        <th scope="row">Washington</th>
+        <td>Good Samaritan Society Stillwater</td>
+    </tr>
+    <tr>
+        <th scope="row">Washington</th>
+        <td>New Perspective - Woodbury</td>
+    </tr>
+    <tr>
+      <th scope="row">Washington</th>
+      <td>Norris Square</td>
+    </tr>	
+	  <tr>
+	    <th scope="row">Washington</th>
+	    <td>Oak Park Senior Living</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Washington</th>
+	    <td>Oak Ridge Place</td>
+    </tr>
+	  <tr>
+      <th scope="row">Washington</th>
+      <td>Peaceful Lodge</td>
+    </tr>	  
+	  <tr>
+      <th scope="row">Washington</th>
+      <td>Prelude Homes and Services - Woodbury South</td>
+    </tr>	
+    <tr>
+      <th scope="row">Washington</th>
+      <td>Saint Therese of Woodbury</td>
+    </tr>
+    <tr>
+      <th scope="row">Washington</th>
+      <td>St. Andrew's Village</td>
+    </tr>	  
+    <tr>
+      <th scope="row">Washington</th>
+      <td>Stonecrest</td>
+    </tr>
+    <tr>
+      <th scope="row">Washington</th>
+      <td>The Encore at Hugo</td>
+    </tr>
+    <tr>
+      <th scope="row">Washington</th>
+      <td>The Encore at Mahtomedi</td>
+    </tr>
+    <tr>
+      <th scope="row">Washington</th>
+      <td>The Gables of Boutwells Landing</td>
+    </tr>
+	  <tr>
+	    <th scope="row">Washington</th>
+	    <td>Woodbury Health Care Center</td>
+    </tr>
+	  <tr>
+      <th scope="row">Washington</th>
+      <td>Woodbury Villa</td>
+    </tr>
+    <tr>
+        <th scope="row">Watonwan</th>
+        <td>Good Samaritan Society St. James</td>
+    </tr>
+    <tr>
+      <th scope="row">Wilkin</th>
+      <td>St. Francis Home</td>
+    </tr>
+    <tr>
+      <th scope="row">Winona</th>
+      <td>Lake Winona Manor</td>
+    </tr>
+    <tr>
+      <th scope="row">Winona</th>
+      <td>Sauer Health Care</td>
+    </tr>
+    <tr>
+      <th scope="row">Wright</th>
+      <td>Park View Care Center</td>
+    </tr>
+    <tr>
+      <th scope="row">Wright</th>
+      <td>Riverview Landing</td>
+    </tr>
+    <tr>
+      <th scope="row">Wright</th>
+      <td>The Estates at Delano LLC</td>
+    </tr>
+  </tbody>
+</table>	
+	<p class="small"> This list is cumulative and facilities may not have ongoing transmission. Facilities with fewer than 10 residents will not be listed.</p>
+	  </div></div></div>
+</div>
+
+	
+<hr>		
+<ul>
+  <li><a href="https://mn.gov/covid19/data/covid-dashboard/index.jsp">Minnesota COVID-19 Public Dashboard</a><br>
+<br></li>
+  <li><a href="https://mn.gov/covid19/data/response.jsp">Minnesota's COVID-19 Response and Preparation Capacity</a><br>
+<br></li>
+  <li><a href="https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/cases-in-us.html">CDC: Coronavirus Disease 2019 (COVID-19) Cases in the U.S.</a><br>
+    <br>
+  </li>
+  <li><a href="https://mn.gov/covid19/data/modeling.jsp">Minnesota COVID-19 Modeling</a>
+  </li>
+</ul>
+			<hr>
+			<p class="small">Data in the data tables is correct as of 11 a.m. daily. Dynamic images and maps for case demographics, likely exposure, residence, and residence type will update shortly after 11 a.m. daily and will not work if your browser is in compatibility mode. </p>
+</div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=mnhealth" async="async"></script>
+  <div id="sidebar_right">
+			<ul id="socialMedia">
+				<li class="addthis_toolbox addthis_default_style"><a href="http://www.addthis.com/bookmark.php?v=250&amp;pub=mnhealth" class="addthis_button share">Share This</a>
+				</li><br />				
+	  			<li class="addthis_toolbox addthis_default_style"><a href="javascript:window.open('http://service.govdelivery.com/service/subscribe.html?code=MNMDH_486', 'Popup','width=700,height=440,toolbar=no,scrollbars=yes,resizable=yes'); void('');" onClick="window.status='Subscribe'; return true" onMouseOver="window.status='Subscribe'; return true" onMouseOut="window.status=''; return true" class="email" alt="Subscribe Coronavirus Disease 2029 (COVID-19) Updates">Subscribe: COVID-19 updates</a> </li>
+			</ul>	
+<!--Begin text area: you can modify -->
+	 
+	  	  <a href="/diseases/coronavirus/guidance.html#ppe"><img src="/diseases/coronavirus/images/maskicon.png" width="100%"alt="Facemasks and Personal Protective Equipment"/></a>
+ <a href="/diseases/coronavirus/hcp/surgery.html "><img src="/diseases/coronavirus/images/surgicon.png" width="100%"alt="Surgeries and Procedures during COVID-19"/></a><br><br>
+	  
+
+<h3>Minnesota Helpline:</h3>
+<p>For questions related to the COVID-19 pandemic, call 651-297-1304 or 1-800-657-3504<br>
+Mon.-Fri.: 9 a.m. to 4 p.m.</p>
+<hr>
+	  <h2>COVID-19 information in other languages:</h2>
+<ul>
+  <li><a href="/diseases/coronavirus/materials/hmong.html">Kab Mob Khaus Las Nas Vais Lav 2019 (COVID-19)</a><br>
+    (Hmong)</li>
+  <li><a href="/diseases/coronavirus/materials/somali.html">Cudurka Koronafayras 2019 (COVID-19)</a><br>
+    (Somali)</li>
+  <li><a href="/diseases/coronavirus/materials/spanish.html">Enfermedad del Coronavirus 2019 (COVID-19)</a><br>
+    (Spanish)</li>
+<li>
+	<a href="/diseases/coronavirus/materials/asl.html">American Sign Language (ASL) Videos</a></li></ul>
+	  
+<hr>
+<h2 class="small">Contact us:</h2>
+<p class="small">If you have questions or comments about this page, use our <a href="https://survey.vovici.com/se/56206EE321296199">IDEPC Comment Form</a> or call 651-201-5414 for the MDH <a href="/about/org/idepc/index.html"> Infectious Disease Epidemiology, Prevention and Control Division</a>.</p>
+  </div>
+	</div>
+</div>
+<footer>
+<!-- close content --></div></div>
+<!-- Begin Footer Include -->
+<div id="footer">
+	<div id="footerContainer">
+		<div class="footerTopics">
+			<ul class="clearfix">
+				<li><a href="/people/index.html">Individual &amp; Family Health</a></li>
+				<li><a href="/facilities/index.html">Health Care Facilities, Providers <br>
+&amp; Insurance</a></li>
+				<li><a href="/data/index.html">Data, Statistics and Legislation</a></li>
+                <li><a href="/diseases/index.html">Diseases &amp; Conditions</a></li>
+                <li><a href="/communities/index.html">Healthy Communities, Environment <br>
+              &amp; Workplaces</a></li>
+                <li><a href="/about/index.html">About MDH</a></li>
+                <li><a href="/about/locations/index.html">Locations &#38; Directions</a></li>
+                <li><a href="/forms/feedback/mail.html">Comments &#38; Questions</a></li>
+                <li><a href="/about/privacy.html">Privacy Statement &amp; Disclaimer</a></li>
+                <li><a href="/about/equalopp.html">Equal Opportunity</a>		</li>
+			</ul>
+		</div>
+      <div class="footerTopics"> 
+      <p>651-201-5000 Phone<br />
+				888-345-0823 Toll-free</p>
+			<p>Information on this website is available in alternative formats upon request. </p>
+		<p style="text-align:center; overflow:hidden"><a href="https://mn.gov/portal/" onClick="return OuttaHere(); return false;"><img src="https://mn.gov/portal/assets/mn.logo.footer_tcm1077-65019.png" alt="Minnesota.gov" /></a></p><p style="text-align:center"><a href=			"https://www.phaboard.org/"><img src="/images/phabseal.png"  width="125" height="125" alt="Public Health Accreditation Board" /></a></p>
+	  </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20272425-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+(function() {
+var sz = document.createElement('script'); sz.type = 'text/javascript'; sz.async = true;
+sz.src = '//siteimproveanalytics.com/js/siteanalyze_6486.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sz, s);
+})();
+/*]]>*/
+</script>
+
+<script>
+$(document).ready(function() {
+	if(document.URL.indexOf("health.state.mn.us/macros/topics/orginfo.html") != -1) {
+		$("#about").addClass("activeBanner");
+	}
+	else if(document.URL.indexOf("health.state.mn.us/index.html") != -1) {
+		$("#home").addClass("activeBanner");
+	}
+
+});
+</script>
+</footer>
+
+<p>Wednesday, 08-Jul-2020 13:15:18 CDT </p>
+</body>
+</html>
