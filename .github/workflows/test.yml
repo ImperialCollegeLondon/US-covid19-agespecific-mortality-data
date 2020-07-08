@@ -22,7 +22,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+<<<<<<< HEAD
 
+=======
+        
+    - name: Install R 
+      run: |
+        sudo apt install r-base
+        
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
     - name: Install Chromium
       run: |
         sudo apt-get install chromium-browser
@@ -33,7 +41,11 @@ jobs:
 
     - name: Clone data from yesterday
       run: |
+<<<<<<< HEAD
         git clone https://@github.com/MJHutchinson/US-covid19-data-scraping --single-branch -b update_data output 
+=======
+        git clone https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping --single-branch -b update_data output 
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
         git config --global user.name "GitHub Actions"
         git config --global user.email action@github.com
     - name: Cache, process and update
@@ -42,12 +54,16 @@ jobs:
         today=$(date +'%Y-%m-%d')
         
         # check the data for today is there already
+<<<<<<< HEAD
         if [ -d "data/$today"]; then
           cp data/$today/* output/data/$today
         else
           mv data/$today output/data/
         fi
 
+=======
+        cp -a data/. output/data/
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
         cp -a html/. output/html/
         cp -a csvs/. output/csvs/
         cp -a pngs/. output/pngs/

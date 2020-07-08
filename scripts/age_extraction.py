@@ -153,6 +153,7 @@ class AgeExtractor:
             with open("data/{}/new_jersey.json".format(pdf_date), "w") as f:
                 json.dump(age_data, f)
 
+<<<<<<< HEAD
     def get_florida(self):
         # check existing assets
         existing_assets = list(map(basename, glob("pdfs/florida/*.pdf")))
@@ -221,6 +222,8 @@ class AgeExtractor:
 
             with open("data/{}/florida.json".format(day), "w") as f:
                 json.dump(age_data, f)
+=======
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
 
     def get_connecticut(self):
         ## now obtain PDF update date
@@ -517,6 +520,38 @@ class AgeExtractor:
         for f in files:
             process_virginia_day(f.split(".")[0])
 
+<<<<<<< HEAD
+=======
+    def get_district_of_columbia(self):
+        os.makedirs('csvs/district_of_columbia/', exist_ok=True)
+        i = 0
+        while True:
+            url = f"https://coronavirus.dc.gov/sites/default/files/dc/sites/coronavirus/page_content/attachments/DC-COVID-19-Data-for-{(self.today-timedelta(days=i)).strftime('%B-%-d-%Y')}.xlsx"
+            ret = subprocess.run(
+                [
+                    "wget",
+                    "--no-check-certificate",
+                    "-O",
+                    f"csvs/district_of_columbia/{(self.today-timedelta(days=i)).strftime('%d-%m-%Y')}.xlsx",
+                    url,
+                ]
+            )
+            print(ret)
+            if ret.returncode==0:
+                break
+            else:
+                os.remove(f"csvs/district_of_columbia/{(self.today-timedelta(days=i)).strftime('%d-%m-%Y')}.xlsx")
+                i += 1
+
+        data = pd.read_excel(f"csvs/district_of_columbia/{(self.today-timedelta(days=i)).strftime('%d-%m-%Y')}.xlsx", sheet_name="Lives Lost by Age", index_col=0)
+        data = data.drop(labels=['Age', 'All'], axis=0)
+
+        for date in data.columns:
+            os.makedirs(f'data/{date.strftime("%Y-%m-%d")}', exist_ok=True)
+            data[date].to_json(f'data/{date.strftime("%Y-%m-%d")}/doc.json')
+        
+
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
     def get_all(self):
         """TODO: running get_*() for every state
         """
@@ -525,6 +560,7 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
+<<<<<<< HEAD
     ageExtractor.get_georgia()
     ageExtractor.get_cdc()
     ageExtractor.get_washington()
@@ -537,3 +573,64 @@ if __name__ == "__main__":
     # ageExtractor.get_michigan()
     ageExtractor.get_minnesota()
     ageExtractor.get_virginia()
+=======
+
+    try:
+        print("\n### Running Georgia ###\n")
+        ageExtractor.get_georgia()
+    except:
+        print("\n!!! GEORGIA FAILED !!!\n")
+
+    try:
+        print("\n### Running CDC ###\n")
+        ageExtractor.get_cdc()
+    except:
+        print("\n!!! CDC FAILED !!!\n")
+
+    try:
+        print("\n### Running Washington###\n")
+        ageExtractor.get_washington()
+    except:
+        print("\n!!! WASHINGTON FAILED !!!\n")
+
+    try:
+        print("\n### Running Texas ###\n")
+        ageExtractor.get_texas()
+    except:
+        print("\n!!! TEXAS FAILED !!!\n")
+
+    try:
+        print("\n### Running Connecticut ###\n")
+        ageExtractor.get_connecticut()
+    except:
+        print("\n!!! CONNECTICUT FAILED !!!\n")
+
+    try:
+        print("\n### Running Minnesota ###\n")
+        ageExtractor.get_minnesota()
+    except:
+        print("\n!!! MINNESOTA FAILED !!!\n")
+
+    try:
+        print("\n### Running Virginia ###\n")
+        ageExtractor.get_virginia()
+    except:
+        print("\n!!! VIRGINIA FAILED !!!\n")
+
+    try:
+        print("\n### Running DOC ###\n")
+        ageExtractor.get_district_of_columbia()
+    except:
+        print("\n!!! DOC FAILED !!!\n")
+
+    try:
+        print("\n### Running NYC ###\n")
+        ageExtractor.get_nyc()
+    except:
+        print("\n!!! NYC FAILED !!!\n")
+    
+    #ageExtractor.get_new_jersey()
+    #ageExtractor.get_florida()
+    # ageExtractor.get_michigan()
+    
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd

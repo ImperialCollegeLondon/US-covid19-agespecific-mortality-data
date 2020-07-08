@@ -1,0 +1,47 @@
+name: Run daily update to s3
+on:
+  schedule:
+    - cron: "08 23 * * *"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+   
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Install R 
+      run: |
+        sudo apt install r-base
+        
+    - name: Install Chromium
+      run: |
+        sudo apt-get update
+        sudo apt-get install chromium-browser
+    - name: Copy Data Sources to S3
+      run: |
+        # check existing assets in florida
+        aws s3 ls s3://$AWS_BUCKET/update_data/pdfs/florida/ > existing_assets_florida        
+        make files
+        today=$(date +'%Y-%m-%d')
+        python scripts/florida_extraction.py
+        # check the data for today is there already
+        aws s3 cp data/$today/ s3://$AWS_BUCKET/update_data/data/$today/ --recursive
+        aws s3 cp html s3://$AWS_BUCKET/update_data/html/ --recursive
+        aws s3 cp csvs s3://$AWS_BUCKET/update_data/csvs/ --recursive
+        aws s3 cp pngs s3://$AWS_BUCKET/update_data/pngs/ --recursive
+        aws s3 cp pdfs s3://$AWS_BUCKET/update_data/pdfs/ --recursive
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_BUCKET: ${{ secrets.AWS_BUCKET }}

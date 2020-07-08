@@ -1,8 +1,13 @@
 name: Run daily update
 on:
   schedule:
+<<<<<<< HEAD
     - cron: "18 20 * * *"
     - cron: "48 22 * * *"
+=======
+    - cron: "08 23 * * *"
+    - cron: "40 20 * * *"
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
 
 jobs:
   build-and-deploy:
@@ -20,7 +25,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+<<<<<<< HEAD
 
+=======
+        
+    - name: Install R 
+      run: |
+        sudo apt install r-base
+        
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
     - name: Install Chromium
       run: |
         sudo apt-get update
@@ -28,7 +41,11 @@ jobs:
 
     - name: Clone data from yesterday
       run: |
+<<<<<<< HEAD
         git clone https://@github.com/MJHutchinson/US-covid19-data-scraping --single-branch -b update_data output 
+=======
+        git clone https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping --single-branch -b update_data output 
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
         git config --global user.name "GitHub Actions"
         git config --global user.email action@github.com
 
@@ -36,6 +53,7 @@ jobs:
       run: |
         make files
         today=$(date +'%Y-%m-%d')
+<<<<<<< HEAD
         
         # check the data for today is there already
         if [ -d "output/data/$today" ]; then
@@ -44,6 +62,9 @@ jobs:
           mv data/$today output/data/
         fi
         
+=======
+        cp -a data/. output/data/
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
         cp -a html/. output/html/
         cp -a csvs/. output/csvs/
         cp -a pngs/. output/pngs/
@@ -55,3 +76,10 @@ jobs:
         git push \
           "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/MJHutchinson/US-covid19-data-scraping" \
           HEAD:update_data
+<<<<<<< HEAD
+=======
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_BUCKET: ${{ secrets.AWS_BUCKET }}
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd

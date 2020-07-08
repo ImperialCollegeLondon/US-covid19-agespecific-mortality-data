@@ -9,4 +9,9 @@ selenium
 numpy 
 matplotlib
 webdriver_manager
+<<<<<<< HEAD
 pillow
+=======
+pillow
+xlrd
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd

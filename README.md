@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ![Run daily update](https://github.com/MJHutchinson/US-covid19-data-scraping/workflows/Run%20daily%20update/badge.svg?branch=master)
+=======
+![Run daily update](https://github.com/MJHutchinson/US-covid19-data-scraping/workflows/Run%20daily%20update/badge.svg?branch=master) ![Run daily update to s3](https://github.com/MJHutchinson/US-covid19-data-scraping/workflows/Run%20daily%20update%20to%20s3/badge.svg)
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
 
 # US-covid19-data-scraping
 Extract and data from various states in the US related to COVID-19. We need the Python dependencies
@@ -52,6 +56,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | Colorado| 2020-03-23 | [link](https://data-cdphe.opendata.arcgis.com/datasets/cdphe-covid19-state-level-open-data-repository?geometry=-125.744%2C35.977%2C-85.358%2C41.950); full time series|
 | Massachusetts| 2020-04-20 | [link](https://www.mass.gov/doc/covid-19-dashboard-april-20-2020/download); similar to florida |
 | New Jersey| 2020-05-06 | [link](https://www.nj.gov/health/cd/documents/topics/NCOV/COVID_Confirmed_Case_Summary.pdf); cumulative, need extracting daily |
+<<<<<<< HEAD
 | New York City| 2020-04-14 | [link](https://www1.nyc.gov/assets/doh/downloads/pdf/imm/covid-19-deaths-confirmed-probable-daily-04142020.pdf); daily cumulative, need extracting daily|
 | Georgia| 2020-04-27 | [link](https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip); daily cumulative, need extracting daily; no historical archive; missing data between 2020-04-27 and 2020-05-06|
 | Washington| 2020-05-04 | [link](https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx); daily cumulative, need extracting daily; no historical archive|
@@ -60,6 +65,16 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | Louisiana| 2020-05-12| [link](http://ldh.la.gov/coronavirus/); daily updated and replaced, need extracting daily; no historical archive|
 | Oklahoma| 2020-05-13| [link](https://looker-dashboards.ok.gov/embed/dashboards/42); daily updated and replaced, need extracting daily; no historical archive. Website changed from 06-06, pdf: [link](https://coronavirus.health.ok.gov/executive-order-reports); file string, age deaths on page 2|
 | North Carolina| 2020-05-13| [link](https://covid19.ncdhhs.gov/dashboard#by-age); daily updated and replaced, need extracting daily; no historical archive|
+=======
+| New York City| 2020-04-14 | [link](https://www1.nyc.gov/assets/doh/downloads/pdf/imm/covid-19-deaths-confirmed-probable-daily-04142020.pdf) and [link](https://github.com/nychealth/coronavirus-data/blob/master/by-age.csv); daily cumulative, need extracting daily|
+| Georgia| 2020-04-27 | [link](https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip); daily cumulative, need extracting daily; no historical archive; missing data between 2020-04-27 and 2020-05-06|
+| Washington| 2020-05-04 | [link](https://www.doh.wa.gov/Emergencies/Coronavirus#CovidDataTables); daily updated and replaced, need exreacting daily; no historical archive|
+| CDC| 2020-05-06 | [link](https://data.cdc.gov/api/views/9bhg-hcku/rows.csv); daily cumulative, need extracting daily; no historical archive|
+| Texas| 2020-05-06 | [link](https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx); daily cumulative, need extracting daily; no historical archive|
+| Louisiana| 2020-05-12| [link](http://ldh.la.gov/coronavirus/); daily updated and replaced, need extracting daily; no historical archive|
+| Oklahoma| 2020-05-13| [link](https://looker-dashboards.ok.gov/embed/dashboards/75); daily updated and replaced, need extracting daily; no historical archive. Website changed from 06-06, pdf: [link](https://coronavirus.health.ok.gov/executive-order-reports); file string, age deaths on page 2|
+| North Carolina| 2020-05-13| [link](https://covid19.ncdhhs.gov/dashboard/about-data); daily updated and replaced, need extracting daily; no historical archive|
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
 | Mississippi| 2020-05-12| [link](https://msdh.ms.gov/msdhsite/_static/14,0,420.html); daily updated and replaced, need exreacting daily; no historical archive|
 | Missouri| 2020-05-13| [link](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php);  daily updated and replaced, need exreacting daily; no historical archive|
 | Delaware| 2020-05-12| [link](https://myhealthycommunity.dhss.delaware.gov/locations/state); daily updated and replaced, need exreacting daily; no historical archive|
@@ -80,7 +95,14 @@ We use webdriver from selenium to find the elements and extract the correspondin
 |Oregon| 2020-06-05 | [link](https://govstatus.egov.com/OR-OHA-COVID-19); updated and replaced on weekdays, need extraction daily; no historical archive|
 |Pennsylvania| 2020-06-07 | [link](https://experience.arcgis.com/experience/cfb3803eb93d42f7ab1c2cfccca78bf7); daily updated and replaced, need extraction daily; no historical archive|
 |New Hampshire| 2020-06-08 | [link](https://www.nh.gov/covid19/dashboard/summary.htm); daily updated and replaced, need extraction daily; no historical archive|
+<<<<<<< HEAD
 
+=======
+|Rhode Island| 2020-06-01 | [link](https://ri-department-of-health-covid-19-data-rihealth.hub.arcgis.com); weekly updated and replaced, need extraction weekly; no historical archive|
+|Utah| 2020-06-17 | [link](https://coronavirus.utah.gov/case-counts/); daily updated and replaced, need extraction daily; no historical archive|
+|Maine| 2020-03-13 | [link](https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml); daily updated, extraction manually; historical archive|
+|Michigan| 2020-04-30 | [link](https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html); daily updated and replaced, need extraction daily; no historical archive|
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
 
 ## Warnings
 ### Updates
@@ -90,6 +112,11 @@ We use webdriver from selenium to find the elements and extract the correspondin
 - Idaho did not update the website on 2020-05-18
 - Missouri change website on the 2020-05-20 and did not update
 - Indiana did not update the data on 2020-05-30
+<<<<<<< HEAD
+=======
+- Washingtin did not update the website on 2020-06-12
+- Mississippi did not update the website on 2020-06-10
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
 
 ### Website dynamics
 - For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
@@ -104,8 +131,15 @@ We use webdriver from selenium to find the elements and extract the correspondin
 
 
 ## Figures
+<<<<<<< HEAD
 ### Time series of extracted data as of 2020-05-16
 ![](figures/time.series_allstates.png)
 
 ### Comparison to IHME and JHU overall death as of 2020-05-16
+=======
+### Time series of extracted data as of 2020-06-29
+![](figures/time.series_allstates.png)
+
+### Comparison to IHME and JHU overall death as of 2020-06-29
+>>>>>>> 79f27dcfaecb79581e8797d83af7bb7d17a41edd
 ![](figures/comparison.ihme.jhu.depthealth_overall.png)
