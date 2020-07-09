@@ -15,7 +15,7 @@ death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200707.csv")
 
 
 # scrapped data
-path_to_data = function(state) file.path("data", last.day, "processed", paste0("DeathsByAge_", state, ".csv"))
+path_to_data = function(state) file.path("data", "processed", last.day, paste0("DeathsByAge_", state, ".csv"))
 
 
 make.comparison.plot = function(State, Code){

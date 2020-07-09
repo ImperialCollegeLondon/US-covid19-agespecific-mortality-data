@@ -308,6 +308,7 @@ process.NM.file = function(last.day){
                          "40-49"="X40.49.years", "50-59" = "X50.59.years", "60-69" = "X60.69.years", 
                          "70-79" = "X70.79.years", "80+" = "X80..years")
   
+  stopifnot(all(tmp$daily.deaths >= 0 )) # TODO need to write a fix if this is not the case.
   data <- with(tmp, tmp[order(date, code, age, cum.deaths, daily.deaths), ])
   data <- data[, c("date", "code", "age", "cum.deaths", "daily.deaths")]
   
