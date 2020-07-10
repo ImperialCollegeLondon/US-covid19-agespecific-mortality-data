@@ -884,12 +884,15 @@ class AgeExtractor:
         browser.get(url)
         browser.implicitly_wait(5)
         time.sleep(2)
-        day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[3]/span[1]').text
+        #day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[3]/span[1]').text
+        day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[2]/span[1]').text
         day = day.split()[3]
         day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/nevada.json".format(day), os.F_OK):
             time.sleep(1)
-            total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[13]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            # total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[13]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            total = browser.find_element_by_xpath(
+                '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[12]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
             browser.find_element_by_xpath(
                 '//*[@id="pbiAppPlaceHolder"]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[3]/i').click()
             time.sleep(2)
@@ -897,7 +900,7 @@ class AgeExtractor:
                 '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div/div').click()
             time.sleep(2)
             browser.find_element_by_xpath(
-                '/html/body/div[5]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/div/span').click()
+                '/html/body/div[5]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/span').click()
             browser.implicitly_wait(2)
             time.sleep(1)
             data = []
