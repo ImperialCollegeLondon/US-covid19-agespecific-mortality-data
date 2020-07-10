@@ -34,7 +34,8 @@ json.states = data.table(code = c(     "AZ",
                                        "VA",
                                        #"WI",
                                        "WA",
-                                       "AL"),
+                                       "AL",
+                                       "DC"),
                          
                          name = c("arizona",
                                   "california",
@@ -65,7 +66,8 @@ json.states = data.table(code = c(     "AZ",
                                   "virginia",
                                   #"wisconsin",
                                   "washington",
-                                  "alabama"
+                                  "alabama",
+                                  "doc"
                                   
                          ),
                          state_name = c("Arizona",
@@ -97,7 +99,8 @@ json.states = data.table(code = c(     "AZ",
                                   "Virginia",
                                  # "Wisconsin",
                                   "Washington",
-                                  "Alabama"
+                                  "Alabama",
+                                  "District of Columbia"
                                   
                          ),
                          json = 1)
