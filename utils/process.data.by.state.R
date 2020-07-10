@@ -150,12 +150,20 @@ process.RI.file = function(csv_file, Date){
 
 process.TN.file = function(last.day){
   
+  dates = seq.Date(as.Date("2020-03-01"), last.day, by = "day")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("tn.xlsx"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  last.day = max(dates)
+  
   xlsx_file = file.path(path_to_data, last.day, "tn.xlsx")
   
   tmp = suppressWarnings(subset(read_excel(xlsx_file), AGE_RANGE != "Pending") %>%
                            mutate(age = ifelse(AGE_RANGE == "0-10 years", "0-9",
                                                ifelse(AGE_RANGE == "81+ years", "80+", 
-                                                      paste0(as.numeric(gsub("(.+)\\-.*", "\\1", AGE_RANGE))-1, "-",as.numeric(gsub(".*\\-(.+) years", "\\1", AGE_RANGE))-1) )),
+                                                      paste0(as.numeric(gsub("(.+)\\-.*", "\\1", AGE_RANGE))-1, "-",
+                                                             as.numeric(gsub(".*\\-(.+) years", "\\1", AGE_RANGE))-1) )),
                                   date = as.Date(DATE),
                                   code = "TN", 
                                   daily.deaths = NA_integer_) %>%
@@ -316,6 +324,7 @@ process.NM.file = function(last.day){
 }
 
 obtain.daily.data.csv_and_xlsx = function(last.day, state_name, state_code){
+  
   cat("\n Processing", state_name,  "\n")
   
   dates = seq.Date(as.Date("2020-03-01"), last.day, by = "day")
@@ -489,6 +498,8 @@ obtain.json.data = function(last.day, state_name, state_code){
   
   dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
   if(state_name == "alabama") dates = dates[which(dates >= as.Date("2020-05-03"))] # they changed age groups at this date
+  if(state_name == "NorthCarolina") dates = dates[which(dates %notin% seq.Date(as.Date("2020-05-13"), as.Date("2020-05-19"), by = "day"))] # incorrect age groups
+  
   first.day = dates[1]
 
   data = NULL
@@ -508,7 +519,7 @@ obtain.json.data = function(last.day, state_name, state_code){
     if(state_name == "pennsylvania" & Date > as.Date("2020-06-12")) names(json_data)[which(names(json_data) == "100+")] = ">100"
     if(state_name == "vermont" & Date > as.Date("2020-06-25")) names(json_data)[which(names(json_data) == "80+")] = "80 plus"
     if(state_name == "florida") names(json_data) = gsub("(.+) years", "\\1",names(json_data))
-    
+
     # make sure that there is no space in the age group
     names(json_data) = gsub(" ", "", names(json_data), fixed = TRUE)
     
