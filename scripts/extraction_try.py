@@ -444,7 +444,7 @@ class AgeExtractor:
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
         browser.implicitly_wait(5)
-        day = browser.find_element_by_xpath('//*[@id="ember10"]/div/h6/span').text
+        day = browser.find_element_by_xpath('//*[@id="ember136"]/div/div/p/span/strong').text
         time.sleep(2)
         day = day.split()[-1]
         day = parsedate(day).strftime('%Y-%m-%d')
@@ -967,7 +967,7 @@ class AgeExtractor:
         browser.get(url)
         browser.implicitly_wait(5)
         time.sleep(3)
-        day = browser.find_element_by_xpath('//*[@id="dnn_ctr33855_HtmlModule_lblContent"]/p[4]/strong[2]').text
+        day = browser.find_element_by_xpath('//*[@id="dnn_ctr33855_HtmlModule_lblContent"]/p[3]/strong[2]').text
         day = day.split()[-1]
         day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/washington.json".format(day), os.F_OK):
@@ -1119,7 +1119,7 @@ if __name__ == "__main__":
         print("\n!!! NORTH CAROLINA 2 FAILED !!!\n")
 
     try:
-        print("\n### Missouri DOC ###\n")
+        print("\n### Missouri ###\n")
         ageExtractor.get_missouri()
     except:
         print("\n!!! MISSOURI FAILED !!!\n")
