@@ -444,8 +444,13 @@ class AgeExtractor:
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
         browser.implicitly_wait(5)
-        day = browser.find_element_by_xpath('//*[@id="ember136"]/div/div/p/span/strong').text
+        #day = browser.find_element_by_xpath('//*[@id="ember136"]/div/div/p/span/strong').text
+        day = browser.find_elements_by_css_selector('strong')
         time.sleep(2)
+        day = [e for e in day if e.text and 'update' in e.text]
+        browser.implicitly_wait(5)
+        time.sleep(10)
+        day = day[0].text
         day = day.split()[-1]
         day = parsedate(day).strftime('%Y-%m-%d')
         time.sleep(1)
@@ -893,6 +898,9 @@ class AgeExtractor:
             # total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[13]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
             total = browser.find_element_by_xpath(
                 '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[12]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            browser.find_element_by_xpath(
+                '//*[@id="pbiAppPlaceHolder"]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[3]/i').click()
+            time.sleep(2)
             browser.find_element_by_xpath(
                 '//*[@id="pbiAppPlaceHolder"]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[3]/i').click()
             time.sleep(2)
