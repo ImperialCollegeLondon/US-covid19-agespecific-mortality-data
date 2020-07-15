@@ -388,7 +388,7 @@ class AgeExtractor:
                 age_data = {}
                 age_data[data[0]] = data[29]
                 age_data[data[1]] = data[28]
-                age_data[data[2]] = data[11]
+                age_data[data[2]] = data[10]
                 age_data[data[3]] = data[9]
                 age_data[data[4]] = data[8]
                 age_data[data[5]] = data[7]
