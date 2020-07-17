@@ -441,20 +441,19 @@ class AgeExtractor:
         options = Options()
         options.add_argument('headless')
         #browser = webdriver.Chrome(executable_path=chromed, options=options)
-        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
-        browser.get(url)
-        browser.implicitly_wait(5)
         #day = browser.find_element_by_xpath('//*[@id="ember136"]/div/div/p/span/strong').text
-        day = browser.find_elements_by_css_selector('strong')
-        time.sleep(2)
-        day = [e for e in day if e.text and 'update' in e.text]
-        browser.implicitly_wait(5)
-        time.sleep(10)
-        day = day[0].text
-        day = day.split()[-1]
+        #day = browser.find_elements_by_css_selector('strong')
+        #time.sleep(2)
+        #day = [e for e in day if e.text and 'update' in e.text]
+        #browser.implicitly_wait(5)
+        #time.sleep(10)
+        #day = day[0].text
+        #day = day.split()[-1]
+        day = requests.get(url).headers['Date']
         day = parsedate(day).strftime('%Y-%m-%d')
-        time.sleep(1)
         if not os.access("data/{}/missouri.json".format(day), os.F_OK):
+            browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+            browser.get(url)
             browser.implicitly_wait(5)
             data = browser.find_elements_by_css_selector('g.amcharts-graph-column')
             time.sleep(2)
