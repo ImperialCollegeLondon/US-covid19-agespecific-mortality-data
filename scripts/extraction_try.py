@@ -686,9 +686,10 @@ class AgeExtractor:
                 wb = xlrd.open_workbook("data/{}/indiana.xlsx".format(day))
                 sh = wb.sheet_by_index(0)
                 age_data = {}
+                k = sh.row_values(0).index('COVID_DEATHS')
                 for rownum in range(1, sh.nrows):
                     row_values = sh.row_values(rownum)
-                    age_data[row_values[0]] = int(row_values[2])
+                    age_data[row_values[0]] = int(row_values[k])
                 # Write to file
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
