@@ -40,6 +40,9 @@ class AgeExtractor:
 
     def get_louisiana(self):
         url = "https://www.arcgis.com/apps/opsdashboard/index.html#/69b726e2b82e408f89c3a54f96e8f776"
+        ## new 7.24 update except Sat.
+        url = 'https://www.arcgis.com/apps/opsdashboard/index.html#/4a6de226701e45bdb542f09b73ee79e1'
+
         #chromed = "D:\chromedriver.exe"
         #os.chdir("/mnt/d")
         options = Options()
@@ -51,9 +54,10 @@ class AgeExtractor:
         browser.implicitly_wait(5) # Let the page load
         button1 = browser.find_elements_by_css_selector('div.flex-fluid.overflow-hidden')
         time.sleep(2)
-        day = button1[0].text
-        idx = re.search( r'updated:.*/2020', day).span()
-        day = day[idx[0]: idx[1]].split(':')[1]
+        #day = button1[0].text
+        #idx = re.search( r'updated:.*/2020', day).span()
+        #day = day[idx[0]: idx[1]].split(':')[1]
+        day = requests.get(url).headers['Date']
         day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/louisiana.json".format(day), os.F_OK):
             browser.implicitly_wait(2)
