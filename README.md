@@ -57,7 +57,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 | Washington| 2020-05-04 | [link](https://www.doh.wa.gov/Emergencies/Coronavirus#CovidDataTables); daily updated and replaced, need exreacting daily; no historical archive|
 | CDC| 2020-05-06 | [link](https://data.cdc.gov/api/views/9bhg-hcku/rows.csv); daily cumulative, need extracting daily; no historical archive|
 | Texas| 2020-05-06 | [link](https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx); daily cumulative, need extracting daily; no historical archive|
-| Louisiana| 2020-05-12| [link](http://ldh.la.gov/coronavirus/); daily updated and replaced, need extracting daily; no historical archive|
+| Louisiana| 2020-05-12| [link](https://www.arcgis.com/apps/opsdashboard/index.html#/4a6de226701e45bdb542f09b73ee79e1); daily updated and replaced except on Saturday, need extracting daily; no historical archive|
 | Oklahoma| 2020-05-13| [link](https://looker-dashboards.ok.gov/embed/dashboards/75); daily updated and replaced, need extracting daily; no historical archive. Website changed from 06-06, pdf: [link](https://coronavirus.health.ok.gov/executive-order-reports); file string, age deaths on page 2|
 | North Carolina| 2020-05-13| [link](https://covid19.ncdhhs.gov/dashboard/about-data); daily updated and replaced, need extracting daily; no historical archive|
 | Mississippi| 2020-05-12| [link](https://msdh.ms.gov/msdhsite/_static/14,0,420.html); daily updated and replaced, need exreacting daily; no historical archive|
