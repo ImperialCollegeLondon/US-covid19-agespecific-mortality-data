@@ -1,0 +1,375 @@
+"date","state","code","age","cum.deaths","daily.deaths"
+2020-05-02,"California","CA","0-1",0,NA
+2020-05-02,"California","CA","1-4",0,NA
+2020-05-02,"California","CA","15-24",0,NA
+2020-05-02,"California","CA","25-34",0,NA
+2020-05-02,"California","CA","35-44",42,NA
+2020-05-02,"California","CA","45-54",95,NA
+2020-05-02,"California","CA","5-14",0,NA
+2020-05-02,"California","CA","55-64",156,NA
+2020-05-02,"California","CA","65-74",283,NA
+2020-05-02,"California","CA","75-84",377,NA
+2020-05-02,"California","CA","85+",449,NA
+2020-05-02,"Colorado","CO","0-1",0,NA
+2020-05-02,"Colorado","CO","1-4",0,NA
+2020-05-02,"Colorado","CO","15-24",0,NA
+2020-05-02,"Colorado","CO","25-34",0,NA
+2020-05-02,"Colorado","CO","35-44",0,NA
+2020-05-02,"Colorado","CO","45-54",0,NA
+2020-05-02,"Colorado","CO","5-14",0,NA
+2020-05-02,"Colorado","CO","55-64",42,NA
+2020-05-02,"Colorado","CO","65-74",127,NA
+2020-05-02,"Colorado","CO","75-84",184,NA
+2020-05-02,"Colorado","CO","85+",236,NA
+2020-05-02,"Connecticut","CT","0-1",0,NA
+2020-05-02,"Connecticut","CT","1-4",0,NA
+2020-05-02,"Connecticut","CT","15-24",0,NA
+2020-05-02,"Connecticut","CT","25-34",0,NA
+2020-05-02,"Connecticut","CT","35-44",0,NA
+2020-05-02,"Connecticut","CT","45-54",0,NA
+2020-05-02,"Connecticut","CT","5-14",0,NA
+2020-05-02,"Connecticut","CT","55-64",0,NA
+2020-05-02,"Connecticut","CT","65-74",53,NA
+2020-05-02,"Connecticut","CT","75-84",76,NA
+2020-05-02,"Connecticut","CT","85+",121,NA
+2020-05-02,"Florida","FL","0-1",0,NA
+2020-05-02,"Florida","FL","1-4",0,NA
+2020-05-02,"Florida","FL","15-24",0,NA
+2020-05-02,"Florida","FL","25-34",0,NA
+2020-05-02,"Florida","FL","35-44",0,NA
+2020-05-02,"Florida","FL","45-54",45,NA
+2020-05-02,"Florida","FL","5-14",0,NA
+2020-05-02,"Florida","FL","55-64",111,NA
+2020-05-02,"Florida","FL","65-74",242,NA
+2020-05-02,"Florida","FL","75-84",329,NA
+2020-05-02,"Florida","FL","85+",308,NA
+2020-05-02,"Georgia","GA","0-1",0,NA
+2020-05-02,"Georgia","GA","1-4",0,NA
+2020-05-02,"Georgia","GA","15-24",0,NA
+2020-05-02,"Georgia","GA","25-34",0,NA
+2020-05-02,"Georgia","GA","35-44",0,NA
+2020-05-02,"Georgia","GA","45-54",37,NA
+2020-05-02,"Georgia","GA","5-14",0,NA
+2020-05-02,"Georgia","GA","55-64",91,NA
+2020-05-02,"Georgia","GA","65-74",148,NA
+2020-05-02,"Georgia","GA","75-84",157,NA
+2020-05-02,"Georgia","GA","85+",132,NA
+2020-05-02,"Illinois","IL","0-1",0,NA
+2020-05-02,"Illinois","IL","1-4",0,NA
+2020-05-02,"Illinois","IL","15-24",0,NA
+2020-05-02,"Illinois","IL","25-34",0,NA
+2020-05-02,"Illinois","IL","35-44",0,NA
+2020-05-02,"Illinois","IL","45-54",90,NA
+2020-05-02,"Illinois","IL","5-14",0,NA
+2020-05-02,"Illinois","IL","55-64",184,NA
+2020-05-02,"Illinois","IL","65-74",360,NA
+2020-05-02,"Illinois","IL","75-84",420,NA
+2020-05-02,"Illinois","IL","85+",477,NA
+2020-05-02,"Indiana","IN","0-1",0,NA
+2020-05-02,"Indiana","IN","1-4",0,NA
+2020-05-02,"Indiana","IN","15-24",0,NA
+2020-05-02,"Indiana","IN","25-34",0,NA
+2020-05-02,"Indiana","IN","35-44",0,NA
+2020-05-02,"Indiana","IN","45-54",0,NA
+2020-05-02,"Indiana","IN","5-14",0,NA
+2020-05-02,"Indiana","IN","55-64",72,NA
+2020-05-02,"Indiana","IN","65-74",139,NA
+2020-05-02,"Indiana","IN","75-84",183,NA
+2020-05-02,"Indiana","IN","85+",174,NA
+2020-05-02,"Louisiana","LA","0-1",0,NA
+2020-05-02,"Louisiana","LA","1-4",0,NA
+2020-05-02,"Louisiana","LA","15-24",0,NA
+2020-05-02,"Louisiana","LA","25-34",0,NA
+2020-05-02,"Louisiana","LA","35-44",31,NA
+2020-05-02,"Louisiana","LA","45-54",55,NA
+2020-05-02,"Louisiana","LA","5-14",0,NA
+2020-05-02,"Louisiana","LA","55-64",160,NA
+2020-05-02,"Louisiana","LA","65-74",227,NA
+2020-05-02,"Louisiana","LA","75-84",320,NA
+2020-05-02,"Louisiana","LA","85+",239,NA
+2020-05-02,"Maryland","MD","0-1",0,NA
+2020-05-02,"Maryland","MD","1-4",0,NA
+2020-05-02,"Maryland","MD","15-24",0,NA
+2020-05-02,"Maryland","MD","25-34",0,NA
+2020-05-02,"Maryland","MD","35-44",0,NA
+2020-05-02,"Maryland","MD","45-54",34,NA
+2020-05-02,"Maryland","MD","5-14",0,NA
+2020-05-02,"Maryland","MD","55-64",94,NA
+2020-05-02,"Maryland","MD","65-74",170,NA
+2020-05-02,"Maryland","MD","75-84",248,NA
+2020-05-02,"Maryland","MD","85+",266,NA
+2020-05-02,"Massachusetts","MA","0-1",0,NA
+2020-05-02,"Massachusetts","MA","1-4",0,NA
+2020-05-02,"Massachusetts","MA","15-24",0,NA
+2020-05-02,"Massachusetts","MA","25-34",0,NA
+2020-05-02,"Massachusetts","MA","35-44",0,NA
+2020-05-02,"Massachusetts","MA","45-54",51,NA
+2020-05-02,"Massachusetts","MA","5-14",0,NA
+2020-05-02,"Massachusetts","MA","55-64",184,NA
+2020-05-02,"Massachusetts","MA","65-74",383,NA
+2020-05-02,"Massachusetts","MA","75-84",783,NA
+2020-05-02,"Massachusetts","MA","85+",1334,NA
+2020-05-02,"Michigan","MI","0-1",0,NA
+2020-05-02,"Michigan","MI","1-4",0,NA
+2020-05-02,"Michigan","MI","15-24",0,NA
+2020-05-02,"Michigan","MI","25-34",0,NA
+2020-05-02,"Michigan","MI","35-44",0,NA
+2020-05-02,"Michigan","MI","45-54",147,NA
+2020-05-02,"Michigan","MI","5-14",0,NA
+2020-05-02,"Michigan","MI","55-64",262,NA
+2020-05-02,"Michigan","MI","65-74",535,NA
+2020-05-02,"Michigan","MI","75-84",607,NA
+2020-05-02,"Michigan","MI","85+",631,NA
+2020-05-02,"New Jersey","NJ","0-1",0,NA
+2020-05-02,"New Jersey","NJ","1-4",0,NA
+2020-05-02,"New Jersey","NJ","15-24",0,NA
+2020-05-02,"New Jersey","NJ","25-34",45,NA
+2020-05-02,"New Jersey","NJ","35-44",100,NA
+2020-05-02,"New Jersey","NJ","45-54",286,NA
+2020-05-02,"New Jersey","NJ","5-14",0,NA
+2020-05-02,"New Jersey","NJ","55-64",722,NA
+2020-05-02,"New Jersey","NJ","65-74",1064,NA
+2020-05-02,"New Jersey","NJ","75-84",1619,NA
+2020-05-02,"New Jersey","NJ","85+",2153,NA
+2020-05-02,"New York","NY","0-1",0,NA
+2020-05-02,"New York","NY","1-4",0,NA
+2020-05-02,"New York","NY","15-24",0,NA
+2020-05-02,"New York","NY","25-34",0,NA
+2020-05-02,"New York","NY","35-44",80,NA
+2020-05-02,"New York","NY","45-54",227,NA
+2020-05-02,"New York","NY","5-14",0,NA
+2020-05-02,"New York","NY","55-64",618,NA
+2020-05-02,"New York","NY","65-74",1049,NA
+2020-05-02,"New York","NY","75-84",1457,NA
+2020-05-02,"New York","NY","85+",1977,NA
+2020-05-02,"Ohio","OH","0-1",0,NA
+2020-05-02,"Ohio","OH","1-4",0,NA
+2020-05-02,"Ohio","OH","15-24",0,NA
+2020-05-02,"Ohio","OH","25-34",0,NA
+2020-05-02,"Ohio","OH","35-44",0,NA
+2020-05-02,"Ohio","OH","45-54",0,NA
+2020-05-02,"Ohio","OH","5-14",0,NA
+2020-05-02,"Ohio","OH","55-64",37,NA
+2020-05-02,"Ohio","OH","65-74",74,NA
+2020-05-02,"Ohio","OH","75-84",115,NA
+2020-05-02,"Ohio","OH","85+",126,NA
+2020-05-02,"Pennsylvania","PA","0-1",0,NA
+2020-05-02,"Pennsylvania","PA","1-4",0,NA
+2020-05-02,"Pennsylvania","PA","15-24",0,NA
+2020-05-02,"Pennsylvania","PA","25-34",0,NA
+2020-05-02,"Pennsylvania","PA","35-44",0,NA
+2020-05-02,"Pennsylvania","PA","45-54",56,NA
+2020-05-02,"Pennsylvania","PA","5-14",0,NA
+2020-05-02,"Pennsylvania","PA","55-64",179,NA
+2020-05-02,"Pennsylvania","PA","65-74",363,NA
+2020-05-02,"Pennsylvania","PA","75-84",538,NA
+2020-05-02,"Pennsylvania","PA","85+",750,NA
+2020-05-02,"Texas","TX","0-1",0,NA
+2020-05-02,"Texas","TX","1-4",0,NA
+2020-05-02,"Texas","TX","15-24",0,NA
+2020-05-02,"Texas","TX","25-34",0,NA
+2020-05-02,"Texas","TX","35-44",0,NA
+2020-05-02,"Texas","TX","45-54",39,NA
+2020-05-02,"Texas","TX","5-14",0,NA
+2020-05-02,"Texas","TX","55-64",78,NA
+2020-05-02,"Texas","TX","65-74",134,NA
+2020-05-02,"Texas","TX","75-84",134,NA
+2020-05-02,"Texas","TX","85+",143,NA
+2020-05-02,"Washington","WA","0-1",0,NA
+2020-05-02,"Washington","WA","1-4",0,NA
+2020-05-02,"Washington","WA","15-24",0,NA
+2020-05-02,"Washington","WA","25-34",0,NA
+2020-05-02,"Washington","WA","35-44",0,NA
+2020-05-02,"Washington","WA","45-54",0,NA
+2020-05-02,"Washington","WA","5-14",0,NA
+2020-05-02,"Washington","WA","55-64",52,NA
+2020-05-02,"Washington","WA","65-74",112,NA
+2020-05-02,"Washington","WA","75-84",175,NA
+2020-05-02,"Washington","WA","85+",235,NA
+2020-05-09,"California","CA","0-1",0,NA
+2020-05-09,"California","CA","1-4",0,NA
+2020-05-09,"California","CA","15-24",0,NA
+2020-05-09,"California","CA","25-34",0,NA
+2020-05-09,"California","CA","35-44",51,NA
+2020-05-09,"California","CA","45-54",119,NA
+2020-05-09,"California","CA","5-14",0,NA
+2020-05-09,"California","CA","55-64",194,NA
+2020-05-09,"California","CA","65-74",350,NA
+2020-05-09,"California","CA","75-84",468,NA
+2020-05-09,"California","CA","85+",572,NA
+2020-05-09,"Colorado","CO","0-1",0,NA
+2020-05-09,"Colorado","CO","1-4",0,NA
+2020-05-09,"Colorado","CO","15-24",0,NA
+2020-05-09,"Colorado","CO","25-34",0,NA
+2020-05-09,"Colorado","CO","35-44",0,NA
+2020-05-09,"Colorado","CO","45-54",0,NA
+2020-05-09,"Colorado","CO","5-14",0,NA
+2020-05-09,"Colorado","CO","55-64",58,NA
+2020-05-09,"Colorado","CO","65-74",164,NA
+2020-05-09,"Colorado","CO","75-84",224,NA
+2020-05-09,"Colorado","CO","85+",320,NA
+2020-05-09,"Connecticut","CT","0-1",0,NA
+2020-05-09,"Connecticut","CT","1-4",0,NA
+2020-05-09,"Connecticut","CT","15-24",0,NA
+2020-05-09,"Connecticut","CT","25-34",0,NA
+2020-05-09,"Connecticut","CT","35-44",0,NA
+2020-05-09,"Connecticut","CT","45-54",11,NA
+2020-05-09,"Connecticut","CT","5-14",0,NA
+2020-05-09,"Connecticut","CT","55-64",39,NA
+2020-05-09,"Connecticut","CT","65-74",89,NA
+2020-05-09,"Connecticut","CT","75-84",126,NA
+2020-05-09,"Connecticut","CT","85+",184,NA
+2020-05-09,"Florida","FL","0-1",0,NA
+2020-05-09,"Florida","FL","1-4",0,NA
+2020-05-09,"Florida","FL","15-24",0,NA
+2020-05-09,"Florida","FL","25-34",0,NA
+2020-05-09,"Florida","FL","35-44",0,NA
+2020-05-09,"Florida","FL","45-54",53,NA
+2020-05-09,"Florida","FL","5-14",0,NA
+2020-05-09,"Florida","FL","55-64",138,NA
+2020-05-09,"Florida","FL","65-74",296,NA
+2020-05-09,"Florida","FL","75-84",391,NA
+2020-05-09,"Florida","FL","85+",378,NA
+2020-05-09,"Georgia","GA","0-1",0,NA
+2020-05-09,"Georgia","GA","1-4",0,NA
+2020-05-09,"Georgia","GA","15-24",0,NA
+2020-05-09,"Georgia","GA","25-34",0,NA
+2020-05-09,"Georgia","GA","35-44",0,NA
+2020-05-09,"Georgia","GA","45-54",49,NA
+2020-05-09,"Georgia","GA","5-14",0,NA
+2020-05-09,"Georgia","GA","55-64",122,NA
+2020-05-09,"Georgia","GA","65-74",195,NA
+2020-05-09,"Georgia","GA","75-84",222,NA
+2020-05-09,"Georgia","GA","85+",173,NA
+2020-05-09,"Illinois","IL","0-1",0,NA
+2020-05-09,"Illinois","IL","1-4",0,NA
+2020-05-09,"Illinois","IL","15-24",0,NA
+2020-05-09,"Illinois","IL","25-34",0,NA
+2020-05-09,"Illinois","IL","35-44",0,NA
+2020-05-09,"Illinois","IL","45-54",127,NA
+2020-05-09,"Illinois","IL","5-14",0,NA
+2020-05-09,"Illinois","IL","55-64",269,NA
+2020-05-09,"Illinois","IL","65-74",485,NA
+2020-05-09,"Illinois","IL","75-84",593,NA
+2020-05-09,"Illinois","IL","85+",674,NA
+2020-05-09,"Indiana","IN","0-1",0,NA
+2020-05-09,"Indiana","IN","1-4",0,NA
+2020-05-09,"Indiana","IN","15-24",0,NA
+2020-05-09,"Indiana","IN","25-34",0,NA
+2020-05-09,"Indiana","IN","35-44",0,NA
+2020-05-09,"Indiana","IN","45-54",22,NA
+2020-05-09,"Indiana","IN","5-14",0,NA
+2020-05-09,"Indiana","IN","55-64",101,NA
+2020-05-09,"Indiana","IN","65-74",209,NA
+2020-05-09,"Indiana","IN","75-84",287,NA
+2020-05-09,"Indiana","IN","85+",297,NA
+2020-05-09,"Louisiana","LA","0-1",0,NA
+2020-05-09,"Louisiana","LA","1-4",0,NA
+2020-05-09,"Louisiana","LA","15-24",0,NA
+2020-05-09,"Louisiana","LA","25-34",0,NA
+2020-05-09,"Louisiana","LA","35-44",37,NA
+2020-05-09,"Louisiana","LA","45-54",74,NA
+2020-05-09,"Louisiana","LA","5-14",0,NA
+2020-05-09,"Louisiana","LA","55-64",201,NA
+2020-05-09,"Louisiana","LA","65-74",281,NA
+2020-05-09,"Louisiana","LA","75-84",409,NA
+2020-05-09,"Louisiana","LA","85+",338,NA
+2020-05-09,"Maryland","MD","0-1",0,NA
+2020-05-09,"Maryland","MD","1-4",0,NA
+2020-05-09,"Maryland","MD","15-24",0,NA
+2020-05-09,"Maryland","MD","25-34",0,NA
+2020-05-09,"Maryland","MD","35-44",0,NA
+2020-05-09,"Maryland","MD","45-54",47,NA
+2020-05-09,"Maryland","MD","5-14",0,NA
+2020-05-09,"Maryland","MD","55-64",147,NA
+2020-05-09,"Maryland","MD","65-74",241,NA
+2020-05-09,"Maryland","MD","75-84",361,NA
+2020-05-09,"Maryland","MD","85+",397,NA
+2020-05-09,"Massachusetts","MA","0-1",0,NA
+2020-05-09,"Massachusetts","MA","1-4",0,NA
+2020-05-09,"Massachusetts","MA","15-24",0,NA
+2020-05-09,"Massachusetts","MA","25-34",0,NA
+2020-05-09,"Massachusetts","MA","35-44",0,NA
+2020-05-09,"Massachusetts","MA","45-54",70,NA
+2020-05-09,"Massachusetts","MA","5-14",0,NA
+2020-05-09,"Massachusetts","MA","55-64",231,NA
+2020-05-09,"Massachusetts","MA","65-74",520,NA
+2020-05-09,"Massachusetts","MA","75-84",1059,NA
+2020-05-09,"Massachusetts","MA","85+",1817,NA
+2020-05-09,"Michigan","MI","0-1",0,NA
+2020-05-09,"Michigan","MI","1-4",0,NA
+2020-05-09,"Michigan","MI","15-24",0,NA
+2020-05-09,"Michigan","MI","25-34",0,NA
+2020-05-09,"Michigan","MI","35-44",43,NA
+2020-05-09,"Michigan","MI","45-54",174,NA
+2020-05-09,"Michigan","MI","5-14",0,NA
+2020-05-09,"Michigan","MI","55-64",333,NA
+2020-05-09,"Michigan","MI","65-74",684,NA
+2020-05-09,"Michigan","MI","75-84",785,NA
+2020-05-09,"Michigan","MI","85+",828,NA
+2020-05-09,"New Jersey","NJ","0-1",0,NA
+2020-05-09,"New Jersey","NJ","1-4",0,NA
+2020-05-09,"New Jersey","NJ","15-24",0,NA
+2020-05-09,"New Jersey","NJ","25-34",54,NA
+2020-05-09,"New Jersey","NJ","35-44",117,NA
+2020-05-09,"New Jersey","NJ","45-54",344,NA
+2020-05-09,"New Jersey","NJ","5-14",0,NA
+2020-05-09,"New Jersey","NJ","55-64",853,NA
+2020-05-09,"New Jersey","NJ","65-74",1247,NA
+2020-05-09,"New Jersey","NJ","75-84",1881,NA
+2020-05-09,"New Jersey","NJ","85+",2502,NA
+2020-05-09,"New York","NY","0-1",0,NA
+2020-05-09,"New York","NY","1-4",0,NA
+2020-05-09,"New York","NY","15-24",0,NA
+2020-05-09,"New York","NY","25-34",33,NA
+2020-05-09,"New York","NY","35-44",102,NA
+2020-05-09,"New York","NY","45-54",291,NA
+2020-05-09,"New York","NY","5-14",0,NA
+2020-05-09,"New York","NY","55-64",763,NA
+2020-05-09,"New York","NY","65-74",1288,NA
+2020-05-09,"New York","NY","75-84",1761,NA
+2020-05-09,"New York","NY","85+",2406,NA
+2020-05-09,"Ohio","OH","0-1",0,NA
+2020-05-09,"Ohio","OH","1-4",0,NA
+2020-05-09,"Ohio","OH","15-24",0,NA
+2020-05-09,"Ohio","OH","25-34",0,NA
+2020-05-09,"Ohio","OH","35-44",0,NA
+2020-05-09,"Ohio","OH","45-54",0,NA
+2020-05-09,"Ohio","OH","5-14",0,NA
+2020-05-09,"Ohio","OH","55-64",57,NA
+2020-05-09,"Ohio","OH","65-74",126,NA
+2020-05-09,"Ohio","OH","75-84",198,NA
+2020-05-09,"Ohio","OH","85+",206,NA
+2020-05-09,"Pennsylvania","PA","0-1",0,NA
+2020-05-09,"Pennsylvania","PA","1-4",0,NA
+2020-05-09,"Pennsylvania","PA","15-24",0,NA
+2020-05-09,"Pennsylvania","PA","25-34",0,NA
+2020-05-09,"Pennsylvania","PA","35-44",0,NA
+2020-05-09,"Pennsylvania","PA","45-54",63,NA
+2020-05-09,"Pennsylvania","PA","5-14",0,NA
+2020-05-09,"Pennsylvania","PA","55-64",202,NA
+2020-05-09,"Pennsylvania","PA","65-74",399,NA
+2020-05-09,"Pennsylvania","PA","75-84",597,NA
+2020-05-09,"Pennsylvania","PA","85+",852,NA
+2020-05-09,"Texas","TX","0-1",0,NA
+2020-05-09,"Texas","TX","1-4",0,NA
+2020-05-09,"Texas","TX","15-24",0,NA
+2020-05-09,"Texas","TX","25-34",0,NA
+2020-05-09,"Texas","TX","35-44",0,NA
+2020-05-09,"Texas","TX","45-54",49,NA
+2020-05-09,"Texas","TX","5-14",0,NA
+2020-05-09,"Texas","TX","55-64",100,NA
+2020-05-09,"Texas","TX","65-74",177,NA
+2020-05-09,"Texas","TX","75-84",190,NA
+2020-05-09,"Texas","TX","85+",191,NA
+2020-05-09,"Washington","WA","0-1",0,NA
+2020-05-09,"Washington","WA","1-4",0,NA
+2020-05-09,"Washington","WA","15-24",0,NA
+2020-05-09,"Washington","WA","25-34",0,NA
+2020-05-09,"Washington","WA","35-44",0,NA
+2020-05-09,"Washington","WA","45-54",24,NA
+2020-05-09,"Washington","WA","5-14",0,NA
+2020-05-09,"Washington","WA","55-64",60,NA
+2020-05-09,"Washington","WA","65-74",131,NA
+2020-05-09,"Washington","WA","75-84",196,NA
+2020-05-09,"Washington","WA","85+",266,NA

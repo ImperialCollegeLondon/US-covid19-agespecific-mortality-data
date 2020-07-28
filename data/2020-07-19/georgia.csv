@@ -1,0 +1,3174 @@
+age,race,sex,county,chronic_condition
+71,African-American/ Black,Male,Appling,Yes
+82,White,Male,Appling,Yes
+83,White,Male,Appling,Unknown
+75,White,Male,Appling,Yes
+71,White,Male,Appling,Unknown
+78,White,Male,Appling,Unknown
+72,African-American/ Black,Male,Appling,Yes
+84,White,Female,Appling,Yes
+86,White,Male,Appling,Yes
+83,African-American/ Black,Male,Appling,Yes
+79,White,Male,Appling,Unknown
+71,White,Male,Appling,Yes
+59,White,Female,Appling,Yes
+69,African-American/ Black,Male,Appling,Unknown
+64,White,Female,Appling,No
+70,African-American/ Black,Female,Atkinson,Yes
+83,African-American/ Black,Male,Atkinson,Unknown
+70,White,Male,Bacon,Yes
+69,White,Male,Bacon,Yes
+51,African-American/ Black,Female,Bacon,Yes
+53,White,Female,Bacon,Yes
+47,White,Male,Bacon,Unknown
+90+,African-American/ Black,Male,Baker,Yes
+64,African-American/ Black,Female,Baker,No
+67,African-American/ Black,Male,Baker,Unknown
+53,White,Male,Baldwin,Yes
+56,African-American/ Black,Female,Baldwin,Yes
+90+,African-American/ Black,Male,Baldwin,Yes
+57,African-American/ Black,Male,Baldwin,Yes
+73,White,Male,Baldwin,Yes
+59,African-American/ Black,Male,Baldwin,Yes
+61,White,Male,Baldwin,Unknown
+61,African-American/ Black,Male,Baldwin,Yes
+66,African-American/ Black,Male,Baldwin,Yes
+78,White,Male,Baldwin,Yes
+81,White,Male,Baldwin,Yes
+90+,White,Male,Baldwin,Unknown
+89,White,Male,Baldwin,Unknown
+65,White,Male,Baldwin,Unknown
+57,White,Male,Baldwin,Unknown
+65,African-American/ Black,Male,Baldwin,Yes
+71,White,Male,Baldwin,Unknown
+60,White,Male,Baldwin,Unknown
+80,White,Male,Baldwin,Yes
+73,African-American/ Black,Male,Baldwin,Yes
+74,African-American/ Black,Male,Baldwin,Unknown
+90+,White,Male,Baldwin,Unknown
+86,White,Male,Baldwin,Unknown
+84,White,Male,Baldwin,Unknown
+71,White,Male,Baldwin,Yes
+75,White,Male,Baldwin,Yes
+68,White,Male,Baldwin,No
+73,White,Male,Baldwin,Unknown
+88,African-American/ Black,Male,Baldwin,Yes
+90+,White,Male,Baldwin,No
+80,White,Male,Baldwin,No
+80,White,Male,Baldwin,Unknown
+90+,African-American/ Black,Female,Baldwin,Yes
+82,White,Female,Baldwin,No
+90+,African-American/ Black,Female,Baldwin,No
+89,White,Male,Banks,Yes
+84,White,Male,Banks,Yes
+74,White,Female,Banks,Yes
+66,American Indian/ Alaska Native,Male,Barrow,Yes
+90+,White,Female,Barrow,Yes
+64,White,Male,Barrow,Yes
+79,White,Female,Barrow,Yes
+82,White,Male,Barrow,Yes
+86,White,Male,Barrow,Yes
+84,White,Female,Barrow,Yes
+46,White,Male,Barrow,No
+79,White,Female,Barrow,Yes
+80,White,Female,Barrow,Yes
+78,White,Female,Barrow,Yes
+89,White,Female,Barrow,Unknown
+85,White,Female,Barrow,Yes
+90+,African-American/ Black,Female,Barrow,Yes
+77,White,Female,Barrow,No
+90+,White,Female,Barrow,No
+73,White,Female,Barrow,No
+84,White,Female,Barrow,No
+88,African-American/ Black,Female,Barrow,Unknown
+90+,White,Female,Barrow,Unknown
+90+,White,Male,Barrow,Yes
+90+,White,Female,Barrow,Unknown
+84,White,Male,Barrow,No
+86,White,Male,Barrow,Yes
+80,White,Female,Barrow,No
+78,White,Female,Barrow,Yes
+83,White,Female,Barrow,Yes
+65,African-American/ Black,Female,Barrow,Yes
+68,White,Male,Barrow,Yes
+56,White,Male,Bartow,Yes
+69,White,Male,Bartow,Yes
+73,White,Male,Bartow,Yes
+90+,White,Male,Bartow,Yes
+72,White,Male,Bartow,Yes
+66,White,Male,Bartow,Yes
+78,White,Male,Bartow,Yes
+79,African-American/ Black,Male,Bartow,Yes
+65,White,Female,Bartow,Yes
+77,White,Female,Bartow,Yes
+88,White,Male,Bartow,Yes
+90+,White,Male,Bartow,Yes
+85,African-American/ Black,Female,Bartow,Yes
+90+,White,Female,Bartow,Yes
+85,White,Male,Bartow,Yes
+86,African-American/ Black,Male,Bartow,Yes
+88,White,Male,Bartow,Yes
+80,African-American/ Black,Male,Bartow,Yes
+87,African-American/ Black,Female,Bartow,Yes
+70,White,Female,Bartow,Yes
+90+,White,Male,Bartow,Yes
+90+,White,Female,Bartow,Yes
+84,White,Male,Bartow,Yes
+87,White,Female,Bartow,Yes
+79,White,Male,Bartow,Yes
+90+,White,Female,Bartow,Yes
+74,White,Male,Bartow,Yes
+56,White,Female,Bartow,Yes
+65,White,Male,Bartow,Yes
+90+,White,Female,Bartow,Yes
+78,White,Female,Bartow,Yes
+90+,White,Female,Bartow,Yes
+81,White,Male,Bartow,Yes
+77,African-American/ Black,Female,Bartow,Yes
+84,White,Female,Bartow,Yes
+78,White,Male,Bartow,Yes
+80,White,Female,Bartow,Yes
+90+,White,Male,Bartow,Yes
+82,White,Male,Bartow,Yes
+64,African-American/ Black,Male,Bartow,Yes
+66,Other,Male,Bartow,Yes
+77,White,Female,Bartow,Yes
+71,White,Female,Bartow,No
+90+,White,Female,Bartow,Yes
+74,White,Male,Bartow,Yes
+89,White,Male,Bartow,Yes
+73,African-American/ Black,Male,Ben Hill,Yes
+71,African-American/ Black,Male,Bibb,Yes
+70,African-American/ Black,Female,Bibb,Yes
+90+,White,Female,Bibb,Yes
+66,African-American/ Black,Female,Bibb,Yes
+68,White,Female,Bibb,Yes
+63,African-American/ Black,Female,Bibb,Yes
+65,African-American/ Black,Male,Bibb,No
+85,White,Male,Bibb,Yes
+37,African-American/ Black,Female,Bibb,Yes
+90+,White,Female,Bibb,Unknown
+78,African-American/ Black,Female,Bibb,No
+71,White,Male,Bibb,Yes
+58,African-American/ Black,Male,Bibb,Yes
+44,African-American/ Black,Female,Bibb,No
+87,African-American/ Black,Male,Bibb,Unknown
+65,African-American/ Black,Female,Bibb,Yes
+47,White,Female,Bibb,Yes
+72,African-American/ Black,Female,Bibb,Unknown
+70,White,Male,Bibb,No
+72,African-American/ Black,Male,Bibb,Yes
+87,African-American/ Black,Female,Bibb,Yes
+70,African-American/ Black,Female,Bibb,Yes
+80,African-American/ Black,Male,Bibb,Yes
+82,African-American/ Black,Female,Bibb,Yes
+60,African-American/ Black,Male,Bibb,No
+76,White,Male,Bibb,Yes
+86,African-American/ Black,Female,Bibb,Yes
+57,African-American/ Black,Female,Bibb,Yes
+89,White,Female,Bibb,Yes
+89,African-American/ Black,Female,Bibb,Yes
+88,White,Male,Bibb,Yes
+90+,African-American/ Black,Female,Bibb,Yes
+85,White,Male,Bibb,Yes
+86,African-American/ Black,Male,Bibb,Yes
+83,White,Female,Bibb,Yes
+72,African-American/ Black,Male,Bibb,Yes
+80,White,Male,Bibb,Yes
+67,African-American/ Black,Male,Bibb,Yes
+86,White,Female,Bibb,Yes
+79,White,Male,Bibb,Yes
+84,White,Female,Bibb,Yes
+49,African-American/ Black,Male,Bibb,Yes
+90+,White,Male,Bibb,Yes
+90+,African-American/ Black,Female,Bibb,Unknown
+48,African-American/ Black,Female,Bleckley,Yes
+78,White,Female,Brantley,Yes
+79,White,Female,Brantley,Unknown
+90+,White,Female,Brantley,Yes
+88,African-American/ Black,Female,Brooks,Unknown
+73,White,Male,Brooks,Yes
+87,White,Male,Brooks,Yes
+87,White,Male,Brooks,Yes
+90+,White,Female,Brooks,Unknown
+90+,White,Female,Brooks,Unknown
+90+,White,Male,Brooks,No
+88,White,Male,Brooks,No
+56,White,Male,Brooks,Yes
+76,African-American/ Black,Male,Brooks,Yes
+68,African-American/ Black,Male,Brooks,Yes
+72,White,Female,Brooks,No
+70,White,Female,Bryan,Yes
+63,White,Male,Bryan,Yes
+60,White,Male,Bryan,Yes
+61,White,Female,Bryan,Yes
+71,African-American/ Black,Female,Bryan,Yes
+65,White,Male,Bulloch,Unknown
+42,African-American/ Black,Female,Bulloch,Yes
+76,White,Female,Bulloch,No
+90+,White,Female,Bulloch,Unknown
+62,White,Female,Bulloch,Yes
+47,Other,Male,Bulloch,Unknown
+90+,African-American/ Black,Female,Bulloch,Yes
+82,African-American/ Black,Male,Burke,Yes
+67,African-American/ Black,Female,Burke,Yes
+83,White,Male,Burke,Yes
+82,White,Female,Burke,Yes
+69,White,Female,Burke,Unknown
+47,African-American/ Black,Female,Burke,No
+84,African-American/ Black,Female,Burke,Unknown
+70,African-American/ Black,Male,Butts,Yes
+67,African-American/ Black,Male,Butts,Unknown
+80,African-American/ Black,Female,Butts,Unknown
+75,White,Female,Butts,Unknown
+74,White,Female,Butts,Unknown
+86,African-American/ Black,Male,Butts,Unknown
+74,White,Male,Butts,Unknown
+90+,African-American/ Black,Female,Butts,Unknown
+72,White,Female,Butts,No
+78,White,Female,Butts,Yes
+79,White,Male,Butts,Unknown
+86,African-American/ Black,Female,Butts,No
+88,White,Male,Butts,Unknown
+90+,White,Female,Butts,Yes
+62,African-American/ Black,Male,Butts,Unknown
+54,White,Male,Butts,Unknown
+44,White,Male,Butts,No
+87,African-American/ Black,Female,Butts,Unknown
+83,White,Female,Butts,Unknown
+90+,African-American/ Black,Female,Butts,Unknown
+85,White,Male,Butts,No
+90+,White,Male,Butts,Unknown
+90+,White,Female,Butts,Unknown
+75,White,Male,Butts,No
+90+,White,Female,Butts,Unknown
+90+,African-American/ Black,Female,Butts,Unknown
+90+,White,Female,Butts,No
+90+,White,Female,Butts,No
+85,African-American/ Black,Female,Butts,Unknown
+62,African-American/ Black,Female,Butts,No
+82,White,Male,Butts,Unknown
+71,White,Male,Butts,Unknown
+65,White,Male,Butts,No
+85,African-American/ Black,Female,Butts,No
+90+,African-American/ Black,Female,Butts,No
+59,African-American/ Black,Female,Calhoun,Yes
+61,African-American/ Black,Female,Calhoun,Yes
+64,White,Male,Calhoun,No
+59,African-American/ Black,Female,Calhoun,Unknown
+35,African-American/ Black,Female,Calhoun,Yes
+30,White,Female,Calhoun,Yes
+45,African-American/ Black,Male,Camden,No
+58,White,Male,Camden,Yes
+68,Unknown,Male,Camden,Unknown
+64,White,Male,Carroll,Yes
+73,White,Female,Carroll,Yes
+74,African-American/ Black,Male,Carroll,Yes
+75,White,Female,Carroll,Yes
+75,White,Male,Carroll,Yes
+86,White,Male,Carroll,Yes
+57,African-American/ Black,Male,Carroll,Yes
+85,White,Male,Carroll,Yes
+80,White,Male,Carroll,Yes
+90+,African-American/ Black,Female,Carroll,Yes
+71,African-American/ Black,Female,Carroll,Yes
+79,White,Female,Carroll,No
+85,White,Male,Carroll,Unknown
+80,White,Male,Carroll,Yes
+86,White,Male,Carroll,Unknown
+87,White,Female,Carroll,No
+74,African-American/ Black,Male,Carroll,Yes
+83,White,Female,Carroll,Yes
+75,White,Male,Carroll,Unknown
+72,White,Male,Carroll,Yes
+78,White,Female,Carroll,Unknown
+73,White,Male,Carroll,Yes
+88,White,Female,Carroll,No
+67,White,Female,Carroll,Yes
+75,White,Female,Carroll,No
+70,White,Female,Carroll,Unknown
+85,White,Female,Carroll,Unknown
+48,White,Male,Carroll,No
+39,African-American/ Black,Female,Carroll,Unknown
+68,White,Male,Carroll,Yes
+90+,White,Female,Carroll,Yes
+64,African-American/ Black,Male,Carroll,No
+88,White,Female,Carroll,Yes
+34,African-American/ Black,Male,Carroll,Yes
+73,White,Female,Carroll,Yes
+90+,White,Female,Carroll,No
+72,White,Male,Carroll,Unknown
+55,African-American/ Black,Male,Carroll,No
+80,African-American/ Black,Female,Carroll,Unknown
+88,White,Female,Carroll,Unknown
+55,Other,Male,Carroll,Unknown
+48,African-American/ Black,Female,Carroll,Yes
+79,White,Female,Catoosa,Yes
+62,White,Female,Catoosa,Yes
+90+,White,Female,Catoosa,Yes
+78,White,Female,Catoosa,Yes
+54,White,Male,Catoosa,Unknown
+90+,White,Male,Catoosa,Yes
+84,Asian,Female,Catoosa,Yes
+59,White,Male,Catoosa,Yes
+72,African-American/ Black,Male,Charlton,Yes
+77,African-American/ Black,Female,Charlton,Yes
+83,White,Male,Chatham,Yes
+84,White,Female,Chatham,Yes
+80,African-American/ Black,Female,Chatham,Yes
+61,African-American/ Black,Male,Chatham,Unknown
+58,White,Male,Chatham,Yes
+57,White,Male,Chatham,Yes
+74,White,Male,Chatham,Yes
+60,White,Female,Chatham,Unknown
+53,African-American/ Black,Male,Chatham,Yes
+90+,White,Male,Chatham,Yes
+80,African-American/ Black,Male,Chatham,Yes
+74,White,Male,Chatham,Yes
+78,White,Male,Chatham,Yes
+90+,White,Female,Chatham,Yes
+87,White,Male,Chatham,Yes
+90+,African-American/ Black,Male,Chatham,Yes
+68,White,Male,Chatham,Yes
+70,African-American/ Black,Male,Chatham,Yes
+75,White,Female,Chatham,Yes
+90+,White,Male,Chatham,Yes
+87,African-American/ Black,Male,Chatham,Yes
+65,White,Female,Chatham,Yes
+73,African-American/ Black,Male,Chatham,Yes
+73,African-American/ Black,Male,Chatham,Yes
+75,White,Male,Chatham,Yes
+60,African-American/ Black,Male,Chatham,Yes
+88,White,Female,Chatham,Yes
+47,White,Female,Chatham,Yes
+90+,White,Female,Chatham,Yes
+64,African-American/ Black,Male,Chatham,Yes
+90+,White,Male,Chatham,No
+90+,African-American/ Black,Female,Chatham,Yes
+44,African-American/ Black,Male,Chatham,Yes
+86,African-American/ Black,Female,Chatham,Yes
+80,African-American/ Black,Female,Chatham,Yes
+75,African-American/ Black,Male,Chatham,Yes
+70,African-American/ Black,Male,Chatham,Unknown
+90+,African-American/ Black,Female,Chatham,Yes
+70,African-American/ Black,Male,Chatham,Yes
+40,White,Male,Chatham,No
+85,White,Female,Chattahoochee,Yes
+82,White,Male,Chattooga,Yes
+65,White,Male,Chattooga,Yes
+67,White,Female,Cherokee,Yes
+69,White,Male,Cherokee,Yes
+87,White,Female,Cherokee,Yes
+78,White,Female,Cherokee,Yes
+81,White,Male,Cherokee,Yes
+90+,White,Female,Cherokee,Yes
+73,White,Male,Cherokee,Yes
+80,White,Male,Cherokee,Yes
+86,White,Male,Cherokee,Yes
+78,White,Female,Cherokee,Yes
+90+,White,Male,Cherokee,Yes
+64,White,Male,Cherokee,Yes
+83,White,Female,Cherokee,Yes
+90+,White,Male,Cherokee,Yes
+90+,White,Female,Cherokee,Yes
+90+,White,Female,Cherokee,Yes
+75,White,Female,Cherokee,Yes
+69,White,Male,Cherokee,Unknown
+51,White,Male,Cherokee,Yes
+65,White,Male,Cherokee,Unknown
+89,White,Female,Cherokee,Yes
+73,White,Female,Cherokee,Yes
+78,White,Female,Cherokee,Yes
+90+,African-American/ Black,Female,Cherokee,Yes
+88,White,Female,Cherokee,Yes
+77,White,Female,Cherokee,Yes
+90+,White,Female,Cherokee,Yes
+80,White,Female,Cherokee,Yes
+87,White,Female,Cherokee,Yes
+74,White,Female,Cherokee,Yes
+83,White,Female,Cherokee,Yes
+80,White,Male,Cherokee,Yes
+81,White,Female,Cherokee,Yes
+83,African-American/ Black,Male,Cherokee,Yes
+89,White,Male,Cherokee,Yes
+90+,White,Female,Cherokee,Yes
+90+,White,Female,Cherokee,Yes
+86,White,Male,Cherokee,Yes
+36,African-American/ Black,Female,Cherokee,Yes
+58,White,Male,Cherokee,Yes
+69,White,Male,Cherokee,Yes
+77,White,Female,Cherokee,Yes
+82,White,Female,Cherokee,Yes
+78,White,Male,Cherokee,Yes
+68,White,Male,Cherokee,No
+90+,White,Male,Cherokee,Yes
+79,White,Male,Cherokee,Yes
+88,White,Male,Cherokee,Yes
+84,White,Male,Cherokee,Yes
+78,White,Female,Clarke,Unknown
+79,African-American/ Black,Male,Clarke,Yes
+60,African-American/ Black,Male,Clarke,Yes
+79,White,Male,Clarke,Yes
+72,African-American/ Black,Male,Clarke,Yes
+78,White,Female,Clarke,Yes
+89,African-American/ Black,Female,Clarke,No
+68,White,Male,Clarke,Unknown
+90+,White,Male,Clarke,Yes
+76,African-American/ Black,Male,Clarke,Yes
+65,African-American/ Black,Female,Clarke,No
+85,African-American/ Black,Male,Clarke,No
+90+,White,Male,Clarke,Unknown
+77,White,Female,Clarke,No
+90+,White,Female,Clarke,Yes
+81,African-American/ Black,Male,Clay,Yes
+64,African-American/ Black,Male,Clay,Yes
+51,African-American/ Black,Female,Clayton,No
+67,African-American/ Black,Female,Clayton,Yes
+47,White,Male,Clayton,Yes
+82,African-American/ Black,Male,Clayton,Yes
+70,African-American/ Black,Male,Clayton,No
+50,Other,Male,Clayton,Yes
+76,African-American/ Black,Male,Clayton,No
+75,African-American/ Black,Female,Clayton,Yes
+63,African-American/ Black,Male,Clayton,Yes
+82,White,Male,Clayton,Yes
+71,African-American/ Black,Female,Clayton,No
+83,African-American/ Black,Female,Clayton,Yes
+54,African-American/ Black,Male,Clayton,Yes
+64,African-American/ Black,Female,Clayton,Unknown
+38,African-American/ Black,Male,Clayton,Yes
+56,African-American/ Black,Female,Clayton,No
+56,White,Male,Clayton,Yes
+63,White,Female,Clayton,Unknown
+49,African-American/ Black,Female,Clayton,Yes
+46,African-American/ Black,Female,Clayton,Unknown
+60,African-American/ Black,Male,Clayton,No
+67,African-American/ Black,Male,Clayton,No
+52,African-American/ Black,Male,Clayton,Yes
+63,African-American/ Black,Female,Clayton,No
+55,African-American/ Black,Female,Clayton,Yes
+86,African-American/ Black,Female,Clayton,Unknown
+84,African-American/ Black,Female,Clayton,Unknown
+44,White,Male,Clayton,No
+64,African-American/ Black,Male,Clayton,Yes
+89,African-American/ Black,Male,Clayton,No
+63,African-American/ Black,Female,Clayton,No
+55,African-American/ Black,Male,Clayton,Yes
+82,White,Female,Clayton,No
+90+,African-American/ Black,Male,Clayton,Unknown
+86,Asian,Female,Clayton,Unknown
+77,African-American/ Black,Male,Clayton,Unknown
+75,African-American/ Black,Male,Clayton,No
+90+,African-American/ Black,Female,Clayton,Unknown
+69,White,Female,Clayton,No
+61,African-American/ Black,Male,Clayton,Unknown
+69,African-American/ Black,Female,Clayton,Unknown
+75,African-American/ Black,Male,Clayton,Unknown
+81,African-American/ Black,Female,Clayton,Yes
+39,African-American/ Black,Female,Clayton,No
+73,African-American/ Black,Male,Clayton,Yes
+74,African-American/ Black,Female,Clayton,Unknown
+33,African-American/ Black,Male,Clayton,No
+70,African-American/ Black,Female,Clayton,Unknown
+57,Other,Female,Clayton,Unknown
+77,White,Male,Clayton,No
+75,African-American/ Black,Female,Clayton,Unknown
+70,African-American/ Black,Male,Clayton,No
+85,African-American/ Black,Male,Clayton,Unknown
+81,African-American/ Black,Female,Clayton,Unknown
+83,Other,Female,Clayton,Unknown
+67,African-American/ Black,Male,Clayton,No
+74,White,Female,Clayton,Unknown
+72,White,Male,Clayton,No
+48,African-American/ Black,Male,Clayton,No
+90+,White,Female,Clayton,No
+90+,African-American/ Black,Female,Clayton,Unknown
+83,African-American/ Black,Female,Clayton,Unknown
+90+,White,Female,Clayton,Unknown
+55,African-American/ Black,Male,Clayton,No
+85,African-American/ Black,Female,Clayton,Unknown
+83,African-American/ Black,Female,Clayton,Unknown
+90+,African-American/ Black,Male,Clayton,Unknown
+69,African-American/ Black,Male,Clayton,No
+82,African-American/ Black,Female,Clayton,No
+66,African-American/ Black,Female,Clayton,Yes
+55,African-American/ Black,Male,Clayton,Unknown
+72,White,Male,Clayton,Unknown
+49,African-American/ Black,Male,Clayton,Unknown
+86,African-American/ Black,Female,Clayton,Unknown
+62,Other,Male,Clayton,Unknown
+67,White,Male,Clayton,Unknown
+56,African-American/ Black,Male,Clayton,Yes
+51,Other,Female,Clayton,Yes
+83,African-American/ Black,Female,Clayton,No
+81,African-American/ Black,Male,Clayton,Yes
+52,African-American/ Black,Male,Clayton,Unknown
+63,African-American/ Black,Male,Clayton,Unknown
+48,Native Hawaiian/ Pacific Islander,Female,Clayton,Unknown
+26,African-American/ Black,Male,Clayton,Unknown
+26,African-American/ Black,Male,Clayton,Yes
+72,White,Male,Clinch,Unknown
+72,White,Male,Clinch,Unknown
+64,African-American/ Black,Male,Clinch,No
+77,White,Male,Clinch,Yes
+67,African-American/ Black,Female,Cobb,Yes
+67,African-American/ Black,Male,Cobb,Yes
+77,White,Male,Cobb,Yes
+33,African-American/ Black,Female,Cobb,Yes
+87,African-American/ Black,Female,Cobb,Yes
+56,White,Male,Cobb,No
+65,White,Male,Cobb,Yes
+82,White,Male,Cobb,Yes
+76,White,Male,Cobb,Yes
+90+,White,Male,Cobb,Yes
+90+,White,Female,Cobb,Yes
+87,White,Male,Cobb,Yes
+68,White,Male,Cobb,Yes
+71,African-American/ Black,Male,Cobb,Yes
+75,African-American/ Black,Female,Cobb,Yes
+86,White,Male,Cobb,Yes
+67,African-American/ Black,Male,Cobb,Yes
+75,White,Male,Cobb,Yes
+82,White,Female,Cobb,No
+36,White,Male,Cobb,Yes
+90+,African-American/ Black,Male,Cobb,Yes
+82,White,Male,Cobb,Yes
+33,White,Male,Cobb,Yes
+71,White,Male,Cobb,Yes
+66,African-American/ Black,Male,Cobb,Yes
+63,African-American/ Black,Female,Cobb,Yes
+73,White,Male,Cobb,Yes
+71,White,Male,Cobb,Yes
+75,White,Male,Cobb,Yes
+54,African-American/ Black,Female,Cobb,Yes
+76,African-American/ Black,Male,Cobb,Yes
+51,White,Male,Cobb,Yes
+75,African-American/ Black,Male,Cobb,Yes
+27,White,Female,Cobb,No
+64,African-American/ Black,Female,Cobb,No
+85,White,Female,Cobb,Yes
+84,White,Male,Cobb,Yes
+77,White,Male,Cobb,Yes
+80,African-American/ Black,Female,Cobb,Yes
+83,African-American/ Black,Female,Cobb,Yes
+66,White,Male,Cobb,Yes
+78,African-American/ Black,Female,Cobb,Yes
+80,White,Male,Cobb,Yes
+70,African-American/ Black,Female,Cobb,Yes
+75,African-American/ Black,Female,Cobb,Yes
+78,African-American/ Black,Male,Cobb,Yes
+54,African-American/ Black,Female,Cobb,Yes
+78,African-American/ Black,Male,Cobb,No
+89,White,Female,Cobb,Yes
+77,White,Male,Cobb,Yes
+90+,White,Female,Cobb,Yes
+73,White,Male,Cobb,Yes
+79,White,Female,Cobb,Yes
+77,African-American/ Black,Male,Cobb,Yes
+81,White,Female,Cobb,Yes
+75,White,Female,Cobb,Unknown
+90+,African-American/ Black,Female,Cobb,Yes
+90+,White,Female,Cobb,Yes
+75,White,Male,Cobb,Yes
+82,White,Female,Cobb,Yes
+57,African-American/ Black,Male,Cobb,Yes
+90+,African-American/ Black,Female,Cobb,Unknown
+81,African-American/ Black,Female,Cobb,Yes
+85,White,Male,Cobb,Yes
+78,White,Female,Cobb,Yes
+83,African-American/ Black,Male,Cobb,Yes
+87,White,Female,Cobb,Yes
+75,White,Female,Cobb,Yes
+86,Other,Female,Cobb,Yes
+71,White,Male,Cobb,Yes
+83,White,Male,Cobb,Yes
+89,African-American/ Black,Female,Cobb,Yes
+61,White,Male,Cobb,Yes
+70,White,Male,Cobb,Yes
+75,White,Male,Cobb,Yes
+87,African-American/ Black,Female,Cobb,Yes
+70,African-American/ Black,Male,Cobb,Yes
+69,African-American/ Black,Female,Cobb,Yes
+50,African-American/ Black,Male,Cobb,Yes
+88,African-American/ Black,Female,Cobb,Yes
+51,White,Female,Cobb,Yes
+76,African-American/ Black,Male,Cobb,Yes
+73,White,Male,Cobb,Yes
+76,African-American/ Black,Female,Cobb,Yes
+90+,White,Female,Cobb,Yes
+80,White,Female,Cobb,Yes
+90+,White,Female,Cobb,Yes
+87,African-American/ Black,Male,Cobb,Yes
+89,African-American/ Black,Female,Cobb,Yes
+78,White,Female,Cobb,No
+90+,White,Female,Cobb,No
+90+,African-American/ Black,Female,Cobb,No
+90+,African-American/ Black,Female,Cobb,Yes
+71,White,Male,Cobb,Yes
+90+,White,Male,Cobb,Yes
+71,White,Female,Cobb,Yes
+90+,White,Male,Cobb,Yes
+75,White,Male,Cobb,Yes
+76,African-American/ Black,Female,Cobb,Yes
+85,White,Male,Cobb,Yes
+88,African-American/ Black,Male,Cobb,Yes
+90+,White,Female,Cobb,Yes
+90+,White,Male,Cobb,Yes
+73,White,Male,Cobb,Yes
+85,White,Male,Cobb,Yes
+81,White,Male,Cobb,Yes
+64,African-American/ Black,Female,Cobb,Yes
+73,White,Male,Cobb,Yes
+74,African-American/ Black,Male,Cobb,Yes
+57,White,Male,Cobb,Yes
+90+,White,Female,Cobb,No
+84,White,Female,Cobb,Yes
+60,White,Female,Cobb,Yes
+79,African-American/ Black,Female,Cobb,Yes
+71,White,Female,Cobb,Yes
+90+,White,Female,Cobb,Yes
+84,White,Female,Cobb,Yes
+76,African-American/ Black,Male,Cobb,Yes
+90+,White,Female,Cobb,Yes
+87,Asian,Female,Cobb,Yes
+90+,White,Female,Cobb,No
+88,African-American/ Black,Female,Cobb,Unknown
+80,White,Female,Cobb,Unknown
+64,African-American/ Black,Female,Cobb,Yes
+85,White,Female,Cobb,Yes
+77,White,Female,Cobb,Unknown
+67,White,Female,Cobb,Unknown
+70,White,Female,Cobb,No
+76,African-American/ Black,Male,Cobb,Yes
+65,African-American/ Black,Male,Cobb,Yes
+79,African-American/ Black,Male,Cobb,Yes
+85,White,Male,Cobb,Yes
+68,African-American/ Black,Male,Cobb,Yes
+71,African-American/ Black,Male,Cobb,Yes
+90+,White,Female,Cobb,Unknown
+83,White,Female,Cobb,Yes
+71,White,Female,Cobb,Yes
+88,White,Male,Cobb,Yes
+87,White,Male,Cobb,Yes
+89,White,Male,Cobb,Yes
+86,African-American/ Black,Female,Cobb,Yes
+76,White,Female,Cobb,Yes
+71,White,Female,Cobb,Yes
+43,African-American/ Black,Female,Cobb,Yes
+78,White,Male,Cobb,Yes
+90+,White,Female,Cobb,No
+90+,White,Female,Cobb,Yes
+73,African-American/ Black,Female,Cobb,Yes
+72,White,Male,Cobb,Yes
+90+,White,Female,Cobb,Unknown
+90+,African-American/ Black,Female,Cobb,Yes
+90+,White,Male,Cobb,Yes
+90+,African-American/ Black,Male,Cobb,Yes
+90+,White,Male,Cobb,Yes
+64,White,Male,Cobb,Yes
+90+,White,Female,Cobb,Yes
+70,African-American/ Black,Male,Cobb,Yes
+68,White,Female,Cobb,Yes
+80,African-American/ Black,Female,Cobb,Yes
+90+,White,Female,Cobb,Unknown
+71,White,Female,Cobb,Unknown
+81,White,Male,Cobb,Yes
+79,White,Female,Cobb,Unknown
+82,White,Female,Cobb,Yes
+65,White,Male,Cobb,Yes
+88,African-American/ Black,Female,Cobb,Unknown
+79,White,Female,Cobb,Unknown
+77,African-American/ Black,Female,Cobb,No
+89,White,Female,Cobb,Yes
+75,White,Female,Cobb,Yes
+87,African-American/ Black,Female,Cobb,Yes
+82,White,Female,Cobb,No
+81,White,Female,Cobb,Yes
+90+,White,Male,Cobb,Yes
+75,African-American/ Black,Male,Cobb,Yes
+88,Unknown,Male,Cobb,Yes
+80,White,Male,Cobb,Yes
+49,White,Male,Cobb,Yes
+65,Other,Female,Cobb,Yes
+74,African-American/ Black,Female,Cobb,Yes
+90+,White,Male,Cobb,Yes
+81,White,Female,Cobb,Yes
+81,African-American/ Black,Male,Cobb,No
+90+,White,Female,Cobb,Yes
+89,White,Male,Cobb,Yes
+75,White,Male,Cobb,Yes
+84,White,Male,Cobb,Yes
+82,White,Female,Cobb,Yes
+80,White,Female,Cobb,Yes
+89,African-American/ Black,Male,Cobb,Yes
+78,African-American/ Black,Female,Cobb,Yes
+86,African-American/ Black,Female,Cobb,Yes
+72,White,Male,Cobb,Yes
+81,African-American/ Black,Female,Cobb,Yes
+82,African-American/ Black,Female,Cobb,Yes
+70,White,Male,Cobb,Yes
+90+,White,Female,Cobb,Yes
+86,African-American/ Black,Male,Cobb,Yes
+88,White,Female,Cobb,Unknown
+76,White,Female,Cobb,Yes
+90+,White,Female,Cobb,Yes
+85,White,Male,Cobb,Yes
+81,Other,Male,Cobb,Yes
+60,African-American/ Black,Female,Cobb,Yes
+66,White,Male,Cobb,Yes
+52,Other,Male,Cobb,Yes
+75,White,Male,Cobb,No
+69,White,Male,Cobb,Unknown
+71,African-American/ Black,Male,Cobb,Yes
+77,White,Male,Cobb,Unknown
+83,White,Male,Cobb,Unknown
+90+,White,Male,Cobb,Yes
+75,African-American/ Black,Male,Cobb,Yes
+85,African-American/ Black,Male,Cobb,No
+85,Native Hawaiian/ Pacific Islander,Male,Cobb,Yes
+80,African-American/ Black,Male,Cobb,No
+71,White,Female,Cobb,No
+81,White,Female,Cobb,Yes
+19,Unknown,Male,Cobb,Yes
+81,African-American/ Black,Female,Cobb,Yes
+82,White,Male,Cobb,Yes
+74,African-American/ Black,Female,Cobb,Yes
+72,African-American/ Black,Male,Cobb,Unknown
+76,White,Female,Cobb,Yes
+90+,White,Female,Cobb,Yes
+88,White,Female,Cobb,Yes
+90+,White,Male,Cobb,Yes
+65,African-American/ Black,Male,Cobb,Yes
+78,White,Female,Cobb,Unknown
+90+,White,Female,Cobb,No
+90+,White,Female,Cobb,Yes
+57,Other,Male,Cobb,Yes
+89,African-American/ Black,Female,Cobb,Yes
+90+,White,Male,Cobb,No
+73,White,Male,Cobb,Yes
+73,Other,Female,Cobb,Yes
+78,African-American/ Black,Male,Cobb,Unknown
+74,Other,Female,Cobb,Yes
+90+,White,Female,Cobb,Yes
+72,African-American/ Black,Male,Cobb,Yes
+82,White,Male,Cobb,Yes
+88,White,Female,Cobb,Unknown
+41,White,Male,Cobb,No
+90+,White,Female,Cobb,No
+75,African-American/ Black,Male,Cobb,Yes
+55,Other,Female,Cobb,Unknown
+90+,African-American/ Black,Female,Cobb,Unknown
+79,White,Male,Cobb,Unknown
+90+,Other,Female,Cobb,Unknown
+87,White,Female,Cobb,Yes
+63,White,Female,Cobb,Yes
+55,Other,Male,Cobb,Yes
+62,White,Male,Cobb,No
+29,White,Male,Cobb,Yes
+56,Unknown,Unknown,Cobb,Unknown
+81,White,Male,Cobb,Yes
+68,African-American/ Black,Female,Cobb,Unknown
+80,Other,Male,Cobb,Yes
+83,African-American/ Black,Male,Cobb,Yes
+72,Unknown,Unknown,Cobb,Unknown
+43,Asian,Female,Cobb,Yes
+55,African-American/ Black,Male,Cobb,Unknown
+31,Unknown,Male,Cobb,No
+32,African-American/ Black,Female,Cobb,Unknown
+48,African-American/ Black,Female,Coffee,Yes
+55,African-American/ Black,Female,Coffee,Yes
+66,African-American/ Black,Male,Coffee,No
+64,African-American/ Black,Male,Coffee,Yes
+84,African-American/ Black,Female,Coffee,Yes
+72,African-American/ Black,Female,Coffee,Yes
+70,White,Male,Coffee,Unknown
+88,White,Male,Coffee,Unknown
+90+,White,Female,Coffee,Unknown
+71,African-American/ Black,Male,Coffee,Yes
+90+,White,Female,Coffee,Unknown
+76,White,Female,Coffee,Yes
+73,White,Female,Coffee,Yes
+80,White,Female,Coffee,Unknown
+82,White,Male,Coffee,No
+86,African-American/ Black,Female,Coffee,Yes
+67,African-American/ Black,Male,Coffee,Yes
+44,Unknown,Male,Coffee,Unknown
+53,African-American/ Black,Male,Colquitt,Yes
+69,African-American/ Black,Male,Colquitt,No
+51,African-American/ Black,Male,Colquitt,Yes
+83,African-American/ Black,Female,Colquitt,Yes
+76,African-American/ Black,Female,Colquitt,No
+52,African-American/ Black,Male,Colquitt,Yes
+65,African-American/ Black,Male,Colquitt,Unknown
+81,White,Male,Colquitt,Unknown
+59,African-American/ Black,Male,Colquitt,Yes
+58,White,Male,Colquitt,No
+49,White,Female,Colquitt,No
+90+,White,Female,Colquitt,Unknown
+69,African-American/ Black,Female,Colquitt,Unknown
+67,White,Male,Colquitt,Yes
+84,White,Male,Colquitt,Unknown
+55,White,Male,Colquitt,Yes
+64,White,Female,Colquitt,Unknown
+50,Other,Female,Colquitt,No
+65,Other,Male,Colquitt,No
+43,Unknown,Female,Colquitt,Unknown
+59,White,Male,Columbia,No
+50,White,Female,Columbia,No
+71,White,Female,Columbia,Yes
+77,White,Female,Columbia,Unknown
+90+,White,Male,Columbia,Unknown
+32,White,Male,Columbia,Unknown
+89,White,Male,Columbia,Yes
+59,White,Male,Columbia,Yes
+90+,African-American/ Black,Male,Columbia,Unknown
+82,White,Male,Columbia,Yes
+82,African-American/ Black,Female,Columbia,Yes
+80,White,Female,Columbia,No
+57,African-American/ Black,Female,Columbia,Yes
+41,African-American/ Black,Male,Columbia,Unknown
+78,African-American/ Black,Male,Cook,Yes
+67,African-American/ Black,Female,Cook,Yes
+73,White,Female,Cook,Unknown
+73,White,Male,Cook,Unknown
+77,White,Male,Coweta,Yes
+42,African-American/ Black,Female,Coweta,Yes
+65,African-American/ Black,Male,Coweta,Unknown
+58,African-American/ Black,Female,Coweta,Unknown
+84,African-American/ Black,Female,Coweta,Yes
+78,White,Female,Coweta,Unknown
+72,African-American/ Black,Male,Coweta,No
+78,African-American/ Black,Female,Coweta,Unknown
+63,African-American/ Black,Female,Coweta,Unknown
+90+,African-American/ Black,Female,Coweta,Unknown
+58,White,Female,Coweta,Unknown
+90+,White,Male,Coweta,Unknown
+80,African-American/ Black,Female,Coweta,No
+71,White,Female,Coweta,Unknown
+90+,White,Male,Coweta,No
+90+,White,Female,Coweta,Unknown
+80,African-American/ Black,Male,Crisp,Unknown
+57,African-American/ Black,Male,Crisp,Unknown
+64,African-American/ Black,Female,Crisp,No
+82,African-American/ Black,Male,Crisp,Yes
+71,African-American/ Black,Male,Crisp,Yes
+90+,African-American/ Black,Male,Crisp,Yes
+85,White,Female,Crisp,Unknown
+67,African-American/ Black,Female,Crisp,Yes
+75,African-American/ Black,Male,Crisp,Yes
+73,African-American/ Black,Male,Crisp,Unknown
+78,White,Male,Crisp,Yes
+53,African-American/ Black,Female,Crisp,No
+76,White,Male,Crisp,Unknown
+79,White,Female,Dade,Yes
+80,White,Male,Dawson,No
+83,White,Female,Dawson,Yes
+71,White,Male,Dawson,Yes
+49,African-American/ Black,Male,DeKalb,Yes
+64,African-American/ Black,Female,DeKalb,Yes
+71,Asian,Male,DeKalb,No
+75,African-American/ Black,Male,DeKalb,No
+31,African-American/ Black,Male,DeKalb,Yes
+65,African-American/ Black,Male,DeKalb,Yes
+80,White,Male,DeKalb,Yes
+90+,African-American/ Black,Female,DeKalb,Yes
+69,African-American/ Black,Male,DeKalb,Yes
+65,African-American/ Black,Female,DeKalb,Yes
+89,White,Female,DeKalb,Yes
+79,African-American/ Black,Male,DeKalb,Yes
+75,American Indian/ Alaska Native,Male,DeKalb,Yes
+81,African-American/ Black,Male,DeKalb,Yes
+73,African-American/ Black,Female,DeKalb,No
+68,African-American/ Black,Female,DeKalb,Yes
+66,African-American/ Black,Female,DeKalb,Unknown
+74,African-American/ Black,Male,DeKalb,Yes
+66,African-American/ Black,Male,DeKalb,Yes
+90+,White,Male,DeKalb,Yes
+51,African-American/ Black,Female,DeKalb,Yes
+61,African-American/ Black,Male,DeKalb,Yes
+62,African-American/ Black,Female,DeKalb,Unknown
+48,African-American/ Black,Female,DeKalb,Unknown
+81,African-American/ Black,Male,DeKalb,Unknown
+84,White,Female,DeKalb,No
+86,White,Female,DeKalb,Unknown
+64,African-American/ Black,Male,DeKalb,Unknown
+67,African-American/ Black,Female,DeKalb,Yes
+88,White,Female,DeKalb,Yes
+65,African-American/ Black,Male,DeKalb,Yes
+75,African-American/ Black,Male,DeKalb,Yes
+80,African-American/ Black,Male,DeKalb,Yes
+90+,White,Male,DeKalb,Yes
+66,African-American/ Black,Female,DeKalb,Yes
+89,White,Male,DeKalb,Unknown
+90+,White,Female,DeKalb,Yes
+82,White,Female,DeKalb,Yes
+76,African-American/ Black,Male,DeKalb,Yes
+66,African-American/ Black,Female,DeKalb,Unknown
+76,African-American/ Black,Female,DeKalb,Yes
+90+,White,Female,DeKalb,Yes
+66,African-American/ Black,Male,DeKalb,Yes
+67,African-American/ Black,Male,DeKalb,Unknown
+54,African-American/ Black,Male,DeKalb,Yes
+70,Asian,Male,DeKalb,No
+32,Other,Male,DeKalb,Unknown
+32,African-American/ Black,Male,DeKalb,Yes
+71,White,Female,DeKalb,Unknown
+90+,White,Female,DeKalb,Yes
+70,White,Male,DeKalb,Yes
+43,African-American/ Black,Male,DeKalb,Yes
+48,White,Male,DeKalb,No
+79,Asian,Female,DeKalb,Yes
+78,White,Female,DeKalb,Yes
+46,African-American/ Black,Male,DeKalb,No
+80,African-American/ Black,Male,DeKalb,Yes
+85,White,Male,DeKalb,Unknown
+84,White,Female,DeKalb,Yes
+90+,White,Female,DeKalb,No
+90+,African-American/ Black,Female,DeKalb,Yes
+88,White,Female,DeKalb,Unknown
+56,African-American/ Black,Male,DeKalb,Unknown
+56,White,Male,DeKalb,Yes
+90+,White,Female,DeKalb,Yes
+90+,African-American/ Black,Male,DeKalb,Yes
+68,African-American/ Black,Male,DeKalb,Yes
+77,African-American/ Black,Male,DeKalb,Yes
+71,African-American/ Black,Female,DeKalb,Yes
+53,African-American/ Black,Female,DeKalb,Yes
+82,White,Female,DeKalb,Yes
+78,White,Female,DeKalb,Yes
+73,African-American/ Black,Female,DeKalb,Yes
+90+,African-American/ Black,Female,DeKalb,Yes
+81,African-American/ Black,Female,DeKalb,Yes
+82,White,Male,DeKalb,Yes
+53,African-American/ Black,Male,DeKalb,Unknown
+88,White,Female,DeKalb,Yes
+85,Asian,Female,DeKalb,Yes
+75,White,Male,DeKalb,Yes
+90+,White,Female,DeKalb,Yes
+86,African-American/ Black,Female,DeKalb,Unknown
+48,White,Female,DeKalb,Yes
+77,African-American/ Black,Male,DeKalb,Unknown
+46,African-American/ Black,Female,DeKalb,Yes
+79,White,Male,DeKalb,Unknown
+68,African-American/ Black,Male,DeKalb,Yes
+90+,White,Male,DeKalb,Unknown
+81,African-American/ Black,Male,DeKalb,Yes
+89,African-American/ Black,Female,DeKalb,Yes
+89,African-American/ Black,Female,DeKalb,Yes
+65,Native Hawaiian/ Pacific Islander,Male,DeKalb,Unknown
+74,African-American/ Black,Male,DeKalb,Unknown
+81,Asian,Male,DeKalb,Unknown
+85,Asian,Male,DeKalb,Unknown
+88,African-American/ Black,Male,DeKalb,Unknown
+83,White,Male,DeKalb,Yes
+75,African-American/ Black,Male,DeKalb,Unknown
+81,White,Female,DeKalb,Unknown
+68,African-American/ Black,Male,DeKalb,Yes
+84,White,Female,DeKalb,Unknown
+83,African-American/ Black,Female,DeKalb,Yes
+81,African-American/ Black,Female,DeKalb,Yes
+79,African-American/ Black,Male,DeKalb,Unknown
+56,White,Female,DeKalb,Yes
+78,African-American/ Black,Male,DeKalb,Unknown
+90+,White,Female,DeKalb,Yes
+90+,African-American/ Black,Female,DeKalb,Yes
+74,African-American/ Black,Male,DeKalb,Unknown
+81,African-American/ Black,Female,DeKalb,Yes
+80,African-American/ Black,Female,DeKalb,Unknown
+90+,White,Male,DeKalb,Unknown
+77,White,Male,DeKalb,Yes
+89,African-American/ Black,Male,DeKalb,Yes
+77,African-American/ Black,Female,DeKalb,Unknown
+79,Asian,Male,DeKalb,Yes
+63,Asian,Male,DeKalb,Yes
+74,White,Female,DeKalb,Yes
+78,African-American/ Black,Male,DeKalb,No
+74,African-American/ Black,Female,DeKalb,Yes
+81,African-American/ Black,Male,DeKalb,Unknown
+72,African-American/ Black,Male,DeKalb,Yes
+74,White,Male,DeKalb,Yes
+71,African-American/ Black,Female,DeKalb,Yes
+73,African-American/ Black,Male,DeKalb,Yes
+78,African-American/ Black,Male,DeKalb,Yes
+50,White,Male,DeKalb,No
+34,Other,Female,DeKalb,No
+73,African-American/ Black,Male,DeKalb,Yes
+76,African-American/ Black,Female,DeKalb,Unknown
+33,African-American/ Black,Male,DeKalb,Unknown
+46,African-American/ Black,Female,DeKalb,Yes
+69,Asian,Female,DeKalb,Yes
+90+,White,Female,DeKalb,Unknown
+51,Other,Male,DeKalb,No
+74,Asian,Female,DeKalb,Yes
+71,White,Female,DeKalb,Unknown
+90+,White,Male,DeKalb,No
+66,African-American/ Black,Male,DeKalb,Yes
+56,African-American/ Black,Male,DeKalb,Yes
+71,African-American/ Black,Male,DeKalb,Yes
+90+,White,Female,DeKalb,Yes
+90+,African-American/ Black,Female,DeKalb,Yes
+81,White,Male,DeKalb,Yes
+90+,African-American/ Black,Female,DeKalb,Yes
+57,Other,Male,DeKalb,Unknown
+79,African-American/ Black,Female,DeKalb,Yes
+70,African-American/ Black,Female,DeKalb,Unknown
+83,African-American/ Black,Female,DeKalb,Unknown
+68,African-American/ Black,Female,DeKalb,Yes
+75,African-American/ Black,Male,DeKalb,Yes
+67,African-American/ Black,Female,DeKalb,No
+70,Other,Male,DeKalb,Unknown
+62,African-American/ Black,Male,DeKalb,Unknown
+57,African-American/ Black,Male,DeKalb,Yes
+69,African-American/ Black,Female,DeKalb,No
+45,Other,Male,DeKalb,No
+47,Other,Male,DeKalb,No
+71,African-American/ Black,Female,DeKalb,Yes
+87,White,Male,DeKalb,Yes
+72,African-American/ Black,Male,DeKalb,Unknown
+59,African-American/ Black,Male,DeKalb,Yes
+52,African-American/ Black,Male,DeKalb,Yes
+64,White,Male,DeKalb,Yes
+44,Asian,Male,DeKalb,Yes
+57,African-American/ Black,Female,DeKalb,Yes
+70,White,Male,DeKalb,No
+45,African-American/ Black,Male,DeKalb,Yes
+46,African-American/ Black,Male,DeKalb,Yes
+62,White,Female,DeKalb,Unknown
+49,White,Male,DeKalb,No
+58,African-American/ Black,Female,DeKalb,Yes
+53,White,Male,DeKalb,No
+90+,White,Female,DeKalb,Yes
+77,African-American/ Black,Male,DeKalb,Yes
+84,White,Male,DeKalb,Yes
+52,African-American/ Black,Male,DeKalb,No
+86,African-American/ Black,Male,DeKalb,Yes
+72,White,Female,DeKalb,Yes
+53,White,Female,DeKalb,Unknown
+33,Unknown,Male,DeKalb,Unknown
+74,African-American/ Black,Female,DeKalb,Yes
+87,Native Hawaiian/ Pacific Islander,Female,DeKalb,Unknown
+90+,African-American/ Black,Female,DeKalb,Yes
+90+,African-American/ Black,Male,DeKalb,Yes
+34,African-American/ Black,Male,DeKalb,Yes
+86,White,Female,DeKalb,Yes
+69,African-American/ Black,Male,DeKalb,Yes
+79,African-American/ Black,Female,Decatur,Yes
+71,African-American/ Black,Female,Decatur,Yes
+31,African-American/ Black,Male,Decatur,Unknown
+66,African-American/ Black,Female,Decatur,Yes
+25,White,Male,Decatur,Unknown
+51,African-American/ Black,Male,Decatur,Yes
+67,African-American/ Black,Female,Decatur,Yes
+58,White,Female,Decatur,Yes
+82,White,Female,Dodge,Yes
+62,White,Female,Dodge,Yes
+67,White,Male,Dooly,No
+71,African-American/ Black,Female,Dooly,No
+68,African-American/ Black,Male,Dooly,Yes
+65,African-American/ Black,Male,Dooly,Yes
+72,African-American/ Black,Female,Dooly,Yes
+59,African-American/ Black,Female,Dooly,Yes
+71,African-American/ Black,Female,Dooly,Unknown
+54,African-American/ Black,Female,Dooly,No
+90+,African-American/ Black,Male,Dooly,Yes
+69,African-American/ Black,Male,Dooly,Yes
+75,African-American/ Black,Male,Dooly,Yes
+83,African-American/ Black,Female,Dooly,Yes
+66,African-American/ Black,Male,Dooly,Yes
+59,African-American/ Black,Male,Dooly,Unknown
+68,African-American/ Black,Female,Dougherty,Yes
+42,African-American/ Black,Female,Dougherty,Yes
+66,African-American/ Black,Female,Dougherty,Yes
+43,African-American/ Black,Female,Dougherty,Yes
+79,African-American/ Black,Male,Dougherty,Yes
+34,African-American/ Black,Male,Dougherty,Yes
+67,White,Female,Dougherty,Yes
+78,African-American/ Black,Male,Dougherty,Yes
+47,African-American/ Black,Female,Dougherty,Yes
+65,African-American/ Black,Female,Dougherty,Yes
+60,African-American/ Black,Female,Dougherty,Yes
+87,White,Female,Dougherty,Unknown
+85,White,Female,Dougherty,Yes
+90+,African-American/ Black,Female,Dougherty,Yes
+53,African-American/ Black,Female,Dougherty,Yes
+84,African-American/ Black,Male,Dougherty,Yes
+66,African-American/ Black,Male,Dougherty,Yes
+66,African-American/ Black,Female,Dougherty,Yes
+68,White,Male,Dougherty,Unknown
+65,White,Female,Dougherty,Yes
+71,White,Male,Dougherty,Yes
+90+,African-American/ Black,Female,Dougherty,Yes
+90+,African-American/ Black,Female,Dougherty,Yes
+61,African-American/ Black,Female,Dougherty,Yes
+69,African-American/ Black,Male,Dougherty,Yes
+73,African-American/ Black,Male,Dougherty,Yes
+63,African-American/ Black,Male,Dougherty,Yes
+73,African-American/ Black,Male,Dougherty,Yes
+70,White,Male,Dougherty,Unknown
+65,African-American/ Black,Male,Dougherty,Yes
+45,African-American/ Black,Female,Dougherty,Yes
+69,African-American/ Black,Male,Dougherty,Yes
+65,African-American/ Black,Male,Dougherty,Yes
+82,African-American/ Black,Female,Dougherty,Yes
+86,African-American/ Black,Female,Dougherty,No
+63,White,Female,Dougherty,Yes
+48,African-American/ Black,Female,Dougherty,Yes
+75,African-American/ Black,Male,Dougherty,Yes
+61,African-American/ Black,Male,Dougherty,Yes
+55,African-American/ Black,Female,Dougherty,No
+81,African-American/ Black,Male,Dougherty,No
+78,African-American/ Black,Female,Dougherty,Yes
+75,African-American/ Black,Male,Dougherty,Yes
+81,African-American/ Black,Female,Dougherty,Yes
+90+,African-American/ Black,Female,Dougherty,No
+76,African-American/ Black,Female,Dougherty,Yes
+74,African-American/ Black,Male,Dougherty,Unknown
+85,African-American/ Black,Female,Dougherty,Yes
+66,African-American/ Black,Female,Dougherty,Yes
+87,African-American/ Black,Female,Dougherty,Yes
+63,African-American/ Black,Female,Dougherty,Yes
+54,African-American/ Black,Female,Dougherty,Yes
+68,African-American/ Black,Male,Dougherty,Yes
+78,African-American/ Black,Male,Dougherty,Yes
+70,African-American/ Black,Male,Dougherty,Yes
+76,African-American/ Black,Male,Dougherty,Yes
+90+,African-American/ Black,Female,Dougherty,Yes
+82,African-American/ Black,Female,Dougherty,Yes
+79,African-American/ Black,Female,Dougherty,Unknown
+90+,White,Female,Dougherty,Unknown
+76,African-American/ Black,Female,Dougherty,Yes
+81,White,Female,Dougherty,Yes
+68,African-American/ Black,Male,Dougherty,Yes
+46,African-American/ Black,Male,Dougherty,Yes
+69,African-American/ Black,Female,Dougherty,Unknown
+65,African-American/ Black,Male,Dougherty,Yes
+38,African-American/ Black,Male,Dougherty,Yes
+75,African-American/ Black,Female,Dougherty,Yes
+65,African-American/ Black,Male,Dougherty,Yes
+43,African-American/ Black,Female,Dougherty,No
+85,African-American/ Black,Female,Dougherty,Yes
+62,White,Female,Dougherty,Yes
+66,African-American/ Black,Female,Dougherty,Yes
+76,African-American/ Black,Female,Dougherty,Unknown
+70,African-American/ Black,Male,Dougherty,Unknown
+77,African-American/ Black,Female,Dougherty,Yes
+71,African-American/ Black,Male,Dougherty,Unknown
+84,African-American/ Black,Male,Dougherty,Yes
+81,White,Female,Dougherty,Yes
+78,African-American/ Black,Male,Dougherty,Unknown
+70,White,Female,Dougherty,Unknown
+90+,African-American/ Black,Female,Dougherty,Yes
+49,African-American/ Black,Male,Dougherty,Unknown
+90+,African-American/ Black,Female,Dougherty,Yes
+74,African-American/ Black,Male,Dougherty,Unknown
+85,White,Female,Dougherty,Yes
+26,African-American/ Black,Female,Dougherty,Yes
+58,Other,Male,Dougherty,Yes
+71,African-American/ Black,Male,Dougherty,Yes
+78,African-American/ Black,Male,Dougherty,Unknown
+74,African-American/ Black,Male,Dougherty,No
+48,African-American/ Black,Male,Dougherty,Yes
+52,African-American/ Black,Female,Dougherty,Yes
+86,African-American/ Black,Male,Dougherty,Unknown
+85,African-American/ Black,Male,Dougherty,Yes
+64,White,Female,Dougherty,Yes
+86,White,Male,Dougherty,Yes
+62,African-American/ Black,Male,Dougherty,Yes
+73,African-American/ Black,Female,Dougherty,Yes
+53,African-American/ Black,Male,Dougherty,Yes
+61,African-American/ Black,Female,Dougherty,Yes
+64,African-American/ Black,Male,Dougherty,Yes
+54,African-American/ Black,Male,Dougherty,No
+69,African-American/ Black,Male,Dougherty,Yes
+86,African-American/ Black,Female,Dougherty,Yes
+62,African-American/ Black,Male,Dougherty,Yes
+65,African-American/ Black,Male,Dougherty,Yes
+67,African-American/ Black,Female,Dougherty,Unknown
+87,African-American/ Black,Female,Dougherty,Unknown
+90+,White,Male,Dougherty,Yes
+78,White,Male,Dougherty,Yes
+83,African-American/ Black,Female,Dougherty,Yes
+68,African-American/ Black,Female,Dougherty,Unknown
+54,African-American/ Black,Male,Dougherty,Unknown
+73,African-American/ Black,Male,Dougherty,Unknown
+85,African-American/ Black,Female,Dougherty,Unknown
+88,African-American/ Black,Female,Dougherty,Unknown
+65,White,Male,Dougherty,No
+51,African-American/ Black,Female,Dougherty,No
+88,White,Female,Dougherty,Unknown
+84,African-American/ Black,Female,Dougherty,Yes
+42,African-American/ Black,Female,Dougherty,Yes
+90+,African-American/ Black,Male,Dougherty,No
+55,White,Female,Dougherty,No
+75,African-American/ Black,Male,Dougherty,Yes
+79,African-American/ Black,Female,Dougherty,Unknown
+76,African-American/ Black,Female,Dougherty,Yes
+75,African-American/ Black,Female,Dougherty,Unknown
+89,African-American/ Black,Female,Dougherty,Unknown
+86,White,Female,Dougherty,Unknown
+53,White,Female,Dougherty,Unknown
+90+,White,Female,Dougherty,No
+84,White,Male,Dougherty,No
+71,African-American/ Black,Female,Dougherty,Yes
+70,African-American/ Black,Male,Dougherty,Yes
+67,African-American/ Black,Female,Dougherty,Unknown
+61,African-American/ Black,Male,Dougherty,Unknown
+89,White,Female,Dougherty,Unknown
+90+,African-American/ Black,Male,Dougherty,Unknown
+83,White,Male,Dougherty,Unknown
+72,African-American/ Black,Male,Dougherty,Unknown
+90+,African-American/ Black,Female,Dougherty,Unknown
+84,African-American/ Black,Male,Dougherty,Yes
+27,African-American/ Black,Male,Dougherty,Unknown
+68,African-American/ Black,Female,Dougherty,Unknown
+74,African-American/ Black,Female,Dougherty,Unknown
+31,African-American/ Black,Female,Dougherty,Unknown
+78,White,Female,Dougherty,Yes
+73,African-American/ Black,Female,Dougherty,Unknown
+88,White,Female,Dougherty,Unknown
+46,African-American/ Black,Female,Dougherty,Yes
+83,African-American/ Black,Male,Dougherty,Unknown
+66,White,Male,Dougherty,Unknown
+90+,White,Female,Dougherty,No
+77,African-American/ Black,Female,Dougherty,No
+79,White,Female,Dougherty,Unknown
+90+,African-American/ Black,Female,Dougherty,Unknown
+64,African-American/ Black,Female,Dougherty,Yes
+66,White,Male,Douglas,No
+78,African-American/ Black,Male,Douglas,Yes
+84,African-American/ Black,Male,Douglas,Yes
+32,African-American/ Black,Male,Douglas,Yes
+56,African-American/ Black,Male,Douglas,Yes
+58,White,Female,Douglas,Yes
+65,White,Female,Douglas,Yes
+73,African-American/ Black,Male,Douglas,Yes
+70,African-American/ Black,Male,Douglas,Yes
+80,White,Female,Douglas,Yes
+73,White,Female,Douglas,Yes
+71,African-American/ Black,Female,Douglas,Yes
+85,White,Male,Douglas,Yes
+66,African-American/ Black,Female,Douglas,Yes
+81,African-American/ Black,Female,Douglas,Yes
+69,White,Female,Douglas,Yes
+89,White,Male,Douglas,Yes
+76,White,Male,Douglas,Yes
+64,African-American/ Black,Male,Douglas,Yes
+75,African-American/ Black,Male,Douglas,Yes
+87,African-American/ Black,Male,Douglas,Yes
+90+,White,Female,Douglas,Yes
+85,African-American/ Black,Female,Douglas,Yes
+90+,White,Male,Douglas,Yes
+59,White,Female,Douglas,Yes
+86,White,Male,Douglas,Yes
+81,White,Male,Douglas,Yes
+76,White,Female,Douglas,Yes
+74,African-American/ Black,Male,Douglas,Yes
+50,Other,Male,Douglas,Yes
+76,White,Female,Douglas,Yes
+90+,White,Female,Douglas,Yes
+90+,White,Male,Douglas,Yes
+90+,White,Female,Douglas,Yes
+47,African-American/ Black,Male,Douglas,Yes
+62,African-American/ Black,Female,Douglas,Yes
+73,White,Male,Douglas,Unknown
+32,White,Female,Douglas,Yes
+60,African-American/ Black,Male,Douglas,No
+84,African-American/ Black,Female,Douglas,Yes
+36,African-American/ Black,Female,Douglas,Yes
+48,African-American/ Black,Female,Early,Yes
+60,African-American/ Black,Female,Early,Unknown
+68,African-American/ Black,Female,Early,Unknown
+54,African-American/ Black,Male,Early,No
+63,African-American/ Black,Female,Early,No
+70,African-American/ Black,Male,Early,Unknown
+58,White,Male,Early,Unknown
+79,White,Male,Early,Unknown
+65,White,Male,Early,Yes
+90+,African-American/ Black,Female,Early,Yes
+80,African-American/ Black,Female,Early,Yes
+71,African-American/ Black,Female,Early,Unknown
+62,African-American/ Black,Female,Early,Unknown
+85,White,Male,Early,Unknown
+84,African-American/ Black,Male,Early,Unknown
+79,African-American/ Black,Male,Early,Unknown
+71,White,Male,Early,Unknown
+90+,White,Female,Early,Yes
+78,White,Female,Early,Unknown
+83,African-American/ Black,Female,Early,Yes
+83,African-American/ Black,Female,Early,Unknown
+90+,White,Female,Early,Unknown
+79,White,Male,Early,Unknown
+88,African-American/ Black,Female,Early,Unknown
+79,African-American/ Black,Female,Early,Unknown
+83,White,Female,Early,Unknown
+68,White,Female,Early,Unknown
+77,White,Male,Early,Unknown
+68,African-American/ Black,Male,Early,Unknown
+65,African-American/ Black,Male,Early,Unknown
+64,African-American/ Black,Female,Early,Unknown
+56,White,Male,Effingham,Yes
+67,African-American/ Black,Male,Emanuel,Yes
+84,White,Female,Emanuel,Yes
+81,White,Male,Emanuel,Yes
+84,White,Female,Fannin,Yes
+51,White,Male,Fannin,Yes
+79,White,Male,Fayette,Yes
+73,African-American/ Black,Male,Fayette,Yes
+83,African-American/ Black,Male,Fayette,Yes
+76,African-American/ Black,Male,Fayette,Yes
+77,White,Female,Fayette,Yes
+73,White,Male,Fayette,Yes
+85,White,Female,Fayette,Yes
+63,African-American/ Black,Male,Fayette,Unknown
+65,African-American/ Black,Male,Fayette,No
+69,African-American/ Black,Female,Fayette,Unknown
+80,African-American/ Black,Male,Fayette,No
+89,African-American/ Black,Male,Fayette,Unknown
+64,African-American/ Black,Female,Fayette,Yes
+84,White,Male,Fayette,No
+88,White,Female,Fayette,No
+79,White,Male,Fayette,Yes
+86,White,Male,Fayette,Yes
+77,African-American/ Black,Male,Fayette,No
+88,White,Female,Fayette,No
+78,White,Male,Fayette,Unknown
+75,White,Male,Floyd,Yes
+65,White,Female,Floyd,Yes
+62,White,Male,Floyd,Yes
+75,White,Female,Floyd,Yes
+72,White,Female,Floyd,Yes
+70,White,Male,Floyd,Yes
+80,White,Male,Floyd,Yes
+73,White,Female,Floyd,Yes
+81,White,Female,Floyd,Unknown
+67,White,Female,Floyd,Yes
+75,White,Male,Floyd,Yes
+80,African-American/ Black,Female,Floyd,Yes
+74,White,Male,Floyd,Yes
+57,White,Male,Floyd,Yes
+56,White,Female,Floyd,Yes
+87,White,Male,Forsyth,No
+74,White,Female,Forsyth,Unknown
+84,White,Male,Forsyth,Yes
+69,Asian,Female,Forsyth,No
+73,Asian,Male,Forsyth,Yes
+60,Asian,Male,Forsyth,Yes
+81,African-American/ Black,Female,Forsyth,Yes
+71,White,Female,Forsyth,Yes
+59,Other,Male,Forsyth,No
+77,White,Female,Forsyth,Yes
+87,White,Female,Forsyth,Yes
+83,White,Male,Forsyth,Unknown
+71,White,Male,Forsyth,Yes
+51,Other,Male,Forsyth,Unknown
+78,White,Female,Forsyth,Yes
+57,African-American/ Black,Male,Forsyth,Unknown
+78,African-American/ Black,Male,Franklin,Yes
+85,White,Male,Franklin,Unknown
+90+,White,Female,Franklin,Yes
+68,Other,Male,Fulton,Yes
+62,African-American/ Black,Male,Fulton,Yes
+64,African-American/ Black,Male,Fulton,Yes
+78,African-American/ Black,Female,Fulton,No
+69,African-American/ Black,Male,Fulton,Yes
+58,African-American/ Black,Male,Fulton,Yes
+68,African-American/ Black,Female,Fulton,Yes
+73,African-American/ Black,Male,Fulton,Yes
+70,African-American/ Black,Female,Fulton,Yes
+66,African-American/ Black,Female,Fulton,Unknown
+67,African-American/ Black,Male,Fulton,Yes
+67,African-American/ Black,Male,Fulton,Yes
+33,African-American/ Black,Male,Fulton,Yes
+89,African-American/ Black,Female,Fulton,Yes
+70,African-American/ Black,Female,Fulton,Yes
+69,African-American/ Black,Male,Fulton,Yes
+50,African-American/ Black,Female,Fulton,No
+59,African-American/ Black,Male,Fulton,Yes
+70,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Male,Fulton,Yes
+63,African-American/ Black,Male,Fulton,Yes
+64,African-American/ Black,Male,Fulton,Yes
+89,African-American/ Black,Male,Fulton,Yes
+83,White,Male,Fulton,Unknown
+53,African-American/ Black,Male,Fulton,Yes
+83,African-American/ Black,Female,Fulton,Yes
+70,African-American/ Black,Male,Fulton,Unknown
+89,White,Female,Fulton,Yes
+60,African-American/ Black,Female,Fulton,Yes
+78,African-American/ Black,Male,Fulton,Yes
+78,African-American/ Black,Male,Fulton,Yes
+81,African-American/ Black,Male,Fulton,Yes
+73,African-American/ Black,Male,Fulton,Unknown
+77,African-American/ Black,Female,Fulton,Yes
+54,African-American/ Black,Female,Fulton,Yes
+73,African-American/ Black,Female,Fulton,Yes
+85,White,Male,Fulton,Yes
+75,African-American/ Black,Male,Fulton,Yes
+63,African-American/ Black,Female,Fulton,Yes
+86,Other,Female,Fulton,Yes
+62,African-American/ Black,Male,Fulton,Yes
+85,African-American/ Black,Male,Fulton,Yes
+84,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Yes
+75,White,Female,Fulton,Yes
+78,African-American/ Black,Male,Fulton,No
+80,African-American/ Black,Male,Fulton,Yes
+77,African-American/ Black,Male,Fulton,Yes
+53,African-American/ Black,Male,Fulton,Yes
+67,African-American/ Black,Female,Fulton,Yes
+63,African-American/ Black,Male,Fulton,Unknown
+87,African-American/ Black,Male,Fulton,Yes
+31,African-American/ Black,Male,Fulton,No
+78,African-American/ Black,Female,Fulton,No
+90+,African-American/ Black,Female,Fulton,Yes
+85,Asian,Male,Fulton,Yes
+80,African-American/ Black,Female,Fulton,Yes
+36,African-American/ Black,Female,Fulton,Yes
+73,African-American/ Black,Male,Fulton,Yes
+88,African-American/ Black,Female,Fulton,Yes
+76,African-American/ Black,Male,Fulton,Yes
+72,African-American/ Black,Female,Fulton,No
+56,African-American/ Black,Male,Fulton,Unknown
+83,African-American/ Black,Male,Fulton,Yes
+70,African-American/ Black,Male,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Yes
+88,African-American/ Black,Male,Fulton,Yes
+80,African-American/ Black,Male,Fulton,Yes
+78,African-American/ Black,Male,Fulton,Yes
+87,African-American/ Black,Male,Fulton,Yes
+87,African-American/ Black,Female,Fulton,Yes
+57,African-American/ Black,Female,Fulton,No
+90+,African-American/ Black,Female,Fulton,Unknown
+82,African-American/ Black,Female,Fulton,Yes
+66,African-American/ Black,Male,Fulton,No
+68,African-American/ Black,Male,Fulton,Unknown
+90+,African-American/ Black,Male,Fulton,Yes
+90+,African-American/ Black,Male,Fulton,Yes
+54,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Male,Fulton,Unknown
+73,African-American/ Black,Male,Fulton,Yes
+89,African-American/ Black,Male,Fulton,Yes
+77,White,Male,Fulton,Yes
+81,African-American/ Black,Female,Fulton,Yes
+85,African-American/ Black,Female,Fulton,Unknown
+76,African-American/ Black,Female,Fulton,Unknown
+69,African-American/ Black,Male,Fulton,Unknown
+90+,White,Male,Fulton,Yes
+71,African-American/ Black,Male,Fulton,Unknown
+88,African-American/ Black,Female,Fulton,Unknown
+88,African-American/ Black,Male,Fulton,Yes
+90+,African-American/ Black,Male,Fulton,Unknown
+72,African-American/ Black,Female,Fulton,No
+90+,African-American/ Black,Female,Fulton,Yes
+76,African-American/ Black,Male,Fulton,Unknown
+76,African-American/ Black,Male,Fulton,Yes
+84,African-American/ Black,Male,Fulton,Yes
+74,African-American/ Black,Male,Fulton,Yes
+77,African-American/ Black,Male,Fulton,Yes
+61,African-American/ Black,Male,Fulton,Unknown
+90+,Asian,Female,Fulton,No
+90+,White,Female,Fulton,Yes
+87,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Unknown
+87,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Male,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,No
+90+,African-American/ Black,Male,Fulton,No
+60,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Yes
+76,African-American/ Black,Female,Fulton,Yes
+59,African-American/ Black,Male,Fulton,Unknown
+62,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,No
+85,African-American/ Black,Female,Fulton,Yes
+52,African-American/ Black,Male,Fulton,No
+23,African-American/ Black,Female,Fulton,Yes
+89,White,Male,Fulton,Yes
+78,White,Male,Fulton,Yes
+90+,African-American/ Black,Male,Fulton,Yes
+84,White,Female,Fulton,Yes
+78,White,Male,Fulton,Yes
+87,White,Female,Fulton,Yes
+75,African-American/ Black,Male,Fulton,No
+62,White,Male,Fulton,Yes
+81,African-American/ Black,Female,Fulton,Yes
+75,African-American/ Black,Male,Fulton,Yes
+70,African-American/ Black,Female,Fulton,Yes
+61,African-American/ Black,Female,Fulton,Unknown
+49,African-American/ Black,Female,Fulton,Yes
+70,White,Male,Fulton,Yes
+90+,White,Female,Fulton,Unknown
+90+,White,Female,Fulton,Yes
+90+,White,Female,Fulton,No
+60,White,Male,Fulton,Yes
+90+,African-American/ Black,Male,Fulton,Yes
+67,African-American/ Black,Male,Fulton,No
+76,African-American/ Black,Male,Fulton,Unknown
+66,African-American/ Black,Female,Fulton,Yes
+56,African-American/ Black,Male,Fulton,Yes
+62,African-American/ Black,Male,Fulton,Yes
+90+,White,Female,Fulton,Yes
+83,White,Female,Fulton,Yes
+90+,White,Female,Fulton,Yes
+90+,White,Female,Fulton,Yes
+53,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Male,Fulton,Yes
+90+,White,Female,Fulton,Yes
+82,African-American/ Black,Female,Fulton,Yes
+68,African-American/ Black,Male,Fulton,Yes
+61,African-American/ Black,Female,Fulton,Yes
+67,African-American/ Black,Male,Fulton,Unknown
+57,White,Female,Fulton,Yes
+72,African-American/ Black,Male,Fulton,Yes
+78,African-American/ Black,Female,Fulton,Yes
+90+,White,Male,Fulton,Yes
+71,White,Male,Fulton,Unknown
+82,White,Male,Fulton,Unknown
+89,White,Male,Fulton,Yes
+45,Other,Male,Fulton,No
+81,African-American/ Black,Male,Fulton,No
+89,White,Male,Fulton,No
+90+,White,Female,Fulton,Yes
+89,White,Female,Fulton,Yes
+61,African-American/ Black,Male,Fulton,Yes
+66,African-American/ Black,Male,Fulton,Yes
+86,African-American/ Black,Male,Fulton,Unknown
+70,African-American/ Black,Male,Fulton,Yes
+75,African-American/ Black,Male,Fulton,Yes
+79,African-American/ Black,Male,Fulton,Yes
+76,White,Male,Fulton,No
+78,African-American/ Black,Male,Fulton,Yes
+50,African-American/ Black,Male,Fulton,Yes
+80,African-American/ Black,Male,Fulton,No
+80,African-American/ Black,Male,Fulton,Unknown
+79,White,Female,Fulton,Yes
+65,African-American/ Black,Male,Fulton,Unknown
+79,African-American/ Black,Female,Fulton,Unknown
+73,African-American/ Black,Female,Fulton,Yes
+60,African-American/ Black,Male,Fulton,Unknown
+65,African-American/ Black,Male,Fulton,Unknown
+89,African-American/ Black,Female,Fulton,No
+79,African-American/ Black,Female,Fulton,No
+83,African-American/ Black,Male,Fulton,No
+68,African-American/ Black,Male,Fulton,Unknown
+86,White,Male,Fulton,Yes
+49,African-American/ Black,Female,Fulton,Yes
+81,African-American/ Black,Female,Fulton,Yes
+90+,White,Female,Fulton,No
+74,African-American/ Black,Male,Fulton,Yes
+80,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Yes
+43,Other,Female,Fulton,Yes
+68,African-American/ Black,Male,Fulton,Yes
+55,African-American/ Black,Male,Fulton,Unknown
+64,African-American/ Black,Male,Fulton,Unknown
+88,African-American/ Black,Male,Fulton,Yes
+77,African-American/ Black,Male,Fulton,No
+61,African-American/ Black,Male,Fulton,Unknown
+48,Other,Male,Fulton,No
+84,White,Male,Fulton,No
+90+,White,Female,Fulton,Yes
+90+,White,Female,Fulton,Yes
+71,White,Female,Fulton,Unknown
+90+,White,Female,Fulton,Yes
+69,White,Male,Fulton,Unknown
+73,African-American/ Black,Female,Fulton,Yes
+67,African-American/ Black,Female,Fulton,Unknown
+90+,White,Female,Fulton,Yes
+90+,White,Female,Fulton,Yes
+74,African-American/ Black,Female,Fulton,Unknown
+90+,African-American/ Black,Female,Fulton,Yes
+87,African-American/ Black,Female,Fulton,Yes
+79,White,Male,Fulton,Yes
+82,African-American/ Black,Male,Fulton,Yes
+76,African-American/ Black,Female,Fulton,Yes
+49,African-American/ Black,Female,Fulton,Yes
+86,White,Male,Fulton,Unknown
+87,African-American/ Black,Female,Fulton,Yes
+90+,White,Female,Fulton,Yes
+77,African-American/ Black,Male,Fulton,Yes
+71,African-American/ Black,Male,Fulton,Yes
+82,African-American/ Black,Female,Fulton,Yes
+90+,White,Male,Fulton,Yes
+88,African-American/ Black,Female,Fulton,Yes
+70,African-American/ Black,Male,Fulton,Unknown
+81,African-American/ Black,Male,Fulton,Unknown
+75,African-American/ Black,Male,Fulton,Yes
+80,African-American/ Black,Male,Fulton,Yes
+65,White,Male,Fulton,Unknown
+90+,African-American/ Black,Female,Fulton,No
+65,African-American/ Black,Male,Fulton,Unknown
+67,African-American/ Black,Female,Fulton,Unknown
+66,White,Male,Fulton,Yes
+68,African-American/ Black,Male,Fulton,No
+80,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Male,Fulton,Unknown
+85,White,Male,Fulton,Unknown
+53,African-American/ Black,Female,Fulton,Unknown
+90+,African-American/ Black,Female,Fulton,Yes
+85,White,Female,Fulton,Yes
+84,White,Male,Fulton,Yes
+81,White,Female,Fulton,Unknown
+73,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Unknown
+67,African-American/ Black,Female,Fulton,Yes
+71,African-American/ Black,Male,Fulton,No
+85,African-American/ Black,Female,Fulton,Unknown
+57,African-American/ Black,Male,Fulton,Unknown
+90+,White,Female,Fulton,Unknown
+81,White,Female,Fulton,Unknown
+64,White,Male,Fulton,Yes
+77,African-American/ Black,Male,Fulton,Unknown
+63,African-American/ Black,Male,Fulton,Unknown
+75,White,Male,Fulton,No
+66,African-American/ Black,Male,Fulton,Unknown
+88,African-American/ Black,Female,Fulton,No
+80,White,Male,Fulton,Unknown
+76,White,Male,Fulton,No
+86,African-American/ Black,Male,Fulton,Unknown
+67,Other,Male,Fulton,Yes
+90+,White,Female,Fulton,No
+69,White,Male,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Yes
+68,African-American/ Black,Male,Fulton,Yes
+73,White,Male,Fulton,Unknown
+34,African-American/ Black,Female,Fulton,Yes
+70,African-American/ Black,Male,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Yes
+74,African-American/ Black,Male,Fulton,Yes
+71,African-American/ Black,Male,Fulton,Unknown
+88,White,Male,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Yes
+79,African-American/ Black,Female,Fulton,Yes
+81,African-American/ Black,Female,Fulton,Yes
+79,White,Female,Fulton,Yes
+88,African-American/ Black,Female,Fulton,Unknown
+90+,African-American/ Black,Female,Fulton,No
+84,African-American/ Black,Male,Fulton,Unknown
+65,African-American/ Black,Male,Fulton,Unknown
+89,White,Male,Fulton,Yes
+45,African-American/ Black,Male,Fulton,Unknown
+88,White,Female,Fulton,Yes
+78,African-American/ Black,Female,Fulton,Yes
+63,White,Female,Fulton,Unknown
+64,African-American/ Black,Female,Fulton,Unknown
+73,African-American/ Black,Male,Fulton,No
+57,African-American/ Black,Female,Fulton,Unknown
+82,African-American/ Black,Male,Fulton,Yes
+67,White,Male,Fulton,Yes
+63,African-American/ Black,Female,Fulton,Yes
+17,African-American/ Black,Male,Fulton,Yes
+79,African-American/ Black,Female,Fulton,No
+77,African-American/ Black,Female,Fulton,Yes
+74,African-American/ Black,Male,Fulton,Unknown
+65,Unknown,Male,Fulton,No
+82,African-American/ Black,Female,Fulton,Yes
+85,African-American/ Black,Female,Fulton,Yes
+70,African-American/ Black,Male,Fulton,Unknown
+47,African-American/ Black,Male,Fulton,Yes
+90+,White,Female,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,Unknown
+87,African-American/ Black,Male,Fulton,Yes
+58,White,Male,Fulton,No
+77,Other,Male,Fulton,Yes
+90+,African-American/ Black,Female,Fulton,No
+73,African-American/ Black,Female,Fulton,No
+39,Other,Male,Fulton,Yes
+52,Other,Male,Fulton,Yes
+86,Other,Female,Fulton,Unknown
+78,Asian,Male,Fulton,Yes
+77,White,Female,Fulton,Unknown
+73,Unknown,Female,Fulton,Unknown
+85,Unknown,Female,Fulton,Unknown
+84,African-American/ Black,Female,Fulton,Yes
+72,African-American/ Black,Male,Fulton,Yes
+79,African-American/ Black,Female,Fulton,No
+71,Unknown,Female,Fulton,Unknown
+58,Other,Female,Fulton,Yes
+76,African-American/ Black,Male,Fulton,No
+45,African-American/ Black,Male,Fulton,Unknown
+82,White,Female,Fulton,No
+89,White,Female,Fulton,No
+86,African-American/ Black,Female,Fulton,Unknown
+77,African-American/ Black,Male,Fulton,Yes
+80,African-American/ Black,Female,Fulton,Unknown
+26,African-American/ Black,Female,Fulton,No
+48,African-American/ Black,Male,Fulton,No
+90+,African-American/ Black,Female,Fulton,Unknown
+73,White,Female,Fulton,Yes
+28,African-American/ Black,Female,Fulton,Unknown
+90+,Unknown,Female,Fulton,Unknown
+47,White,Male,Fulton,Unknown
+89,White,Male,Fulton,Unknown
+86,White,Female,Fulton,Yes
+53,White,Male,Fulton,Unknown
+58,White,Male,Gilmer,Yes
+80,White,Female,Gilmer,Unknown
+90+,White,Male,Glynn,Yes
+76,African-American/ Black,Male,Glynn,Yes
+75,White,Female,Glynn,No
+83,White,Female,Glynn,Yes
+71,Asian,Female,Glynn,Yes
+68,African-American/ Black,Female,Glynn,Yes
+74,African-American/ Black,Male,Glynn,Yes
+84,White,Female,Glynn,Yes
+90+,White,Male,Glynn,Yes
+57,Other,Male,Glynn,No
+45,African-American/ Black,Female,Glynn,Unknown
+78,Unknown,Male,Glynn,Unknown
+78,White,Male,Gordon,Yes
+70,White,Female,Gordon,Yes
+68,White,Male,Gordon,Yes
+69,White,Male,Gordon,Yes
+74,White,Male,Gordon,Yes
+90+,White,Female,Gordon,Unknown
+86,White,Male,Gordon,Yes
+85,White,Female,Gordon,Yes
+63,White,Male,Gordon,Yes
+66,White,Female,Gordon,Yes
+90+,White,Female,Gordon,Yes
+79,White,Male,Gordon,Yes
+90+,White,Female,Gordon,Yes
+89,White,Female,Gordon,Yes
+77,White,Male,Gordon,Yes
+73,White,Female,Gordon,Yes
+79,White,Male,Gordon,Yes
+51,White,Male,Gordon,Yes
+73,Other,Male,Gordon,Yes
+57,African-American/ Black,Female,Grady,Unknown
+59,African-American/ Black,Male,Grady,Yes
+85,White,Female,Grady,Unknown
+63,African-American/ Black,Male,Grady,Unknown
+47,African-American/ Black,Male,Greene,Yes
+90+,White,Female,Greene,No
+90+,White,Male,Greene,Yes
+78,African-American/ Black,Female,Greene,Unknown
+86,White,Male,Greene,No
+55,African-American/ Black,Male,Greene,Yes
+83,White,Male,Greene,Unknown
+71,African-American/ Black,Male,Greene,No
+45,African-American/ Black,Female,Greene,Yes
+85,White,Male,Greene,Unknown
+85,White,Female,Gwinnett,Yes
+44,African-American/ Black,Male,Gwinnett,Yes
+66,White,Male,Gwinnett,Yes
+67,White,Male,Gwinnett,Yes
+63,White,Female,Gwinnett,Yes
+69,White,Female,Gwinnett,Yes
+81,White,Male,Gwinnett,No
+61,White,Male,Gwinnett,Yes
+81,African-American/ Black,Male,Gwinnett,Yes
+85,Asian,Male,Gwinnett,Yes
+62,White,Male,Gwinnett,Yes
+82,White,Male,Gwinnett,Unknown
+73,White,Male,Gwinnett,Yes
+74,White,Female,Gwinnett,Yes
+80,White,Male,Gwinnett,Yes
+77,African-American/ Black,Male,Gwinnett,Yes
+72,Asian,Female,Gwinnett,Yes
+81,White,Female,Gwinnett,Yes
+81,White,Male,Gwinnett,Yes
+78,Asian,Male,Gwinnett,Yes
+31,African-American/ Black,Female,Gwinnett,Unknown
+90+,White,Male,Gwinnett,Yes
+81,African-American/ Black,Female,Gwinnett,Yes
+78,African-American/ Black,Male,Gwinnett,Yes
+90+,Other,Male,Gwinnett,Yes
+66,African-American/ Black,Female,Gwinnett,Yes
+70,African-American/ Black,Male,Gwinnett,Yes
+66,White,Female,Gwinnett,Yes
+66,African-American/ Black,Male,Gwinnett,Yes
+58,Other,Female,Gwinnett,Unknown
+85,Asian,Female,Gwinnett,Yes
+74,White,Female,Gwinnett,Yes
+65,White,Male,Gwinnett,No
+85,White,Female,Gwinnett,Yes
+82,African-American/ Black,Female,Gwinnett,Yes
+82,African-American/ Black,Female,Gwinnett,Yes
+68,Other,Female,Gwinnett,Yes
+72,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+87,White,Female,Gwinnett,Yes
+89,White,Female,Gwinnett,Yes
+59,White,Female,Gwinnett,Yes
+87,White,Female,Gwinnett,Yes
+69,White,Female,Gwinnett,Yes
+83,White,Female,Gwinnett,Yes
+48,Asian,Male,Gwinnett,No
+81,Asian,Male,Gwinnett,Yes
+72,Other,Female,Gwinnett,Yes
+75,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+73,Native Hawaiian/ Pacific Islander,Female,Gwinnett,Yes
+89,African-American/ Black,Female,Gwinnett,Yes
+83,African-American/ Black,Female,Gwinnett,Yes
+82,African-American/ Black,Male,Gwinnett,Yes
+60,African-American/ Black,Male,Gwinnett,Yes
+90+,White,Male,Gwinnett,Unknown
+72,African-American/ Black,Female,Gwinnett,Yes
+87,White,Male,Gwinnett,Yes
+82,White,Male,Gwinnett,Yes
+83,White,Male,Gwinnett,Yes
+79,White,Male,Gwinnett,Yes
+83,White,Male,Gwinnett,Yes
+84,White,Male,Gwinnett,Yes
+70,White,Male,Gwinnett,Yes
+71,White,Female,Gwinnett,Yes
+84,White,Female,Gwinnett,Yes
+66,White,Female,Gwinnett,Unknown
+55,African-American/ Black,Female,Gwinnett,Yes
+89,White,Male,Gwinnett,Unknown
+88,White,Male,Gwinnett,Yes
+66,African-American/ Black,Female,Gwinnett,Yes
+83,White,Male,Gwinnett,Yes
+56,White,Male,Gwinnett,Unknown
+90+,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+89,White,Male,Gwinnett,Yes
+63,Asian,Male,Gwinnett,Yes
+83,White,Female,Gwinnett,Yes
+80,White,Female,Gwinnett,Yes
+80,African-American/ Black,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+73,White,Female,Gwinnett,Yes
+89,African-American/ Black,Male,Gwinnett,Yes
+74,White,Female,Gwinnett,Yes
+81,African-American/ Black,Male,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+72,African-American/ Black,Male,Gwinnett,Yes
+48,African-American/ Black,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+87,White,Female,Gwinnett,Yes
+88,African-American/ Black,Female,Gwinnett,Yes
+62,African-American/ Black,Female,Gwinnett,Yes
+80,African-American/ Black,Female,Gwinnett,Yes
+85,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+85,White,Male,Gwinnett,Yes
+51,Other,Male,Gwinnett,No
+68,African-American/ Black,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+74,Asian,Male,Gwinnett,Yes
+90+,African-American/ Black,Female,Gwinnett,Yes
+90+,African-American/ Black,Female,Gwinnett,Yes
+80,African-American/ Black,Female,Gwinnett,Yes
+81,White,Female,Gwinnett,Yes
+68,African-American/ Black,Female,Gwinnett,Unknown
+73,African-American/ Black,Male,Gwinnett,Yes
+85,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+90+,White,Male,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+58,Asian,Male,Gwinnett,Unknown
+75,White,Female,Gwinnett,Yes
+83,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Unknown
+78,Native Hawaiian/ Pacific Islander,Female,Gwinnett,Yes
+83,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Unknown
+43,White,Male,Gwinnett,Unknown
+84,White,Female,Gwinnett,Yes
+84,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+89,White,Male,Gwinnett,Yes
+74,White,Male,Gwinnett,Yes
+70,African-American/ Black,Female,Gwinnett,Yes
+68,White,Female,Gwinnett,Yes
+90+,White,Male,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+70,Other,Female,Gwinnett,Yes
+69,African-American/ Black,Male,Gwinnett,Yes
+88,White,Male,Gwinnett,Yes
+90+,African-American/ Black,Female,Gwinnett,Yes
+82,White,Male,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+85,White,Female,Gwinnett,Yes
+81,Asian,Male,Gwinnett,No
+77,White,Male,Gwinnett,Unknown
+85,White,Female,Gwinnett,Yes
+46,African-American/ Black,Male,Gwinnett,Yes
+60,White,Female,Gwinnett,Yes
+52,Asian,Male,Gwinnett,No
+57,Other,Male,Gwinnett,No
+55,Other,Male,Gwinnett,No
+90+,White,Female,Gwinnett,Yes
+85,White,Female,Gwinnett,No
+69,African-American/ Black,Male,Gwinnett,Yes
+64,African-American/ Black,Male,Gwinnett,Yes
+69,Asian,Male,Gwinnett,Yes
+47,Other,Male,Gwinnett,Yes
+80,White,Female,Gwinnett,Yes
+90+,White,Female,Gwinnett,Yes
+64,African-American/ Black,Male,Gwinnett,No
+86,White,Male,Gwinnett,No
+62,Other,Male,Gwinnett,Unknown
+44,African-American/ Black,Female,Gwinnett,Unknown
+65,Other,Male,Gwinnett,Yes
+70,African-American/ Black,Female,Gwinnett,Yes
+70,Asian,Male,Gwinnett,Yes
+82,White,Female,Gwinnett,Yes
+56,African-American/ Black,Female,Gwinnett,Yes
+50,White,Male,Gwinnett,Unknown
+77,White,Female,Gwinnett,Yes
+88,White,Female,Gwinnett,No
+87,Asian,Male,Gwinnett,Yes
+67,White,Male,Gwinnett,Unknown
+49,African-American/ Black,Male,Gwinnett,Yes
+52,Other,Male,Gwinnett,Unknown
+76,African-American/ Black,Female,Gwinnett,Unknown
+51,Other,Female,Gwinnett,Yes
+85,White,Male,Gwinnett,No
+85,White,Female,Gwinnett,Yes
+37,Asian,Male,Gwinnett,No
+41,Other,Male,Gwinnett,No
+57,African-American/ Black,Female,Gwinnett,Yes
+37,Unknown,Female,Gwinnett,Unknown
+81,African-American/ Black,Female,Gwinnett,No
+61,African-American/ Black,Male,Gwinnett,Yes
+43,African-American/ Black,Female,Gwinnett,Yes
+75,White,Female,Gwinnett,Unknown
+66,White,Male,Gwinnett,Yes
+30,Other,Male,Gwinnett,No
+59,White,Male,Gwinnett,Yes
+56,African-American/ Black,Male,Gwinnett,Yes
+85,Unknown,Female,Gwinnett,Yes
+71,African-American/ Black,Male,Gwinnett,Yes
+76,Other,Female,Gwinnett,Yes
+76,Other,Female,Gwinnett,Yes
+73,African-American/ Black,Female,Gwinnett,Yes
+72,African-American/ Black,Male,Gwinnett,Unknown
+52,African-American/ Black,Female,Gwinnett,Yes
+32,Unknown,Female,Gwinnett,Unknown
+57,African-American/ Black,Male,Gwinnett,Yes
+58,Unknown,Male,Gwinnett,Yes
+61,White,Male,Gwinnett,Unknown
+79,White,Female,Habersham,Yes
+34,Asian,Male,Habersham,No
+74,White,Male,Habersham,Yes
+75,White,Female,Habersham,Yes
+40,Other,Female,Habersham,No
+63,White,Female,Habersham,Yes
+90+,White,Female,Habersham,Unknown
+87,White,Male,Habersham,Yes
+62,White,Female,Habersham,No
+90+,White,Female,Habersham,Unknown
+68,White,Female,Habersham,Yes
+85,White,Female,Habersham,Unknown
+90+,White,Female,Habersham,Yes
+90+,White,Male,Habersham,Yes
+70,White,Female,Habersham,Yes
+76,Other,Male,Habersham,Yes
+82,White,Female,Habersham,Yes
+73,White,Female,Habersham,Yes
+85,White,Male,Habersham,Yes
+83,White,Female,Habersham,Yes
+83,White,Female,Habersham,Yes
+88,White,Male,Habersham,Yes
+71,White,Female,Habersham,Yes
+90+,White,Male,Habersham,Yes
+90+,White,Female,Habersham,Yes
+86,White,Female,Habersham,Unknown
+90+,White,Male,Habersham,No
+84,White,Female,Habersham,Yes
+90+,White,Female,Habersham,Yes
+90+,White,Female,Habersham,Yes
+82,White,Female,Habersham,Yes
+90+,White,Female,Habersham,Unknown
+69,White,Female,Habersham,Yes
+76,White,Male,Habersham,No
+82,White,Male,Habersham,Yes
+90+,White,Male,Habersham,Yes
+80,White,Female,Habersham,Unknown
+79,White,Female,Habersham,Yes
+58,Asian,Female,Habersham,Yes
+90+,White,Female,Habersham,Yes
+90+,White,Female,Habersham,Yes
+75,White,Male,Hall,Yes
+45,Other,Male,Hall,Yes
+67,White,Male,Hall,Yes
+61,White,Female,Hall,Unknown
+73,African-American/ Black,Male,Hall,Yes
+81,Asian,Male,Hall,Yes
+45,African-American/ Black,Male,Hall,Yes
+76,White,Male,Hall,Yes
+46,White,Male,Hall,No
+90+,White,Female,Hall,Yes
+72,African-American/ Black,Male,Hall,Yes
+68,White,Male,Hall,Yes
+76,African-American/ Black,Male,Hall,Yes
+58,Other,Male,Hall,Unknown
+89,White,Female,Hall,Yes
+63,White,Male,Hall,No
+63,Asian,Male,Hall,No
+89,White,Female,Hall,Yes
+50,White,Male,Hall,Yes
+53,African-American/ Black,Female,Hall,Yes
+89,White,Male,Hall,Yes
+84,White,Female,Hall,Unknown
+90+,White,Female,Hall,Yes
+61,White,Female,Hall,Yes
+78,White,Male,Hall,Yes
+69,White,Male,Hall,Yes
+88,White,Male,Hall,Yes
+86,White,Female,Hall,Yes
+88,White,Male,Hall,Unknown
+82,White,Male,Hall,Yes
+60,White,Male,Hall,No
+90+,White,Female,Hall,No
+90+,White,Female,Hall,Yes
+86,White,Female,Hall,No
+85,White,Male,Hall,Unknown
+88,White,Male,Hall,Yes
+85,White,Female,Hall,Yes
+83,White,Female,Hall,Yes
+90+,White,Female,Hall,Yes
+90+,White,Female,Hall,Yes
+77,White,Male,Hall,Yes
+69,White,Male,Hall,Yes
+83,White,Female,Hall,Yes
+85,White,Female,Hall,Yes
+49,White,Female,Hall,Yes
+80,White,Male,Hall,Yes
+84,White,Female,Hall,Yes
+68,White,Male,Hall,Yes
+90+,White,Female,Hall,Yes
+65,White,Female,Hall,Yes
+83,White,Male,Hall,Yes
+85,African-American/ Black,Male,Hall,Yes
+74,African-American/ Black,Male,Hall,Yes
+56,White,Male,Hall,Unknown
+77,White,Male,Hall,Yes
+83,White,Male,Hall,Yes
+64,White,Female,Hall,Yes
+52,Other,Female,Hall,Yes
+51,White,Male,Hall,No
+50,Other,Male,Hall,Unknown
+90+,White,Male,Hall,Yes
+76,White,Female,Hall,Yes
+67,Other,Male,Hall,Yes
+72,White,Male,Hall,Yes
+64,Unknown,Male,Hall,Unknown
+76,Unknown,Female,Hall,Yes
+64,African-American/ Black,Female,Hancock,Yes
+74,African-American/ Black,Female,Hancock,Yes
+70,African-American/ Black,Female,Hancock,Yes
+68,White,Male,Hancock,Yes
+82,African-American/ Black,Male,Hancock,Yes
+77,White,Female,Hancock,Unknown
+90+,White,Female,Hancock,Yes
+87,African-American/ Black,Female,Hancock,Unknown
+86,African-American/ Black,Male,Hancock,Unknown
+81,White,Male,Hancock,Yes
+53,African-American/ Black,Female,Hancock,No
+82,African-American/ Black,Male,Hancock,Unknown
+45,African-American/ Black,Male,Hancock,Yes
+64,African-American/ Black,Female,Hancock,Yes
+81,African-American/ Black,Female,Hancock,No
+85,African-American/ Black,Male,Hancock,Unknown
+60,African-American/ Black,Male,Hancock,Yes
+88,White,Female,Hancock,Yes
+64,African-American/ Black,Female,Hancock,Yes
+67,White,Male,Hancock,Yes
+80,White,Male,Hancock,Unknown
+81,African-American/ Black,Male,Hancock,Yes
+76,White,Male,Hancock,Yes
+77,White,Male,Hancock,Unknown
+85,African-American/ Black,Female,Hancock,Yes
+73,African-American/ Black,Female,Hancock,Unknown
+62,African-American/ Black,Male,Hancock,Unknown
+90+,African-American/ Black,Female,Hancock,Unknown
+72,White,Male,Hancock,Unknown
+54,White,Female,Hancock,No
+72,African-American/ Black,Male,Hancock,Yes
+66,African-American/ Black,Female,Hancock,Unknown
+70,African-American/ Black,Male,Hancock,No
+72,White,Female,Haralson,Yes
+75,White,Male,Haralson,Yes
+79,White,Male,Haralson,Yes
+67,White,Male,Haralson,Yes
+71,White,Male,Haralson,Yes
+70,White,Male,Haralson,Yes
+90+,African-American/ Black,Female,Harris,Yes
+69,Asian,Female,Harris,Unknown
+85,White,Male,Harris,Yes
+74,African-American/ Black,Female,Harris,Yes
+40,White,Female,Harris,Yes
+69,White,Male,Harris,Unknown
+58,African-American/ Black,Male,Harris,Yes
+81,White,Female,Harris,No
+76,White,Female,Harris,Yes
+77,White,Male,Harris,Yes
+67,White,Male,Harris,No
+62,African-American/ Black,Female,Harris,Yes
+64,African-American/ Black,Female,Harris,Yes
+76,White,Female,Heard,Yes
+66,African-American/ Black,Female,Heard,Unknown
+82,White,Female,Heard,No
+80,Asian,Male,Henry,Yes
+73,African-American/ Black,Male,Henry,Yes
+75,White,Female,Henry,Yes
+63,African-American/ Black,Female,Henry,Yes
+68,African-American/ Black,Male,Henry,No
+36,African-American/ Black,Male,Henry,Yes
+70,African-American/ Black,Male,Henry,Unknown
+64,African-American/ Black,Male,Henry,Unknown
+34,African-American/ Black,Female,Henry,No
+72,White,Female,Henry,Unknown
+55,American Indian/ Alaska Native,Male,Henry,Yes
+69,African-American/ Black,Female,Henry,Unknown
+73,White,Male,Henry,Yes
+82,White,Male,Henry,Unknown
+64,African-American/ Black,Male,Henry,Unknown
+79,African-American/ Black,Female,Henry,Unknown
+77,White,Female,Henry,No
+56,African-American/ Black,Female,Henry,Yes
+86,White,Female,Henry,Unknown
+82,White,Male,Henry,Unknown
+85,White,Male,Henry,Unknown
+72,Asian,Male,Henry,Unknown
+90+,White,Male,Henry,Unknown
+89,White,Female,Henry,Unknown
+70,White,Male,Henry,Yes
+76,White,Male,Henry,Unknown
+44,African-American/ Black,Male,Henry,No
+42,White,Male,Henry,Yes
+90+,White,Male,Henry,Unknown
+82,White,Male,Henry,Unknown
+90+,White,Female,Henry,Yes
+58,Asian,Male,Henry,Unknown
+76,African-American/ Black,Male,Henry,No
+69,White,Male,Henry,No
+64,White,Male,Houston,Yes
+84,African-American/ Black,Male,Houston,Yes
+85,White,Male,Houston,Yes
+85,White,Male,Houston,Yes
+75,White,Male,Houston,Yes
+90+,African-American/ Black,Male,Houston,Yes
+75,African-American/ Black,Female,Houston,Yes
+64,African-American/ Black,Male,Houston,Yes
+68,Asian,Male,Houston,Yes
+78,African-American/ Black,Male,Houston,Yes
+74,African-American/ Black,Female,Houston,Yes
+62,African-American/ Black,Male,Houston,Yes
+71,African-American/ Black,Female,Houston,Yes
+58,White,Female,Houston,Yes
+29,African-American/ Black,Female,Houston,Unknown
+84,White,Female,Houston,Yes
+79,African-American/ Black,Male,Houston,Yes
+49,African-American/ Black,Male,Houston,Yes
+67,African-American/ Black,Male,Houston,Yes
+71,Asian,Male,Houston,Yes
+58,White,Male,Houston,Yes
+76,White,Male,Houston,Yes
+66,White,Male,Houston,No
+89,White,Male,Houston,Yes
+84,White,Female,Houston,Yes
+76,White,Female,Houston,Unknown
+53,African-American/ Black,Male,Houston,Yes
+76,African-American/ Black,Male,Houston,Yes
+89,White,Male,Houston,Yes
+65,African-American/ Black,Male,Houston,Yes
+82,White,Female,Houston,Yes
+81,White,Female,Houston,Yes
+79,White,Female,Houston,Yes
+80,African-American/ Black,Female,Irwin,Yes
+53,African-American/ Black,Female,Jackson,No
+77,White,Female,Jackson,Yes
+83,White,Male,Jackson,Unknown
+64,White,Female,Jackson,Yes
+78,White,Male,Jackson,Unknown
+86,White,Female,Jackson,Yes
+78,White,Female,Jackson,Yes
+85,White,Female,Jackson,No
+87,White,Male,Jackson,No
+81,White,Female,Jackson,No
+57,White,Male,Jackson,No
+90+,Other,Female,Jackson,Yes
+64,African-American/ Black,Female,Jasper,Yes
+89,White,Female,Jeff Davis,Yes
+74,African-American/ Black,Female,Jeff Davis,Unknown
+69,African-American/ Black,Male,Jeff Davis,Yes
+49,African-American/ Black,Female,Jefferson,Yes
+65,African-American/ Black,Female,Jefferson,Yes
+59,African-American/ Black,Male,Jefferson,Yes
+88,Unknown,Male,Jefferson,Unknown
+40,African-American/ Black,Female,Jefferson,Unknown
+90+,White,Male,Jenkins,Yes
+70,White,Male,Jenkins,Yes
+50,White,Female,Jenkins,Yes
+54,African-American/ Black,Female,Jenkins,No
+66,White,Female,Jenkins,Yes
+68,White,Female,Jenkins,Unknown
+37,African-American/ Black,Female,Jenkins,Yes
+71,African-American/ Black,Male,Jenkins,Yes
+72,White,Male,Jenkins,Yes
+90+,African-American/ Black,Female,Jenkins,Yes
+90+,White,Female,Jenkins,Yes
+78,White,Male,Jenkins,Yes
+72,White,Male,Jenkins,Yes
+88,African-American/ Black,Male,Jenkins,Yes
+90+,African-American/ Black,Male,Johnson,Yes
+67,White,Male,Johnson,Unknown
+85,African-American/ Black,Male,Jones,Yes
+81,White,Female,Lamar,No
+83,White,Female,Lamar,No
+87,White,Male,Lamar,Unknown
+88,White,Female,Lamar,No
+86,White,Male,Lamar,No
+85,White,Female,Lamar,Yes
+87,Unknown,Female,Lamar,Unknown
+75,White,Female,Lanier,Yes
+71,White,Male,Lanier,Yes
+73,White,Male,Lanier,Yes
+83,African-American/ Black,Male,Laurens,Yes
+58,African-American/ Black,Male,Lee,Yes
+64,African-American/ Black,Female,Lee,Yes
+63,White,Male,Lee,Yes
+55,African-American/ Black,Female,Lee,Yes
+70,African-American/ Black,Male,Lee,No
+49,White,Male,Lee,Yes
+64,African-American/ Black,Male,Lee,Yes
+54,African-American/ Black,Male,Lee,Yes
+68,African-American/ Black,Female,Lee,Yes
+27,African-American/ Black,Female,Lee,No
+63,African-American/ Black,Male,Lee,Yes
+67,White,Female,Lee,Unknown
+70,African-American/ Black,Female,Lee,Unknown
+34,African-American/ Black,Female,Lee,Unknown
+57,African-American/ Black,Male,Lee,Yes
+49,African-American/ Black,Female,Lee,Yes
+79,White,Female,Lee,Unknown
+81,African-American/ Black,Female,Lee,Yes
+73,African-American/ Black,Female,Lee,Unknown
+89,White,Female,Lee,Unknown
+90+,White,Male,Lee,Unknown
+81,White,Male,Lee,Yes
+89,Native Hawaiian/ Pacific Islander,Male,Liberty,Yes
+68,Other,Male,Liberty,No
+79,African-American/ Black,Male,Lincoln,Yes
+80,African-American/ Black,Male,Lincoln,Yes
+75,African-American/ Black,Male,Long,Yes
+66,African-American/ Black,Male,Lowndes,Yes
+90+,White,Female,Lowndes,Unknown
+87,White,Female,Lowndes,Yes
+74,White,Female,Lowndes,Unknown
+74,White,Female,Lowndes,Yes
+56,African-American/ Black,Male,Lowndes,No
+68,African-American/ Black,Female,Lowndes,Yes
+76,White,Female,Lowndes,Unknown
+77,White,Female,Lowndes,No
+86,White,Female,Lowndes,Unknown
+85,White,Female,Lowndes,No
+77,White,Female,Lowndes,Yes
+78,African-American/ Black,Male,Lowndes,Unknown
+80,White,Female,Lowndes,Unknown
+71,African-American/ Black,Female,Lowndes,Unknown
+85,White,Female,Lowndes,No
+78,White,Male,Lowndes,Unknown
+78,White,Male,Lowndes,Unknown
+29,Other,Female,Lowndes,Unknown
+58,White,Male,Lumpkin,Yes
+78,White,Female,Lumpkin,Yes
+69,White,Female,Lumpkin,Yes
+65,White,Female,Lumpkin,Yes
+62,White,Male,Macon,Unknown
+59,African-American/ Black,Male,Macon,Yes
+68,African-American/ Black,Male,Macon,Yes
+87,African-American/ Black,Female,Macon,Yes
+49,African-American/ Black,Male,Macon,Unknown
+70,African-American/ Black,Female,Macon,Yes
+67,African-American/ Black,Male,Macon,Yes
+51,African-American/ Black,Male,Macon,Unknown
+59,African-American/ Black,Male,Macon,Yes
+80,African-American/ Black,Male,Macon,Unknown
+71,African-American/ Black,Male,Madison,Yes
+78,African-American/ Black,Female,Madison,No
+87,White,Male,Madison,No
+90+,White,Female,Madison,Unknown
+81,White,Female,Marion,Yes
+50,White,Male,Marion,No
+90+,White,Female,Marion,No
+45,African-American/ Black,Male,McDuffie,Yes
+65,African-American/ Black,Female,McDuffie,Unknown
+73,African-American/ Black,Female,McDuffie,Yes
+46,African-American/ Black,Female,McDuffie,Yes
+77,African-American/ Black,Female,McDuffie,Yes
+81,African-American/ Black,Male,McDuffie,Yes
+77,White,Female,McDuffie,No
+39,White,Male,McDuffie,Yes
+63,White,Female,McIntosh,Yes
+60,White,Male,Meriwether,Yes
+71,White,Male,Meriwether,Unknown
+73,African-American/ Black,Female,Meriwether,Yes
+83,White,Female,Meriwether,Unknown
+90+,African-American/ Black,Female,Mitchell,Unknown
+85,African-American/ Black,Female,Mitchell,Yes
+89,White,Female,Mitchell,Yes
+83,African-American/ Black,Female,Mitchell,Yes
+73,African-American/ Black,Male,Mitchell,Yes
+73,African-American/ Black,Male,Mitchell,No
+68,African-American/ Black,Male,Mitchell,Yes
+61,Other,Female,Mitchell,Yes
+44,African-American/ Black,Male,Mitchell,No
+90+,African-American/ Black,Male,Mitchell,Unknown
+55,African-American/ Black,Female,Mitchell,No
+54,Asian,Male,Mitchell,No
+90+,White,Female,Mitchell,No
+79,White,Male,Mitchell,Yes
+89,African-American/ Black,Female,Mitchell,No
+55,African-American/ Black,Female,Mitchell,Yes
+56,African-American/ Black,Female,Mitchell,Yes
+87,African-American/ Black,Female,Mitchell,Unknown
+59,African-American/ Black,Female,Mitchell,Yes
+72,African-American/ Black,Male,Mitchell,Yes
+81,White,Male,Mitchell,Yes
+76,African-American/ Black,Female,Mitchell,Unknown
+90+,White,Female,Mitchell,Yes
+48,African-American/ Black,Male,Mitchell,No
+82,African-American/ Black,Female,Mitchell,Yes
+72,White,Male,Mitchell,Unknown
+90+,African-American/ Black,Female,Mitchell,Unknown
+65,African-American/ Black,Male,Mitchell,Yes
+67,White,Male,Mitchell,Yes
+77,African-American/ Black,Male,Mitchell,Yes
+68,African-American/ Black,Male,Mitchell,Yes
+75,African-American/ Black,Male,Mitchell,Yes
+83,White,Male,Mitchell,Unknown
+37,White,Male,Mitchell,No
+66,African-American/ Black,Female,Mitchell,Yes
+86,African-American/ Black,Female,Mitchell,Yes
+58,White,Male,Mitchell,Yes
+87,African-American/ Black,Male,Mitchell,Unknown
+64,African-American/ Black,Female,Mitchell,Yes
+59,African-American/ Black,Female,Mitchell,Unknown
+90+,White,Male,Mitchell,Yes
+77,White,Male,Monroe,Yes
+52,African-American/ Black,Male,Monroe,Yes
+62,African-American/ Black,Female,Monroe,Yes
+89,White,Female,Monroe,Yes
+67,White,Female,Monroe,Yes
+90+,African-American/ Black,Female,Monroe,Yes
+80,White,Female,Monroe,Yes
+76,African-American/ Black,Female,Monroe,Yes
+88,White,Female,Monroe,No
+65,White,Male,Monroe,Unknown
+83,African-American/ Black,Male,Monroe,No
+90+,White,Female,Monroe,Unknown
+84,White,Female,Monroe,Unknown
+90+,White,Female,Monroe,No
+90+,White,Female,Monroe,Unknown
+90+,African-American/ Black,Male,Monroe,Unknown
+49,African-American/ Black,Male,Monroe,No
+72,White,Female,Monroe,No
+58,White,Male,Monroe,Yes
+82,White,Male,Monroe,Yes
+83,White,Male,Murray,Yes
+71,White,Female,Murray,Yes
+64,White,Female,Muscogee,Yes
+85,African-American/ Black,Male,Muscogee,Yes
+65,African-American/ Black,Female,Muscogee,No
+22,African-American/ Black,Female,Muscogee,Yes
+72,White,Male,Muscogee,Yes
+72,African-American/ Black,Female,Muscogee,Yes
+73,White,Male,Muscogee,Yes
+63,African-American/ Black,Male,Muscogee,Yes
+72,African-American/ Black,Female,Muscogee,Yes
+63,African-American/ Black,Male,Muscogee,Yes
+77,White,Male,Muscogee,Unknown
+65,African-American/ Black,Female,Muscogee,Yes
+89,White,Male,Muscogee,Yes
+60,African-American/ Black,Female,Muscogee,Yes
+90+,African-American/ Black,Male,Muscogee,Unknown
+90+,African-American/ Black,Female,Muscogee,Yes
+30,Other,Male,Muscogee,Unknown
+79,White,Male,Muscogee,Yes
+90+,African-American/ Black,Female,Muscogee,Yes
+90+,White,Male,Muscogee,Unknown
+58,African-American/ Black,Male,Muscogee,Yes
+51,African-American/ Black,Male,Muscogee,No
+44,African-American/ Black,Female,Muscogee,Yes
+78,White,Male,Muscogee,Yes
+83,African-American/ Black,Female,Muscogee,Yes
+65,White,Female,Muscogee,Yes
+77,African-American/ Black,Male,Muscogee,Yes
+78,White,Female,Muscogee,Yes
+90+,White,Female,Muscogee,No
+78,African-American/ Black,Male,Muscogee,No
+59,African-American/ Black,Male,Muscogee,Unknown
+84,White,Male,Muscogee,No
+66,African-American/ Black,Female,Muscogee,Unknown
+77,White,Female,Muscogee,Yes
+76,African-American/ Black,Male,Muscogee,Yes
+89,White,Female,Muscogee,Unknown
+54,African-American/ Black,Female,Muscogee,Yes
+69,African-American/ Black,Female,Muscogee,Yes
+25,African-American/ Black,Male,Muscogee,No
+89,White,Female,Muscogee,Yes
+33,African-American/ Black,Female,Muscogee,Yes
+88,White,Female,Muscogee,No
+70,African-American/ Black,Female,Muscogee,Yes
+87,White,Male,Muscogee,Yes
+54,African-American/ Black,Female,Muscogee,No
+76,African-American/ Black,Female,Muscogee,Unknown
+69,African-American/ Black,Female,Muscogee,Yes
+64,African-American/ Black,Male,Muscogee,Yes
+81,African-American/ Black,Male,Muscogee,Yes
+66,African-American/ Black,Male,Muscogee,No
+90+,White,Female,Muscogee,Unknown
+80,African-American/ Black,Female,Muscogee,Yes
+90+,White,Male,Muscogee,Unknown
+86,African-American/ Black,Male,Muscogee,No
+90+,White,Male,Muscogee,Yes
+75,White,Female,Muscogee,Yes
+72,White,Female,Muscogee,Yes
+56,African-American/ Black,Male,Muscogee,Yes
+68,White,Male,Muscogee,Yes
+82,African-American/ Black,Male,Muscogee,Yes
+75,Unknown,Male,Muscogee,Unknown
+79,African-American/ Black,Female,Muscogee,Yes
+75,Unknown,Female,Muscogee,Yes
+89,White,Female,Muscogee,No
+61,African-American/ Black,Male,Newton,Yes
+83,White,Female,Newton,Yes
+71,African-American/ Black,Male,Newton,Yes
+77,White,Male,Newton,Yes
+84,White,Male,Newton,Yes
+52,African-American/ Black,Male,Newton,Yes
+58,African-American/ Black,Female,Newton,Unknown
+66,African-American/ Black,Male,Newton,Unknown
+73,African-American/ Black,Female,Newton,Unknown
+89,White,Male,Newton,Yes
+71,African-American/ Black,Female,Newton,Unknown
+73,African-American/ Black,Male,Newton,Yes
+86,White,Female,Newton,No
+88,African-American/ Black,Female,Newton,Yes
+50,African-American/ Black,Male,Newton,Yes
+69,White,Male,Newton,Yes
+79,African-American/ Black,Female,Newton,Unknown
+81,White,Female,Newton,Yes
+79,Unknown,Male,Newton,Unknown
+58,White,Male,Oconee,Yes
+90+,White,Female,Oconee,Yes
+73,White,Male,Oconee,Yes
+86,White,Male,Oconee,Yes
+90+,African-American/ Black,Female,Oconee,No
+87,White,Female,Oconee,Yes
+69,African-American/ Black,Male,Oconee,No
+90+,White,Male,Oconee,Yes
+68,White,Male,Oconee,No
+78,White,Female,Oconee,No
+90+,White,Female,Oconee,No
+68,White,Female,Oconee,No
+84,White,Male,Oconee,No
+90+,African-American/ Black,Female,Oconee,Yes
+83,White,Male,Oglethorpe,Yes
+70,White,Male,Oglethorpe,Unknown
+90+,African-American/ Black,Male,Oglethorpe,Unknown
+90+,White,Male,Oglethorpe,Yes
+85,White,Male,Oglethorpe,Unknown
+81,White,Female,Oglethorpe,Yes
+90+,White,Male,Oglethorpe,Unknown
+73,White,Male,Paulding,Yes
+67,African-American/ Black,Female,Paulding,Yes
+71,White,Male,Paulding,Yes
+74,White,Male,Paulding,Yes
+87,White,Female,Paulding,Yes
+64,White,Female,Paulding,Yes
+85,White,Male,Paulding,Yes
+57,White,Female,Paulding,Yes
+73,White,Female,Paulding,Unknown
+76,White,Male,Paulding,Yes
+85,Other,Female,Paulding,Yes
+78,White,Male,Paulding,Yes
+48,White,Male,Paulding,Yes
+73,White,Female,Paulding,Yes
+45,White,Female,Paulding,Yes
+83,White,Female,Paulding,Yes
+86,African-American/ Black,Female,Peach,Yes
+29,African-American/ Black,Female,Peach,Yes
+57,African-American/ Black,Female,Peach,Yes
+60,African-American/ Black,Female,Peach,Yes
+86,African-American/ Black,Female,Peach,Yes
+80,African-American/ Black,Female,Peach,Yes
+90+,African-American/ Black,Female,Peach,Yes
+76,African-American/ Black,Female,Peach,Yes
+44,African-American/ Black,Female,Peach,Yes
+76,White,Male,Peach,Unknown
+70,White,Male,Pickens,Yes
+76,White,Female,Pickens,Yes
+72,White,Male,Pickens,Yes
+78,White,Male,Pickens,No
+77,White,Female,Pickens,Yes
+67,White,Female,Pierce,No
+83,White,Male,Pierce,Yes
+62,White,Male,Pierce,Unknown
+51,White,Female,Pierce,No
+87,African-American/ Black,Female,Pierce,Unknown
+59,White,Male,Pike,No
+46,African-American/ Black,Male,Pike,Yes
+81,African-American/ Black,Male,Pike,No
+67,Other,Male,Polk,No
+84,White,Male,Polk,Yes
+63,African-American/ Black,Male,Pulaski,Yes
+63,African-American/ Black,Female,Pulaski,Yes
+72,White,Male,Putnam,Yes
+61,African-American/ Black,Male,Putnam,Yes
+73,White,Male,Putnam,Yes
+63,White,Male,Putnam,Yes
+89,African-American/ Black,Male,Putnam,Unknown
+90+,White,Female,Putnam,Unknown
+69,African-American/ Black,Male,Putnam,Unknown
+90+,African-American/ Black,Female,Putnam,No
+48,African-American/ Black,Male,Putnam,Yes
+85,African-American/ Black,Female,Putnam,Yes
+68,African-American/ Black,Female,Putnam,No
+81,Other,Male,Putnam,Yes
+71,African-American/ Black,Female,Putnam,Yes
+61,African-American/ Black,Male,Quitman,Yes
+68,White,Female,Rabun,Yes
+82,White,Male,Rabun,Yes
+37,White,Female,Rabun,No
+65,White,Female,Randolph,Unknown
+69,African-American/ Black,Male,Randolph,Yes
+62,African-American/ Black,Female,Randolph,Unknown
+65,African-American/ Black,Female,Randolph,Yes
+83,African-American/ Black,Female,Randolph,No
+61,African-American/ Black,Male,Randolph,Unknown
+84,White,Female,Randolph,Unknown
+90+,White,Male,Randolph,Unknown
+55,African-American/ Black,Male,Randolph,Unknown
+82,African-American/ Black,Female,Randolph,Yes
+90+,American Indian/ Alaska Native,Female,Randolph,Unknown
+78,African-American/ Black,Female,Randolph,No
+90+,White,Male,Randolph,Yes
+78,African-American/ Black,Female,Randolph,Yes
+83,White,Female,Randolph,No
+90+,African-American/ Black,Female,Randolph,No
+66,African-American/ Black,Male,Randolph,No
+66,African-American/ Black,Female,Randolph,No
+85,African-American/ Black,Male,Randolph,Unknown
+71,African-American/ Black,Male,Randolph,Unknown
+88,African-American/ Black,Female,Randolph,No
+50,African-American/ Black,Male,Randolph,No
+90+,White,Female,Randolph,Unknown
+90+,African-American/ Black,Female,Randolph,No
+38,African-American/ Black,Female,Randolph,Unknown
+81,White,Female,Richmond,Yes
+87,African-American/ Black,Female,Richmond,Unknown
+50,African-American/ Black,Female,Richmond,Yes
+70,African-American/ Black,Female,Richmond,Yes
+78,African-American/ Black,Male,Richmond,Yes
+82,White,Female,Richmond,Yes
+62,African-American/ Black,Male,Richmond,Yes
+72,African-American/ Black,Female,Richmond,Yes
+79,African-American/ Black,Male,Richmond,Yes
+80,African-American/ Black,Male,Richmond,Yes
+68,White,Female,Richmond,Yes
+62,White,Female,Richmond,Yes
+83,White,Male,Richmond,Yes
+84,African-American/ Black,Female,Richmond,Yes
+90+,African-American/ Black,Female,Richmond,Unknown
+72,African-American/ Black,Male,Richmond,No
+84,White,Female,Richmond,Unknown
+67,African-American/ Black,Female,Richmond,Yes
+90+,White,Female,Richmond,Yes
+84,White,Male,Richmond,Yes
+84,White,Male,Richmond,Yes
+90+,African-American/ Black,Female,Richmond,Unknown
+33,African-American/ Black,Female,Richmond,Yes
+90+,White,Male,Richmond,Yes
+65,African-American/ Black,Male,Richmond,Yes
+62,African-American/ Black,Male,Richmond,Yes
+85,White,Female,Richmond,Yes
+84,African-American/ Black,Male,Richmond,No
+46,African-American/ Black,Female,Richmond,Yes
+83,White,Male,Richmond,No
+90+,White,Male,Richmond,Yes
+90+,African-American/ Black,Male,Richmond,No
+73,White,Male,Richmond,Unknown
+81,White,Male,Richmond,No
+86,White,Male,Richmond,No
+88,White,Male,Richmond,No
+75,African-American/ Black,Male,Richmond,Yes
+87,White,Male,Richmond,Unknown
+90+,White,Male,Richmond,No
+90+,African-American/ Black,Male,Richmond,Yes
+82,White,Male,Richmond,No
+74,African-American/ Black,Female,Richmond,Yes
+70,African-American/ Black,Male,Richmond,Yes
+88,White,Male,Richmond,No
+81,White,Male,Richmond,Yes
+71,African-American/ Black,Female,Richmond,Yes
+86,White,Male,Richmond,Unknown
+83,White,Male,Richmond,No
+90+,White,Male,Richmond,No
+61,African-American/ Black,Male,Richmond,Yes
+80,White,Male,Richmond,No
+76,White,Male,Richmond,No
+66,White,Male,Richmond,No
+90+,African-American/ Black,Male,Richmond,Yes
+66,African-American/ Black,Male,Richmond,No
+85,African-American/ Black,Male,Richmond,Unknown
+75,White,Male,Richmond,Yes
+90+,White,Male,Richmond,Unknown
+75,White,Female,Richmond,No
+89,White,Male,Richmond,No
+33,African-American/ Black,Male,Richmond,Unknown
+52,African-American/ Black,Male,Richmond,Unknown
+20,African-American/ Black,Female,Richmond,Unknown
+57,African-American/ Black,Female,Rockdale,Yes
+40,African-American/ Black,Female,Rockdale,Yes
+44,African-American/ Black,Female,Rockdale,No
+63,White,Male,Rockdale,Yes
+77,African-American/ Black,Female,Rockdale,Yes
+73,White,Male,Rockdale,Yes
+54,African-American/ Black,Male,Rockdale,Yes
+65,White,Female,Rockdale,Yes
+38,African-American/ Black,Male,Rockdale,Yes
+64,African-American/ Black,Female,Rockdale,Yes
+90+,African-American/ Black,Female,Rockdale,Yes
+61,African-American/ Black,Male,Schley,Yes
+67,African-American/ Black,Female,Screven,Yes
+81,White,Female,Screven,Yes
+42,African-American/ Black,Female,Screven,Unknown
+83,White,Female,Screven,Yes
+73,White,Female,Screven,Yes
+85,White,Female,Screven,Yes
+73,African-American/ Black,Female,Screven,No
+90+,African-American/ Black,Male,Screven,Yes
+69,African-American/ Black,Female,Seminole,Yes
+89,White,Female,Seminole,Unknown
+73,White,Male,Spalding,Yes
+50,African-American/ Black,Male,Spalding,No
+85,White,Male,Spalding,Yes
+68,African-American/ Black,Female,Spalding,Unknown
+77,White,Male,Spalding,Yes
+70,White,Female,Spalding,Unknown
+33,African-American/ Black,Male,Spalding,No
+52,African-American/ Black,Male,Spalding,Unknown
+86,White,Male,Spalding,Unknown
+85,White,Female,Spalding,Unknown
+53,African-American/ Black,Male,Spalding,Unknown
+74,African-American/ Black,Male,Spalding,Unknown
+88,White,Female,Spalding,No
+83,White,Female,Spalding,Yes
+75,White,Female,Spalding,Unknown
+90+,White,Female,Spalding,Unknown
+80,White,Female,Spalding,Unknown
+90+,White,Female,Spalding,Unknown
+90+,White,Female,Spalding,Unknown
+90+,White,Female,Spalding,Unknown
+82,White,Female,Spalding,Unknown
+90+,White,Female,Spalding,Unknown
+84,African-American/ Black,Female,Spalding,Unknown
+76,White,Female,Spalding,Yes
+90+,White,Female,Spalding,Unknown
+88,African-American/ Black,Female,Spalding,Unknown
+78,White,Male,Spalding,Unknown
+81,White,Male,Spalding,Yes
+90+,White,Female,Spalding,Unknown
+71,White,Female,Spalding,No
+85,White,Male,Spalding,No
+84,White,Female,Spalding,No
+84,White,Male,Spalding,No
+68,White,Male,Stephens,Yes
+84,White,Female,Stephens,Unknown
+70,White,Female,Stephens,Yes
+87,African-American/ Black,Male,Stephens,Yes
+78,White,Male,Stephens,Unknown
+70,White,Male,Stephens,Yes
+34,Other,Male,Stewart,Yes
+54,African-American/ Black,Female,Stewart,No
+90+,White,Female,Stewart,Yes
+43,Other,Male,Stewart,Unknown
+66,African-American/ Black,Female,Sumter,Yes
+73,African-American/ Black,Male,Sumter,Yes
+63,African-American/ Black,Male,Sumter,Yes
+72,White,Male,Sumter,Yes
+71,African-American/ Black,Female,Sumter,Yes
+68,African-American/ Black,Female,Sumter,No
+85,African-American/ Black,Male,Sumter,Unknown
+74,African-American/ Black,Male,Sumter,No
+71,African-American/ Black,Female,Sumter,Yes
+69,African-American/ Black,Male,Sumter,Yes
+87,White,Female,Sumter,Yes
+63,African-American/ Black,Male,Sumter,Yes
+79,White,Female,Sumter,Yes
+68,African-American/ Black,Male,Sumter,Unknown
+82,White,Male,Sumter,Unknown
+74,African-American/ Black,Male,Sumter,No
+76,African-American/ Black,Male,Sumter,Yes
+88,African-American/ Black,Male,Sumter,Yes
+28,Other,Male,Sumter,Unknown
+72,African-American/ Black,Male,Sumter,Unknown
+62,White,Male,Sumter,Unknown
+75,White,Male,Sumter,Yes
+66,African-American/ Black,Male,Sumter,No
+65,African-American/ Black,Male,Sumter,Yes
+78,African-American/ Black,Male,Sumter,Unknown
+90+,White,Female,Sumter,No
+79,African-American/ Black,Female,Sumter,Yes
+36,African-American/ Black,Female,Sumter,No
+63,African-American/ Black,Male,Sumter,Yes
+63,White,Male,Sumter,Unknown
+65,African-American/ Black,Male,Sumter,Yes
+45,African-American/ Black,Male,Sumter,No
+76,African-American/ Black,Female,Sumter,Yes
+85,African-American/ Black,Female,Sumter,Yes
+66,White,Male,Sumter,Unknown
+85,African-American/ Black,Male,Sumter,Unknown
+77,White,Male,Sumter,Yes
+49,African-American/ Black,Male,Sumter,Unknown
+86,White,Male,Sumter,Yes
+90+,African-American/ Black,Female,Sumter,Unknown
+81,African-American/ Black,Female,Sumter,Yes
+60,African-American/ Black,Female,Sumter,Yes
+87,White,Female,Sumter,Unknown
+78,White,Female,Sumter,Yes
+90+,White,Female,Sumter,Unknown
+87,African-American/ Black,Female,Sumter,No
+90+,White,Male,Sumter,Unknown
+58,African-American/ Black,Male,Sumter,Yes
+82,White,Female,Sumter,Unknown
+85,White,Female,Sumter,Yes
+81,White,Male,Sumter,No
+73,African-American/ Black,Male,Sumter,Yes
+74,African-American/ Black,Male,Talbot,No
+49,White,Male,Talbot,Yes
+65,African-American/ Black,Male,Talbot,Yes
+60,African-American/ Black,Female,Taylor,Yes
+83,African-American/ Black,Female,Taylor,Yes
+60,White,Male,Telfair,No
+65,African-American/ Black,Female,Telfair,No
+85,White,Male,Telfair,Yes
+73,African-American/ Black,Female,Terrell,Yes
+75,African-American/ Black,Male,Terrell,Yes
+68,African-American/ Black,Female,Terrell,Yes
+61,African-American/ Black,Female,Terrell,Yes
+81,White,Male,Terrell,Yes
+90+,African-American/ Black,Female,Terrell,No
+88,African-American/ Black,Female,Terrell,Unknown
+61,African-American/ Black,Female,Terrell,Yes
+78,African-American/ Black,Female,Terrell,Yes
+77,African-American/ Black,Male,Terrell,Yes
+62,African-American/ Black,Female,Terrell,No
+58,African-American/ Black,Male,Terrell,Yes
+74,African-American/ Black,Male,Terrell,Yes
+78,African-American/ Black,Male,Terrell,Yes
+84,African-American/ Black,Female,Terrell,Yes
+79,White,Male,Terrell,Yes
+55,African-American/ Black,Female,Terrell,Yes
+60,African-American/ Black,Male,Terrell,Unknown
+79,White,Female,Terrell,Yes
+74,African-American/ Black,Male,Terrell,Unknown
+67,African-American/ Black,Male,Terrell,Unknown
+58,African-American/ Black,Female,Terrell,Yes
+81,White,Female,Terrell,Unknown
+68,African-American/ Black,Male,Terrell,Unknown
+82,African-American/ Black,Male,Terrell,Unknown
+79,African-American/ Black,Female,Terrell,Unknown
+61,White,Male,Terrell,No
+85,White,Male,Terrell,Unknown
+75,African-American/ Black,Male,Terrell,Unknown
+59,African-American/ Black,Male,Thomas,Yes
+87,White,Female,Thomas,Yes
+82,White,Male,Thomas,Yes
+90+,White,Male,Thomas,Yes
+84,White,Female,Thomas,Yes
+77,White,Female,Thomas,No
+75,White,Female,Thomas,Unknown
+75,White,Male,Thomas,Yes
+72,African-American/ Black,Male,Thomas,Yes
+82,African-American/ Black,Male,Thomas,Yes
+90+,White,Female,Thomas,Yes
+75,African-American/ Black,Female,Thomas,Unknown
+63,African-American/ Black,Male,Thomas,Yes
+84,White,Female,Thomas,Unknown
+77,White,Female,Thomas,Yes
+84,White,Male,Thomas,Unknown
+73,African-American/ Black,Male,Thomas,Unknown
+90+,White,Female,Thomas,Yes
+44,African-American/ Black,Male,Thomas,Yes
+79,White,Female,Thomas,Yes
+70,African-American/ Black,Male,Thomas,Yes
+85,White,Male,Thomas,Yes
+71,African-American/ Black,Male,Thomas,Yes
+83,White,Female,Thomas,Unknown
+90+,White,Male,Thomas,Unknown
+79,White,Female,Thomas,Yes
+90+,White,Female,Thomas,Unknown
+78,White,Female,Thomas,Unknown
+90+,White,Female,Thomas,Unknown
+72,White,Female,Thomas,Unknown
+88,White,Female,Thomas,Unknown
+84,White,Male,Thomas,Yes
+42,African-American/ Black,Male,Thomas,Unknown
+62,African-American/ Black,Female,Tift,Yes
+74,African-American/ Black,Male,Tift,Yes
+90+,White,Male,Tift,Yes
+80,White,Male,Tift,No
+45,White,Male,Tift,Yes
+73,African-American/ Black,Male,Tift,Yes
+83,White,Male,Tift,Yes
+77,White,Female,Tift,Yes
+85,African-American/ Black,Female,Tift,Yes
+62,African-American/ Black,Male,Tift,Yes
+86,White,Male,Tift,Yes
+77,White,Male,Tift,Yes
+67,African-American/ Black,Male,Tift,Yes
+59,African-American/ Black,Female,Tift,Yes
+76,White,Female,Tift,Yes
+90+,African-American/ Black,Female,Tift,Yes
+73,African-American/ Black,Female,Tift,Unknown
+89,African-American/ Black,Female,Tift,Yes
+82,White,Female,Tift,Yes
+65,Other,Female,Tift,Yes
+90+,African-American/ Black,Female,Tift,Yes
+43,African-American/ Black,Female,Tift,Yes
+67,African-American/ Black,Female,Tift,Yes
+63,White,Male,Tift,Yes
+90+,White,Female,Tift,Yes
+70,White,Male,Tift,No
+56,Other,Female,Tift,Yes
+59,Other,Male,Tift,Yes
+49,White,Female,Tift,Yes
+77,White,Male,Toombs,Yes
+82,African-American/ Black,Female,Toombs,Yes
+79,White,Female,Toombs,No
+69,African-American/ Black,Male,Toombs,Yes
+78,African-American/ Black,Female,Toombs,Yes
+57,White,Female,Toombs,Unknown
+53,White,Female,Towns,Yes
+50,White,Male,Treutlen,Yes
+62,African-American/ Black,Male,Treutlen,Yes
+61,African-American/ Black,Female,Troup,Yes
+66,African-American/ Black,Female,Troup,Yes
+90+,African-American/ Black,Female,Troup,Yes
+71,African-American/ Black,Female,Troup,Yes
+57,African-American/ Black,Female,Troup,No
+37,African-American/ Black,Female,Troup,No
+90+,White,Female,Troup,Yes
+86,White,Female,Troup,Unknown
+83,African-American/ Black,Female,Troup,Yes
+86,African-American/ Black,Female,Troup,Yes
+90+,White,Female,Troup,Yes
+67,White,Male,Troup,Unknown
+60,African-American/ Black,Female,Troup,No
+74,African-American/ Black,Male,Troup,Yes
+85,White,Female,Troup,Unknown
+85,White,Female,Troup,Yes
+75,White,Female,Troup,Yes
+80,White,Female,Troup,Yes
+65,African-American/ Black,Female,Troup,Yes
+80,White,Female,Troup,Yes
+58,African-American/ Black,Female,Troup,Yes
+82,White,Female,Troup,Yes
+74,African-American/ Black,Female,Troup,Yes
+81,African-American/ Black,Male,Troup,No
+85,White,Female,Troup,Unknown
+69,African-American/ Black,Male,Troup,Yes
+80,African-American/ Black,Male,Troup,Unknown
+87,White,Female,Troup,No
+90+,White,Female,Troup,Unknown
+83,White,Female,Troup,Unknown
+32,African-American/ Black,Male,Troup,Unknown
+61,African-American/ Black,Female,Troup,No
+59,African-American/ Black,Female,Troup,No
+75,Unknown,Unknown,Troup,Unknown
+78,African-American/ Black,Male,Troup,Unknown
+52,African-American/ Black,Female,Troup,Yes
+75,White,Male,Troup,No
+84,African-American/ Black,Male,Troup,No
+56,African-American/ Black,Male,Troup,Unknown
+76,African-American/ Black,Male,Troup,Unknown
+60,African-American/ Black,Female,Troup,Unknown
+71,White,Male,Troup,Yes
+89,African-American/ Black,Male,Troup,Unknown
+69,African-American/ Black,Male,Turner,Yes
+83,White,Male,Turner,Yes
+75,African-American/ Black,Female,Turner,Yes
+63,African-American/ Black,Male,Turner,Unknown
+70,African-American/ Black,Male,Turner,Unknown
+87,African-American/ Black,Male,Turner,Unknown
+62,African-American/ Black,Male,Turner,Yes
+63,African-American/ Black,Male,Turner,Unknown
+63,African-American/ Black,Male,Turner,Unknown
+85,African-American/ Black,Female,Turner,Yes
+90+,White,Female,Turner,Yes
+90+,White,Female,Turner,Unknown
+83,White,Male,Turner,Yes
+54,African-American/ Black,Male,Turner,No
+79,White,Male,Turner,No
+79,White,Male,Turner,Yes
+52,African-American/ Black,Male,Turner,Yes
+81,African-American/ Black,Female,Turner,Yes
+41,African-American/ Black,Male,Twiggs,Yes
+78,White,Male,Union,Unknown
+70,White,Female,Union,Yes
+86,White,Male,Union,Yes
+85,White,Male,Union,Yes
+82,White,Male,Non-Georgia Resident,Yes
+71,African-American/ Black,Female,Non-Georgia Resident,Yes
+90+,White,Female,Non-Georgia Resident,Yes
+77,White,Male,Non-Georgia Resident,Yes
+51,White,Male,Non-Georgia Resident,Unknown
+63,African-American/ Black,Male,Non-Georgia Resident,No
+53,African-American/ Black,Male,Non-Georgia Resident,Yes
+48,African-American/ Black,Male,Non-Georgia Resident,No
+30,African-American/ Black,Male,Non-Georgia Resident,Unknown
+56,African-American/ Black,Male,Non-Georgia Resident,Yes
+83,White,Male,Non-Georgia Resident,Unknown
+90+,African-American/ Black,Female,Non-Georgia Resident,Yes
+77,Asian,Male,Non-Georgia Resident,Yes
+59,African-American/ Black,Female,Non-Georgia Resident,Yes
+82,White,Male,Non-Georgia Resident,No
+84,African-American/ Black,Female,Non-Georgia Resident,Unknown
+24,African-American/ Black,Female,Non-Georgia Resident,Unknown
+74,Unknown,Male,Non-Georgia Resident,Unknown
+68,African-American/ Black,Female,Non-Georgia Resident,No
+87,White,Male,Non-Georgia Resident,Yes
+89,African-American/ Black,Female,Non-Georgia Resident,Unknown
+79,African-American/ Black,Female,Non-Georgia Resident,Unknown
+72,African-American/ Black,Female,Non-Georgia Resident,No
+69,African-American/ Black,Female,Non-Georgia Resident,Unknown
+61,White,Female,Non-Georgia Resident,No
+67,Other,Male,Non-Georgia Resident,Unknown
+53,White,Male,Non-Georgia Resident,Yes
+69,White,Male,Non-Georgia Resident,Unknown
+71,White,Male,Non-Georgia Resident,Yes
+58,African-American/ Black,Female,Non-Georgia Resident,Yes
+73,African-American/ Black,Female,Non-Georgia Resident,Yes
+77,White,Male,Non-Georgia Resident,Unknown
+65,African-American/ Black,Male,Non-Georgia Resident,Unknown
+49,White,Female,Non-Georgia Resident,No
+81,White,Female,Non-Georgia Resident,Unknown
+77,White,Male,Non-Georgia Resident,Yes
+75,Unknown,Male,Non-Georgia Resident,Unknown
+64,African-American/ Black,Male,Non-Georgia Resident,Yes
+71,African-American/ Black,Male,Non-Georgia Resident,Unknown
+76,White,Female,Non-Georgia Resident,Yes
+61,Other,Female,Non-Georgia Resident,Unknown
+52,African-American/ Black,Female,Non-Georgia Resident,Yes
+71,White,Female,Non-Georgia Resident,Yes
+55,African-American/ Black,Female,Non-Georgia Resident,Yes
+52,Other,Female,Non-Georgia Resident,No
+64,African-American/ Black,Male,Non-Georgia Resident,Yes
+57,African-American/ Black,Male,Non-Georgia Resident,Yes
+62,White,Female,Non-Georgia Resident,Yes
+27,White,Female,Non-Georgia Resident,Unknown
+67,African-American/ Black,Male,Non-Georgia Resident,No
+72,White,Male,Non-Georgia Resident,Yes
+82,African-American/ Black,Female,Non-Georgia Resident,Yes
+38,African-American/ Black,Male,Non-Georgia Resident,Unknown
+87,African-American/ Black,Male,Non-Georgia Resident,Yes
+59,African-American/ Black,Male,Non-Georgia Resident,Yes
+85,White,Male,Non-Georgia Resident,Yes
+59,White,Male,Non-Georgia Resident,Yes
+75,African-American/ Black,Female,Non-Georgia Resident,Yes
+81,White,Male,Non-Georgia Resident,Yes
+60,White,Female,Non-Georgia Resident,Yes
+65,African-American/ Black,Female,Non-Georgia Resident,Unknown
+80,African-American/ Black,Male,Non-Georgia Resident,Yes
+90+,White,Female,Non-Georgia Resident,Yes
+54,Unknown,Male,Unknown,Yes
+70,Unknown,Male,Unknown,Unknown
+70,Unknown,Male,Unknown,Unknown
+81,Unknown,Male,Unknown,Unknown
+40,Unknown,Male,Unknown,Unknown
+77,Unknown,Male,Unknown,Unknown
+72,African-American/ Black,Male,Upson,Yes
+79,African-American/ Black,Female,Upson,Unknown
+74,African-American/ Black,Male,Upson,No
+76,White,Female,Upson,Yes
+83,White,Female,Upson,Unknown
+90+,White,Female,Upson,Unknown
+74,White,Female,Upson,Yes
+75,African-American/ Black,Male,Upson,Unknown
+81,African-American/ Black,Female,Upson,Unknown
+61,African-American/ Black,Male,Upson,Unknown
+70,White,Female,Upson,Unknown
+84,African-American/ Black,Female,Upson,Yes
+74,White,Male,Upson,No
+62,White,Male,Upson,Yes
+90+,White,Female,Upson,Unknown
+60,White,Female,Upson,Unknown
+75,African-American/ Black,Female,Upson,Unknown
+78,White,Female,Upson,Unknown
+82,White,Male,Upson,Unknown
+79,African-American/ Black,Female,Upson,Unknown
+89,White,Male,Upson,No
+76,White,Male,Upson,Unknown
+70,African-American/ Black,Male,Upson,Unknown
+90+,African-American/ Black,Male,Upson,Unknown
+64,African-American/ Black,Male,Upson,No
+84,African-American/ Black,Male,Upson,Unknown
+83,White,Male,Upson,Unknown
+66,White,Female,Upson,No
+75,White,Female,Upson,Unknown
+59,White,Male,Upson,Unknown
+81,White,Male,Upson,Yes
+85,White,Male,Upson,No
+88,White,Female,Upson,Unknown
+58,African-American/ Black,Female,Upson,Yes
+68,African-American/ Black,Female,Upson,Unknown
+80,African-American/ Black,Male,Upson,Unknown
+76,White,Female,Upson,Unknown
+75,White,Male,Upson,No
+82,White,Female,Upson,Unknown
+53,African-American/ Black,Male,Upson,Yes
+62,White,Female,Upson,Yes
+61,African-American/ Black,Male,Upson,Unknown
+45,African-American/ Black,Male,Upson,No
+87,White,Female,Upson,No
+77,White,Female,Upson,No
+84,White,Female,Walker,Yes
+81,White,Female,Walker,Yes
+79,White,Male,Walker,Yes
+78,White,Female,Walker,Yes
+90+,White,Male,Walker,Yes
+77,White,Male,Walker,Yes
+90+,White,Male,Walker,Yes
+90+,White,Female,Walker,Yes
+76,White,Male,Walker,Yes
+73,White,Male,Walker,Yes
+78,White,Female,Walker,Yes
+90+,White,Female,Walker,Yes
+89,White,Female,Walker,Yes
+63,White,Male,Walker,No
+74,African-American/ Black,Male,Walton,No
+75,White,Male,Walton,Yes
+87,White,Male,Walton,Yes
+77,White,Male,Walton,Yes
+83,White,Female,Walton,Yes
+90+,White,Female,Walton,No
+65,African-American/ Black,Male,Walton,Yes
+90+,White,Female,Walton,Yes
+72,White,Female,Walton,Yes
+56,African-American/ Black,Male,Walton,Yes
+88,African-American/ Black,Female,Walton,No
+67,White,Male,Walton,No
+89,White,Female,Walton,No
+68,White,Female,Walton,No
+84,White,Male,Walton,No
+74,White,Male,Walton,Yes
+89,White,Male,Walton,No
+88,White,Female,Walton,No
+90+,White,Female,Walton,No
+87,White,Female,Walton,No
+60,White,Male,Walton,No
+90+,White,Female,Walton,No
+89,White,Female,Walton,No
+74,White,Male,Walton,No
+81,White,Male,Walton,Yes
+80,White,Female,Walton,Yes
+90+,White,Female,Walton,No
+90+,White,Female,Walton,Yes
+90+,White,Male,Walton,No
+84,White,Female,Walton,No
+90+,White,Female,Walton,No
+75,African-American/ Black,Male,Walton,Unknown
+75,White,Male,Ware,Yes
+58,African-American/ Black,Female,Ware,Yes
+44,African-American/ Black,Male,Ware,Yes
+82,African-American/ Black,Female,Ware,Yes
+80,African-American/ Black,Male,Ware,Unknown
+62,African-American/ Black,Female,Ware,Yes
+71,African-American/ Black,Male,Ware,Unknown
+64,White,Male,Ware,Unknown
+72,African-American/ Black,Male,Ware,Yes
+86,White,Male,Ware,Yes
+72,White,Male,Ware,Unknown
+71,White,Female,Ware,Unknown
+90+,African-American/ Black,Female,Ware,Yes
+85,White,Male,Ware,Unknown
+76,White,Female,Ware,Unknown
+60,African-American/ Black,Female,Ware,Yes
+90+,White,Female,Ware,No
+66,White,Male,Washington,Yes
+59,African-American/ Black,Male,Webster,Yes
+56,White,Female,Webster,Yes
+65,White,Male,White,Yes
+90+,White,Female,White,Yes
+26,White,Male,White,No
+81,White,Male,White,Yes
+80,White,Female,White,No
+90+,White,Male,Whitfield,Yes
+81,White,Male,Whitfield,Yes
+68,White,Male,Whitfield,Yes
+78,African-American/ Black,Male,Whitfield,Yes
+75,White,Male,Whitfield,Yes
+90+,White,Female,Whitfield,Yes
+77,White,Female,Whitfield,Unknown
+56,White,Male,Whitfield,No
+89,White,Female,Whitfield,Unknown
+81,White,Male,Whitfield,Yes
+66,White,Male,Whitfield,Yes
+53,White,Male,Whitfield,Yes
+88,White,Female,Whitfield,Yes
+90+,White,Female,Whitfield,Yes
+51,White,Female,Whitfield,Yes
+90+,White,Female,Whitfield,Yes
+90+,White,Female,Whitfield,Yes
+90+,White,Male,Whitfield,Yes
+50,Other,Male,Whitfield,Yes
+69,White,Male,Whitfield,Yes
+68,White,Female,Whitfield,Yes
+57,White,Male,Whitfield,Yes
+77,White,Female,Whitfield,Yes
+79,White,Male,Wilcox,Yes
+61,African-American/ Black,Female,Wilcox,Yes
+79,White,Male,Wilcox,Yes
+77,African-American/ Black,Male,Wilcox,Unknown
+65,African-American/ Black,Female,Wilcox,Yes
+68,White,Female,Wilcox,Yes
+82,White,Male,Wilcox,Yes
+90+,African-American/ Black,Male,Wilcox,Yes
+84,African-American/ Black,Male,Wilcox,Yes
+90+,White,Female,Wilcox,Yes
+74,African-American/ Black,Female,Wilcox,Yes
+79,White,Male,Wilcox,Unknown
+64,White,Female,Wilcox,Yes
+79,White,Male,Wilcox,Unknown
+84,White,Male,Wilcox,Unknown
+56,White,Female,Wilkes,Yes
+80,White,Female,Wilkes,Unknown
+90+,African-American/ Black,Male,Wilkes,Unknown
+66,African-American/ Black,Male,Wilkinson,Yes
+63,African-American/ Black,Male,Wilkinson,Yes
+54,African-American/ Black,Female,Wilkinson,Yes
+65,African-American/ Black,Female,Wilkinson,Yes
+79,African-American/ Black,Female,Wilkinson,Unknown
+56,African-American/ Black,Male,Wilkinson,Yes
+63,African-American/ Black,Female,Wilkinson,No
+90+,White,Female,Wilkinson,Yes
+76,White,Female,Wilkinson,Yes
+48,African-American/ Black,Male,Worth,Yes
+60,African-American/ Black,Male,Worth,Yes
+77,African-American/ Black,Male,Worth,Yes
+88,White,Female,Worth,Yes
+75,African-American/ Black,Male,Worth,Yes
+62,African-American/ Black,Male,Worth,Unknown
+67,African-American/ Black,Female,Worth,Yes
+69,African-American/ Black,Male,Worth,Yes
+79,White,Male,Worth,Unknown
+71,White,Male,Worth,Unknown
+65,White,Female,Worth,Unknown
+64,White,Female,Worth,Yes
+74,White,Female,Worth,Yes
+88,White,Female,Worth,Yes
+68,African-American/ Black,Female,Worth,Yes
+86,African-American/ Black,Male,Worth,Unknown
+83,African-American/ Black,Female,Worth,Yes
+60,White,Male,Worth,Yes
+90+,African-American/ Black,Male,Worth,Unknown
+55,African-American/ Black,Female,Worth,No
+83,White,Female,Worth,Unknown
+66,African-American/ Black,Female,Worth,Yes
