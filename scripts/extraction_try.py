@@ -391,11 +391,11 @@ class AgeExtractor:
                 data = lines[data_num:]
                 age_data = {}
                 age_data[data[0]] = data[29]
-                age_data[data[1]] = data[28]
-                age_data[data[2]] = data[10]
-                age_data[data[3]] = data[9]
-                age_data[data[4]] = data[8]
-                age_data[data[5]] = data[7]
+                age_data[data[1]] = data[27]
+                age_data[data[2]] = data[9]
+                age_data[data[3]] = data[8]
+                age_data[data[4]] = data[7]
+                age_data[data[5]] = data[28]
                 doc.close()
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
@@ -475,7 +475,7 @@ class AgeExtractor:
                 print('\n------ Processed Missouri {} ------\n'.format(day))
                 browser.save_screenshot('pngs/missouri/{}.png'.format(day))
             else:
-                print('\n------ Processed Missouri error ------\n')
+                print('\n !!!----  Missouri error ----!!!\n')
         else:
             print('Report for Missouri {} is already exist'.format(day))
 
@@ -1142,7 +1142,7 @@ if __name__ == "__main__":
         print("\n!!! NORTH CAROLINA 2 FAILED !!!\n")
 
     try:
-        print("\n### Missouri ###\n")
+        print("\n### Running Missouri ###\n")
         ageExtractor.get_missouri()
     except:
         print("\n!!! MISSOURI FAILED !!!\n")
