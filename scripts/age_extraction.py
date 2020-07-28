@@ -181,10 +181,10 @@ class AgeExtractor:
             mkdir("pdfs/massachusetts")
         existing_assets = list(map(basename, glob("pdfs/massachusetts/*.pdf")))
         api_base_url = "https://www.mass.gov/doc/"
-        date_diff = self.today - date(2020, 4, 20)
+        date_diff = self.today - date(2020, 7, 1) 
 
         for i in range(date_diff.days + 1):
-            day = date(2020, 4, 20) + timedelta(days=i)
+            day = date(2020, 7, 1) + timedelta(days=i)
             day_string = day.strftime("%Y-%m-%d")
             day = day.strftime("%B-%-d-%Y").lower()
             pdf_name = "covid-19-dashboard-{}/download".format(day)
