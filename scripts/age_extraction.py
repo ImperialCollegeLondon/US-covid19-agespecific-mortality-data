@@ -540,6 +540,12 @@ if __name__ == "__main__":
         ageExtractor.get_nyc()
     except:
         print("\n!!! NYC FAILED !!!\n")
+                               
+    try:
+        print("\n### Running MA ###\n")
+        ageExtractor.get_massachusetts()
+    except:
+        print("\n!!! MA FAILED !!!\n")                             
     
     #ageExtractor.get_new_jersey()
     #ageExtractor.get_florida()
