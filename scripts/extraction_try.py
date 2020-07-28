@@ -927,7 +927,7 @@ class AgeExtractor:
             browser.implicitly_wait(2)
             time.sleep(1)
             data = []
-            for i in range(7):
+            for i in range(8):
                 data.append(browser.find_element_by_xpath(
                     '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[6]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="g"]/*[name()="path"][' + str(i+1) + ']').get_attribute('aria-label')
                             )
