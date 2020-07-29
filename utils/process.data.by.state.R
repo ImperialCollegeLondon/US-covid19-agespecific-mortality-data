@@ -256,9 +256,11 @@ process.GA.file = function(csv_file, Date){
 }
 
 process.ID.file = function(csv_file, Date){
+  
   tmp = read.csv(csv_file) %>%
     mutate(age = ifelse(Age.Group.Ten == "<18", "0-19", 
-                        ifelse(Age.Group.Ten == "18-29 years" | Age.Group.Ten == "18-29", "20-29", as.character(Age.Group.Ten))), # group 0-1 and 2-9 for analysis
+                        ifelse(Age.Group.Ten == "18-29 years" | Age.Group.Ten == "18-29", "20-29", 
+                               ifelse(Age.Group.Ten == "80", "80+", as.character(Age.Group.Ten)))), # group 0-1 and 2-9 for analysis
            code = "ID", 
            date = Date,
            cum.deaths = as.numeric(Deaths), 
@@ -382,6 +384,8 @@ process.CO.file = function(last.day){
            code = "CO",
            age = as.character(age))
   
+  tmp = subset(tmp, age != "Unknown")
+  
   return(tmp)
 }
 
@@ -398,8 +402,7 @@ process.ME.file = function(last.day){
   
   tmp = as.data.table(read.csv(csv_file))
   tmp$Age.Ranges = rep(tmp$Age.Ranges[seq(1,nrow(tmp),2)], each = 2)
-  levels(tmp$Age.Ranges) = list("0-19" = "<20", "20-29"="20s", "30-39" ="30s", "40-49"="40s",
-                                "50-59" = "50s", "60-69" = "60s", "70-79" = "70s", "80+" = "80+")
+
   tmp = tmp %>%
     subset(X == "Running Sum of Measure Toggle along LATEST_STATUS_DATE") %>%
     melt(id.vars = c("Age.Ranges", "X")) %>%
@@ -411,6 +414,9 @@ process.ME.file = function(last.day){
            cum.deaths = value) %>%
     select(date, age, cum.deaths, daily.deaths, code)
   
+  tmp$age = as.factor(tmp$age)
+  levels(tmp$age) = list("0-19" = "<20", "20-29"="20s", "30-39" ="30s", "40-49"="40s",
+                                "50-59" = "50s", "60-69" = "60s", "70-79" = "70s", "80+" = "80+")
   return(tmp)
 }
 
@@ -442,6 +448,8 @@ process.WI.file = function(last.day){
 
 process.NM.file = function(last.day){
   
+  cat("\n Processing ", "New Mexico", " \n")
+  
   dates = seq.Date(as.Date("2020-03-01"), last.day, by = "day")
   
   data_files = list.files(file.path(path_to_data, dates), full.names = T)
@@ -452,7 +460,7 @@ process.NM.file = function(last.day){
   csv_file = file.path(path_to_data, last.day, "new_mexico.csv")
   
   tmp = reshape2::melt (as.data.table(read.csv(csv_file)) , id.vars = "Date") %>%
-    subset(variable != "Total") %>%
+    subset(variable != "Total" & Date != "") %>%
     rename(daily.deaths = value) %>%
     mutate(date = as.Date(Date, format = "%d/%m/%y"),
            code = "NM",
@@ -468,6 +476,8 @@ process.NM.file = function(last.day){
   stopifnot(all(tmp$daily.deaths >= 0 )) # TODO need to write a fix if this is not the case.
   data <- with(tmp, tmp[order(date, code, age, cum.deaths, daily.deaths), ])
   data <- data[, c("date", "code", "age", "cum.deaths", "daily.deaths")]
+  
+  print(unique(tmp$date))
   
   return(data)
 }
@@ -507,7 +517,7 @@ obtain.json.data = function(last.day, state_name, state_code){
     if(state_name == "pennsylvania" & Date > as.Date("2020-06-12")) names(json_data)[which(names(json_data) == "100+")] = ">100"
     if(state_name == "vermont" & Date > as.Date("2020-06-25")) names(json_data)[which(names(json_data) == "80+")] = "80 plus"
     if(state_name == "florida") names(json_data) = gsub("(.+) years", "\\1",names(json_data))
-
+    
     # make sure that there is no space in the age band name
     names(json_data) = gsub(" ", "", names(json_data), fixed = TRUE)
     
@@ -548,6 +558,12 @@ obtain.json.data = function(last.day, state_name, state_code){
         json_data[[age_group]][index_comma] = as.numeric(gsub(",", "", json_data[[age_group]][index_comma]))
       }
       
+      # remove signs such as "<" if any
+      if(any(grepl("<", json_data[[age_group]]))){
+        index_sign = which(grepl("<", json_data[[age_group]]) == T)
+        json_data[[age_group]][index_sign] = 0
+      }
+      
       # index inside the json varies states by state
       index = 1
       if(state_name == "ma") index = 2
@@ -570,6 +586,13 @@ obtain.json.data = function(last.day, state_name, state_code){
           
           # incremental deaths is distributed equally among the missing days
           daily.deaths = round((cum.death.t_lag - cum.death.t_0 )/(n.lost.days+1))
+          
+          if( daily.deaths < 0 ) {
+            daily.deaths = 0
+            data[which(data$date == (Date-n.lost.days-1) & data$age == age_group),]$daily.deaths = 
+              max(0, data[which(data$date == (Date-n.lost.days-1)& data$age == age_group),]$daily.deaths + daily.deaths)
+          }
+          
           data = rbind(data, data.table(age = age_group, 
                                         date = lost.days, 
                                         cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.lost.days)), 
@@ -619,7 +642,16 @@ obtain.json.data = function(last.day, state_name, state_code){
     data = suppressWarnings(data %>%
       mutate(age = ifelse(age == "<18", "0-19",
                           ifelse(age == "18-29", "20-29", age))))
-      
+  }
+  
+  if(state_name == "utah"){
+    data = data.table( data )
+    data_agg = data[age %in% c("0-1", "1-14"), list(cum.deaths = sum(cum.deaths),
+                                         daily.deaths = sum(daily.deaths)),
+         by = c("date", "code")]
+    data_agg[, age := "0-14"]
+    
+    data = rbind( subset(data, age %notin% c("0-1", "1-14")), data_agg)
   }
   
   if(state_name == "iowa"){
@@ -693,6 +725,17 @@ obtain.json.data = function(last.day, state_name, state_code){
     data = data %>%
       mutate(age = ifelse(age == "5-17", "5-19", 
                           ifelse(age == "18-29", "20-29",age)))
+  }
+  
+  if(state_name == "kansas"){
+    data = data %>%
+      mutate(age = ifelse(age == "0-17", "0-19", 
+                          ifelse(age == "18-24", "20-24",age)))
+  }
+  
+  if(state_name == "doc"){
+    data = data %>%
+      mutate(age = ifelse(age == "<19", "0-19", age))
   }
   
   if(state_name == "oregon"){
