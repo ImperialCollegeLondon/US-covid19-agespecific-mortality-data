@@ -41,7 +41,7 @@ obtain.daily.data.csv_and_xlsx = function(last.day, state_name, state_code){
   
   data = NULL
   for(t in 1:length(dates)){
-    
+      
     Date = dates[t]
     print(Date)
     
@@ -223,6 +223,7 @@ process.TX.file = function(xlsx_file, Date){
     summarise(cum.deaths = sum(cum.deaths))
   
   tmp = subset(tmp, age != "Probable cases are not included in the total case numbers")
+  tmp = subset(tmp, age != "Unknown")
   
   return(tmp)
 }
@@ -289,7 +290,8 @@ process.RI.file = function(csv_file, Date){
   
   tmp = read.csv(csv_file)
   colnames(tmp)[1] = "age"
-  tmp = as.data.frame(suppressWarnings(tmp[6:16,] %>%
+  rows_age = grepl("\\d\\-\\d|\\d\\+",tmp[,1])
+  tmp = as.data.frame(suppressWarnings(tmp[rows_age,] %>%
                                          mutate(code = "RI", 
                                                 date = Date,
                                                 cum.deaths = ifelse(grepl("<", Deaths), 0, as.numeric(as.character(Deaths))), 
