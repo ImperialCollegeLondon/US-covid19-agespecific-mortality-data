@@ -992,7 +992,7 @@ class AgeExtractor:
         browser.implicitly_wait(5)
         time.sleep(3)
         ###will change:
-        day = browser.find_element_by_xpath('//*[@id="dnn_ctr33855_HtmlModule_lblContent"]/p[4]/strong[2]').text
+        day = browser.find_element_by_xpath('//*[@id="dnn_ctr33855_HtmlModule_lblContent"]/p[5]/strong[2]').text
         day = day.split()[-1]
         day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/washington.json".format(day), os.F_OK):
