@@ -961,15 +961,30 @@ class AgeExtractor:
         day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group[2]/transform/div/div[2]/visual-container-modern[2]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
         day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/michigan.json".format(day), os.F_OK):
+
             browser.implicitly_wait(2)
+            total = browser.find_element_by_xpath(
+                '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[1]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div[1]/div[4]/div/div/div[3]/div[1]').text
+            browser.implicitly_wait(5)
+
             browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group[3]/transform/div/div[2]/visual-container-modern[4]/transform/div/div[3]/div/visual-modern/div/button').click()
             browser.implicitly_wait(5)
-            browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group/transform/div/div[2]/visual-container-modern[2]/transform/div/div[3]/div/visual-modern/div/button').click()
-            browser.implicitly_wait(5)
+            #browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group/transform/div/div[2]/visual-container-modern[2]/transform/div/div[3]/div/visual-modern/div/button').click()
+            #browser.implicitly_wait(5)
             age_data = {}
-            for i in range(9):
-                data = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[15]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"]/*[name()="rect"][' + str(i+1) + ']').get_attribute('aria-label')
-                age_data[data.split()[2][0:-1]] = data.split()[-1][0:-1]
+            age_data["0-19"] = '0'
+            data = browser.find_elements_by_css_selector('rect.column.setFocusRing')
+            age_data = [e.get_attribute('aria-label') for e in data if
+                        e.get_attribute('aria-label') and 'Total Deaths' in e.get_attribute(
+                            'aria-label') and 'Age Group' in e.get_attribute('aria-label')]
+            data = age_data
+            age_data = {}
+            age_data["0-19"] = '0'
+            for i in data:
+                #data = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[15]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"]/*[name()="rect"][' + str(i+1) + ']').get_attribute('aria-label')
+                age_data[i.split()[2][0:-1]] = i.split()[-1][0:-1]
+            time.sleep(2)
+            age_data["total"] = total
             path = "data/{}".format(day)
             if not os.path.exists(path):
                 os.mkdir(path)
