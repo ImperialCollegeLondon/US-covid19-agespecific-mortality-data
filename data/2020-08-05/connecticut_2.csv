@@ -1,4 +1,13 @@
-[{"dateupdated":"2020-08-03T00:00:00.000","agegroups":"0-9","totalcases":"786","confirmedcases":"764","probablecases":"22","totalcaserate":"207","totaldeaths":"1","confirmeddeaths":"1","probabledeaths":"0"}
+[{"dateupdated":"2020-08-04T00:00:00.000","agegroups":"0-9","totalcases":"793","confirmedcases":"771","probablecases":"22","totalcaserate":"209","totaldeaths":"1","confirmeddeaths":"1","probabledeaths":"0"}
+,{"dateupdated":"2020-08-04T00:00:00.000","agegroups":"10-19","totalcases":"1869","confirmedcases":"1802","probablecases":"67","totalcaserate":"406","totaldeaths":"1","confirmeddeaths":"1","probabledeaths":"0"}
+,{"dateupdated":"2020-08-04T00:00:00.000","agegroups":"20-29","totalcases":"6481","confirmedcases":"6287","probablecases":"194","totalcaserate":"1391","totaldeaths":"4","confirmeddeaths":"4","probabledeaths":"0"}
+,{"dateupdated":"2020-08-04T00:00:00.000","agegroups":"30-39","totalcases":"7231","confirmedcases":"7068","probablecases":"163","totalcaserate":"1642","totaldeaths":"21","confirmeddeaths":"21","probabledeaths":"0"}
+,{"dateupdated":"2020-08-04T00:00:00.000","agegroups":"40-49","totalcases":"7042","confirmedcases":"6859","probablecases":"183","totalcaserate":"1599","totaldeaths":"57","confirmeddeaths":"45","probabledeaths":"12"}
+,{"dateupdated":"2020-08-04T00:00:00.000","agegroups":"50-59","totalcases":"8358","confirmedcases":"8127","probablecases":"231","totalcaserate":"1579","totaldeaths":"182","confirmeddeaths":"152","probabledeaths":"30"}
+,{"dateupdated":"2020-08-04T00:00:00.000","agegroups":"60-69","totalcases":"6816","confirmedcases":"6606","probablecases":"210","totalcaserate":"1575","totaldeaths":"544","confirmeddeaths":"462","probabledeaths":"82"}
+,{"dateupdated":"2020-08-04T00:00:00.000","agegroups":"70-79","totalcases":"4527","confirmedcases":"4297","probablecases":"230","totalcaserate":"1737","totaldeaths":"966","confirmeddeaths":"799","probabledeaths":"167"}
+,{"dateupdated":"2020-08-04T00:00:00.000","agegroups":"80 and older","totalcases":"7054","confirmedcases":"6394","probablecases":"660","totalcaserate":"4297","totaldeaths":"2661","confirmeddeaths":"2070","probabledeaths":"591"}
+,{"dateupdated":"2020-08-03T00:00:00.000","agegroups":"0-9","totalcases":"786","confirmedcases":"764","probablecases":"22","totalcaserate":"207","totaldeaths":"1","confirmeddeaths":"1","probabledeaths":"0"}
 ,{"dateupdated":"2020-08-03T00:00:00.000","agegroups":"10-19","totalcases":"1848","confirmedcases":"1782","probablecases":"66","totalcaserate":"402","totaldeaths":"1","confirmeddeaths":"1","probabledeaths":"0"}
 ,{"dateupdated":"2020-08-03T00:00:00.000","agegroups":"20-29","totalcases":"6463","confirmedcases":"6269","probablecases":"194","totalcaserate":"1387","totaldeaths":"4","confirmeddeaths":"4","probabledeaths":"0"}
 ,{"dateupdated":"2020-08-03T00:00:00.000","agegroups":"30-39","totalcases":"7208","confirmedcases":"7045","probablecases":"163","totalcaserate":"1637","totaldeaths":"21","confirmeddeaths":"21","probabledeaths":"0"}
@@ -988,12 +997,4 @@
 ,{"dateupdated":"2020-04-06T00:00:00.000","agegroups":"60 - 69","totalcases":"1092","totalcaserate":"252","totaldeaths":"28"}
 ,{"dateupdated":"2020-04-06T00:00:00.000","agegroups":"70 - 79","totalcases":"569","totalcaserate":"218","totaldeaths":"49"}
 ,{"dateupdated":"2020-04-06T00:00:00.000","agegroups":"80 and older","totalcases":"546","totalcaserate":"333","totaldeaths":"110"}
-,{"dateupdated":"2020-04-05T00:00:00.000","agegroups":"0 - 9","totalcases":"49","totalcaserate":"13","totaldeaths":"1"}
-,{"dateupdated":"2020-04-05T00:00:00.000","agegroups":"10 -19","totalcases":"113","totalcaserate":"25","totaldeaths":"0"}
-,{"dateupdated":"2020-04-05T00:00:00.000","agegroups":"20 -29","totalcases":"639","totalcaserate":"137","totaldeaths":"0"}
-,{"dateupdated":"2020-04-05T00:00:00.000","agegroups":"30 - 39","totalcases":"856","totalcaserate":"194","totaldeaths":"1"}
-,{"dateupdated":"2020-04-05T00:00:00.000","agegroups":"40 -49","totalcases":"963","totalcaserate":"219","totaldeaths":"7"}
-,{"dateupdated":"2020-04-05T00:00:00.000","agegroups":"50 -59","totalcases":"1152","totalcaserate":"218","totaldeaths":"9"}
-,{"dateupdated":"2020-04-05T00:00:00.000","agegroups":"60 - 69","totalcases":"896","totalcaserate":"207","totaldeaths":"27"}
-,{"dateupdated":"2020-04-05T00:00:00.000","agegroups":"70 - 79","totalcases":"475","totalcaserate":"182","totaldeaths":"47"}
-,{"dateupdated":"2020-04-05T00:00:00.000","agegroups":"80 and older","totalcases":"463","totalcaserate":"282","totaldeaths":"97"}]
+,{"dateupdated":"2020-04-05T00:00:00.000","agegroups":"0 - 9","totalcases":"49","totalcaserate":"13","totaldeaths":"1"}]
