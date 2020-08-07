@@ -671,8 +671,9 @@ obtain.json.data = function(last.day, state_name, state_code){
   
   if(state_name == "SouthCarolina"){
     data = suppressWarnings(data %>%
-      mutate(age = ifelse(age == "81+", "80+", 
-                          paste0(as.numeric(gsub("(.+)\\-.*", "\\1", age))-1, "-", as.numeric(gsub(".*\\-(.+)", "\\1", age))-1))))
+                              mutate(age = ifelse(age == "81+", "80+", 
+                                                  ifelse( age == "<10", "0-9", 
+                                                          paste0(as.numeric(gsub("(.+)\\-.*", "\\1", age))-1, "-", as.numeric(gsub(".*\\-(.+)", "\\1", age))-1)))))
   }
 
   if(state_name == "oklahoma"){
