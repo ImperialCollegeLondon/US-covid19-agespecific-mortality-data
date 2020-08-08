@@ -1,6 +1,7 @@
 cat("\n### Running Wisconsin ###\n")
 
 # read csv
+tryCatch({
 file = './data/Wisconsin.csv'
 df = read.csv(file)
 
@@ -31,5 +32,5 @@ if(!file.exists(file.path('./data',date,'wisconsin.csv'))){
 }else{
   cat('Report for Wisconsin', date, 'is already exist')
 }
-
+})
 
