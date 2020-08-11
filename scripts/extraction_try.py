@@ -209,6 +209,7 @@ class AgeExtractor:
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
 
         browser.get(url)
+        browser.implicitly_wait(10)
         day = browser.find_element_by_xpath('/html/body/div[1]/div[5]/div/section/div[2]/article/div/div[1]/div/div[2]/div/div/div/div/p').text.split(':')[1].split()[0]
         day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/NorthDakota.json".format(day), os.F_OK):
@@ -1007,7 +1008,7 @@ class AgeExtractor:
         browser.implicitly_wait(5)
         time.sleep(3)
         ###will change:
-        day = browser.find_element_by_xpath('//*[@id="dnn_ctr33855_HtmlModule_lblContent"]/p[5]/strong[2]').text
+        day = browser.find_element_by_xpath('//*[@id="dnn_ctr33855_HtmlModule_lblContent"]/p[4]/strong[2]').text
         day = day.split()[-1]
         day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/washington.json".format(day), os.F_OK):
@@ -1042,6 +1043,30 @@ class AgeExtractor:
             print('Report for Washington {} is already exist'.format(day))
         browser.close()
         browser.quit()
+
+    def get_WA_pngs(self):
+        url = 'https://www.doh.wa.gov/Emergencies/Coronavirus#CovidDataTables'
+        options = Options()
+        options.add_argument('headless')
+        # browser = webdriver.Chrome(executable_path=chromed, options=options)
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(5)
+        time.sleep(3)
+        browser.implicitly_wait(2)
+        browser.find_element_by_xpath('//*[@id="togConfirmedCasesDeathsTbl"]').click()
+        browser.implicitly_wait(2)
+        time.sleep(2)
+        browser.find_element_by_xpath('//*[@id="togCasesDeathsByAgeTbl"]').click()
+        browser.implicitly_wait(2)
+        time.sleep(2)
+        width = browser.execute_script("return document.documentElement.scrollWidth")
+        height = browser.execute_script("return document.documentElement.scrollHeight")
+        # print(width, height)
+        browser.set_window_size(width, height)
+        time.sleep(1)
+        browser.save_screenshot('pngs/washington/{}-2.png'.format(self.today))
+
 
     def get_illinois(self):
         ## TODO: extract
@@ -1150,7 +1175,7 @@ if __name__ == "__main__":
         print("\n### Running North Dakota ###\n")
         ageExtractor.get_nd()
     except:
-        print("\n!!! DOC NORTH DAKOTA !!!\n")
+        print("\n!!! NORTH DAKOTA FAILED !!!\n")
 
     try:
         print("\n### Running North Carolina 2 ###\n")
@@ -1247,6 +1272,12 @@ if __name__ == "__main__":
         ageExtractor.get_washington()
     except:
         print("\n!!! WASHINGTON FAILED !!!\n")
+
+    try:
+        print("\n### Running Washington png ###\n")
+        ageExtractor.get_WA_pngs()
+    except:
+        print("\n!!! WASHINGTON PNG FAILED !!!\n")
 
     try:
         print("\n### Running Mississippi ###\n")
