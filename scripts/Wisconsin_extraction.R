@@ -1,7 +1,7 @@
 cat("\n### Running Wisconsin ###\n")
 
 # read csv
-file = 'WS.csv'
+file = 'Wisconsin.csv'
 df = read.csv(file, header = TRUE)
 
 # select columns and create new column names
