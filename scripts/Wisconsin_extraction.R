@@ -1,7 +1,7 @@
 cat("\n### Running Wisconsin ###\n")
 
 # read csv
-file = 'Wisconsin.csv'
+file = 'data/Wisconsin.csv'
 df = read.csv(file, header = TRUE)
 
 # select columns and create new column names
@@ -25,8 +25,8 @@ colnames(df) = newcol
 df$Date <- as.Date(as.character(df$Date))
 date <- format(df$Date[nrow(df)], "%Y-%m-%d")
 
-if(!file.exists(file.path(date,'wisconsin.csv'))){
-  outfile <- file.path(date,'wisconsin.csv')
+if(!file.exists(file.path('data', date,'wisconsin.csv'))){
+  outfile <- file.path('data', date,'wisconsin.csv')
   write.csv(df, file=outfile)
   cat('\n------ Processed Wisconsin', date, '------\n')
 }else{
