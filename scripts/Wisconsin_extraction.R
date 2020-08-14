@@ -2,6 +2,8 @@ cat("\n### Running Wisconsin ###\n")
 
 # read csv
 file = 'data/Wisconsin.csv'
+
+
 df = read.csv(file, header = TRUE)
 
 # select columns and create new column names
@@ -23,6 +25,7 @@ colnames(df) = newcol
 
 # deal with dates
 df$Date <- as.Date(as.character(df$Date))
+df = df[order(df$Date),]
 date <- format(df$Date[nrow(df)], "%Y-%m-%d")
 
 if(!file.exists(file.path('data', date,'wisconsin.csv'))){
