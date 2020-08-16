@@ -1,5 +1,5 @@
 #!/bin/bash
-today=$(date +'%Y-%m-%d')
+today=$(date -d 'yesterday' +'%Y-%m-%d')
 echo "$today"
 mkdir -p data/$today/
 mkdir -p pdfs/$today/
