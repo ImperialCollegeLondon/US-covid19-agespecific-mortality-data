@@ -1,5 +1,4 @@
-cat("\n### Running Wisconsin ###\n")
-get_wisconsin = function(1){
+get_wisconsin = function(){
   # read csv
   file = 'data/Wisconsin.csv'
   
@@ -36,6 +35,9 @@ get_wisconsin = function(1){
     cat('Report for Wisconsin', date, 'is already exist')
   }
 }
-tryCatch({
-  get_wisconsin(1)}) 
 
+
+cat("\n### Running Wisconsin ###\n")
+tryCatch({
+  get_wisconsin()}) 
+cat("\n### Wisconsin end ###\n")
