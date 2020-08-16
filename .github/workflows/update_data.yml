@@ -2,6 +2,7 @@ name: Run daily update
 on:
   schedule:
     - cron: "08 23 * * *"
+    - cron: "50 03 * * *"
 
 jobs:
   build-and-deploy:
