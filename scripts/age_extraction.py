@@ -250,7 +250,7 @@ class AgeExtractor:
 
                     os.makedirs("data/{}".format(day_string), exist_ok=True)
 
-                    with open("data/{}/ma.json".format(day_string), "w") as f:
+                    with open("data/{}/ma_daily.json".format(day_string), "w") as f:
                         json.dump(age_data, f)
                     doc.close()
 
