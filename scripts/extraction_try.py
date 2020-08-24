@@ -200,6 +200,26 @@ class AgeExtractor:
                         )
                     )
 
+    def get_nd_png(self):
+        url = "https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases"
+        # chromed = "D:\chromedriver.exe"
+        day = requests.get(url).headers['Date']
+        day = parsedate(day).strftime('%Y-%m-%d')
+        options = Options()
+        options.add_argument('headless')
+        # browser = webdriver.Chrome(executable_path=chromed, options=options)
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+
+        browser.get(url)
+        browser.implicitly_wait(10)
+
+        width = browser.execute_script("return document.documentElement.scrollWidth")
+        height = browser.execute_script("return document.documentElement.scrollHeight")
+        # print(width, height)
+        browser.set_window_size(width, height)
+        time.sleep(1)
+        browser.save_screenshot('pngs/NorthDakota/{}_2.png'.format(day))
+
     def get_nd(self):
         url = "https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases"
         #chromed = "D:\chromedriver.exe"
@@ -967,18 +987,20 @@ class AgeExtractor:
 
         if not os.access("data/{}/michigan.json".format(day), os.F_OK):
             browser.implicitly_wait(2)
+            time.sleep(10)
             browser.save_screenshot('pngs/michigan/{}_total.png'.format(day))
-
+            browser.implicitly_wait(2)
             total = browser.find_element_by_xpath(
                 '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[2]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div[1]/div[4]/div/div/div[3]/div[1]').text
             browser.implicitly_wait(5)
             browser.find_element_by_xpath(
                 '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group[3]/transform/div/div[2]/visual-container-modern[4]/transform/div/div[3]/div/visual-modern/div/button').click()
             browser.implicitly_wait(25)
-            time.sleep(5)
+            time.sleep(30)
             browser.find_element_by_xpath(
                 '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group/transform/div/div[2]/visual-container-modern[2]/transform/div/div[3]/div/visual-modern/div/button').click()
             browser.implicitly_wait(25)
+            time.sleep(20)
             data = browser.find_elements_by_css_selector('rect.column.setFocusRing')
             age_data = [e.get_attribute('aria-label') for e in data if
                         e.get_attribute('aria-label') and 'Total Deaths' in e.get_attribute(
@@ -1003,8 +1025,10 @@ class AgeExtractor:
                 json.dump(age_data, f)
             print('\n------ Processed Michigan {} ------\n'.format(day))
             browser.save_screenshot('pngs/michigan/{}.png'.format(day))
+            print(age_data)
         else:
             print('Report for Michigan {} is already exist'.format(day))
+
         browser.close()
         browser.quit()
 
@@ -1180,6 +1204,12 @@ if __name__ == "__main__":
         ageExtractor.get_oklahoma2()
     except:
         print("\n!!! OKLAHOMA 2 FAILED !!!\n")
+
+    try:
+        print("\n### Running North Dakota pngs ###\n")
+        ageExtractor.get_nd_png()
+    except:
+        print("\n!!! NORTH DAKOTA png FAILED !!!\n")
 
     try:
         print("\n### Running North Dakota ###\n")
