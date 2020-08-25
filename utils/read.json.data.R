@@ -106,10 +106,11 @@ modify_ageband = function(data, state_name, state_code)
   
   if(state_name == "iowa"){
     data = data %>%
-      mutate(age = ifelse(age == "18-40", "20-39", 
-                          ifelse(age == "41-60", "40-59",
-                                 ifelse(age == "61-80", "60-79",
-                                        "80+"))))
+      mutate(age = ifelse(age == "0-17", "0-19",
+                          ifelse(age == "18-40", "20-39", 
+                             ifelse(age == "41-60", "40-59",
+                                    ifelse(age == "61-80", "60-79",
+                                           "80+")))))
   }
   
   if(state_name == "missouri"){
