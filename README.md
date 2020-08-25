@@ -22,14 +22,14 @@ This will get you the latest data in `data/$DATE` and `pdfs/$DATE`.
 ```
 Rscript scripts/process.data.R
 ```
-This will get you csv files for every state with variables *age*, *date*, *daily.deaths* or *weekly.deaths* and *code* in `data/$DATE/processed`.
+This will get you csv files for every state with variables *age*, *date*, *daily.deaths* and (state) *code* in `data/processed/$DATE/`.
 
-3. To create the figures, run
+3. To create figures, run
 ```
 Rscript scripts/plot.comparison.and.timeseries.R
 ```
-This will get you pngs in `figures/` of 
-* Comparison between extracted data from the Department of Health and IHME and JHU overall deaths as well as,
+This will get you pdfs in `figures/$DATE/` of 
+* Comparison between extracted data from the Department of Health and JHU overall deaths as well as,
 * Time series of overall deaths for every state.
 
 
