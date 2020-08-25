@@ -89,6 +89,7 @@ class AgeExtractor:
                 json.dump(age_data, f)
             print('\n------ Processed Louisiana {} ------\n'.format(day))
             browser.save_screenshot('pngs/louisiana/{}.png'.format(day))
+            print(age_data)
         else:
             print('Report for Louisiana {} is already exist'.format(day))
 
@@ -135,6 +136,7 @@ class AgeExtractor:
                 json.dump(age_data, f)
             print('\n------ Processed Oklahoma {} ------\n'.format(day))
             browser.save_screenshot('pngs/oklahoma/{}.png'.format(day))
+            print(age_data)
         else:
             print('Report for Oklahoma {} is already exist'.format(day))
 
@@ -147,9 +149,9 @@ class AgeExtractor:
         if not os.path.exists("pdfs/oklahoma"):
             os.mkdir("pdfs/oklahoma")
         existing_assets = list(map(basename, glob("pdfs/oklahoma/*.pdf")))
-        date_diff = date.today() - date(2020, 6, 5)
+        date_diff = date.today() - date(2020, 8, 23)
         for i in range(date_diff.days + 1):
-            dayy = date(2020,6,5) + timedelta(days=i)
+            dayy = date(2020,8,23) + timedelta(days=i)
             day = dayy.strftime("%-m-%-d-%y").lower()
             url = "https://coronavirus.health.ok.gov/sites/g/files/gmc786/f/eo_-_covid-19_report_-_{}.pdf".format(day)
             if url.split("/")[-1] not in existing_assets:
@@ -222,35 +224,43 @@ class AgeExtractor:
 
     def get_nd(self):
         url = "https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases"
-        #chromed = "D:\chromedriver.exe"
-        options = Options()
-        options.add_argument('headless')
-        #browser = webdriver.Chrome(executable_path=chromed, options=options)
-        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
-
-        browser.get(url)
-        browser.implicitly_wait(10)
-        day = browser.find_element_by_xpath('/html/body/div[1]/div[5]/div/section/div[2]/article/div/div[1]/div/div[2]/div/div/div/div/p').text.split(':')[1].split()[0]
+        url = 'https://app.powerbigov.us/view?r=eyJrIjoiYjJhZjUwM2QtZDIwZi00MmU3LTljZjEtZjgyMzIzZDVmMmQxIiwidCI6IjJkZWEwNDY0LWRhNTEtNGE4OC1iYWUyLWIzZGI5NGJjMGM1NCJ9&pageName=ReportSectionf5bbf68127089e2bd8ea'
+        day = requests.get(url).headers['Date']
         day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/NorthDakota.json".format(day), os.F_OK):
+
+            #chromed = "D:\chromedriver.exe"
+            options = Options()
+            options.add_argument('headless')
+            #browser = webdriver.Chrome(executable_path=chromed, options=options)
+            browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+            browser.get(url)
+            time.sleep(20)
+            browser.implicitly_wait(40)
+            browser.implicitly_wait(5)
+            age_data = {}
+            for i in range(9):
+                data = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[23]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"][2]/*[name()="rect"]['+ str(i+1)+']')
+                data = data.get_attribute('aria-label')
+                age_data[data.split('.')[0].split()[-1]] = data.split('.')[1].split()[-1]
             browser.implicitly_wait(5)
             #if browser.execute_script("return document.readyState") == "complete":
-            data = browser.find_elements_by_css_selector('rect.highcharts-point')
-            data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label')]
+            #data = browser.find_elements_by_css_selector('rect.highcharts-point')
+            #data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label')]
             # data from 24 to 33
-            data = data[24:33]
-            age_data = {}
+            #data = data[24:33]
+            #age_data = {}
             #for i in data:
             #    age_data[i.split(',')[0].split('.')[1]] = i.split(',')[1].split('.')[0]
-            age_data[" 0-9"] = data[0].split(',')[1].split('.')[0]
-            age_data[" 10-19"] = data[1].split(',')[1].split('.')[0]
-            age_data[" 20-29"] = data[2].split(',')[1].split('.')[0]
-            age_data[" 30-39"] = data[3].split(',')[1].split('.')[0]
-            age_data[" 40-49"] = data[4].split(',')[1].split('.')[0]
-            age_data[" 50-59"] = data[5].split(',')[1].split('.')[0]
-            age_data[" 60-69"] = data[6].split(',')[1].split('.')[0]
-            age_data[" 70-79"] = data[7].split(',')[1].split('.')[0]
-            age_data[" 80+"] = data[8].split(',')[1].split('.')[0]
+            #age_data[" 0-9"] = data[0].split(',')[1].split('.')[0]
+            #age_data[" 10-19"] = data[1].split(',')[1].split('.')[0]
+            #age_data[" 20-29"] = data[2].split(',')[1].split('.')[0]
+            #age_data[" 30-39"] = data[3].split(',')[1].split('.')[0]
+            #age_data[" 40-49"] = data[4].split(',')[1].split('.')[0]
+            #age_data[" 50-59"] = data[5].split(',')[1].split('.')[0]
+            #age_data[" 60-69"] = data[6].split(',')[1].split('.')[0]
+            #age_data[" 70-79"] = data[7].split(',')[1].split('.')[0]
+            #age_data[" 80+"] = data[8].split(',')[1].split('.')[0]
 
             if age_data:
                 path = "data/{}".format(day)
@@ -258,7 +268,9 @@ class AgeExtractor:
                     os.mkdir(path)
                 with open("data/{}/NorthDakota.json".format(day), "w") as f:
                     json.dump(age_data, f)
+
                 print('\n------ Processed North Dakota {} ------\n'.format(day))
+
             #else:
             #    print('error for extracting')
             # take the full screenshot
@@ -269,6 +281,7 @@ class AgeExtractor:
             browser.set_window_size(width, height)
             time.sleep(1)
             browser.save_screenshot('pngs/NorthDakota/{}.png'.format(day))
+            print(age_data)
 
         else:
             print('Report for North Dakota{} is already exist'.format(day))
@@ -326,6 +339,7 @@ class AgeExtractor:
                 with open("data/{}/arizona.json".format(day), "w") as f:
                     json.dump(age_data, f)
                 print('\n------ Processed Arizona {} ------\n'.format(day))
+                print(age_data)
             else:
                 print('Data for Arizona {} is already exist'.format(day))
 
@@ -425,14 +439,15 @@ class AgeExtractor:
                 with open("data/{}/NorthCarolina.json".format(day), "w") as f:
                     json.dump(age_data, f)
                 print('\n------ Processed North Carolina {} ------\n'.format(day))
+                print(age_data)
             else:
                 print('Data for North Carolina {} is already exist'.format(day))
 
     def get_mississippi(self):
         existing_assets = list(map(basename, glob("pngs/mississippi/*.png")))
-        date_diff = date.today() - date(2020, 7, 3)
+        date_diff = date.today() - date(2020, 8, 17)
         for i in range(date_diff.days + 1):
-            dayy = date(2020, 7, 3) + timedelta(days=i)
+            dayy = date(2020, 8, 17) + timedelta(days=i)
             day = dayy.strftime('%Y-%m-%d')
             url = 'https://msdh.ms.gov/msdhsite/_static/images/graphics/covid19-chart-age-' + str(day[5:]) + '.png'
             if day + '.png' not in existing_assets:
@@ -495,6 +510,7 @@ class AgeExtractor:
                     json.dump(age_data, f)
                 print('\n------ Processed Missouri {} ------\n'.format(day))
                 browser.save_screenshot('pngs/missouri/{}.png'.format(day))
+                print(age_data)
             else:
                 print('\n !!!----  Missouri error ----!!!\n')
         else:
@@ -545,8 +561,7 @@ class AgeExtractor:
                 json.dump(age_data, f)
             print('\n------ Processed Kentucky {} ------\n'.format(day))
             browser.save_screenshot('pngs/kentucky/{}.png'.format(day))
-            #else:
-            #    print('error for extracting')
+            print(age_data)
         else:
             print('Report for kentucky {} is already exist'.format(day))
 
@@ -594,7 +609,7 @@ class AgeExtractor:
                 browser.set_window_size(width, height)
                 time.sleep(1)
                 browser.save_screenshot('pngs/delaware/{}.png'.format(day))
-
+                print(age_data)
             else:
                 print('error for extracting')
         else:
@@ -652,6 +667,7 @@ class AgeExtractor:
                     json.dump(age_death, f)
                 print('\n------ Processed Vermont {} ------\n'.format(day))
                 browser.save_screenshot('pngs/vermont/{}.png'.format(day))
+                print(age_death)
             else:
                 print('error for extracting')
         else:
@@ -722,6 +738,7 @@ class AgeExtractor:
                 with open("data/{}/indiana.json".format(day), "w") as f:
                     json.dump(age_data, f)
                 print('\n------ Processed Indiana {} ------\n'.format(day))
+                print(age_data)
             else:
                 print('Report for Indiana {} is already exist'.format(day))
 
@@ -761,6 +778,7 @@ class AgeExtractor:
                 with open("data/{}/maryland.json".format(day), "w") as f:
                     json.dump(age_data, f)
                 print('\n------ Processed Maryland {} ------\n'.format(day))
+                print(age_data)
             else:
                  print('error for extracting')
         else:
@@ -851,6 +869,7 @@ class AgeExtractor:
                 with open("data/{}/oregon.json".format(day), "w") as f:
                     json.dump(age_data, f)
                 print('\n------ Processed Oregon {} ------\n'.format(day))
+                print(age_data)
             else:
                 print('Report for Oregon {} is already exist'.format(day))
 
@@ -894,6 +913,7 @@ class AgeExtractor:
                 json.dump(age_data, f)
             print('\n------ Processed Pennsylvania {} ------\n'.format(day))
             browser.save_screenshot('pngs/pennsylvania/{}.png'.format(day))
+            print(age_data)
             browser.close()
             browser.quit()
         else:
@@ -964,6 +984,7 @@ class AgeExtractor:
                 json.dump(age_data, f)
             print('\n------ Processed Nevada {} ------\n'.format(day))
             browser.save_screenshot('pngs/nevada/{}.png'.format(day))
+            print(age_data)
         else:
             print('Report for Nevada {} is already exist'.format(day))
         browser.close()
@@ -1073,6 +1094,7 @@ class AgeExtractor:
             browser.set_window_size(width, height)
             time.sleep(1)
             browser.save_screenshot('pngs/washington/{}.png'.format(day))
+            print(age_data)
         else:
             print('Report for Washington {} is already exist'.format(day))
         browser.close()
@@ -1145,6 +1167,7 @@ class AgeExtractor:
             browser.set_window_size(width, height)
             time.sleep(1)
             browser.save_screenshot('pngs/Illinois/{}.png'.format(day))
+            print(age_data)
         else:
             print('Report for Illinois {} is already exist'.format(day))
         browser.close()
@@ -1184,6 +1207,7 @@ class AgeExtractor:
             with open("data/{}/utah.json".format(day), "w") as f:
                 json.dump(age_data, f)
             print('\n------ Processed Utah {} ------\n'.format(day))
+            print(age_data)
         else:
             print('Report for Utah {} is already exist'.format(day))
 

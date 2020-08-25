@@ -1,6 +1,5 @@
 library(data.table)
 
-#path_to_data = "data"
 #setwd("~/git/US-covid19-data-scraping")
 
 time.daily.update = strptime("22:00:00", "%H:%M:%S")
@@ -8,31 +7,26 @@ time.daily.update = strptime("22:00:00", "%H:%M:%S")
 if(Sys.time() > time.daily.update) last.day = Sys.Date()  # today
 if(Sys.time() < time.daily.update) last.day = Sys.Date() - 1 # yesterday 
  
-source("utils/process.data.by.state.R")
+source("utils/obtain.data.R")
 source("utils/make.summary.R") # table.states is a summary of all states extracted
 
 cat("\n Begin Processing \n")
 
 dir.create(file.path("data", "processed", last.day), showWarnings = FALSE)
 
-## STATES WITH RULE BASED FUNCTION
-rulebased.states = subset(table.states, json == 0 & code != "CDC")
+states = subset(table.states, code != "CDC")
+
 data.overall = NULL
-for(i in 1:nrow(rulebased.states)){
-  data = obtain.rulebased.data(last.day, rulebased.states$name[i], rulebased.states$code[i])
-  write.csv(data, file = file.path("data", "processed", last.day, paste0("DeathsByAge_",rulebased.states$code[i],".csv")), row.names=FALSE)
+for(i in 1:nrow(states)){
+  data = obtain.data(last.day, states$name[i], states$code[i], states$json[i])
+  write.csv(data, file = file.path("data", "processed", last.day, paste0("DeathsByAge_",states$code[i],".csv")), row.names=FALSE)
   data.overall = dplyr::bind_rows(data, data.overall)
 }
 
-## STATES WITH .JSON file
-json.states=subset(table.states, json == 1)
-for(i in 1:nrow(json.states)){
-  data = obtain.json.data(last.day, json.states$name[i], json.states$code[i])
-  write.csv(data, file = file.path("data", "processed", last.day, paste0("DeathsByAge_",json.states$code[i],".csv")), row.names=FALSE)
-  data.overall = dplyr::bind_rows(data, data.overall)
-}
-
-data.overall = subset(data.overall, code != "TX") # data does not match with JHU or IHME.
+# include texas from 27/07
+data.overall_woTX = subset(data.overall, code != "TX") 
+data.overall_TX = subset(data.overall, code == "TX" & date > as.Date("2020-07-27")) 
+data.overall = dplyr::bind_rows(data.overall_woTX, data.overall_TX)
 write.csv(data.overall, file = file.path("data", "processed", last.day, "DeathsByAge_US.csv"), row.names=FALSE)
 
 cat("\n End Processing \n")

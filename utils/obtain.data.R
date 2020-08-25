@@ -1,0 +1,96 @@
+library("rjson")
+library(readxl)
+library(tidyverse)
+
+path_to_data = "data"
+
+`%notin%` = Negate(`%in%`)
+
+source("utils/find.daily.deaths.R")
+source("utils/read.json.data.R")
+source("utils/read.daily-historical.data.R")
+
+obtain.data = function(last.day, state_name, state_code, json){
+  
+  ## 1. STATES WITH RULE BASED FUNCTION
+  states.historical.data = c("CO", "CT", "TN", "ME", "WI", "VA")
+  states.daily.data = c("TX", "GA", "ID", "AK", "RI")
+  
+  # file with entire time series
+  if(state_code %in% states.historical.data)  data = obtain.historic.data.csv_and_xlsx(last.day, state_name, state_code)
+  
+  # file with entire time series and daily deaths (rather than cumulative deaths)
+  if(state_code %in% "NM")  data = do.call(paste0("read.", state_code, ".file"), list(last.day))
+  
+  # daily file
+  if(state_code %in% states.daily.data) data = obtain.daily.data.csv_and_xlsx(last.day, state_name, state_code)
+  
+  
+  ##  2, STATES WITH .JSON file
+  if(json == 1) data = obtain.json.data(last.day, state_name, state_code)
+
+  return(data)
+  
+}
+
+obtain.daily.data.csv_and_xlsx = function(last.day, state_name, state_code){
+  
+  cat("\n Processing", state_name,  "\n")
+  
+  dates = seq.Date(as.Date("2020-03-01"), last.day, by = "day")
+  
+  file_format = ".csv"
+  if(state_code %in% c("TX")) file_format = ".xlsx"
+  
+  # find dates with data
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0(state_name, file_format), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  
+  # find daily deaths
+  data = find_daily_deaths(dates = dates, state_name = state_name, state_code = state_code, daily.data.csv_and_xlsx = TRUE)
+  
+  return(data.table(data))
+}
+
+obtain.historic.data.csv_and_xlsx = function(last.day, state_name, state_code){
+  
+  cat("\n Processing ", state_name, " \n")
+  
+  # read the file 
+  tmp = do.call(paste0("read.", state_code, ".file"), list(last.day))
+  
+  # find dates with data
+  dates = unique(sort(tmp$date))
+  
+  # find daily deaths
+  data = find_daily_deaths(dates = dates, h_data = tmp, state_code = state_code, historic.data = 1)
+  
+  return(data.table(data))
+}
+
+obtain.json.data = function(last.day, state_name, state_code){
+  
+  cat(paste0("\n Processing ", state_name,"\n"))
+  
+  dates = seq.Date(as.Date("2020-03-01"), last.day, by = "day")
+  
+  # find date with data
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0(state_name, ".json"), data_files)]
+  if(state_name == "ma")  data_files_state = data_files_state[!grepl("oklahoma.json|alabama.json", data_files_state)] # we named massasschussets "ma" ...
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  
+  if(state_name == "alabama") dates = dates[which(dates >= as.Date("2020-05-03"))] # they changed age groups at this date
+  if(state_name == "NorthCarolina") dates = dates[which(dates %notin% seq.Date(as.Date("2020-05-13"), as.Date("2020-05-19"), by = "day"))] # incorrect age groups
+  
+  # find daily deaths
+  data = find_daily_deaths(dates = dates, state_name = state_name, state_code = state_code, json = TRUE)
+
+  # change age label to match 5 y age bands used in the analysis
+  data = modify_ageband(data, state_name,state_code)
+  
+  return(data)
+} 
+
+
