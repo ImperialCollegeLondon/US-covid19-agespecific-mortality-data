@@ -44,8 +44,42 @@ We use Requests to make HTTP/HTTPS requests to a web API, checking whether the d
 
 We use webdriver from selenium to find the elements and extract the corresponding data. 
 
-## State specifications
-| Country        | Date record start           | Notes and link  |
+## Warnings (not updated since 06-10)
+### Updates
+- Florida did not publish a report on 2020-05-09
+- South Carolina data have not been updated on 2020-05-17
+- Iowa did not update the website on 2020-05-18
+- Idaho did not update the website on 2020-05-18
+- Missouri change website on the 2020-05-20 and did not update
+- Indiana did not update the data on 2020-05-30
+- Washingtin did not update the website on 2020-06-12
+- Mississippi did not update the website on 2020-06-10
+
+### Website dynamics
+- For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
+- For Missouri, the website is changed on 2020-05-21, cannot find the timestamp
+- Delware did not update the website on 2020-05-21
+- For Oklahoma, website changed on 2020-06-06
+
+### About the data
+- For North Carolina, the total death number is updated daily, but the age death data is not updated daily. The website format changes from 2020-05-20 
+- NY and NJ have a 1 day latency, meaning that the cumulative deaths we extract on day t are the cumulative deaths in day t-1
+- From 2020-06-04, age band 0-9 was added for Kentucky 
+
+
+
+## About
+### Licence
+This data set is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) by Imperial College London on behalf of its COVID-19 Response Team. Copyright Imperial College London 2020.
+
+### Warranty
+Imperial makes no representation or warranty about the accuracy or completeness of the data nor that the results will not constitute in infringement of third-party rights. 
+Imperial accepts no liability or responsibility for any use which may be made of any results, for the results, nor for any reliance which may be placed on any such work or results.
+
+### Reference 
+Attribute the data as the "COVID-19 Age specific Mortality Data Repository by the Imperial College London COVID-19 Response Team", and the urls sepecified below.
+
+| State        | Date record start           | Notes and link  |
 | ------------- |:-------------:| -----:|
 | Florida| 2020-03-26 |[link](https://www.floridadisaster.org/covid19/covid-19-data-reports/); file string; age data on page 3 table: `covid-19-data---daily-report-$year-$month-$day-$time.pdf` |
 | Connecticut| 2020-04-05 | [link](https://data.ct.gov/api/views/ypz6-8qyf/rows.csv); full time series|
@@ -84,33 +118,3 @@ We use webdriver from selenium to find the elements and extract the correspondin
 |Utah| 2020-06-17 | [link](https://coronavirus.utah.gov/case-counts/); daily updated and replaced, need extraction daily; no historical archive|
 |Maine| 2020-03-13 | [link](https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml); daily updated, extraction manually; historical archive|
 |Michigan| 2020-04-30 | [link](https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html); daily updated and replaced, need extraction daily; no historical archive|
-
-## Warnings
-### Updates
-- Florida did not publish a report on 2020-05-09
-- South Carolina data have not been updated on 2020-05-17
-- Iowa did not update the website on 2020-05-18
-- Idaho did not update the website on 2020-05-18
-- Missouri change website on the 2020-05-20 and did not update
-- Indiana did not update the data on 2020-05-30
-- Washingtin did not update the website on 2020-06-12
-- Mississippi did not update the website on 2020-06-10
-
-### Website dynamics
-- For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
-- For Missouri, the website is changed on 2020-05-21, cannot find the timestamp
-- Delware did not update the website on 2020-05-21
-- For Oklahoma, website changed on 2020-06-06
-
-### About the data
-- For North Carolina, the total death number is updated daily, but the age death data is not updated daily. The website format changes from 2020-05-20 
-- NY and NJ have a 1 day latency, meaning that the cumulative deaths we extract on day t are the cumulative deaths in day t-1
-- From 2020-06-04, age band 0-9 was added for Kentucky 
-
-
-## Figures
-### Time series of extracted data as of 2020-06-29
-![](figures/time.series_allstates.png)
-
-### Comparison to IHME and JHU overall death as of 2020-06-29
-![](figures/comparison.ihme.jhu.depthealth_overall.png)
