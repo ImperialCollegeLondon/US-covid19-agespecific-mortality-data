@@ -80,7 +80,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 #### Active maintainers (alphabetically)
 
 - [Yu Chen](https://github.com/YuCHENJT) - Department of Mathematics, Imperial College London
-- [Michael Hutchinson](https://www.github.com/MJHutchinson) - PhD Student, Department of Statistics, Oxford
+- [Michael Hutchinson](https://www.github.com/MJHutchinson) - Department of Statistics, Oxford
 - [Mélodie Monod](https://github.com/melodiemonod) - Department of Mathematics, Imperial College London
 - [Oliver Ratmann](https://github.com/olli0601) - Department of Mathematics, Imperial College London
 - [Harrison Zhu](https://github.com/harrisonzhu508) - Department of Mathematics, Imperial College London
