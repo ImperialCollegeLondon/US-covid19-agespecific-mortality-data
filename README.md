@@ -69,6 +69,25 @@ We use webdriver from selenium to find the elements and extract the correspondin
 
 
 ## About
+### Maintainers and Contributors
+<p float="left">
+  <img src="logos/IMP_ML_1CS_4CP_CLEAR%20SPACE.svg" height="100" /> 
+  <img src="logos/ox_brand1_pos.gif" height="100" />
+</p>
+
+
+#### Active maintainers (alphabetically)
+
+- Yu Chen
+- [Michael Hutchinson](https://www.github.com/MJHutchinson) - PhD Student, Department of Statistics, Oxford
+- Melodie Monde
+- Oliver Ratman
+- Harrison Zhu
+
+#### Contirubutors
+
+- Martin McManus
+
 ### Licence
 This data set is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) by Imperial College London on behalf of its COVID-19 Response Team. Copyright Imperial College London 2020.
 
