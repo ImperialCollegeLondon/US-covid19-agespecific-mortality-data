@@ -73,6 +73,7 @@ We use webdriver from selenium to find the elements and extract the correspondin
 <p float="left">
   <a href="https://www.imperial.ac.uk/"> <img src="logos/IMP_ML_1CS_4CP_CLEAR%20SPACE.svg" height="100" /> </a> 
   <a href="https://www.ox.ac.uk/"> <img src="logos/ox_brand1_pos.gif" height="100" /> </a>  
+  <a href="https://statml.io/"> <img src="logos/cropped-LOGO_512_512.svg-270x270.png" height="100" /> </a>  
 </p>
 
 
