@@ -98,7 +98,7 @@ Attribute the data as the "COVID-19 Age specific Mortality Data Repository by th
 | Kansas | 2020-05-13 | [link](https://www.coronavirus.kdheks.gov/160/COVID-19-in-Kansas) | dashboard updated Monday, Wednesday and Friday, and replaced; no historical archive | 
 | Kentucky | 2020-05-13 | [link](https://kygeonet.maps.arcgis.com/apps/opsdashboard/index.html#/543ac64bc40445918cf8bc34dc40e334) | dashboard updated daily and replaced; no historical archive | 
 | Louisiana | 2020-05-12 | [link](https://www.arcgis.com/apps/opsdashboard/index.html#/4a6de226701e45bdb542f09b73ee79e1) | dashboard updated daily except on Saturday and replaced; no historical archive|
-| Maine | 2020-03-13 | [link](https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml) | metadata updated daily; full time series |
+| Maine | 2020-03-12 | [link](https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml) | metadata updated daily; full time series |
 | Maryland | 2020-05-14 | [link](https://coronavirus.maryland.gov/) | dashboard updated daily and replaced; no historical archive | 
 | Massachusetts | 2020-04-20 | [link](https://www.mass.gov/info-details/archive-of-covid-19-cases-in-massachusetts) | daily report; with historical archive; STOPPED REPORTING BY AGE ON 2020-08-11 |
 | Michigan | 2020-03-21 | (1) `data/req/michigan weekly.csv` and (2) [link](https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html) | (1) data requested to the DoH (2) dashboard updated daily and replaced; no historical archive |
