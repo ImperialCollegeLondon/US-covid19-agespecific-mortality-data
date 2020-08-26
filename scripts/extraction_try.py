@@ -1,28 +1,19 @@
 import os
-import re
-import csv
 import time
 import json
-import warnings
 import requests
-import subprocess
-
-from os import system
-from os.path import basename, join
-from shutil import copyfile
-from datetime import date, timedelta, datetime
+from os.path import basename
+from datetime import date, timedelta
 from dateutil.parser import parse as parsedate
 import xlrd
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager, ChromeType
-from PIL import Image
+
 
 import fitz
-import numpy as np
 from glob import glob
-from bs4 import BeautifulSoup, SoupStrainer
+from bs4 import BeautifulSoup
 
 class AgeExtractor:
     """ Using the Chrome driver to render a web page with the help of Selenium.
@@ -553,7 +544,6 @@ class AgeExtractor:
                 print('Report for Indiana {} is already exist'.format(day))
 
     def get_maryland(self):
-        ## update
         url = 'https://coronavirus.maryland.gov/'
         day = parsedate(requests.get(url).headers['Date']).strftime('%Y-%m-%d')
         options = Options()
@@ -570,8 +560,8 @@ class AgeExtractor:
                 browser.save_screenshot('pngs/maryland/{}.png'.format(day))
                 age_data = {}
                 for i in range(9):
-                    group = browser.find_element_by_xpath('//*[@id="ember111"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[1]').text
-                    data = browser.find_element_by_xpath('//*[@id="ember111"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[3]').text
+                    group = browser.find_element_by_xpath('//*[@id="ember91"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[1]').text
+                    data = browser.find_element_by_xpath('//*[@id="ember91"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[3]').text
                     if data == '':
                         data = '0'
                     else:
@@ -593,6 +583,7 @@ class AgeExtractor:
 
         browser.close()
         browser.quit()
+        
 
     def get_oregon(self):
         url = 'https://govstatus.egov.com/OR-OHA-COVID-19'
