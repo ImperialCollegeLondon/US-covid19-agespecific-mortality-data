@@ -44,30 +44,6 @@ We use Requests to make HTTP/HTTPS requests to a web API, checking whether the d
 
 We use webdriver from selenium to find the elements and extract the corresponding data. 
 
-
-## Warnings (not updated since 2020-06-10)
-### Updates
-- Florida did not publish a report on 2020-05-09
-- South Carolina data have not been updated on 2020-05-17
-- Iowa did not update the website on 2020-05-18
-- Idaho did not update the website on 2020-05-18
-- Missouri change website on the 2020-05-20 and did not update
-- Indiana did not update the data on 2020-05-30
-- Washingtin did not update the website on 2020-06-12
-- Mississippi did not update the website on 2020-06-10
-
-### Website dynamics
-- For Washington, the download URL keeps changing between using `-` and `_` separators. When there's an error, simply use the recommended line of code in `get_washington()`
-- For Missouri, the website is changed on 2020-05-21, cannot find the timestamp
-- Delware did not update the website on 2020-05-21
-- For Oklahoma, website changed on 2020-06-06
-
-### About the data
-- For North Carolina, the total death number is updated daily, but the age death data is not updated daily. The website format changes from 2020-05-20 
-- NY and NJ have a 1 day latency, meaning that the cumulative deaths we extract on day t are the cumulative deaths in day t-1
-- From 2020-06-04, age band 0-9 was added for Kentucky 
-
-
 ## About
 ### Maintainers and Contributors
 <p float="left">
