@@ -44,36 +44,8 @@ We use Requests to make HTTP/HTTPS requests to a web API, checking whether the d
 
 We use webdriver from selenium to find the elements and extract the corresponding data. 
 
-## About
-### Maintainers and Contributors
-<p float="left">
-  <a href="https://www.imperial.ac.uk/"> <img src="logos/IMP_ML_1CS_4CP_CLEAR%20SPACE.svg" height="100" /> </a> 
-  <a href="https://www.ox.ac.uk/"> <img src="logos/ox_brand1_pos.gif" height="100" /> </a>  
-  <a href="https://statml.io/"> <img src="logos/cropped-LOGO_512_512.svg-270x270.png" height="100" /> </a>  
-</p>
-
-
-#### Active maintainers (alphabetically)
-
-- [Yu Chen](https://github.com/YuCHENJT) - Department of Mathematics, Imperial College London
-- [Michael Hutchinson](https://www.github.com/MJHutchinson) - Department of Statistics, Oxford
-- [Mélodie Monod](https://github.com/melodiemonod) - Department of Mathematics, Imperial College London
-- [Oliver Ratmann](https://github.com/olli0601) - Department of Mathematics, Imperial College London
-- [Harrison Zhu](https://github.com/harrisonzhu508) - Department of Mathematics, Imperial College London
-
-#### Contributors
-
-- [Martin McManus](https://github.com/MartinMcManus1) - Department of Mathematics, Imperial College London
-
-### Licence
-This data set is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) by Imperial College London on behalf of its COVID-19 Response Team. Copyright Imperial College London 2020.
-
-### Warranty
-Imperial makes no representation or warranty about the accuracy or completeness of the data nor that the results will not constitute in infringement of third-party rights. 
-Imperial accepts no liability or responsibility for any use which may be made of any results, for the results, nor for any reliance which may be placed on any such work or results.
-
-### Cite 
-Attribute the data as the "COVID-19 Age specific Mortality Data Repository by the Imperial College London COVID-19 Response Team", and the urls sepecified below.
+## Data source
+This table includes a complete list of all sources ever used in the data set. We acknowledge and are grateful to U.S. state Departments of Health for making the primary data available at the following sources:
 
 | State        | Date record start           | Link(s)  | Notes |
 | ----------- |:-----------------:| -----:| ------:|
@@ -119,5 +91,44 @@ Attribute the data as the "COVID-19 Age specific Mortality Data Repository by th
 | Virginia | 2020-04-21 | [link](https://data.virginia.gov/Government/VDH-COVID-19-PublicUseDataset-Cases_By-Age-Group/uktn-mwig) | metadata updated daily; full time series |
 | Washington| 2020-06-08 | [link](https://www.doh.wa.gov/Emergencies/NovelCoronavirusOutbreak2020COVID19/DataDashboard) | dashboard updated daily and replaced; no historical archive |
 | Wisconsin | 2020-03-15 | [link](https://hub.arcgis.com/datasets/wi-dhs::covid-19-historical-data-table) | metadata updated daily; full time series |
+
+
+## About
+### Maintainers and Contributors
+<p float="left">
+  <a href="https://www.imperial.ac.uk/"> <img src="logos/IMP_ML_1CS_4CP_CLEAR%20SPACE.svg" height="100" /> </a> 
+  <a href="https://www.ox.ac.uk/"> <img src="logos/ox_brand1_pos.gif" height="100" /> </a>  
+  <a href="https://statml.io/"> <img src="logos/cropped-LOGO_512_512.svg-270x270.png" height="100" /> </a>  
+</p>
+
+
+#### Active maintainers (alphabetically)
+
+- [Yu Chen](https://github.com/YuCHENJT) - Department of Mathematics, Imperial College London
+- [Michael Hutchinson](https://www.github.com/MJHutchinson) - Department of Statistics, Oxford
+- [Mélodie Monod](https://github.com/melodiemonod) - Department of Mathematics, Imperial College London
+- [Oliver Ratmann](https://github.com/olli0601) - Department of Mathematics, Imperial College London
+- [Harrison Zhu](https://github.com/harrisonzhu508) - Department of Mathematics, Imperial College London
+
+#### Contributors
+
+- [Martin McManus](https://github.com/MartinMcManus1) - Department of Mathematics, Imperial College London
+
+### Licence
+This data set is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) by Imperial College London on behalf of its COVID-19 Response Team. Copyright Imperial College London 2020.
+
+### Warranty
+Imperial makes no representation or warranty about the accuracy or completeness of the data nor that the results will not constitute in infringement of third-party rights. 
+Imperial accepts no liability or responsibility for any use which may be made of any results, for the results, nor for any reliance which may be placed on any such work or results.
+
+### Cite 
+Attribute the data as the "COVID-19 Age specific Mortality Data Repository by the Imperial College London COVID-19 Response Team", and the urls sepecified below.
+
+### Acknowledgements
+We acknowledge the support of the EPSRC through the [EPSRC Centre for Doctoral Training in Modern Statistics and Statistical Machine Learning](https://statml.io) at Imperial and Oxford.
+
+### Funding
+This research was partly funded by the The Imperial College COVID-19 Research Fund.
+
 
 
