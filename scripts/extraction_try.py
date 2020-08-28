@@ -175,8 +175,9 @@ class AgeExtractor:
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
 
         browser.get(url)
-        browser.implicitly_wait(10)
-
+        browser.implicitly_wait(30)
+        time.sleep(40)
+        browser.implicitly_wait(20)
         width = browser.execute_script("return document.documentElement.scrollWidth")
         height = browser.execute_script("return document.documentElement.scrollHeight")
         # print(width, height)
@@ -200,7 +201,7 @@ class AgeExtractor:
             browser.implicitly_wait(5)
             age_data = {}
             for i in range(9):
-                data = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[23]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"][2]/*[name()="rect"]['+ str(i+1)+']')
+                data = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[22]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"][2]/*[name()="rect"]['+ str(i+1)+']')
                 data = data.get_attribute('aria-label')
                 age_data[data.split('.')[0].split()[-1]] = data.split('.')[1].split()[-1]
             browser.implicitly_wait(5)
@@ -212,11 +213,13 @@ class AgeExtractor:
                     json.dump(age_data, f)
 
                 print('\n------ Processed North Dakota {} ------\n'.format(day))
+            browser.implicitly_wait(10)
             width = browser.execute_script("return document.documentElement.scrollWidth")
             height = browser.execute_script("return document.documentElement.scrollHeight")
             #print(width, height)
             browser.set_window_size(width, height)
-            time.sleep(1)
+            time.sleep(10)
+            browser.implicitly_wait(4)
             browser.save_screenshot('pngs/NorthDakota/{}.png'.format(day))
             print(age_data)
 
@@ -583,7 +586,21 @@ class AgeExtractor:
 
         browser.close()
         browser.quit()
-        
+
+    def get_maryland_pngs(self):
+        url = 'https://coronavirus.maryland.gov/'
+        day = parsedate(requests.get(url).headers['Date']).strftime('%Y-%m-%d')
+        options = Options()
+        options.add_argument('headless')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(5)
+        if not os.access("data/{}/maryland.json".format(day), os.F_OK):
+            width = browser.execute_script("return document.documentElement.scrollWidth")
+            height = browser.execute_script("return document.documentElement.scrollHeight")
+            browser.set_window_size(width, height)
+            time.sleep(1)
+            browser.save_screenshot('pngs/maryland/{}.png'.format(day))
 
     def get_oregon(self):
         url = 'https://govstatus.egov.com/OR-OHA-COVID-19'
@@ -1028,6 +1045,12 @@ if __name__ == "__main__":
         ageExtractor.get_maryland()
     except:
         print("\n!!! MARYLAND FAILED !!!\n")
+
+    try:
+        print("\n### Running Maryland png ###\n")
+        ageExtractor.get_maryland_pngs()
+    except:
+        print("\n!!! MARYLAND PNG FAILED !!!\n")
 
     try:
         print("\n### Running Vermont ###\n")
