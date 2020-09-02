@@ -71,7 +71,8 @@ read.AK.file = function(csv_file, Date){
            code = "AK", 
            date = Date,
            is_after_0622 = date > as.Date("2020-06-22"),
-           cum.deaths = ifelse(is_after_0622, as.numeric(Deceased_Cases), as.numeric(Deaths)), # name of death variable changed on this date
+           is_before_0826 = date < as.Date("2020-08-26"),
+           cum.deaths = ifelse(is_after_0622 & is_before_0826, as.numeric(Deceased_Cases), as.numeric(Deaths)), # name of death variable changed on this date
            daily.deaths = NA_integer_) %>%
     select(age, code, date, daily.deaths, cum.deaths) 
   
