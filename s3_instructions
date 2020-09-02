@@ -1,7 +1,0 @@
-Take note of username (bucket name), access key and secret access key.
-
-1) First install AWS CLI by `sudo apt-get install awscli`
-
-2) Then `aws configure` and enter the access keys. Everything else remains default when prompted.
-
-3) To access the repository, `aws s3 help` or look online for instructions. For example, to look at the data in the florida folder in the PDFs folder:`aws s3 ls s3://usaage/update_data/pdfs/florida/`. To download, it's aws `s3 cp s3://usaage/update_data/data/  DESTINATION_FOLDER_NAME --recursive`

@@ -409,45 +409,12 @@ class AgeExtractor:
             process_minnesota_day(f.split(".")[0])
 
     def get_virginia(self):
-        subprocess.run(
-            [
-                "wget",
-                "--no-check-certificate",
-                "-O",
-                "csvs/virginia/temp.csv",
-                "https://www.vdh.virginia.gov/content/uploads/sites/182/2020/03/VDH-COVID-19-PublicUseDataset-Cases_By-Age-Group.csv",
-            ]
-        )   
-
-        data = pd.read_csv("csvs/virginia/temp.csv")
-        csv_date = datetime.strptime(data['Report Date'][0], '%m/%d/%Y').strftime("%d-%m-%Y")
-
-        copyfile("csvs/virginia/temp.csv", f"csvs/virginia/{csv_date}.csv")
-
-        os.remove("csvs/virginia/temp.csv")
-
-        def process_virginia_day(file_date):
-            print(file_date)
-            file_date = datetime.strptime(file_date, "%d-%m-%Y")
-
-            data = pd.read_csv(f"csvs/virginia/{file_date.strftime('%d-%m-%Y')}.csv")
-            data = data.groupby(by='Age Group').sum()['Number of Deaths'].reset_index()
-
-            ret = dict()
-            for i in range(len(data)):
-                ret[data.loc[i]['Age Group']] = int(data.loc[i]['Number of Deaths'])
-
-            print(ret)
-
-            os.makedirs(f"data/{file_date.strftime('%Y-%m-%d')}", exist_ok=True)
-            with open(f"data/{file_date.strftime('%Y-%m-%d')}/virginia.json", "w") as f:
-                json.dump(ret, f)
-
-            print(f'Processed {file_date} for Virginia')
-
-        files = os.listdir("csvs/virginia")
-        for f in files:
-            process_virginia_day(f.split(".")[0])
+        data = pd.read_csv("https://data.virginia.gov/api/views/uktn-mwig/rows.csv?accessType=DOWNLOAD").dropna()
+        data = data.groupby(by=["Report Date", "Age Group"]).sum().reset_index(level=1)[["Age Group", "Number of Cases"]]
+        for date in data.index:
+            d = datetime.strptime(date, "%m/%d/%Y").strftime("%Y-%m-%d")
+            os.makedirs(f'data/{d}', exist_ok=True)
+            data.loc[date].reset_index(drop=True).set_index("Age Group")["Number of Cases"].to_json(f'data/{d}/virginia.json')
 
     def get_district_of_columbia(self):
         os.makedirs('csvs/district_of_columbia/', exist_ok=True)
