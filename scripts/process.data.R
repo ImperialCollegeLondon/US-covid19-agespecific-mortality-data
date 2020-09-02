@@ -16,17 +16,27 @@ dir.create(file.path("data", "processed", last.day), showWarnings = FALSE)
 
 states = subset(table.states, code != "CDC")
 
-data.overall = NULL
+
+#
+# process every state 
+data.overall <- vector('list',nrow(states))
 for(i in 1:nrow(states)){
+  
   data = obtain.data(last.day, states$name[i], states$code[i], states$json[i])
   write.csv(data, file = file.path("data", "processed", last.day, paste0("DeathsByAge_",states$code[i],".csv")), row.names=FALSE)
-  data.overall = dplyr::bind_rows(data, data.overall)
+  
+  data.overall[[i]] = data
 }
+data.overall = do.call('rbind',data.overall)
 
-# include texas from 27/07
+#
+# include texas from 27/07 (day where the data start matching with JHU)
 data.overall_woTX = subset(data.overall, code != "TX") 
 data.overall_TX = subset(data.overall, code == "TX" & date > as.Date("2020-07-27")) 
 data.overall = dplyr::bind_rows(data.overall_woTX, data.overall_TX)
+
+#
+# save
 write.csv(data.overall, file = file.path("data", "processed", last.day, "DeathsByAge_US.csv"), row.names=FALSE)
 
 cat("\n End Processing \n")

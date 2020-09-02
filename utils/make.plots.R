@@ -14,7 +14,7 @@ death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_20
 death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200823.csv"))
 
 
-# scrapped data
+# processed data
 path_to_data = function(state) file.path("data", "processed", last.day, paste0("DeathsByAge_", state, ".csv"))
 
 
@@ -22,6 +22,7 @@ make.comparison.plot = function(State, Code){
   
   cat(paste("\n Make comparison plot for", State, "\n"))
   
+  # if NYC, use the data from NYC github repository
   if(Code == "NYC"){ 
     death_data_nyc = data.table(death_data_nyc) %>%
       select(DEATH_COUNT, DATE_OF_INTEREST) %>%
@@ -53,6 +54,7 @@ make.comparison.plot = function(State, Code){
   
   } else{
     
+    # else use the JHU/IHME data
     death_data_ihme = data.table(subset(death_data_ihme, state_name == State)) %>%
       select(code, daily_deaths, date) %>%
       mutate(source = "IHME",

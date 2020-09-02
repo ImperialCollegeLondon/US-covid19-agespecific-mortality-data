@@ -3,6 +3,7 @@ library(rjson)
 
 #setwd("~/git/US-covid19-data-scraping")
 
+# Requested data sent by Michigan DoH 
 michigan_weekly <- read_csv("data/req/michigan weekly.csv")
 
 # select columns of data that we are interested and rename the columns 

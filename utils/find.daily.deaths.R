@@ -1,4 +1,3 @@
-
 find_daily_deaths = function(dates, h_data = NULL, state_code, state_name = NULL, daily.data.csv_and_xlsx = 0, json = 0, historic.data = 0)
 {
   
@@ -11,33 +10,36 @@ find_daily_deaths = function(dates, h_data = NULL, state_code, state_name = NULL
     Date = dates[t]
     print(Date)
     
-    # read daily daily update if csv or xlsx
+    #
+    # read daily daily update 
+    
+    #if csv or xlsx
     if(daily.data.csv_and_xlsx){
       file_format = ".csv"
       if(state_code %in% c("TX")) file_format = ".xlsx"
       file = file.path(path_to_data, Date, paste0(state_name, file_format))
       tmp = do.call(paste0("read.", state_code, ".file"), list(file, Date))
     }
-    
-    # read daily daily update if json
+    #if json
     if(json)
     {
       res = read_json(Date, state_name, state_code, data)
       json_data = res[[1]]; tmp = res[[2]]
     }
     
-    # select Date in historical data 
+    #
+    # select Date for historical data 
     if(historic.data)
     {
       tmp = subset(h_data, date == Date)
     }
     
+
     for(age_group in tmp$age){
 
       if(json){
         tmp = check_format_json(tmp, json_data, state_name, age_group, Date)
       }
-      
       
       if(Date > first.day){
         # compute daily death
