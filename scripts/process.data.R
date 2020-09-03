@@ -30,10 +30,23 @@ for(i in 1:nrow(states)){
 data.overall = do.call('rbind',data.overall)
 
 #
-# include texas from 27/07 (day where the data start matching with JHU)
+# include Texas from 27/07 (day where the data start matching with JHU)
 data.overall_woTX = subset(data.overall, code != "TX") 
 data.overall_TX = subset(data.overall, code == "TX" & date > as.Date("2020-07-27")) 
 data.overall = dplyr::bind_rows(data.overall_woTX, data.overall_TX)
+
+#
+# include NYC from 30/06 (day where the data start matching with NYC overall)
+data.overall_woNYC = subset(data.overall, code != "NYC") 
+data.overall_NYC = subset(data.overall, code == "NYC" & date > as.Date("2020-06-30")) 
+data.overall = dplyr::bind_rows(data.overall_woNYC, data.overall_NYC)
+
+#
+# include Vermont from 15/06 (day where the data start matching with JHU)
+data.overall_woVT = subset(data.overall, code != "VT") 
+data.overall_VT = subset(data.overall, code == "VT" & date > as.Date("2020-06-15")) 
+data.overall = dplyr::bind_rows(data.overall_woVT, data.overall_VT)
+
 
 #
 # save
