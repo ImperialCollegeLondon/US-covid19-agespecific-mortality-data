@@ -8,10 +8,10 @@ library(tidyverse)
 death_data_ihme = read.csv(file.path("data", "official", "ihme_death_data.csv"))
 
 # jhu
-death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_200823.rds"))
+death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_200902.rds"))
 
 # NYC
-death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200823.csv"))
+death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200902.csv"))
 
 
 # processed data
