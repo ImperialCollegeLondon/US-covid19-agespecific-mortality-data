@@ -59,7 +59,7 @@ This table includes a complete list of all sources ever used in the data set. We
 | District of Columbia | 2020-04-13 | [link](https://coronavirus.dc.gov/page/coronavirus-data) | metadata updated daily; full time series |
 | Florida | 2020-03-27 | [link](https://www.floridadisaster.org/covid19/covid-19-data-reports/) | daily report; with historical archive |
 | Georgia | 2020-04-27 | [link](https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip) | metadata updated daily and replaced; no historical archive |
-| Idaho | 2020-05-13 | [link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard_V2/Story1) | dashboard updated daily and replaced; no historical archive| 
+| Idaho | 2020-05-13 | (1)[link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard_V2/Story1), (2)[link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard/Home) | dashboard updated daily and replaced; no historical archive ; (1) died on 2020-09-04| 
 | Illinois | 2020-05-14 | [link](https://www.dph.illinois.gov/covid19/covid19-statistics) | dashboard updated daily and replaced; no historical archive | 
 | Indiana | 2020-05-13 | [link](https://www.coronavirus.in.gov/) | dashboard updated daily and replaced; no historical archive | 
 | Iowa | 2020-05-13 | [link](https://coronavirus.iowa.gov/pages/outcome-analysis-deaths) | dashboard updated daily and replaced; no historical archive | 
