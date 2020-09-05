@@ -547,6 +547,7 @@ class AgeExtractor:
         browser.implicitly_wait(5)
         if not os.access("data/{}/maryland.json".format(day), os.F_OK):
             if browser.execute_script("return document.readyState") == "complete":
+                time.sleep(4)
                 browser.implicitly_wait(2)
                 age_data = {}
                 for i in range(9):
