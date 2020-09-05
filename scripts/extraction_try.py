@@ -539,7 +539,7 @@ class AgeExtractor:
 
     def get_maryland(self):
         url = 'https://coronavirus.maryland.gov/'
-        day = self.today.strftime('%Y-%m-%d')
+        day = parsedate(requests.get(url).headers['Date']).strftime('%Y-%m-%d')
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
