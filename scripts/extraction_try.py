@@ -354,6 +354,8 @@ class AgeExtractor:
     def get_missouri(self):
 
         url = 'https://mophep.maps.arcgis.com/apps/opsdashboard/index.html#/c1f2a0115b0b4e4e9cc9ded149d0ae09'
+        url = 'https://mophep.maps.arcgis.com/apps/opsdashboard/index.html#/2ee3d6c43e49401fa22a9435dd7ba064'
+
         options = Options()
         options.add_argument('headless')
         day = requests.get(url).headers['Date']
@@ -364,7 +366,7 @@ class AgeExtractor:
             browser.implicitly_wait(25)
             data = browser.find_elements_by_css_selector('g.amcharts-graph-column')
             time.sleep(2)
-            data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label') and 'Total' in e.get_attribute('aria-label')]
+            data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label') and 'Count' in e.get_attribute('aria-label')]
             time.sleep(2)
             age_data = {}
             for i in range(len(data)):
@@ -468,10 +470,11 @@ class AgeExtractor:
 
         browser.get(url)
         browser.implicitly_wait(5)
-        time.sleep(2)
-        day = browser.find_element_by_xpath('//*[@id="ember437"]/div/div/p').text
-        day = parsedate(day.split()[2]).strftime('%Y-%m-%d')
-
+        time.sleep(20)
+        #day = browser.find_element_by_xpath('//*[@id="ember437"]/div/div').text
+        #day = parsedate(day.split()[2]).strftime('%Y-%m-%d')
+        day = requests.get(url).headers['Date']
+        day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/vermont.json".format(day), os.F_OK):
             browser.implicitly_wait(3)
             browser.find_element_by_xpath('//*[@id="ember392"]').click()
