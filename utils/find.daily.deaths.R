@@ -2,7 +2,7 @@ find_daily_deaths = function(dates, h_data = NULL, state_code, state_name = NULL
 {
   
   first.day = min(dates)
-  
+
   data = NULL
   
   for(t in 1:length(dates)){
@@ -59,11 +59,31 @@ find_daily_deaths = function(dates, h_data = NULL, state_code, state_name = NULL
           
           # if the cumulative death at t0 is greater than the one at tlag
           if( daily.deaths < 0 ) { 
-            # decrease the daily death at t0 by the difference, or set it to 0 if the difference is negative
-            data[which(data$date == (Date-n.lost.days-1) & data$age == age_group),]$daily.deaths = 
-              max(0, data[which(data$date == (Date-n.lost.days-1)& data$age == age_group),]$daily.deaths + daily.deaths)
-            # set daily death at t to 0
-            daily.deaths = 0
+            # find dates for which we need to reduce the daily death
+            cum.deaths = cumsum(rev(data[which(data$date < Date-n.lost.days & data$age == age_group),]$daily.deaths))
+            first.date.to.reduce = rev(seq(dates[2], Date-n.lost.days-1, by = "day"))[which(cum.deaths >= abs(daily.deaths))[1]]
+            
+            # if we need to reduce the first cumulative death to obtain the required cum death at tlag
+            reduce_first_cumdeath = 0
+            if(length(which(cum.deaths >= abs(daily.deaths))) == 0){
+              reduce_first_cumdeath = 1
+              first.date.to.reduce = dates[2]
+            }
+            
+            # distribute the difference of cum death to reduce
+            for(tt in seq_along(seq(first.date.to.reduce, Date-n.lost.days-1, by = "day"))){
+              date.to.reduce = rev(seq(first.date.to.reduce, Date-n.lost.days-1, by = "day"))[tt]
+              daily.deaths.to.reduce = min(data[which(data$date == date.to.reduce & data$age == age_group),]$daily.deaths, abs(daily.deaths))
+              data[which(data$date == date.to.reduce & data$age == age_group),]$daily.deaths = data[which(data$date == date.to.reduce & data$age == age_group),]$daily.deaths - daily.deaths.to.reduce
+              daily.deaths = daily.deaths + daily.deaths.to.reduce
+            }
+              
+            if(reduce_first_cumdeath){
+              data[which(data$date == dates[1] & data$age == age_group),]$cum.deaths = max(0, data[which(data$date == dates[1] & data$age == age_group),]$cum.deaths + daily.deaths)
+              daily.deaths = 0
+            }
+
+            stopifnot(daily.deaths == 0)
           }
           
           data = rbind(data, data.table(age = age_group, 
@@ -71,16 +91,42 @@ find_daily_deaths = function(dates, h_data = NULL, state_code, state_name = NULL
                                         cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.lost.days)), 
                                         daily.deaths = rep(daily.deaths, n.lost.days), 
                                         code = state_code))
+          
+          # if rounding brings to 0 attribute all to the day before
+          if(daily.deaths == 0 & cum.death.t_lag == 1){
+            data[which(data$date == Date - 1& data$age == age_group),]$daily.deaths = cum.death.t_lag
+          }
         }
         
         stopifnot(is.numeric(daily.deaths) & !is.null(daily.deaths))
         
         # if the cumulative death at t-1 is greater than the one at t
         if(daily.deaths<0){
-          # decrease the daily death at t-1 by the difference, or set it to 0 if the difference is negative 
-          data[which(data$age == age_group & data$date == (Date-1)),]$daily.deaths = max(data[which(data$age == age_group & data$date == (Date-1)),]$daily.deaths + daily.deaths,0)
-          # set daily death at t to 0
-          daily.deaths = 0
+          # find date for which we need to reduce the daily death
+          cum.deaths = cumsum(rev(data[which(data$date < Date & data$age == age_group),]$daily.deaths))
+          first.date.to.reduce = rev(seq(dates[2], Date-1, by = "day"))[which(cum.deaths >= abs(daily.deaths))[1]]
+          
+          # if we need to reduce the first cumulative death to obtain the required cum death at tlag
+          reduce_first_cumdeath = 0
+          if(length(which(cum.deaths >= abs(daily.deaths))) == 0){
+            reduce_first_cumdeath = 1
+            first.date.to.reduce = dates[2]
+          }
+          
+          # distribute the difference of cum death to reduce
+          for(tt in seq_along(seq(first.date.to.reduce, Date-1, by = "day"))){
+            date.to.reduce = rev(seq(first.date.to.reduce, Date-1, by = "day"))[tt]
+            daily.deaths.to.reduce =  min(data[which(data$date == date.to.reduce & data$age == age_group),]$daily.deaths, abs(daily.deaths))
+            data[which(data$date == date.to.reduce & data$age == age_group),]$daily.deaths = data[which(data$date == date.to.reduce & data$age == age_group),]$daily.deaths - daily.deaths.to.reduce
+            daily.deaths = daily.deaths + daily.deaths.to.reduce
+          }
+          
+          if(reduce_first_cumdeath){
+            data[which(data$date == dates[[1]] & data$age == age_group),]$cum.deaths = max(0, data[which(data$date == dates[[1]] & data$age == age_group),]$cum.deaths + daily.deaths)
+            daily.deaths = 0
+          }
+
+          stopifnot(daily.deaths == 0)
         }
         tmp[which(tmp$age == age_group & tmp$date == Date),]$daily.deaths = daily.deaths
       }
@@ -88,6 +134,7 @@ find_daily_deaths = function(dates, h_data = NULL, state_code, state_name = NULL
     }
     data = rbind(data, tmp)
   }
+  
   
   # overwrite cumulative deaths
   data = data %>%

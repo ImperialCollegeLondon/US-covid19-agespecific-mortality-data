@@ -25,8 +25,12 @@ read.GA.file = function(csv_file, Date){
   
   tmp = read.csv(csv_file)
   tmp = subset(tmp, !is.na(age) & age != ".")
-  agedf = data.table(age = 0:109, age_cat = cut(0:109, breaks = seq(0, 110, 5), include.highest = FALSE, right = FALSE))
+  agedf = data.table(age = 0:109, age_break = cut(0:109, breaks = seq(0, 110, 5), include.highest = FALSE, right = FALSE))
+  agedf[, age_cat :=  ifelse(age_break %in% c("[90,95)", "[95,100)", "[100,105)", "[105,110)"), "90+",
+                             paste0(as.numeric(gsub("\\[(.+),.*", "\\1", age_break)), "-", as.numeric( sub("[^,]*,([^]]*)\\)", "\\1", age_break))-1))]
   
+  agedf[, age_cat := as.factor(age_cat)]
+
   if(Date >= as.Date("2020-05-12")){ # age groups change on this date
     tmp$age = as.character(tmp$age)
     tmp[which(tmp$age == "90+"),]$age = "90"
@@ -34,17 +38,16 @@ read.GA.file = function(csv_file, Date){
   }
   
   tmp = as.data.table(tmp) %>%
-    merge(agedf, by = "age", all.y = T) %>%
-    mutate(age = ifelse(age_cat %in% c("[90,95)", "[95,100)", "[100,105)", "[105,110)"), "90+",
-                        paste0(as.numeric(gsub("\\[(.+),.*", "\\1", age_cat)), "-", as.numeric( sub("[^,]*,([^]]*)\\)", "\\1", age_cat))-1))) %>%
-    group_by(age) %>%
+    merge(agedf, by = "age") %>%
+    group_by(age_cat) %>%
     summarise(cum.deaths = n()) %>%
-    mutate(date = Date,
+    complete(age_cat, fill = list(cum.deaths= 0)) %>%
+    mutate(age = age_cat,
+           date = Date,
            code = "GA",
            daily.deaths = NA_integer_) %>%
     select(age, cum.deaths, daily.deaths, code, date)
   tmp[is.na(tmp$cum.deaths),]$cum.deaths = 0
-  
   
   return(tmp)
 }
@@ -85,12 +88,25 @@ read.RI.file = function(csv_file, Date){
   tmp = read.csv(csv_file)
   colnames(tmp)[1] = "age"
   rows_age = grepl("\\d\\-\\d|\\d\\+",tmp[,1])
-  tmp = as.data.frame(suppressWarnings(tmp[rows_age,] %>%
+  tmp = as.data.table(suppressWarnings(tmp[rows_age,] %>%
                                          mutate(code = "RI", 
                                                 date = Date,
                                                 cum.deaths = ifelse(grepl("<", Deaths), 0, as.numeric(as.character(Deaths))), 
                                                 daily.deaths = NA_integer_) %>%
                                          select(age, code, date, daily.deaths, cum.deaths) ))
+  
+  # group 90-99 and 100 before 2020-09-03 because removed after
+  if(Date < as.Date("2020-09-03")){
+    tmp1 = tmp[age %in% c("90-99", "100+"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "90+")]
+    tmp = rbind(tmp[! age%in% c("90-99", "100+")], tmp1[1,])
+  }
+  # group 0-4 and 5-9, 10-14 and 15-18, 19-24 and 25-29
+  if(Date >= as.Date("2020-09-03")){
+    tmp1 = tmp[age %in% c("0-4", "5-9"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "0-9")]
+    tmp2 = tmp[age %in% c("10-14", "15-18"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "10-19")]
+    tmp3 = tmp[age %in% c("19-24", "25-29"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "20-29")]
+    tmp = rbind(rbind(rbind(tmp[! age%in% c("0-4", "5-9", "10-14", "15-18", "19-24", "25-29")], tmp1[1,]), tmp2[1,], tmp3[1,]))
+  }
   
   return(tmp)
 }
