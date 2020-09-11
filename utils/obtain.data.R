@@ -9,6 +9,7 @@ path_to_data = "data"
 source("utils/summary-functions.R")
 source("utils/read.json.data.R")
 source("utils/read.daily-historical.data.R")
+source("utils/sanity_check_processed_data.R")
 
 obtain.data = function(last.day, state_name, state_code, json){
   

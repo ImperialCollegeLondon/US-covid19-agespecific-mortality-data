@@ -1,9 +1,9 @@
 read.TX.file = function(xlsx_file, Date){
-  
+
   tmp = read_excel(xlsx_file, sheet = "Fatalities by Age Group", col_names = c("age", "cum.deaths", "perc"))
   # they changed the format of their table on the 07/27
-  if(Date < as.Date("2020-07-27")) tmp = tmp[-c(1:2, 15:19), 1:2]
-  if(Date >= as.Date("2020-07-27")) tmp = tmp[-c(1:3, 16:20), 1:2]
+  tmp = tmp[tmp$age %in% c("<1 year", "1-9 years", "10-19 years", "20-29 years", "30-39 years", "40-49 years", "50-59 years", "60-64 years",
+                       "65-69 years", "70-74 years", "75-79 years","80+ years"),c("age","cum.deaths")]
   
   tmp = tmp %>%
     mutate(age = ifelse(age == "<1 year", "0-9", 
@@ -14,9 +14,6 @@ read.TX.file = function(xlsx_file, Date){
            daily.deaths = NA_integer_) %>%
     group_by(age, code, date, daily.deaths) %>%
     summarise(cum.deaths = sum(cum.deaths))
-  
-  tmp = subset(tmp, age != "Probable cases are not included in the total case numbers")
-  tmp = subset(tmp, age != "Unknown")
   
   return(tmp)
 }
