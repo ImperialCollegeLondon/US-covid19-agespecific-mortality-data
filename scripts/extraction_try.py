@@ -191,14 +191,13 @@ class AgeExtractor:
         day = requests.get(url).headers['Date']
         day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/NorthDakota.json".format(day), os.F_OK):
-            chromed = "D:\chromedriver.exe"
             options = Options()
             options.add_argument('headless')
             browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
             browser.get(url)
             time.sleep(20)
             browser.implicitly_wait(40)
-            browser.implicitly_wait(5)
+            browser.implicitly_wait(150)
             age_data = {}
             for i in range(9):
                 data = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[22]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"][2]/*[name()="rect"]['+ str(i+1)+']')
@@ -250,19 +249,13 @@ class AgeExtractor:
                 # find the page
                 lines = doc.getPageText(0).splitlines()
                 day = parsedate(lines[1]).strftime('%Y-%m-%d')
-                for num, l in enumerate(lines):
-                    if 'COVID-19 Deaths by Gender' in l:
-                        data_num = num
-                        break
-                lines = lines[data_num + 1 : ]
+                data = lines
                 age_data = {}
-                data = lines[5:10]
-                data = sorted([int(''.join(e.split(','))) for e in data])
-                age_data['<20y'] = data[0]
-                age_data['20-44y'] = data[1]
-                age_data['45-54y'] = data[2]
-                age_data['55-64y'] = data[3]
-                age_data['65+'] = data[4]
+                age_data['<20y'] = data[17]
+                age_data['20-44y'] = data[14]
+                age_data['45-54y'] = data[15]
+                age_data['55-64y'] = data[16]
+                age_data['65+'] = data[13]
                 doc.close()
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
@@ -554,8 +547,8 @@ class AgeExtractor:
                 browser.implicitly_wait(2)
                 age_data = {}
                 for i in range(9):
-                    group = browser.find_element_by_xpath('//*[@id="ember91"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[1]').text
-                    data = browser.find_element_by_xpath('//*[@id="ember91"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[3]').text
+                    group = browser.find_element_by_xpath('//*[@id="ember113"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[1]').text
+                    data = browser.find_element_by_xpath('//*[@id="ember113"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[3]').text
                     if data == '':
                         data = '0'
                     else:
@@ -680,7 +673,7 @@ class AgeExtractor:
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
-        browser.implicitly_wait(5)
+        browser.implicitly_wait(25)
         time.sleep(2)
         browser.find_element_by_xpath(
             '/html/body/div[1]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[2]/span/span[2]').click()
@@ -690,6 +683,7 @@ class AgeExtractor:
         day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[2]/span[1]').text
         day = day.split()[3]
         day = parsedate(day).strftime('%Y-%m-%d')
+        time.sleep(10)
         if not os.access("data/{}/nevada.json".format(day), os.F_OK):
             time.sleep(1)
             total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[9]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
@@ -736,10 +730,10 @@ class AgeExtractor:
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
         browser.implicitly_wait(5)
-        browser.implicitly_wait(5)
         time.sleep(200)
         day = browser.find_element_by_xpath(
             '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group[2]/transform/div/div[2]/visual-container-modern[2]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+        time.sleep(10)
         day = parsedate(day).strftime('%Y-%m-%d')
 
         if not os.access("data/{}/michigan.json".format(day), os.F_OK):
@@ -759,6 +753,7 @@ class AgeExtractor:
             browser.implicitly_wait(25)
             time.sleep(20)
             data = browser.find_elements_by_css_selector('rect.column.setFocusRing')
+            time.sleep(3)
             age_data = [e.get_attribute('aria-label') for e in data if
                         e.get_attribute('aria-label') and 'Total Deaths' in e.get_attribute(
                             'aria-label') and 'Age Group' in e.get_attribute('aria-label')]
@@ -789,14 +784,15 @@ class AgeExtractor:
         browser.quit()
 
     def get_washington(self):
-        url = 'https://www.doh.wa.gov/Emergencies/Coronavirus#CovidDataTables'
+        url = 'https://www.doh.wa.gov/Emergencies/COVID19/DataDashboard'
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
-        browser.implicitly_wait(5)
-        time.sleep(3)
-        day = browser.find_element_by_xpath('//*[@id="dnn_ctr33855_HtmlModule_lblContent"]/p[4]/strong[2]').text
+        browser.implicitly_wait(20)
+        time.sleep(20)
+        day = browser.find_element_by_xpath('//*[@id="dnn_ctr34535_HtmlModule_lblContent"]/p[3]/strong').text
+        time.sleep(10)
         day = day.split()[-1]
         day = parsedate(day).strftime('%Y-%m-%d')
         if not os.access("data/{}/washington.json".format(day), os.F_OK):
