@@ -48,7 +48,7 @@ ensure_increasing_cumulative_deaths = function(dates, h_data)
   for(t in 1:length(dates)){
     
     Date = rev(dates)[t]
-    
+    print(Date)
     #
     # check if cumulative death is strictly dicreasing from last date to first date
     

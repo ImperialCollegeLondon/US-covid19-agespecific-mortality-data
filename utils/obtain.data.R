@@ -6,10 +6,10 @@ path_to_data = "data"
 
 `%notin%` = Negate(`%in%`)
 
-source("utils/summary-functions.R")
+source("utils/summary.functions.R")
 source("utils/read.json.data.R")
 source("utils/read.daily-historical.data.R")
-source("utils/sanity_check_processed_data.R")
+source("utils/sanity.check.processed.data.R")
 
 obtain.data = function(last.day, state_name, state_code, json){
   

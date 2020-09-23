@@ -24,3 +24,6 @@ make.comparison.plots(table.states.process$state_name, table.states.process$code
 # 2. time series of all states
 make.time.series.plots(table.states.process$code)
   
+#
+# 3. cumulative death among young
+make.death.among.young.plot()

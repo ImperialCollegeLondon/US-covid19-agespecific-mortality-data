@@ -8,10 +8,10 @@ library(tidyverse)
 death_data_ihme = read.csv(file.path("data", "official", "ihme_death_data.csv"))
 
 # jhu
-death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_200902.rds"))
+death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_200922.rds"))
 
 # NYC
-death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200902.csv"))
+death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200922.csv"))
 
 
 # processed data
@@ -153,4 +153,19 @@ make.time.series.plots = function(codes){
     guides(fill = guide_legend(title="Age")) +
     labs(title = "Time series from Dept of Health", y = "Daily or weekly deaths (overall population)") 
   ggsave(file.path("figures", last.day, "time.series_allstates_byage.pdf"), p, w = 5, h = 75,limitsize = FALSE)
+}
+
+make.death.among.young.plot = function(){
+  tmp = as.data.table( read.csv( path_to_data("US") ) )
+  
+  tmp1 = tmp[, list(max_date = max(date)), by = "code"]
+  tmp = merge(tmp, tmp1, by = "code")
+  tmp[, islastdate := date == max_date]
+  tmp = tmp[islastdate==T,]
+  tmp = tmp[age %in% c("0-4", "0-9", "0-14", "0-19", "0-24"),]
+  
+  ggplot(tmp, aes(x = code, y = cum.deaths, col = age)) +
+    geom_point(size = 4) +
+    theme_bw()
+  ggsave(file.path("figures", last.day, "death.among.young.pdf"), w = 15, h = 10)
 }
