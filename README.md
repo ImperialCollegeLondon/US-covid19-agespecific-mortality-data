@@ -26,7 +26,7 @@ This will get you csv files for every state with variables *age*, *date*, *daily
 
 3. To create figures, run
 ```
-Rscript scripts/plot.comparison.and.timeseries.R
+Rscript scripts/plot.time.series.R
 ```
 This will get you pdfs in `figures/$DATE/` of 
 * Comparison between extracted data from the Department of Health and JHU overall deaths as well as,
