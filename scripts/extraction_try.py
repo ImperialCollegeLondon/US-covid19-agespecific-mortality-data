@@ -176,14 +176,20 @@ class AgeExtractor:
 
         browser.get(url)
         browser.implicitly_wait(30)
-        time.sleep(40)
-        browser.implicitly_wait(20)
+        time.sleep(50)
+        browser.implicitly_wait(50)
         width = browser.execute_script("return document.documentElement.scrollWidth")
         height = browser.execute_script("return document.documentElement.scrollHeight")
         # print(width, height)
         browser.set_window_size(width, height)
-        time.sleep(1)
+        time.sleep(50)
+        browser.implicitly_wait(50)
+        time.sleep(10)
         browser.save_screenshot('pngs/NorthDakota/{}_2.png'.format(day))
+        browser.close()
+        browser.quit()
+
+
 
     def get_nd(self):
         url = "https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases"
@@ -685,7 +691,7 @@ class AgeExtractor:
         day = parsedate(day).strftime('%Y-%m-%d')
         time.sleep(10)
         if not os.access("data/{}/nevada.json".format(day), os.F_OK):
-            time.sleep(1)
+            time.sleep(5)
             total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[9]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
             time.sleep(2)
             browser.find_element_by_xpath(
@@ -829,7 +835,7 @@ class AgeExtractor:
         browser.quit()
 
     def get_WA_pngs(self):
-        url = 'https://www.doh.wa.gov/Emergencies/Coronavirus#CovidDataTables'
+        url = 'https://www.doh.wa.gov/Emergencies/COVID19/DataDashboard'
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
