@@ -45,6 +45,10 @@ check_format_json = function(tmp, json_data, state_name, age_group, Date)
     cum.deaths = as.numeric(gsub("(.+)\\%", "\\1", json_data[[age_group]][1])) * as.numeric(gsub(",", "", json_data[["total"]])) / 100
     json_data[[age_group]] = cum.deaths
   }
+  if(state_name == "wyoming"){
+    cum.deaths = as.numeric(gsub("(.+)\\%", "\\1", json_data[[age_group]][1])) * as.numeric(json_data[["total"]]) / 100
+    json_data[[age_group]] = cum.deaths
+  }
   
   # data changed from percentage to absolute value on this date
   if(state_name == "new_jersey" & Date < as.Date("2020-06-22")){ 
@@ -156,6 +160,16 @@ modify_ageband = function(data, state_name, state_code)
                           ifelse(age == "18-29", "20-29", age)))
   }
   
+  if(state_name == "wyoming"){
+    data = data %>%
+      mutate(age = ifelse(age == "0-18", "0-19", 
+                          ifelse(age == "19-64", "20-64", age)))
+  }
+  if(state_name == "hawaii"){
+    data = data %>%
+      mutate(age = ifelse(age == "0-17", "0-19", 
+                          ifelse(age == "18-29", "20-29", age)))
+  }
   if(state_name == "nyc"){
     data = data %>%
       mutate(age = ifelse(age == "0-17", "0-19", 
