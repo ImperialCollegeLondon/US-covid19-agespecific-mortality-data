@@ -4,9 +4,6 @@ library(scales)
 library(gridExtra)
 library(tidyverse)
 
-# ihme
-death_data_ihme = read.csv(file.path("data", "official", "ihme_death_data.csv"))
-
 # jhu
 death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_200922.rds"))
 
@@ -54,13 +51,7 @@ make.comparison.plot = function(State, Code){
   
   } else{
     
-    # else use the JHU/IHME data
-    death_data_ihme = data.table(subset(death_data_ihme, state_name == State)) %>%
-      select(code, daily_deaths, date) %>%
-      mutate(source = "IHME",
-             cum.deaths = cumsum(daily_deaths))
-    death_data_ihme$date = as.Date(death_data_ihme$date)
-    
+    # else use the JHU data
     death_data_jhu = data.table(subset(death_data_jhu, code == Code)) %>%
       select(code, daily_deaths, date) %>%
       mutate(source = "JHU",
@@ -73,7 +64,7 @@ make.comparison.plot = function(State, Code){
       mutate(source = "Dept of Health")
     death_data_scrapping$date = as.Date(death_data_scrapping$date)
     
-    death_data = dplyr::bind_rows(death_data_jhu, death_data_ihme, death_data_scrapping)
+    death_data = dplyr::bind_rows(death_data_jhu, death_data_scrapping)
     
     p = ggplot(data = death_data, aes(x = date, y = cum.deaths, col = source)) +
       geom_point() +
