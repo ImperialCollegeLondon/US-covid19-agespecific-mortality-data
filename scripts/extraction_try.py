@@ -168,6 +168,8 @@ class AgeExtractor:
 
     def get_nd_png(self):
         url = "https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases"
+        url = 'https://app.powerbigov.us/view?r=eyJrIjoiYjJhZjUwM2QtZDIwZi00MmU3LTljZjEtZjgyMzIzZDVmMmQxIiwidCI6IjJkZWEwNDY0LWRhNTEtNGE4OC1iYWUyLWIzZGI5NGJjMGM1NCJ9&pageName=ReportSectionf5bbf68127089e2bd8ea'
+
         day = requests.get(url).headers['Date']
         day = parsedate(day).strftime('%Y-%m-%d')
         options = Options()
@@ -202,31 +204,28 @@ class AgeExtractor:
             browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
             browser.get(url)
             time.sleep(20)
-            browser.implicitly_wait(40)
-            browser.implicitly_wait(150)
+            browser.implicitly_wait(60)
             age_data = {}
             for i in range(9):
-                data = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[22]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"][2]/*[name()="rect"]['+ str(i+1)+']')
+                data = browser.find_element_by_xpath(
+                    '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[22]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"][2]/*[name()="rect"][' + str(
+                        i + 1) + ']')
                 data = data.get_attribute('aria-label')
                 age_data[data.split('.')[0].split()[-1]] = data.split('.')[1].split()[-1]
-            browser.implicitly_wait(5)
             if age_data:
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
                     os.mkdir(path)
                 with open("data/{}/NorthDakota.json".format(day), "w") as f:
                     json.dump(age_data, f)
-
                 print('\n------ Processed North Dakota {} ------\n'.format(day))
-            browser.implicitly_wait(10)
+                print(age_data)
             width = browser.execute_script("return document.documentElement.scrollWidth")
             height = browser.execute_script("return document.documentElement.scrollHeight")
-            #print(width, height)
+            # print(width, height)
             browser.set_window_size(width, height)
-            time.sleep(10)
-            browser.implicitly_wait(4)
+            time.sleep(1)
             browser.save_screenshot('pngs/NorthDakota/{}.png'.format(day))
-            print(age_data)
 
         else:
             print('Report for North Dakota{} is already exist'.format(day))
@@ -679,27 +678,35 @@ class AgeExtractor:
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
-        browser.implicitly_wait(25)
+        browser.implicitly_wait(5)
         time.sleep(2)
+        # day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[3]/span[1]').text
         browser.find_element_by_xpath(
             '/html/body/div[1]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[2]/span/span[2]').click()
         time.sleep(2)
         browser.find_element_by_xpath('//*[@id="flyoutElement"]/div[1]/div/div/ul/li[1]/a').click()
-
-        day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[2]/span[1]').text
+        day = browser.find_element_by_xpath(
+            '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[2]/span[1]').text
         day = day.split()[3]
         day = parsedate(day).strftime('%Y-%m-%d')
         time.sleep(10)
         if not os.access("data/{}/nevada.json".format(day), os.F_OK):
-            time.sleep(5)
-            total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[9]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            time.sleep(1)
+            # total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[13]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            # total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[12]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            total = browser.find_element_by_xpath(
+                '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[9]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            # browser.find_element_by_xpath(
+            #    '//*[@id="pbiAppPlaceHolder"]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[3]/i').click()
             time.sleep(2)
             browser.find_element_by_xpath(
                 '/html/body/div[1]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[2]/span/span[2]').click()
             time.sleep(2)
             browser.find_element_by_xpath('//*[@id="flyoutElement"]/div[1]/div/div/ul/li[3]/a').click()
-            time.sleep(2)
-            time.sleep(2)
+
+            # browser.find_element_by_xpath(
+            #   '//*[@id="pbiAppPlaceHolder"]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[3]/i').click()
+
             browser.find_element_by_xpath(
                 '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div/div').click()
             time.sleep(2)
@@ -710,7 +717,8 @@ class AgeExtractor:
             data = []
             for i in range(8):
                 data.append(browser.find_element_by_xpath(
-                    '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[6]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="g"]/*[name()="path"][' + str(i+1) + ']').get_attribute('aria-label')
+                    '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[6]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="g"]/*[name()="path"][' + str(
+                        i + 1) + ']').get_attribute('aria-label')
                             )
             age_data = {}
             for i in data:
@@ -758,6 +766,7 @@ class AgeExtractor:
                 '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group/transform/div/div[2]/visual-container-modern[2]/transform/div/div[3]/div/visual-modern/div/button').click()
             browser.implicitly_wait(25)
             time.sleep(20)
+            browser.implicitly_wait(5)
             data = browser.find_elements_by_css_selector('rect.column.setFocusRing')
             time.sleep(3)
             age_data = [e.get_attribute('aria-label') for e in data if
@@ -940,6 +949,54 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
+    def get_alabama(self):
+        url = 'https://alpublichealth.maps.arcgis.com/apps/opsdashboard/index.html#/6d2771faa9da4a2786a509d82c8cf0f7'
+        options = Options()
+        options.add_argument('headless')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(5)
+        time.sleep(10)
+        day = requests.get(url).headers['Date']
+        day = parsedate(day).strftime('%Y-%m-%d')
+        browser.implicitly_wait(2)
+        if not os.access("data/{}/alabama.json".format(day), os.F_OK):
+            browser.implicitly_wait(5)
+            total = browser.find_element_by_xpath(
+                '//*[@id="ember452"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
+            browser.implicitly_wait(2)
+            browser.find_element_by_xpath('//*[@id="ember381"]').click()
+            time.sleep(3)
+            age_data = {}
+            for i in range(5):
+                group = browser.find_element_by_xpath(
+                    '//*[@id="ember185"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
+                        i + 1) + ']/*[name()="text"][1]').text
+                data = browser.find_element_by_xpath(
+                    '//*[@id="ember185"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
+                        i + 1) + ']/*[name()="text"][2]').text
+                age_data[group] = data
+            age_data['total'] = total
+
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/alabama.json".format(day), "w") as f:
+                json.dump(age_data, f)
+            print('\n------ Processed Alabama {} ------\n'.format(day))
+            path = "pngs/alabama"
+            if not os.path.exists(path):
+                os.mkdir(path)
+            time.sleep(1)
+            browser.save_screenshot('pngs/alabama/{}.png'.format(day))
+            print(age_data)
+        else:
+            print('Report for Alabama {} is already exist'.format(day))
+
+        browser.close()
+        browser.quit()
+
+
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
     try:
@@ -1067,6 +1124,12 @@ if __name__ == "__main__":
         ageExtractor.get_washington()
     except:
         print("\n!!! WASHINGTON FAILED !!!\n")
+
+    try:
+        print("\n### Running Alabama ###\n")
+        ageExtractor.get_alabama()
+    except:
+        print("\n!!! ALABAMA FAILED !!!\n")
 
     try:
         print("\n### Running Washington png ###\n")
