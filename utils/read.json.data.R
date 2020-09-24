@@ -147,7 +147,11 @@ modify_ageband = function(data, state_name, state_code)
       mutate(age = ifelse(age == "0-17", "0-19", 
                           ifelse(age == "18-49", "20-49", age)))
   }
-  
+  if(state_name == "alabama"){
+    data = data %>%
+      mutate(age = ifelse(age == "5-17", "5-19", 
+                          ifelse(age == "18-24", "20-24", age)))
+  }
   if(state_name == "NorthCarolina"){
     data = data %>%
       mutate(age = ifelse(age == "0-17", "0-19", 
