@@ -953,15 +953,15 @@ class AgeExtractor:
         url = 'https://alpublichealth.maps.arcgis.com/apps/opsdashboard/index.html#/6d2771faa9da4a2786a509d82c8cf0f7'
         options = Options()
         options.add_argument('headless')
-        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
-        browser.get(url)
-        browser.implicitly_wait(5)
-        time.sleep(10)
+
         day = requests.get(url).headers['Date']
         day = parsedate(day).strftime('%Y-%m-%d')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(15)
         browser.implicitly_wait(2)
         if not os.access("data/{}/alabama.json".format(day), os.F_OK):
-            browser.implicitly_wait(5)
+            browser.implicitly_wait(15)
             total = browser.find_element_by_xpath(
                 '//*[@id="ember452"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
             browser.implicitly_wait(2)
@@ -997,6 +997,125 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
+    def get_california(self):
+        url = 'https://public.tableau.com/views/COVID-19CasesDashboard_15931020425010/Cases.pdf?:embed=y&:showVizHome=no'
+        ## updated daily
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for California {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/california.json".format(day), os.F_OK):
+                path = "pdfs/california"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/california/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    ####  TODO extract
+            else:
+                print('Data for California {} is already exist'.format(day))
+
+    def get_sc(self):
+        url = 'https://public.tableau.com/views/MainDashboard_15964746061440/DeathsDash.pdf?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
+
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for SouthCarolina {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/SouthCarolina.json".format(day), os.F_OK):
+                path = "pdfs/SouthCarolina"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/SouthCarolina/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    ####  TODO extract
+            else:
+                print('Data for South Carolina {} is already exist'.format(day))
+
+    def get_nh(self):
+        url = 'https://nh.gov/t/DHHS/views/COVID-19Dashboard/Summary.pdf?:embed=y&:isGuestRedirectFromVizportal=y&:display_count=n&:showVizHome=n&:origin=viz_share_link'
+
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for NewHampshire {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/new_hampshire.json".format(day), os.F_OK):
+                path = "pdfs/NewHampshire"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/NewHampshire/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    ####  TODO extract
+            else:
+                print('Data for NewHampshirea {} is already exist'.format(day))
+
+
+    def get_kansas(self):
+        url = 'https://public.tableau.com/views/COVID-19TableauVersion2/DeathSummary.pdf?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
+
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for kansas {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/kansas.json".format(day), os.F_OK):
+                path = "pdfs/kansas"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/kansas/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    ####  TODO extract
+            else:
+                print('Data for kansas {} is already exist'.format(day))
+
+    def get_hawaii(self):
+        url = 'https://public.tableau.com/views/AgeGroupsApr4/TableDash.pdf?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=no&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&null&%3AloadOrderID=3'
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for hawaii {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/hawaii.json".format(day), os.F_OK):
+                path = "pdfs/hawaii"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/hawaii/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    ####  TODO extract
+            else:
+                print('Data for hawaii {} is already exist'.format(day))
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
@@ -1126,11 +1245,7 @@ if __name__ == "__main__":
     except:
         print("\n!!! WASHINGTON FAILED !!!\n")
 
-    try:
-        print("\n### Running Alabama ###\n")
-        ageExtractor.get_alabama()
-    except:
-        print("\n!!! ALABAMA FAILED !!!\n")
+
 
     try:
         print("\n### Running Washington png ###\n")
@@ -1143,3 +1258,41 @@ if __name__ == "__main__":
         ageExtractor.get_mississippi()
     except:
         print("\n!!! MISSISSIPPI FAILED !!!\n")
+
+
+    try:
+        print("\n### Running Alabama ###\n")
+        ageExtractor.get_alabama()
+    except:
+        print("\n!!! ALABAMA FAILED !!!\n")
+
+
+    try:
+        print("\n### Running california ###\n")
+        ageExtractor.get_california()
+    except:
+        print("\n!!! california FAILED !!!\n")
+
+    try:
+        print("\n### Running South Carolina ###\n")
+        ageExtractor.get_sc()
+    except:
+        print("\n!!! South Carolina FAILED !!!\n")
+
+    try:
+        print("\n### Running New Hampshire ###\n")
+        ageExtractor.get_nh()
+    except:
+        print("\n!!! New Hampshire FAILED !!!\n")
+
+    try:
+        print("\n### Running Kansas ###\n")
+        ageExtractor.get_kansas()
+    except:
+        print("\n!!! Kansas FAILED !!!\n")
+
+    try:
+        print("\n### Running Hawaii ###\n")
+        ageExtractor.get_hawaii()
+    except:
+        print("\n!!! Hawaii FAILED !!!\n")
