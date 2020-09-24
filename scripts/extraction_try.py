@@ -168,6 +168,8 @@ class AgeExtractor:
 
     def get_nd_png(self):
         url = "https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases"
+        url = 'https://app.powerbigov.us/view?r=eyJrIjoiYjJhZjUwM2QtZDIwZi00MmU3LTljZjEtZjgyMzIzZDVmMmQxIiwidCI6IjJkZWEwNDY0LWRhNTEtNGE4OC1iYWUyLWIzZGI5NGJjMGM1NCJ9&pageName=ReportSectionf5bbf68127089e2bd8ea'
+
         day = requests.get(url).headers['Date']
         day = parsedate(day).strftime('%Y-%m-%d')
         options = Options()
@@ -202,31 +204,28 @@ class AgeExtractor:
             browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
             browser.get(url)
             time.sleep(20)
-            browser.implicitly_wait(40)
-            browser.implicitly_wait(150)
+            browser.implicitly_wait(60)
             age_data = {}
             for i in range(9):
-                data = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[22]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"][2]/*[name()="rect"]['+ str(i+1)+']')
+                data = browser.find_element_by_xpath(
+                    '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[22]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="svg"]/*[name()="g"][1]/*[name()="g"][2]/*[name()="svg"]/*[name()="g"][2]/*[name()="rect"][' + str(
+                        i + 1) + ']')
                 data = data.get_attribute('aria-label')
                 age_data[data.split('.')[0].split()[-1]] = data.split('.')[1].split()[-1]
-            browser.implicitly_wait(5)
             if age_data:
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
                     os.mkdir(path)
                 with open("data/{}/NorthDakota.json".format(day), "w") as f:
                     json.dump(age_data, f)
-
                 print('\n------ Processed North Dakota {} ------\n'.format(day))
-            browser.implicitly_wait(10)
+                print(age_data)
             width = browser.execute_script("return document.documentElement.scrollWidth")
             height = browser.execute_script("return document.documentElement.scrollHeight")
-            #print(width, height)
+            # print(width, height)
             browser.set_window_size(width, height)
-            time.sleep(10)
-            browser.implicitly_wait(4)
+            time.sleep(1)
             browser.save_screenshot('pngs/NorthDakota/{}.png'.format(day))
-            print(age_data)
 
         else:
             print('Report for North Dakota{} is already exist'.format(day))
@@ -679,27 +678,35 @@ class AgeExtractor:
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
-        browser.implicitly_wait(25)
+        browser.implicitly_wait(5)
         time.sleep(2)
+        # day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[3]/span[1]').text
         browser.find_element_by_xpath(
             '/html/body/div[1]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[2]/span/span[2]').click()
         time.sleep(2)
         browser.find_element_by_xpath('//*[@id="flyoutElement"]/div[1]/div/div/ul/li[1]/a').click()
-
-        day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[2]/span[1]').text
+        day = browser.find_element_by_xpath(
+            '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[2]/span[1]').text
         day = day.split()[3]
         day = parsedate(day).strftime('%Y-%m-%d')
         time.sleep(10)
         if not os.access("data/{}/nevada.json".format(day), os.F_OK):
-            time.sleep(5)
-            total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[9]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            time.sleep(1)
+            # total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[13]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            # total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[12]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            total = browser.find_element_by_xpath(
+                '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[9]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
+            # browser.find_element_by_xpath(
+            #    '//*[@id="pbiAppPlaceHolder"]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[3]/i').click()
             time.sleep(2)
             browser.find_element_by_xpath(
                 '/html/body/div[1]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[2]/span/span[2]').click()
             time.sleep(2)
             browser.find_element_by_xpath('//*[@id="flyoutElement"]/div[1]/div/div/ul/li[3]/a').click()
-            time.sleep(2)
-            time.sleep(2)
+
+            # browser.find_element_by_xpath(
+            #   '//*[@id="pbiAppPlaceHolder"]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[3]/i').click()
+
             browser.find_element_by_xpath(
                 '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div/div').click()
             time.sleep(2)
@@ -710,7 +717,8 @@ class AgeExtractor:
             data = []
             for i in range(8):
                 data.append(browser.find_element_by_xpath(
-                    '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[6]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="g"]/*[name()="path"][' + str(i+1) + ']').get_attribute('aria-label')
+                    '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[6]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="g"]/*[name()="path"][' + str(
+                        i + 1) + ']').get_attribute('aria-label')
                             )
             age_data = {}
             for i in data:
@@ -758,6 +766,7 @@ class AgeExtractor:
                 '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-group/transform/div/div[2]/visual-container-modern[2]/transform/div/div[3]/div/visual-modern/div/button').click()
             browser.implicitly_wait(25)
             time.sleep(20)
+            browser.implicitly_wait(5)
             data = browser.find_elements_by_css_selector('rect.column.setFocusRing')
             time.sleep(3)
             age_data = [e.get_attribute('aria-label') for e in data if
@@ -940,6 +949,174 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
+    def get_alabama(self):
+        url = 'https://alpublichealth.maps.arcgis.com/apps/opsdashboard/index.html#/6d2771faa9da4a2786a509d82c8cf0f7'
+        options = Options()
+        options.add_argument('headless')
+
+        day = requests.get(url).headers['Date']
+        day = parsedate(day).strftime('%Y-%m-%d')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        browser.get(url)
+        browser.implicitly_wait(15)
+        browser.implicitly_wait(2)
+        if not os.access("data/{}/alabama.json".format(day), os.F_OK):
+            browser.implicitly_wait(15)
+            total = browser.find_element_by_xpath(
+                '//*[@id="ember452"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
+            browser.implicitly_wait(2)
+            browser.find_element_by_xpath('//*[@id="ember381"]').click()
+            time.sleep(3)
+            age_data = {}
+            age_data['5-17'] = '0%'
+            for i in range(5):
+                group = browser.find_element_by_xpath(
+                    '//*[@id="ember185"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
+                        i + 1) + ']/*[name()="text"][1]').text
+                data = browser.find_element_by_xpath(
+                    '//*[@id="ember185"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
+                        i + 1) + ']/*[name()="text"][2]').text
+                age_data[group] = data
+            age_data['total'] = total
+
+            path = "data/{}".format(day)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            with open("data/{}/alabama.json".format(day), "w") as f:
+                json.dump(age_data, f)
+            print('\n------ Processed Alabama {} ------\n'.format(day))
+            path = "pngs/alabama"
+            if not os.path.exists(path):
+                os.mkdir(path)
+            time.sleep(1)
+            browser.save_screenshot('pngs/alabama/{}.png'.format(day))
+            print(age_data)
+        else:
+            print('Report for Alabama {} is already exist'.format(day))
+
+        browser.close()
+        browser.quit()
+
+    def get_california(self):
+        url = 'https://public.tableau.com/views/COVID-19CasesDashboard_15931020425010/Cases.pdf?:embed=y&:showVizHome=no'
+        ## updated daily
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for California {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/california.json".format(day), os.F_OK):
+                path = "pdfs/california"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/california/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    ####  TODO extract
+            else:
+                print('Data for California {} is already exist'.format(day))
+
+    def get_sc(self):
+        url = 'https://public.tableau.com/views/MainDashboard_15964746061440/DeathsDash.pdf?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
+
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for SouthCarolina {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/SouthCarolina.json".format(day), os.F_OK):
+                path = "pdfs/SouthCarolina"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/SouthCarolina/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    ####  TODO extract
+            else:
+                print('Data for South Carolina {} is already exist'.format(day))
+
+    def get_nh(self):
+        url = 'https://nh.gov/t/DHHS/views/COVID-19Dashboard/Summary.pdf?:embed=y&:isGuestRedirectFromVizportal=y&:display_count=n&:showVizHome=n&:origin=viz_share_link'
+
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for NewHampshire {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/new_hampshire.json".format(day), os.F_OK):
+                path = "pdfs/NewHampshire"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/NewHampshire/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    ####  TODO extract
+            else:
+                print('Data for NewHampshirea {} is already exist'.format(day))
+
+
+    def get_kansas(self):
+        url = 'https://public.tableau.com/views/COVID-19TableauVersion2/DeathSummary.pdf?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
+
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for kansas {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/kansas.json".format(day), os.F_OK):
+                path = "pdfs/kansas"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/kansas/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    ####  TODO extract
+            else:
+                print('Data for kansas {} is already exist'.format(day))
+
+    def get_hawaii(self):
+        url = 'https://public.tableau.com/views/AgeGroupsApr4/TableDash.pdf?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=no&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&null&%3AloadOrderID=3'
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for hawaii {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/hawaii.json".format(day), os.F_OK):
+                path = "pdfs/hawaii"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/hawaii/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    ####  TODO extract
+            else:
+                print('Data for hawaii {} is already exist'.format(day))
+
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
     try:
@@ -1068,6 +1245,8 @@ if __name__ == "__main__":
     except:
         print("\n!!! WASHINGTON FAILED !!!\n")
 
+
+
     try:
         print("\n### Running Washington png ###\n")
         ageExtractor.get_WA_pngs()
@@ -1079,3 +1258,41 @@ if __name__ == "__main__":
         ageExtractor.get_mississippi()
     except:
         print("\n!!! MISSISSIPPI FAILED !!!\n")
+
+
+    try:
+        print("\n### Running Alabama ###\n")
+        ageExtractor.get_alabama()
+    except:
+        print("\n!!! ALABAMA FAILED !!!\n")
+
+
+    try:
+        print("\n### Running california ###\n")
+        ageExtractor.get_california()
+    except:
+        print("\n!!! california FAILED !!!\n")
+
+    try:
+        print("\n### Running South Carolina ###\n")
+        ageExtractor.get_sc()
+    except:
+        print("\n!!! South Carolina FAILED !!!\n")
+
+    try:
+        print("\n### Running New Hampshire ###\n")
+        ageExtractor.get_nh()
+    except:
+        print("\n!!! New Hampshire FAILED !!!\n")
+
+    try:
+        print("\n### Running Kansas ###\n")
+        ageExtractor.get_kansas()
+    except:
+        print("\n!!! Kansas FAILED !!!\n")
+
+    try:
+        print("\n### Running Hawaii ###\n")
+        ageExtractor.get_hawaii()
+    except:
+        print("\n!!! Hawaii FAILED !!!\n")

@@ -91,6 +91,7 @@ This table includes a complete list of all sources ever used in the data set. We
 | Virginia | 2020-04-21 | [link](https://data.virginia.gov/Government/VDH-COVID-19-PublicUseDataset-Cases_By-Age-Group/uktn-mwig) | metadata updated daily; full time series |
 | Washington| 2020-06-08 | [link](https://www.doh.wa.gov/Emergencies/NovelCoronavirusOutbreak2020COVID19/DataDashboard) | dashboard updated daily and replaced; no historical archive |
 | Wisconsin | 2020-03-15 | [link](https://hub.arcgis.com/datasets/wi-dhs::covid-19-historical-data-table) | metadata updated daily; full time series |
+| Wyoming| 2020-09-22| [link](https://health.wyo.gov/publichealth/infectious-disease-epidemiology-unit/disease/novel-coronavirus/covid-19-map-and-statistics/) | dashboard updated daily and replaced; no historical archive |
 
 
 ## About
