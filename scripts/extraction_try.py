@@ -968,6 +968,7 @@ class AgeExtractor:
             browser.find_element_by_xpath('//*[@id="ember381"]').click()
             time.sleep(3)
             age_data = {}
+            age_data['5-17'] = '0%'
             for i in range(5):
                 group = browser.find_element_by_xpath(
                     '//*[@id="ember185"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
