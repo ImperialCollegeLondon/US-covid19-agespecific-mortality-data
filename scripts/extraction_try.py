@@ -1147,6 +1147,36 @@ class AgeExtractor:
             else:
                 print('Data for hawaii {} is already exist'.format(day))
 
+
+
+    def get_colorado_pngs(self):
+        url = 'https://public.tableau.com/views/Colorado_COVID19_Data/CO_Case_Demographics?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
+        day = requests.get(url).headers['Date']
+        day = parsedate(day).strftime('%Y-%m-%d')
+        options = Options()
+        options.add_argument('headless')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+
+        browser.get(url)
+        browser.implicitly_wait(30)
+        browser.find_element_by_xpath('//*[@id="view12902688137728866763_889995828657056411"]').click()
+        time.sleep(50)
+        browser.implicitly_wait(50)
+        width = browser.execute_script("return document.documentElement.scrollWidth")
+        height = browser.execute_script("return document.documentElement.scrollHeight")
+        # print(width, height)
+        browser.set_window_size(width, height)
+        time.sleep(50)
+        browser.implicitly_wait(50)
+        time.sleep(10)
+        path = "pngs/colorado".format(day)
+        if not os.path.exists(path):
+            os.mkdir(path)
+
+        browser.save_screenshot('pngs/colorado/{}_2.png'.format(day))
+        browser.close()
+        browser.quit()
+
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
     try:
@@ -1332,3 +1362,9 @@ if __name__ == "__main__":
         ageExtractor.get_hawaii()
     except:
         print("\n!!! Hawaii FAILED !!!\n")
+
+    try:
+        print("\n### Running Colorado ###\n")
+        ageExtractor.get_colorado_pngs()
+    except:
+        print("\n!!! Colorado FAILED !!!\n")
