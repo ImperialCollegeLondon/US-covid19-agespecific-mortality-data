@@ -198,10 +198,12 @@ class AgeExtractor:
         url = 'https://app.powerbigov.us/view?r=eyJrIjoiYjJhZjUwM2QtZDIwZi00MmU3LTljZjEtZjgyMzIzZDVmMmQxIiwidCI6IjJkZWEwNDY0LWRhNTEtNGE4OC1iYWUyLWIzZGI5NGJjMGM1NCJ9&pageName=ReportSectionf5bbf68127089e2bd8ea'
         day = requests.get(url).headers['Date']
         day = parsedate(day).strftime('%Y-%m-%d')
+        time.sleep(2)
         if not os.access("data/{}/NorthDakota.json".format(day), os.F_OK):
             options = Options()
             options.add_argument('headless')
             browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+            time.sleep(10)
             browser.get(url)
             time.sleep(20)
             browser.implicitly_wait(60)
@@ -220,11 +222,13 @@ class AgeExtractor:
                     json.dump(age_data, f)
                 print('\n------ Processed North Dakota {} ------\n'.format(day))
                 print(age_data)
+
+            browser.implicitly_wait(5)
             width = browser.execute_script("return document.documentElement.scrollWidth")
             height = browser.execute_script("return document.documentElement.scrollHeight")
-            # print(width, height)
+            browser.implicitly_wait(5)
             browser.set_window_size(width, height)
-            time.sleep(1)
+            time.sleep(3)
             browser.save_screenshot('pngs/NorthDakota/{}.png'.format(day))
 
         else:
@@ -949,6 +953,32 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
+    def get_wyoming(self):
+        url = 'https://public.tableau.com/views/EpiCOVIDtest/COVID-19RelatedDeaths.pdf?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=no&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&publish=yes&%3AloadOrderID=0'
+
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for Wyoming {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/wyoming .json".format(day), os.F_OK):
+                path = "pdfs/Wyoming"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pdfs/Wyoming/{}.pdf".format(day), "wb") as f:
+                    f.write(r.content)
+
+                    # cannot see the data from the pdf
+                    ## do manually
+                    ### pdf as a proof
+            else:
+                print('Data for Wyoming {} is already exist'.format(day))
+
     def get_alabama(self):
         url = 'https://alpublichealth.maps.arcgis.com/apps/opsdashboard/index.html#/6d2771faa9da4a2786a509d82c8cf0f7'
         options = Options()
@@ -961,9 +991,9 @@ class AgeExtractor:
         browser.implicitly_wait(15)
         browser.implicitly_wait(2)
         if not os.access("data/{}/alabama.json".format(day), os.F_OK):
+            browser.maximize_window()
             browser.implicitly_wait(15)
-            total = browser.find_element_by_xpath(
-                '//*[@id="ember452"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
+            total = browser.find_element_by_xpath('//*[@id="ember456"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
             browser.implicitly_wait(2)
             browser.find_element_by_xpath('//*[@id="ember381"]').click()
             time.sleep(3)
@@ -1117,6 +1147,36 @@ class AgeExtractor:
             else:
                 print('Data for hawaii {} is already exist'.format(day))
 
+
+
+    def get_colorado_pngs(self):
+        url = 'https://public.tableau.com/views/Colorado_COVID19_Data/CO_Case_Demographics?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
+        day = requests.get(url).headers['Date']
+        day = parsedate(day).strftime('%Y-%m-%d')
+        options = Options()
+        options.add_argument('headless')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+
+        browser.get(url)
+        browser.implicitly_wait(30)
+        browser.find_element_by_xpath('//*[@id="view12902688137728866763_889995828657056411"]').click()
+        time.sleep(50)
+        browser.implicitly_wait(50)
+        width = browser.execute_script("return document.documentElement.scrollWidth")
+        height = browser.execute_script("return document.documentElement.scrollHeight")
+        # print(width, height)
+        browser.set_window_size(width, height)
+        time.sleep(50)
+        browser.implicitly_wait(50)
+        time.sleep(10)
+        path = "pngs/colorado".format(day)
+        if not os.path.exists(path):
+            os.mkdir(path)
+
+        browser.save_screenshot('pngs/colorado/{}_2.png'.format(day))
+        browser.close()
+        browser.quit()
+
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
     try:
@@ -1261,6 +1321,12 @@ if __name__ == "__main__":
 
 
     try:
+        print("\n### Running Wyoming ###\n")
+        ageExtractor.get_wyoming()
+    except:
+        print("\n!!! Wyoming FAILED !!!\n")
+
+    try:
         print("\n### Running Alabama ###\n")
         ageExtractor.get_alabama()
     except:
@@ -1296,3 +1362,9 @@ if __name__ == "__main__":
         ageExtractor.get_hawaii()
     except:
         print("\n!!! Hawaii FAILED !!!\n")
+
+    try:
+        print("\n### Running Colorado ###\n")
+        ageExtractor.get_colorado_pngs()
+    except:
+        print("\n!!! Colorado FAILED !!!\n")
