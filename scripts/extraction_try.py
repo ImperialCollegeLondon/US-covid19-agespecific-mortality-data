@@ -682,8 +682,8 @@ class AgeExtractor:
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
-        browser.implicitly_wait(5)
-        time.sleep(2)
+        browser.implicitly_wait(25)
+        time.sleep(20)
         # day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[3]/span[1]').text
         browser.find_element_by_xpath(
             '/html/body/div[1]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[2]/span/span[2]').click()
@@ -695,6 +695,7 @@ class AgeExtractor:
         day = parsedate(day).strftime('%Y-%m-%d')
         time.sleep(10)
         if not os.access("data/{}/nevada.json".format(day), os.F_OK):
+            browser.maximize_window()
             time.sleep(1)
             # total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[13]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
             # total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[12]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
@@ -716,7 +717,7 @@ class AgeExtractor:
             time.sleep(2)
             browser.find_element_by_xpath(
                 '/html/body/div[5]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/span').click()
-            browser.implicitly_wait(2)
+            browser.implicitly_wait(20)
             time.sleep(1)
             data = []
             for i in range(8):
@@ -772,7 +773,7 @@ class AgeExtractor:
             time.sleep(20)
             browser.implicitly_wait(5)
             data = browser.find_elements_by_css_selector('rect.column.setFocusRing')
-            time.sleep(3)
+            time.sleep(23)
             age_data = [e.get_attribute('aria-label') for e in data if
                         e.get_attribute('aria-label') and 'Total Deaths' in e.get_attribute(
                             'aria-label') and 'Age Group' in e.get_attribute('aria-label')]
@@ -991,23 +992,27 @@ class AgeExtractor:
         browser.implicitly_wait(15)
         browser.implicitly_wait(2)
         if not os.access("data/{}/alabama.json".format(day), os.F_OK):
-            browser.maximize_window()
             browser.implicitly_wait(15)
-            total = browser.find_element_by_xpath('//*[@id="ember456"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
+            buttons = browser.find_elements_by_css_selector('div')
+            time.sleep(2)
+            a = [e for e in buttons if e.text == '13'][0]
+            a.click()
+            browser.maximize_window()
+            # total = browser.find_element_by_xpath(
+            #    '//*[@id="ember608"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
             browser.implicitly_wait(2)
-            browser.find_element_by_xpath('//*[@id="ember381"]').click()
+            # browser.find_element_by_xpath('//*[@id="ember381"]').click()
             time.sleep(3)
             age_data = {}
-            age_data['5-17'] = '0%'
-            for i in range(5):
-                group = browser.find_element_by_xpath(
-                    '//*[@id="ember185"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
-                        i + 1) + ']/*[name()="text"][1]').text
-                data = browser.find_element_by_xpath(
-                    '//*[@id="ember185"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
-                        i + 1) + ']/*[name()="text"][2]').text
-                age_data[group] = data
-            age_data['total'] = total
+            age_data['5-17'] = '0'
+            data = browser.find_elements_by_css_selector('g.amcharts-pie-item')
+            data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label')]
+            for i in data[17:22]:
+                # group = browser.find_element_by_xpath('//*[@id="ember190"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"]['+str(i+1)+']/*[name()="text"][1]').text
+                # data = browser.find_element_by_xpath('//*[@id="ember190"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"]['+str(i+1)+']/*[name()="text"][2]').text
+                # age_data[group] = data
+                age_data[i.split(':')[0]] = i.split()[-1]
+            # age_data['total'] = total
 
             path = "data/{}".format(day)
             if not os.path.exists(path):
@@ -1177,6 +1182,56 @@ class AgeExtractor:
         browser.close()
         browser.quit()
 
+    def get_iowa_pngs(self):
+        url = 'https://public.domo.com/embed/pages/egBrj'
+        day = requests.get(url).headers['Date']
+        day = parsedate(day).strftime('%Y-%m-%d')
+        options = Options()
+        options.add_argument('headless')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+
+        browser.get(url)
+        browser.implicitly_wait(30)
+        browser.find_element_by_xpath('//*[@id="view12902688137728866763_889995828657056411"]').click()
+        time.sleep(50)
+        browser.implicitly_wait(50)
+        width = browser.execute_script("return document.documentElement.scrollWidth")
+        height = browser.execute_script("return document.documentElement.scrollHeight")
+        # print(width, height)
+        browser.set_window_size(width, height)
+        time.sleep(50)
+        browser.implicitly_wait(50)
+        time.sleep(10)
+        path = "pngs/iowa".format(day)
+        if not os.path.exists(path):
+            os.mkdir(path)
+
+        browser.save_screenshot('pngs/iowa/{}_2.png'.format(day))
+        browser.close()
+        browser.quit()
+
+    def get_idaho_twb(self):
+        url = 'https://public.tableau.com/workbooks/DPHIdahoCOVID-19Dashboard.twb'
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for idaho {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("pngs/idaho/{}".format(day), os.F_OK):
+                path = "pngs/idaho"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pngs/idaho/{}.twb".format(day), "wb") as f:
+                    f.write(r.content)
+            else:
+                print('Data for idaho {} is already exist'.format(day))
+
+
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
     try:
@@ -1185,11 +1240,11 @@ if __name__ == "__main__":
     except:
         print("\n!!! OKLAHOMA FAILED !!!\n")
 
-    try:
-        print("\n### Running Oklahoma2 ###\n")
-        ageExtractor.get_oklahoma2()
-    except:
-        print("\n!!! OKLAHOMA 2 FAILED !!!\n")
+#    try:
+#        print("\n### Running Oklahoma2 ###\n")
+#        ageExtractor.get_oklahoma2()
+#    except:
+#        print("\n!!! OKLAHOMA 2 FAILED !!!\n")
 
     try:
         print("\n### Running North Dakota pngs ###\n")
@@ -1364,7 +1419,19 @@ if __name__ == "__main__":
         print("\n!!! Hawaii FAILED !!!\n")
 
     try:
-        print("\n### Running Colorado ###\n")
+        print("\n### Running Colorado pngs ###\n")
         ageExtractor.get_colorado_pngs()
     except:
         print("\n!!! Colorado FAILED !!!\n")
+
+    try:
+        print("\n### Running Iowa pngs ###\n")
+        ageExtractor.get_iowa_pngs()
+    except:
+        print("\n!!! Iowa FAILED !!!\n")
+
+    try:
+        print("\n### Running Idaho tableau ###\n")
+        ageExtractor.get_idaho_twb()
+    except:
+        print("\n!!! Iowa FAILED !!!\n")
