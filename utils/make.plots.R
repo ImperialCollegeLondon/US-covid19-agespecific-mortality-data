@@ -5,10 +5,10 @@ library(gridExtra)
 library(tidyverse)
 
 # jhu
-death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_200922.rds"))
+death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_200926.rds"))
 
 # NYC
-death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200922.csv"))
+death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_200926.csv"))
 
 
 # processed data
@@ -128,7 +128,7 @@ make.time.series.plots = function(codes){
     theme(legend.position="right")+ 
     guides(fill = guide_legend(title="Age")) +
     labs(title = "Time series from Dept of Health", y = "Daily or weekly deaths (overall population)") 
-  ggsave(file.path("figures", last.day, "time.series_allstates.pdf"), p, w = 8, h = 75,limitsize = FALSE)
+  ggsave(file.path("figures", last.day, "time.series_allstates.pdf"), p, w = 8, h = 100,limitsize = FALSE)
   
   databyage$date = as.Date(databyage$date)
   p = ggplot(databyage, aes(x = date, y = daily.deaths, linetype = update, color = age)) +
@@ -143,7 +143,7 @@ make.time.series.plots = function(codes){
     theme(legend.position="bottom")+ 
     guides(fill = guide_legend(title="Age")) +
     labs(title = "Time series from Dept of Health", y = "Daily or weekly deaths (overall population)") 
-  ggsave(file.path("figures", last.day, "time.series_allstates_byage.pdf"), p, w = 5, h = 75,limitsize = FALSE)
+  ggsave(file.path("figures", last.day, "time.series_allstates_byage.pdf"), p, w = 5, h = 100,limitsize = FALSE)
 }
 
 make.death.among.young.plot = function(){
