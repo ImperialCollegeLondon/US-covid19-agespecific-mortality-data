@@ -2,10 +2,11 @@ import os
 import time
 import json
 import requests
+import xlrd
 from os.path import basename
 from datetime import date, timedelta
 from dateutil.parser import parse as parsedate
-import xlrd
+from shutil import copyfile
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager, ChromeType
@@ -100,7 +101,7 @@ class AgeExtractor:
             )
             # find the page
             lines = doc.getPageText(0).splitlines()
-            total = int(lines[2])
+            total = int(lines[2].replace(',',''))
             age_data = {}
             for i in data:
                age_data[i.split()[0]] = int(round(total * float(i.split()[1][0:-1])* 0.01, 0))
@@ -1206,8 +1207,10 @@ class AgeExtractor:
 
     def get_kansas(self):
         base_url = 'https://public.tableau.com/profile/kdhe.epidemiology#!/vizhome/COVID-19TableauVersion2/DeathSummary'
-        chromed = "D:\chromedriver.exe"
-        browser = webdriver.Chrome(executable_path=chromed)
+        options = Options()
+        options.add_argument('headless')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+
         browser.get(base_url)
         browser.implicitly_wait(5)
         time.sleep(10)
