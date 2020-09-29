@@ -13,20 +13,20 @@ selenium
 ```
 
 1. To extract and clean, run
-```
-make files
+```bash
+$ make files
 ```
 This will get you the latest data in `data/$DATE` and `pdfs/$DATE`.
 
 2. To process, run
-```
-Rscript scripts/process.data.R
+```bash
+$ Rscript scripts/process.data.R
 ```
 This will get you csv files for every state with variables *age*, *date*, *daily.deaths* and (state) *code* in `data/processed/$DATE/`.
 
-3. To create figures, run
-```
-Rscript scripts/plot.time.series.R
+3. To create the figures, run
+```bash
+$ Rscript scripts/plot.time.series.R
 ```
 This will get you pdfs in `figures/$DATE/` of 
 * Comparison between extracted data from the Department of Health and JHU overall deaths as well as,
