@@ -1,24 +1,23 @@
 import os
+import csv
 import time
 import json
-import requests
+import fitz
 import xlrd
+import requests
+import pandas as pd
+from glob import glob
+from shutil import copyfile
 from os.path import basename
+from bs4 import BeautifulSoup
+from selenium import webdriver
 from datetime import date, timedelta
 from dateutil.parser import parse as parsedate
-from shutil import copyfile
-from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager, ChromeType
 
-
-import fitz
-from glob import glob
-from bs4 import BeautifulSoup
-
 class AgeExtractor:
     """ Using the Chrome driver to render a web page with the help of Selenium.
-        Need to install a Chromdirver.exe and copy its path into the code.
         The web can automatically click the button and switch the page,
         but it need time to load, otherwise, we would get the wrong or empty results.
     """
@@ -1394,6 +1393,15 @@ class AgeExtractor:
             else:
                 print('Data for idaho {} is already exist'.format(day))
 
+
+
+    def get_ri(self):
+        #url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv'
+        data = pd.read_csv(os.path.basename('data/RhodeIsland.csv'))
+        day = data.iloc[-1,1]
+        if not os.access("data/{}/rhode_island.csv".format(day), os.F_OK):
+           copyfile("data/RhodeIsland.csv", f"data/{day}/rhode_island.csv")
+        os.remove("data/RhodeIsland.csv")
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
