@@ -4,6 +4,7 @@ import time
 import json
 import fitz
 import xlrd
+import shutil
 import requests
 import pandas as pd
 from glob import glob
@@ -1089,8 +1090,7 @@ class AgeExtractor:
                 print('\n------ Processed California {} ------\n'.format(day))
                 print(age_data)
                 doc.close()
-                copyfile(f"pdfs/california/{date}.pdf", f"pdfs/california/{day}.pdf")
-                os.remove(f"pdfs/california/{date}.pdf")
+                shutil.move(f"pdfs/california/{date}.pdf", f"pdfs/california/{day}.pdf")
 
             else:
                 print('Data for California {} is already exist'.format(date))
@@ -1149,8 +1149,7 @@ class AgeExtractor:
                 print('\n------ Processed South Carolina {} ------\n'.format(day))
                 print(age_data)
                 doc.close()
-                copyfile(f"pdfs/SouthCarolina/{date}.pdf", f"pdfs/SouthCarolina/{day}.pdf")
-                os.remove(f"pdfs/SouthCarolina/{date}.pdf")
+                shutil.move(f"pdfs/SouthCarolina/{date}.pdf", f"pdfs/SouthCarolina/{day}.pdf")
             else:
                 print('Data for South Carolina {} is already exist'.format(date))
 
@@ -1197,8 +1196,7 @@ class AgeExtractor:
                 print('\n------ Processed New Hampshire {} ------\n'.format(day))
                 print(age_data)
                 doc.close()
-                copyfile(f"pdfs/NewHampshire/{date}.pdf", f"pdfs/NewHampshire/{day}.pdf")
-                os.remove(f"pdfs/NewHampshire/{date}.pdf")
+                shutil.move(f"pdfs/NewHampshire/{date}.pdf", f"pdfs/NewHampshire/{day}.pdf")
 
             else:
                 print('Data for New Hampshire {} is already exist'.format(date))
@@ -1308,8 +1306,7 @@ class AgeExtractor:
                 print('\n------ Processed Hawaii {} ------\n'.format(day))
                 print(age_data)
                 doc.close()
-                copyfile(f"pdfs/hawaii/{date}.pdf", f"pdfs/hawaii/{day}.pdf")
-                os.remove(f"pdfs/hawaii/{date}.pdf")
+                shutil.move(f"pdfs/hawaii/{date}.pdf", f"pdfs/hawaii/{day}.pdf")
 
             else:
                 print('Data for hawaii {} is already exist'.format(date))
@@ -1397,11 +1394,27 @@ class AgeExtractor:
 
     def get_ri(self):
         #url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv'
-        data = pd.read_csv(os.path.basename('data/RhodeIsland.csv'))
-        day = data.iloc[-1,1]
-        if not os.access("data/{}/rhode_island.csv".format(day), os.F_OK):
-           copyfile("data/RhodeIsland.csv", f"data/{day}/rhode_island.csv")
-        os.remove("data/RhodeIsland.csv")
+        #url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/gviz/tq?tqx=out:csv&sheet=Demographics
+        url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/gviz/tq?tqx=out:csv&sheet=Demographics'
+
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err, "\n ==> Report for Rhode Island {} is not available".format(self.today.strftime('%Y-%m-%d')))
+        else:
+            req = requests.get(url)
+            url_content = req.content
+            file = open("data/RhodeIsland.csv", 'wb')
+            file.write(url_content)
+            file.close()
+            print('\n------ Download Rhode Island file------\n')
+
+            data = pd.read_csv('data/RhodeIsland.csv')
+            day = data.iloc[-1,1]
+            day = parsedate(day).strftime("%Y-%m-%d")
+            shutil.move("data/RhodeIsland.csv", f"data/{day}/rhode_island.csv")
+            print('\n------ Processed Rhode Island file {}------\n'.format(day))
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
@@ -1602,7 +1615,8 @@ if __name__ == "__main__":
         print("\n!!! Iowa FAILED !!!\n")
 
     try:
-        print("\n### Running Idaho tableau ###\n")
-        ageExtractor.get_idaho_twb()
+        print("\n### Running Rhode Island csv ###\n")
+        ageExtractor.get_ri()
     except:
-        print("\n!!! Iowa FAILED !!!\n")
+        print("\n!!! Rhode Island FAILED !!!\n")
+
