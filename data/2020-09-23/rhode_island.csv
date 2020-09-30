@@ -1,37 +1,41 @@
-"Sex","All People Tested
- (Positive and Negative) N=305,202","","Cases N=23,059","","Hospitalizations N=2,698","","Deaths N=1,094",""
-"Female","162327","55%","12644","55%","1278","47%","579","53%"
-"Male","130457","45%","10233","45%","1403","52%","515","47%"
-"Other","17","","103","","10","","0","0%"
-"Pending further information","12401","","79","","7","","0",""
-"Age Group","","","","","","","",""
-"0-4","5976","2%","374","2%","24","1%","0","0%"
-"5-9","4934","2%","372","2%","8","","0","0%"
-"10-14","5649","2%","436","2%","16","1%","",""
-"15-18","13297","4%","835","4%","19","1%","0","0%"
-"19-24","39056","13%","2417","10%","74","3%","",""
-"25-29","27511","9%","2042","9%","94","3%","",""
-"30-39","48154","16%","3701","16%","212","8%","7","1%"
-"40-49","39115","13%","3370","15%","305","11%","16","1%"
-"50-59","46178","15%","3370","15%","419","16%","50","5%"
-"60-69","37772","12%","2372","10%","532","20%","115","11%"
-"70-79","20880","7%","1546","7%","503","19%","260","24%"
-"80-89","11066","4%","1323","6%","344","13%","351","32%"
-"90+","5388","2%","893","4%","146","5%","290","27%"
-"Pending further information","226","","8","","","","0",""
-"Race and Ethnicity","","","","","","","",""
-"Hispanic or Latino†","24222","22%","8187","45%","763","36%","104","12%"
-"American Indian or Alaska Native*","680","1%","72","","5","","",""
-"Asian*","2659","2%","359","2%","30","1%","13","1%"
-"Black or African American*","8574","8%","2230","12%","269","13%","56","6%"
-"Native Hawaiian or Other Pacific Islander*","211","","0","0%","0","0%","0","0%"
-"White*","66291","59%","6830","38%","997","47%","724","81%"
-"Other race*","9250","8%","316","2%","39","2%","0","0%"
-"Multiple race*","112","","156","1%","5","","",""
-"Declined","2078","","194","","7","","0",""
-"Unknown or pending further information","191125","","4715","","583","","195",""
-"† Includes people who identify as any race.","","","","","","","",""
-"* Includes people who identify as non-Hispanic ethnicity or have unknown or declined ethnicity.","","","","","","","",""
-"Source: Rhode Island Department of Health","","","","","","","",""
-"Notes: Percentages for counts of less than five are not shown. Percentages do not include people with unknown demographics or those that are pending further information. People tested for COVID-19, COVID-19 cases, and COVID-19 associated deaths exclude out-of-state residents. COVID-19 hospitalizations include all patients hospitalized in Rhode Island, some of whom may not be Rhode Island residents.","","","","","","","",""
-"Last updated:","9/23/2020","","","","","","",""
+,"All People Tested
+ (Positive and Negative)",,Cases,,Hospitalizations,,Deaths,
+Sex,"N=305,202",,"N=23,059",,"N=2,698",,"N=1,094",
+Female,162327,55%,12644,55%,1278,47%,579,53%
+Male,130457,45%,10233,45%,1403,52%,515,47%
+Other,17,<1%,103,<1%,10,<1%,0,0%
+Pending further information,12401,--,79,--,7,--,0,--
+Age Group,,,,,,,,
+0-4,5976,2%,374,2%,24,1%,0,0%
+5-9,4934,2%,372,2%,8,<1%,0,0%
+10-14,5649,2%,436,2%,16,1%,<5,--
+15-18,13297,4%,835,4%,19,1%,0,0%
+19-24,39056,13%,2417,10%,74,3%,<5,--
+25-29,27511,9%,2042,9%,94,3%,<5,--
+30-39,48154,16%,3701,16%,212,8%,7,1%
+40-49,39115,13%,3370,15%,305,11%,16,1%
+50-59,46178,15%,3370,15%,419,16%,50,5%
+60-69,37772,12%,2372,10%,532,20%,115,11%
+70-79,20880,7%,1546,7%,503,19%,260,24%
+80-89,11066,4%,1323,6%,344,13%,351,32%
+90+,5388,2%,893,4%,146,5%,290,27%
+Pending further information,226,--,8,--,<5,--,0,--
+Race and Ethnicity,,,,,,,,
+Hispanic or Latino†,24222,22%,8187,45%,763,36%,104,12%
+American Indian or Alaska Native*,680,1%,72,<1%,5,<1%,<5,--
+Asian*,2659,2%,359,2%,30,1%,13,1%
+Black or African American*,8574,8%,2230,12%,269,13%,56,6%
+Native Hawaiian or Other Pacific Islander*,211,<1%,0,0%,0,0%,0,0%
+White*,66291,59%,6830,38%,997,47%,724,81%
+Other race*,9250,8%,316,2%,39,2%,0,0%
+Multiple race*,112,<1%,156,1%,5,<1%,<5,--
+Declined,2078,--,194,--,7,--,0,--
+Unknown or pending further information,191125,--,4715,--,583,--,195,--
+† Includes people who identify as any race.,,,,,,,,
+* Includes people who identify as non-Hispanic ethnicity or have unknown or declined ethnicity.,,,,,,,,
+Source: Rhode Island Department of Health,,,,,,,,
+"Notes: Percentages for counts of less than five are not shown. Percentages do not include people with unknown demographics or those that are pending further information. People tested for COVID-19, COVID-19 cases, and COVID-19 associated deaths exclude out-of-state residents. COVID-19 hospitalizations include all patients hospitalized in Rhode Island, some of whom may not be Rhode Island residents.",,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+Last updated:,9/23/2020,,,,,,,
