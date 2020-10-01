@@ -88,7 +88,7 @@ class AgeExtractor:
     def get_texas(self):
         ## now obtain PDF update date
         r = requests.head(
-            "https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx",
+            "https://dshs.texas.gov/coronavirus/TexasCOVID19Demographics.xlsx.asp",
             verify=False,
         )
         ## the reports are always published 1 day later (possibly!)
@@ -101,7 +101,7 @@ class AgeExtractor:
             print("==> Texas data already up to date up to {}".format(data_date))
         else:
             system(
-                "wget --no-check-certificate -O data/{}/texas.xlsx https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx".format(
+                "wget --no-check-certificate -O data/{}/texas.xlsx https://dshs.texas.gov/coronavirus/TexasCOVID19Demographics.xlsx.asp".format(
                     data_date
                 )
             )
