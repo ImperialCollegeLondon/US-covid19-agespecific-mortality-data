@@ -136,7 +136,7 @@ This table includes a complete list of all sources ever used in the data set. We
 
 - [Yu Chen](https://github.com/YuCHENJT) - Department of Mathematics, Imperial College London
 - [Michael Hutchinson](https://www.github.com/MJHutchinson) - Department of Statistics, Oxford
-- Vidoushee Jogara - Mary List McCammon Fellow, Department of Mathematics, Imperial College London
+- Vidoushee Jogarah - Mary Lister McCammon Fellow, Department of Mathematics, Imperial College London
 - [Mélodie Monod](https://github.com/melodiemonod) - Department of Mathematics, Imperial College London
 - [Oliver Ratmann](https://github.com/olli0601) - Department of Mathematics, Imperial College London
 - [Harrison Zhu](https://github.com/harrisonzhu508) - Department of Mathematics, Imperial College London
