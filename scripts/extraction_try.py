@@ -1,23 +1,24 @@
 import os
+import csv
 import time
 import json
+import fitz
+import xlrd
+import shutil
 import requests
+import pandas as pd
+from glob import glob
+from shutil import copyfile
 from os.path import basename
+from bs4 import BeautifulSoup
+from selenium import webdriver
 from datetime import date, timedelta
 from dateutil.parser import parse as parsedate
-import xlrd
-from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager, ChromeType
 
-
-import fitz
-from glob import glob
-from bs4 import BeautifulSoup
-
 class AgeExtractor:
     """ Using the Chrome driver to render a web page with the help of Selenium.
-        Need to install a Chromdirver.exe and copy its path into the code.
         The web can automatically click the button and switch the page,
         but it need time to load, otherwise, we would get the wrong or empty results.
     """
@@ -100,7 +101,7 @@ class AgeExtractor:
             )
             # find the page
             lines = doc.getPageText(0).splitlines()
-            total = int(lines[2])
+            total = int(lines[2].replace(',',''))
             age_data = {}
             for i in data:
                age_data[i.split()[0]] = int(round(total * float(i.split()[1][0:-1])* 0.01, 0))
@@ -682,8 +683,8 @@ class AgeExtractor:
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
-        browser.implicitly_wait(5)
-        time.sleep(2)
+        browser.implicitly_wait(35)
+        time.sleep(20)
         # day = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[5]/transform/div/div[3]/div/visual-modern/div/div/div/p[3]/span[1]').text
         browser.find_element_by_xpath(
             '/html/body/div[1]/ui-view/div/div[2]/logo-bar/div/div/div/logo-bar-navigation/span/a[2]/span/span[2]').click()
@@ -695,6 +696,7 @@ class AgeExtractor:
         day = parsedate(day).strftime('%Y-%m-%d')
         time.sleep(10)
         if not os.access("data/{}/nevada.json".format(day), os.F_OK):
+            browser.maximize_window()
             time.sleep(1)
             # total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[13]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
             # total = browser.find_element_by_xpath('//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[12]/transform/div/div[3]/div/visual-modern/div/*[name()="svg"]/*[name()="g"][1]/*[name()="text"]/*[name()="tspan"]').text
@@ -716,7 +718,7 @@ class AgeExtractor:
             time.sleep(2)
             browser.find_element_by_xpath(
                 '/html/body/div[5]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/span').click()
-            browser.implicitly_wait(2)
+            browser.implicitly_wait(20)
             time.sleep(1)
             data = []
             for i in range(8):
@@ -772,7 +774,7 @@ class AgeExtractor:
             time.sleep(20)
             browser.implicitly_wait(5)
             data = browser.find_elements_by_css_selector('rect.column.setFocusRing')
-            time.sleep(3)
+            time.sleep(23)
             age_data = [e.get_attribute('aria-label') for e in data if
                         e.get_attribute('aria-label') and 'Total Deaths' in e.get_attribute(
                             'aria-label') and 'Age Group' in e.get_attribute('aria-label')]
@@ -991,24 +993,31 @@ class AgeExtractor:
         browser.implicitly_wait(15)
         browser.implicitly_wait(2)
         if not os.access("data/{}/alabama.json".format(day), os.F_OK):
-            browser.maximize_window()
             browser.implicitly_wait(15)
-            total = browser.find_element_by_xpath('//*[@id="ember456"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
+            buttons = browser.find_elements_by_css_selector('div')
+            time.sleep(2)
+            browser.implicitly_wait(5)
+            a = [e for e in buttons if e.text == '13'][0]
+            a.click()
+            browser.implicitly_wait(4)
+            browser.maximize_window()
+            # total = browser.find_element_by_xpath(
+            #    '//*[@id="ember608"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
             browser.implicitly_wait(2)
-            browser.find_element_by_xpath('//*[@id="ember381"]').click()
+            # browser.find_element_by_xpath('//*[@id="ember381"]').click()
             time.sleep(3)
             age_data = {}
-            age_data['5-17'] = '0%'
-            for i in range(5):
-                group = browser.find_element_by_xpath(
-                    '//*[@id="ember185"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
-                        i + 1) + ']/*[name()="text"][1]').text
-                data = browser.find_element_by_xpath(
-                    '//*[@id="ember185"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
-                        i + 1) + ']/*[name()="text"][2]').text
-                age_data[group] = data
-            age_data['total'] = total
-
+            age_data['5-17'] = '0'
+            data = browser.find_elements_by_css_selector('g.amcharts-pie-item')
+            data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label')]
+            for i in data[17:22]:
+                # group = browser.find_element_by_xpath('//*[@id="ember190"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"]['+str(i+1)+']/*[name()="text"][1]').text
+                # data = browser.find_element_by_xpath('//*[@id="ember190"]/div/div[2]/*[name()="svg"]/*[name()="g"]/*[name()="g"]/*[name()="g"]['+str(i+1)+']/*[name()="text"][2]').text
+                # age_data[group] = data
+                age_data[i.split(':')[0]] = i.split()[-1]
+            # age_data['total'] = total
+            age_data['65+'] = age_data['>= 65']
+            del age_data['>= 65']
             path = "data/{}".format(day)
             if not os.path.exists(path):
                 os.mkdir(path)
@@ -1039,17 +1048,52 @@ class AgeExtractor:
                 "==> Report for California {} is not available".date.today().strftime('%Y-%m-%d')
             )
         else:
-            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
-            if not os.access("data/{}/california.json".format(day), os.F_OK):
+            date = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/california.json".format(date), os.F_OK):
                 path = "pdfs/california"
                 if not os.path.exists(path):
                     os.mkdir(path)
-                with open("pdfs/california/{}.pdf".format(day), "wb") as f:
+                with open("pdfs/california/{}.pdf".format(date), "wb") as f:
                     f.write(r.content)
+                doc = fitz.Document("pdfs/california/{}.pdf".format(date))
+                # find the page
+                lines = doc.getPageText(0).splitlines()
+                for num, l in enumerate(lines):
+                    if "Last\tUpdated" in l:
+                        day = l.split()[-1]
+                        break
+                day = parsedate(day).strftime('%Y-%m-%d')
+                for num,l in enumerate(lines):
+                    if "CALIFORNIA\tDEATHS" in l:
+                        total_num = num
+                        break
+                data = lines[total_num:]
 
-                    ####  TODO extract
+                for a, b in enumerate(data):
+                    if "Gender" in b:
+                        begin_num = a
+                    if "Age" in b:
+                        end_num = a
+                    if 'Race/Ethnicity' in b:
+                        total_before = a
+                total = data[total_before + 1]
+                data = data[begin_num+1 : end_num-1]
+                age_data = {}
+                for i in range(int(len(data)/2)):
+                    age_data[data[2*i]] = data[2*i+1]
+                age_data['total'] =total
+                path = "data/{}".format(day)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("data/{}/california.json".format(day), "w") as f:
+                    json.dump(age_data, f)
+                print('\n------ Processed California {} ------\n'.format(day))
+                print(age_data)
+                doc.close()
+                shutil.move(f"pdfs/california/{date}.pdf", f"pdfs/california/{day}.pdf")
+
             else:
-                print('Data for California {} is already exist'.format(day))
+                print('Data for California {} is already exist'.format(date))
 
     def get_sc(self):
         url = 'https://public.tableau.com/views/MainDashboard_15964746061440/DeathsDash.pdf?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
@@ -1063,17 +1107,51 @@ class AgeExtractor:
                 "==> Report for SouthCarolina {} is not available".date.today().strftime('%Y-%m-%d')
             )
         else:
-            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
-            if not os.access("data/{}/SouthCarolina.json".format(day), os.F_OK):
+            date = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/SouthCarolina.json".format(date), os.F_OK):
                 path = "pdfs/SouthCarolina"
                 if not os.path.exists(path):
                     os.mkdir(path)
-                with open("pdfs/SouthCarolina/{}.pdf".format(day), "wb") as f:
+                with open("pdfs/SouthCarolina/{}.pdf".format(date), "wb") as f:
                     f.write(r.content)
+                doc = fitz.Document("pdfs/SouthCarolina/{}.pdf".format(date))
 
-                    ####  TODO extract
+                lines = doc.getPageText(0).splitlines()
+                total = lines[0]
+                for num, l in enumerate(lines):
+                    if '/2020' in l:
+                        day = l.split()[-1]
+                day = parsedate(day).strftime("%Y-%m-%d")
+                for a, b in enumerate(lines):
+                    if "by\tAge\tGroup" in b:
+                        begin_num = a
+                        break
+                data = lines[begin_num + 1:]
+                age_data = {}
+                age_data[data[2]] = '0%'
+                age_data['<10'] = age_data['≤\t10']
+                del age_data['≤\t10']
+                age_data[data[3]] = '0%'
+                age_data[data[4]] = data[14]
+                age_data[data[5]] = data[15]
+                age_data[data[6]] = data[16]
+                age_data[data[7]] = data[17]
+                age_data[data[8]] = data[11]
+                age_data[data[9]] = data[12]
+                age_data[data[10]] = data[13]
+                age_data['total'] = total
+
+                path = "data/{}".format(day)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("data/{}/SouthCarolina.json".format(day), "w") as f:
+                    json.dump(age_data, f)
+                print('\n------ Processed South Carolina {} ------\n'.format(day))
+                print(age_data)
+                doc.close()
+                shutil.move(f"pdfs/SouthCarolina/{date}.pdf", f"pdfs/SouthCarolina/{day}.pdf")
             else:
-                print('Data for South Carolina {} is already exist'.format(day))
+                print('Data for South Carolina {} is already exist'.format(date))
 
     def get_nh(self):
         url = 'https://nh.gov/t/DHHS/views/COVID-19Dashboard/Summary.pdf?:embed=y&:isGuestRedirectFromVizportal=y&:display_count=n&:showVizHome=n&:origin=viz_share_link'
@@ -1087,40 +1165,99 @@ class AgeExtractor:
                 "==> Report for NewHampshire {} is not available".date.today().strftime('%Y-%m-%d')
             )
         else:
-            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
-            if not os.access("data/{}/new_hampshire.json".format(day), os.F_OK):
+            date = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/new_hampshire.json".format(date), os.F_OK):
                 path = "pdfs/NewHampshire"
                 if not os.path.exists(path):
                     os.mkdir(path)
-                with open("pdfs/NewHampshire/{}.pdf".format(day), "wb") as f:
+                with open("pdfs/NewHampshire/{}.pdf".format(date), "wb") as f:
                     f.write(r.content)
+                doc = fitz.Document("pdfs/NewHampshire/{}.pdf".format(date))
+                # find the page
+                lines = doc.getPageText(0).splitlines()
+                for num, l in enumerate(lines):
+                    if "Data as of:" in l:
+                        day = l.split()[-1]
+                        break
+                day = parsedate(day).strftime('%Y-%m-%d')
+                for num, l in enumerate(lines):
+                    if "Age Group" in l:
+                        begin_num = num
+                        break
+                data = lines[begin_num:]
+                age_data = {}
+                for i in range(9):
+                    age_data[data[i+1]] = data[29-i]
+                path = "data/{}".format(day)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("data/{}/new_hampshire.json".format(day), "w") as f:
+                    json.dump(age_data, f)
+                print('\n------ Processed New Hampshire {} ------\n'.format(day))
+                print(age_data)
+                doc.close()
+                shutil.move(f"pdfs/NewHampshire/{date}.pdf", f"pdfs/NewHampshire/{day}.pdf")
 
-                    ####  TODO extract
             else:
-                print('Data for NewHampshirea {} is already exist'.format(day))
+                print('Data for New Hampshire {} is already exist'.format(date))
 
 
     def get_kansas(self):
-        url = 'https://public.tableau.com/views/COVID-19TableauVersion2/DeathSummary.pdf?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
+        base_url = 'https://public.tableau.com/profile/kdhe.epidemiology#!/vizhome/COVID-19TableauVersion2/DeathSummary'
+        options = Options()
+        options.add_argument('headless')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
 
+        browser.get(base_url)
+        browser.implicitly_wait(5)
+        time.sleep(10)
+        day = browser.find_element_by_xpath('//*[@id="ng-app"]/body/div[1]/div[2]/section/div/div[2]/section[3]/div/figcaption/div[2]/div/div[2]/dl/div[3]/dd/span').text
+        day = parsedate(day).strftime("%Y-%m-%d")
+        browser.close()
+        browser.quit()
+
+        url = 'https://public.tableau.com/views/COVID-19TableauVersion2/DeathSummary.pdf?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
         try:
             r = requests.get(url)
             r.raise_for_status()
         except requests.exceptions.HTTPError as err:
             print(err)
             print(
-                "==> Report for kansas {} is not available".date.today().strftime('%Y-%m-%d')
+                "==> Report for kansas {} is not available".day
             )
         else:
-            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
             if not os.access("data/{}/kansas.json".format(day), os.F_OK):
                 path = "pdfs/kansas"
                 if not os.path.exists(path):
                     os.mkdir(path)
                 with open("pdfs/kansas/{}.pdf".format(day), "wb") as f:
                     f.write(r.content)
+                doc = fitz.Document("pdfs/kansas/{}.pdf".format(day))
+                # find the page
+                lines = doc.getPageText(0).splitlines()
 
-                    ####  TODO extract
+                for num, l in enumerate(lines):
+                    if "years" in l:
+                        begin_num = num
+                        break
+                for num, l in enumerate(lines):
+                    if "Deaths\tby\tAge\tGroup" in l:
+                        end_num = num
+                        break
+                data = lines[begin_num: end_num]
+                age_data = {}
+                for i in range(8):
+                    age_data[data[i].split('\t')[0]] = data[-(i+1)]
+
+                path = "data/{}".format(day)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("data/{}/kansas.json".format(day), "w") as f:
+                    json.dump(age_data, f)
+                print('\n------ Processed Kansas {} ------\n'.format(day))
+                print(age_data)
+                doc.close()
+
             else:
                 print('Data for kansas {} is already exist'.format(day))
 
@@ -1135,22 +1272,79 @@ class AgeExtractor:
                 "==> Report for hawaii {} is not available".date.today().strftime('%Y-%m-%d')
             )
         else:
-            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
-            if not os.access("data/{}/hawaii.json".format(day), os.F_OK):
+            date = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("data/{}/hawaii.json".format(date), os.F_OK):
                 path = "pdfs/hawaii"
                 if not os.path.exists(path):
                     os.mkdir(path)
-                with open("pdfs/hawaii/{}.pdf".format(day), "wb") as f:
+                with open("pdfs/hawaii/{}.pdf".format(date), "wb") as f:
                     f.write(r.content)
+                doc = fitz.Document("pdfs/hawaii/{}.pdf".format(date))
 
-                    ####  TODO extract
+                lines = doc.getPageText(0).splitlines()
+                total = lines[0]
+                for num, l in enumerate(lines):
+                    if 'Last\tupdated' in l:
+                        day = l
+                day = " ".join(day.split('\t')[2:5])
+                day = parsedate(day).strftime("%Y-%m-%d")
+                for a, b in enumerate(lines):
+                    if "Age\tGroup" in b:
+                        end_num = a
+                        break
+                data = lines[1:end_num]
+                age_data = {}
+                age_group = [data[0].split('\t')[0]] + [data[1].split('\t')[0]] + [e.split('.')[-1][1:] for e in data[1].split('\t') if '.' in e and '-' in e] + [data[2].split('\t')[0]]
+                for i in range(8):
+                    age_data[age_group[i]] = data[-(3 + 5*i)]
+
+                path = "data/{}".format(day)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("data/{}/hawaii.json".format(day), "w") as f:
+                    json.dump(age_data, f)
+                print('\n------ Processed Hawaii {} ------\n'.format(day))
+                print(age_data)
+                doc.close()
+                shutil.move(f"pdfs/hawaii/{date}.pdf", f"pdfs/hawaii/{day}.pdf")
+
             else:
-                print('Data for hawaii {} is already exist'.format(day))
+                print('Data for hawaii {} is already exist'.format(date))
 
 
 
     def get_colorado_pngs(self):
         url = 'https://public.tableau.com/views/Colorado_COVID19_Data/CO_Case_Demographics?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
+        day = requests.get(url).headers['Date']
+        day = parsedate(day).strftime('%Y-%m-%d')
+        options = Options()
+        options.add_argument('headless')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+
+        browser.get(url)
+        browser.implicitly_wait(30)
+        browser.find_element_by_xpath('//*[@id="view12902688137728866763_889995828657056411"]').click()
+        time.sleep(50)
+        browser.find_element_by_xpath(
+            '//*[@id="view12902688137728866763_9910513099237291342"]/div[1]/div[2]/canvas[2]').click()
+        browser.implicitly_wait(50)
+        width = browser.execute_script("return document.documentElement.scrollWidth")
+        height = browser.execute_script("return document.documentElement.scrollHeight")
+        # print(width, height)
+        browser.set_window_size(width, height)
+        time.sleep(50)
+        browser.implicitly_wait(50)
+        time.sleep(10)
+        path = "pngs/colorado".format(day)
+        if not os.path.exists(path):
+            os.mkdir(path)
+
+        browser.save_screenshot('pngs/colorado/{}.png'.format(day))
+        browser.close()
+        browser.quit()
+
+    def get_iowa_pngs(self):
+        url = 'https://public.domo.com/embed/pages/egBrj'
         day = requests.get(url).headers['Date']
         day = parsedate(day).strftime('%Y-%m-%d')
         options = Options()
@@ -1169,13 +1363,60 @@ class AgeExtractor:
         time.sleep(50)
         browser.implicitly_wait(50)
         time.sleep(10)
-        path = "pngs/colorado".format(day)
+        path = "pngs/iowa".format(day)
         if not os.path.exists(path):
             os.mkdir(path)
 
-        browser.save_screenshot('pngs/colorado/{}_2.png'.format(day))
+        browser.save_screenshot('pngs/iowa/{}_2.png'.format(day))
         browser.close()
         browser.quit()
+
+    def get_idaho_twb(self):
+        url = 'https://public.tableau.com/workbooks/DPHIdahoCOVID-19Dashboard.twb'
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err)
+            print(
+                "==> Report for idaho {} is not available".date.today().strftime('%Y-%m-%d')
+            )
+        else:
+            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            if not os.access("pngs/idaho/{}".format(day), os.F_OK):
+                path = "pngs/idaho"
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                with open("pngs/idaho/{}.twb".format(day), "wb") as f:
+                    f.write(r.content)
+            else:
+                print('Data for idaho {} is already exist'.format(day))
+
+
+
+    def get_ri(self):
+        #url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv'
+        #url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/gviz/tq?tqx=out:csv&sheet=Demographics
+        url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/gviz/tq?tqx=out:csv&sheet=Demographics'
+
+        try:
+            r = requests.get(url)
+            r.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(err, "\n ==> Report for Rhode Island {} is not available".format(self.today.strftime('%Y-%m-%d')))
+        else:
+            req = requests.get(url)
+            url_content = req.content
+            file = open("data/RhodeIsland.csv", 'wb')
+            file.write(url_content)
+            file.close()
+            print('\n------ Download Rhode Island file------\n')
+
+            data = pd.read_csv('data/RhodeIsland.csv')
+            day = data.iloc[-1,1]
+            day = parsedate(day).strftime("%Y-%m-%d")
+            shutil.move("data/RhodeIsland.csv", f"data/{day}/rhode_island.csv")
+            print('\n------ Processed Rhode Island file {}------\n'.format(day))
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
@@ -1185,11 +1426,11 @@ if __name__ == "__main__":
     except:
         print("\n!!! OKLAHOMA FAILED !!!\n")
 
-    try:
-        print("\n### Running Oklahoma2 ###\n")
-        ageExtractor.get_oklahoma2()
-    except:
-        print("\n!!! OKLAHOMA 2 FAILED !!!\n")
+#    try:
+#        print("\n### Running Oklahoma2 ###\n")
+#        ageExtractor.get_oklahoma2()
+#    except:
+#        print("\n!!! OKLAHOMA 2 FAILED !!!\n")
 
     try:
         print("\n### Running North Dakota pngs ###\n")
@@ -1364,7 +1605,20 @@ if __name__ == "__main__":
         print("\n!!! Hawaii FAILED !!!\n")
 
     try:
-        print("\n### Running Colorado ###\n")
+        print("\n### Running Colorado pngs ###\n")
         ageExtractor.get_colorado_pngs()
     except:
         print("\n!!! Colorado FAILED !!!\n")
+
+    try:
+        print("\n### Running Iowa pngs ###\n")
+        ageExtractor.get_iowa_pngs()
+    except:
+        print("\n!!! Iowa FAILED !!!\n")
+
+    try:
+        print("\n### Running Rhode Island csv ###\n")
+        ageExtractor.get_ri()
+    except:
+        print("\n!!! Rhode Island FAILED !!!\n")
+
