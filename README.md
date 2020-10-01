@@ -1,7 +1,30 @@
 ![Run daily update](https://github.com/ImperialCollegeLondon/US-covid19-data-scraping/workflows/Run%20daily%20update/badge.svg) ![Run daily update to s3](https://github.com/ImperialCollegeLondon/US-covid19-data-scraping/workflows/Run%20daily%20update%20to%20s3/badge.svg)
 
-# US-covid19-data-scraping
-Extract and data from various states in the US related to COVID-19. We need the Python dependencies
+# Age-specific COVID-19 mortality data in the United-States
+
+## Data 
+The user does not have to run the extraction herself/himself and may directly find age-specific mortality by date, age and state in 
+```
+data/processed/$most-recent-date/DeathsByAge_US.csv
+```
+where ```$most-recent-date``` is the most recent date. We aim to update the processed data at least once a week.
+
+## Usage 
+
+### Dependencies
+- R version >= 4.0.2
+- Python version >= 3.6.1
+- R libraries:
+```
+data.table
+ggplot2 
+scales
+gridExtra
+tidyverse
+rjson
+readxl
+```
+- Python libraries:
 ```
 fitz
 PyMuPDF
@@ -12,19 +35,26 @@ requests
 selenium
 ```
 
-1. To extract and clean, run
+
+### Structure Overview
+The code is divided into 3 parts: First, the extraction of data, daily, that are saved as .json, .csv or .xlsx depending on the source.  Second, the processing of the daily files to create a complete time series for every state. Third, the comparison of our extracted data to John Hopkins University (JHU).
+
+### 1. Daily extraction 
+To extract, run
 ```bash
 $ make files
 ```
-This will get you the latest data in `data/$DATE` and `pdfs/$DATE`.
+This will get you the latest data in `data/$DATE`.
 
-2. To process, run
+### 2. Processing 
+To process, run
 ```bash
 $ Rscript scripts/process.data.R
 ```
-This will get you csv files for every state with variables *age*, *date*, *daily.deaths* and (state) *code* in `data/processed/$DATE/`.
+This will get you a csv file for every state with variables *age*, *date*, *daily.deaths* and (state) *code* in `data/processed/$DATE/`.
 
-3. To create the figures, run
+### 3. Comparison to JHU 
+To create the figures, run
 ```bash
 $ Rscript scripts/plot.time.series.R
 ```
@@ -32,17 +62,16 @@ This will get you pdfs in `figures/$DATE/` of
 * Comparison between extracted data from the Department of Health and JHU overall deaths as well as,
 * Time series of overall deaths for every state.
 
-
-## PDF extractions
+## More details about the scraping 
+### PDF extractions
 We use Requests to make HTTP/HTTPS requests to a web API, BeautifulSoup to extract the download links in the HTML page and Fitz to extract the data within the PDF. The resulting data is stored in a `.json` file in `data/$DATE`.
 
-## non-PDF extractions (e.g. csvs, xlsx ...)
-
+### non-PDF extractions (e.g. csvs, xlsx ...)
 We use Requests to make HTTP/HTTPS requests to a web API, checking whether the data is up-to-date. We then download the raw files to `data/$date`, via `scripts/age_extraction.py`. This is summarised in `Makefile` in the `make files` directive.
 
-## Dynamic websites
-
+### Dynamic websites
 We use webdriver from selenium to find the elements and extract the corresponding data. 
+
 
 ## Data source
 This table includes a complete list of all sources ever used in the data set. We acknowledge and are grateful to U.S. state Departments of Health for making the primary data available at the following sources:
