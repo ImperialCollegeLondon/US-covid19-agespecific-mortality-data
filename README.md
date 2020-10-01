@@ -114,7 +114,7 @@ This table includes a complete list of all sources ever used in the data set. We
 | Rhode Island | 2020-06-01 | [link](https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/edit#gid=31350783) | metadata updated weekly and replaced; no historical archive |
 | South Carolina| 2020-05-14 | [link](https://www.scdhec.gov/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/sc-demographic-data-covid-19) | dashboard updated on Tuesday and Friday; no historical archive | 
 | Tennessee | 2020-04-09 | [link](https://www.tn.gov/health/cedep/ncov/data/downloadable-datasets.html) | metadata updated daily; full time series |
-| Texas | 2020-05-06 | [link](https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx) | metadata updated daily and replaced; no historical archive |
+| Texas | 2020-05-06 | (1)[link](https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx) until , (2)[link](https://dshs.texas.gov/coronavirus/TexasCOVID19Demographics.xlsx.asp) until 2020-09-24 | metadata updated daily and replaced; no historical archive |
 | Utah | 2020-06-17 | [link](https://coronavirus.utah.gov/case-counts/) | dashboard updated daily and replaced; no historical archive| 
 | Vermont | 2020-05-13 | (1)[link](https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/f2d395572efa401888eddceebddc318f) until 2020-09-03, (2)[link](https://experience.arcgis.com/experience/85f43bd849e743cb957993a545d17170) since | dashboard updated daily and replaced; no historical archive; (1) does not report mortality by age since 2020-09-03 | 
 | Virginia | 2020-04-21 | [link](https://data.virginia.gov/Government/VDH-COVID-19-PublicUseDataset-Cases_By-Age-Group/uktn-mwig) | metadata updated daily; full time series |
