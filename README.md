@@ -3,7 +3,7 @@
 # Age-specific COVID-19 mortality data in the United-States
 
 ## Data 
-The user does not have to run the extraction herself/himself and may directly find age-specific mortality by date, age and state in 
+The user may directly find age-specific mortality by date, age and state in 
 ```
 data/processed/$most-recent-date/DeathsByAge_US.csv
 ```
