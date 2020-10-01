@@ -1325,6 +1325,8 @@ class AgeExtractor:
         browser.implicitly_wait(30)
         browser.find_element_by_xpath('//*[@id="view12902688137728866763_889995828657056411"]').click()
         time.sleep(50)
+        browser.find_element_by_xpath(
+            '//*[@id="view12902688137728866763_9910513099237291342"]/div[1]/div[2]/canvas[2]').click()
         browser.implicitly_wait(50)
         width = browser.execute_script("return document.documentElement.scrollWidth")
         height = browser.execute_script("return document.documentElement.scrollHeight")
@@ -1337,7 +1339,7 @@ class AgeExtractor:
         if not os.path.exists(path):
             os.mkdir(path)
 
-        browser.save_screenshot('pngs/colorado/{}_2.png'.format(day))
+        browser.save_screenshot('pngs/colorado/{}.png'.format(day))
         browser.close()
         browser.quit()
 
