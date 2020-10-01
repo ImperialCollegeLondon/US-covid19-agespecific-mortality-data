@@ -1574,17 +1574,17 @@ if __name__ == "__main__":
         print("\n!!! ALABAMA FAILED !!!\n")
 
 
-    try:
-        print("\n### Running california ###\n")
-        ageExtractor.get_california()
-    except:
-        print("\n!!! california FAILED !!!\n")
+    #try:
+    #    print("\n### Running california ###\n")
+    #    ageExtractor.get_california()
+    #except:
+    #    print("\n!!! california FAILED !!!\n")
 
-    try:
-        print("\n### Running South Carolina ###\n")
-        ageExtractor.get_sc()
-    except:
-        print("\n!!! South Carolina FAILED !!!\n")
+    #try:
+    #    print("\n### Running South Carolina ###\n")
+    #    ageExtractor.get_sc()
+    #except:
+    #    print("\n!!! South Carolina FAILED !!!\n")
 
     try:
         print("\n### Running New Hampshire ###\n")
