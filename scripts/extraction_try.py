@@ -1580,11 +1580,11 @@ if __name__ == "__main__":
     #except:
     #    print("\n!!! california FAILED !!!\n")
 
-    try:
-        print("\n### Running South Carolina ###\n")
-        ageExtractor.get_sc()
-    except:
-        print("\n!!! South Carolina FAILED !!!\n")
+    #try:
+    #    print("\n### Running South Carolina ###\n")
+    #    ageExtractor.get_sc()
+    #except:
+    #    print("\n!!! South Carolina FAILED !!!\n")
 
     try:
         print("\n### Running New Hampshire ###\n")
