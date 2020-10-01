@@ -1574,11 +1574,11 @@ if __name__ == "__main__":
         print("\n!!! ALABAMA FAILED !!!\n")
 
 
-    try:
-        print("\n### Running california ###\n")
-        ageExtractor.get_california()
-    except:
-        print("\n!!! california FAILED !!!\n")
+    #try:
+    #    print("\n### Running california ###\n")
+    #    ageExtractor.get_california()
+    #except:
+    #    print("\n!!! california FAILED !!!\n")
 
     try:
         print("\n### Running South Carolina ###\n")
