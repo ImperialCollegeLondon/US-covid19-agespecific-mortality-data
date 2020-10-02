@@ -197,8 +197,9 @@ class AgeExtractor:
     def get_nd(self):
         url = "https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases"
         url = 'https://app.powerbigov.us/view?r=eyJrIjoiYjJhZjUwM2QtZDIwZi00MmU3LTljZjEtZjgyMzIzZDVmMmQxIiwidCI6IjJkZWEwNDY0LWRhNTEtNGE4OC1iYWUyLWIzZGI5NGJjMGM1NCJ9&pageName=ReportSectionf5bbf68127089e2bd8ea'
-        day = requests.get(url).headers['Date']
-        day = parsedate(day).strftime('%Y-%m-%d')
+        #day = requests.get(url).headers['Date']
+        #day = parsedate(day).strftime('%Y-%m-%d')
+        day = self.today
         time.sleep(2)
         if not os.access("data/{}/NorthDakota.json".format(day), os.F_OK):
             options = Options()
@@ -997,10 +998,14 @@ class AgeExtractor:
             buttons = browser.find_elements_by_css_selector('div')
             time.sleep(2)
             browser.implicitly_wait(5)
+            browser.maximize_window()
+            #for i in range(13):
+            #    browser.find_element_by_xpath('//*[@id="ember473"]').click()
+            #    browser.implicitly_wait(2)
+            #    time.sleep(1)
             a = [e for e in buttons if e.text == '13'][0]
             a.click()
             browser.implicitly_wait(4)
-            browser.maximize_window()
             # total = browser.find_element_by_xpath(
             #    '//*[@id="ember608"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
             browser.implicitly_wait(2)
@@ -1397,8 +1402,7 @@ class AgeExtractor:
     def get_ri(self):
         #url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv'
         #url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/gviz/tq?tqx=out:csv&sheet=Demographics
-        url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/gviz/tq?tqx=out:csv&sheet=Demographics'
-
+        url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv&gid=31350783'
         try:
             r = requests.get(url)
             r.raise_for_status()
@@ -1412,10 +1416,16 @@ class AgeExtractor:
             file.close()
             print('\n------ Download Rhode Island file------\n')
 
-            data = pd.read_csv('data/RhodeIsland.csv')
+            data = pd.read_csv('data/RhodeIsland.csv', header = 0)
             day = data.iloc[-1,1]
             day = parsedate(day).strftime("%Y-%m-%d")
+            #line_2 = ['Sex', data.columns[1].split()[-1],' ', data.columns[2].split()[-1], ' ', data.columns[3].split()[-1],
+            #          ' ', data.columns[4].split()[-1], ' ']
+            #data.columns = ['', 'All People Tested\n (Positive and Negative)', 'Unnamed: 2', 'Cases', 'Unnamed: 4',
+            #               'Hospitalizations', 'Unnamed: 6', 'Deaths', 'Unnamed: 8']
+
             shutil.move("data/RhodeIsland.csv", f"data/{day}/rhode_island.csv")
+
             print('\n------ Processed Rhode Island file {}------\n'.format(day))
 
 if __name__ == "__main__":
