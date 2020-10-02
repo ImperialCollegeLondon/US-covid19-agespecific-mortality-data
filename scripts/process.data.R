@@ -61,7 +61,7 @@ write.csv(data.overall_adj, file = file.path("data", "processed", last.day, "Dea
 latest_folder = file.path("data", "processed", "latest")
 latest_files = list.files(file.path("data", "processed", last.day), full.names=TRUE)
 dir.create(latest_folder, showWarnings=FALSE)
-file.copy(latest_files, latest_folder, recursive=TRUE, overwrite=TRUE)
+invisible(file.copy(latest_files, latest_folder, recursive=TRUE, overwrite=TRUE))
 
 
 cat("\n End Processing \n")
