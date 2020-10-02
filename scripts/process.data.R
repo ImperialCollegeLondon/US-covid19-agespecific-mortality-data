@@ -51,9 +51,18 @@ data.overall = dplyr::bind_rows(data.overall_woVT, data.overall_VT)
 data.overall_adj = modify_ageband(data.overall)
 
 #
-# save
+# save aggregated outputs in a single file
 write.csv(data.overall, file = file.path("data", "processed", last.day, "DeathsByAge_US.csv"), row.names=FALSE)
 write.csv(data.overall_adj, file = file.path("data", "processed", last.day, "DeathsByAge_US_adj.csv"), row.names=FALSE)
+
+
+#
+# maintain a copy of the latest date in a consistent location
+latest_folder = file.path("data", "processed", "latest")
+latest_files = list.files(file.path("data", "processed", last.day), full.names=TRUE)
+dir.create(latest_folder, showWarnings=FALSE)
+file.copy(latest_files, latest_folder, recursive=TRUE, overwrite=TRUE)
+
 
 cat("\n End Processing \n")
 cat("\n Processed data are in data/", as.character(last.day), "/processed \n")
