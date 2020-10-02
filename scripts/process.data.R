@@ -24,7 +24,6 @@ for(i in 1:nrow(states)){
   
   data = obtain.data(last.day, states$name[i], states$code[i], states$json[i])
   write.csv(data, file = file.path("data", "processed", last.day, paste0("DeathsByAge_",states$code[i],".csv")), row.names=FALSE)
-  
   data.overall[[i]] = data
 }
 data.overall = do.call('rbind',data.overall)
@@ -47,10 +46,14 @@ data.overall_woVT = subset(data.overall, code != "VT")
 data.overall_VT = subset(data.overall, code == "VT" & date > as.Date("2020-06-15")) 
 data.overall = dplyr::bind_rows(data.overall_woVT, data.overall_VT)
 
+#
+# Adjust age group (to match 5 y age band)
+data.overall_adj = modify_ageband(data.overall)
 
 #
 # save
 write.csv(data.overall, file = file.path("data", "processed", last.day, "DeathsByAge_US.csv"), row.names=FALSE)
+write.csv(data.overall_adj, file = file.path("data", "processed", last.day, "DeathsByAge_US_adj.csv"), row.names=FALSE)
 
 cat("\n End Processing \n")
 cat("\n Processed data are in data/", as.character(last.day), "/processed \n")

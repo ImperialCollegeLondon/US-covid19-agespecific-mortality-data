@@ -6,14 +6,12 @@ read.TX.file = function(xlsx_file, Date){
                        "65-69 years", "70-74 years", "75-79 years","80+ years"),c("age","cum.deaths")]
   
   tmp = tmp %>%
-    mutate(age = ifelse(age == "<1 year", "0-9", 
-                        ifelse(age == "1-9 years", "0-9", gsub("(.+) years", "\\1", age))), # group 0-1 and 2-9 for analysis
+    mutate(age = ifelse(age == "<1 year", "0-1", gsub("(.+) years", "\\1", age)), # group 0-1 and 2-9 for analysis
            code = "TX", 
            date = Date,
            cum.deaths = as.numeric(cum.deaths), 
            daily.deaths = NA_integer_) %>%
-    group_by(age, code, date, daily.deaths) %>%
-    summarise(cum.deaths = sum(cum.deaths))
+    select(age, code, date, daily.deaths, cum.deaths) 
   
   return(tmp)
 }
@@ -52,8 +50,8 @@ read.GA.file = function(csv_file, Date){
 read.ID.file = function(csv_file, Date){
   
   tmp = read.csv(csv_file) %>%
-    mutate(age = ifelse(Age.Group.Ten == "<18", "0-19", 
-                        ifelse(Age.Group.Ten == "18-29 years" | Age.Group.Ten == "18-29", "20-29", 
+    mutate(age = ifelse(Age.Group.Ten == "<18", "0-17", 
+                        ifelse(Age.Group.Ten == "18-29 years", "18-29", 
                                ifelse(Age.Group.Ten == "80", "80+", as.character(Age.Group.Ten)))), # group 0-1 and 2-9 for analysis
            code = "ID", 
            date = Date,
@@ -120,10 +118,9 @@ read.TN.file = function(last.day){
   xlsx_file = file.path(path_to_data, last.day, "tn.xlsx")
   
   tmp = suppressWarnings(subset(read_excel(xlsx_file), AGE_RANGE != "Pending") %>%
-                           mutate(age = ifelse(AGE_RANGE == "0-10 years", "0-9",
-                                               ifelse(AGE_RANGE == "81+ years", "80+", 
+                           mutate(age = ifelse(AGE_RANGE == "81+ years", "81+", 
                                                       paste0(as.numeric(gsub("(.+)\\-.*", "\\1", AGE_RANGE))-1, "-",
-                                                             as.numeric(gsub(".*\\-(.+) years", "\\1", AGE_RANGE))-1) )),
+                                                             as.numeric(gsub(".*\\-(.+) years", "\\1", AGE_RANGE))-1)),
                                   date = as.Date(DATE),
                                   code = "TN", 
                                   daily.deaths = NA_integer_) %>%

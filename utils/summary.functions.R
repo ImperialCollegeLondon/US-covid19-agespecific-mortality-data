@@ -151,3 +151,56 @@ generate_dailydeaths = function(n,s){
   
   return(nums)
 }
+
+modify_ageband = function(data, state_name, state_code)
+{
+  
+  data = as.data.table( data )
+  data[, age := as.character(age)]
+  
+  #
+  # modify age band
+  data[, age := ifelse(age == "0-10", "0-9", age)]
+  data[, age := ifelse(age == "0-17", "0-19", age)]
+  data[, age := ifelse(age == "0-18", "0-19", age)]
+  data[, age := ifelse(age == "5-17", "5-19", age)]
+  data[, age := ifelse(age == "10-18", "10-19", age)]
+  data[, age := ifelse(age == "11-20", "10-19", age)]
+  data[, age := ifelse(age == "18-24", "20-24", age)]
+  data[, age := ifelse(age == "18-29", "20-29", age)]
+  data[, age := ifelse(age == "18-34", "20-34", age)]
+  data[, age := ifelse(age == "18-35", "20-34", age)]
+  data[, age := ifelse(age == "18-40", "20-39", age)]
+  data[, age := ifelse(age == "18-44", "20-44", age)]
+  data[, age := ifelse(age == "18-49", "20-49", age)]
+  data[, age := ifelse(age == "19-29", "20-29", age)]
+  data[, age := ifelse(age == "19-64", "20-64", age)]
+  data[, age := ifelse(age == "21-30", "20-29", age)]
+  data[, age := ifelse(age == "31-40", "30-39", age)]
+  data[, age := ifelse(age == "36-49", "35-49", age)]
+  data[, age := ifelse(age == "41-50", "40-49", age)]
+  data[, age := ifelse(age == "41-60", "40-59", age)]
+  data[, age := ifelse(age == "51-60", "50-59", age)]
+  data[, age := ifelse(age == "61-70", "60-69", age)]
+  data[, age := ifelse(age == "61-80", "60-79", age)]
+  data[, age := ifelse(age == "65-76", "65-74", age)]
+  data[, age := ifelse(age == "71-80", "70-79", age)]
+  data[, age := ifelse(age == "81+", "80+", age)]
+  
+  
+  #
+  # Aggregate
+  tmp = subset(data, age == "0-1") 
+  for(loc in unique(tmp$code)){
+    tmp1 = subset(data, code == loc)
+    age_from1 = unique(tmp1$age)[which(grepl('1-',unique(tmp1$age)))]
+    tmp1_agg = tmp1[age %in% c("0-1", age_from1), list(cum.deaths = sum(cum.deaths),
+                                                       daily.deaths = sum(daily.deaths)),
+                    by = c("date", "code")]
+    tmp1_agg[, age := paste0("0-", gsub("1-(.+)","\\1",age_from1))]
+    tmp1 = rbind( subset(tmp1, age %notin% c("0-1", age_from1)), tmp1_agg)
+    data = rbind(subset(data, !code %in% loc), tmp1)
+  }
+  
+  return(data)
+}

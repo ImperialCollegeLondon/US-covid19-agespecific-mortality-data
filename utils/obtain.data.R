@@ -105,10 +105,10 @@ obtain.json.data = function(last.day, state_name, state_code){
   
   # find daily deaths
   data = find_daily_deaths(dates = dates, h_data = data, state_code = state_code)
-
-  # change age label to match 5 y age bands used in the analysis
-  data = modify_ageband(data, state_name,state_code)
   
+  # make human readable age band
+  data = fix_age_json(data)
+    
   return(data)
 } 
 
