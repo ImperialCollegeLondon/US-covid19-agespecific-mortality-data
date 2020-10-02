@@ -409,9 +409,9 @@ class AgeExtractor:
         if not os.access("data/{}/kentucky.json".format(day), os.F_OK):
             browser.implicitly_wait(5)
             age_data = {}
-            data = data[10:17]
+            data = data[10:18]
             age_data['10-19'] = '0'
-            age_data['20-29'] = '0'
+            #age_data['20-29'] = '0'
             for i in data:
                 age_data[i.split()[0]] = i.split()[1]
             path = "data/{}".format(day)
