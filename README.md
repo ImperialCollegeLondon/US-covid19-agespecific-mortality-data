@@ -23,6 +23,7 @@ gridExtra
 tidyverse
 rjson
 readxl
+reshape2
 ```
 - Python libraries:
 ```
