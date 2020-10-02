@@ -5,9 +5,9 @@
 ## Data 
 The user may directly find age-specific mortality by date, age and state in 
 ```
-data/processed/$most-recent-date/DeathsByAge_US.csv
+data/processed/latest/DeathsByAge_US.csv
 ```
-where ```$most-recent-date``` is the most recent date. We aim to update the processed data at least once a week.
+We aim to update the processed data at least once a week.
 
 ## Usage 
 
