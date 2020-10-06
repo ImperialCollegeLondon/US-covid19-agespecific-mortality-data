@@ -749,6 +749,7 @@ class AgeExtractor:
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+        time.sleep(10)
         browser.get(url)
         browser.implicitly_wait(5)
         time.sleep(200)
@@ -995,17 +996,18 @@ class AgeExtractor:
         browser.implicitly_wait(2)
         if not os.access("data/{}/alabama.json".format(day), os.F_OK):
             browser.implicitly_wait(15)
-            buttons = browser.find_elements_by_css_selector('div')
+            #buttons = browser.find_elements_by_css_selector('div')
             time.sleep(2)
             browser.implicitly_wait(5)
-            browser.maximize_window()
-            #for i in range(13):
-            #    browser.find_element_by_xpath('//*[@id="ember473"]').click()
-            #    browser.implicitly_wait(2)
-            #    time.sleep(1)
-            a = [e for e in buttons if e.text == '13'][0]
-            a.click()
+
+            for i in range(13):
+                browser.find_element_by_xpath('//*[@id="ember473"]').click()
+                browser.implicitly_wait(2)
+                time.sleep(1)
+            #a = [e for e in buttons if e.text == '13'][0]
+            #a.click()
             browser.implicitly_wait(4)
+            browser.maximize_window()
             # total = browser.find_element_by_xpath(
             #    '//*[@id="ember608"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
             browser.implicitly_wait(2)
