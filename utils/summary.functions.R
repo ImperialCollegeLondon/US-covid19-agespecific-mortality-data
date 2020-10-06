@@ -152,7 +152,7 @@ generate_dailydeaths = function(n,s){
   return(nums)
 }
 
-modify_ageband = function(data, state_name, state_code)
+adjust_to_5y_age_band = function(data)
 {
   
   data = as.data.table( data )
@@ -204,3 +204,51 @@ modify_ageband = function(data, state_name, state_code)
   
   return(data)
 }
+
+keep_days_match_JHU = function(data)
+{
+  #
+  # include Texas from 27/07 (day where the data start matching with JHU)
+  data_woTX = subset(data, code != "TX") 
+  data_TX = subset(data, code == "TX" & date > as.Date("2020-07-27")) 
+  data = dplyr::bind_rows(data_woTX, data_TX)
+  rm(data_woTX, data_TX)
+  
+  #
+  # include NYC from 30/06 (day where the data start matching with NYC overall)
+  data_woNYC = subset(data, code != "NYC") 
+  data_NYC = subset(data, code == "NYC" & date > as.Date("2020-06-30")) 
+  data = dplyr::bind_rows(data_woNYC, data_NYC)
+  rm(data_woNYC, data_NYC)
+  
+  #
+  # include Vermont from 15/06 (day where the data start matching with JHU)
+  data_woVT = subset(data, code != "VT") 
+  data_VT = subset(data, code == "VT" & date > as.Date("2020-06-15")) 
+  data = dplyr::bind_rows(data_woVT, data_VT)
+  rm(data_woVT, data_VT)
+  
+  #
+  # include Georgia from 8/05 (day where the data start matching with JHU)
+  data_woGA = subset(data, code != "GA") 
+  data_GA = subset(data, code == "GA" & date > as.Date("2020-05-08")) 
+  data = dplyr::bind_rows(data_woGA, data_GA)
+  rm(data_woGA, data_GA)
+  
+  #
+  # include Idaho from 15/06 (day where the data start matching with JHU)
+  data_woID = subset(data, code != "ID") 
+  data_ID = subset(data, code == "ID" & date > as.Date("2020-06-15")) 
+  data = dplyr::bind_rows(data_woID, data_ID)
+  rm(data_woID, data_ID)
+  
+  #
+  # include Kansas from 01/06 (day where the data start matching with JHU)
+  data_woKS = subset(data, code != "KS") 
+  data_KS = subset(data, code == "KS" & date > as.Date("2020-06-01")) 
+  data = dplyr::bind_rows(data_woKS, data_KS)
+  rm(data_woKS, data_KS)
+  
+  return(data)
+}
+
