@@ -119,8 +119,8 @@ read.TN.file = function(last.day){
   
   tmp = suppressWarnings(subset(read_excel(xlsx_file), AGE_RANGE != "Pending") %>%
                            mutate(age = ifelse(AGE_RANGE == "81+ years", "81+", 
-                                                      paste0(as.numeric(gsub("(.+)\\-.*", "\\1", AGE_RANGE))-1, "-",
-                                                             as.numeric(gsub(".*\\-(.+) years", "\\1", AGE_RANGE))-1)),
+                                                      paste0(as.numeric(gsub("(.+)\\-.*", "\\1", AGE_RANGE)), "-",
+                                                             as.numeric(gsub(".*\\-(.+) years", "\\1", AGE_RANGE)))),
                                   date = as.Date(DATE),
                                   code = "TN", 
                                   daily.deaths = NA_integer_) %>%
