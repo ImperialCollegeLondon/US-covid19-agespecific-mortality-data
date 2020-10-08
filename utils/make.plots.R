@@ -153,7 +153,9 @@ make.death.among.young.plot = function(){
   tmp = merge(tmp, tmp1, by = "code")
   tmp[, islastdate := date == max_date]
   tmp = tmp[islastdate==T,]
-  tmp = tmp[age %in% c("0-4", "0-9", "0-14", "0-19", "0-24"),]
+  tmp = tmp[!grepl("\\+", age)]
+  tmp[, age.from := gsub("(.+)-.*", "\\1", age)]
+  tmp = tmp[age.from == 0]
   
   ggplot(tmp, aes(x = code, y = cum.deaths, col = age)) +
     geom_point(size = 4) +
