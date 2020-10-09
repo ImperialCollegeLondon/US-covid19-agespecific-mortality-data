@@ -639,6 +639,7 @@ class AgeExtractor:
 
     def get_pennsylvania(self):
         url = 'https://pema.maps.arcgis.com/apps/opsdashboard/index.html#/90e80f49696e43458fdf4d40e796dd0e'
+        url = 'https://experience.arcgis.com/experience/ed2def13f9b045eda9f7d22dbc9b500e'
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
@@ -1289,7 +1290,6 @@ class AgeExtractor:
                 doc = fitz.Document("pdfs/hawaii/{}.pdf".format(date))
 
                 lines = doc.getPageText(0).splitlines()
-                total = lines[0]
                 for num, l in enumerate(lines):
                     if 'Last\tupdated' in l:
                         day = l
@@ -1301,9 +1301,10 @@ class AgeExtractor:
                         break
                 data = lines[1:end_num]
                 age_data = {}
-                age_group = [data[0].split('\t')[0]] + [data[1].split('\t')[0]] + [e.split('.')[-1][1:] for e in data[1].split('\t') if '.' in e and '-' in e] + [data[2].split('\t')[0]]
+                #age_group = [data[0].split('\t')[0]] + [data[1].split('\t')[0]] + [e.split('.')[-1][1:] for e in data[1].split('\t') if '.' in e and '-' in e] + [data[2].split('\t')[0]]
                 for i in range(8):
-                    age_data[age_group[i]] = data[-(3 + 5*i)]
+                    age_data[data[i].split('\t')[0]]  = data[-(3+5*i)]
+                    #age_data[age_group[i]] = data[-(3 + 5*i)]
 
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
@@ -1621,12 +1622,6 @@ if __name__ == "__main__":
         ageExtractor.get_colorado_pngs()
     except:
         print("\n!!! Colorado FAILED !!!\n")
-
-    try:
-        print("\n### Running Iowa pngs ###\n")
-        ageExtractor.get_iowa_pngs()
-    except:
-        print("\n!!! Iowa FAILED !!!\n")
 
     try:
         print("\n### Running Rhode Island csv ###\n")
