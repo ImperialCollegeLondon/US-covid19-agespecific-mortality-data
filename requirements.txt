@@ -1,4 +1,4 @@
-fiona 
+fiona==1.8.13.post1
 fitz
 PyMuPDF
 pandas
