@@ -240,18 +240,17 @@ read.WI.file = function(last.day){
   
   csv_file = file.path(path_to_data, last.day, "wisconsin.csv")
   
-  tmp = reshape2::melt (as.data.table(read.csv(csv_file)) , id.vars = "Date") %>%
-    subset(variable != "X") %>%
-    rename(cum.deaths = value) %>%
-    mutate(date = as.Date(Date),
+  tmp = reshape2::melt(as.data.table(read.csv(csv_file)) , id.vars = "DATE") %>%
+    subset(grepl("DTHS_[0-9]", variable)) %>%
+    mutate(cum.deaths = as.numeric(ifelse(is.na(value), 0, value)),
+           date = as.Date(DATE),
            code = "WI",
            daily.deaths = NA_integer_,
-           age = factor(as.character(variable))) %>%
+           age_from = gsub("DTHS_(.+)_.*", "\\1", variable),
+           age_to = gsub("DTHS_.*_(.+)", "\\1", variable), 
+           age = ifelse(age_from == "DTHS_90", "90+", paste0(age_from, "-", age_to))) %>%
     select(date, age, code, cum.deaths, daily.deaths)
-  levels(tmp$age) = list("0-9" = "X0.9.years", "10-19" = "X10.19.years", "20-29"="X20.29.years",
-                         "30-39" ="X30.39.years", "40-49"="X40.49.years", "50-59" = "X50.59.years", 
-                         "60-69" = "X60.69.years", "70-79" = "X70.79.years", "80-89" = "X80.89.years",
-                         "90+" = "X90..years")
+  
   return(tmp)
 }
 
