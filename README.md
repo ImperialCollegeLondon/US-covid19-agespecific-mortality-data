@@ -120,7 +120,7 @@ This table includes a complete list of all sources ever used in the data set. We
 | Vermont | 2020-05-13 | (1)[link](https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/f2d395572efa401888eddceebddc318f) until 2020-09-03, (2)[link](https://experience.arcgis.com/experience/85f43bd849e743cb957993a545d17170) since | dashboard updated daily and replaced; no historical archive; (1) does not report mortality by age since 2020-09-03 | 
 | Virginia | 2020-04-21 | [link](https://data.virginia.gov/Government/VDH-COVID-19-PublicUseDataset-Cases_By-Age-Group/uktn-mwig) | metadata updated daily; full time series |
 | Washington| 2020-06-08 | [link](https://www.doh.wa.gov/Emergencies/NovelCoronavirusOutbreak2020COVID19/DataDashboard) | dashboard updated daily and replaced; no historical archive |
-| Wisconsin | 2020-03-15 | [link](https://hub.arcgis.com/datasets/wi-dhs::covid-19-historical-data-table) | metadata updated daily; full time series |
+| Wisconsin | 2020-03-15 | (1)[link](https://hub.arcgis.com/datasets/wi-dhs::covid-19-historical-data-table) until 2020-10-19, (2)[link](https://data.dhsgis.wi.gov/datasets/covid-19-historical-data-by-state/data?orderBy=GEOID) since 2020-10-19 | metadata updated daily; full time series |
 | Wyoming| 2020-09-22| [link](https://health.wyo.gov/publichealth/infectious-disease-epidemiology-unit/disease/novel-coronavirus/covid-19-map-and-statistics/) | dashboard updated daily and replaced; no historical archive |
 
 
