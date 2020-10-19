@@ -14,7 +14,7 @@ source("utils/sanity.check.processed.data.R")
 obtain.data = function(last.day, state_name, state_code, json){
   
   ## 1. STATES WITH RULE BASED FUNCTION
-  states.historical.data = c("CO", "CT", "TN", "ME", "WI", "VA")
+  states.historical.data = c("CT", "TN", "ME", "WI", "VA")
   states.daily.data = c("TX", "GA", "ID", "AK", "RI")
   
   # file with entire time series

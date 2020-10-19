@@ -94,12 +94,15 @@ read.RI.file = function(csv_file, Date){
   if(Date < as.Date("2020-09-03")){
     tmp1 = tmp[age %in% c("90-99", "100+"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "90+")]
     tmp = rbind(tmp[! age%in% c("90-99", "100+")], tmp1[1,])
+    tmp[age == "10-19", age := "10-18"]
+    tmp[age == "20-29", age := "19-29"]
   }
+  
   # group 0-4 and 5-9, 10-14 and 15-18, 19-24 and 25-29
   if(Date >= as.Date("2020-09-03")){
     tmp1 = tmp[age %in% c("0-4", "5-9"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "0-9")]
-    tmp2 = tmp[age %in% c("10-14", "15-18"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "10-19")]
-    tmp3 = tmp[age %in% c("19-24", "25-29"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "20-29")]
+    tmp2 = tmp[age %in% c("10-14", "15-18"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "10-18")]
+    tmp3 = tmp[age %in% c("19-24", "25-29"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "19-29")]
     tmp = rbind(rbind(rbind(tmp[! age%in% c("0-4", "5-9", "10-14", "15-18", "19-24", "25-29")], tmp1[1,]), tmp2[1,], tmp3[1,]))
   }
   
