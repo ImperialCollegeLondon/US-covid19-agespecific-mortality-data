@@ -43,6 +43,8 @@ jobs:
         
     - name: Install Chromium
       run: |
+        sudo apt-get clean 
+        sudo apt-get update
         sudo apt-get install chromium-browser
 
     - name: Install Tree
