@@ -18,11 +18,11 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install Python 
+    - name: Upgrade pip
       run: |
         python -m pip install --upgrade pip
         
-    - name: Install libgdal-dev
+    - name: Install libgdal-dev and gdal
       run: |
         sudo apt-get install libgdal-dev
         export CPLUS_INCLUDE_PATH=/usr/include/gdal
