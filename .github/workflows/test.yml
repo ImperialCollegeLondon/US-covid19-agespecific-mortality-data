@@ -28,10 +28,10 @@ jobs:
         export CPLUS_INCLUDE_PATH=/usr/include/gdal
         export C_INCLUDE_PATH=/usr/include/gdal
         
-    - name: Install fiona
+    - name: Install fiona and wheel
       run: |
-        gdal-config --version
         pip install Fiona
+        pip install wheel
 
     - name: Install python dependencies
       run: |
