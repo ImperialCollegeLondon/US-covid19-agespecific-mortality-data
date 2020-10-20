@@ -15,12 +15,23 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install Python dependencies
+    - name: Upgrade pip
       run: |
         python -m pip install --upgrade pip
+        
+    - name: Install libgdal-dev and gdal
+      run: |
         sudo apt-get install libgdal-dev
         export CPLUS_INCLUDE_PATH=/usr/include/gdal
         export C_INCLUDE_PATH=/usr/include/gdal
+        
+    - name: Install fiona and wheel
+      run: |
+        pip install Fiona
+        pip install wheel
+
+    - name: Install python dependencies
+      run: |
         pip install -r requirements.txt
         
     - name: Install R 
@@ -29,6 +40,7 @@ jobs:
         
     - name: Install Chromium
       run: |
+        sudo apt-get clean 
         sudo apt-get update
         sudo apt-get install chromium-browser
 
