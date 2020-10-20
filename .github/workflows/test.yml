@@ -27,9 +27,11 @@ jobs:
         sudo apt-get install libgdal-dev
         export CPLUS_INCLUDE_PATH=/usr/include/gdal
         export C_INCLUDE_PATH=/usr/include/gdal
+        pip install GDAL
         
     - name: Install fiona
       run: |
+        gdal-config --version
         GDAL_CONFIG=/path/to/gdal-config pip install fiona
         
     - name: Install python dependencies
