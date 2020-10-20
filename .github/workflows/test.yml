@@ -25,7 +25,7 @@ jobs:
         export CPLUS_INCLUDE_PATH=/usr/include/gdal
         export C_INCLUDE_PATH=/usr/include/gdal
         GDAL_CONFIG=/path/to/gdal-config pip install fiona
-        pip install -r requirements.txt
+        # pip install -r requirements.txt
         
     - name: Install R 
       run: |
