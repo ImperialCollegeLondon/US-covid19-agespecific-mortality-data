@@ -437,6 +437,9 @@ class AgeExtractor:
             options.add_argument('headless')
             browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
             browser.get(url)
+            browser.find_element_by_xpath('//*[@id="accept"]').click()
+            browser.find_element_by_xpath('/html/body/main/div/div/div[2]/section/form/button').click()
+
             if browser.execute_script("return document.readyState") == "complete":
                 age_data = {}
                 for i in range(6):
@@ -1003,19 +1006,22 @@ class AgeExtractor:
         browser.implicitly_wait(15)
         browser.implicitly_wait(2)
         if not os.access("data/{}/alabama.json".format(day), os.F_OK):
-            browser.implicitly_wait(15)
-            #buttons = browser.find_elements_by_css_selector('div')
-            time.sleep(2)
-            browser.implicitly_wait(5)
-
-            for i in range(13):
-                browser.find_element_by_xpath('//*[@id="ember473"]').click()
-                browser.implicitly_wait(2)
-                time.sleep(1)
-            #a = [e for e in buttons if e.text == '13'][0]
-            #a.click()
-            browser.implicitly_wait(4)
             browser.maximize_window()
+            browser.implicitly_wait(15)
+            buttons = browser.find_elements_by_css_selector('div')
+            time.sleep(20)
+            browser.implicitly_wait(15)
+
+            #for i in range(13):
+            #    browser.find_element_by_xpath('//*[@id="ember473"]').click()
+            #    browser.implicitly_wait(2)
+            #    time.sleep(1)
+            a = [e for e in buttons if e.text == '13'][0]
+            browser.implicitly_wait(40)
+            time.sleep(20)
+            a.click()
+            browser.implicitly_wait(40)
+            #browser.maximize_window()
             # total = browser.find_element_by_xpath(
             #    '//*[@id="ember608"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
             browser.implicitly_wait(2)
