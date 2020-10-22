@@ -6,12 +6,26 @@ read_json = function(Date, state_name, state_code, data)
   
   # age band's name changed with time
   if(state_name == "arizona" & Date > as.Date("2020-05-13")) names(json_data) = unique(data$age)
-  if(state_name == "missouri" & Date > as.Date("2020-05-21")) names(json_data)[which(names(json_data) == "under 20")] = "Under 20"
-  if(state_name == "missouri" & Date > as.Date("2020-07-06")) names(json_data)[which(names(json_data) == "0-19")] = "Under 20"
+  if(state_name == "missouri" & Date <= as.Date("2020-05-21")) names(json_data)[which(names(json_data) == "Under 20")] = "0-19"
+  if(state_name == "missouri" & Date > as.Date("2020-05-21")) names(json_data)[which(names(json_data) == "under 20")] = "0-19"
+  if(state_name == "missouri" & Date > as.Date("2020-07-06")) names(json_data)[which(names(json_data) == "0-19")] = "0-19"
+  if(state_name == "missouri" & Date < as.Date("2020-10-07")) names(json_data)[which(names(json_data) == "0-19")] = "0-17"
+  if(state_name == "missouri" & Date < as.Date("2020-10-07")) names(json_data)[which(names(json_data) == "20-29")] = "18-29"
   if(state_name == "pennsylvania" & Date > as.Date("2020-06-12")) names(json_data)[which(names(json_data) == "100+")] = ">100"
   if(state_name == "vermont" & Date > as.Date("2020-06-25")) names(json_data)[which(names(json_data) == "80+")] = "80 plus"
   if(state_name == "florida") names(json_data) = gsub("(.+) years", "\\1",names(json_data))
-  
+  if(state_name == "missouri" & Date >= as.Date("2020-10-07")){
+    json_data[['0-17']] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("0-4", "5-9", "10-14", "15-17"))])))
+    json_data[["18-29"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("18-24", "25-29"))])))
+    json_data[["30-39"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("30-34", "35-39"))])))
+    json_data[["40-49"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("40-44", "45-49"))])))
+    json_data[["50-59"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("50-54", "55-59"))])))
+    json_data[["60-69"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("60-64", "65-69"))])))
+    json_data[["70-79"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("70-74", "75-79"))])))
+    json_data = json_data[-c(which(names(json_data) %in% c("0-4", "5-9", "10-14", "15-17","18-24", "25-29","30-34", "35-39",
+                                   "40-44", "45-49","50-54", "55-59","60-64", "65-69","70-74", "75-79")))]
+  }
+
   # make sure that there is no space in the age band name
   names(json_data) = gsub(" ", "", names(json_data), fixed = TRUE)
   
