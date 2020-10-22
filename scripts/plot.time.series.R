@@ -1,9 +1,6 @@
 library(tidyverse)
 
-time.daily.update = strptime("22:00:00", "%H:%M:%S")
-
-if(Sys.time() > time.daily.update) last.day = Sys.Date() # today
-if(Sys.time() < time.daily.update) last.day = Sys.Date() - 1 # yesterday 
+last.day = Sys.Date() - 1 # yesterday 
 
 source("utils/make.summary.R") # table.states is a summary of all states extracted
 source("utils/make.plots.R")
