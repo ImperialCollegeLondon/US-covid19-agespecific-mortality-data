@@ -281,7 +281,7 @@ class AgeExtractor:
 
 
     def get_nc2(self):
-        path = "pdfs/nc2"
+        path = "pdfs/NorthCarolina"
         if not os.path.exists(path):
             os.mkdir(path)
         url = 'https://covid19.ncdhhs.gov/dashboard/about-data'
@@ -298,9 +298,9 @@ class AgeExtractor:
             )
         else:
             if not os.access("data/{}/NorthCarolina.json".format(day), os.F_OK):
-                with open("pdfs/nc2/{}.pdf".format(day), "wb") as f:
+                with open("pdfs/NorthCarolina/{}.pdf".format(day), "wb") as f:
                     f.write(r.content)
-                doc = fitz.Document("pdfs/nc2/{}.pdf".format(day))
+                doc = fitz.Document("pdfs/NorthCarolina/{}.pdf".format(day))
                 # find the page
                 lines = doc.getPageText(0).splitlines()
                 for num, l in enumerate(lines):
@@ -344,11 +344,11 @@ class AgeExtractor:
                         "==> Report for Mississippi {} is not available".format(day)
                     )
                 else:
-                    path = "pngs/Mississippi"
+                    path = "pngs/mississippi"
                     if not os.path.exists(path):
                         os.mkdir(path)
                     response = requests.get(url)
-                    with open("pngs/Mississippi/{}.png".format(day), "wb") as f:
+                    with open("pngs/mississippi/{}.png".format(day), "wb") as f:
                         for data in response.iter_content(128):
                             f.write(data)
                     print('\n------ Processed Mississippi pngs {} ------\n'.format(day))
@@ -437,6 +437,8 @@ class AgeExtractor:
             options.add_argument('headless')
             browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
             browser.get(url)
+            browser.implicitly_wait(10)
+            time.sleep(5)
             browser.find_element_by_xpath('//*[@id="accept"]').click()
             browser.find_element_by_xpath('/html/body/main/div/div/div[2]/section/form/button').click()
 
@@ -945,7 +947,10 @@ class AgeExtractor:
             height = browser.execute_script("return document.documentElement.scrollHeight")
             browser.set_window_size(width, height)
             time.sleep(1)
-            browser.save_screenshot('pngs/Utah/{}.png'.format(day))
+            path = "pngs/utah"
+            if not os.path.exists(path):
+                os.mkdir(path)
+            browser.save_screenshot('pngs/utah/{}.png'.format(day))
             browser.implicitly_wait(2)
             total = browser.find_element_by_xpath('//*[@id="DataTables_Table_2"]/tbody/tr/td[1]').text
             age_data = {}
@@ -982,10 +987,10 @@ class AgeExtractor:
         else:
             day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
             if not os.access("data/{}/wyoming .json".format(day), os.F_OK):
-                path = "pdfs/Wyoming"
+                path = "pdfs/wyoming"
                 if not os.path.exists(path):
                     os.mkdir(path)
-                with open("pdfs/Wyoming/{}.pdf".format(day), "wb") as f:
+                with open("pdfs/wyoming/{}.pdf".format(day), "wb") as f:
                     f.write(r.content)
 
                     # cannot see the data from the pdf
@@ -1004,13 +1009,13 @@ class AgeExtractor:
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
         browser.implicitly_wait(15)
-        browser.implicitly_wait(2)
+        browser.implicitly_wait(20)
         if not os.access("data/{}/alabama.json".format(day), os.F_OK):
             browser.maximize_window()
             browser.implicitly_wait(15)
             buttons = browser.find_elements_by_css_selector('div')
             time.sleep(20)
-            browser.implicitly_wait(15)
+            browser.implicitly_wait(45)
 
             #for i in range(13):
             #    browser.find_element_by_xpath('//*[@id="ember473"]').click()
@@ -1188,12 +1193,12 @@ class AgeExtractor:
         else:
             date = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
             if not os.access("data/{}/new_hampshire.json".format(date), os.F_OK):
-                path = "pdfs/NewHampshire"
+                path = "pdfs/new_hampshire"
                 if not os.path.exists(path):
                     os.mkdir(path)
-                with open("pdfs/NewHampshire/{}.pdf".format(date), "wb") as f:
+                with open("pdfs/new_hampshire/{}.pdf".format(date), "wb") as f:
                     f.write(r.content)
-                doc = fitz.Document("pdfs/NewHampshire/{}.pdf".format(date))
+                doc = fitz.Document("pdfs/new_hampshire/{}.pdf".format(date))
                 # find the page
                 lines = doc.getPageText(0).splitlines()
                 for num, l in enumerate(lines):
@@ -1208,7 +1213,7 @@ class AgeExtractor:
                 data = lines[begin_num:]
                 age_data = {}
                 for i in range(9):
-                    age_data[data[i+1]] = data[29-i]
+                    age_data[data[i+1]] = data[32-i]
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
                     os.mkdir(path)
@@ -1217,7 +1222,7 @@ class AgeExtractor:
                 print('\n------ Processed New Hampshire {} ------\n'.format(day))
                 print(age_data)
                 doc.close()
-                shutil.move(f"pdfs/NewHampshire/{date}.pdf", f"pdfs/NewHampshire/{day}.pdf")
+                shutil.move(f"pdfs/new_hampshire/{date}.pdf", f"pdfs/new_hampshire/{day}.pdf")
 
             else:
                 print('Data for New Hampshire {} is already exist'.format(date))
