@@ -1,3 +1,5 @@
+library("stringr")  
+
 create_time_series = function(dates, h_data = NULL, state_code, state_name = NULL, daily.data.csv_and_xlsx = 0, json = 0, historic.data = 0)
 {
   
@@ -54,12 +56,15 @@ ensure_increasing_cumulative_deaths = function(dates, h_data)
     
     for(age_group in unique(h_data$age)){
       
-      
-      if(Date < max(dates)){
+      for(Code in unique(h_data$code)){
         
-        # if cumulative date at date t < date t - 1, fix cum deaths at date t - 1 to the one at date t.
-        if(h_data[age == age_group & date == Date, cum.deaths] > h_data[age == age_group & date == rev(dates)[t-1], cum.deaths]){
-          h_data[age == age_group & date == Date,]$cum.deaths = h_data[age == age_group & date == rev(dates)[t-1], cum.deaths]
+        if(Date < max(dates)){
+          
+          # if cumulative date at date t < date t - 1, fix cum deaths at date t - 1 to the one at date t.
+          if(h_data[age == age_group & date == Date & code == Code, cum.deaths] > h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]){
+            h_data[age == age_group & date == Date & code == Code,]$cum.deaths = h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]
+          }
+          
         }
         
       }
@@ -138,7 +143,8 @@ find_daily_deaths = function(dates, h_data, state_code)
   return(data)
 }
 
-generate_dailydeaths = function(n,s){
+generate_dailydeaths = function(n,s)
+  {
   num = floor(s/n)
   nums = rep(num, n)
   i = n
@@ -202,6 +208,13 @@ adjust_to_5y_age_band = function(data)
     data = rbind(subset(data, !code %in% loc), tmp1)
   }
   
+  # check
+  data[, age_from := as.numeric(ifelse(grepl("\\+", age), gsub("(.+)\\+", "\\1", age), gsub("(.+)-.*", "\\1", age)))]
+  data[, age_to := as.numeric(ifelse(grepl("\\+", age), 100, gsub(".*-(.+)", "\\1", age)))]
+  stopifnot(all(unique(data$age_from) %%5 == 0) & all(str_sub(as.character(data$age_to), -1, -1) %in% c("0", "4", "9")))
+  
+  data = select(data, -c("age_from", "age_to"))
+  
   return(data)
 }
 
@@ -252,3 +265,4 @@ keep_days_match_JHU = function(data)
   return(data)
 }
 
+`%notin%` = Negate(`%in%`)

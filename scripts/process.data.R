@@ -19,12 +19,13 @@ dir.create(file.path("data", "processed", last.day), showWarnings = FALSE)
 # process every state 
 cat("\n Begin Processing \n")
 
-states = subset(table.states, code != "CDC")
-data.overall <- vector('list',nrow(states))
-for(i in 1:nrow(states)){
+data.overall <- vector('list',nrow(table.states))
+for(i in 1:nrow(table.states)){
   
-  data = obtain.data(last.day, states$name[i], states$code[i], states$json[i])
-  write.csv(data, file = file.path("data", "processed", last.day, paste0("DeathsByAge_",states$code[i],".csv")), row.names=FALSE)
+  data = obtain.data(last.day, table.states$name[i], table.states$code[i], table.states$json[i])
+  write.csv(data, file = file.path("data", "processed", last.day, paste0("DeathsByAge_",table.states$code[i],".csv")), row.names=FALSE)
+  
+  if(table.states$code[i] == "CDC") next
   
   data.overall[[i]] = copy(data)
   

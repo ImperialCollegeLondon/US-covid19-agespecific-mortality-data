@@ -15,7 +15,7 @@ obtain.data = function(last.day, state_name, state_code, json){
   
   ## 1. STATES WITH RULE BASED FUNCTION
   states.historical.data = c("CT", "TN", "ME", "WI", "VA")
-  states.daily.data = c("TX", "GA", "ID", "AK", "RI")
+  states.daily.data = c("TX", "GA", "ID", "AK", "RI", "CDC")
   
   # file with entire time series
   if(state_code %in% states.historical.data) data = obtain.historic.data.csv_and_xlsx(last.day, state_name, state_code)
@@ -55,7 +55,12 @@ obtain.daily.data.csv_and_xlsx = function(last.day, state_name, state_code){
   data = ensure_increasing_cumulative_deaths(dates = dates, h_data = data)
   
   # find daily deaths
-  data = find_daily_deaths(dates = dates, h_data = data, state_code = state_code)
+  data.list = vector(mode = "list", length = length(unique(data$code)))
+  for(i in 1:length(unique(data$code))){
+    data.list[[i]] = find_daily_deaths(dates = dates, h_data = subset(data, code == unique(data$code)[i]), state_code = unique(data$code)[i])
+  }
+  data = do.call("rbind", data.list)
+
   
   return(data.table(data))
 }

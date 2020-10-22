@@ -15,7 +15,7 @@ death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_201810.csv")
 path_to_data = function(state) file.path("data", "processed", last.day, paste0("DeathsByAge_", state, ".csv"))
 
 
-make.comparison.plot = function(State, Code){
+make.comparison.plot = function(State, Code, with_CDC = 0){
   
   cat(paste("\n Make comparison plot for", State, "\n"))
   
@@ -66,9 +66,20 @@ make.comparison.plot = function(State, Code){
     
     death_data = dplyr::bind_rows(death_data_jhu, death_data_scrapping)
     
+    if(with_CDC){
+      death_data_cdc = read.csv(path_to_data("CDC")) %>%
+        subset(code == Code) %>%
+        group_by(date, code) %>%
+        summarise(cum.deaths = sum(cum.deaths)) %>%
+        mutate(source = "CDC")
+      death_data_cdc$date = as.Date(death_data_cdc$date)
+      
+      death_data = dplyr::bind_rows(death_data, death_data_cdc)
+    }
+
     p = ggplot(data = death_data, aes(x = date, y = cum.deaths, col = source)) +
-      geom_point() +
-      geom_line()  +
+      geom_point(size = 1) +
+      geom_line(size = 0.5)  +
       scale_x_date(date_breaks = "weeks", labels = date_format("%e %b"), 
                    limits = c(death_data$date[1], 
                               death_data$date[length(death_data$date)])) + 
@@ -77,7 +88,7 @@ make.comparison.plot = function(State, Code){
       theme(legend.position="right")+ 
       guides(fill = guide_legend(title="Age")) +
       labs(title = State, y = "Daily deaths (overall population)") 
-    ggsave(file.path("figures", last.day, paste0("comparison.ihme.jhu.depthealth_", Code, ".pdf")), p, w = 8, h =6)
+    ggsave(file.path("figures", last.day, paste0("comparison.jhu.depthealth_", Code, ".pdf")), p, w = 8, h =6)
   }
   
   return(p)
@@ -89,7 +100,7 @@ make.comparison.plots = function(names, codes){
     p[[i]] = make.comparison.plot(names[i], codes[i])
   }
   q = do.call(grid.arrange, c(p, ncol =1))
-  ggsave(file.path("figures", last.day, "comparison.ihme.jhu.depthealth_overall.pdf"), q, w = 8, h = 75, limitsize = FALSE)
+  ggsave(file.path("figures", last.day, "comparison.ihme.jhu.depthealth_overall.pdf"), q, w = 8, h = 100, limitsize = FALSE)
 }
 
 make.time.series.plots = function(codes){

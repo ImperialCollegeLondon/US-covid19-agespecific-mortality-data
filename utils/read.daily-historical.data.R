@@ -314,3 +314,131 @@ read.VA.file = function(last.day){
 
   return(tmp)
 }
+
+read.CDC.file = function(csv_file, Date){
+  
+  tmp = as.data.table( read.csv(csv_file) ) %>%
+    subset(grepl("year", Age.group)) %>%
+    mutate(age = ifelse(Age.group == "Under 1 year", "0-1", 
+                        ifelse(Age.group == "85 years and over", "85+", gsub("(.+) years", "\\1", Age.group))), # group 0-1 and 2-9 for analysis
+           date = as.Date(Data.as.of, format = "%m/%d/%Y"),
+           cum.deaths = ifelse(is.na(COVID.19.Deaths), 0, as.numeric(COVID.19.Deaths)), 
+           daily.deaths = NA_integer_) %>%
+    group_by(age, date, State) %>%
+    summarise(cum.deaths = sum(cum.deaths), 
+              daily.deaths = sum(daily.deaths)) %>%
+    ungroup()
+
+  # duplicated age groups
+  if(all(c("50-64", "55-64") %in% tmp$age)) tmp = subset(tmp, age != "50-64")
+  if(all(c("35-44", "30-49") %in% tmp$age)) tmp = subset(tmp, age != "30-49")
+  tmp = subset(tmp, !age %in% c("0-17", "18-29"))
+  
+  map_statename_code = data.table(State = c(
+                                  "Alabama"         ,         
+                                  "Alaska"          ,         
+                                  "Arizona"	        ,         
+                                  "Arkansas"        ,         
+                                  "California"      ,         
+                                  "Colorado"        ,         
+                                  "Connecticut"     ,         
+                                  "Delaware"        ,         
+                                  "Florida"         ,         
+                                  "Georgia"         ,         
+                                  "Hawaii"          ,         
+                                  "Idaho"           ,         
+                                  "Illinois"        ,         
+                                  "Indiana"         ,         
+                                  "Iowa"            ,         
+                                  "Kansas"          ,         
+                                  "Kentucky"        ,         
+                                  "Louisiana"	      ,         
+                                  "Maine"           ,         
+                                  "Maryland"        ,         
+                                  "Massachusetts"   ,         
+                                  "Michigan"        ,         
+                                  "Minnesota"       ,         
+                                  "Mississippi"     ,         
+                                  "Missouri"        ,         
+                                  "Montana"         ,         
+                                  "Nebraska"        ,         
+                                  "Nevada"          ,         
+                                  "New Hampshire"   ,         
+                                  "New Jersey"      ,         
+                                  "New Mexico"      ,         
+                                  "New York"        ,         
+                                  "North Carolina"  ,         
+                                  "North Dakota"    ,         
+                                  "Ohio"            ,         
+                                  "Oklahoma"        ,         
+                                  "Oregon"	        ,         
+                                  "Pennsylvania"    ,         
+                                  "Rhode Island"    ,         
+                                  "South Carolina"  ,         
+                                  "South Dakota"    ,         
+                                  "Tennessee"	      ,         
+                                  "Texas"	          ,         
+                                  "Utah"	          ,         
+                                  "Vermont"         ,         
+                                  "Virginia"        ,         
+                                  "Washington"      ,         
+                                  "West Virginia"   ,         
+                                  "Wisconsin",	               
+                                  "Wyoming"), 
+                                  code = c(
+                                  "AL",
+                                  "AK",
+                                  "AZ",
+                                  "AR",
+                                  "CA",
+                                  "CO",
+                                  "CT",
+                                  "DE",
+                                  "FL",
+                                  "GA",
+                                  "HI",
+                                  "ID",
+                                  "IL",
+                                  "IN",
+                                  "IA",
+                                  "KS",
+                                  "KY",
+                                  "LA",
+                                  "ME",
+                                  "MD",
+                                  "MA",
+                                  "MI",
+                                  "MN",
+                                  "MS",
+                                  "MO",
+                                  "MT",
+                                  "NE",
+                                  "NV",
+                                  "NH",
+                                  "NJ",
+                                  "NM",
+                                  "NY",
+                                  "NC",
+                                  "ND",
+                                  "OH",
+                                  "OK",
+                                  "OR",
+                                  "PA",
+                                  "RI",
+                                  "SC",
+                                  "SD",
+                                  "TN",
+                                  "TX",
+                                  "UT",
+                                  "VT",
+                                  "VA",
+                                  "WA",
+                                  "WV",
+                                  "WI",
+                                  "WY"))
+  
+  tmp = merge(tmp, map_statename_code, by = "State")
+  tmp = select(tmp, -State)
+  
+  return(tmp)
+}
