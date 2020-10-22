@@ -78,18 +78,18 @@ We use webdriver from selenium to find the elements and extract the correspondin
 This table includes a complete list of all sources ever used in the data set. We acknowledge and are grateful to U.S. state Departments of Health for making the primary data available at the following sources:
 
 | State        | Date record start           | Link(s)  | Notes |
-| ----------- |:-----------------:| -----:| ------:|
+| ----------- |:-----------------:| -------:| ------:|
 | Alabama | 2020-05-03 | [link](https://alpublichealth.maps.arcgis.com/apps/opsdashboard/index.html#/6d2771faa9da4a2786a509d82c8cf0f7) | dashboard updated daily and replaced; no historical archive |
 | Alaska | 2020-06-09 | [link](https://coronavirus-response-alaska-dhss.hub.arcgis.com/datasets/summary-tables) | metadata updated daily and replaced; no historical archive |
 | Arizona | 2020-05-13 | [link](https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/covid-19/dashboards/index.php) | dashboard updated daily and replaced; no historical archive | 
 | California | 2020-05-13 | [link](https://public.tableau.com/views/COVID-19CasesDashboard_15931020425010/Cases?:embed=y&:showVizHome=no) | dashboard updated daily and replaced; no historical archive | 
-| Colorado| 2020-03-23 | (1) [link](https://data-cdphe.opendata.arcgis.com/datasets/cdphe-covid19-state-level-open-data-repository?geometry=-125.744%2C35.977%2C-85.358%2C41.950) until 2020-08-20, (2) [link](https://covid19.colorado.gov/data) since |(1) metadata updated daily; full time series; died in 2020-08-20; (2) dashboard updated daily and replaced; no historical archive |
+| Colorado| 2020-03-23 | (1) [link](https://data-cdphe.opendata.arcgis.com/datasets/cdphe-covid19-state-level-open-data-repository?geometry=-125.744%2C35.977%2C-85.358%2C41.950) until 2020-08-20, (2) [link](https://covid19.colorado.gov/data) since 2020-08-20 |(1) metadata updated daily; full time series; died in 2020-08-20; (2) dashboard updated daily and replaced; no historical archive |
 | Connecticut | 2020-04-05 | [link](https://data.ct.gov/Health-and-Human-Services/COVID-19-Cases-and-Deaths-by-Age-Group/ypz6-8qyf) | metadata updated daily; full time series|
 | Delaware | 2020-05-12 | [link](https://myhealthycommunity.dhss.delaware.gov/locations/state) | dashboard updated daily and replaced; no historical archive |
 | District of Columbia | 2020-04-13 | [link](https://coronavirus.dc.gov/page/coronavirus-data) | metadata updated daily; full time series |
 | Florida | 2020-03-27 | [link](https://www.floridadisaster.org/covid19/covid-19-data-reports/) | daily report; with historical archive |
 | Georgia | 2020-04-27 | [link](https://ga-covid19.ondemand.sas.com/docs/ga_covid_data.zip) | metadata updated daily and replaced; no historical archive |
-| Idaho | 2020-05-13 | (1)[link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard_V2/Story1), (2)[link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard/Home) | dashboard updated daily and replaced; no historical archive ; (1) died on 2020-09-04| 
+| Idaho | 2020-05-13 | (1) [link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard_V2/Story1), (2) [link](https://public.tableau.com/profile/idaho.division.of.public.health#!/vizhome/DPHIdahoCOVID-19Dashboard/Home) | dashboard updated daily and replaced; no historical archive ; (1) died on 2020-09-04| 
 | Illinois | 2020-05-14 | [link](https://www.dph.illinois.gov/covid19/covid19-statistics) | dashboard updated daily and replaced; no historical archive | 
 | Indiana | 2020-05-13 | [link](https://www.coronavirus.in.gov/) | dashboard updated daily and replaced; no historical archive | 
 | Iowa | 2020-05-13 | [link](https://coronavirus.iowa.gov/pages/outcome-analysis-deaths) | dashboard updated daily and replaced; no historical archive | 
@@ -115,12 +115,12 @@ This table includes a complete list of all sources ever used in the data set. We
 | Rhode Island | 2020-06-01 | [link](https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/edit#gid=31350783) | metadata updated weekly and replaced; no historical archive |
 | South Carolina| 2020-05-14 | [link](https://www.scdhec.gov/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/sc-demographic-data-covid-19) | dashboard updated on Tuesday and Friday; no historical archive | 
 | Tennessee | 2020-04-09 | [link](https://www.tn.gov/health/cedep/ncov/data/downloadable-datasets.html) | metadata updated daily; full time series |
-| Texas | 2020-05-06 | (1)[link](https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx) until , (2)[link](https://dshs.texas.gov/coronavirus/TexasCOVID19Demographics.xlsx.asp) until 2020-09-24 | metadata updated daily and replaced; no historical archive |
+| Texas | 2020-05-06 | (1) [link](https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx) until 2020-09-24, (2) [link](https://dshs.texas.gov/coronavirus/TexasCOVID19Demographics.xlsx.asp) since 2020-09-24 | metadata updated daily and replaced; no historical archive |
 | Utah | 2020-06-17 | [link](https://coronavirus.utah.gov/case-counts/) | dashboard updated daily and replaced; no historical archive| 
-| Vermont | 2020-05-13 | (1)[link](https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/f2d395572efa401888eddceebddc318f) until 2020-09-03, (2)[link](https://experience.arcgis.com/experience/85f43bd849e743cb957993a545d17170) since | dashboard updated daily and replaced; no historical archive; (1) does not report mortality by age since 2020-09-03 | 
+| Vermont | 2020-05-13 | (1) [link](https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/f2d395572efa401888eddceebddc318f) until 2020-09-03, (2) [link](https://experience.arcgis.com/experience/85f43bd849e743cb957993a545d17170) since 2020-09-03 | dashboard updated daily and replaced; no historical archive; (1) does not report mortality by age since 2020-09-03 | 
 | Virginia | 2020-04-21 | [link](https://data.virginia.gov/Government/VDH-COVID-19-PublicUseDataset-Cases_By-Age-Group/uktn-mwig) | metadata updated daily; full time series |
 | Washington| 2020-06-08 | [link](https://www.doh.wa.gov/Emergencies/NovelCoronavirusOutbreak2020COVID19/DataDashboard) | dashboard updated daily and replaced; no historical archive |
-| Wisconsin | 2020-03-15 | (1)[link](https://hub.arcgis.com/datasets/wi-dhs::covid-19-historical-data-table) until 2020-10-19, (2)[link](https://data.dhsgis.wi.gov/datasets/covid-19-historical-data-by-state/data?orderBy=GEOID) since 2020-10-19 | metadata updated daily; full time series |
+| Wisconsin | 2020-03-15 | (1) [link](https://hub.arcgis.com/datasets/wi-dhs::covid-19-historical-data-table) until 2020-10-19, (2) [link](https://data.dhsgis.wi.gov/datasets/covid-19-historical-data-by-state/data?orderBy=GEOID) since 2020-10-19 | metadata updated daily; full time series |
 | Wyoming| 2020-09-22| [link](https://health.wyo.gov/publichealth/infectious-disease-epidemiology-unit/disease/novel-coronavirus/covid-19-map-and-statistics/) | dashboard updated daily and replaced; no historical archive |
 
 
