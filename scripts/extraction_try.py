@@ -35,8 +35,7 @@ class AgeExtractor:
         browser.implicitly_wait(5) # Let the page load
         button1 = browser.find_elements_by_css_selector('div.flex-fluid.overflow-hidden')
         time.sleep(2)
-        day = requests.get(url).headers['Date']
-        day = parsedate(day).strftime('%Y-%m-%d')
+        day = self.today
         if not os.access("data/{}/louisiana.json".format(day), os.F_OK):
             browser.implicitly_wait(2)
             button_name = button1[0].text.split('\n')[-1]
@@ -171,8 +170,7 @@ class AgeExtractor:
         url = "https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases"
         url = 'https://app.powerbigov.us/view?r=eyJrIjoiYjJhZjUwM2QtZDIwZi00MmU3LTljZjEtZjgyMzIzZDVmMmQxIiwidCI6IjJkZWEwNDY0LWRhNTEtNGE4OC1iYWUyLWIzZGI5NGJjMGM1NCJ9&pageName=ReportSectionf5bbf68127089e2bd8ea'
 
-        day = requests.get(url).headers['Date']
-        day = parsedate(day).strftime('%Y-%m-%d')
+        day = self.today
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
@@ -362,8 +360,7 @@ class AgeExtractor:
 
         options = Options()
         options.add_argument('headless')
-        day = requests.get(url).headers['Date']
-        day = parsedate(day).strftime('%Y-%m-%d')
+        day = self.today
         if not os.access("data/{}/missouri.json".format(day), os.F_OK):
             browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
             browser.get(url)
@@ -494,8 +491,7 @@ class AgeExtractor:
         time.sleep(20)
         #day = browser.find_element_by_xpath('//*[@id="ember437"]/div/div').text
         #day = parsedate(day.split()[2]).strftime('%Y-%m-%d')
-        day = requests.get(url).headers['Date']
-        day = parsedate(day).strftime('%Y-%m-%d')
+        day = self.today
         if not os.access("data/{}/vermont.json".format(day), os.F_OK):
             browser.implicitly_wait(3)
             browser.find_element_by_xpath('//*[@id="ember392"]').click()
@@ -563,7 +559,7 @@ class AgeExtractor:
 
     def get_maryland(self):
         url = 'https://coronavirus.maryland.gov/'
-        day = parsedate(requests.get(url).headers['Date']).strftime('%Y-%m-%d')
+        day = self.today
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
@@ -606,7 +602,7 @@ class AgeExtractor:
 
     def get_maryland_pngs(self):
         url = 'https://coronavirus.maryland.gov/'
-        day = parsedate(requests.get(url).headers['Date']).strftime('%Y-%m-%d')
+        day = self.today
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
@@ -1018,8 +1014,7 @@ class AgeExtractor:
         options = Options()
         options.add_argument('headless')
 
-        day = requests.get(url).headers['Date']
-        day = parsedate(day).strftime('%Y-%m-%d')
+        day = self.today
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
         browser.implicitly_wait(15)
@@ -1355,8 +1350,7 @@ class AgeExtractor:
 
     def get_colorado_pngs(self):
         url = 'https://public.tableau.com/views/Colorado_COVID19_Data/CO_Case_Demographics?%3Aembed=y&%3AshowVizHome=no&%3Ahost_url=https%3A%2F%2Fpublic.tableau.com%2F&%3Aembed_code_version=3&%3Atabs=no&%3Atoolbar=yes&%3Aanimate_transition=yes&%3Adisplay_static_image=no&%3Adisplay_spinner=no&%3Adisplay_overlay=yes&%3Adisplay_count=yes&%3Alanguage=en&publish=yes&%3AloadOrderID=0'
-        day = requests.get(url).headers['Date']
-        day = parsedate(day).strftime('%Y-%m-%d')
+        day = self.today
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
@@ -1385,8 +1379,7 @@ class AgeExtractor:
 
     def get_iowa_pngs(self):
         url = 'https://public.domo.com/embed/pages/egBrj'
-        day = requests.get(url).headers['Date']
-        day = parsedate(day).strftime('%Y-%m-%d')
+        day = self.today
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
