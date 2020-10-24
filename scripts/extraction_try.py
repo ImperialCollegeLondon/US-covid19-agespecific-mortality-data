@@ -439,14 +439,20 @@ class AgeExtractor:
             browser.get(url)
             browser.implicitly_wait(10)
             time.sleep(5)
+
             browser.find_element_by_xpath('//*[@id="accept"]').click()
             browser.find_element_by_xpath('/html/body/main/div/div/div[2]/section/form/button').click()
-
+            ##  website change from 2020-05-20
+            # day = browser.find_element_by_xpath('//*[@id="outcomes"]/div/article[1]/div/div/div[2]/div[1]/div[1]/div/div/span[2]').text
+            # day = browser.find_element_by_xpath('//*[@id="outcomes"]/div/div[2]/div[1]/div/div[1]/div/span').text.split(':')[1]
+            # day = parsedate(day).strftime("%Y-%m-%d")
             if browser.execute_script("return document.readyState") == "complete":
                 age_data = {}
                 for i in range(6):
-                    path1 = browser.find_element_by_xpath('//*[@id="total-deaths-by-age"]/div[2]/div/table/tbody/tr[' + str(i + 1) + ']/td[1]/span/span')
-                    path2 = browser.find_element_by_xpath('//*[@id="total-deaths-by-age"]/div[2]/div/table/tbody/tr['+ str(i + 1) + ']/td[2]')
+                    path1 = browser.find_element_by_xpath(
+                        '//*[@id="total-deaths-by-age"]/div[2]/div/table/tbody/tr[' + str(i + 1) + ']/td[1]/span/span')
+                    path2 = browser.find_element_by_xpath(
+                        '//*[@id="total-deaths-by-age"]/div[2]/div/table/tbody/tr[' + str(i + 1) + ']/td[2]')
                     age_data[path1.text] = path2.text.split()[0]
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
@@ -454,13 +460,19 @@ class AgeExtractor:
                 with open("data/{}/delaware.json".format(day), "w") as f:
                     json.dump(age_data, f)
                 print('\n------ Processed Delaware {} ------\n'.format(day))
+                #### get the full snapshot:
+                # thanks #https://zhuanlan.zhihu.com/p/73255362
                 width = browser.execute_script("return document.documentElement.scrollWidth")
                 height = browser.execute_script("return document.documentElement.scrollHeight")
 
                 browser.set_window_size(width, height)
                 time.sleep(1)
-                browser.save_screenshot('pngs/delaware/{}.png'.format(day))
+                path = "pngs/delaware".format(day)
+                if not os.path.exists(path):
+                    os.mkdir(path)
                 print(age_data)
+                browser.save_screenshot('pngs/delaware/{}.png'.format(day))
+
             else:
                 print('error for extracting')
         else:
@@ -759,6 +771,8 @@ class AgeExtractor:
 
     def get_michigan(self):
         url = 'https://app.powerbigov.us/view?r=eyJrIjoiMWNjYjU1YWQtNzFlMC00N2ZlLTg3NjItYmQxMWI4OWIwMGY1IiwidCI6ImQ1ZmI3MDg3LTM3NzctNDJhZC05NjZhLTg5MmVmNDcyMjVkMSJ9'
+        url = 'https://app.powerbigov.us/view?r=eyJrIjoiNDY0ZGVlMDItMzUzNC00ZGE5LWFjYzQtNzliOGJkZWQ4YTgzIiwidCI6ImQ1ZmI3MDg3LTM3NzctNDJhZC05NjZhLTg5MmVmNDcyMjVkMSJ9'
+
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
@@ -1012,9 +1026,9 @@ class AgeExtractor:
         browser.implicitly_wait(20)
         if not os.access("data/{}/alabama.json".format(day), os.F_OK):
             browser.maximize_window()
-            browser.implicitly_wait(15)
+            browser.implicitly_wait(35)
             buttons = browser.find_elements_by_css_selector('div')
-            time.sleep(20)
+            time.sleep(60)
             browser.implicitly_wait(45)
 
             #for i in range(13):
@@ -1022,14 +1036,14 @@ class AgeExtractor:
             #    browser.implicitly_wait(2)
             #    time.sleep(1)
             a = [e for e in buttons if e.text == '13'][0]
-            browser.implicitly_wait(40)
-            time.sleep(20)
+            browser.implicitly_wait(60)
+            time.sleep(50)
             a.click()
             browser.implicitly_wait(40)
             #browser.maximize_window()
             # total = browser.find_element_by_xpath(
             #    '//*[@id="ember608"]/*[name()="svg"]/*[name()="g"][2]/*[name()="svg"]/*[name()="text"]').text
-            browser.implicitly_wait(2)
+            browser.implicitly_wait(22)
             # browser.find_element_by_xpath('//*[@id="ember381"]').click()
             time.sleep(3)
             age_data = {}
