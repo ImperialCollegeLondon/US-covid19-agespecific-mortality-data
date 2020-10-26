@@ -250,7 +250,7 @@ class AgeExtractor:
                 "==> Report for Arizona {} is not available".date.today().strftime('%Y-%m-%d')
             )
         else:
-            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            day = self.today
             if not os.access("data/{}/arizona.json".format(day), os.F_OK):
                 with open("pdfs/arizona/{}.pdf".format(day), "wb") as f:
                     f.write(r.content)
@@ -392,7 +392,7 @@ class AgeExtractor:
     def get_kentucky(self):
         url = "https://kygeonet.maps.arcgis.com/apps/opsdashboard/index.html#/543ac64bc40445918cf8bc34dc40e334"
         r = requests.get(url)
-        day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+        day = self.today
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
@@ -995,7 +995,7 @@ class AgeExtractor:
                 "==> Report for Wyoming {} is not available".date.today().strftime('%Y-%m-%d')
             )
         else:
-            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            day = self.today
             if not os.access("data/{}/wyoming .json".format(day), os.F_OK):
                 path = "pdfs/wyoming"
                 if not os.path.exists(path):
@@ -1200,7 +1200,7 @@ class AgeExtractor:
                 "==> Report for NewHampshire {} is not available".date.today().strftime('%Y-%m-%d')
             )
         else:
-            date = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            date = self.today
             if not os.access("data/{}/new_hampshire.json".format(date), os.F_OK):
                 path = "pdfs/new_hampshire"
                 if not os.path.exists(path):
@@ -1307,7 +1307,7 @@ class AgeExtractor:
                 "==> Report for hawaii {} is not available".date.today().strftime('%Y-%m-%d')
             )
         else:
-            date = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            date = self.today
             if not os.access("data/{}/hawaii.json".format(date), os.F_OK):
                 path = "pdfs/hawaii"
                 if not os.path.exists(path):
@@ -1444,7 +1444,7 @@ class AgeExtractor:
                 "==> Report for idaho {} is not available".date.today().strftime('%Y-%m-%d')
             )
         else:
-            day = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
+            day = self.today
             if not os.access("pdfs/idaho/{}".format(day), os.F_OK):
                 path = "pdfs/idaho"
                 if not os.path.exists(path):
