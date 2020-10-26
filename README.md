@@ -102,7 +102,7 @@ This table includes a complete list of all sources ever used in the data set. We
 | Massachusetts | 2020-04-20 | [link](https://www.mass.gov/info-details/archive-of-covid-19-cases-in-massachusetts) until 2020-08-11 and [link](https://www.mass.gov/info-details/covid-19-response-reporting) since | (1) daily report, with historical archive; (2) weekly report, with historical archive;  |
 | Michigan | 2020-03-21 | (1) `data/req/michigan weekly.csv` and (2) [link](https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html) | (1) data requested to the DoH (2) dashboard updated daily and replaced; no historical archive |
 | Mississippi | 2020-04-27 | [link](https://msdh.ms.gov/msdhsite/_static/14,0,420.html) | dashboard updated daily and replaced; no historical archive |
-| Missouri | 2020-05-13 | [link](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php) | dashboard updated daily and replaced; no historical archive |
+| Missouri | 2020-05-13 | (1)[link](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php) and (2)[link](https://showmestrong.mo.gov/data/public-health/) | dashboard updated daily and replaced; no historical archive |
 | Nevada | 2020-06-07 | [link](https://nvhealthresponse.nv.gov) | dashboard updated daily and replaced; no historical archive |
 | New Hampshire | 2020-06-07 | [link](https://www.nh.gov/covid19/dashboard/summary.htm) | dashboard updated daily and replaced; no historical archive |
 | New Jersey | 2020-05-25 | [link](https://njhealth.maps.arcgis.com/apps/opsdashboard/index.html#/81a17865cb1a44db92eb8eb421703635) | dashboard updated daily and replaced; no historical archive|
