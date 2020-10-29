@@ -28,7 +28,7 @@ def get_florida():
        existing_assets = [x.strip().split(" ")[-1] for x in existing_assets] 
 
     headers = requests.utils.default_headers()
-    url = "http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive"
+    url = "http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive/cases-monitoring-and-pui-information/state-report/"
     req = requests.get(url, headers)
     soup = BeautifulSoup(req.content, "html.parser")
     covid_links = []
@@ -44,7 +44,8 @@ def get_florida():
     print(covid_links)
 
     # download these assets
-    api_base_url = "http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive"
+#    api_base_url = "http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive"
+    api_base_url = "http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive/cases-monitoring-and-pui-information/state-report"
     for pdf_name in covid_links:
         print(pdf_name, "DOWNLOAD")
         subprocess.run(
