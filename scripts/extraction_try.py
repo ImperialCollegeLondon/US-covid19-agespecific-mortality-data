@@ -1409,6 +1409,25 @@ class AgeExtractor:
         browser.save_screenshot('pngs/iowa/{}_2.png'.format(day))
         browser.close()
         browser.quit()
+    def get_nh_pngs(self):
+        url = 'https://nh.gov/t/DHHS/views/COVID-19Dashboard/Summary?:embed=y&:isGuestRedirectFromVizportal=y&:display_count=n&:showVizHome=n&:origin=viz_share_link'
+        day = self.today
+        options = Options()
+        options.add_argument('headless')
+        browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
+
+        browser.get(url)
+        browser.implicitly_wait(30)
+        time.sleep(50)
+        browser.implicitly_wait(50)
+
+        path = "pngs/new_hampshire".format(day)
+        if not os.path.exists(path):
+            os.mkdir(path)
+
+        browser.save_screenshot('pngs/new_hampshire/{}.png'.format(day))
+        browser.close()
+        browser.quit()
 
     def get_ri(self):
         #url = 'https://docs.google.com/spreadsheets/d/1c2QrNMz8pIbYEKzMJL7Uh2dtThOJa2j1sSMwiDo5Gz4/export?format=csv'
@@ -1659,6 +1678,12 @@ if __name__ == "__main__":
         ageExtractor.get_nh()
     except:
         print("\n!!! New Hampshire FAILED !!!\n")
+    try:
+        print("\n### Running New Hampshire PNG ###\n")
+        ageExtractor.get_nh_pngs()
+    except:
+        print("\n!!! New Hampshire PNG FAILED !!!\n")
+
 
     try:
         print("\n### Running Kansas ###\n")
