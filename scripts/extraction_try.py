@@ -404,13 +404,14 @@ class AgeExtractor:
         data = [e.get_attribute('aria-label') for e in data if e.get_attribute('aria-label')]
         browser.implicitly_wait(5)
         if not os.access("data/{}/kentucky.json".format(day), os.F_OK):
+            browser.implicitly_wait(25)
             browser.implicitly_wait(5)
             age_data = {}
-            data = data[10:18]
-            age_data['10-19'] = '0'
-            #age_data['20-29'] = '0'
+            data = data[9:18]
+            #age_data["10-19"] = "0"
+            #age_data["20-29"] = "0"
             for i in data:
-                age_data[i.split()[0]] = i.split()[1]
+                age_data[i.split()[1]] = i.split()[2]
             path = "data/{}".format(day)
             if not os.path.exists(path):
                 os.mkdir(path)
@@ -1227,7 +1228,7 @@ class AgeExtractor:
                 data = lines[begin_num:]
                 age_data = {}
                 for i in range(9):
-                    age_data[data[i+1]] = data[32-i]
+                    age_data[data[i+1]] = data[29-i]
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
                     os.mkdir(path)
