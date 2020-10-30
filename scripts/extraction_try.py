@@ -39,17 +39,23 @@ class AgeExtractor:
         if not os.access("data/{}/louisiana.json".format(day), os.F_OK):
             browser.implicitly_wait(2)
             button_name = button1[0].text.split('\n')[-1]
-            button = [e for e in button1 if e.text == button_name][0]
+            m_button = [e for e in button1 if e.text == button_name][0]
             time.sleep(2)
-            button.click()
+            m_button.click()
             browser.implicitly_wait(2)
-            button = browser.find_elements_by_css_selector('div.flex-fluid')
+            #button = browser.find_elements_by_css_selector('div.flex-fluid')
             time.sleep(2)
-            button = [e for e in button if e.text == button_name or e.text == 'Cases and Deaths by Age']
+            button = browser.find_elements_by_css_selector('div')
+            time.sleep(20)
+            button = [e for e in button if e.text == 'Deaths by Age Group']
+            time.sleep(20)
+            button[0].click()
+            time.sleep(10)
+            #button = [e for e in button if e.text == button_name or e.text == 'Cases and Deaths by Age']
             time.sleep(2)
-            button[1].click()
+            #button[1].click()
             browser.implicitly_wait(1)
-            button[2].click()
+            #button[2].click()
             browser.implicitly_wait(1)
             board = browser.find_elements_by_css_selector('g.amcharts-graph-column')#.amcharts-graph-graphAuto1_1589372672251')
             data = [e.get_attribute('aria-label') for e in board if e.get_attribute('aria-label') and 'death' in e.get_attribute('aria-label')]
@@ -57,7 +63,7 @@ class AgeExtractor:
             age_data ={}
             for a in data:
                 age_data[" ".join(a.split()[1:-1])] = a.split()[-1]
-
+            m_button.click()
             path = "data/{}".format(day)
             if not os.path.exists(path):
                 os.mkdir(path)
