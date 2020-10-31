@@ -490,8 +490,10 @@ class AgeExtractor:
 
 
     def get_vermont(self):
+        ## monthly update url
         url = 'https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/f2d395572efa401888eddceebddc318f'
         url = 'https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/3779c97adb8a42159d2a67a7d663b45e'
+        url = 'https://vcgi.maps.arcgis.com/apps/opsdashboard/index.html#/5a94dba447ad418bb11976516252dd93'
 
         options = Options()
         options.add_argument('headless')
@@ -504,12 +506,12 @@ class AgeExtractor:
         #day = parsedate(day.split()[2]).strftime('%Y-%m-%d')
         day = self.today
         if not os.access("data/{}/vermont.json".format(day), os.F_OK):
-            browser.implicitly_wait(3)
-            browser.find_element_by_xpath('//*[@id="ember392"]').click()
-            browser.implicitly_wait(3)
-            browser.find_element_by_xpath('//*[@id="ember377"]').click()
-            browser.implicitly_wait(3)
-            browser.find_element_by_xpath('//*[@id="ember392"]').click()
+            browser.implicitly_wait(13)
+            browser.find_element_by_xpath('//*[@id="ember468"]').click()
+            browser.implicitly_wait(13)
+            browser.find_element_by_xpath('//*[@id="ember449"]').click()
+            browser.implicitly_wait(13)
+            browser.find_element_by_xpath('//*[@id="ember468"]').click()
             time.sleep(3)
             age_data = {}
             age_data['0-9'] = 0
@@ -517,7 +519,7 @@ class AgeExtractor:
             age_data['20-29'] = 0
             for i in range(6):
                 data = browser.find_element_by_xpath(
-                    '//*[@id="ember201"]/div/div/*[name()="svg"]/*[name()="g"][7]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
+                    '//*[@id="ember238"]/div/div/*[name()="svg"]/*[name()="g"][7]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
                         i + 1) + ']').get_attribute('aria-label')
                 age_data[data.split()[0]] = data.split()[-1]
             path = "data/{}".format(day)
