@@ -11,6 +11,10 @@ We aim to update the processed data at least once a week. The data set currently
 
 ## Usage 
 
+### Structure Overview
+The code is divided into 2 parts: First, the extraction of the COVID-19 mortality counts data from Department of Health websites. Second, the processing of the extracted data to create a complete time series of age-specific COVID-19 mortality counts for every location. 
+
+
 ### Dependencies
 #### Data extraction
 - Python version >= 3.6.1
@@ -39,8 +43,6 @@ readxl
 reshape2
 ```
 
-### Structure Overview
-The code is divided into 2 parts: First, the extraction of the COVID-19 mortality counts data from Department of Health websites. Second, the processing of the extracted data to create a complete time series of age-specific COVID-19 mortality counts for every location. 
 
 ### 1. Data extraction 
 To extract, run
@@ -83,7 +85,8 @@ Depending on the data format made available by the DoH, we do the following:
 
 **Static Webpages (HTML)**: We save the HTML and extract the data using `BeautifulSoup`, and save them in JSON format.
 
-**Dynamic Webpages (Dashboard)**: We use `selenium` to render a webpage and switch to the right page. Then, if the data is stored in the source code, we find their path or css, extract them and save them to a `JSON` format. Otherwise, we take a screenshot of the webpage and extract the data manually.
+**Dynamic Webpages (Dashboard)**: We use `selenium` to render a webpage and switch to the right page. Then, if the data is stored in the source code, we find their path or css, extract them and save them to a `JSON` format. Otherwise, if the webpage can be saved as a PDFs, we use `BeautifulSoup` to download the webpage in a PDFs format and `fitz` to extract the data within PDFs. If we cannot use either of the latter options, we take a screenshot of the webpage, and extract the data manually.
+
 
 **Screenshots/PNGs**: To record the data published in the dynamic webpages
 
