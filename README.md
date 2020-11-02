@@ -12,19 +12,8 @@ We aim to update the processed data at least once a week. The data set currently
 ## Usage 
 
 ### Dependencies
-- R version >= 4.0.2
+#### Data extraction
 - Python version >= 3.6.1
-- R libraries:
-```
-data.table
-ggplot2 
-scales
-gridExtra
-tidyverse
-rjson
-readxl
-reshape2
-```
 - Python libraries:
 ```
 fitz
@@ -36,42 +25,110 @@ requests
 selenium
 ```
 
+#### Data processing
+- R version >= 4.0.2
+- R libraries:
+```
+data.table
+ggplot2 
+scales
+gridExtra
+tidyverse
+rjson
+readxl
+reshape2
+```
 
 ### Structure Overview
-The code is divided into 3 parts: First, the extraction of data, daily, that are saved as .json, .csv or .xlsx depending on the source.  Second, the processing of the daily files to create a complete time series for every state. Third, the comparison of our extracted data to John Hopkins University (JHU).
+The code is divided into 2 parts: First, the extraction of the COVID-19 mortality counts data from Department of Health websites. Second, the processing of the extracted data to create a complete time series of age-specific COVID-19 mortality counts for every location. 
 
-### 1. Daily extraction 
+### 1. Data extraction 
 To extract, run
 ```bash
 $ make files
 ```
 This will get you the latest data in `data/$DATE`.
 
-### 2. Processing 
+### 2. Data processing 
 To process, run
 ```bash
 $ Rscript scripts/process.data.R
 ```
 This will get you a csv file for every state with variables *age*, *date*, *daily.deaths* and (state) *code* in `data/processed/$DATE/`.
 
-### 3. Comparison to JHU 
-To create the figures, run
-```bash
-$ Rscript scripts/plot.time.series.R
-```
-This will get you pdfs in `figures/$DATE/` of 
-* Comparison between extracted data from the Department of Health and JHU overall deaths as well as,
-* Time series of overall deaths for every state.
 
-## More details about the scraping 
-### PDF extractions
-We use Requests to make HTTP/HTTPS requests to a web API, BeautifulSoup to extract the download links in the HTML page and Fitz to extract the data within the PDF. The resulting data is stored in a `.json` file in `data/$DATE`.
+## More details about the data extraction
 
-### non-PDF extractions (e.g. csvs, xlsx ...)
-We use Requests to make HTTP/HTTPS requests to a web API, checking whether the data is up-to-date. We then download the raw files to `data/$date`, via `scripts/age_extraction.py`. This is summarised in `Makefile` in the `make files` directive.
+The main entry point is `make files`. 
 
-### Dynamic websites
-We use webdriver from selenium to find the elements and extract the corresponding data. 
+### Scripts
+`make files` will execute the `files` task in `Makefile`, which currently is composed only of the script `./download_files.sh`. This script follows the following steps:
+
+1. Set a date, `$date`, in the local environment
+2. Create new folders in `data` and `pdfs` for the `$date`.
+3. Run the following scripts:
+    - `scripts/age_extraction.py` to extract the locations for which data are available in CSV, XLSX or JSON format.  
+    - a series of `GET` requests to the web API. They download CSVs made available by the DoH directly.
+    - `scripts/extraction_try.py`, which downloads data that are in webpage, XLSX or PDF format.
+    - `python scripts/get_nm.py` to get New Mexico data. 
+    
+
+### General procedure
+
+Depending on the data format made available by the DoH, we do the following:
+
+**PDFs**: We use `fitz` in order to read data within PDFs and save them to JSON or CSV format.
+
+**CSVs, XLSX, JSON**: Download directly
+
+**Static Webpages (HTML)**: We save the HTML and extract the data using `BeautifulSoup`, and save them in JSON format
+
+**Dynamic Webpages (Dashboard)**: We use `selenium` to render a webpage and switch to the right page. We get the data via them `path` or `css` (find from the `inspect`), and save them into `JSON` format
+
+**Screenshots/PNGs**: To record the data published in the dynamic webpages
+
+
+## More details about the data processing
+### Procedure
+#### Pre-processing adjustments
+We reconstruct time series for every location and age band, therefore all extracted data need to have the same age bands. If the DoH changes the reported age bands at time $t$ and,
+
+- the old age bands can be used to find the new age bands, then we find the mortality counts by the old age bands for every data from $t$ before processing.
+- the old age bands cannot be used to find the new age bands, then we truncate the time series: $t$ becomes the first day of the time series and all data extracted before $t$ are ignored.
+
+#### Processing stages
+
+1. Read the data
+      - If a complete time series records of age-specific COVID-19 attributable death burden is available
+          - Use only the last data available
+          - Every state has its own processing function depending on the data format 
+      
+      - If daily snapshots of age-specific COVID-19 attributable death burden are available
+          - Use every data ever extracted
+          - if CSV or XLSX: the state has its own processing function 
+          -  if JSON: common processing function 
+
+2. Ensure that the mortality counts are strictly increasing 
+      - some DoH updates indicated a decreasing mortality count from one day to the next.
+      - In this case, we set the mortality count on the earliest day to match the mortality count on the most recent day.
+
+3. Find daily deaths
+      - some days had missing data, usually either because no updates were reported, because the webpage failed or because the URL of the website had mutated. 
+      - The missing daily mortality count were imputed, assuming a constant increase in daily mortality count between days with data. 
+
+4. Check that the reconstructed cumulative deaths on the last day match the ones reported in the latest data.
+
+The script that acts as a spine for those four stages is `utils/obtain.data.R`. Functions for stage 1 are in `utils/read.daily-historical.data.R` and `utils/read.json.data.R`. Functions from stage 2, 3 are in `utils/summary_functions.R`. Function for stage 4 is in `utils/sanity.check.processed.data.R`.
+
+#### Post-processing adjustments 
+After reconstructing the time series, we make final adjustements for analysis:
+
+1. Modify the age bands boundaries from the ones declared by the Department of Health, such that they reflect the closest age bands in the set, A = { [0-4], [5-9], ..., [75-79], [80-84], [85+] }. 
+For example, age band [0-17] becomes [0-19] and age band [61-65]. 
+
+2. Keep only days that match closely with JHU overall mortality counts.
+
+Both data set, adjusted and non adjusted are available, `DeathsByAge_US_adj.csv` and `DeathsByAge_US.csv`.
 
 
 ## Data source
