@@ -79,11 +79,11 @@ Depending on the data format made available by the DoH, we do the following:
 
 **PDFs**: We use `fitz` in order to read data within PDFs and save them to JSON or CSV format.
 
-**CSVs, XLSX, JSON**: Download directly
+**CSVs, XLSX, JSON**: We download the data directly.
 
-**Static Webpages (HTML)**: We save the HTML and extract the data using `BeautifulSoup`, and save them in JSON format
+**Static Webpages (HTML)**: We save the HTML and extract the data using `BeautifulSoup`, and save them in JSON format.
 
-**Dynamic Webpages (Dashboard)**: We use `selenium` to render a webpage and switch to the right page. We get the data via them `path` or `css` (find from the `inspect`), and save them into `JSON` format
+**Dynamic Webpages (Dashboard)**: We use `selenium` to render a webpage and switch to the right page. Then, if the data is stored in the source code, we find their path or css, extract them and save them to a `JSON` format. Otherwise, we take a screenshot of the webpage and extract the data manually.
 
 **Screenshots/PNGs**: To record the data published in the dynamic webpages
 
