@@ -1236,7 +1236,7 @@ class AgeExtractor:
                 data = lines[begin_num:]
                 age_data = {}
                 for i in range(9):
-                    age_data[data[i+1]] = data[29-i]
+                    age_data[data[i+1]] = data[32-i]
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
                     os.mkdir(path)
