@@ -1,0 +1,41 @@
+,"All People Tested
+ (Positive and Negative)",,Cases,,Hospitalizations,,Deaths,
+Sex,"N=406,867",,"N=32,657",,"N=3,389",,"N=1,207",
+Female,211977,55%,17538,54%,1642,49%,638,53%
+Male,172525,45%,14780,46%,1735,51%,569,47%
+Other,81,<1%,14,<1%,<5,--,0,0%
+Pending further information,22284,--,325,--,8,--,0,--
+Age Group,,,,,,,,
+0-4,9598,2%,558,2%,27,1%,0,0%
+5-9,11471,3%,620,2%,11,<1%,0,0%
+10-14,11343,3%,801,2%,16,<1%,<5,--
+15-18,19292,5%,1341,4%,24,1%,0,0%
+19-24,51967,13%,3893,12%,100,3%,<5,--
+25-29,36169,9%,2994,9%,116,3%,<5,--
+30-39,63001,16%,5249,16%,252,7%,7,1%
+40-49,50523,12%,4685,14%,376,11%,16,1%
+50-59,59430,15%,4722,14%,522,15%,53,4%
+60-69,48474,12%,3277,10%,657,19%,129,11%
+70-79,26068,6%,1979,6%,639,19%,278,23%
+80-89,12996,3%,1537,5%,446,13%,392,32%
+90+,6095,1%,998,3%,202,6%,327,27%
+Pending further information,440,--,<5,--,<5,--,0,--
+Race and Ethnicity,,,,,,,,
+Hispanic or Latino†,28686,18%,11370,43%,981,36%,114,11%
+American Indian or Alaska Native*,3811,2%,94,<1%,5,<1%,<5,--
+Asian*,3769,2%,482,2%,50,2%,14,1%
+Black or African American*,11374,7%,3022,11%,338,12%,63,6%
+Native Hawaiian or Other Pacific Islander*,470,<1%,0,0%,0,0%,0,0%
+White*,94568,60%,11097,42%,1306,47%,803,81%
+Other race*,13563,9%,428,2%,59,2%,0,0%
+Multiple race*,136,<1%,233,1%,12,<1%,0,0%
+Declined,3132,--,304,--,10,--,0,--
+Unknown or pending further information,247358,--,5627,--,628,--,212,--
+† Includes people who identify as any race.,,,,,,,,
+* Includes people who identify as non-Hispanic ethnicity or have unknown or declined ethnicity.,,,,,,,,
+Source: Rhode Island Department of Health,,,,,,,,
+"Notes: Percentages for counts of less than five are not shown. Percentages do not include people with unknown demographics or those that are pending further information. People tested for COVID-19, COVID-19 cases, and COVID-19 associated deaths exclude out-of-state residents. COVID-19 hospitalizations include all patients hospitalized in Rhode Island, some of whom may not be Rhode Island residents.",,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+Last updated:,11/4/2020,,,,,,,
