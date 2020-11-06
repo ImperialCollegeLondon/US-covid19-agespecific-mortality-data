@@ -6,6 +6,7 @@ library(data.table)
 dates = seq.Date(as.Date("2020-03-22"), last.day, by = "day")
 
 json.states = data.table(code = c(     "AZ",
+                                       "AR",
                                        "CA",
                                        "DE",
                                        "IN",
@@ -40,6 +41,7 @@ json.states = data.table(code = c(     "AZ",
                                        "CO"),
                          
                          name = c("arizona",
+                                  "arkansas",
                                   "california",
                                   "delaware",
                                   "indiana",
@@ -75,6 +77,7 @@ json.states = data.table(code = c(     "AZ",
                                   
                          ),
                          state_name = c("Arizona",
+                                        "Arkansas",
                                   "California",
                                   "Delaware",
                                   "Indiana",
