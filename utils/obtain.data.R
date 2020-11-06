@@ -97,9 +97,11 @@ obtain.json.data = function(last.day, state_name, state_code){
   data_files = list.files(file.path(path_to_data, dates), full.names = T)
   data_files_state = data_files[grepl(paste0(state_name, ".json"), data_files)]
   if(state_name == "ma")  data_files_state = data_files_state[!grepl("oklahoma.json|alabama.json", data_files_state)] # we named massasschussets "ma" ...
+  if(state_name == "kansas")  data_files_state = data_files_state[!grepl("arkansas.json", data_files_state)] 
   dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
   
   if(state_name == "alabama") dates = dates[which(dates >= as.Date("2020-05-03"))] # they changed age groups at this date
+  if(state_name == "minnesota") dates = dates[which(dates >= as.Date("2020-05-21"))] # they changed age groups at this date
   if(state_name == "mississippi") dates = dates[which(dates >= as.Date("2020-09-30"))] # they changed age groups at this date
   if(state_name == "wyoming") dates = dates[which(dates >= as.Date("2020-10-29"))] # they changed age groups at this date
   if(state_name == "NorthCarolina") dates = dates[which(dates %notin% seq.Date(as.Date("2020-05-13"), as.Date("2020-05-19"), by = "day"))] # incorrect age groups

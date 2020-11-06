@@ -25,6 +25,19 @@ read_json = function(Date, state_name, state_code, data)
     json_data = json_data[-c(which(names(json_data) %in% c("0-4", "5-9", "10-14", "15-17","18-24", "25-29","30-34", "35-39",
                                    "40-44", "45-49","50-54", "55-59","60-64", "65-69","70-74", "75-79")))]
   }
+  if(state_name == "minnesota" & Date >= as.Date("2020-08-20")){
+    json_data[["20-29"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("20-24", "25-29"))])))
+    json_data[["30-39"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("30-34", "35-39"))])))
+    json_data[["40-49"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("40-44", "45-49"))])))
+    json_data[["50-59"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("50-54", "55-59"))])))
+    json_data[["60-69"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("60-64", "65-69"))])))
+    json_data[["70-79"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("70-74", "75-79"))])))
+    json_data[["80-89"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("80-84", "85-89"))])))
+    json_data[["90-99"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("90-94", "95-99"))])))
+    json_data = json_data[-c(which(names(json_data) %in% c("20-24", "25-29","30-34", "35-39","40-44", "45-49",
+                                                           "50-54", "55-59","60-64", "65-69","70-74", "75-79",
+                                                           "80-84", "85-89", "90-94", "95-99")))]
+  }
 
   # make sure that there is no space in the age band name
   names(json_data) = gsub(" ", "", names(json_data), fixed = TRUE)
