@@ -92,8 +92,9 @@ check_format_json = function(tmp, json_data, state_name, age_group, Date)
   return(tmp)
 }
 
-fix_age_json = function(data)
+fix_age_json = function(data, state_code)
   {
+  data[, age := ifelse(age == "<1", "0-0", age)]
   data[, age := ifelse(age == "00-04", "0-4", age)]
   data[, age := ifelse(age == "05-17", "5-17", age)]
   data[, age := ifelse(age == "<10", "0-9", age)]
@@ -101,8 +102,16 @@ fix_age_json = function(data)
   data[, age := ifelse(age == "<19", "0-18", age)]
   data[, age := ifelse(age %in% c("<20","Under20"), "0-19", age)]
   data[, age := ifelse(age %in% c(">80", "80plus","80andover"), "80+", age)]
+  data[, age := ifelse(age == ">80", "81+", age)]
   data[, age := ifelse(age == ">100", "100+", age)]
   data[, age := suppressWarnings(ifelse(grepl('to', age), paste0(as.numeric(gsub("(.+)to.*", "\\1", age)), "-", as.numeric(gsub(".*to(.+)", "\\1", age))), age))]
+  
+  if(state_code == "DC"){ # DC made a mistake in its age band, <19 includes 19
+    data[, age := ifelse(age == "<19", "0-19", age)]
+  }
+  if(state_code == "UT"){ # utah made a mistake in its age band, 0-1 is "Less than 1 year"
+    data[, age := ifelse(age == "0-1", "0-0", age)]
+  }
   
   #
   # Check that the first age group start at 0 - if not include a 0-(min(age)-1) with 0 deaths

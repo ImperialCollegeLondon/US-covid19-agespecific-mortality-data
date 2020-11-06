@@ -172,6 +172,7 @@ adjust_to_5y_age_band = function(data)
   data[, age := ifelse(age == "5-17", "5-19", age)]
   data[, age := ifelse(age == "10-18", "10-19", age)]
   data[, age := ifelse(age == "11-20", "10-19", age)]
+  data[, age := ifelse(age == "11-17", "10-19", age)]
   data[, age := ifelse(age == "18-24", "20-24", age)]
   data[, age := ifelse(age == "18-29", "20-29", age)]
   data[, age := ifelse(age == "18-34", "20-34", age)]
@@ -196,7 +197,8 @@ adjust_to_5y_age_band = function(data)
   
   #
   # Aggregate
-  tmp = subset(data, age == "0-1") 
+  tmp = subset(data, age == "0-0")
+  stopifnot( nrow(subset(data, age ==  "0-1")) == 0 )
   for(loc in unique(tmp$code)){
     tmp1 = subset(data, code == loc)
     age_from1 = unique(tmp1$age)[which(grepl('1-',unique(tmp1$age)))]

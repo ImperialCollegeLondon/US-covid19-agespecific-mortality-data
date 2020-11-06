@@ -101,6 +101,7 @@ obtain.json.data = function(last.day, state_name, state_code){
   
   if(state_name == "alabama") dates = dates[which(dates >= as.Date("2020-05-03"))] # they changed age groups at this date
   if(state_name == "mississippi") dates = dates[which(dates >= as.Date("2020-09-30"))] # they changed age groups at this date
+  if(state_name == "wyoming") dates = dates[which(dates >= as.Date("2020-10-29"))] # they changed age groups at this date
   if(state_name == "NorthCarolina") dates = dates[which(dates %notin% seq.Date(as.Date("2020-05-13"), as.Date("2020-05-19"), by = "day"))] # incorrect age groups
   
   # create time series
@@ -113,7 +114,7 @@ obtain.json.data = function(last.day, state_name, state_code){
   data = find_daily_deaths(dates = dates, h_data = data, state_code = state_code)
   
   # make human readable age band
-  data = fix_age_json(data)
+  data = fix_age_json(data, state_code)
     
   return(data)
 } 
