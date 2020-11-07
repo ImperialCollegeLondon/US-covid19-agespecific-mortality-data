@@ -62,7 +62,9 @@ ensure_increasing_cumulative_deaths = function(dates, h_data)
           
           # if cumulative date at date t < date t - 1, fix cum deaths at date t - 1 to the one at date t.
           if(h_data[age == age_group & date == Date & code == Code, cum.deaths] > h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]){
+            difference = h_data[age == age_group & date == Date & code == Code, cum.deaths] - h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]
             h_data[age == age_group & date == Date & code == Code,]$cum.deaths = h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]
+            if(difference > 30) stop("!!! Cumulative deaths decreased from one day to the next by more than 30, check your data !!!" )
           }
           
         }
@@ -202,11 +204,11 @@ adjust_to_5y_age_band = function(data)
   for(loc in unique(tmp$code)){
     tmp1 = subset(data, code == loc)
     age_from1 = unique(tmp1$age)[which(grepl('1-',unique(tmp1$age)))]
-    tmp1_agg = tmp1[age %in% c("0-1", age_from1), list(cum.deaths = sum(cum.deaths),
+    tmp1_agg = tmp1[age %in% c("0-0", age_from1), list(cum.deaths = sum(cum.deaths),
                                                        daily.deaths = sum(daily.deaths)),
                     by = c("date", "code")]
     tmp1_agg[, age := paste0("0-", gsub("1-(.+)","\\1",age_from1))]
-    tmp1 = rbind( subset(tmp1, age %notin% c("0-1", age_from1)), tmp1_agg)
+    tmp1 = rbind( subset(tmp1, age %notin% c("0-0", age_from1)), tmp1_agg)
     data = rbind(subset(data, !code %in% loc), tmp1)
   }
   
