@@ -114,7 +114,7 @@ fix_age_json = function(data, state_code)
   data[, age := ifelse(age == "<18", "0-17", age)]
   data[, age := ifelse(age == "<19", "0-18", age)]
   data[, age := ifelse(age %in% c("<20","Under20"), "0-19", age)]
-  data[, age := ifelse(age %in% c(">80", "80plus","80andover"), "80+", age)]
+  data[, age := ifelse(age %in% c("80plus","80andover"), "80+", age)]
   data[, age := ifelse(age == ">80", "81+", age)]
   data[, age := ifelse(age == ">100", "100+", age)]
   data[, age := suppressWarnings(ifelse(grepl('to', age), paste0(as.numeric(gsub("(.+)to.*", "\\1", age)), "-", as.numeric(gsub(".*to(.+)", "\\1", age))), age))]
