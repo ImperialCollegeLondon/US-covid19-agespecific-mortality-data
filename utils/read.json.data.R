@@ -125,6 +125,9 @@ fix_age_json = function(data, state_code)
   if(state_code == "UT"){ # utah made a mistake in its age band, 0-1 is "Less than 1 year"
     data[, age := ifelse(age == "0-1", "0-0", age)]
   }
+  if(state_code == "SC"){ # SC made a mistake in its age band, <10 includes 10
+    data[, age := ifelse(age == "0-9", "0-10", age)]
+  }
   
   #
   # Check that the first age group start at 0 - if not include a 0-(min(age)-1) with 0 deaths
