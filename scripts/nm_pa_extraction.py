@@ -84,7 +84,7 @@ for x in urls[:-1]:
 
 print("New Mexico Completed")
 
-from datetime import date
+from datetime import date, timedelta
 
 # Pennsylvania extraction
 print("Extracting Pennsylvania")
@@ -92,7 +92,7 @@ url = 'https://padoh.maps.arcgis.com/apps/opsdashboard/index.html#/5662e22517b64
 options = Options()
 options.add_argument('headless')
 
-day = date.today().strftime("%Y-%m-%d")
+day = (date.today() - timedelta(1)).strftime("%Y-%m-%d")
 browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
 browser.get(url)
 browser.implicitly_wait(15) # Let the page load
@@ -128,7 +128,7 @@ if not os.access("data/{}/pennsylvania.json".format(day), os.F_OK):
     print(age_data)
     
 else:
-    print('Report for Pennsylvania {} is already exist'.format(day))
+    print('Report for Pennsylvania {} already exists'.format(day))
     
 browser.switch_to.default_content()
 browser.close()
