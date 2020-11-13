@@ -167,7 +167,7 @@ This table includes a complete list of all sources ever used in the data set. We
 | New Hampshire | 2020-06-07 | [link](https://www.nh.gov/covid19/dashboard/summary.htm) | dashboard updated daily and replaced; no historical archive |
 | New Jersey | 2020-05-25 | [link](https://njhealth.maps.arcgis.com/apps/opsdashboard/index.html#/81a17865cb1a44db92eb8eb421703635) | dashboard updated daily and replaced; no historical archive|
 | New Mexico | 2020-05-25 | [link](https://cv.nmhealth.org/newsroom/) | daily written report; with history archive |
-| New York City | 2020-04-14 | [link](https://www1.nyc.gov/site/doh/covid/covid-19-data-archive.page) until 2020-05-18 and [link](https://github.com/nychealth/coronavirus-data/blob/master/by-age.csv) since | report / csv updated daily, with history archive |
+| New York City | 2020-04-14 | [link](https://www1.nyc.gov/site/doh/covid/covid-19-data-archive.page), [link](https://github.com/nychealth/coronavirus-data/blob/master/by-age.csv) since 2020-05-18, [link](https://github.com/nychealth/coronavirus-data/blob/master/totals/by-age.csv) since 2020-11-08 | report / csv updated daily, with history archive |
 | North Carolina | 2020-05-20 | [link](https://covid19.ncdhhs.gov/dashboard/about-data) | dashboard updated daily and replaced; no historical archive |
 | North Dakota | 2020-05-14 | [link](https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases) | dashboard updated daily and replaced; no historical archive|
 | Oklahoma | 2020-05-13 | [link](https://looker-dashboards.ok.gov/embed/dashboards/76) | dashboard updated daily and replaced; no historical archive |
