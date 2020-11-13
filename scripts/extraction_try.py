@@ -747,11 +747,18 @@ class AgeExtractor:
             #browser.find_element_by_xpath(
             #    '/html/body/div[5]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/span').click()
             browser.implicitly_wait(2)
+            browser.implicitly_wait(6)
             browser.find_element_by_xpath(
-                '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[1]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div/div').click()
-            browser.implicitly_wait(2)
+                '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[1]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div').click()
+
+            #browser.find_element_by_xpath(
+            #    '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[1]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div/div').click()
+            browser.implicitly_wait(6)
             browser.find_element_by_xpath(
-                '/html/body/div[6]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/div/span').click()
+                '/html/body/div[6]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/span').click()
+
+            #browser.find_element_by_xpath(
+            #    '/html/body/div[6]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/div/span').click()
             browser.implicitly_wait(2)
             time.sleep(1)
 
