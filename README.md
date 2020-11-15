@@ -11,9 +11,25 @@ We aim to update the processed data at least once a week. The data set currently
 
 ## Usage 
 
+### Docker
+The easiest way for reproducibility is using `docker`. A `Dockerfile` is in the repository.
+
+Run:
+```sh
+sudo apt-get install docker # for linux. For mac you can use something like brew. In any case,
+# you need to install docker onto your machine 
+docker build -t usaage .
+docker run --rm -t -d --name usaage_container -v $(pwd):/code usaage
+```
+
+This will keep a docker container running in the background, which you can inspect using docker ps.
+
+Now all the development can be done in the container and you can edit the code as usual locally (changes will be synced to the docker container since we made it share folders using the flag `-v`). You might need to use Remote-SSH in the VSCODE IDE for convenience. You can also just attach a shell onto the container using `docker exec -it usaage_container /bin/bash`
+
+You can check that everything works by running make all in the container.
+
 ### Structure Overview
 The code is divided into 2 parts: First, the extraction of the COVID-19 mortality counts data from Department of Health websites. Second, the processing of the extracted data to create a complete time series of age-specific COVID-19 mortality counts for every location. 
-
 
 ### Dependencies
 #### Data extraction
@@ -132,7 +148,6 @@ For example, age band [0-17] becomes [0-19] and age band [61-65].
 2. Keep only days that match closely with JHU overall mortality counts.
 
 Both data set, adjusted and non adjusted are available, `DeathsByAge_US_adj.csv` and `DeathsByAge_US.csv`.
-
 
 ## Data source
 This table includes a complete list of all sources ever used in the data set. We acknowledge and are grateful to U.S. state Departments of Health for making the primary data available at the following sources:
