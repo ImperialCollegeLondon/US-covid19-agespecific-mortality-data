@@ -1210,8 +1210,7 @@ class AgeExtractor:
                 print('Data for South Carolina {} is already exist'.format(date))
 
     def get_nh(self):
-        url = 'https://nh.gov/t/DHHS/views/COVID-19Dashboard/Summary.pdf?:embed=y&:isGuestRedirectFromVizportal=y&:display_count=n&:showVizHome=n&:origin=viz_share_link'
-
+        url = 'https://www.nh.gov/covid19/documents/case-summary.pdf'
         try:
             r = requests.get(url)
             r.raise_for_status()
