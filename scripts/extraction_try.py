@@ -267,10 +267,10 @@ class AgeExtractor:
                 data = lines
                 age_data = {}
                 age_data['<20y'] = data[17]
-                age_data['20-44y'] = data[14]
-                age_data['45-54y'] = data[15]
-                age_data['55-64y'] = data[16]
-                age_data['65+'] = data[13]
+                age_data['20-44y'] = data[15]
+                age_data['45-54y'] = data[16]
+                age_data['55-64y'] = data[13]
+                age_data['65+'] = data[14]
                 doc.close()
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
@@ -314,7 +314,7 @@ class AgeExtractor:
                 data = lines[data_num:]
                 age_data = {}
                 age_data[data[0]] = data[29]
-                age_data[data[1]] = data[26]
+                age_data[data[1]] = data[25]
                 age_data[data[2]] = data[8]
                 age_data[data[3]] = data[7]
                 age_data[data[4]] = data[28]
