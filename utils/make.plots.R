@@ -5,10 +5,10 @@ library(gridExtra)
 library(tidyverse)
 
 # jhu
-death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_201810.rds"))
+death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_201126.rds"))
 
 # NYC
-death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_201810.csv"))
+death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_201126.csv"))
 
 
 # processed data
@@ -22,10 +22,10 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
   # if NYC, use the data from NYC github repository
   if(Code == "NYC"){ 
     death_data_nyc = data.table(death_data_nyc) %>%
-      select(DEATH_COUNT, DATE_OF_INTEREST) %>%
+      select(DEATH_COUNT, date_of_interest) %>%
       rename(daily_deaths = DEATH_COUNT) %>%
       mutate(source = "City",
-             date = as.Date(DATE_OF_INTEREST, format = "%m/%d/%y"),
+             date = as.Date(date_of_interest, format = "%m/%d/%y"),
              cum.deaths = cumsum(daily_deaths))
     
     death_data_scrapping = read.csv(path_to_data(Code)) %>%
@@ -65,6 +65,8 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
     death_data_scrapping$date = as.Date(death_data_scrapping$date)
     
     death_data = dplyr::bind_rows(death_data_jhu, death_data_scrapping)
+    
+    cat('The last day of data is ', as.character(max(death_data_scrapping$date)))
     
     if(with_CDC){
       death_data_cdc = read.csv(path_to_data("CDC")) %>%
