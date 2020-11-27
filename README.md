@@ -174,8 +174,9 @@ This table includes a complete list of all sources ever used in the data set. We
 | Louisiana | 2020-05-12 | [link](https://www.arcgis.com/apps/opsdashboard/index.html#/4a6de226701e45bdb542f09b73ee79e1) | dashboard updated daily except on Saturday and replaced; no historical archive|
 | Maine | 2020-03-12 | [link](https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml) | metadata updated daily; full time series |
 | Maryland | 2020-05-14 | [link](https://coronavirus.maryland.gov/) | dashboard updated daily and replaced; no historical archive | 
-| Massachusetts | 2020-04-20 | [link](https://www.mass.gov/info-details/archive-of-covid-19-cases-in-massachusetts) until 2020-08-11 and [link](https://www.mass.gov/info-details/covid-19-response-reporting) since | (1) daily report, with historical archive; (2) weekly report, with historical archive;  |
+| Massachusetts | 2020-04-20 | [link](https://www.mass.gov/info-details/archive-of-covid-19-cases-in-massachusetts) until 2020-08-11 and [link](https://www.mass.gov/info-details/covid-19-response-reporting) since | (1) daily report, with historical archive; (2) weekly report, with historical archive  |
 | Michigan | 2020-03-21 | (1) `data/req/michigan weekly.csv` and (2) [link](https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html) | (1) data requested to the DoH (2) dashboard updated daily and replaced; no historical archive |
+| Minnesota | 2020-05-21 | [link](https://www.health.state.mn.us/diseases/coronavirus/stats/index.html) | weekly report, with historical archive |
 | Mississippi | 2020-04-27 | [link](https://msdh.ms.gov/msdhsite/_static/14,0,420.html) | dashboard updated daily and replaced; no historical archive |
 | Missouri | 2020-05-13 | (1)[link](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php) and (2)[link](https://showmestrong.mo.gov/data/public-health/) | dashboard updated daily and replaced; no historical archive |
 | Nevada | 2020-06-07 | [link](https://nvhealthresponse.nv.gov) | dashboard updated daily and replaced; no historical archive |
