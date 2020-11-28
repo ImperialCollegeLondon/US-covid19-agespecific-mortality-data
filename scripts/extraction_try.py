@@ -28,6 +28,7 @@ class AgeExtractor:
 
     def get_louisiana(self):
         url = 'https://www.arcgis.com/apps/opsdashboard/index.html#/4a6de226701e45bdb542f09b73ee79e1'
+        url = 'https://ladhh.maps.arcgis.com/apps/opsdashboard/index.html#/4ecc2bfa2fa54b6eb5c0eccda972d203'
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
@@ -39,31 +40,36 @@ class AgeExtractor:
         if not os.access("data/{}/louisiana.json".format(day), os.F_OK):
             browser.implicitly_wait(2)
             button_name = button1[0].text.split('\n')[-1]
-            m_button = [e for e in button1 if e.text == button_name][0]
+            main = [e for e in button1 if e.text == button_name][0]
+            #button = [e for e in button1 if e.text == 'State Map of Cases by Parish'][0]
             time.sleep(2)
-            m_button.click()
+            main.click()
             browser.implicitly_wait(2)
-            #button = browser.find_elements_by_css_selector('div.flex-fluid')
-            time.sleep(2)
             button = browser.find_elements_by_css_selector('div')
-            time.sleep(20)
-            button = [e for e in button if e.text == 'Deaths by Age Group']
-            time.sleep(20)
-            button[0].click()
-            time.sleep(10)
-            #button = [e for e in button if e.text == button_name or e.text == 'Cases and Deaths by Age']
             time.sleep(2)
-            #button[1].click()
+            button = [e for e in button if e.text == 'Deaths by Age Group']
+            time.sleep(2)
+            button[0].click()
+            main.click()
             browser.implicitly_wait(1)
             #button[2].click()
             browser.implicitly_wait(1)
             board = browser.find_elements_by_css_selector('g.amcharts-graph-column')#.amcharts-graph-graphAuto1_1589372672251')
-            data = [e.get_attribute('aria-label') for e in board if e.get_attribute('aria-label') and 'death' in e.get_attribute('aria-label')]
+
+            data = [e.get_attribute('aria-label') for e in board if e.get_attribute('aria-label')]
+
+            data = data[134:141]
             browser.implicitly_wait(5)
             age_data ={}
             for a in data:
-                age_data[" ".join(a.split()[1:-1])] = a.split()[-1]
-            m_button.click()
+                age_data[" ".join(a.split()[0:-1])] = a.split()[-1]
+
+            #data = [e.get_attribute('aria-label') for e in board if e.get_attribute('aria-label') and 'death' in e.get_attribute('aria-label')]
+            #browser.implicitly_wait(5)
+            #age_data ={}
+            #for a in data:
+            #    age_data[" ".join(a.split()[1:-1])] = a.split()[-1]
+            #m_button.click()
             path = "data/{}".format(day)
             if not os.path.exists(path):
                 os.mkdir(path)
@@ -584,8 +590,10 @@ class AgeExtractor:
                 browser.implicitly_wait(2)
                 age_data = {}
                 for i in range(9):
-                    group = browser.find_element_by_xpath('//*[@id="ember110"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[1]').text
-                    data = browser.find_element_by_xpath('//*[@id="ember110"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[3]').text
+                    group = browser.find_element_by_xpath(
+                        '//*[@id="ember120"]/table[1]/tbody/tr[' + str(i + 2) + ']/td[1]').text
+                    data = browser.find_element_by_xpath(
+                        '//*[@id="ember120"]/table[1]/tbody/tr[' + str(i + 2) + ']/td[3]').text
                     if data == '':
                         data = '0'
                     else:
