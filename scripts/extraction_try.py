@@ -259,7 +259,7 @@ class AgeExtractor:
         except requests.exceptions.HTTPError as err:
             print(err)
             print(
-                "==> Report for Arizona {} is not available".date.today().strftime('%Y-%m-%d')
+                "==> Report for Arizona {} is not available".format(date.today().strftime('%Y-%m-%d'))
             )
         else:
             day = self.today
@@ -477,7 +477,7 @@ class AgeExtractor:
 
                 browser.set_window_size(width, height)
                 time.sleep(1)
-                path = "pngs/delaware".format(day)
+                path = "pngs/delaware/{}".format(day)
                 if not os.path.exists(path):
                     os.mkdir(path)
                 print(age_data)
@@ -1020,7 +1020,7 @@ class AgeExtractor:
         except requests.exceptions.HTTPError as err:
             print(err)
             print(
-                "==> Report for Wyoming {} is not available".date.today().strftime('%Y-%m-%d')
+                "==> Report for Wyoming {} is not available".format(date.today().strftime('%Y-%m-%d'))
             )
         else:
             day = self.today
@@ -1109,7 +1109,7 @@ class AgeExtractor:
         except requests.exceptions.HTTPError as err:
             print(err)
             print(
-                "==> Report for California {} is not available".date.today().strftime('%Y-%m-%d')
+                "==> Report for California {} is not available".format(date.today().strftime('%Y-%m-%d'))
             )
         else:
             date = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
@@ -1168,7 +1168,7 @@ class AgeExtractor:
         except requests.exceptions.HTTPError as err:
             print(err)
             print(
-                "==> Report for SouthCarolina {} is not available".date.today().strftime('%Y-%m-%d')
+                "==> Report for SouthCarolina {} is not available".format(date.today().strftime('%Y-%m-%d'))
             )
         else:
             date = parsedate(r.headers["Date"]).strftime("%Y-%m-%d")
@@ -1182,7 +1182,7 @@ class AgeExtractor:
 
                 lines = doc.getPageText(0).splitlines()
                 total = lines[0]
-                for num, l in enumerate(lines):
+                for l in enumerate(lines):
                     if '/2020' in l:
                         day = l.split()[-1]
                 day = parsedate(day).strftime("%Y-%m-%d")
@@ -1225,7 +1225,7 @@ class AgeExtractor:
         except requests.exceptions.HTTPError as err:
             print(err)
             print(
-                "==> Report for NewHampshire {} is not available".date.today().strftime('%Y-%m-%d')
+                "==> Report for NewHampshire {} is not available".format(date.today().strftime('%Y-%m-%d'))
             )
         else:
             date = self.today
@@ -1286,7 +1286,7 @@ class AgeExtractor:
         except requests.exceptions.HTTPError as err:
             print(err)
             print(
-                "==> Report for kansas {} is not available".day
+                "==> Report for kansas {} is not available".format(day)
             )
         else:
             if not os.access("data/{}/kansas.json".format(day), os.F_OK):
@@ -1332,7 +1332,7 @@ class AgeExtractor:
         except requests.exceptions.HTTPError as err:
             print(err)
             print(
-                "==> Report for hawaii {} is not available".date.today().strftime('%Y-%m-%d')
+                "==> Report for hawaii {} is not available".format(date.today().strftime('%Y-%m-%d'))
             )
         else:
             date = self.today
@@ -1345,7 +1345,7 @@ class AgeExtractor:
                 doc = fitz.Document("pdfs/hawaii/{}.pdf".format(date))
 
                 lines = doc.getPageText(0).splitlines()
-                for num, l in enumerate(lines):
+                for l in enumerate(lines):
                     if 'Last\tupdated' in l:
                         day = l
                 day = " ".join(day.split('\t')[2:5])
@@ -1397,7 +1397,7 @@ class AgeExtractor:
         time.sleep(50)
         browser.implicitly_wait(50)
         time.sleep(10)
-        path = "pngs/colorado".format(day)
+        path = "pngs/colorado/{}".format(day)
         if not os.path.exists(path):
             os.mkdir(path)
 
@@ -1424,7 +1424,7 @@ class AgeExtractor:
         time.sleep(50)
         browser.implicitly_wait(50)
         time.sleep(10)
-        path = "pngs/iowa".format(day)
+        path = "pngs/iowa/{}".format(day)
         if not os.path.exists(path):
             os.mkdir(path)
 
@@ -1443,7 +1443,7 @@ class AgeExtractor:
         time.sleep(50)
         browser.implicitly_wait(50)
 
-        path = "pngs/new_hampshire".format(day)
+        path = "pngs/new_hampshire/{}".format(day)
         if not os.path.exists(path):
             os.mkdir(path)
 
@@ -1488,7 +1488,7 @@ class AgeExtractor:
         except requests.exceptions.HTTPError as err:
             print(err)
             print(
-                "==> Report for idaho {} is not available".date.today().strftime('%Y-%m-%d')
+                "==> Report for idaho {} is not available".format(date.today().strftime('%Y-%m-%d'))
             )
         else:
             day = self.today
