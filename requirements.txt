@@ -1,6 +1,6 @@
 fiona 
-fitz
 PyMuPDF
+fitz
 pandas
 pyjson
 beautifulsoup4
@@ -11,4 +11,4 @@ matplotlib
 webdriver_manager
 pillow
 xlrd
-frontend
+
