@@ -52,7 +52,7 @@ ensure_increasing_cumulative_deaths = function(dates, h_data)
     Date = rev(dates)[t]
     print(Date)
     #
-    # check if cumulative death is strictly dicreasing from last date to first date
+    # check if cumulative death is strictly decreasing from last date to first date
     
     for(age_group in unique(h_data$age)){
       
