@@ -513,11 +513,11 @@ class AgeExtractor:
         day = self.today
         if not os.access("data/{}/vermont.json".format(day), os.F_OK):
             browser.implicitly_wait(13)
-            browser.find_element_by_xpath('//*[@id="ember468"]').click()
+            browser.find_element_by_xpath('//*[@id="ember486"]').click()
             browser.implicitly_wait(13)
-            browser.find_element_by_xpath('//*[@id="ember449"]').click()
+            browser.find_element_by_xpath('//*[@id="ember467"]').click()
             browser.implicitly_wait(13)
-            browser.find_element_by_xpath('//*[@id="ember468"]').click()
+            browser.find_element_by_xpath('//*[@id="ember486"]').click()
             time.sleep(3)
             age_data = {}
             age_data['0-9'] = 0
@@ -525,7 +525,7 @@ class AgeExtractor:
             age_data['20-29'] = 0
             for i in range(6):
                 data = browser.find_element_by_xpath(
-                    '//*[@id="ember238"]/div/div/*[name()="svg"]/*[name()="g"][7]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
+                    '//*[@id="ember252"]/div/div/*[name()="svg"]/*[name()="g"][7]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
                         i + 1) + ']').get_attribute('aria-label')
                 age_data[data.split()[0]] = data.split()[-1]
             path = "data/{}".format(day)
@@ -655,7 +655,7 @@ class AgeExtractor:
                     f.write(r.content)
                 html = r.text
                 soup = BeautifulSoup(html, "html.parser")
-                tables = soup.find_all("table")[2]
+                tables = soup.find_all("table")[1]
                 rows = tables.find_all("td")
                 data = [e.text for e in rows]
                 age_data = {}
