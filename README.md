@@ -7,7 +7,7 @@ The user may directly find age-specific mortality by date, age and location in
 ```
 data/processed/latest/DeathsByAge_US.csv
 ```
-We aim to update the processed data at least once a week. The data set currently includes 42 U.S. states and 2 metropolitan areas, New York City and the District of Columbia.
+We aim to update the processed data at least once a week. The data set currently includes 44 U.S. states and 2 metropolitan areas, New York City and the District of Columbia.
 
 ## Usage 
 
