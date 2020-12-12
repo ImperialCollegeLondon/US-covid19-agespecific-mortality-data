@@ -19,14 +19,15 @@ from dateutil.parser import parse as parsedate
 from bs4 import BeautifulSoup, SoupStrainer
 
 
-class AgeExtractor:
+class Extractor:
     def __init__(self):
         self.today = date.today()
 
     def get_cdc(self):
         ## now obtain PDF update date
         r = requests.get(
-            "https://data.cdc.gov/api/views/9bhg-hcku/rows.csv", verify=False,
+            "https://data.cdc.gov/api/views/9bhg-hcku/rows.csv",
+            verify=False,
         )
         ## the reports are always published 1 day later (possibly!)
         data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
@@ -61,9 +62,6 @@ class AgeExtractor:
 
     def get_washington(self):
         ## now obtain PDF update date
-        # r = requests.head(
-        #     "https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC-CDC-Event-Date-SARS.xlsx"
-        # )
         r = requests.head(
             "https://www.doh.wa.gov/Portals/1/Documents/1600/coronavirus/data-tables/PUBLIC_CDC_Event_Date_SARS.xlsx"
         )
@@ -153,11 +151,11 @@ class AgeExtractor:
             with open("data/{}/new_jersey.json".format(pdf_date), "w") as f:
                 json.dump(age_data, f)
 
-
     def get_connecticut(self):
         ## now obtain PDF update date
         r = requests.get(
-            "https://data.ct.gov/api/views/ypz6-8qyf/rows.csv", verify=False,
+            "https://data.ct.gov/api/views/ypz6-8qyf/rows.csv",
+            verify=False,
         )
         ## the reports are always published 1 day later (possibly!)
         data_date = parsedate(r.headers["Last-Modified"]).strftime("%Y-%m-%d")
@@ -181,7 +179,7 @@ class AgeExtractor:
             mkdir("pdfs/massachusetts")
         existing_assets = list(map(basename, glob("pdfs/massachusetts/*.pdf")))
         api_base_url = "https://www.mass.gov/doc/"
-        date_diff = self.today - date(2020, 7, 1) 
+        date_diff = self.today - date(2020, 7, 1)
 
         for i in range(date_diff.days + 1):
             day = date(2020, 7, 1) + timedelta(days=i)
@@ -354,7 +352,7 @@ class AgeExtractor:
             with open(f"data/{file_date.strftime('%Y-%m-%d')}/michigan.json", "w") as f:
                 json.dump(data, f)
 
-            print(f'Processed {file_date} for Michigan')
+            print(f"Processed {file_date} for Michigan")
 
         files = os.listdir("html/michigan")
         for f in files:
@@ -369,13 +367,13 @@ class AgeExtractor:
                 "html/minnesota/temp.html",
                 "https://www.health.state.mn.us/diseases/coronavirus/situation.html",
             ]
-        )   
+        )
 
         with open("html/minnesota/temp.html") as f:
             soup = BeautifulSoup(f, "html.parser")
 
-        html_date = soup.find('p', class_='small').find('strong').text[9:]
-        html_date = datetime.strptime(html_date, '%B %d, %Y').strftime("%d/%m/%Y")
+        html_date = soup.find("p", class_="small").find("strong").text[9:]
+        html_date = datetime.strptime(html_date, "%B %d, %Y").strftime("%d/%m/%Y")
         html_date = html_date.replace("/", "-")
 
         copyfile("html/minnesota/temp.html", f"html/minnesota/{html_date}.html")
@@ -388,36 +386,46 @@ class AgeExtractor:
             with open(f"html/minnesota/{file_date.strftime('%d-%m-%Y')}.html") as f:
                 soup = BeautifulSoup(f, "html.parser")
 
-            table = soup.find("table", id='agetable')
-            table_rows = table.find_all('tr')
+            table = soup.find("table", id="agetable")
+            table_rows = table.find_all("tr")
 
             data = dict()
 
             for row in table_rows[1:]:
-                age_band = row.find('th').text
-                deaths = row.find_all('td')[1].text.strip(' ')
+                age_band = row.find("th").text
+                deaths = row.find_all("td")[1].text.strip(" ")
                 data[age_band] = deaths
 
             os.makedirs(f"data/{file_date.strftime('%Y-%m-%d')}", exist_ok=True)
-            with open(f"data/{file_date.strftime('%Y-%m-%d')}/minnesota.json", "w") as f:
+            with open(
+                f"data/{file_date.strftime('%Y-%m-%d')}/minnesota.json", "w"
+            ) as f:
                 json.dump(data, f)
 
-            print(f'Processed {file_date} for Minnesota')
+            print(f"Processed {file_date} for Minnesota")
 
         files = os.listdir("html/minnesota")
         for f in files:
             process_minnesota_day(f.split(".")[0])
 
     def get_virginia(self):
-        data = pd.read_csv("https://data.virginia.gov/api/views/uktn-mwig/rows.csv?accessType=DOWNLOAD").dropna()
-        data = data.groupby(by=["Report Date", "Age Group"]).sum().reset_index(level=1)[["Age Group", "Number of Cases"]]
+        data = pd.read_csv(
+            "https://data.virginia.gov/api/views/uktn-mwig/rows.csv?accessType=DOWNLOAD"
+        ).dropna()
+        data = (
+            data.groupby(by=["Report Date", "Age Group"])
+            .sum()
+            .reset_index(level=1)[["Age Group", "Number of Cases"]]
+        )
         for date in data.index:
             d = datetime.strptime(date, "%m/%d/%Y").strftime("%Y-%m-%d")
-            os.makedirs(f'data/{d}', exist_ok=True)
-            data.loc[date].reset_index(drop=True).set_index("Age Group")["Number of Cases"].to_json(f'data/{d}/virginia.json')
+            os.makedirs(f"data/{d}", exist_ok=True)
+            data.loc[date].reset_index(drop=True).set_index("Age Group")[
+                "Number of Cases"
+            ].to_json(f"data/{d}/virginia.json")
 
     def get_district_of_columbia(self):
-        os.makedirs('csvs/district_of_columbia/', exist_ok=True)
+        os.makedirs("csvs/district_of_columbia/", exist_ok=True)
         i = 0
         while True:
             url = f"https://coronavirus.dc.gov/sites/default/files/dc/sites/coronavirus/page_content/attachments/DC-COVID-19-Data-for-{(self.today-timedelta(days=i)).strftime('%B-%-d-%Y')}.xlsx"
@@ -431,90 +439,81 @@ class AgeExtractor:
                 ]
             )
             print(ret)
-            if ret.returncode==0:
+            if ret.returncode == 0:
                 break
             else:
-                os.remove(f"csvs/district_of_columbia/{(self.today-timedelta(days=i)).strftime('%d-%m-%Y')}.xlsx")
+                os.remove(
+                    f"csvs/district_of_columbia/{(self.today-timedelta(days=i)).strftime('%d-%m-%Y')}.xlsx"
+                )
                 i += 1
 
-        data = pd.read_excel(f"csvs/district_of_columbia/{(self.today-timedelta(days=i)).strftime('%d-%m-%Y')}.xlsx", sheet_name="Lives Lost by Age", index_col=0)
-        data = data.drop(labels=['Age', 'All'], axis=0)
+        data = pd.read_excel(
+            f"csvs/district_of_columbia/{(self.today-timedelta(days=i)).strftime('%d-%m-%Y')}.xlsx",
+            sheet_name="Lives Lost by Age",
+            index_col=0,
+        )
+        data = data.drop(labels=["Age", "All"], axis=0)
 
         for date in data.columns:
             os.makedirs(f'data/{date.strftime("%Y-%m-%d")}', exist_ok=True)
             data[date].to_json(f'data/{date.strftime("%Y-%m-%d")}/doc.json')
-        
 
     def get_all(self):
-        """TODO: running get_*() for every state
-        """
-        return NotImplementedError()
+        try:
+            print("\n### Running Georgia ###\n")
+            self.get_georgia()
+        except:
+            print("\n!!! GEORGIA FAILED !!!\n")
+
+        try:
+            print("\n### Running CDC ###\n")
+            self.get_cdc()
+        except:
+            print("\n!!! CDC FAILED !!!\n")
+
+        try:
+            print("\n### Running Washington###\n")
+            self.get_washington()
+        except:
+            print("\n!!! WASHINGTON FAILED !!!\n")
+
+        try:
+            print("\n### Running Texas ###\n")
+            self.get_texas()
+        except:
+            print("\n!!! TEXAS FAILED !!!\n")
+
+        try:
+            print("\n### Running Connecticut ###\n")
+            self.get_connecticut()
+        except:
+            print("\n!!! CONNECTICUT FAILED !!!\n")
+
+        try:
+            print("\n### Running Minnesota ###\n")
+            self.get_minnesota()
+        except:
+            print("\n!!! MINNESOTA FAILED !!!\n")
+
+        try:
+            print("\n### Running Virginia ###\n")
+            self.get_virginia()
+        except:
+            print("\n!!! VIRGINIA FAILED !!!\n")
+
+        try:
+            print("\n### Running DOC ###\n")
+            self.get_district_of_columbia()
+        except:
+            print("\n!!! DOC FAILED !!!\n")
+
+        try:
+            print("\n### Running NYC ###\n")
+            self.get_nyc()
+        except:
+            print("\n!!! NYC FAILED !!!\n")
 
 
 if __name__ == "__main__":
-    ageExtractor = AgeExtractor()
-
-    try:
-        print("\n### Running Georgia ###\n")
-        ageExtractor.get_georgia()
-    except:
-        print("\n!!! GEORGIA FAILED !!!\n")
-
-    try:
-        print("\n### Running CDC ###\n")
-        ageExtractor.get_cdc()
-    except:
-        print("\n!!! CDC FAILED !!!\n")
-
-    try:
-        print("\n### Running Washington###\n")
-        ageExtractor.get_washington()
-    except:
-        print("\n!!! WASHINGTON FAILED !!!\n")
-
-    try:
-        print("\n### Running Texas ###\n")
-        ageExtractor.get_texas()
-    except:
-        print("\n!!! TEXAS FAILED !!!\n")
-
-    try:
-        print("\n### Running Connecticut ###\n")
-        ageExtractor.get_connecticut()
-    except:
-        print("\n!!! CONNECTICUT FAILED !!!\n")
-
-    try:
-        print("\n### Running Minnesota ###\n")
-        ageExtractor.get_minnesota()
-    except:
-        print("\n!!! MINNESOTA FAILED !!!\n")
-
-    try:
-        print("\n### Running Virginia ###\n")
-        ageExtractor.get_virginia()
-    except:
-        print("\n!!! VIRGINIA FAILED !!!\n")
-
-    try:
-        print("\n### Running DOC ###\n")
-        ageExtractor.get_district_of_columbia()
-    except:
-        print("\n!!! DOC FAILED !!!\n")
-
-    try:
-        print("\n### Running NYC ###\n")
-        ageExtractor.get_nyc()
-    except:
-        print("\n!!! NYC FAILED !!!\n")
-                               
-    #try:
-    #    print("\n### Running MA ###\n")
-    #    ageExtractor.get_massachusetts()
-    #except:
-    #    print("\n!!! MA FAILED !!!\n")                             
-    
-    #ageExtractor.get_new_jersey()
-    #ageExtractor.get_florida()
-    # ageExtractor.get_michigan()
-    
+    extractor = Extractor()
+    extractor.get_all()
