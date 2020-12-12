@@ -131,3 +131,5 @@ dmypy.json
 .vscode
 *.pdf
 *.pdf?la=en
+
+*.DS_Store
