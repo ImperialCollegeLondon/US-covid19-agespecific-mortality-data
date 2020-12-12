@@ -7,6 +7,7 @@ mkdir -p pdfs/$today/
 # run python scripts
 python scripts/extractor.py
 python scripts/selenium_extractor.py
+python scripts/nm_pa_extractor.py
 
 # GET method to directly download some data
 GET https://data.ct.gov/resource/ypz6-8qyf.json > data/$today/connecticut_2.csv
