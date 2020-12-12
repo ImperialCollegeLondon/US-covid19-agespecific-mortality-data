@@ -52,7 +52,7 @@ ensure_increasing_cumulative_deaths = function(dates, h_data)
     Date = rev(dates)[t]
     print(Date)
     #
-    # check if cumulative death is strictly dicreasing from last date to first date
+    # check if cumulative death is strictly decreasing from last date to first date
     
     for(age_group in unique(h_data$age)){
       
@@ -62,7 +62,9 @@ ensure_increasing_cumulative_deaths = function(dates, h_data)
           
           # if cumulative date at date t < date t - 1, fix cum deaths at date t - 1 to the one at date t.
           if(h_data[age == age_group & date == Date & code == Code, cum.deaths] > h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]){
+            difference = h_data[age == age_group & date == Date & code == Code, cum.deaths] - h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]
             h_data[age == age_group & date == Date & code == Code,]$cum.deaths = h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]
+            if(difference > 30) stop("!!! Cumulative deaths decreased from one day to the next by more than 30, check your data !!!" )
           }
           
         }
@@ -172,12 +174,14 @@ adjust_to_5y_age_band = function(data)
   data[, age := ifelse(age == "5-17", "5-19", age)]
   data[, age := ifelse(age == "10-18", "10-19", age)]
   data[, age := ifelse(age == "11-20", "10-19", age)]
+  data[, age := ifelse(age == "11-17", "10-19", age)]
   data[, age := ifelse(age == "18-24", "20-24", age)]
   data[, age := ifelse(age == "18-29", "20-29", age)]
   data[, age := ifelse(age == "18-34", "20-34", age)]
   data[, age := ifelse(age == "18-35", "20-34", age)]
   data[, age := ifelse(age == "18-40", "20-39", age)]
   data[, age := ifelse(age == "18-44", "20-44", age)]
+  data[, age := ifelse(age == "18-39", "20-39", age)]
   data[, age := ifelse(age == "18-49", "20-49", age)]
   data[, age := ifelse(age == "19-29", "20-29", age)]
   data[, age := ifelse(age == "19-64", "20-64", age)]
@@ -196,15 +200,16 @@ adjust_to_5y_age_band = function(data)
   
   #
   # Aggregate
-  tmp = subset(data, age == "0-1") 
+  tmp = subset(data, age == "0-0")
+  stopifnot( nrow(subset(data, age ==  "0-1")) == 0 )
   for(loc in unique(tmp$code)){
     tmp1 = subset(data, code == loc)
     age_from1 = unique(tmp1$age)[which(grepl('1-',unique(tmp1$age)))]
-    tmp1_agg = tmp1[age %in% c("0-1", age_from1), list(cum.deaths = sum(cum.deaths),
+    tmp1_agg = tmp1[age %in% c("0-0", age_from1), list(cum.deaths = sum(cum.deaths),
                                                        daily.deaths = sum(daily.deaths)),
                     by = c("date", "code")]
     tmp1_agg[, age := paste0("0-", gsub("1-(.+)","\\1",age_from1))]
-    tmp1 = rbind( subset(tmp1, age %notin% c("0-1", age_from1)), tmp1_agg)
+    tmp1 = rbind( subset(tmp1, age %notin% c("0-0", age_from1)), tmp1_agg)
     data = rbind(subset(data, !code %in% loc), tmp1)
   }
   

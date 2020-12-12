@@ -28,6 +28,7 @@ class AgeExtractor:
 
     def get_louisiana(self):
         url = 'https://www.arcgis.com/apps/opsdashboard/index.html#/4a6de226701e45bdb542f09b73ee79e1'
+        url = 'https://ladhh.maps.arcgis.com/apps/opsdashboard/index.html#/4ecc2bfa2fa54b6eb5c0eccda972d203'
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
@@ -39,31 +40,36 @@ class AgeExtractor:
         if not os.access("data/{}/louisiana.json".format(day), os.F_OK):
             browser.implicitly_wait(2)
             button_name = button1[0].text.split('\n')[-1]
-            m_button = [e for e in button1 if e.text == button_name][0]
+            main = [e for e in button1 if e.text == button_name][0]
+            #button = [e for e in button1 if e.text == 'State Map of Cases by Parish'][0]
             time.sleep(2)
-            m_button.click()
+            main.click()
             browser.implicitly_wait(2)
-            #button = browser.find_elements_by_css_selector('div.flex-fluid')
-            time.sleep(2)
             button = browser.find_elements_by_css_selector('div')
-            time.sleep(20)
-            button = [e for e in button if e.text == 'Deaths by Age Group']
-            time.sleep(20)
-            button[0].click()
-            time.sleep(10)
-            #button = [e for e in button if e.text == button_name or e.text == 'Cases and Deaths by Age']
             time.sleep(2)
-            #button[1].click()
+            button = [e for e in button if e.text == 'Deaths by Age Group']
+            time.sleep(2)
+            button[0].click()
+            main.click()
             browser.implicitly_wait(1)
             #button[2].click()
             browser.implicitly_wait(1)
             board = browser.find_elements_by_css_selector('g.amcharts-graph-column')#.amcharts-graph-graphAuto1_1589372672251')
-            data = [e.get_attribute('aria-label') for e in board if e.get_attribute('aria-label') and 'death' in e.get_attribute('aria-label')]
+
+            data = [e.get_attribute('aria-label') for e in board if e.get_attribute('aria-label')]
+
+            data = data[134:141]
             browser.implicitly_wait(5)
             age_data ={}
             for a in data:
-                age_data[" ".join(a.split()[1:-1])] = a.split()[-1]
-            m_button.click()
+                age_data[" ".join(a.split()[0:-1])] = a.split()[-1]
+
+            #data = [e.get_attribute('aria-label') for e in board if e.get_attribute('aria-label') and 'death' in e.get_attribute('aria-label')]
+            #browser.implicitly_wait(5)
+            #age_data ={}
+            #for a in data:
+            #    age_data[" ".join(a.split()[1:-1])] = a.split()[-1]
+            #m_button.click()
             path = "data/{}".format(day)
             if not os.path.exists(path):
                 os.mkdir(path)
@@ -267,10 +273,10 @@ class AgeExtractor:
                 data = lines
                 age_data = {}
                 age_data['<20y'] = data[17]
-                age_data['20-44y'] = data[14]
-                age_data['45-54y'] = data[15]
-                age_data['55-64y'] = data[16]
-                age_data['65+'] = data[13]
+                age_data['20-44y'] = data[15]
+                age_data['45-54y'] = data[16]
+                age_data['55-64y'] = data[13]
+                age_data['65+'] = data[14]
                 doc.close()
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
@@ -314,7 +320,7 @@ class AgeExtractor:
                 data = lines[data_num:]
                 age_data = {}
                 age_data[data[0]] = data[29]
-                age_data[data[1]] = data[26]
+                age_data[data[1]] = data[24]
                 age_data[data[2]] = data[8]
                 age_data[data[3]] = data[7]
                 age_data[data[4]] = data[28]
@@ -333,9 +339,9 @@ class AgeExtractor:
 
     def get_mississippi(self):
         existing_assets = list(map(basename, glob("pngs/mississippi/*.png")))
-        date_diff = date.today() - date(2020, 8, 27)
+        date_diff = date.today() - date(2020, 11, 20)
         for i in range(date_diff.days + 1):
-            dayy = date(2020, 8, 27) + timedelta(days=i)
+            dayy = date(2020, 11,20) + timedelta(days=i)
             day = dayy.strftime('%Y-%m-%d')
             url = 'https://msdh.ms.gov/msdhsite/_static/images/graphics/covid19-chart-age-' + str(day[5:]) + '.png'
             if day + '.png' not in existing_assets:
@@ -471,7 +477,7 @@ class AgeExtractor:
 
                 browser.set_window_size(width, height)
                 time.sleep(1)
-                path = "pngs/delaware".format(day)
+                path = "pngs/delaware"
                 if not os.path.exists(path):
                     os.mkdir(path)
                 print(age_data)
@@ -507,11 +513,11 @@ class AgeExtractor:
         day = self.today
         if not os.access("data/{}/vermont.json".format(day), os.F_OK):
             browser.implicitly_wait(13)
-            browser.find_element_by_xpath('//*[@id="ember468"]').click()
+            browser.find_element_by_xpath('//*[@id="ember486"]').click()
             browser.implicitly_wait(13)
-            browser.find_element_by_xpath('//*[@id="ember449"]').click()
+            browser.find_element_by_xpath('//*[@id="ember467"]').click()
             browser.implicitly_wait(13)
-            browser.find_element_by_xpath('//*[@id="ember468"]').click()
+            browser.find_element_by_xpath('//*[@id="ember486"]').click()
             time.sleep(3)
             age_data = {}
             age_data['0-9'] = 0
@@ -519,7 +525,7 @@ class AgeExtractor:
             age_data['20-29'] = 0
             for i in range(6):
                 data = browser.find_element_by_xpath(
-                    '//*[@id="ember238"]/div/div/*[name()="svg"]/*[name()="g"][7]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
+                    '//*[@id="ember252"]/div/div/*[name()="svg"]/*[name()="g"][7]/*[name()="g"]/*[name()="g"]/*[name()="g"][' + str(
                         i + 1) + ']').get_attribute('aria-label')
                 age_data[data.split()[0]] = data.split()[-1]
             path = "data/{}".format(day)
@@ -584,8 +590,10 @@ class AgeExtractor:
                 browser.implicitly_wait(2)
                 age_data = {}
                 for i in range(9):
-                    group = browser.find_element_by_xpath('//*[@id="ember110"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[1]').text
-                    data = browser.find_element_by_xpath('//*[@id="ember110"]/div/table[2]/tbody/tr[' + str(i + 2) + ']/td[3]').text
+                    group = browser.find_element_by_xpath(
+                        '//*[@id="ember120"]/table[1]/tbody/tr[' + str(i + 2) + ']/td[1]').text
+                    data = browser.find_element_by_xpath(
+                        '//*[@id="ember120"]/table[1]/tbody/tr[' + str(i + 2) + ']/td[3]').text
                     if data == '':
                         data = '0'
                     else:
@@ -647,7 +655,7 @@ class AgeExtractor:
                     f.write(r.content)
                 html = r.text
                 soup = BeautifulSoup(html, "html.parser")
-                tables = soup.find_all("table")[2]
+                tables = soup.find_all("table")[1]
                 rows = tables.find_all("td")
                 data = [e.text for e in rows]
                 age_data = {}
@@ -747,11 +755,18 @@ class AgeExtractor:
             #browser.find_element_by_xpath(
             #    '/html/body/div[5]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/span').click()
             browser.implicitly_wait(2)
+            browser.implicitly_wait(6)
             browser.find_element_by_xpath(
-                '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[1]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div/div').click()
-            browser.implicitly_wait(2)
+                '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[1]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div').click()
+
+            #browser.find_element_by_xpath(
+            #    '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas-modern/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container-modern[1]/transform/div/div[3]/div/visual-modern/div/div/div[2]/div/div').click()
+            browser.implicitly_wait(6)
             browser.find_element_by_xpath(
-                '/html/body/div[6]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/div/span').click()
+                '/html/body/div[6]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/span').click()
+
+            #browser.find_element_by_xpath(
+            #    '/html/body/div[6]/div[1]/div/div[2]/div/div[1]/div/div/div[2]/div/div/span').click()
             browser.implicitly_wait(2)
             time.sleep(1)
 
@@ -1203,8 +1218,7 @@ class AgeExtractor:
                 print('Data for South Carolina {} is already exist'.format(date))
 
     def get_nh(self):
-        url = 'https://nh.gov/t/DHHS/views/COVID-19Dashboard/Summary.pdf?:embed=y&:isGuestRedirectFromVizportal=y&:display_count=n&:showVizHome=n&:origin=viz_share_link'
-
+        url = 'https://www.nh.gov/covid19/documents/case-summary.pdf'
         try:
             r = requests.get(url)
             r.raise_for_status()

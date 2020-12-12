@@ -24,14 +24,17 @@ jobs:
         
     - name: Install libgdal-dev and gdal
       run: |
+        sudo apt-get update
         sudo apt-get install libgdal-dev
         export CPLUS_INCLUDE_PATH=/usr/include/gdal
         export C_INCLUDE_PATH=/usr/include/gdal
         
-    - name: Install fiona and wheel
+    - name: Install fiona, wheel, fitz and PyMuPDF
       run: |
         pip install Fiona
         pip install wheel
+        pip install fitz
+        pip install PyMuPDF
 
     - name: Install python dependencies
       run: |

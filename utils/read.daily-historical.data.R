@@ -6,7 +6,7 @@ read.TX.file = function(xlsx_file, Date){
                        "65-69 years", "70-74 years", "75-79 years","80+ years"),c("age","cum.deaths")]
   
   tmp = tmp %>%
-    mutate(age = ifelse(age == "<1 year", "0-1", gsub("(.+) years", "\\1", age)), # group 0-1 and 2-9 for analysis
+    mutate(age = ifelse(age == "<1 year", "0-0", gsub("(.+) years", "\\1", age)), # group 0-1 and 2-9 for analysis
            code = "TX", 
            date = Date,
            cum.deaths = as.numeric(cum.deaths), 

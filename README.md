@@ -7,13 +7,29 @@ The user may directly find age-specific mortality by date, age and location in
 ```
 data/processed/latest/DeathsByAge_US.csv
 ```
-We aim to update the processed data at least once a week. The data set currently includes 42 U.S. states and 2 metropolitan areas, New York City and the District of Columbia.
+We aim to update the processed data at least once a week. The data set currently includes 44 U.S. states and 2 metropolitan areas, New York City and the District of Columbia.
 
 ## Usage 
 
+### Docker
+The easiest way for reproducibility is using `docker`. A `Dockerfile` is in the repository.
+
+Run:
+```sh
+sudo apt-get install docker # for linux. For mac you can use something like brew. In any case,
+# you need to install docker onto your machine 
+docker build -t usaage .
+docker run --rm -t -d --name usaage_container -v $(pwd):/code usaage
+```
+
+This will keep a docker container running in the background, which you can inspect using docker ps.
+
+Now all the development can be done in the container and you can edit the code as usual locally (changes will be synced to the docker container since we made it share folders using the flag `-v`). You might need to use Remote-SSH in the VSCODE IDE for convenience. You can also just attach a shell onto the container using `docker exec -it usaage_container /bin/bash`
+
+You can check that everything works by running make all in the container.
+
 ### Structure Overview
 The code is divided into 2 parts: First, the extraction of the COVID-19 mortality counts data from Department of Health websites. Second, the processing of the extracted data to create a complete time series of age-specific COVID-19 mortality counts for every location. 
-
 
 ### Dependencies
 #### Data extraction
@@ -133,7 +149,6 @@ For example, age band [0-17] becomes [0-19] and age band [61-65].
 
 Both data set, adjusted and non adjusted are available, `DeathsByAge_US_adj.csv` and `DeathsByAge_US.csv`.
 
-
 ## Data source
 This table includes a complete list of all sources ever used in the data set. We acknowledge and are grateful to U.S. state Departments of Health for making the primary data available at the following sources:
 
@@ -159,15 +174,16 @@ This table includes a complete list of all sources ever used in the data set. We
 | Louisiana | 2020-05-12 | [link](https://www.arcgis.com/apps/opsdashboard/index.html#/4a6de226701e45bdb542f09b73ee79e1) | dashboard updated daily except on Saturday and replaced; no historical archive|
 | Maine | 2020-03-12 | [link](https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus/data.shtml) | metadata updated daily; full time series |
 | Maryland | 2020-05-14 | [link](https://coronavirus.maryland.gov/) | dashboard updated daily and replaced; no historical archive | 
-| Massachusetts | 2020-04-20 | [link](https://www.mass.gov/info-details/archive-of-covid-19-cases-in-massachusetts) until 2020-08-11 and [link](https://www.mass.gov/info-details/covid-19-response-reporting) since | (1) daily report, with historical archive; (2) weekly report, with historical archive;  |
+| Massachusetts | 2020-04-20 | [link](https://www.mass.gov/info-details/archive-of-covid-19-cases-in-massachusetts) until 2020-08-11 and [link](https://www.mass.gov/info-details/covid-19-response-reporting) since | (1) daily report, with historical archive; (2) weekly report, with historical archive  |
 | Michigan | 2020-03-21 | (1) `data/req/michigan weekly.csv` and (2) [link](https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html) | (1) data requested to the DoH (2) dashboard updated daily and replaced; no historical archive |
+| Minnesota | 2020-05-21 | [link](https://www.health.state.mn.us/diseases/coronavirus/stats/index.html) | weekly report, with historical archive |
 | Mississippi | 2020-04-27 | [link](https://msdh.ms.gov/msdhsite/_static/14,0,420.html) | dashboard updated daily and replaced; no historical archive |
 | Missouri | 2020-05-13 | (1)[link](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php) and (2)[link](https://showmestrong.mo.gov/data/public-health/) | dashboard updated daily and replaced; no historical archive |
 | Nevada | 2020-06-07 | [link](https://nvhealthresponse.nv.gov) | dashboard updated daily and replaced; no historical archive |
 | New Hampshire | 2020-06-07 | [link](https://www.nh.gov/covid19/dashboard/summary.htm) | dashboard updated daily and replaced; no historical archive |
 | New Jersey | 2020-05-25 | [link](https://njhealth.maps.arcgis.com/apps/opsdashboard/index.html#/81a17865cb1a44db92eb8eb421703635) | dashboard updated daily and replaced; no historical archive|
 | New Mexico | 2020-05-25 | [link](https://cv.nmhealth.org/newsroom/) | daily written report; with history archive |
-| New York City | 2020-04-14 | [link](https://www1.nyc.gov/site/doh/covid/covid-19-data-archive.page) until 2020-05-18 and [link](https://github.com/nychealth/coronavirus-data/blob/master/by-age.csv) since | report / csv updated daily, with history archive |
+| New York City | 2020-04-14 | [link](https://www1.nyc.gov/site/doh/covid/covid-19-data-archive.page), [link](https://github.com/nychealth/coronavirus-data/blob/master/by-age.csv) since 2020-05-18, [link](https://github.com/nychealth/coronavirus-data/blob/master/totals/by-age.csv) since 2020-11-08 | report / csv updated daily, with history archive |
 | North Carolina | 2020-05-20 | [link](https://covid19.ncdhhs.gov/dashboard/about-data) | dashboard updated daily and replaced; no historical archive |
 | North Dakota | 2020-05-14 | [link](https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases) | dashboard updated daily and replaced; no historical archive|
 | Oklahoma | 2020-05-13 | [link](https://looker-dashboards.ok.gov/embed/dashboards/76) | dashboard updated daily and replaced; no historical archive |

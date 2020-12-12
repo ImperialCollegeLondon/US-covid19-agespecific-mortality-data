@@ -2,7 +2,7 @@ library(tidyverse)
 
 last.day = Sys.Date() - 1 # yesterday 
 
-source("utils/make.summary.R") # table.states is a summary of all states extracted
+source("utils/make_location_table.R") # table.states is a summary of all states extracted
 source("utils/make.plots.R")
 
 dir.create(file.path("figures", last.day), showWarnings = FALSE)
