@@ -8,6 +8,7 @@ create_time_series = function(dates, h_data = NULL, state_code, state_name = NUL
   for(t in 1:length(dates)){
     
     Date = dates[t]
+    #print(Date)
     
     #
     # read daily update 
@@ -63,8 +64,11 @@ ensure_increasing_cumulative_deaths = function(dates, h_data)
           # if cumulative date at date t < date t - 1, fix cum deaths at date t - 1 to the one at date t.
           if(h_data[age == age_group & date == Date & code == Code, cum.deaths] > h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]){
             difference = h_data[age == age_group & date == Date & code == Code, cum.deaths] - h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]
+            if(difference > 30) stop(paste0("!!! Cumulative deaths decreased from one day to the next by more than 30, check your data !!! ", age_group, ' ',
+                                            difference, ' ',
+                                            h_data[age == age_group & date == Date & code == Code, cum.deaths], ' ',
+                                            h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]) )
             h_data[age == age_group & date == Date & code == Code,]$cum.deaths = h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]
-            if(difference > 30) stop("!!! Cumulative deaths decreased from one day to the next by more than 30, check your data !!!" )
           }
           
         }
@@ -168,13 +172,16 @@ adjust_to_5y_age_band = function(data)
   
   #
   # modify age band
+  data[, age := ifelse(age == "0-5", "0-4", age)]
   data[, age := ifelse(age == "0-10", "0-9", age)]
   data[, age := ifelse(age == "0-17", "0-19", age)]
   data[, age := ifelse(age == "0-18", "0-19", age)]
   data[, age := ifelse(age == "5-17", "5-19", age)]
+  data[, age := ifelse(age == "6-11", "5-9", age)]
   data[, age := ifelse(age == "10-18", "10-19", age)]
   data[, age := ifelse(age == "11-20", "10-19", age)]
   data[, age := ifelse(age == "11-17", "10-19", age)]
+  data[, age := ifelse(age == "12-14", "10-14", age)]
   data[, age := ifelse(age == "18-24", "20-24", age)]
   data[, age := ifelse(age == "18-29", "20-29", age)]
   data[, age := ifelse(age == "18-34", "20-34", age)]
