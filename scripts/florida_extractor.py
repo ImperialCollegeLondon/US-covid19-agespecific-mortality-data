@@ -23,9 +23,9 @@ def get_florida():
     # existing_assets = list(map(basename, glob("pdfs/florida/state_reports*.pdf")))
     with open("existing_assets_florida") as f:
         # https://stackoverflow.com/questions/3277503/how-to-read-a-file-line-by-line-into-a-list
-       existing_assets = f.readlines()
+        existing_assets = f.readlines()
         # you may also want to remove whitespace characters like `\n` at the end of each line
-       existing_assets = [x.strip().split(" ")[-1] for x in existing_assets] 
+        existing_assets = [x.strip().split(" ")[-1] for x in existing_assets]
 
     headers = requests.utils.default_headers()
     url = "http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive/cases-monitoring-and-pui-information/state-report/"
@@ -44,7 +44,7 @@ def get_florida():
     print(covid_links)
 
     # download these assets
-#    api_base_url = "http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive"
+    #    api_base_url = "http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive"
     api_base_url = "http://ww11.doh.state.fl.us/comm/_partners/covid19_report_archive/cases-monitoring-and-pui-information/state-report"
     for pdf_name in covid_links:
         print(pdf_name, "DOWNLOAD")
@@ -64,7 +64,7 @@ def get_florida():
     # existing_assets = ["pdfs/florida/state_reports_latest_06_27.pdf"]
     usable_assets = {}
     for pdf_path in existing_assets:
-        
+
         # if pdf_path == "pdfs/florida/state_reports_latest_06_20.pdf":
         #     continue
         pdf_base = basename(pdf_path)
@@ -78,7 +78,7 @@ def get_florida():
         #     pdf_date = datetime.strptime(tmp.group(0), "%m.%d.%Y")
         # tmp = re.search("[0-9]+\\.[0-9]+\\.[0-9]{2}", pdf_base)
         # if tmp is not None:
-            # pdf_date = datetime.strptime(tmp.group(0), "%m.%d.%y")
+        # pdf_date = datetime.strptime(tmp.group(0), "%m.%d.%y")
         # takes care of 20200603 types
         tmp = re.search("[0-9]{4}[0-9]{2}[0-9]{2}", pdf_base)
         if tmp is not None:
@@ -88,21 +88,23 @@ def get_florida():
         # tmp = re.search("[0-9]{2}_[0-9]{2}.pdf", pdf_base)
         # if tmp is not None:
         #     tmp = "2020_" + tmp.group(0).split(".")[0]
-        #     pdf_date = datetime.strptime(tmp, "%Y_%m_%d") 
+        #     pdf_date = datetime.strptime(tmp, "%Y_%m_%d")
         # # takes care of 0603 types
         # tmp = re.search("_[0-9]{2}[0-9]{2}.pdf", pdf_base)
         # if tmp is not None:
         #     tmp = "2020" + tmp.group(0).split(".")[0]
-        #     pdf_date = datetime.strptime(tmp, "%Y_%m%d")  
+        #     pdf_date = datetime.strptime(tmp, "%Y_%m%d")
         # # takes care of aug_02 types
         # tmp = re.search("aug_[0-9]{2}.pdf", pdf_base)
         # if tmp is not None:
         #     tmp = "2020_08_" + tmp.group(0).split(".")[0][-2:]
-        #     pdf_date = datetime.strptime(tmp, "%Y_%m_%d")  
+        #     pdf_date = datetime.strptime(tmp, "%Y_%m_%d")
         # if pdf_date is None:
         #     raise ValueError(pdf_date)
 
-        if (pdf_date >= datetime.strptime("2020-03-27", "%Y-%m-%d")) & (pdf_date!=datetime.strptime("2020-08-05", "%Y-%m-%d")):
+        if (pdf_date >= datetime.strptime("2020-03-27", "%Y-%m-%d")) & (
+            pdf_date != datetime.strptime("2020-08-05", "%Y-%m-%d")
+        ):
             usable_assets[pdf_date.strftime("%Y-%m-%d")] = pdf_path
     print("USABLE: ", usable_assets)
     for day in usable_assets.keys():
@@ -121,9 +123,9 @@ def get_florida():
                     print(age_data)
                     break
 
-
         with open("data/{}/florida.json".format(day), "w") as f:
             json.dump(age_data, f)
 
+
 if __name__ == "__main__":
-	get_florida()
+    get_florida()
