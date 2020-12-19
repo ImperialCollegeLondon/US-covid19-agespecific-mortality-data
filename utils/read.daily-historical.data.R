@@ -198,7 +198,7 @@ read.CO.file = function(last.day){
   return(tmp)
 }
 
-read.ME.file = function(last.day){
+read.ME.file_deprecated = function(last.day){
   
   dates = seq.Date(as.Date("2020-03-01"), last.day, by = "day")
   
@@ -226,6 +226,38 @@ read.ME.file = function(last.day){
   tmp$age = as.factor(tmp$age)
   levels(tmp$age) = list("0-19" = "<20", "20-29"="20s", "30-39" ="30s", "40-49"="40s",
                          "50-59" = "50s", "60-69" = "60s", "70-79" = "70s", "80+" = "80+")
+  return(tmp)
+}
+
+read.ME.file = function(last.day){
+  
+  dates = seq.Date(as.Date("2020-03-01"), last.day, by = "day")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("maine.csv"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  last.day = max(dates)
+  
+  csv_file = file.path(path_to_data, last.day, "maine.csv")
+  
+  tmp = as.data.table(read.csv(csv_file))
+  tmp = subset(tmp, Case.Status == 'Confirmed')
+  setnames(tmp, c('Age.Ranges'), c('age'))
+  
+  tmp[, date := as.Date(LATEST_STATUS_DATE, '%d/%m/%Y') ]
+  tmp = as.data.table( tidyr::complete(tmp, age, date, fill = list(DEATHS= 0)))
+  tmp[, cum.deaths := cumsum(DEATHS), by = 'age']
+  tmp[, daily.deaths := NA_integer_]
+  tmp[, code := 'ME']
+  
+  tmp = unique(select(tmp, date, age, cum.deaths, daily.deaths, code))
+  
+  tmp$age = as.factor(tmp$age)
+  levels(tmp$age) = list("0-19" = "<20", "20-29"="20s", "30-39" ="30s", "40-49"="40s",
+                         "50-59" = "50s", "60-69" = "60s", "70-79" = "70s", "80+" = "80")
+  
+  tmp = tmp[order(date, age)]
+  
   return(tmp)
 }
 
