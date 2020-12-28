@@ -61,14 +61,14 @@ read_json = function(Date, state_name, state_code, data)
     json_data[["45-64"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("45-54", "55-64"))])))
     json_data = json_data[-c(which(names(json_data) %in% c("18-24", "25-34", "35-44", "45-54", "55-64")))]
   }
-  if(state_name == "NorthDakota" & Date < as.Date("2020-12-14")){
-    # on this date 0-9 and 10-19 counts were respectively 0 and 1
-    json_data[["0-5"]] = 0
-    json_data[["6-11"]] = 0
-    json_data[["12-14"]] = 0
-    json_data[["15-19"]] = json_data[["10-19"]]
-    json_data = json_data[-c(which(names(json_data) %in% c("0-9", "10-19")))]
-  }
+  # if(state_name == "NorthDakota" & Date < as.Date("2020-12-14")){
+  #   # on this date 0-9 and 10-19 counts were respectively 0 and 1
+  #   json_data[["0-5"]] = 0
+  #   json_data[["6-11"]] = 0
+  #   json_data[["12-14"]] = 0
+  #   json_data[["15-19"]] = json_data[["10-19"]]
+  #   json_data = json_data[-c(which(names(json_data) %in% c("0-9", "10-19")))]
+  # }
 
   
   # process the file
