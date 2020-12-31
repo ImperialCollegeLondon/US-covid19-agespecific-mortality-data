@@ -112,7 +112,7 @@ class AgeExtractor:
             )
             # find the page
             lines = doc.getPageText(0).splitlines()
-            total = int(lines[2].replace(',',''))
+            total = int(lines[5].replace(',',''))
             age_data = {}
             for i in data:
                age_data[i.split()[0]] = int(round(total * float(i.split()[1][0:-1])* 0.01, 0))
@@ -655,7 +655,7 @@ class AgeExtractor:
                     f.write(r.content)
                 html = r.text
                 soup = BeautifulSoup(html, "html.parser")
-                tables = soup.find_all("table")[1]
+                tables = soup.find_all("table")[2]
                 rows = tables.find_all("td")
                 data = [e.text for e in rows]
                 age_data = {}
