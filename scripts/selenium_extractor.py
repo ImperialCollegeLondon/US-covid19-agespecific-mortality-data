@@ -553,6 +553,11 @@ class AgeExtractor:
             if not os.access("data/{}/indiana.xlsx".format(day), os.F_OK):
                 req = requests.get(url)
                 url_content = req.content
+                path = "data/{}".format(day)
+
+                if not os.path.exists(path):
+                    os.mkdir(path)
+
                 file = open("data/{}/indiana.xlsx".format(day), 'wb')
                 file.write(url_content)
                 file.close()
