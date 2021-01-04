@@ -14,7 +14,7 @@ if(length(args_line) > 0)
 indir = "~/git/US-covid19-data-scraping" # path to the repo
 stan_model = "201023o"
 
-path.to.deathByAge.data = file.path(indir, "data", "processed", "2020-11-27", "DeathsByAge_US.csv")
+path.to.deathByAge.data = file.path(indir, "data", "processed", "2020-12-10", "DeathsByAge_US.csv")
 path.to.demographics.data = file.path(indir, "data_visualization", "data", "us_population_withnyc.rds")
 path.to.jhu.data = file.path(indir, "data", "official", "jhu_death_data_padded_201207.rds")
 path.to.nyc.data = file.path(indir, "data", "official", "NYC_deaths_201207.csv")
@@ -23,7 +23,7 @@ path.to.ifr.by.age = file.path(indir, "data_visualization", "data", "ifr-by-age-
 source(file.path(indir, "data_visualization", "functions", "data-visualization-summary_functions.R"))
 source(file.path(indir, "data_visualization", "functions", "data-visualization-stan_utility_functions.R"))
 
-set.seed(3312111)
+set.seed(3312112)
 run_index = round(runif(1,0, 10000))
 run_tag = paste0(stan_model, "_", run_index)
 

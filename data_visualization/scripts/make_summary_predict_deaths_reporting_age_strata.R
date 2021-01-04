@@ -2,11 +2,11 @@ library(data.table)
 
 indir = "~/git/US-covid19-data-scraping" # path directory to the repository
 
-set.seed(3312111)
+set.seed(3312112)
 run_index = round(runif(1,0, 10000))
 run_tag = paste0("201023o_", run_index)
 
-lastDate = "2020-11-27"
+lastDate = "2020-12-10"
 path.to.demographics.data = file.path(indir, "data_visualization", "data", "us_population_withnyc.rds")
 path.to.jhu.data = file.path(indir, "data", "official", "jhu_death_data_padded_201207.rds")
 path.to.nyc.data = file.path(indir, "data", "official", "NYC_deaths_201207.csv")
@@ -60,7 +60,7 @@ death_summary = find_pop_count(death.predict, pop_count)
 death_summary = merge(death_summary, loc_div, by = "code")
 
 # Summary for the last month
-last_month = as.Date('2020-11-01')
+last_month = as.Date('2020-12-01')
 death_summary_last_month = subset(death_summary, date == last_month)
 
 
@@ -99,6 +99,6 @@ ggsave(p_proportion_monthly_death, file = file.path(outfig.dir, paste0("Propotio
 # save for paper
 # truncate if it does not fit to JHU
 death_summary_truncated = keep_days_match_JHU(death_summary)
-saveRDS(death_summary_truncated, file = "~/git/R0t/covid19AgeModel/inst/data/df_predict_reporting_age_strata_201217.rds")
+saveRDS(death_summary_truncated, file = "~/git/R0t/covid19AgeModel/inst/data/df_predict_reporting_age_strata_210103.rds")
 
 

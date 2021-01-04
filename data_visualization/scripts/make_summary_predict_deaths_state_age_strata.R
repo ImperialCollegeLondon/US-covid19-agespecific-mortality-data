@@ -2,7 +2,7 @@ library(data.table)
 
 indir = "~/git/US-covid19-data-scraping" # path directory to the repository
 
-set.seed(3312111)
+set.seed(3312112)
 run_index = round(runif(1,0, 10000))
 run_tag = paste0("201023o_", run_index)
 
@@ -37,7 +37,7 @@ eff_sample_size = readRDS(file.path(path.to.predict_deaths_state_age_strata.resu
 Rhat = readRDS(file.path(path.to.predict_deaths_state_age_strata.results, "table", "Rhat_cum.rds"))
 n_runs = nrow(unique(select(death.predict, code, date))) 
 
-convergence_diagnostics = list(prettyNum(round(range(eff_sample_size), digits = 2),big.mark=","), round(range(Rhat), digits = 4), n_runs, c(Loc_label, Date_report))
+convergence_diagnostics = list(prettyNum(round(range(eff_sample_size), digits = 2),big.mark=","), round(range(Rhat), digits = 4), n_runs)
 
 #
 # Save

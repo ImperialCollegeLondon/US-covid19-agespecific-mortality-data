@@ -2,11 +2,11 @@ library(data.table)
 
 indir = "~/git/US-covid19-data-scraping" # path directory to the repository
 
-set.seed(3312111)
+set.seed(3312112)
 run_index = round(runif(1,0, 10000))
 run_tag = paste0("201023o_", run_index)
 
-lastDate = "2020-11-27"
+lastDate = "2020-12-10"
 path.to.demographics.data = file.path(indir, "data_visualization", "data", "us_population_withnyc.rds")
 path.to.jhu.data = file.path(indir, "data", "official", "jhu_death_data_padded_201207.rds")
 path.to.nyc.data = file.path(indir, "data", "official", "NYC_deaths_201207.csv")
@@ -76,7 +76,7 @@ death_summary[, CL_deaths_cum_100K := (CL_deaths_cum * 100000) / pop_count ]
 death_summary[, CU_deaths_cum_100K := (CU_deaths_cum * 100000) / pop_count ]
 
 # Summary for the last month
-last_month = as.Date('2020-11-01')
+last_month = as.Date('2020-12-01')
 death_summary_last_month = subset(death_summary, date == last_month)
 
 
