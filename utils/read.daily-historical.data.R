@@ -158,7 +158,7 @@ read.CT.file = function(last.day){
                                                            ifelse(AgeGroups == "60 - 69", "60-69",
                                                                   ifelse(AgeGroups == "70 - 79", "70-79",
                                                                          ifelse(AgeGroups == "80 and older", "80+", AgeGroups))))))))),
-           date = as.Date(DateUpdated, format = "%m/%d/%y"),
+           date = as.Date(DateUpdated, format = "%m/%d/%Y"),
            code = "CT", 
            daily.deaths = NA_integer_) %>%
     rename(cum.deaths = Total.deaths) %>%
