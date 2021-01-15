@@ -302,7 +302,7 @@ read.NM.file = function(last.day){
   tmp = reshape2::melt (as.data.table(read.csv(csv_file)) , id.vars = "Date") %>%
     subset(variable != "Total" & Date != "") %>%
     rename(daily.deaths = value) %>%
-    mutate(date = as.Date(Date, format = "%d/%m/%y"),
+    mutate(date = as.Date(Date, format = "%d/%m/%Y"),
            code = "NM",
            age = factor(as.character(variable))) %>%
     select(date, age, code, daily.deaths) %>%
