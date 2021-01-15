@@ -5,10 +5,10 @@ library(gridExtra)
 library(tidyverse)
 
 # jhu
-death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_201217.rds"))
+death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_210114.rds"))
 
 # NYC
-death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_201217.csv"))
+death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_210114.csv"))
 
 
 # processed data
