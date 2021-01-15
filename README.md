@@ -180,7 +180,7 @@ This table includes a complete list of all sources ever used in the data set. We
 | Mississippi | 2020-04-27 | [link](https://msdh.ms.gov/msdhsite/_static/14,0,420.html) | dashboard updated daily and replaced; no historical archive |
 | Missouri | 2020-05-13 | (1)[link](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php) and (2)[link](https://showmestrong.mo.gov/data/public-health/) | dashboard updated daily and replaced; no historical archive |
 | Nevada | 2020-06-07 | [link](https://nvhealthresponse.nv.gov) | dashboard updated daily and replaced; no historical archive |
-| New Hampshire | 2020-06-07 | [link](https://www.nh.gov/covid19/dashboard/summary.htm) | dashboard updated daily and replaced; no historical archive |
+| New Hampshire | 2020-06-07 | (1)[link](https://www.nh.gov/covid19/dashboard/summary.htm) until 2021-01-08, and (2)[link](https://www.nh.gov/covid19/dashboard/case-summary.htm) since 2021-01-08 | dashboard updated daily and replaced; no historical archive |
 | New Jersey | 2020-05-25 | [link](https://njhealth.maps.arcgis.com/apps/opsdashboard/index.html#/81a17865cb1a44db92eb8eb421703635) | dashboard updated daily and replaced; no historical archive|
 | New Mexico | 2020-05-25 | [link](https://cv.nmhealth.org/newsroom/) | daily written report; with history archive |
 | New York City | 2020-04-14 | [link](https://www1.nyc.gov/site/doh/covid/covid-19-data-archive.page), [link](https://github.com/nychealth/coronavirus-data/blob/master/by-age.csv) since 2020-05-18, [link](https://github.com/nychealth/coronavirus-data/blob/master/totals/by-age.csv) since 2020-11-08 | report / csv updated daily, with history archive |
