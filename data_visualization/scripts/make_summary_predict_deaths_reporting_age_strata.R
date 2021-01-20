@@ -99,6 +99,6 @@ ggsave(p_proportion_monthly_death, file = file.path(outfig.dir, paste0("Propotio
 # save for paper
 # truncate if it does not fit to JHU
 death_summary_truncated = keep_days_match_JHU(death_summary)
-saveRDS(death_summary_truncated, file = "~/git/R0t/covid19AgeModel/inst/data/df_predict_reporting_age_strata_210103.rds")
+saveRDS(death_summary_truncated, file = "~/git/R0t/covid19AgeModel/inst/data/df_predict_reporting_age_strata_210103_cured.rds")
 
 

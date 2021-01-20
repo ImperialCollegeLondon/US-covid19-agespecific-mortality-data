@@ -103,7 +103,7 @@ registerDoParallel(length(locations)/4)
 
 #
 # For every state
-mclapply( 1:length(locations) , function(m) {   
+mclapply( 26:30 , function(m) {   
   #m = 12
   
   Code = locations[m]
