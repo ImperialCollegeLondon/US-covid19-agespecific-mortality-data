@@ -200,9 +200,14 @@ generate_daily_deaths_missing_days= function(state_code, dates_missing, prop_dea
     setnames(death_data,'DEATH_COUNT', 'daily_deaths')
   } else{
     death_data = as.data.table( readRDS(path_to_JHU_data) )
-    
   }
 
+  # adjust for lag
+  states_w_one_day_delay = c("CT", "DC","FL","MO","MS","SC")
+  if(state_code %in% states_w_one_day_delay){
+    dates_missing = dates_missing + 1
+  }
+  
   death_data = subset(death_data, code == state_code & date %in% dates_missing)
   tmp = merge(prop_deaths_df, death_data, by = 'code',allow.cartesian=TRUE)
   tmp[, daily.deaths := round(daily_deaths * prop.deaths)]
@@ -210,6 +215,11 @@ generate_daily_deaths_missing_days= function(state_code, dates_missing, prop_dea
   
   if(sum(tmp$daily.deaths) > max_deaths){
     tmp[, daily.deaths := floor(daily.deaths * max_deaths / (sum(tmp$daily.deaths)))]
+  }
+  
+  # adjust for lag
+  if(state_code %in% states_w_one_day_delay){
+    tmp[, date := date - 1]
   }
   
   return(tmp)
