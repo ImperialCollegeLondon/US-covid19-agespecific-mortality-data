@@ -166,3 +166,4 @@ saveRDS(list(format(last_month, "%B %d, %Y"), share_75_deaths, share_5074_deaths
         file = file.path(outtab.dir, paste0("deaths_ntl_age_strata_summary.rds")), version = 2)
 saveRDS(list(format(last_month, "%B %d, %Y"), mortality_counts_rate_summary_024, mortality_counts_rate_summary_2549, mortality_counts_rate_summary_5074, mortality_counts_rate_summary_75), 
         file = file.path(outtab.dir, paste0("mortality_counts_rate_summary.rds")), version = 2)
+

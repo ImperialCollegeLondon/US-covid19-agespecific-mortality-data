@@ -30,7 +30,6 @@ create_time_series = function(dates, h_data = NULL, state_code, state_name = NUL
       for(age_group in tmp$age){
         tmp = check_format_json(tmp, json_data, state_name, age_group, Date)
       }
-      
     }
     
     # if select Date for historical data 
@@ -38,14 +37,14 @@ create_time_series = function(dates, h_data = NULL, state_code, state_name = NUL
     {
       tmp = as.data.table( subset(h_data, date == Date) )
     }
-    
     data = rbind(data, tmp)
   }
+  
   
   return(data)
 }
 
-ensure_increasing_cumulative_deaths = function(dates, h_data)
+ensure_increasing_cumulative_deaths = function(dates, h_data, check_difference=1)
 {
   
   for(t in 1:length(dates)){
@@ -64,7 +63,7 @@ ensure_increasing_cumulative_deaths = function(dates, h_data)
           # if cumulative date at date t < date t - 1, fix cum deaths at date t - 1 to the one at date t.
           if(h_data[age == age_group & date == Date & code == Code, cum.deaths] > h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]){
             difference = h_data[age == age_group & date == Date & code == Code, cum.deaths] - h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]
-            if(difference > 30) stop(paste0("!!! Cumulative deaths decreased from one day to the next by more than 30, check your data !!! ", age_group, ' ',
+            if(difference > 50 & check_difference) stop(paste0("!!! Cumulative deaths decreased from one day to the next by more than 50, check your data !!! ", age_group, ' ',
                                             difference, ' ',
                                             h_data[age == age_group & date == Date & code == Code, cum.deaths], ' ',
                                             h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]) )
@@ -106,29 +105,70 @@ find_daily_deaths = function(dates, h_data, state_code)
         
         # if there is missing data at t-1
         if((Date - 1) %notin% dates){
+         
           n.lost.days = as.numeric(Date - dates[which(dates == Date)-1] -1)
           lost.days = Date - c(n.lost.days:1)
           cum.death.t_lag = tmp[age == age_group & date == Date,]$cum.deaths
           cum.death.t_0 =  data[age == age_group & date == (Date-n.lost.days-1),]$cum.deaths
+
+          # find monthly death before missing data
+          df = subset(data, date == dates[t-1])
+          df = df[order(age)]
+          df_last_month = subset(data, date == dates[max(1,t-32)] )
+          df_last_month = df_last_month[order(age)]
+          df[, monthly_deaths := cum.deaths - df_last_month$cum.deaths]
+          stopifnot(all(df$monthly_deaths >= 0))
           
-          # incremental deaths is distributed equally among the missing days
-          daily.deaths.lost.days = generate_dailydeaths(n.lost.days+1, cum.death.t_lag - cum.death.t_0)
-          daily.deaths = daily.deaths.lost.days[1]
+          # find age proportion over the last month
+          var_monthly_deaths = "monthly_deaths"
+          if(sum(df$monthly_deaths) == 0) var_monthly_deaths = 'cum.deaths'
+          df[, prop.deaths := get(var_monthly_deaths) / sum(get(var_monthly_deaths))]
+          if(sum(df$cum.deaths) == 0) df[, prop.deaths := 0]
+          df = subset(df, age == age_group)
+          df = select(df, age, prop.deaths, code)
           
-          data = rbind(data, data.table(age = age_group, 
-                                        date = lost.days, 
-                                        cum.deaths = round(cum.death.t_0 + daily.deaths*c(1:n.lost.days)), 
-                                        daily.deaths = daily.deaths.lost.days[-1], 
-                                        code = state_code))
+          # find missing days by using un-stratified JHU data and age proportion
+          data_missing_days = generate_daily_deaths_missing_days(state_code = state_code, 
+                                                                 dates_missing = seq.Date(dates[t-1]+1, dates[t] - 1, by = 'day'),
+                                                                 prop_deaths_df = df,
+                                                                 max_deaths = cum.death.t_lag - cum.death.t_0)
+          data_missing_days[, cum.deaths := round(cum.death.t_0 + cumsum(daily.deaths))]
           
+          # find daily deaths
+          daily.deaths = cum.death.t_lag - cum.death.t_0 - sum(data_missing_days$daily.deaths)
+          
+          # smooth
+          if(n.lost.days > 4 & daily.deaths > max(data_missing_days$daily.deaths)*1.2){
+            #increment = floor((cum.death.t_lag - cum.death.t_0)/n.lost.days - median(data_missing_days$daily.deaths) - max(data_missing_days$daily.deaths)/2)
+            increment = floor((daily.deaths - max(data_missing_days$daily.deaths))/n.lost.days)
+            
+            if(increment > 0) {
+              data_missing_days$daily.deaths = data_missing_days$daily.deaths + increment
+              data_missing_days[, cum.deaths := round(cum.death.t_0 + cumsum(daily.deaths))]
+              daily.deaths = cum.death.t_lag - cum.death.t_0 - sum(data_missing_days$daily.deaths)
+            }
+
+          }
+          
+          stopifnot(nrow(data_missing_days) == n.lost.days)
+          data = rbind(data, data_missing_days)
         }
         
+        if(daily.deaths < 0){
+          print(increment)
+          print(data_missing_days)
+          print(daily.deaths)
+        }
         stopifnot(daily.deaths >= 0)
         
         tmp[which(tmp$age == age_group & tmp$date == Date),]$daily.deaths = daily.deaths
+        
+        diff = daily.deaths + subset(data, date == Date -1 & age == age_group)$cum.deaths == subset(data, date == Date & age == age_group )$cum.deaths
+        stopifnot(diff == 1)
       }
       
     }
+    
     data = rbind(data, tmp)
   }
   
@@ -142,11 +182,47 @@ find_daily_deaths = function(dates, h_data, state_code)
   # sanity check: cumulative day on last day are equal to the one provided by the DoH
   sanity_check(data, data_processed, max(dates))
   
+  # sanity check: no missing dates
+  stopifnot(all(seq.Date(min(data$date), max(data$date), by = 'day') %in% unique(data$date)))
+  
   # Reorder data
   data_processed <- with(data, data[order(data_processed, age, cum.deaths, daily.deaths, code), ])
   data_processed <- data_processed[, c("date", "age", "cum.deaths", "daily.deaths", "code")]
   
   return(data)
+}
+
+generate_daily_deaths_missing_days= function(state_code, dates_missing, prop_deaths_df, max_deaths){
+  if(state_code == 'NYC'){
+    death_data = as.data.table( read.csv(path_to_NYC_data) )
+    death_data[, date := as.Date(date_of_interest, format = '%m/%d/%Y')]
+    death_data[, code := 'NYC']
+    setnames(death_data,'DEATH_COUNT', 'daily_deaths')
+  } else{
+    death_data = as.data.table( readRDS(path_to_JHU_data) )
+  }
+
+  # adjust for lag
+  states_w_one_day_delay = c("CT", "DC","FL","MO","MS","SC")
+  if(state_code %in% states_w_one_day_delay){
+    dates_missing = dates_missing + 1
+  }
+  
+  death_data = subset(death_data, code == state_code & date %in% dates_missing)
+  tmp = merge(prop_deaths_df, death_data, by = 'code',allow.cartesian=TRUE)
+  tmp[, daily.deaths := round(daily_deaths * prop.deaths)]
+  tmp = select(tmp, code, date, age, daily.deaths)
+  
+  if(sum(tmp$daily.deaths) > max_deaths){
+    tmp[, daily.deaths := floor(daily.deaths * max_deaths / (sum(tmp$daily.deaths)))]
+  }
+  
+  # adjust for lag
+  if(state_code %in% states_w_one_day_delay){
+    tmp[, date := date - 1]
+  }
+  
+  return(tmp)
 }
 
 generate_dailydeaths = function(n,s)
@@ -273,6 +349,20 @@ keep_days_match_JHU = function(data)
   data_KS = subset(data, code == "KS" & date > as.Date("2020-06-01")) 
   data = dplyr::bind_rows(data_woKS, data_KS)
   rm(data_woKS, data_KS)
+  
+  return(data)
+}
+
+adjust_delay_reporting = function(data)
+{
+  #
+  # one day delay
+  states_w_one_day_delay = c("CT", "DC","FL","MO","MS","SC")
+  data_wo = subset(data, !code %in% states_w_one_day_delay)
+  data_one_day_delay = subset(data, code %in% states_w_one_day_delay)
+  data_one_day_delay[, date := date + 1]
+  data = dplyr::bind_rows(data_wo, data_one_day_delay)
+  rm(data_wo, data_one_day_delay)
   
   return(data)
 }

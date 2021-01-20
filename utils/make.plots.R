@@ -12,7 +12,7 @@ death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_210114.csv")
 
 
 # processed data
-path_to_data = function(state) file.path("data", "processed", last.day, paste0("DeathsByAge_", state, ".csv"))
+data_US = read.csv(file.path("data", "processed", last.day, paste0("DeathsByAge_", 'US', ".csv")))
 
 
 make.comparison.plot = function(State, Code, with_CDC = 0){
@@ -28,14 +28,17 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
              date = as.Date(date_of_interest, format = "%m/%d/%y"),
              cum.deaths = cumsum(daily_deaths))
     
-    death_data_scrapping = read.csv(path_to_data(Code)) %>%
+    death_data_scrapping = subset(data_US, code == Code) %>%
       group_by(date, code) %>%
-      summarise(cum.deaths = sum(cum.deaths)) %>%
+      summarise(cum.deaths = sum(cum.deaths),
+                daily_deaths = sum(daily.deaths)) %>%
       mutate(source = "City by age")
     death_data_scrapping$date = as.Date(death_data_scrapping$date)
     
-    death_data = dplyr::bind_rows(death_data_nyc, death_data_scrapping)
+    cat('The last day of data is ', as.character(max(death_data_scrapping$date)))
     
+    death_data = dplyr::bind_rows(death_data_nyc, death_data_scrapping)
+
     p = ggplot(data = death_data, aes(x = date, y = cum.deaths, col = source)) +
       geom_point() +
       geom_line()  +
@@ -46,9 +49,20 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
       theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
       theme(legend.position="right")+ 
       guides(fill = guide_legend(title="Age")) +
+      labs(title = State, y = "Cumulative deaths (overall population)") 
+    ggsave(file.path("figures", last.day, paste0("comparison.jhu.depthealth_cum_", Code, ".pdf")), p, w = 8, h =6)
+    
+    p2 = ggplot(data = death_data, aes(x = date, y = daily_deaths, col = source)) +
+      geom_line()  +
+      scale_x_date(date_breaks = "weeks", labels = date_format("%e %b"), 
+                   limits = c(death_data$date[1], 
+                              death_data$date[length(death_data$date)])) + 
+      theme_bw() + 
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+      theme(legend.position="right")+ 
+      guides(fill = guide_legend(title="Age")) +
       labs(title = State, y = "Daily deaths (overall population)") 
-    ggsave(file.path("figures", last.day, paste0("comparison.ihme.jhu.depthealth_", Code, ".pdf")), p, w = 8, h =6)
-  
+    ggsave(file.path("figures", last.day, paste0("comparison.jhu.depthealth_daily_", Code, ".pdf")), p2, w = 8, h =6)
   } else{
     
     # else use the JHU data
@@ -58,9 +72,10 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
              cum.deaths = cumsum(daily_deaths)) 
     death_data_jhu$date = as.Date(death_data_jhu$date)
     
-    death_data_scrapping = read.csv(path_to_data(Code)) %>%
+    death_data_scrapping = subset(data_US, code == Code) %>%
       group_by(date, code) %>%
-      summarise(cum.deaths = sum(cum.deaths)) %>%
+      summarise(cum.deaths = sum(cum.deaths),
+                daily_deaths = sum(daily.deaths)) %>%
       mutate(source = "Dept of Health")
     death_data_scrapping$date = as.Date(death_data_scrapping$date)
     
@@ -69,10 +84,11 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
     cat('The last day of data is ', as.character(max(death_data_scrapping$date)))
     
     if(with_CDC){
-      death_data_cdc = read.csv(path_to_data("CDC")) %>%
+      death_data_cdc = subset(data_US, code == 'CDC') %>%
         subset(code == Code) %>%
         group_by(date, code) %>%
-        summarise(cum.deaths = sum(cum.deaths)) %>%
+        summarise(cum.deaths = sum(cum.deaths),
+                  daily_deaths = sum(daily.deaths)) %>%
         mutate(source = "CDC")
       death_data_cdc$date = as.Date(death_data_cdc$date)
       
@@ -90,19 +106,34 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
       theme(legend.position="right")+ 
       guides(fill = guide_legend(title="Age")) +
       labs(title = State, y = "Daily deaths (overall population)") 
-    ggsave(file.path("figures", last.day, paste0("comparison.jhu.depthealth_", Code, ".pdf")), p, w = 8, h =6)
+    ggsave(file.path("figures", last.day, paste0("comparison.jhu.depthealth_cum_", Code, ".pdf")), p, w = 8, h =6)
+    
+    p2 = ggplot(data = death_data, aes(x = date, y = daily_deaths, col = source)) +
+      geom_line(size = 0.5)  +
+      scale_x_date(date_breaks = "weeks", labels = date_format("%e %b"), 
+                   limits = c(death_data$date[1], 
+                              death_data$date[length(death_data$date)])) + 
+      theme_bw() + 
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+      theme(legend.position="right")+ 
+      guides(fill = guide_legend(title="Age")) +
+      labs(title = State, y = "Daily deaths (overall population)") 
+    ggsave(file.path("figures", last.day, paste0("comparison.jhu.depthealth_daily_", Code, ".pdf")), p2, w = 8, h =6)
   }
   
-  return(p)
+  return(list(p, p2))
 }
 
 make.comparison.plots = function(names, codes){
-  p = list()
+  p = list(); p2 = list()
   for(i in 1:length(names)){
-    p[[i]] = make.comparison.plot(names[i], codes[i])
+    plots = make.comparison.plot(names[i], codes[i])
+    p[[i]] = plots[[1]]; p2[[i]] = plots[[2]]
   }
   q = do.call(grid.arrange, c(p, ncol =1))
-  ggsave(file.path("figures", last.day, "comparison.ihme.jhu.depthealth_overall.pdf"), q, w = 8, h = 100, limitsize = FALSE)
+  ggsave(file.path("figures", last.day, "comparison.ihme.jhu.depthealth_cum_overall.pdf"), q, w = 8, h = 110, limitsize = FALSE)
+  q = do.call(grid.arrange, c(p2, ncol =1))
+  ggsave(file.path("figures", last.day, "comparison.ihme.jhu.depthealth_daily_overall.pdf"), q, w = 8, h = 110, limitsize = FALSE)
 }
 
 make.time.series.plots = function(codes){
@@ -111,14 +142,14 @@ make.time.series.plots = function(codes){
   
   databyage = NULL; data = NULL
   for(Code in codes){
-    death_data_scrapping = read.csv(path_to_data(Code)) %>%
+    death_data_scrapping = subset(data_US, code == Code) %>%
         mutate(update = "daily", 
                code = as.character(code),
                date = as.character(date))%>%
         select(code, update, daily.deaths,date,age)
       databyage = rbind(databyage, death_data_scrapping)
       
-      death_data_scrapping = read.csv(path_to_data(Code)) %>%
+      death_data_scrapping = subset(data_US, code == Code) %>%
         group_by(date, code) %>%
         summarise(daily_deaths = sum(daily.deaths)) %>%
         ungroup() %>%
@@ -160,7 +191,7 @@ make.time.series.plots = function(codes){
 }
 
 make.death.among.young.plot = function(){
-  tmp = as.data.table( read.csv( path_to_data("US") ) )
+  tmp = as.data.table( data_US )
   
   tmp1 = tmp[, list(max_date = max(date)), by = "code"]
   tmp = merge(tmp, tmp1, by = "code")

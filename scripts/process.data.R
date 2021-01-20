@@ -19,6 +19,8 @@ dir.create(file.path("data", "processed", last.day), showWarnings = FALSE)
 # process every state 
 cat("\n Begin Processing \n")
 
+table.states = subset(table.states, code != 'CDC') #rm CDC
+
 data.overall <- vector('list',nrow(table.states))
 for(i in 1:nrow(table.states)){
   
@@ -33,12 +35,16 @@ for(i in 1:nrow(table.states)){
 data.overall = do.call('rbind',data.overall)
 
 #
-# Adjust age group (to match 5 y age band) 
-data.overall_adj = adjust_to_5y_age_band(data.overall)
+# Remove days that disagree with JHU
+data.overall = keep_days_match_JHU(data.overall)
 
 #
-# Remove days that disagree with JHU
-data.overall_adj = keep_days_match_JHU(data.overall_adj)
+# Adjust for delays in reporting
+data.overall = adjust_delay_reporting(data.overall)
+
+#
+# Adjust age group (to match 5 y age band) 
+data.overall_adj = adjust_to_5y_age_band(data.overall)
 
 #
 # save aggregated outputs in a single file

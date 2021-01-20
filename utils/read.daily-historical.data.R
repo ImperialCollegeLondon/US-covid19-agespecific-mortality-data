@@ -1,9 +1,9 @@
 read.TX.file = function(xlsx_file, Date){
-
+  
   tmp = read_excel(xlsx_file, sheet = "Fatalities by Age Group", col_names = c("age", "cum.deaths", "perc"))
   # they changed the format of their table on the 07/27
   tmp = tmp[tmp$age %in% c("<1 year", "1-9 years", "10-19 years", "20-29 years", "30-39 years", "40-49 years", "50-59 years", "60-64 years",
-                       "65-69 years", "70-74 years", "75-79 years","80+ years"),c("age","cum.deaths")]
+                           "65-69 years", "70-74 years", "75-79 years","80+ years"),c("age","cum.deaths")]
   
   tmp = tmp %>%
     mutate(age = ifelse(age == "<1 year", "0-0", gsub("(.+) years", "\\1", age)), # group 0-1 and 2-9 for analysis
@@ -14,6 +14,105 @@ read.TX.file = function(xlsx_file, Date){
     select(age, code, date, daily.deaths, cum.deaths) 
   
   return(tmp)
+}
+
+
+read.TX.file.time.series = function(last.day){
+
+  dates = seq.Date(as.Date("2020-07-27"), last.day, by = "day")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  
+  # find overall deaths (across age) 
+  data_files_state_unstratified = data_files[grepl(paste0("texas_total.xlsx"), data_files)]
+  dates_unstratified = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state_unstratified))
+  last.day_unstratified = max(dates_unstratified)
+  
+  xlsx_file_unstratified = file.path(path_to_data, last.day_unstratified, "texas_total.xlsx")
+  
+  tmp1 = suppressWarnings(as.data.table(read_excel(xlsx_file_unstratified, sheet = "Trends", col_types = c('date', rep('numeric', 6)))[-c(1:4),c(1,7)]))
+  colnames(tmp1) = c('date', 'daily.deaths_n')
+  tmp1 = tmp1[!is.na(date) & !is.na(daily.deaths_n)]
+  tmp1[, date := as.Date(date)]
+  
+  # find proportion deaths by age
+  data_files_state_stratified = data_files[grepl(paste0("texas.xlsx"), data_files)]
+  dates_stratified = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state_stratified))
+  
+  # create time series
+  data = create_time_series(dates = dates_stratified, state_name = 'texas', state_code = 'TX', daily.data.csv_and_xlsx = TRUE)
+  
+  # ensure that cumulative death is increasing in the data
+  data = ensure_increasing_cumulative_deaths(dates = dates_stratified, h_data = data)
+  
+  # find proportion using cumulative deaths
+  tmp = data[, list(cum.deaths_n = sum(cum.deaths)), by = 'date']
+  data = merge(data, tmp, by = 'date')
+  data[, prop.deaths := cum.deaths / cum.deaths_n]
+  
+  df = NULL
+  for(t in 1:length(dates_stratified)){
+    # t = 1
+    Date = dates_stratified[t]
+    
+    tmp = subset(data, date == Date)
+    
+    if(t == 1){
+      tmp = select(tmp, code, date, age, cum.deaths, prop.deaths)
+      df = rbind(df, tmp)
+      next
+    }
+
+    df_last_month = as.data.table(subset(data, date == dates_stratified[max(1,t-31)]))
+    df_last_month = df_last_month[order(age)]
+    tmp[, monthly_deaths := cum.deaths - df_last_month$cum.deaths]
+    if(t %in% 2:7) tmp[, monthly_deaths := cum.deaths]
+    stopifnot(all(tmp$monthly_deaths >= 0))
+    
+    # find age proportion over the last month
+    var_monthly_deaths = "monthly_deaths"
+    if(sum(tmp$monthly_deaths) == 0) var_monthly_deaths = 'cum.deaths'
+    tmp[, prop.deaths := get(var_monthly_deaths) / sum(get(var_monthly_deaths))]
+    if(sum(tmp$cum.deaths) == 0) df[, prop.deaths := 0]
+    tmp = select(tmp, code, date, age, cum.deaths, prop.deaths)
+    
+    df = rbind(df, tmp)
+    
+    if(t == length(dates_stratified)) next
+    if(dates_stratified[t+1] - Date - 1 == 0) next
+    
+    # repeat same proportion for missing days
+    for(t1 in 1:(dates_stratified[t+1] - Date - 1)){
+      tmp$date = Date + t1
+      df = rbind(df, tmp)
+    }
+  }
+  df = as.data.table(df)
+
+  if(0){
+    ggplot(df, aes(x = date, y = prop.deaths, col = age)) + 
+      geom_line()
+  }
+  
+  df = merge(df, tmp1, by = 'date')
+  df[, daily.deaths := round(daily.deaths_n * prop.deaths)]
+  df[, cum.deaths := cumsum(daily.deaths), by = 'age']
+
+  # add cum at first date
+  tmp2 = tmp1[, cum.deaths_n := cumsum(daily.deaths_n)]
+  tmp2 = subset(tmp2, date == min(df$date) - 1)
+  tmp3 = subset(df, date == min(df$date))
+  tmp3$cum.deathst_1 = tmp2$cum.deaths_n
+  tmp3[, cum.deathst_1 := round(cum.deathst_1 * prop.deaths)]
+  tmp3 = select(tmp3, cum.deathst_1, age)
+  df = merge(df, tmp3,by = 'age')
+  df[, cum.deaths := cum.deathst_1 + cum.deaths]
+  
+  # remove first daily.deaths
+  df[date == min(date), daily.deaths := NA_integer_]
+  df = select(df, age, code, date, cum.deaths, daily.deaths)
+  
+  return(df)
 }
 
 read.GA.file = function(csv_file, Date){

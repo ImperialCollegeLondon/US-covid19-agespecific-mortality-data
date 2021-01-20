@@ -3,6 +3,8 @@ library(readxl)
 library(tidyverse)
 
 path_to_data = "data"
+path_to_JHU_data = "data/official/jhu_death_data_padded_210118.rds"
+path_to_NYC_data = "data/official/NYC_deaths_210118.csv"
 
 `%notin%` = Negate(`%in%`)
 
@@ -14,8 +16,8 @@ source("utils/sanity.check.processed.data.R")
 obtain.data = function(last.day, state_name, state_code, json){
   
   ## 1. STATES WITH RULE BASED FUNCTION
-  states.historical.data = c("CT", "TN", "ME", "WI", "VA")
-  states.daily.data = c("TX", "GA", "ID", "AK", "RI", "CDC")
+  states.historical.data = c("CT", "TN", "ME", "WI", "VA","TX")
+  states.daily.data = c("GA", "ID", "AK", "RI", "CDC")
   
   # file with entire time series
   if(state_code %in% states.historical.data) data = obtain.historic.data.csv_and_xlsx(last.day, state_name, state_code)
@@ -70,7 +72,11 @@ obtain.historic.data.csv_and_xlsx = function(last.day, state_name, state_code){
   cat("\n Processing ", state_name, " \n")
   
   # read the file 
-  tmp = do.call(paste0("read.", state_code, ".file"), list(last.day))
+  if(state_code != 'TX'){
+    tmp = do.call(paste0("read.", state_code, ".file"), list(last.day))
+  } else{
+    tmp = do.call(paste0("read.", state_code, ".file.time.series"), list(last.day))
+  }
   
   # find dates with data
   dates = unique(sort(tmp$date))

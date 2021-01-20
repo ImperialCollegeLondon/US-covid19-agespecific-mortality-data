@@ -2,9 +2,9 @@ library(data.table)
 
 indir = "~/git/US-covid19-data-scraping" # path directory to the repository
 
-last_Date = "2020-11-27"
-path.to.jhu.data = file.path(indir, "data", "official", "jhu_death_data_padded_201207.rds")
-path.to.nyc.data = file.path(indir, "data", "official", "NYC_deaths_201207.csv")
+last_Date = "2020-12-10"
+path.to.jhu.data = file.path(indir, "data", "official", "jhu_death_data_padded_201217.rds")
+path.to.nyc.data = file.path(indir, "data", "official", "NYC_deaths_201217.csv")
 path.to.deathByAge.data = file.path(indir, "data", "processed", last_Date, "DeathsByAge_US.csv")
 path.to.demographics.data = file.path(indir, "data_visualization", "data", "us_population_withnyc.rds")
 outtab.dir = file.path(indir, "data_visualization", "tables")
@@ -34,6 +34,7 @@ tmp[, date := as.Date(date, format = "%m/%d/%Y")]
 tmp[, code := "NYC"]
 death_data = rbind(select(death_data, code, date, daily_deaths), select(tmp, code, date, daily_deaths))
 death_data = merge(death_data, pop_info, by = c("code"))
+death_data = subset(death_data, date <= last_Date)
 
 #
 # Make summaries
