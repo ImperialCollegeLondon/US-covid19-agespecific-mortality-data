@@ -12,6 +12,9 @@ path.to.predict_deaths_state_age_strata.results = file.path(indir, "data_visuali
 outtab.dir = file.path(indir, "data_visualization", "tables")
 outfig.dir = file.path(indir, "data_visualization", "figures")
 
+dir.create(outtab.dir, showWarnings = FALSE)
+dir.create(outfig.dir, showWarnings = FALSE)
+
 source(file.path(indir, "data_visualization", "functions", "data-visualization-summary_functions.r"))
 source(file.path(indir, "data_visualization", "functions", "data-visualization-plot_functions.r"))
 

@@ -7,8 +7,12 @@ path.to.jhu.data = file.path(indir, "data", "official", "jhu_death_data_padded_2
 path.to.nyc.data = file.path(indir, "data", "official", "NYC_deaths_201217.csv")
 path.to.deathByAge.data = file.path(indir, "data", "processed", last_Date, "DeathsByAge_US.csv")
 path.to.demographics.data = file.path(indir, "data_visualization", "data", "us_population_withnyc.rds")
+
 outtab.dir = file.path(indir, "data_visualization", "tables")
 outfig.dir = file.path(indir, "data_visualization", "figures")
+
+dir.create(outtab.dir, showWarnings = FALSE)
+dir.create(outfig.dir, showWarnings = FALSE)
 
 source(file.path(indir, "utils", "summary.functions.R"))
 source(file.path(indir, "data_visualization", "functions", "data-visualization-summary_functions.r"))
