@@ -9,6 +9,11 @@ data/processed/latest/DeathsByAge_US.csv
 ```
 We aim to update the processed data at least once a week. The data set currently includes 44 U.S. states and 2 metropolitan areas, New York City and the District of Columbia.
 
+## Note 
+The code to estimate COVID-19 cases and deaths across common age-strata, used in the report below, is available in `data_visualization/` 
+- M Monod, A Blenkinsop, X Xi et al. [Report 32: Age groups that sustain resurging COVID-19 epidemics in the United States Imperial College London](https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/covid-19-reports/) (version 2, 07-01-2021), doi: https://doi.org/10.25561/82551.
+
+
 ## Usage 
 
 ### Docker
