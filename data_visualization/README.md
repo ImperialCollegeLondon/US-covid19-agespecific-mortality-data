@@ -48,17 +48,23 @@ and the tables under
 tables/
 ```
 
+### Note: Predictions used in version 1.1.0 of https://github.com/ImperialCollegeLondon/covid19model/covid19AgeModel
+Table https://github.com/ImperialCollegeLondon/covid19model/covid19AgeModel/inst/data-v110/df_predict_reporting_age_strata_201126_cured.rds is generated in 
+```bash
+$ Rscript scripts_v110/make_summary_predict_deaths_reporting_age_strata.r
+```
+
 ## Results
 ### Mortality Rate By Age
-![ ](data_visualization/figures/MortalityRateByAge.png)
+![ ](figures/MortalityRateByAge.png)
 
 ### Mortality Rate By Age - USA map
-![ ](data_visualization/figures/heat_map_usa_MortalityRateByAge.png)
+![ ](figures/heat_map_usa_MortalityRateByAge.png)
 
 ### Proportion of individuals aged 20-49 among COVID-19 cases 
-<img src="data_visualization/figures/ProprotionCasesByAge_reporting_age_strata_2049.png" width="700">
+<img src="figures/ProprotionCasesByAge_reporting_age_strata_2049.png" width="700">
 
 
 ### Proportion of COVID-19 attributable deaths By Age
-<img src="data_visualization/figures/PropotionMonthlyDeathsByAge_reporting_age_strata.png" width="700">
+<img src="figures/PropotionMonthlyDeathsByAge_reporting_age_strata.png" width="700">
 
