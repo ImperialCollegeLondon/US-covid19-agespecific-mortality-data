@@ -22,7 +22,7 @@ class AgeExtractor:
         The web can automatically click the button and switch the page,
         but it need time to load, otherwise, we would get the wrong or empty results.
     """
-
+     
     def __init__(self):
         self.today = date.today().strftime("%Y-%m-%d")
 
