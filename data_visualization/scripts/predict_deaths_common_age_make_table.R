@@ -23,7 +23,7 @@ path.to.ifr.by.age = file.path(indir, "data_visualization", "data", "ifr-by-age-
 source(file.path(indir, "data_visualization", "functions", "data-visualization-summary_functions.R"))
 source(file.path(indir, "data_visualization", "functions", "data-visualization-stan_utility_functions.R"))
 
-set.seed(3312112)
+set.seed(33121122)
 run_index = round(runif(1,0, 10000))
 run_tag = paste0(stan_model, "_", run_index)
 

@@ -2,7 +2,7 @@ library(data.table)
 
 indir = "~/git/US-covid19-data-scraping" # path directory to the repository
 
-set.seed(3312112)
+set.seed(33121122)
 run_index = round(runif(1,0, 10000))
 run_tag = paste0("201023o_", run_index)
 
