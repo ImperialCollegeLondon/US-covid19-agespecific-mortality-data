@@ -13,8 +13,8 @@ path.to.nyc.data = file.path(indir, "data", "official", "NYC_deaths_201207.csv")
 path.to.deathByAge.data = file.path(indir, "data", "processed", lastDate, "DeathsByAge_US.csv")
 path.to.predict_deaths_ntl_age_strata = file.path(indir, "data_visualization", "results_predict_deaths_common_age_strata", run_tag, "table", "deaths_predict_ntl_age_strata.rds")
 
-outtab.dir = file.path(indir, "data_visualization", "tables_v110")
-outfig.dir = file.path(indir, "data_visualization", "figures_v110")
+outtab.dir = file.path(indir, "data_visualization", "tables_v120")
+outfig.dir = file.path(indir, "data_visualization", "figures_v120")
 
 dir.create(outtab.dir, showWarnings = FALSE)
 dir.create(outfig.dir, showWarnings = FALSE)

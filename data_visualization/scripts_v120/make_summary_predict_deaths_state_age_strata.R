@@ -9,8 +9,8 @@ run_tag = paste0("201023o_", run_index)
 path.to.demographics.data = file.path(indir, "data_visualization", "data", "us_population_withnyc.rds")
 path.to.predict_deaths_state_age_strata.results = file.path(indir, "data_visualization", "results_predict_deaths_common_age_strata", run_tag)
 
-outtab.dir = file.path(indir, "data_visualization", "tables_v110")
-outfig.dir = file.path(indir, "data_visualization", "figures_v110")
+outtab.dir = file.path(indir, "data_visualization", "tables_v120")
+outfig.dir = file.path(indir, "data_visualization", "figures_v120")
 
 dir.create(outtab.dir, showWarnings = FALSE)
 dir.create(outfig.dir, showWarnings = FALSE)

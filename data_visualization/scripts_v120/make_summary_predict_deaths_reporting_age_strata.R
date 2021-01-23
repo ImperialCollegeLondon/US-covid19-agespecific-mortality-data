@@ -13,8 +13,8 @@ path.to.nyc.data = file.path(indir, "data", "official", "NYC_deaths_201207.csv")
 path.to.deathByAge.data = file.path(indir, "data", "processed", lastDate, "DeathsByAge_US.csv")
 path.to.predict_deaths_reporting_age_strata = file.path(indir, "data_visualization", "results_predict_deaths_common_age_strata", run_tag, "table", "df_predict_reporting_age_strata.rds")
 
-outtab.dir = file.path(indir, "data_visualization", "tables_v110")
-outfig.dir = file.path(indir, "data_visualization", "figures_v110")
+outtab.dir = file.path(indir, "data_visualization", "tables_v120")
+outfig.dir = file.path(indir, "data_visualization", "figures_v120")
 
 dir.create(outtab.dir, showWarnings = FALSE)
 dir.create(outfig.dir, showWarnings = FALSE)
@@ -63,10 +63,10 @@ death_summary = find_pop_count(death.predict, pop_count)
 death_summary = merge(death_summary, loc_div, by = "code")
 
 #
-# Table ttps://github.com/ImperialCollegeLondon/covid19model/covid19AgeModel/inst/data-v110/df_predict_reporting_age_strata_201126_cured.rds
+# Table ttps://github.com/ImperialCollegeLondon/covid19model/covid19AgeModel/inst/data-v120/df_predict_reporting_age_strata_201126_cured.rds
 # truncate if it does not fit to JHU
 death_summary_truncated = keep_days_match_JHU(death_summary)
-#saveRDS(death_summary_truncated, file = "~/git/R0t/covid19AgeModel/inst/data_v110/df_predict_reporting_age_strata_201126_cured.rds")
+#saveRDS(death_summary_truncated, file = "~/git/R0t/covid19AgeModel/inst/data_v120/df_predict_reporting_age_strata_201126_cured.rds")
 
 #
 # Plot
