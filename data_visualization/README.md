@@ -22,22 +22,22 @@ tidyverse
 reshape2
 ```
 
-### Reproduce estimations used in version 1.1.0 of https://github.com/ImperialCollegeLondon/covid19model/covid19AgeModel
+### Reproduce estimations used in the final version for publication (package version 1.2.0) of https://github.com/ImperialCollegeLondon/covid19model/covid19AgeModel
 First, generate the estimations posterior samples run,
 ```bash
 $ cd data_visualization/
-$ Rscript scripts_v110/predict_deaths_common_age_run_stan.R
+$ Rscript scripts_v120/predict_deaths_common_age_run_stan.R
 ```
 Second, produce the convergence diagnostics and summary tables of the posterior samples with,
 ```bash
-$ Rscript scripts_v110/predict_deaths_common_age_make_table.R
-$ Rscript scripts_v110/predict_deaths_common_age_make_figure.R
+$ Rscript scripts_v120/predict_deaths_common_age_make_table.R
+$ Rscript scripts_v120/predict_deaths_common_age_make_figure.R
 ```
 Finally, produce the postprocessing figures and tables with,
 ```bash
-$ Rscript scripts_v110/make_summary_predict_deaths_ntl_age_strata.r
-$ Rscript scripts_v110/make_summary_predict_deaths_reporting_age_strata.r
-$ Rscript scripts_v110/make_summary_predict_deaths_state_age_strata.r
+$ Rscript scripts_v120/make_summary_predict_deaths_ntl_age_strata.r
+$ Rscript scripts_v120/make_summary_predict_deaths_reporting_age_strata.r
+$ Rscript scripts_v120/make_summary_predict_deaths_state_age_strata.r
 ```
 The figures are stored under 
 ```bash
