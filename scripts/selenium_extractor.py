@@ -319,12 +319,12 @@ class AgeExtractor:
                         break
                 data = lines[data_num:]
                 age_data = {}
-                age_data[data[0]] = data[29]
+                age_data[data[0]] = data[28]
                 age_data[data[1]] = data[22]
                 age_data[data[2]] = data[7]
-                age_data[data[3]] = data[28]
+                age_data[data[3]] = data[29]
                 age_data[data[4]] = data[27]
-                age_data[data[5]] = data[26]
+                age_data[data[5]] = data[25]
                 doc.close()
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
@@ -596,9 +596,9 @@ class AgeExtractor:
                 age_data = {}
                 for i in range(9):
                     group = browser.find_element_by_xpath(
-                        '//*[@id="ember120"]/table[1]/tbody/tr[' + str(i + 2) + ']/td[1]').text
+                        '//*[@id="ember121"]/table[1]/tbody/tr[' + str(i + 2) + ']/td[1]').text
                     data = browser.find_element_by_xpath(
-                        '//*[@id="ember120"]/table[1]/tbody/tr[' + str(i + 2) + ']/td[3]').text
+                        '//*[@id="ember121"]/table[1]/tbody/tr[' + str(i + 2) + ']/td[3]').text
                     if data == '':
                         data = '0'
                     else:
