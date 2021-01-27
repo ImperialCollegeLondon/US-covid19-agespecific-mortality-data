@@ -1436,23 +1436,25 @@ class AgeExtractor:
         browser.save_screenshot('pngs/iowa/{}_2.png'.format(day))
         browser.close()
         browser.quit()
-    def get_nh_pngs(self):
-        url = 'https://nh.gov/t/DHHS/views/COVID-19Dashboard/Summary?:embed=y&:isGuestRedirectFromVizportal=y&:display_count=n&:showVizHome=n&:origin=viz_share_link'
+        
+def get_nh_pngs(self):
+        url ='https://www.nh.gov/t/DHHS/views/COVID-19CaseDashboard/Summary?:iid=1&:isGuestRedirectFromVizportal=y&:embed=y'
         day = self.today
         options = Options()
+        options.add_argument('--no-sandbox')
         options.add_argument('headless')
+        options.add_argument('--disable-dev-shm-usage')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
-
         browser.get(url)
         browser.implicitly_wait(30)
         time.sleep(50)
         browser.implicitly_wait(50)
-
-        path = "pngs/new_hampshire".format(day)
+        
+        path = "../pngs/new_hampshire".format(day)
         if not os.path.exists(path):
             os.mkdir(path)
-
-        browser.save_screenshot('pngs/new_hampshire/{}.png'.format(day))
+            
+        browser.save_screenshot('../pngs/new_hampshire/{}.png'.format(day))
         browser.close()
         browser.quit()
 
