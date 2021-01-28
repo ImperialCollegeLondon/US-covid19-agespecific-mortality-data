@@ -2,6 +2,15 @@
 
 # Age-specific COVID-19 mortality data in the United-States
 
+## Version 1 Release [![DOI](https://zenodo.org/badge/259326890.svg)](https://zenodo.org/badge/latestdoi/259326890)
+This is the release related to our [upcoming peer-reviewed age paper](https://www.medrxiv.org/content/10.1101/2020.09.18.20197376v1), where we use age-specific mobility data to estimate the epidemic in the USA by accounting for age-specific heterogeneity.
+
+You may directly get:
+1. the age-specific mortality data used in the paper [here](https://github.com/ImperialCollegeLondon/US-covid19-agespecific-mortality-data/blob/master/data/processed/2020-10-29/DeathsByAge_US_adj.csv)
+2. the crude estimates of the COVID-19 cases and mortality across common age strata [here](https://github.com/ImperialCollegeLondon/US-covid19-agespecific-mortality-data/blob/master/data_visualization/tables_v120/df_predict_reporting_age_strata_201126_cured.rds)
+
+----
+
 ## Data 
 The user may directly find age-specific mortality by date, age and location in 
 ```
