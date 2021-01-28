@@ -5,7 +5,7 @@
 ## Version 1 Release [![DOI](https://zenodo.org/badge/259326890.svg)](https://zenodo.org/badge/latestdoi/259326890)
 This is the release related to our [upcoming peer-reviewed age paper](https://www.medrxiv.org/content/10.1101/2020.09.18.20197376v1), where we use age-specific mobility data to estimate the epidemic in the USA by accounting for age-specific heterogeneity.
 
-You may directly get:
+One may directly get:
 1. the age-specific mortality data used in the paper [here](https://github.com/ImperialCollegeLondon/US-covid19-agespecific-mortality-data/blob/master/data/processed/2020-10-29/DeathsByAge_US_adj.csv)
 2. the crude estimates of the COVID-19 cases and mortality across common age strata [here](https://github.com/ImperialCollegeLondon/US-covid19-agespecific-mortality-data/blob/master/data_visualization/tables_v120/df_predict_reporting_age_strata_201126_cured.rds)
 
@@ -17,11 +17,6 @@ The user may directly find age-specific mortality by date, age and location in
 data/processed/latest/DeathsByAge_US.csv
 ```
 We aim to update the processed data at least once a week. The data set currently includes 44 U.S. states and 2 metropolitan areas, New York City and the District of Columbia.
-
-## Note 
-The code to estimate COVID-19 cases and deaths across common age-strata, used in the report below, is available in `data_visualization/` 
-- M Monod, A Blenkinsop, X Xi et al. [Report 32: Age groups that sustain resurging COVID-19 epidemics in the United States Imperial College London](https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/covid-19-reports/) (version 2, 07-01-2021), doi: https://doi.org/10.25561/82551.
-
 
 ## Usage 
 
