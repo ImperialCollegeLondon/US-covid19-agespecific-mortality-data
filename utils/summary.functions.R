@@ -203,7 +203,6 @@ generate_daily_deaths_missing_days= function(state_code, dates_missing, prop_dea
   }
 
   # adjust for lag
-  states_w_one_day_delay = c("CT", "DC","FL","MO","MS","SC")
   if(state_code %in% states_w_one_day_delay){
     dates_missing = dates_missing + 1
   }
@@ -357,7 +356,6 @@ adjust_delay_reporting = function(data)
 {
   #
   # one day delay
-  states_w_one_day_delay = c("CT", "DC","FL","MO","MS","SC")
   data_wo = subset(data, !code %in% states_w_one_day_delay)
   data_one_day_delay = subset(data, code %in% states_w_one_day_delay)
   data_one_day_delay[, date := date + 1]

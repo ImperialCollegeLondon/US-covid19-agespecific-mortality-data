@@ -343,7 +343,8 @@ class AgeExtractor:
         for i in range(date_diff.days + 1):
             dayy = date(2020, 11,20) + timedelta(days=i)
             day = dayy.strftime('%Y-%m-%d')
-            url = 'https://msdh.ms.gov/msdhsite/_static/images/graphics/covid19-chart-age-' + str(day[5:]) + '.png'
+            #url = 'https://msdh.ms.gov/msdhsite/_static/images/graphics/covid19-chart-age-' + str(day[5:]) + '.png'
+            url='https://msdh.ms.gov/msdhsite/scripts/FullScreen.cfm?itemLink=https://msdh.ms.gov/msdhsite/_static/images/graphics/covid19-chart-age-'+str(day)+'.png'
             if day + '.png' not in existing_assets:
                 try:
                     r = requests.get(url)
@@ -932,7 +933,9 @@ class AgeExtractor:
     def get_illinois(self):
         url = 'https://www.dph.illinois.gov/covid19/covid19-statistics'
         options = Options()
+        options.add_argument('--no-sandbox')
         options.add_argument('headless')
+        options.add_argument('--disable-dev-shm-usage')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
         browser.get(url)
         browser.implicitly_wait(5)
@@ -945,7 +948,7 @@ class AgeExtractor:
             browser.implicitly_wait(3)
             time.sleep(2)
             age_data = {}
-            group = ['Unknown','<20','20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80+']
+            group = ['<20','20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80+','Unknown']
             # j the age_groups
             for j in range(9):
 
@@ -1160,7 +1163,6 @@ class AgeExtractor:
                 print(age_data)
                 doc.close()
                 shutil.move(f"pdfs/california/{date}.pdf", f"pdfs/california/{day}.pdf")
-
             else:
                 print('Data for California {} is already exist'.format(date))
 
@@ -1223,7 +1225,7 @@ class AgeExtractor:
                 print('Data for South Carolina {} is already exist'.format(date))
 
     def get_nh(self):
-        url = 'https://www.nh.gov/covid19/documents/case-summary.pdf'
+        url = 'https://www.nh.gov/t/DHHS/views/COVID-19CaseDashboard/Summary?:iid=1&:isGuestRedirectFromVizportal=y&:embed=y'
         try:
             r = requests.get(url)
             r.raise_for_status()
@@ -1436,8 +1438,12 @@ class AgeExtractor:
         browser.save_screenshot('pngs/iowa/{}_2.png'.format(day))
         browser.close()
         browser.quit()
+<<<<<<< HEAD
+    def get_nh_pngs(self):
+=======
         
 def get_nh_pngs(self):
+>>>>>>> 50de479b92723a11d0a2c69f19f0003c5c496555
         url ='https://www.nh.gov/t/DHHS/views/COVID-19CaseDashboard/Summary?:iid=1&:isGuestRedirectFromVizportal=y&:embed=y'
         day = self.today
         options = Options()
@@ -1669,13 +1675,11 @@ if __name__ == "__main__":
         ageExtractor.get_WA_pngs()
     except:
         print("\n!!! WASHINGTON PNG FAILED !!!\n")
-
     try:
         print("\n### Running Mississippi ###\n")
         ageExtractor.get_mississippi()
     except:
         print("\n!!! MISSISSIPPI FAILED !!!\n")
-
 
     try:
         print("\n### Running Wyoming ###\n")
