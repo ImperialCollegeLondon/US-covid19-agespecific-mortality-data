@@ -1,12 +1,12 @@
 # Visualization of age-specific COVID-19 mortality data in the United-States
 
 ## Overview
-The data from different age stratifications were used to estimate death counts in the common age bands across all locations using a latent Dirichlet-multinomial model.
+Death counts from different age stratifications were used to estimate death counts and crude case counts in common age bands across all locations using a latent Dirichlet-multinomial model.
 
-The model and associated estimations have been used in:
+The model and associated estimations have been used in our upcoming [peer-reviewed age paper](https://www.medrxiv.org/content/10.1101/2020.09.18.20197376v1), where we use age-specific mobility data to estimate the epidemic in the USA by accounting for age-specific heterogeneity.
 
-- M Monod, A Blenkinsop, X Xi et al. [Report 32: Age groups that sustain resurging COVID-19 epidemics in the United States Imperial College London](https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/covid-19-reports/) (version 2, 07-01-2021), doi: https://doi.org/10.25561/82551.
-
+## Data
+One may directly find the crude estimates of the COVID-19 cases and mortality across common age strata [here](https://github.com/ImperialCollegeLondon/US-covid19-agespecific-mortality-data/blob/master/data_visualization/tables_v120/df_predict_reporting_age_strata_201126_cured.rds). Please note that the data were reproduced in [this repositoy](https://github.com/ImperialCollegeLondon/covid19model/tree/master/covid19AgeModel).
 
 ## Usage
 ### Dependencies
@@ -22,8 +22,8 @@ tidyverse
 reshape2
 ```
 
-### Reproduce estimations used in the final version for publication (package version 1.2.0) of https://github.com/ImperialCollegeLondon/covid19model/covid19AgeModel
-First, generate the estimations posterior samples run,
+### Generate estimations 
+First, to generate the posterior samples run,
 ```bash
 $ cd data_visualization/
 $ Rscript scripts_v120/predict_deaths_common_age_run_stan.R
