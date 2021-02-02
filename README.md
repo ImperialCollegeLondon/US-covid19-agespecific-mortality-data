@@ -12,11 +12,11 @@ One may directly get:
 ----
 
 ## Data 
-The user may directly find age-specific mortality by date, age and location in 
+The user may directly find the latest update of the age-specific mortality by date, age and location in 
 ```
 data/processed/latest/DeathsByAge_US.csv
 ```
-We aim to update the processed data at least once a week. The data set currently includes 44 U.S. states and 2 metropolitan areas, New York City and the District of Columbia.
+We aim to update the data at least once a week. The data set currently includes 44 U.S. states and 2 metropolitan areas. The locations are listed in the table below.
 
 ## Usage 
 
@@ -240,7 +240,7 @@ Imperial makes no representation or warranty about the accuracy or completeness 
 Imperial accepts no liability or responsibility for any use which may be made of any results, for the results, nor for any reliance which may be placed on any such work or results.
 
 ### Cite 
-Attribute the data as the "COVID-19 Age specific Mortality Data Repository by the Imperial College London COVID-19 Response Team", and the urls sepecified below.
+Attribute the data as the "COVID-19 Age specific Mortality Data Repository by the Imperial College London COVID-19 Response Team", and the urls sepecified above.
 
 ### Acknowledgements
 We acknowledge the support of the EPSRC through the [EPSRC Centre for Doctoral Training in Modern Statistics and Statistical Machine Learning](https://statml.io) at Imperial and Oxford.
