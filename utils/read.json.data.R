@@ -102,7 +102,7 @@ check_format_json = function(json_data, state_name, age_group, Date)
   }
   
   # data in percent
-  if(state_name == "washington"){
+  if(state_name == "washington" & age_group != 'total'){
     cum.deaths = as.numeric(gsub("(.+)\\%", "\\1", json_data[[age_group]][1])) * as.numeric(gsub(",", "", json_data[["total"]])) / 100
     json_data[[age_group]] = cum.deaths
   }
