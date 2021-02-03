@@ -26,10 +26,6 @@ create_time_series = function(dates, h_data = NULL, state_code, state_name = NUL
     {
       res = read_json(Date, state_name, state_code, data)
       json_data = res[[1]]; tmp = res[[2]]
-      
-      for(age_group in tmp$age){
-        tmp = check_format_json(tmp, json_data, state_name, age_group, Date)
-      }
     }
     
     # if select Date for historical data 

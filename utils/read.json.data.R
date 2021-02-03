@@ -4,6 +4,10 @@ read_json = function(Date, state_name, state_code, data)
   json_file <- file.path(path_to_data, Date, paste0(state_name, ".json"))
   json_data <- suppressWarnings(fromJSON(paste(readLines(json_file))))
   
+  for(age_group in names(json_data)){
+    json_data = check_format_json(json_data, state_name, age_group, Date)
+  }
+  
   if(state_name == "florida") names(json_data) = gsub("(.+) years", "\\1",names(json_data))
   
   # age band's name changed 
@@ -61,16 +65,7 @@ read_json = function(Date, state_name, state_code, data)
     json_data[["45-64"]] = sum(as.numeric(unlist(json_data[which(names(json_data) %in% c("45-54", "55-64"))])))
     json_data = json_data[-c(which(names(json_data) %in% c("18-24", "25-34", "35-44", "45-54", "55-64")))]
   }
-  # if(state_name == "NorthDakota" & Date < as.Date("2020-12-14")){
-  #   # on this date 0-9 and 10-19 counts were respectively 0 and 1
-  #   json_data[["0-5"]] = 0
-  #   json_data[["6-11"]] = 0
-  #   json_data[["12-14"]] = 0
-  #   json_data[["15-19"]] = json_data[["10-19"]]
-  #   json_data = json_data[-c(which(names(json_data) %in% c("0-9", "10-19")))]
-  # }
 
-  
   # process the file
   tmp = data.table(age = names(json_data), 
                    cum.deaths = NA_integer_, 
@@ -83,10 +78,20 @@ read_json = function(Date, state_name, state_code, data)
   tmp = tmp[which(tmp$age != "total"),]; tmp = tmp[which(tmp$age != "Total"),]; tmp = tmp[which(tmp$age != "N"),]
   tmp = tmp[which(tmp$age != "Notavailable"),]; tmp = tmp[which(tmp$age != "Missing"),]
   
+  # index of the cum deaths in the file
+  # index inside the json varies states by state
+  index = 1
+  if(state_name == "ma") index = 2
+  
+  for(age_group in tmp$age){
+    cum.deaths = as.integer(json_data[[age_group]][index])
+    tmp[which(age == age_group),]$cum.deaths = cum.deaths
+  }
+  
   return(list(json_data, tmp))
 }
 
-check_format_json = function(tmp, json_data, state_name, age_group, Date)
+check_format_json = function(json_data, state_name, age_group, Date)
   {
   
   # sometimes mismatch in the place of the data on the json
@@ -124,14 +129,8 @@ check_format_json = function(tmp, json_data, state_name, age_group, Date)
     json_data[[age_group]][index_sign] = 0
   }
   
-  # index inside the json varies states by state
-  index = 1
-  if(state_name == "ma") index = 2
-  
-  cum.deaths = as.integer(json_data[[age_group]][index])
-  tmp[which(age == age_group),]$cum.deaths = cum.deaths
-  
-  return(tmp)
+
+  return(json_data)
 }
 
 fix_age_json = function(data, state_code)
