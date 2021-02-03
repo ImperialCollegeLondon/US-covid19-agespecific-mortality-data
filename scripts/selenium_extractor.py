@@ -1438,12 +1438,8 @@ class AgeExtractor:
         browser.save_screenshot('pngs/iowa/{}_2.png'.format(day))
         browser.close()
         browser.quit()
-<<<<<<< HEAD
-    def get_nh_pngs(self):
-=======
         
 def get_nh_pngs(self):
->>>>>>> 50de479b92723a11d0a2c69f19f0003c5c496555
         url ='https://www.nh.gov/t/DHHS/views/COVID-19CaseDashboard/Summary?:iid=1&:isGuestRedirectFromVizportal=y&:embed=y'
         day = self.today
         options = Options()
