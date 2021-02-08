@@ -81,3 +81,7 @@ jobs:
       run: |
         # print out smoe filenames
         aws s3 ls s3://$AWS_BUCKET/update_data/pdfs/florida/
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_BUCKET: ${{ secrets.AWS_BUCKET }}
