@@ -275,8 +275,8 @@ class AgeExtractor:
                 age_data['<20y'] = data[17]
                 age_data['20-44y'] = data[15]
                 age_data['45-54y'] = data[16]
-                age_data['55-64y'] = data[13]
-                age_data['65+'] = data[14]
+                age_data['55-64y'] = data[14]
+                age_data['65+'] = data[13]
                 doc.close()
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
@@ -1538,6 +1538,7 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
+
     try:
         print("\n### Running Oklahoma ###\n")
         ageExtractor.get_oklahoma()
