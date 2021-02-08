@@ -78,6 +78,6 @@ jobs:
         tree html -L 2
         tree pngs -L 2
     - name: Test AWSCLI output
-     run: |
-      # print out some filenames
-      aws s3 ls s3://$AWS_BUCKET/update_data/pdfs/florida/
+      run: |
+        # print out smoe filenames
+        aws s3 ls s3://$AWS_BUCKET/update_data/pdfs/florida/
