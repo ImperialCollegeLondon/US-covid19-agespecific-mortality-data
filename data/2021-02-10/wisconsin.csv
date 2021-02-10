@@ -1,0 +1,1 @@
+{"errors":[{"title":"Server Error","status":500,"message":"request to https://dhsgis.wi.gov/server/rest/services/DHS_COVID19/COVID19_WI/MapServer/11?f=json failed, reason: read ECONNRESET"}],"meta":{}}
