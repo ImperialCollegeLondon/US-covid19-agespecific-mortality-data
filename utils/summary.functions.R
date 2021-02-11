@@ -249,6 +249,7 @@ adjust_to_5y_age_band = function(data)
   data[, age := ifelse(age == "0-18", "0-19", age)]
   data[, age := ifelse(age == "5-17", "5-19", age)]
   data[, age := ifelse(age == "6-11", "5-9", age)]
+  data[, age := ifelse(age == "10-17", "10-19", age)]
   data[, age := ifelse(age == "10-18", "10-19", age)]
   data[, age := ifelse(age == "11-20", "10-19", age)]
   data[, age := ifelse(age == "11-17", "10-19", age)]
