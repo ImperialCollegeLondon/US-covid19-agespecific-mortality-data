@@ -8,7 +8,7 @@ last.day = Sys.Date() - 1 # yesterday
 
 #
 # Load code
-source("utils/obtain.data.R")
+source("utils/obtain.data.functions.R")
 source("utils/make_location_table.R") # table.states is a summary of all states extracted
 
 #

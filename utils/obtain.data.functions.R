@@ -10,9 +10,10 @@ states_w_one_day_delay = c("CT", "DC","FL","MO","MS","SC",  'HI')
 `%notin%` = Negate(`%in%`)
 
 source("utils/summary.functions.R")
-source("utils/read.json.data.R")
-source("utils/read.daily-historical.data.R")
-source("utils/sanity.check.processed.data.R")
+source("utils/adjust.functions.R")
+source("utils/read.json.data.functions.R")
+source("utils/read.daily-historical.data.functions.R")
+source("utils/sanity.check.function.R")
 
 obtain.data = function(last.day, state_name, state_code, json){
   
