@@ -319,11 +319,11 @@ class AgeExtractor:
                         break
                 data = lines[data_num:]
                 age_data = {}
-                age_data[data[0]] = data[28]
+                age_data[data[0]] = data[27]
                 age_data[data[1]] = data[22]
                 age_data[data[2]] = data[7]
                 age_data[data[3]] = data[29]
-                age_data[data[4]] = data[27]
+                age_data[data[4]] = data[28]
                 age_data[data[5]] = data[25]
                 doc.close()
                 path = "data/{}".format(day)
@@ -1274,6 +1274,7 @@ class AgeExtractor:
 
     def get_kansas(self):
         base_url = 'https://public.tableau.com/profile/kdhe.epidemiology#!/vizhome/COVID-19TableauVersion2/DeathSummary'
+        
         options = Options()
         options.add_argument('headless')
         browser = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(), options=options)
@@ -1316,8 +1317,11 @@ class AgeExtractor:
                         break
                 data = lines[begin_num: end_num]
                 age_data = {}
-                for i in range(8):
+                for i in range(9):
+                    if i==1:
+                       age_data['10-17']=0 
                     age_data[data[i].split('\t')[0]] = data[-(i+1)]
+                
 
                 path = "data/{}".format(day)
                 if not os.path.exists(path):
@@ -1538,7 +1542,7 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
-
+    
     try:
         print("\n### Running Oklahoma ###\n")
         ageExtractor.get_oklahoma()
@@ -1713,7 +1717,6 @@ if __name__ == "__main__":
         ageExtractor.get_nh_pngs()
     except:
         print("\n!!! New Hampshire PNG FAILED !!!\n")
-
 
     try:
         print("\n### Running Kansas ###\n")
