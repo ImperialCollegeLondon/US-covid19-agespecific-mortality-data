@@ -59,7 +59,7 @@ ensure_increasing_cumulative_deaths = function(dates, h_data, check_difference=1
           # if cumulative date at date t < date t - 1, fix cum deaths at date t - 1 to the one at date t.
           if(h_data[age == age_group & date == Date & code == Code, cum.deaths] > h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]){
             difference = h_data[age == age_group & date == Date & code == Code, cum.deaths] - h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]
-            if(difference > 50 & check_difference) stop(paste0("!!! Cumulative deaths decreased from one day to the next by more than 50, check your data !!! ", age_group, ' ',
+            if(difference > 60 & check_difference) stop(paste0("!!! Cumulative deaths decreased from one day to the next by more than 50, check your data !!! ", age_group, ' ',
                                             difference, ' ',
                                             h_data[age == age_group & date == Date & code == Code, cum.deaths], ' ',
                                             h_data[age == age_group & date == rev(dates)[t-1] & code == Code, cum.deaths]) )
