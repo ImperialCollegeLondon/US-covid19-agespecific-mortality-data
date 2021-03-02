@@ -3,8 +3,8 @@ library(readxl)
 library(tidyverse)
 
 path_to_data = "data"
-path_to_JHU_data = "data/official/jhu_death_data_padded_210222.rds"
-path_to_NYC_data = "data/official/NYC_deaths_210222.csv"
+path_to_JHU_data = "data/official/jhu_death_data_padded_210301.rds"
+path_to_NYC_data = "data/official/NYC_deaths_210301.csv"
 states_w_one_day_delay = c("CT", "DC","FL","MO","MS","SC",  'HI')
 
 `%notin%` = Negate(`%in%`)
