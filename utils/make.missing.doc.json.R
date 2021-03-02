@@ -31,7 +31,7 @@ make_doc_json = function(){
   
   dates = seq.Date(max(dates_json) + 1, max(dates_csv), by = 'day') 
   
-  file = as.data.table( reshape2::melt(read.csv(file.path(path_to_data, max(dates_csv), 'doc.csv'))), id.vars = 'X')
+  file = as.data.table( reshape2::melt(read.csv(file.path(path_to_data, max(dates_csv), 'doc.csv')), id.vars = 'X'))
   file = file[-c(1:2621),] # keep only 2021
   file[, date := as.Date(paste0(variable, '.2021'), format('X%d.%b.%Y'))]
   setnames(file, 'X', 'age')
