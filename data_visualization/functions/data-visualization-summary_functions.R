@@ -282,3 +282,156 @@ find_mortality_counts_rate_summary = function(death_summary_last_month, Age, pop
   
   return(tmp)
 }
+
+prepare_CDC_data = function(last.day,indir){
+  
+  path_to_data = file.path(indir, 'data')
+  
+  state_name = 'cdc'
+  state_code = 'CDC'
+  
+  dates = seq.Date(as.Date("2020-03-01"), last.day, by = "day")
+  
+  file_format = ".csv"
+  
+  # find dates with data
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0(state_name, file_format), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  
+  tmp = vector(mode = 'list', length = length(dates))
+  for(t in 1:length(dates)){
+    csv_file = file.path(path_to_data, dates[t], 'cdc.csv')
+    tmp[[t]] = as.data.table( read.csv(csv_file) ) 
+    if('Data.As.Of' %in% names(tmp[[t]])) setnames(tmp[[t]], 'Data.As.Of', 'Data.as.of')
+    if('Age.Group' %in% names(tmp[[t]])) setnames(tmp[[t]], 'Age.Group', 'Age.group')
+    tmp[[t]] = select(tmp[[t]], State, 'Data.as.of', Sex, Age.group, COVID.19.Deaths)
+  }
+  tmp = do.call('rbind', tmp)
+  
+  tmp = subset(tmp, Sex %in% c('Male', 'Female'))
+  
+  # sum over sex
+  tmp = tmp[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('Data.as.of', 'State', 'Age.group')]
+  
+  # organise age groups
+  tmp[, Age.group := ifelse(Age.group == "Under 1 year", "0-0", 
+                            ifelse(Age.group == "85 years and over", "85+", gsub("(.+) years", "\\1", Age.group)))]
+  tmp = subset(tmp, !Age.group %in% c("0-17", '18-29', "30-49", "50-64", "All Ages", "All ages"))
+  tmp[, Age.group := factor(Age.group, c('0-0', '1-4', '5-14', '15-24', '25-34', '35-44', '45-54', '55-64', '65-74', '75-84', '85+'))]
+  
+  # set date variable
+  tmp[, date := as.Date(Data.as.of, format = '%m/%d/%Y')]
+  tmp = select(tmp, -Data.as.of)
+  
+  # rm overall
+  tmp = subset(tmp, !is.na(Age.group))
+  
+  tmp1 = tmp[, list(N = .N), by = c('State', 'date')]
+  stopifnot(all(tmp1$N == 11))
+  
+  return(tmp)
+}
+
+map_statename_code = data.table(State = c(
+  "Alabama"         ,         
+  "Alaska"          ,         
+  "Arizona"	        ,         
+  "Arkansas"        ,         
+  "California"      ,         
+  "Colorado"        ,         
+  "Connecticut"     ,         
+  "Delaware"        ,         
+  "Florida"         ,         
+  "Georgia"         ,         
+  "Hawaii"          ,         
+  "Idaho"           ,         
+  "Illinois"        ,         
+  "Indiana"         ,         
+  "Iowa"            ,         
+  "Kansas"          ,         
+  "Kentucky"        ,         
+  "Louisiana"	      ,         
+  "Maine"           ,         
+  "Maryland"        ,         
+  "Massachusetts"   ,         
+  "Michigan"        ,         
+  "Minnesota"       ,         
+  "Mississippi"     ,         
+  "Missouri"        ,         
+  "Montana"         ,         
+  "Nebraska"        ,         
+  "Nevada"          ,         
+  "New Hampshire"   ,         
+  "New Jersey"      ,         
+  "New Mexico"      ,         
+  "New York"        ,         
+  "North Carolina"  ,         
+  "North Dakota"    ,         
+  "Ohio"            ,         
+  "Oklahoma"        ,         
+  "Oregon"	        ,         
+  "Pennsylvania"    ,         
+  "Rhode Island"    ,         
+  "South Carolina"  ,         
+  "South Dakota"    ,         
+  "Tennessee"	      ,         
+  "Texas"	          ,         
+  "Utah"	          ,         
+  "Vermont"         ,         
+  "Virginia"        ,         
+  "Washington"      ,         
+  "West Virginia"   ,         
+  "Wisconsin",	               
+  "Wyoming"), 
+  code = c(
+    "AL",
+    "AK",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY"))
