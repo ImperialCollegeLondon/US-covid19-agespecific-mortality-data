@@ -294,9 +294,10 @@ class AgeExtractor:
         path = "pdfs/NorthCarolina"
         if not os.path.exists(path):
             os.mkdir(path)
-        url = 'https://covid19.ncdhhs.gov/dashboard/about-data'
-        day = requests.get(url).headers['Last-Modified']
-        day = parsedate(day).strftime('%Y-%m-%d')
+        #url = 'https://covid19.ncdhhs.gov/dashboard/about-data'
+        #day = requests.get(url).headers['Last-Modified']
+        #day = parsedate(day).strftime('%Y-%m-%d')
+        day = self.today
         url = 'https://public.tableau.com/views/NCDHHS_COVID-19_DataDownload/Demographics.pdf?:showVizHome=no'
         try:
             r = requests.get(url)
@@ -320,7 +321,7 @@ class AgeExtractor:
                 data = lines[data_num:]
                 age_data = {}
                 age_data[data[0]] = data[27]
-                age_data[data[1]] = data[22]
+                age_data[data[1]] = data[21]
                 age_data[data[2]] = data[7]
                 age_data[data[3]] = data[29]
                 age_data[data[4]] = data[28]
@@ -1542,7 +1543,7 @@ class AgeExtractor:
 
 if __name__ == "__main__":
     ageExtractor = AgeExtractor()
-    
+
     try:
         print("\n### Running Oklahoma ###\n")
         ageExtractor.get_oklahoma()
@@ -1566,13 +1567,11 @@ if __name__ == "__main__":
         ageExtractor.get_nd()
     except:
         print("\n!!! NORTH DAKOTA FAILED !!!\n")
-
     try:
         print("\n### Running North Carolina 2 ###\n")
         ageExtractor.get_nc2()
     except:
         print("\n!!! NORTH CAROLINA 2 FAILED !!!\n")
-
     try:
         print("\n### Running Missouri ###\n")
         ageExtractor.get_missouri()
