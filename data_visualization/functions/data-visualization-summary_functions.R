@@ -283,7 +283,7 @@ find_mortality_counts_rate_summary = function(death_summary_last_month, Age, pop
   return(tmp)
 }
 
-prepare_CDC_data = function(last.day,indir){
+prepare_CDC_data = function(last.day,age_max,indir){
   
   path_to_data = file.path(indir, 'data')
   
@@ -327,8 +327,19 @@ prepare_CDC_data = function(last.day,indir){
   # rm overall
   tmp = subset(tmp, !is.na(Age.group))
   
+  # check that the number of age group is the same for every stata/date combinations
   tmp1 = tmp[, list(N = .N), by = c('State', 'date')]
   stopifnot(all(tmp1$N == 11))
+  
+  # rm US and add code
+  setnames(tmp, c('Age.group', 'State'), c("age", "loc_label"))
+  tmp = subset(tmp, loc_label != 'United States')
+  tmp = merge(tmp, map_statename_code, by.x = 'loc_label', by.y = 'State')
+  
+  # find age from and age to
+  tmp[, age_from := as.numeric(ifelse(grepl("\\+", age), gsub("(.+)\\+", "\\1", age), gsub("(.+)-.*", "\\1", age)))]
+  tmp[, age_to := as.numeric(ifelse(grepl("\\+", age), age_max, gsub(".*-(.+)", "\\1", age)))]
+  
   
   return(tmp)
 }

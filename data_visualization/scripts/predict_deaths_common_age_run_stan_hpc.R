@@ -21,7 +21,7 @@ path.to.demographics.data = file.path(indir, "data_visualization", "data", "us_p
 path.to.stan.model = file.path(indir, "data_visualization", "stan-models", paste0("predict_DeathsByAge_", stan_model, ".stan"))
 
 source(file.path(indir, "data_visualization", "functions", "data-visualization-summary_functions.R"))
-source(file.path(indir, "data_visualization", "functions", "data-visualization-stan_utility_functions.R"))
+source(file.path(indir, "data_visualization", "functions", "data-visualization-stan_utility_functions_CDC.R"))
 
 set.seed(33121122)
 run_index = round(runif(1,0, 10000))
@@ -62,28 +62,7 @@ death_summary_month[, age_to := as.numeric(ifelse(grepl("\\+", age), age_max, gs
 
 #
 # Create age maps
-# create map by 5-year age bands
-df_age_continuous = data.table(age_from = 0:age_max,
-                               age_to = 0:age_max,
-                               age_index = 0:age_max,
-                               age = c(0.1, 1:age_max))
-
-# create map for reporting age groups
-df_age_reporting = data.table(age_from = c(0,10,20,35,50,65,80),
-                              age_to = c(9,19,34,49,64,79,age_max),
-                              age_index = 1:7,
-                              age_cat = c("0-9", "10-19", "20-34", "35-49", "50-64", "65-79", "80+"))
-df_age_reporting[, age_from_index := which(df_age_continuous$age_from == age_from), by = "age_cat"]
-df_age_reporting[, age_to_index := which(df_age_continuous$age_to == age_to), by = "age_cat"]
-
-
-# create map for 4 new age groups
-df_ntl_age_strata = data.table(age_cat = c("0-24", "25-49", "50-74", "75+"),
-                               age_from = c(0, 25, 50, 75),
-                               age_to = c(24, 49, 74, age_max),
-                               age_index = 1:4)
-df_ntl_age_strata[, age_from_index := which(df_age_continuous$age_from == age_from), by = "age_cat"]
-df_ntl_age_strata[, age_to_index := which(df_age_continuous$age_to == age_to), by = "age_cat"]
+create_map_age(age_max)
 
 
 #
