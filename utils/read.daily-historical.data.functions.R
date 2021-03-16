@@ -177,7 +177,8 @@ read.AK.file = function(csv_file, Date){
   
 }
 
-read.RI.file = function(csv_file, Date){
+read.RI.file = function(csv_file, Date)
+  {
   
   tmp = read.csv(csv_file)
   colnames(tmp)[1] = "age"
@@ -204,6 +205,31 @@ read.RI.file = function(csv_file, Date){
     tmp3 = tmp[age %in% c("19-24", "25-29"), list(cum.deaths = sum(cum.deaths), code = code, date = date, daily.deaths = daily.deaths, age = "19-29")]
     tmp = rbind(rbind(rbind(tmp[! age%in% c("0-4", "5-9", "10-14", "15-18", "19-24", "25-29")], tmp1[1,]), tmp2[1,], tmp3[1,]))
   }
+  
+  return(tmp)
+}
+
+read.WA.file = function(last.day){
+  
+  dates = seq.Date(as.Date("2020-03-01"), last.day, by = "day")
+  
+  data_files = list.files(file.path(path_to_data, dates), full.names = T)
+  data_files_state = data_files[grepl(paste0("washington.csv"), data_files)]
+  dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
+  last.day = max(dates)
+  
+  csv_file = file.path(path_to_data, last.day, "washington.csv")
+  
+  tmp = as.data.table(reshape2::melt(read.csv(csv_file), id.vars = c('County', 'WeekStartDate', 'Deaths', 'dtm_updated')))
+  tmp = subset(tmp, grepl('Age.', variable))
+  tmp[, date := as.Date(WeekStartDate, format = '%d/%m/%Y')]
+  tmp[, age := paste0(gsub('Age.([0-9]+)(.*)', '\\1', variable), '-', gsub('Age.([0-9]+).([0-9]+)', '\\2', variable))]
+  tmp[age == "80-Age.80.", age := '80+']
+  tmp = tmp[, list(daily.deaths = sum(value)), by = c('date', 'age')]
+  tmp = tmp[order(date, age)]
+  tmp[, cum.deaths := cumsum(daily.deaths), by = 'age']
+  tmp[, daily.deaths := NA, by = 'age']
+  tmp[, code := 'WA']
   
   return(tmp)
 }

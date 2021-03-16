@@ -3,8 +3,8 @@ library(readxl)
 library(tidyverse)
 
 path_to_data = "data"
-path_to_JHU_data = "data/official/jhu_death_data_padded_210308.rds"
-path_to_NYC_data = "data/official/NYC_deaths_210308.csv"
+path_to_JHU_data = "data/official/jhu_death_data_padded_210315.rds"
+path_to_NYC_data = "data/official/NYC_deaths_210315.csv"
 states_w_one_day_delay = c("CT", "DC","FL","MO","MS","SC",  'HI')
 
 `%notin%` = Negate(`%in%`)
@@ -18,7 +18,7 @@ source("utils/sanity.check.function.R")
 obtain.data = function(last.day, state_name, state_code, json){
   
   ## 1. STATES WITH RULE BASED FUNCTION
-  states.historical.data = c("CT", "TN", "ME", "WI", "VA","TX")
+  states.historical.data = c("CT", "TN", "ME", "WI", "VA","TX", 'WA')
   states.daily.data = c("GA", "ID", "AK", "RI", "CDC")
   
   # file with entire time series
