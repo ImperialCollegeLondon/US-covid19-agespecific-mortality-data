@@ -38,6 +38,9 @@ make_doc_json = function(){
   file = subset(file, !age %in% c('Age', "All"))
   file = select(file, date, age, value)
   
+  dates = unique(file$date)
+  if(length(dates) < 1) stop()
+  
   #
   # Create missing json
   for(t in 1:length(dates)){
