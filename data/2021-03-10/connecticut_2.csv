@@ -1,0 +1,3 @@
+Can't connect to data.ct.gov:443 (Temporary failure in name resolution)
+
+Temporary failure in name resolution at /usr/share/perl5/LWP/Protocol/http.pm line 50.
