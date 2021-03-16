@@ -66,7 +66,7 @@ plot_continuous_age_contribution_CDC = function(fit, df_age, lab, Code, Date, no
   fit_samples = rstan::extract(fit)
   
   # pi: age contribution to deaths (continuous)
-  tmp3 = as.data.table(  reshape2::melt(fit_samples$pi_predict) ) 
+  tmp3 = as.data.table(  reshape2::melt(fit_samples$alpha) ) 
   colnames(tmp3) = c("iterations", "age_index", "value")
   tmp3 = tmp3[, list( 	q= quantile(value, prob=ps),
                        q_label=p_labs), 
@@ -77,7 +77,7 @@ plot_continuous_age_contribution_CDC = function(fit, df_age, lab, Code, Date, no
     geom_line(aes(y = M)) +
     geom_ribbon(aes(ymin= CL, ymax = CU), alpha = 0.5) + 
     theme_bw() +
-    labs(y = paste0("Contribution to ", lab), x = "", title = paste(Code, "date", Date))
+    labs(y = paste0("Relative contribution to ", lab), x = "", title = paste(Code, "date", Date))
   
   return(p)
 }
@@ -127,7 +127,7 @@ make_predictive_checks_table_CDC = function(fit, variable_abbr, tmp1, df_age_rep
   fit_samples = rstan::extract(fit)
   
   # posterior predictive check
-  tmp2 = as.data.table( reshape2::melt(fit_samples$deaths_predict_reporting_age_strata) )
+  tmp2 = as.data.table( reshape2::melt(fit_samples$deaths_predict_state_age_strata) )
   colnames(tmp2) = c("iterations", "age_index", "value")
   tmp2 = tmp2[, list( 	q= quantile(value, prob=ps),
                        q_label=p_labs), 
@@ -534,9 +534,9 @@ prepare_stan_data = function(deathByAge, JHUData, loc_name, Date){
   cumulative_less_1 <<- sum(tmp1$COVID.19.Deaths) <= 1
   
   # find weekly deaths
-  tmp2 = subset(tmp, date == dates[t-1] & !is.na(COVID.19.Deaths) & age %in% tmp1$age)
-  tmp3 = subset(tmp1, age %in% tmp2$age)
-  tmp2$weekly_deaths = tmp3$COVID.19.Deaths - tmp2$COVID.19.Deaths
+  tmp3 = subset(tmp, date == dates[t-1] & !is.na(COVID.19.Deaths) & age %in% tmp1$age)
+  tmp2 = subset(tmp1, age %in% tmp3$age)
+  tmp2$weekly_deaths = tmp2$COVID.19.Deaths - tmp3$COVID.19.Deaths
   tmp2 <<- tmp2
   weekly_less_1 <<- sum(tmp2$weekly_deaths) <= 1
   

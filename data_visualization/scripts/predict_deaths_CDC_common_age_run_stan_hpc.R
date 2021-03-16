@@ -108,7 +108,7 @@ mclapply( 1:length(locations) , function(m) {
     #
     # fit biweekly deaths
     if(!weekly_less_1){ 
-      stan_data$deaths = tmp1$weekly_deaths
+      stan_data$deaths = tmp2$weekly_deaths
       fit_weekly <- rstan::sampling(model,data=stan_data,iter=10000,warmup=1000,chains=3,
                                     seed=run_index,verbose=TRUE,control = list(max_treedepth = 15, adapt_delta = 0.9)) 
       file = file.path(outdir.fit, paste0("fit_weekly_deaths_", Code, "_", Date, "_",run_tag,".rds"))
