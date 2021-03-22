@@ -69,11 +69,16 @@ model {
 
 
 generated quantities {
+  real log_lik[W];
   int deaths_predict[A,W];
   int deaths_predict_state_age_strata_non_missing[B,W] = rep_array(0, B, W);
   int deaths_predict_state_age_strata[B,W];
 
   for(w in 1:W){
+    log_lik[w] = neg_binomial_lpmf(deaths[idx_non_missing[1:N_idx_non_missing[w],w],w] | alpha_reduced[idx_non_missing[1:N_idx_non_missing[w],w], w] , theta[w] );
+    for(i in range_censored[1]:range_censored[2])
+      log_lik[w] += neg_binomial_lpmf(i| alpha_reduced[idx_missing[1:N_idx_missing[w],w], w] , theta[w] );
+    
     deaths_predict[:,w] = neg_binomial_rng(alpha[:,w], theta[w]);
     deaths_predict_state_age_strata_non_missing[idx_non_missing[1:N_idx_non_missing[w],w],w] = neg_binomial_rng(alpha_reduced[idx_non_missing[1:N_idx_non_missing[w],w], w], theta[w]);
     deaths_predict_state_age_strata[:,w] = neg_binomial_rng(alpha_reduced[:,w], theta[w]);
