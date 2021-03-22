@@ -1,71 +1,59 @@
-make_predictive_checks_table_CDC = function(fit, variable_abbr, tmp1, df_age_reporting, no_fit){
+make_predictive_checks_table = function(fit, variable_abbr, df_week, df_age_reporting, data){
   
   ps <- c(0.5, 0.025, 0.975)
   p_labs <- paste0(c('M','CL','CU'), "_", variable_abbr)
   
-  # if no fit was done because the sum of the deaths were <1 
-  if(no_fit){
-    df_age_reporting = select(df_age_reporting, -age_index, -age_from_index, -age_to_index)
-    tmp2 = merge(tmp1, df_age_reporting, by.x = c('age_from', 'age_to', 'age'), by.y = c('age_from', 'age_to', 'age_cat'), all.y = T)
-    tmp2[, paste0(c('M','CL','CU'), "_", variable_abbr) := NA]
-    
-    tmp2[, loc_label := unique(loc_label[!is.na(loc_label)])]
-    tmp2[, date := unique(date[!is.na(date)])]
-    tmp2[, code := unique(code[!is.na(code)])]
-    
-    tmp2[,age := factor(age, levels = unique(tmp[order(age_from)]$age)) ]
-    return(tmp2)
-  }
+  if(is.null(fit)) stop()
   
   # extract samples
   fit_samples = rstan::extract(fit)
   
-  # posterior predictive check
-  tmp2 = as.data.table( reshape2::melt(fit_samples$deaths_predict_state_age_strata) )
-  colnames(tmp2) = c("iterations", "age_index", "value")
-  tmp2 = tmp2[, list( 	q= quantile(value, prob=ps),
+  tmp1 = as.data.table( reshape2::melt(fit_samples$deaths_predict_state_age_strata) )
+  setnames(tmp1, c('Var2', 'Var3'), c('age_index','week_index'))
+  tmp1 = tmp1[, list( 	q= quantile(value, prob=ps),
                        q_label=p_labs), 
-              by=c('age_index')]		
-  tmp2[, age := df_age_reporting$age_cat[age_index]]
-  tmp2[, age_from := df_age_reporting$age_from[age_index] ]
-  tmp2[, age_to := df_age_reporting$age_to[age_index] ]
-  tmp2 = dcast(tmp2, age + age_from + age_to ~ q_label, value.var = "q")
-  tmp2 = merge(tmp2, tmp1, by = c("age", 'age_from', 'age_to'), all.x = T)
+              by=c('age_index', 'week_index')]	
+  tmp1 = dcast(tmp1, week_index + age_index ~ q_label, value.var = "q")
   
-  tmp2[,age := factor(age, levels = unique(tmp[order(age_from)]$age)) ]
+  tmp1 = merge(tmp1, df_week, by = 'week_index')
+  tmp1[, age := df_state_age_strata$age[age_index]]
   
-  tmp2[, loc_label := unique(loc_label[!is.na(loc_label)])]
-  tmp2[, date := unique(date[!is.na(date)])]
-  tmp2[, code := unique(code[!is.na(code)])]
+  tmp1 = merge(tmp1, data, by = c('date', 'age'))
   
-  return(tmp2)
+  return(tmp1)
 }
 
-plot_continuous_age_contribution_CDC = function(fit, df_age, lab, Code, Date, no_fit){
+plot_continuous_age_contribution = function(fit, df_age_continuous, df_week, lab, Code){
   
   ps <- c(0.5, 0.025, 0.975)
   p_labs <- c('M','CL','CU')
   
-  if(no_fit) return(ggplot())
+  if(is.null(fit)) return(ggplot())
   
   # extract samples
   fit_samples = rstan::extract(fit)
   
-  # pi: age contribution to deaths (continuous)
-  tmp3 = as.data.table(  reshape2::melt(fit_samples$alpha) ) 
-  colnames(tmp3) = c("iterations", "age_index", "value")
-  tmp3 = tmp3[, list( 	q= quantile(value, prob=ps),
+  tmp1 = as.data.table( reshape2::melt(fit_samples$alpha) )
+  setnames(tmp1, c('Var2', 'Var3'), c('age_index','week_index'))
+  tmp1 = tmp1[, list( 	q= quantile(value, prob=ps),
                        q_label=p_labs), 
-              by=c('age_index')]	
-  tmp3 = merge(tmp3, df_age, by = "age_index")
-  tmp3 = dcast(tmp3, age ~ q_label, value.var = "q")
-  p = ggplot(tmp3, aes(x = age)) + 
+              by=c('age_index', 'week_index')]	
+  tmp1 = dcast(tmp1, week_index + age_index ~ q_label, value.var = "q")
+  
+  tmp1 = merge(tmp1, df_week, by = 'week_index')
+  tmp1[, age := df_age_continuous$age_index[age_index]]
+  
+  n_row = length(unique(tmp1$date))
+   
+  p = ggplot(tmp1, aes(x = age)) + 
     geom_line(aes(y = M)) +
     geom_ribbon(aes(ymin= CL, ymax = CU), alpha = 0.5) + 
     theme_bw() +
-    labs(y = paste0("Relative contribution to ", lab), x = "", title = paste(Code, "date", Date))
+    labs(y = paste0("Relative contribution to ", lab), x = "", title = paste(Code)) + 
+    facet_wrap(~date, nrow = n_row)
   
-  return(p)
+  ggsave(p, file = file.path(outdir.fig, "continuous_contribution", paste0("alpha_cum", "_",Code, "_", run_tag,".png") ), w= 8, h = 6*n_row / 2)
+  
 }
 
 make_convergence_diagnostics_stats = function(fit){
@@ -78,6 +66,18 @@ make_convergence_diagnostics_stats = function(fit){
   cat("the minimum and maximum effective sample size are ", range(eff_sample_size_cum[[j]]), "\n")
   cat("the minimum and maximum Rhat are ", range(Rhat_cum[[j]]), "\n")
   stopifnot(min(eff_sample_size_cum[[j]]) > 500)
+  
+  #
+  # compute WAIC and LOO
+  re = rstan::extract(fit_cum)
+  if('log_lik' %in% names(re)){
+    log_lik <- loo::extract_log_lik(fit_cum)
+    .WAIC = loo::waic(log_lik)
+    .LOO = loo::loo(log_lik)
+    print(.WAIC); print(.LOO)
+    WAIC[[j]] <<- .WAIC$pointwise
+    LOO[[j]] <<- .LOO$pointwise
+  } 
 }
 
 make_convergence_diagnostics_plots = function(fit, title, suffix)
@@ -106,6 +106,25 @@ make_convergence_diagnostics_plots = function(fit, title, suffix)
     ggsave(p_intervals, file = file.path(outdir.fig, "convergence_diagnostics", paste0("intervals_plots_",  suffix, '_',Code, "_", par, "_", run_tag,".png") ), w=10, h = 10)
     
   }
+
+}
+
+
+plot_posterior_predictive_checks = function(data, variable, variable_abbr, lab){
+  
+  Code = unique(data$code)
+  n_row = length(unique(data$date))
+  
+  # posterior predictive check
+  p1 = ggplot(data, aes(x = age)) + 
+    geom_point(aes(y = get(paste0("M_",variable_abbr)) ), col = "black")+
+    geom_errorbar(aes(ymin = get(paste0("CL_",variable_abbr)), ymax = get(paste0("CU_",variable_abbr))), width = .2, col = "black")+
+    geom_point(aes(y = get(variable)), col = "red") + 
+    theme_bw() +
+    labs(y = lab, x = "") + 
+    facet_wrap(~date, nrow = n_row)
+  
+  ggsave(p1, file = file.path(outdir.fig, "posterior_predictive_checks", paste0("posterior_predictive_checks_cum_", Code, "_", run_tag,".png") ), w= 10, h = 6*n_row / 2)
 
 }
 

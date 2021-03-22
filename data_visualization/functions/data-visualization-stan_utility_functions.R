@@ -389,32 +389,6 @@ find_diff_cases_monthly = function(fit_monthly_t, fit_monthly_t0, name_var, abbr
 
 
 
-make_convergence_diagnostics_stats = function(fit, no_fit){
-  
-  if(no_fit) return(0)
-  
-  summary = rstan::summary(fit_cum)$summary
-  eff_sample_size_cum[[j]] <<- summary[,9][!is.na(summary[,9])]
-  Rhat_cum[[j]] <<- summary[,10][!is.na(summary[,10])]
-  cat("the minimum and maximum effective sample size are ", range(eff_sample_size_cum[[j]]), "\n")
-  cat("the minimum and maximum Rhat are ", range(Rhat_cum[[j]]), "\n")
-  stopifnot(min(eff_sample_size_cum[[j]]) > 500)
-}
-
-make_convergence_diagnostics_plots = function(fit, title, suffix, no_fit){
-  
-  if(no_fit) return(0)
-  
-  posterior <- as.array(fit)
-  p_trace = bayesplot::mcmc_trace(posterior, regex_pars = c("beta", "v_inflation")) + labs(title = title)
-  p_pairs = gridExtra::arrangeGrob(bayesplot::mcmc_pairs(posterior, regex_pars = c("beta", "v_inflation")), top = title)
-  p_intervals = bayesplot::mcmc_intervals(posterior, regex_pars = c("beta", "v_inflation")) + labs(title = title)
-  
-  ggsave(p_trace, file = file.path(outdir.fig, "convergence_diagnostics", paste0("trace_plots_", suffix, '_', Code, "_", Date, "_", run_tag,".png") ), w= 8, h = 8)
-  ggsave(p_pairs, file = file.path(outdir.fig, "convergence_diagnostics", paste0("pairs_plots_",  suffix, '_',Code, "_", Date, "_", run_tag,".png") ), w= 8, h = 10)
-  ggsave(p_intervals, file = file.path(outdir.fig, "convergence_diagnostics", paste0("intervals_plots_",  suffix, '_',Code, "_", Date, "_", run_tag,".png") ), w= 8, h = 8)
-  
-}
 
 
 
