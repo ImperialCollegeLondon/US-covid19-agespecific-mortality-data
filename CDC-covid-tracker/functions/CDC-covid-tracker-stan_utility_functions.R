@@ -67,3 +67,45 @@ plot_continuous_age_contribution_CDC = function(fit, df_age, lab, Code, Date, no
   
   return(p)
 }
+
+make_convergence_diagnostics_stats = function(fit){
+  
+  stopifnot(!is.null(fit))
+  
+  summary = rstan::summary(fit_cum)$summary
+  eff_sample_size_cum[[j]] <<- summary[,9][!is.na(summary[,9])]
+  Rhat_cum[[j]] <<- summary[,10][!is.na(summary[,10])]
+  cat("the minimum and maximum effective sample size are ", range(eff_sample_size_cum[[j]]), "\n")
+  cat("the minimum and maximum Rhat are ", range(Rhat_cum[[j]]), "\n")
+  stopifnot(min(eff_sample_size_cum[[j]]) > 500)
+}
+
+make_convergence_diagnostics_plots = function(fit, title, suffix)
+  {
+  
+  stopifnot(!is.null(fit))
+  
+  posterior <- as.array(fit)
+  
+  if(all(sapply(c("lambda", "nu", "rho", "sigma"), function(x) sum(grepl(x, names(fit))) > 0))){
+    pars = c("lambda", "nu", "rho", "sigma")
+  }
+  
+  if(all(sapply(c("beta", "nu", "lambda"), function(x) sum(grepl(x, names(fit))) > 0))){
+    pars = c("beta", "nu", "lambda")
+  }
+
+  for(par in pars)
+  {
+    p_trace = bayesplot::mcmc_trace(posterior, regex_pars = par) + labs(title = title) 
+    p_pairs = gridExtra::arrangeGrob(bayesplot::mcmc_pairs(posterior, regex_pars = par), top = title)
+    p_intervals = bayesplot::mcmc_intervals(posterior, regex_pars = par) + labs(title = title)
+    
+    ggsave(p_trace, file = file.path(outdir.fig, "convergence_diagnostics", paste0("trace_plots_", suffix, '_', Code, "_", par, "_", run_tag,".png") ), w= 10, h = 10)
+    ggsave(p_pairs, file = file.path(outdir.fig, "convergence_diagnostics", paste0("pairs_plots_",  suffix, '_',Code, "_", par, "_", run_tag,".png") ), w= 15, h = 15)
+    ggsave(p_intervals, file = file.path(outdir.fig, "convergence_diagnostics", paste0("intervals_plots_",  suffix, '_',Code, "_", par, "_", run_tag,".png") ), w=10, h = 10)
+    
+  }
+
+}
+
