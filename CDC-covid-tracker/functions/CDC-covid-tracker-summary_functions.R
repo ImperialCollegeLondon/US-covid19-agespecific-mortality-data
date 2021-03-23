@@ -163,10 +163,8 @@ prepare_stan_data = function(deathByAge, JHUData, loc_name){
   # range of the censored data
   stan_data$range_censored = c(1,9)
   
-  
   return(stan_data)
 }
-
 
 map_statename_code = data.table(State = c(
   "Alabama"         ,         

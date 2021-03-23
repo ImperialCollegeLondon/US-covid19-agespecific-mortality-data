@@ -23,7 +23,7 @@ make_predictive_checks_table = function(fit, variable_abbr, df_week, df_age_repo
   return(tmp1)
 }
 
-plot_continuous_age_contribution = function(fit, df_age_continuous, df_week, lab, Code){
+plot_continuous_age_contribution = function(fit, df_age_continuous, df_week, lab, outdir){
   
   ps <- c(0.5, 0.025, 0.975)
   p_labs <- c('M','CL','CU')
@@ -52,7 +52,7 @@ plot_continuous_age_contribution = function(fit, df_age_continuous, df_week, lab
     labs(y = paste0("Relative contribution to ", lab), x = "", title = paste(Code)) + 
     facet_wrap(~date, nrow = n_row)
   
-  ggsave(p, file = file.path(outdir.fig, "continuous_contribution", paste0("alpha_cum", "_",Code, "_", run_tag,".png") ), w= 8, h = 6*n_row / 2)
+  ggsave(p, file = paste0(outdir, "alpha_cum", "_",Code, "_", run_tag,".png") , w= 8, h = 6*n_row / 2)
   
 }
 
@@ -65,7 +65,7 @@ make_convergence_diagnostics_stats = function(fit){
   Rhat_cum[[j]] <<- summary[,10][!is.na(summary[,10])]
   cat("the minimum and maximum effective sample size are ", range(eff_sample_size_cum[[j]]), "\n")
   cat("the minimum and maximum Rhat are ", range(Rhat_cum[[j]]), "\n")
-  stopifnot(min(eff_sample_size_cum[[j]]) > 500)
+  if(min(eff_sample_size_cum[[j]]) < 500) cat('\nEffective sample size smaller than 500 \n')
   
   #
   # compute WAIC and LOO
@@ -99,7 +99,8 @@ make_convergence_diagnostics_plots = function(fit, title, suffix)
   {
     p_trace = bayesplot::mcmc_trace(posterior, regex_pars = par) + labs(title = title) 
     p_pairs = gridExtra::arrangeGrob(bayesplot::mcmc_pairs(posterior, regex_pars = par), top = title)
-    p_intervals = bayesplot::mcmc_intervals(posterior, regex_pars = par) + labs(title = title)
+    p_intervals = bayesplot::mcmc_intervals(posterior, regex_pars = par, prob = 0.95,
+                                            prob_outer = 0.95) + labs(title = title)
     
     ggsave(p_trace, file = file.path(outdir.fig, "convergence_diagnostics", paste0("trace_plots_", suffix, '_', Code, "_", par, "_", run_tag,".png") ), w= 10, h = 10)
     ggsave(p_pairs, file = file.path(outdir.fig, "convergence_diagnostics", paste0("pairs_plots_",  suffix, '_',Code, "_", par, "_", run_tag,".png") ), w= 15, h = 15)
@@ -109,8 +110,8 @@ make_convergence_diagnostics_plots = function(fit, title, suffix)
 
 }
 
-
-plot_posterior_predictive_checks = function(data, variable, variable_abbr, lab){
+plot_posterior_predictive_checks = function(data, variable, variable_abbr, lab, outdir)
+  {
   
   Code = unique(data$code)
   n_row = length(unique(data$date))
@@ -124,7 +125,7 @@ plot_posterior_predictive_checks = function(data, variable, variable_abbr, lab){
     labs(y = lab, x = "") + 
     facet_wrap(~date, nrow = n_row)
   
-  ggsave(p1, file = file.path(outdir.fig, "posterior_predictive_checks", paste0("posterior_predictive_checks_cum_", Code, "_", run_tag,".png") ), w= 10, h = 6*n_row / 2)
+  ggsave(p1, file = paste0(outdir, "posterior_predictive_checks_cum_", Code, "_", run_tag,".png") , w= 10, h = 6*n_row / 2)
 
 }
 
