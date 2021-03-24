@@ -8,6 +8,7 @@ indir = "~/git/US-covid19-data-scraping" # path to the repo
 outdir = file.path(indir, 'CDC-covid-tracker', "results")
 location.index = 2
 stan_model = "210319d"
+JOBID = 12
 
 args_line <-  as.list(commandArgs(trailingOnly=TRUE))
 if(length(args_line) > 0)
@@ -74,12 +75,15 @@ cat("Location ", as.character(loc_name), "\n")
 # stan data
 cat("\n Prepare stan data \n")
 stan_data = prepare_stan_data(deathByAge, JHUData, loc_name)
-
+stan_data$age = matrix(stan_data$age, nrow = 106, ncol = 1)
 
 cat("\n Start sampling \n")
 
 # fit cumulative deaths
+# path.to.stan.model = file.path(indir, 'CDC-covid-tracker', "stan-models", paste0("CDC-covid-tracker_", '210319d2', ".stan"))
+
 model = rstan::stan_model(path.to.stan.model)
+
 fit_cum <- rstan::sampling(model,data=stan_data,iter=1000,warmup=100,chains=1,
                            seed=JOBID,verbose=TRUE,control = list(max_treedepth = 15, adapt_delta = 0.9))
 
@@ -91,8 +95,5 @@ while(!file.exists(file)){
 
 
 
-  
-
-  
 
 
