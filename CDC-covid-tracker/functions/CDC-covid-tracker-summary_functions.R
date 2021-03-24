@@ -23,28 +23,64 @@ prepare_CDC_data = function(last.day,age_max,indir){
     tmp[[t]] = select(tmp[[t]], State, 'Data.as.of', Sex, Age.group, COVID.19.Deaths)
   }
   tmp = do.call('rbind', tmp)
-  
-  tmp = subset(tmp, Sex %in% c('Male', 'Female'))
-  
+
   # sum over sex
+  tmp = subset(tmp, Sex %in% c('Male', 'Female'))
   tmp = tmp[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('Data.as.of', 'State', 'Age.group')]
-  
-  # organise age groups
-  tmp[, Age.group := ifelse(Age.group == "Under 1 year", "0-0", 
-                            ifelse(Age.group == "85 years and over", "85+", gsub("(.+) years", "\\1", Age.group)))]
-  tmp = subset(tmp, !Age.group %in% c("0-17", '18-29', "30-49", "50-64", "All Ages", "All ages"))
-  tmp[, Age.group := factor(Age.group, c('0-0', '1-4', '5-14', '15-24', '25-34', '35-44', '45-54', '55-64', '65-74', '75-84', '85+'))]
   
   # set date variable
   tmp[, date := as.Date(Data.as.of, format = '%m/%d/%Y')]
   tmp = select(tmp, -Data.as.of)
   
+  # rename age groups
+  tmp[, Age.group := ifelse(Age.group == "Under 1 year", "0-0", 
+                            ifelse(Age.group == "85 years and over", "85+", gsub("(.+) years", "\\1", Age.group)))]
+  tmp = subset(tmp, !Age.group %in% c("0-17", '5-14', '15-24', '25-34', '35-44', '45-54','55-64', "All Ages", "All ages"))
+  
+  tmp1 = subset(tmp, date  == "2021-02-24")
+  unique(tmp1$Age.group)
+  # group 0-0 and 1-4 age groups
+  tmp1 = subset(tmp, Age.group %in% c('0-0', '1-4'))
+  tmp1 = tmp1[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('date', 'State')]
+  tmp1[, Age.group := '0-4']
+  tmp = rbind(subset(tmp, !Age.group %in% c('0-0', '1-4')), tmp1)
+  
+  # add 5-9 and 10-17 age groups
+  for(missing.age in c('5-9', '10-17')){
+    tmp1 = unique(select(tmp, date, State))
+    tmp1[, Age.group := missing.age]
+    tmp1[, COVID.19.Deaths := NA]
+    tmp = rbind(tmp, tmp1)
+  }
+  
+  # add 18-29, 30-49 and 50-64 before 2020-09-02
+  for(missing.age in c('18-29', '30-49', '50-64')){
+    missing.dates = unique(subset(tmp, date < "2020-09-02")$date)
+    for(t in seq_along(missing.dates)){
+      Date = missing.dates[t]
+      tmp1 = unique(select(tmp, State))
+      tmp1[, Age.group := missing.age]
+      tmp1[, date := Date]
+      tmp1[, COVID.19.Deaths := NA]
+      tmp = rbind(tmp, tmp1)
+    }
+  }
+
+  # gather 30-39 and 40-49 
+  tmp1 = subset(tmp, Age.group %in% c('30-39', '40-49'))
+  tmp1 = tmp1[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('date', 'State')]
+  tmp1[, Age.group := '30-49']
+  tmp = rbind(subset(tmp, !Age.group %in% c('30-39', '40-49')), tmp1)
+  
+  # factor age
+  tmp[, Age.group := factor(Age.group, c('0-4', '5-9', '10-17', '18-29', '30-49', '50-64', '65-74', '75-84', '85+'))]
+
   # rm overall
   tmp = subset(tmp, !is.na(Age.group))
   
   # check that the number of age group is the same for every stata/date combinations
   tmp1 = tmp[, list(N = .N), by = c('State', 'date')]
-  stopifnot(all(tmp1$N == 11))
+  stopifnot(all(tmp1$N == 9))
   
   # rm US and add code
   setnames(tmp, c('Age.group', 'State'), c("age", "loc_label"))
@@ -55,6 +91,8 @@ prepare_CDC_data = function(last.day,age_max,indir){
   tmp[, age_from := as.numeric(ifelse(grepl("\\+", age), gsub("(.+)\\+", "\\1", age), gsub("(.+)-.*", "\\1", age)))]
   tmp[, age_to := as.numeric(ifelse(grepl("\\+", age), age_max, gsub(".*-(.+)", "\\1", age)))]
   
+  # order
+  tmp = tmp[order(loc_label, date, age)]
   
   return(tmp)
 }
