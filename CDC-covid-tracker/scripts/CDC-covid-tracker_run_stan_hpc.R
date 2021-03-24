@@ -19,14 +19,14 @@ if(length(args_line) > 0)
   stopifnot(args_line[[9]]=='-JOBID')
   indir <- args_line[[2]]
   outdir <- args_line[[4]]
-  location.index <- args_line[[6]]
+  location.index <- as.numeric(args_line[[6]])
   stan_model <- args_line[[8]]
-  JOBID <- args_line[[10]]
+  JOBID <- as.numeric(args_line[[10]])
 }
 
 # stan model
-options(mc.cores = parallel::detectCores())
-rstan_options(auto_write = TRUE)
+#options(mc.cores = parallel::detectCores())
+#rstan_options(auto_write = TRUE)
 path.to.stan.model = file.path(indir, 'CDC-covid-tracker', "stan-models", paste0("CDC-covid-tracker_", stan_model, ".stan"))
 
 # path to JHU data
@@ -44,10 +44,10 @@ outdir.fig = file.path(outdir, run_tag, "figures")
 outdir.table = file.path(outdir, run_tag, "table")
 
 cat("outfile.dir is ", file.path(outdir, run_tag))
-dir.create(file.path(outdir, run_tag))
-dir.create(outdir.fit)
-dir.create(outdir.fig)
-dir.create(outdir.table)
+dir.create(file.path(outdir, run_tag), showWarnings = F)
+dir.create(outdir.fit, showWarnings = F)
+dir.create(outdir.fig, showWarnings = F)
+dir.create(outdir.table, showWarnings = F)
 
 # max age considered
 age_max = 105
@@ -57,7 +57,7 @@ JHUData = readRDS(path.to.JHU.data)
   
 # Gather CDC data
 # last.day = Sys.Date() - 1 # yesterday 
-last.day = as.Date('2021-03-05')
+last.day = as.Date('2021-03-03')
 deathByAge = prepare_CDC_data(last.day, age_max, indir)
 
 # Create age maps
@@ -79,7 +79,8 @@ stan_data = prepare_stan_data(deathByAge, JHUData, loc_name)
 cat("\n Start sampling \n")
 
 # fit cumulative deaths
-fit_cum <- rstan::sampling(model,data=stan_data,iter=1000,warmup=100,chains=3,
+model = rstan::stan_model(path.to.stan.model)
+fit_cum <- rstan::sampling(model,data=stan_data,iter=1000,warmup=100,chains=1,
                            seed=JOBID,verbose=TRUE,control = list(max_treedepth = 15, adapt_delta = 0.9))
 
 file = file.path(outdir.fit, paste0("fit_cumulative_deaths_", Code, "_",run_tag,".rds"))
