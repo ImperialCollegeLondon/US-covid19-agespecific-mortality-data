@@ -16,9 +16,9 @@ if(length(args_line) > 0)
   stopifnot(args_line[[9]]=='-JOBID')
   indir <- args_line[[2]]
   outdir <- args_line[[4]]
-  location.index <- args_line[[6]]
+  location.index <- as.numeric(args_line[[6]])
   stan_model <- args_line[[8]]
-  JOBID <- args_line[[10]]
+  JOBID <- as.numeric(args_line[[10]])
 }
 
 
