@@ -111,8 +111,8 @@ saveRDS(predictive_checks_table, file = file.path(outdir.table, paste0('predicti
 
 saveRDS(eff_sample_size_cum, file = file.path(outdir.table, paste0("eff_sample_size_cum_", Code, ".rds")))
 
-saveRDS(Rhat_cum, file = file.path(outdir.table, "Rhat_cum_", Code, ".rds"))
+saveRDS(Rhat_cum, file = file.path(outdir.table, paste0("Rhat_cum_", Code, ".rds")))
 
-saveRDS(WAIC, file = file.path(outdir.table, "WAIC_", Code, ".rds"))
+saveRDS(WAIC, file = file.path(outdir.table, paste0("WAIC_", Code, ".rds")))
 
-saveRDS(LOO, file = file.path(outdir.table, "LOO_", Code, ".rds"))
+saveRDS(LOO, file = file.path(outdir.table, paste0("LOO_", Code, ".rds")))
