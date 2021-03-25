@@ -90,9 +90,6 @@ model {
 
   }
 
-
-}
-
 generated quantities {
   real log_lik[W];
   // int deaths_predict[A,W];
