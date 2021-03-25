@@ -1,12 +1,15 @@
 library(rstan)
 library(data.table)
+library(dplyr)
 
-indir = "~/git/US-covid19-data-scraping" # path to the repo
+indir = "~/git/US-covid19-agespecific-mortality-data" # path to the repo
 outdir = file.path(indir, 'CDC-covid-tracker', "results")
 location.index = 2
-stan_model = "210319d"
+stan_model = "210319d3"
+JOBID = 782737
 
 args_line <-  as.list(commandArgs(trailingOnly=TRUE))
+print(args_line)
 if(length(args_line) > 0)
 {
   stopifnot(args_line[[1]]=='-indir')
@@ -20,7 +23,6 @@ if(length(args_line) > 0)
   stan_model <- args_line[[8]]
   JOBID <- as.numeric(args_line[[10]])
 }
-
 
 
 # load functions
@@ -93,12 +95,12 @@ predictive_checks_table[[j]] = make_predictive_checks_table(fit_cum, "deaths_cum
 cat("\nMake posterior predive checks plots \n")
 plot_posterior_predictive_checks(predictive_checks_table[[j]], variable = "COVID.19.Deaths", 
                                  variable_abbr = "deaths_cum", lab = "Cumulative COVID-19 deaths", 
-                                 outdir = paste0(outdir.fig, "posterior_predictive_checks/"))
+                                 outdir = file.path(outdir.fig, "posterior_predictive_checks/"))
 
 # Plots continuous age distribution alpha
 cat("\nMake continuous age distribution plots \n")
 plot_continuous_age_contribution(fit_cum, df_age_continuous, df_week, "cumulative COVID-19 deaths", 
-                                 outdir = paste0(outdir.fig, "continuous_contribution"))
+                                 outdir = file.path(outdir.fig, "continuous_contribution"))
 
 
 #
