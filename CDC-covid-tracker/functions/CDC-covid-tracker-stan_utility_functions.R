@@ -125,7 +125,7 @@ plot_posterior_predictive_checks = function(data, variable, variable_abbr, lab, 
     labs(y = lab, x = "") + 
     facet_wrap(~date, nrow = n_row)
   
-  ggsave(p1, file = paste0(outdir, "posterior_predictive_checks_cum_", Code, "_", run_tag,".png") , w= 10, h = 6*n_row / 2)
+  ggsave(p1, file = paste0(outdir, "posterior_predictive_checks_cum_", Code, "_", run_tag,".png") , w= 10, h = 6*n_row / 2, limitsize = FALSE)
 
 }
 

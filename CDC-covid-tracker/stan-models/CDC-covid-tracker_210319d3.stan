@@ -42,8 +42,6 @@ parameters {
   vector[A] eta[W];
   vector<lower=0>[W] nu;
   real<lower=0> lambda[W];
-  real c0;	
-	real c1;
 }
 
 transformed parameters {
@@ -54,7 +52,7 @@ transformed parameters {
   
   for(w in 1:W)
   {
-    phi[:,w] = softmax( c0 + c1*age_1 + gp(age, sigma[w], rho[w], eta[w]) ); 
+    phi[:,w] = softmax( gp(age, sigma[w], rho[w], eta[w]) ); 
 
     alpha[:,w] = phi[:,w] * lambda[w] / nu[w];
     
@@ -69,8 +67,7 @@ model {
   nu ~ exponential(1);
   rho ~ inv_gamma(5, 5);
   sigma ~ std_normal();
-  c0 ~ normal(0,5);
-	c1 ~ normal(0,5);
+
 	
   for(w in 1:W){
     eta[w] ~ std_normal();
@@ -82,10 +79,7 @@ model {
       
       for(n in 1:N_idx_missing[w])
         for(i in min_count_censored[idx_missing[n,w],w]:max_count_censored[idx_missing[n,w],w])
-          target += neg_binomial_lpmf( i | alpha_reduced[idx_missing[n,w], w] , theta[w] ) ;
-      }
-        
-          
+          target += neg_binomial_lpmf( i | alpha_reduced[idx_missing[n,w], w] , theta[w] ) ;          
     }
 
   }
@@ -116,5 +110,6 @@ generated quantities {
   }
 
 }
+
 
 

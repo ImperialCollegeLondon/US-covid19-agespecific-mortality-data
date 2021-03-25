@@ -85,7 +85,7 @@ cat("\n Start sampling \n")
 model = rstan::stan_model(path.to.stan.model)
 
 fit_cum <- rstan::sampling(model,data=stan_data,iter=1000,warmup=100,chains=1,
-                           seed=JOBID,verbose=TRUE,control = list(max_treedepth = 15, adapt_delta = 0.9))
+                           seed=JOBID,verbose=TRUE)
 
 file = file.path(outdir.fit, paste0("fit_cumulative_deaths_", Code, "_",run_tag,".rds"))
 

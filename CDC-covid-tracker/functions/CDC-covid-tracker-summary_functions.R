@@ -31,48 +31,42 @@ prepare_CDC_data = function(last.day,age_max,indir){
   # set date variable
   tmp[, date := as.Date(Data.as.of, format = '%m/%d/%Y')]
   tmp = select(tmp, -Data.as.of)
+
+  # keep date only after "2020-09-02" to have all the age groups
+  tmp = subset(tmp, date >= as.Date("2020-12-30"))
+  
+  # boundaries if deaths is missing
+  tmp[, min_COVID.19.Deaths := 1]
+  tmp[, max_COVID.19.Deaths := 9]
   
   # rename age groups
   tmp[, Age.group := ifelse(Age.group == "Under 1 year", "0-0", 
                             ifelse(Age.group == "85 years and over", "85+", gsub("(.+) years", "\\1", Age.group)))]
-  tmp = subset(tmp, !Age.group %in% c("0-17", '5-14', '15-24', '25-34', '35-44', '45-54','55-64', "All Ages", "All ages"))
-  
-  tmp1 = subset(tmp, date  == "2021-02-24")
-  unique(tmp1$Age.group)
+
   # group 0-0 and 1-4 age groups
   tmp1 = subset(tmp, Age.group %in% c('0-0', '1-4'))
-  tmp1 = tmp1[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('date', 'State')]
+  tmp1 = tmp1[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('date', 'State', 'min_COVID.19.Deaths', 'max_COVID.19.Deaths')]
   tmp1[, Age.group := '0-4']
   tmp = rbind(subset(tmp, !Age.group %in% c('0-0', '1-4')), tmp1)
   
-  # add 5-9 and 10-17 age groups
-  for(missing.age in c('5-9', '10-17')){
-    tmp1 = unique(select(tmp, date, State))
-    tmp1[, Age.group := missing.age]
-    tmp1[, COVID.19.Deaths := NA]
-    tmp = rbind(tmp, tmp1)
-  }
-  
-  # add 18-29, 30-49 and 50-64 before 2020-09-02
-  for(missing.age in c('18-29', '30-49', '50-64')){
-    missing.dates = unique(subset(tmp, date < "2020-09-02")$date)
-    for(t in seq_along(missing.dates)){
-      Date = missing.dates[t]
-      tmp1 = unique(select(tmp, State))
-      tmp1[, Age.group := missing.age]
-      tmp1[, date := Date]
-      tmp1[, COVID.19.Deaths := NA]
-      tmp = rbind(tmp, tmp1)
-    }
-  }
-
   # gather 30-39 and 40-49 
   tmp1 = subset(tmp, Age.group %in% c('30-39', '40-49'))
-  tmp1 = tmp1[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('date', 'State')]
+  tmp1 = tmp1[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('date', 'State', 'min_COVID.19.Deaths', 'max_COVID.19.Deaths')]
   tmp1[, Age.group := '30-49']
   tmp = rbind(subset(tmp, !Age.group %in% c('30-39', '40-49')), tmp1)
   
+  # add 10-17 age group
+  tmp[Age.group == '0-17' & (is.na(COVID.19.Deaths) | COVID.19.Deaths > 0), min_COVID.19.Deaths := 0]
+  tmp[Age.group == '0-17' & COVID.19.Deaths > 0, max_COVID.19.Deaths := COVID.19.Deaths]
+  tmp[Age.group == '0-17', Age.group := '10-17']
+ 
+  # add 5-9 age group
+  tmp[Age.group == '5-14' & (is.na(COVID.19.Deaths) | COVID.19.Deaths > 0), min_COVID.19.Deaths := 0]
+  tmp[Age.group == '5-14' & COVID.19.Deaths > 0, max_COVID.19.Deaths := COVID.19.Deaths]
+  tmp[Age.group == '5-14', Age.group := '5-9']
+  
   # factor age
+  tmp = subset(tmp, !Age.group %in% c("0-17", '5-14', '15-24', '25-34', '35-44', '45-54','55-64', "All Ages", "All ages"))
   tmp[, Age.group := factor(Age.group, c('0-4', '5-9', '10-17', '18-29', '30-49', '50-64', '65-74', '75-84', '85+'))]
 
   # rm overall
@@ -86,6 +80,7 @@ prepare_CDC_data = function(last.day,age_max,indir){
   setnames(tmp, c('Age.group', 'State'), c("age", "loc_label"))
   tmp = subset(tmp, loc_label != 'United States')
   tmp = merge(tmp, map_statename_code, by.x = 'loc_label', by.y = 'State')
+  
   
   # find age from and age to
   tmp[, age_from := as.numeric(ifelse(grepl("\\+", age), gsub("(.+)\\+", "\\1", age), gsub("(.+)-.*", "\\1", age)))]
@@ -105,10 +100,10 @@ create_map_age = function(age_max){
                                    age = c(0.1, 1:age_max))
   
   # create map for reporting age groups
-  df_age_reporting <<- data.table(age_from = c(0,1,5,15,25,35,45,55,65,75,85),
-                                  age_to = c(0,4,14,24,34,44,54,64,74,84,age_max),
-                                  age_index = 1:11,
-                                  age_cat = c('0-0', '1-4', '5-14', '15-24', '25-34', '35-44', '45-54', '55-64', '65-74', '75-84', '85+'))
+  df_age_reporting <<- data.table(age_from = c(0,5,10,18,30,50,65,75,85),
+                                  age_to = c(4,9,17,29,49,64,74,84,age_max),
+                                  age_index = 1:9,
+                                  age_cat = c('0-4', '5-9', '10-17', '18-29', '30-49', '50-64', '65-74', '75-84', '85+'))
   df_age_reporting[, age_from_index := which(df_age_continuous$age_from == age_from), by = "age_cat"]
   df_age_reporting[, age_to_index := which(df_age_continuous$age_to == age_to), by = "age_cat"]
   
@@ -152,23 +147,34 @@ prepare_stan_data = function(deathByAge, JHUData, loc_name){
   N_idx_missing = vector(mode = 'integer', length = W)
   idx_non_missing = matrix(nrow = B, ncol = W, 0)
   idx_missing = matrix(nrow = B, ncol = W, 0)
+  min_count_censored = matrix(nrow = B, ncol = W, -1)
+  max_count_censored = matrix(nrow = B, ncol = W, -1)
   deaths = matrix(nrow = B, ncol = W, 0)
   
+  
   for(w in 1:W){
+    
     Week = sort(unique(tmp$date))[w]
     
     tmp1 = subset(tmp, date == Week & !is.na( COVID.19.Deaths ))
-    df_state_age_strata_non_missing = unique(select(tmp1, age_from, age_to, age))
+    df_non_missing = unique(select(tmp1, age_from, age_to, age))
+    
+    tmp1 = subset(tmp, date == Week & is.na( COVID.19.Deaths ))
+    df_missing = unique(select(tmp1, age_from, age_to, age, min_COVID.19.Deaths, max_COVID.19.Deaths))
     
     # number of non missing and missing age category 
-    N_idx_non_missing[w] = nrow(df_state_age_strata_non_missing)
-    N_idx_missing[w] = B - N_idx_non_missing[w]
+    N_idx_non_missing[w] = nrow(df_non_missing)
+    N_idx_missing[w] = nrow(df_missing)
     
     # index missing and non missing
-    .idx_non_missing = which(df_state_age_strata$age %in% df_state_age_strata_non_missing$age)
-    .idx_missing = which(!df_state_age_strata$age %in% df_state_age_strata_non_missing$age)
+    .idx_non_missing = which(df_state_age_strata$age %in% df_non_missing$age)
+    .idx_missing = which(df_state_age_strata$age %in% df_missing$age)
     idx_non_missing[,w] = c(.idx_non_missing, rep(-1, B - length(.idx_non_missing)))
     idx_missing[,w] = c(.idx_missing, rep(-1, B - length(.idx_missing)))
+    
+    # min and max of missing data
+    min_count_censored[.idx_missing,w] = df_missing$min_COVID.19.Deaths
+    max_count_censored[.idx_missing,w] = df_missing$max_COVID.19.Deaths
     
     # deaths
     tmp1 = copy(tmp)
@@ -192,14 +198,13 @@ prepare_stan_data = function(deathByAge, JHUData, loc_name){
                      N_idx_missing = N_idx_missing,
                      idx_non_missing = idx_non_missing,
                      idx_missing = idx_missing,
+                     min_count_censored = min_count_censored,
+                     max_count_censored = max_count_censored,
                      deaths = deaths
                 ))
   
   stan_data$age = stan_data$age / sd(stan_data$age)
   stan_data$age2 = stan_data$age2 / sd(stan_data$age2)
-  
-  # range of the censored data
-  stan_data$range_censored = c(1,9)
   
   return(stan_data)
 }
@@ -307,3 +312,20 @@ map_statename_code = data.table(State = c(
     "WI",
     "WY"))
 
+
+
+# # add 18-29, 30-49 and 50-64 before 2020-09-02
+# if(0)
+# {
+#   for(missing.age in c('18-29', '30-49', '50-64')){
+#     missing.dates = unique(subset(tmp, date < "2020-09-02")$date)
+#     for(t in seq_along(missing.dates)){
+#       Date = missing.dates[t]
+#       tmp1 = unique(select(tmp, State))
+#       tmp1[, Age.group := missing.age]
+#       tmp1[, date := Date]
+#       tmp1[, COVID.19.Deaths := NA]
+#       tmp = rbind(tmp, tmp1)
+#     }
+#   }
+# }
