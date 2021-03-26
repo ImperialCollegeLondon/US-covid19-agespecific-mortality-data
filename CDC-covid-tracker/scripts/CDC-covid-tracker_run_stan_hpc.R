@@ -39,10 +39,10 @@ source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-sum
 source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-stan_utility_functions.R"))
 
 # tag and directories
-run_tag = paste0(stan_model, "_", JOBID)
+run_tag = paste0(stan_model, "-", JOBID)
 
 outdir.fit = file.path(outdir, run_tag, "fits")
-stopifnot(!dir.exists(outdir.fit))
+stopifnot(dir.exists(outdir.fit))
 
 cat("\n outfile.dir is ", file.path(outdir, run_tag), '\n')
 
@@ -71,12 +71,14 @@ cat("Location ", as.character(loc_name), "\n")
 # stan data
 cat("\n Prepare stan data \n")
 stan_data = prepare_stan_data(deathByAge, JHUData, loc_name)
-stan_data$age = matrix(stan_data$age, nrow = 106, ncol = 1)
+
+if(grepl('d2|d3', stan_model))
+  stan_data$age = matrix(stan_data$age, nrow = 106, ncol = 1)
+
 
 cat("\n Start sampling \n")
 
 # fit cumulative deaths
-path.to.stan.model = file.path(indir, 'CDC-covid-tracker', "stan-models", paste0("CDC-covid-tracker_", '210319d2', ".stan"))
 
 model = rstan::stan_model(path.to.stan.model)
 
