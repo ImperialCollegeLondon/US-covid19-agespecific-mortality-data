@@ -27,7 +27,9 @@ if(length(args_line) > 0)
 
 # load functions
 source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-summary_functions.R"))
-source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-stan_utility_functions.R"))
+source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-postprocessing-plotting_functions.R"))
+source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-postprocessing-summary_functions.R"))
+
 
 # path to JHU data
 path.to.JHU.data = file.path(indir, "data", "official", paste0("jhu_death_data_padded_210308.rds"))
