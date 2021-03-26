@@ -6,11 +6,12 @@ library(doParallel)
 
 indir = "~/git/US-covid19-data-scraping" # path to the repo
 outdir = file.path(indir, 'CDC-covid-tracker', "results")
-location.index = 2
+location.index = 1
 stan_model = "210319d"
 JOBID = 12
 
 args_line <-  as.list(commandArgs(trailingOnly=TRUE))
+print(args_line)
 if(length(args_line) > 0)
 {
   stopifnot(args_line[[1]]=='-indir')
@@ -38,7 +39,7 @@ source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-sum
 source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-stan_utility_functions.R"))
 
 # tag and directories
-run_tag = paste0(stan_model, "_", JOBID)
+run_tag = paste0(stan_model, "-", JOBID)
 
 outdir.fit = file.path(outdir, run_tag, "fits")
 outdir.fig = file.path(outdir, run_tag, "figures")
@@ -80,12 +81,11 @@ stan_data$age = matrix(stan_data$age, nrow = 106, ncol = 1)
 cat("\n Start sampling \n")
 
 # fit cumulative deaths
-# path.to.stan.model = file.path(indir, 'CDC-covid-tracker', "stan-models", paste0("CDC-covid-tracker_", '210319d2', ".stan"))
+path.to.stan.model = file.path(indir, 'CDC-covid-tracker', "stan-models", paste0("CDC-covid-tracker_", '210319d2', ".stan"))
 
 model = rstan::stan_model(path.to.stan.model)
 
-fit_cum <- rstan::sampling(model,data=stan_data,iter=1000,warmup=100,chains=1,
-                           seed=JOBID,verbose=TRUE)
+fit_cum <- rstan::sampling(model,data=stan_data,iter=1000,warmup=100,chains=1, seed=JOBID,verbose=TRUE)
 
 file = file.path(outdir.fit, paste0("fit_cumulative_deaths_", Code, "_",run_tag,".rds"))
 

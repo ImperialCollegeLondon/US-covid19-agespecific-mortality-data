@@ -20,7 +20,7 @@ if(length(args_line) > 0)
 }
 
 # set directories
-run_tag = paste0(stan_model, "_", JOBID)
+run_tag = paste0(stan_model, "-", JOBID)
 
 outdir.table = file.path(outdir, run_tag, "table")
 
