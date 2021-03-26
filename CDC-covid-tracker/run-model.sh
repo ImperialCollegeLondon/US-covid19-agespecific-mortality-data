@@ -12,5 +12,5 @@ JOBID=$$
 
 echo {1..50} | tr ' ' '\n' | xargs -P 50 -n 1 -I {} Rscript ~/git/US-covid19-agespecific-mortality-data/CDC-covid-tracker/scripts/CDC-covid-tracker_run_stan_hpc.R -indir $INDIR -outdir $CWD -location.index {} -stan_model $STAN_MODEL -JOBID $JOBID
 
-echo {1..50} | tr ' ' '\n' | xargs -P 50 -n 1 -I {} Rscript ~/git/US-covid19-agespecific-mortality-data/CDC-covid-tracker/scripts/CDC-covid-tracker_postprocessing_make_figures.R -indir $INDIR -outdir $CWD -location.index {} -stan_model $STAN_MODEL -JOBID $JOBID
+echo {1..50} | tr ' ' '\n' | xargs -P 50 -n 1 -I {} Rscript ~/git/US-covid19-agespecific-mortality-data/CDC-covid-tracker/scripts/CDC-covid-tracker_postprocessing.R -indir $INDIR -outdir $CWD -location.index {} -stan_model $STAN_MODEL -JOBID $JOBID
 
