@@ -5,8 +5,8 @@
 #PBS -q pqcovid19c
 module load anaconda3/personal
 
-CWD="~/git/US-covid19-agespecific-mortality-data/CDC-covid-tracker/results/"
-INDIR="~/git/US-covid19-agespecific-mortality-data/"
+CWD="/rds/general/user/mm3218/home/git/US-covid19-agespecific-mortality-data/CDC-covid-tracker/results/"
+INDIR="/rds/general/user/mm3218/home/git/US-covid19-agespecific-mortality-data/"
 STAN_MODEL="210319d"
 JOBID=$$
 

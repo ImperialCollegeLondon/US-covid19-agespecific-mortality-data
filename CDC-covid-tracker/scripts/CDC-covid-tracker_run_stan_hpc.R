@@ -39,8 +39,17 @@ source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-sum
 source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-stan_utility_functions.R"))
 
 # tag and directories
-run_tag = paste0(stan_model, "-", JOBID)
+run_tag = paste0(stan_model, "_", JOBID)
+
 outdir.fit = file.path(outdir, run_tag, "fits")
+outdir.fig = file.path(outdir, run_tag, "figures")
+outdir.table = file.path(outdir, run_tag, "table")
+
+cat("outfile.dir is ", file.path(outdir, run_tag))
+dir.create(file.path(outdir, run_tag), showWarnings = F)
+dir.create(outdir.fit, showWarnings = F)
+dir.create(outdir.fig, showWarnings = F)
+dir.create(outdir.table, showWarnings = F)
 
 # max age considered
 age_max = 105
@@ -76,15 +85,10 @@ path.to.stan.model = file.path(indir, 'CDC-covid-tracker', "stan-models", paste0
 
 model = rstan::stan_model(path.to.stan.model)
 
-fit_cum <- rstan::sampling(model,data=stan_data,iter=1000,warmup=100,chains=1, seed=JOBID,verbose=TRUE)
+fit_cum <- rstan::sampling(model,data=stan_data,iter=2000,warmup=250,chains=1, seed=JOBID,verbose=TRUE)
 
 file = file.path(outdir.fit, paste0("fit_cumulative_deaths_", Code, "_",run_tag,".rds"))
 
 while(!file.exists(file)){
   tryCatch(saveRDS(fit_cum, file=file), error=function(e){cat("ERROR :",conditionMessage(e), ", let's try again \n")})
 }
-
-
-
-
-

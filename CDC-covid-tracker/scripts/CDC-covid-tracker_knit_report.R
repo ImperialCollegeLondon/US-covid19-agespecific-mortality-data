@@ -1,7 +1,7 @@
 library(rstan)
 library(data.table)
 
-indir = "~/git/US-covid19-agespecific-mortality-data" # path to the repo
+indir = "/rds/general/user/mm3218/home/git/US-covid19-agespecific-mortality-data" # path to the repo
 outdir = file.path(indir, 'CDC-covid-tracker', "results")
 stan_model = "210319d3"
 JOBID = 782737
@@ -22,12 +22,12 @@ if(length(args_line) > 0)
 # set directories
 run_tag = paste0(stan_model, "-", JOBID)
 outdir.table = file.path(outdir, run_tag, "table")
-outdir.report = file.path(indir, 'CDC-covid-tracker', 'reports')
+outdir.report = file.path(indir, 'CDC-covid-tracker', 'reports', paste0('report_', run_tag, '.html'))
 dir.report = file.path(indir, 'CDC-covid-tracker', 'scripts', 'CDC-covid-tracker_report.Rmd')
 
 # find states
 files = list.files(path = outdir.table, pattern = 'predictive')
-locs = unique(gsub("predictive_checks_table_(.+).rds", "\\1", files))
+locs = unique(gsub(paste0(run_tag, "-predictive_checks_table_(.+).rds"), "\\1", files))
 
 ##	make report
 cat(paste("\n ----------- create report ----------- \n"))

@@ -15,22 +15,34 @@ prepare_CDC_data = function(last.day,age_max,indir){
   dates = as.Date(gsub( ".*\\/(.+)\\/.*", "\\1", data_files_state))
   
   tmp = vector(mode = 'list', length = length(dates))
+  idx.rm = c()
   for(t in 1:length(dates)){
     csv_file = file.path(path_to_data, dates[t], 'cdc.csv')
     tmp[[t]] = as.data.table( read.csv(csv_file) ) 
-    if('Data.As.Of' %in% names(tmp[[t]])) setnames(tmp[[t]], 'Data.As.Of', 'Data.as.of')
+    if('End.Date' %in% names(tmp[[t]])) setnames(tmp[[t]], 'End.Date', 'End.Week')
     if('Age.Group' %in% names(tmp[[t]])) setnames(tmp[[t]], 'Age.Group', 'Age.group')
-    tmp[[t]] = select(tmp[[t]], State, 'Data.as.of', Sex, Age.group, COVID.19.Deaths)
+    
+    if('Group'%in% names(tmp[[t]])) tmp[[t]] = subset(tmp[[t]], Group == 'By Total')
+    
+    stopifnot(length(unique(tmp[[t]]$End.Week)) == 1)
+    
+    if(t > 1) 
+      if(unique(tmp[[t]]$End.Week) == unique(tmp[[t-1]]$End.Week) ){
+        idx.rm = c(idx.rm, t)
+      next
+      }
+      
+    tmp[[t]] = select(tmp[[t]], State, 'End.Week', Sex, Age.group, COVID.19.Deaths)
   }
-  tmp = do.call('rbind', tmp)
+  tmp = do.call('rbind', tmp[-idx.rm])
 
+  # set date variable
+  tmp[, date := as.Date(End.Week, format = '%m/%d/%Y')]
+  tmp = select(tmp, -End.Week)
+  
   # sum over sex
   tmp = subset(tmp, Sex %in% c('Male', 'Female'))
-  tmp = tmp[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('Data.as.of', 'State', 'Age.group')]
-  
-  # set date variable
-  tmp[, date := as.Date(Data.as.of, format = '%m/%d/%Y')]
-  tmp = select(tmp, -Data.as.of)
+  tmp = tmp[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('date', 'State', 'Age.group')]
 
   # keep date only after "2020-09-02" to have all the age groups
   tmp = subset(tmp, date >= as.Date("2020-12-30"))
@@ -83,13 +95,24 @@ prepare_CDC_data = function(last.day,age_max,indir){
   tmp = subset(tmp, loc_label != 'United States')
   tmp = merge(tmp, map_statename_code, by.x = 'loc_label', by.y = 'State')
   
-  
   # find age from and age to
   tmp[, age_from := as.numeric(ifelse(grepl("\\+", age), gsub("(.+)\\+", "\\1", age), gsub("(.+)-.*", "\\1", age)))]
   tmp[, age_to := as.numeric(ifelse(grepl("\\+", age), age_max, gsub(".*-(.+)", "\\1", age)))]
   
   # order
   tmp = tmp[order(loc_label, date, age)]
+  
+  # ensure that it is cumulative
+  tmp1 = tmp[, list(noncum = na.omit(COVID.19.Deaths) <= cummax(na.omit(COVID.19.Deaths))), by = c('loc_label', 'date', 'age')]
+  stopifnot(all(tmp1$noncum))
+  
+  # plot
+  if(0){
+    ggplot(tmp, aes(x = date, y = COVID.19.Deaths, col = age)) + 
+      geom_line() + 
+      facet_grid(loc_label~.,  scales = 'free') + 
+      theme_bw()
+  }
   
   return(tmp)
 }
