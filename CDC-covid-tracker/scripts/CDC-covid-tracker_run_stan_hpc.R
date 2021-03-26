@@ -40,16 +40,7 @@ source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-sta
 
 # tag and directories
 run_tag = paste0(stan_model, "-", JOBID)
-
 outdir.fit = file.path(outdir, run_tag, "fits")
-outdir.fig = file.path(outdir, run_tag, "figures")
-outdir.table = file.path(outdir, run_tag, "table")
-
-cat("outfile.dir is ", file.path(outdir, run_tag))
-dir.create(file.path(outdir, run_tag), showWarnings = F)
-dir.create(outdir.fit, showWarnings = F)
-dir.create(outdir.fig, showWarnings = F)
-dir.create(outdir.table, showWarnings = F)
 
 # max age considered
 age_max = 105

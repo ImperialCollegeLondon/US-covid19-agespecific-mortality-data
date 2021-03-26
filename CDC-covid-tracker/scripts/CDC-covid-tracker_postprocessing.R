@@ -34,17 +34,9 @@ path.to.JHU.data = file.path(indir, "data", "official", paste0("jhu_death_data_p
 
 # set directories
 run_tag = paste0(stan_model, "-", JOBID)
-
 outdir.fit = file.path(outdir, run_tag, "fits")
-outdir.fig = file.path(outdir, run_tag, "figure")
-outdir.table = file.path(outdir, run_tag, "table")
-
-cat("outfile.dir is ", file.path(outdir, run_tag))
-dir.create(outdir.fig, showWarnings = FALSE)
-dir.create(outdir.table, showWarnings = FALSE)
-
-outdir.fig = file.path(outdir.fig, run_tag)
-outdir.table = file.path(outdir.table, run_tag)
+outdir.fig = file.path(outdir, run_tag, "figure", run_tag)
+outdir.table = file.path(outdir, run_tag, "table", run_tag)
 
 # max age considered
 age_max = 105
