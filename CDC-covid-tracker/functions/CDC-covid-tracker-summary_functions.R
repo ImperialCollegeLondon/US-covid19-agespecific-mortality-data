@@ -45,7 +45,7 @@ prepare_CDC_data = function(last.day,age_max,indir){
   tmp = tmp[, list(COVID.19.Deaths = sum(COVID.19.Deaths)), by = c('date', 'State', 'Age.group')]
 
   # keep date only after "2020-09-02" to have all the age groups
-  tmp = subset(tmp, date >= as.Date("2020-12-30"))
+  tmp = subset(tmp, date >= as.Date("2020-09-02"))
   
   # boundaries if deaths is missing
   tmp[, min_COVID.19.Deaths := 1]
