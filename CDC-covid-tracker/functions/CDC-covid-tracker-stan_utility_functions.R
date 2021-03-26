@@ -52,7 +52,7 @@ plot_continuous_age_contribution = function(fit, df_age_continuous, df_week, lab
     labs(y = paste0("Relative contribution to ", lab), x = "", title = paste(Code)) + 
     facet_wrap(~date, nrow = n_row)
   
-  ggsave(p, file = paste0(outdir, "continuous_contribution_",Code, ".png") , w= 8, h = 6*n_row / 2)
+  ggsave(p, file = paste0(outdir, "-continuous_contribution_",Code, ".png") , w= 8, h = 6*n_row / 2)
   
 }
 
@@ -125,7 +125,7 @@ plot_posterior_predictive_checks = function(data, variable, variable_abbr, lab, 
     labs(y = lab, x = "") + 
     facet_wrap(~date, nrow = n_row)
   
-  ggsave(p1, file = paste0(outdir, "posterior_predictive_checks_", Code,".png") , w= 10, h = 6*n_row / 2, limitsize = FALSE)
+  ggsave(p1, file = paste0(outdir, "-posterior_predictive_checks_", Code,".png") , w= 10, h = 6*n_row / 2, limitsize = FALSE)
 
 }
 

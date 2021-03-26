@@ -33,7 +33,7 @@ source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-sta
 path.to.JHU.data = file.path(indir, "data", "official", paste0("jhu_death_data_padded_210308.rds"))
 
 # set directories
-run_tag = paste0(stan_model, "_", JOBID)
+run_tag = paste0(stan_model, "-", JOBID)
 
 outdir.fit = file.path(outdir, run_tag, "fits")
 outdir.fig = file.path(outdir, run_tag, "figure")
