@@ -13,7 +13,8 @@ JOBID=$$
 # main directory
 mkdir $CWD/$STAN_MODEL-$JOBID
 
-# directories for figures and tables
+# directories for fits, figures and tables
+mkdir $CWD/$STAN_MODEL-$JOBID/fits
 mkdir $CWD/$STAN_MODEL-$JOBID/figure
 mkdir $CWD/$STAN_MODEL-$JOBID/table
 
