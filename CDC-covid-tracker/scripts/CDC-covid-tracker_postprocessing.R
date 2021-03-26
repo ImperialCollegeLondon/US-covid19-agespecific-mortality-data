@@ -89,12 +89,12 @@ predictive_checks_table = make_predictive_checks_table(fit_cum, "deaths_cum", df
 cat("\nMake posterior predive checks plots \n")
 plot_posterior_predictive_checks(predictive_checks_table, variable = "COVID.19.Deaths", 
                                  variable_abbr = "deaths_cum", lab = "Cumulative COVID-19 deaths", 
-                                 outdir = paste0(outdir.fig, "-posterior_predictive_checks-"))
+                                 outdir = outdir.fig)
 
 # Plots continuous age distribution alpha
 cat("\nMake continuous age distribution plots \n")
 plot_continuous_age_contribution(fit_cum, df_age_continuous, df_week, "cumulative COVID-19 deaths", 
-                                 outdir = paste0(outdir.fig, "-continuous_contribution-"))
+                                 outdir = outdir.fig)
 
 
 #
