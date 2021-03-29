@@ -9,7 +9,7 @@ add_splines_stan_data = function(stan_data, spline_degree = 3)
   m = m[-c(1, nrow(m)),]
   stan_data$BASIS = m
   
-  B <- t(splines::bs(age, knots=age, degree=spline_degree, intercept = T)) 
+  # B <- t(splines::bs(age, knots=age, degree=spline_degree, intercept = T)) 
   return(stan_data)
 }
 
