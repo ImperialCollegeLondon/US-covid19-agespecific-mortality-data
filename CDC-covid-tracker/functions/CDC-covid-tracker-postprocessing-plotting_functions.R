@@ -8,7 +8,7 @@ plot_continuous_age_contribution = function(fit, df_age_continuous, df_week, lab
   # extract samples
   fit_samples = rstan::extract(fit)
   
-  tmp1 = as.data.table( reshape2::melt(fit_samples$alpha) )
+  tmp1 = as.data.table( reshape2::melt(fit_samples$phi) )
   setnames(tmp1, c('Var2', 'Var3'), c('age_index','week_index'))
   tmp1 = tmp1[, list( 	q= quantile(value, prob=ps),
                        q_label=p_labs), 
