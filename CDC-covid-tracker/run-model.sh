@@ -5,7 +5,7 @@ STAN_MODEL="210326"
 CWD="/rds/general/user/mm3218/home/git/US-covid19-agespecific-mortality-data/CDC-covid-tracker/results/"
 INDIR="/rds/general/user/mm3218/home/git/US-covid19-agespecific-mortality-data/"
 
-cat > $STAN_MODEL-$JOBID.pbs <<EOF
+cat > $CWD/$STAN_MODEL-$JOBID.pbs <<EOF
 
 #!/bin/sh
 #PBS -l walltime=30:59:00
@@ -35,6 +35,7 @@ Rscript ~/git/US-covid19-agespecific-mortality-data/CDC-covid-tracker/scripts/CD
 
 EOF
 
+cd CWD
 qsub $STAN_MODEL-$JOBID.pbs
 
 
