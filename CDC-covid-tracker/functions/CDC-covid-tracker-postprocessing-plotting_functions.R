@@ -38,16 +38,13 @@ make_convergence_diagnostics_plots = function(fit, title, suffix, outfile)
   
   posterior <- as.array(fit)
   
-  if(all(sapply(c("lambda", "nu", "rho", "sigma"), function(x) sum(grepl(x, names(fit))) > 0))){
-    pars = c("lambda", "nu", "rho", "sigma")
-  }
-  
-  if(all(sapply(c("beta", "nu", "lambda"), function(x) sum(grepl(x, names(fit))) > 0))){
-    pars = c("beta", "nu", "lambda")
-  }
-  
+  pars = c("lambda", "nu", "rho", "sigma", "beta", "a0", "tau", 'aw', 'sd_aw', 'sd_a_raw', a0_raw)
+
   for(par in pars)
-  {
+  {                     
+    
+    if(!par %in% names(fit)) next
+    
     p_trace = bayesplot::mcmc_trace(posterior, regex_pars = par) + labs(title = title) 
     p_pairs = gridExtra::arrangeGrob(bayesplot::mcmc_pairs(posterior, regex_pars = par), top = title)
     p_intervals = bayesplot::mcmc_intervals(posterior, regex_pars = par, prob = 0.95,
