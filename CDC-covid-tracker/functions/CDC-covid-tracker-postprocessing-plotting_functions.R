@@ -38,7 +38,7 @@ make_convergence_diagnostics_plots = function(fit, title, suffix, outfile)
   
   posterior <- as.array(fit)
   
-  pars = list("lambda", "nu", "rho", "sigma", "beta", "tau", c('aw', 'sd_aw'), c('sd_a_raw', 'a0_raw'))
+  pars = list("lambda", "nu", "rho", "sigma", "beta", "tau", c('aw', 'sd_aw'), c('sd_a_raw', 'a0_raw'), 'a_age', 'a0')
 
   for(j in 1:length(pars))
   {                     
