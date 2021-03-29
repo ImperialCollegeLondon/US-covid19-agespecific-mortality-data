@@ -35,7 +35,7 @@ Rscript ~/git/US-covid19-agespecific-mortality-data/CDC-covid-tracker/scripts/CD
 
 EOF
 
-cd CWD
+cd $CWD
 qsub $STAN_MODEL-$JOBID.pbs
 
 
