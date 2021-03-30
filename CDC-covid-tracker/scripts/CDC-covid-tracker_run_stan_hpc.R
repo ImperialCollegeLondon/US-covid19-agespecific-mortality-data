@@ -7,7 +7,7 @@ library(doParallel)
 indir = "~/git/US-covid19-data-scraping" # path to the repo
 outdir = file.path(indir, 'CDC-covid-tracker', "results")
 location.index = 1
-stan_model = "210319d2"
+stan_model = "210329b"
 JOBID = 12
 
 args_line <-  as.list(commandArgs(trailingOnly=TRUE))
@@ -76,7 +76,7 @@ if(grepl('210319d2|210319d3', stan_model)){
   cat("\n Using a GP \n")
   stan_data$age = matrix(stan_data$age, nrow = 106, ncol = 1)
 }
-if(grepl('210326|210329', stan_model)){
+if(grepl('210326|210329|210330', stan_model)){
   cat("\n Using splines \n")
   stan_data = add_splines_stan_data(stan_data)
 }
@@ -95,5 +95,9 @@ cat('\n Save file', file, '\n')
 while(!file.exists(file)){
   tryCatch(saveRDS(fit_cum, file=file), error=function(e){cat("ERROR :",conditionMessage(e), ", let's try again \n")})
 }
+
+
+
+
 
 

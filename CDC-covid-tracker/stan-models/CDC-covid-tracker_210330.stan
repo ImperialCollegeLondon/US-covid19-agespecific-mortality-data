@@ -1,15 +1,3 @@
-functions {
-  
-	//GP covariance function
-	vector gp(vector[] x, real sdgp, real lscale, vector zgp) { 
-		matrix[size(x), size(x)] cov;
-		cov = cov_exp_quad(x, sdgp, lscale) + diag_matrix(rep_vector(1e-10, size(x)));
-
-		return cholesky_decompose(cov) * zgp;
-	}
-	
-}
-
 data{
   int<lower=0> W; // number of weeks
   int<lower=0> A; // continuous age
@@ -31,13 +19,13 @@ data{
 }
 
 parameters {
-  row_vector[num_basis] a_raw[W]; 
-  real a0[W]; 
-  real a_age[W]; 
+  row_vector[num_basis] beta_raw[W]; 
   real<lower=0> tau[W]; 
   vector<lower=0>[W] nu;
   real<lower=0> lambda[W];
-
+  real gamma_0; 
+  real gamma_time_effect[W]; 
+  real<lower=0> sd_gamma;
 }
 
 transformed parameters {
@@ -48,13 +36,15 @@ transformed parameters {
   
   for(w in 1:W)
   {
-    row_vector[num_basis] a; 
-    a[1] = a_raw[w,1];
-    for (i in 2:num_basis)
-      a[i] = a[i-1] + a_raw[w,i]*tau[w];
+    real gamma = gamma_0 + gamma_time_effect[w];
+    row_vector[num_basis] beta;
     
-    phi[:,w] = softmax( a0[w] + a_age[w]*age + to_vector(a_raw[w]*BASIS) ); 
-
+    beta[1] = beta_raw[w][1];
+    for (i in 2:num_basis)
+      beta[i] = beta[i-1] + beta_raw[w][i]*tau[w]; 
+    
+    phi[:,w] = softmax(gamma*age + to_vector(beta*BASIS) ); 
+    
     alpha[:,w] = phi[:,w] * lambda[w] / nu[w];
     
     for(b in 1:B){
@@ -66,19 +56,20 @@ transformed parameters {
 
 model {
   nu ~ exponential(1);
-  a0 ~ normal(0, 5); 
-  a_age ~ normal(0, 5); 
+  gamma_0 ~ normal(0, 5); 
   tau ~ cauchy(0, 1);
+  gamma_time_effect ~ normal(0, sd_gamma);
+  sd_gamma ~ cauchy(0, 1);
 
   for(w in 1:W){
-    a_raw[w] ~ normal(0, 1);
+    beta_raw[w] ~ normal(0, 1);
 
     lambda[w] ~ exponential(1.0 / sum(deaths[idx_non_missing[1:N_idx_non_missing[w],w],w]));
-    
+
     target += neg_binomial_lpmf(deaths[idx_non_missing[1:N_idx_non_missing[w],w],w] | alpha_reduced[idx_non_missing[1:N_idx_non_missing[w],w], w] , theta[w] );
   
     if(N_idx_missing[w] > 0){
-      
+
       for(n in 1:N_idx_missing[w])
         for(i in min_count_censored[idx_missing[n,w],w]:max_count_censored[idx_missing[n,w],w])
           target += neg_binomial_lpmf( i | alpha_reduced[idx_missing[n,w], w] , theta[w] ) ;
@@ -112,5 +103,7 @@ generated quantities {
   }
 
 }
+
+
 
 

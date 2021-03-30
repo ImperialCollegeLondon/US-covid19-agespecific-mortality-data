@@ -14,7 +14,7 @@ cat > $CWD/$STAN_MODEL-$JOBID.pbs <<EOF
 #PBS -q pqcovid19c
 module load anaconda3/personal
 
-PWD=$(pwd)
+PWD=\$(pwd)
 CWD=$CWD
 INDIR=$INDIR
 STAN_MODEL=$STAN_MODEL

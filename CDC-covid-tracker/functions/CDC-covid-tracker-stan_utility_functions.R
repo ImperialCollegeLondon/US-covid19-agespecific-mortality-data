@@ -2,9 +2,11 @@
 add_splines_stan_data = function(stan_data, spline_degree = 3)
 {
   
-  stan_data$num_basis = length(stan_data$age) + spline_degree - 1
+  knots = c(stan_data$age[seq(1, length(stan_data$age), 12)], max(stan_data$age))
 
-  stan_data$BASIS = bsplines(stan_data$age, spline_degree)
+  stan_data$num_basis = length(knots) + spline_degree - 1
+
+  stan_data$BASIS = bsplines(stan_data$age, knots, spline_degree)
   
   stopifnot(all( apply(stan_data$BASIS, 1, sum) > 0  ))
   # B <- t(splines::bs(age, knots=age, degree=spline_degree, intercept = T)) 
@@ -49,21 +51,21 @@ find_intervals = function(knots, degree){
   return(intervals)
 }
 
-bsplines = function(knots, degree)
+bsplines = function(data, knots, degree)
 {
   K = length(knots)
   num_basis = K + degree - 1
   
   intervals = find_intervals(knots, degree)
   
-  m = matrix(nrow = num_basis, ncol = K, 0)
+  m = matrix(nrow = num_basis, ncol = length(data), 0)
   
   for(k in 1:num_basis)
   {
-    m[k,] = bspline(knots, k, degree + 1, intervals) 
+    m[k,] = bspline(data, k, degree + 1, intervals) 
   }
   
-  m[num_basis,K] = 1
+  m[num_basis,length(data)] = 1
   
   return(m)
 }

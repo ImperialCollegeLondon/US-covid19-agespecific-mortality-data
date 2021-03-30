@@ -19,11 +19,16 @@ data{
 }
 
 parameters {
-  row_vector[num_basis] beta_raw[W]; 
-  real gamma[W]; 
+  real beta_1;
+  real beta_time_effect[W]; 
+  row_vector[num_basis-1] beta_raw[W]; 
   real<lower=0> tau[W]; 
   vector<lower=0>[W] nu;
   real<lower=0> lambda[W];
+  real gamma_0; 
+  real gamma_time_effect[W]; 
+  real<lower=0> sd_gamma;
+   real<lower=0> sd_beta;
 }
 
 transformed parameters {
@@ -34,13 +39,14 @@ transformed parameters {
   
   for(w in 1:W)
   {
+    real gamma = gamma_0 + gamma_time_effect[w];
     row_vector[num_basis] beta;
     
-    beta[1] = beta_raw[w][1];
+    beta[1] = beta_1 + beta_time_effect[w];
     for (i in 2:num_basis)
-      beta[i] = beta[i-1] + beta_raw[w][i]*tau[w]; 
+      beta[i] = beta[i-1] + beta_raw[w][i-1]*tau[w]; 
     
-    phi[:,w] = softmax(gamma[w]*age + to_vector(beta*BASIS) ); 
+    phi[:,w] = softmax(gamma*age + to_vector(beta*BASIS) ); 
     
     alpha[:,w] = phi[:,w] * lambda[w] / nu[w];
     
@@ -53,9 +59,14 @@ transformed parameters {
 
 model {
   nu ~ exponential(1);
-  gamma ~ normal(0, 5); 
+  gamma_0 ~ normal(0, 5); 
+  beta_1 ~ normal(0, 1);
+  beta_time_effect ~ normal(0, sd_beta);
   tau ~ cauchy(0, 1);
-
+  gamma_time_effect ~ normal(0, sd_gamma);
+  sd_gamma ~ cauchy(0, 1);
+  sd_beta ~ cauchy(0, 1);
+  
   for(w in 1:W){
     beta_raw[w] ~ normal(0, 1);
 
@@ -98,7 +109,6 @@ generated quantities {
   }
 
 }
-
 
 
 
