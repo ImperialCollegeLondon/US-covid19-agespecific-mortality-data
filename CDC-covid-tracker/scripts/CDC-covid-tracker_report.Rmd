@@ -772,7 +772,9 @@ knitr::include_graphics(file.to.figure("continuous_contribution_WY"))
 
 
 
-## Convergence diagnostics
+## Convergence diagnostics {.tabset .tabset-fade}
+
+Listed below are the parameters with an effective sample size smaller than 500.
 
 `r if ('AL' %in% args$states) '### Alabama'`
 ```{r, include=('AL' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}

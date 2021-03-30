@@ -48,10 +48,7 @@ transformed parameters {
   
   for(w in 1:W)
   {
-    row_vector[num_basis] a; 
-    a[1] = a_raw[w,1];
-    for (i in 2:num_basis)
-      a[i] = a_raw[w,i]*tau[w];
+    row_vector[num_basis] a = a_raw[w]*tau[w];
     
     phi[:,w] = softmax( a0[w] + a_age[w]*age + to_vector(a_raw[w]*BASIS) ); 
 
