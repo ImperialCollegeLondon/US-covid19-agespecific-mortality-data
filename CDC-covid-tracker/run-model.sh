@@ -5,11 +5,11 @@ STAN_MODEL="210326"
 CWD="/rds/general/user/mm3218/home/git/US-covid19-agespecific-mortality-data/CDC-covid-tracker/results/"
 INDIR="/rds/general/user/mm3218/home/git/US-covid19-agespecific-mortality-data/"
 
-cat > $CWD/$STAN_MODEL-$JOBID.pbs <<EOF
+cat > $CWD/bash_$STAN_MODEL-$JOBID.pbs <<EOF
 
 #!/bin/sh
 #PBS -l walltime=30:59:00
-#PBS -l select=1:ncpus=50:ompthreads=1:mem=100gb
+#PBS -l select=1:ncpus=50:ompthreads=1:mem=300gb
 #PBS -j oe
 #PBS -q pqcovid19c
 module load anaconda3/personal
@@ -39,7 +39,7 @@ Rscript ~/git/US-covid19-agespecific-mortality-data/CDC-covid-tracker/scripts/CD
 EOF
 
 cd $CWD
-qsub $STAN_MODEL-$JOBID.pbs
+qsub bash_$STAN_MODEL-$JOBID.pbs
 
 
 
