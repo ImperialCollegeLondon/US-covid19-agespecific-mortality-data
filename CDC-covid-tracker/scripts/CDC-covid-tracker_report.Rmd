@@ -774,9 +774,11 @@ knitr::include_graphics(file.to.figure("continuous_contribution_WY"))
 
 ## Convergence diagnostics {.tabset .tabset-fade}
 
+`r if ('AL' %in% args$states) '### Alabama'`
+
+#### Effective sample size
 Listed below are the parameters with an effective sample size smaller than 500.
 
-`r if ('AL' %in% args$states) '### Alabama'`
 ```{r, include=('AL' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_AL"))){
   neff <- readRDS(file.to.table("eff_sample_size_cum_AL"))
@@ -784,7 +786,25 @@ if(file.exists(file.to.table("eff_sample_size_cum_AL"))){
 }
 ```
 
+#### WAIC
+```{r, include=('AL' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_AL"))){
+  apply(readRDS(file.to.table("WAIC_AL")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('AL' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_AL"))){
+  apply(readRDS(file.to.table("LOO_AL")), 2, sum)
+}
+```
+
 `r if ('AK' %in% args$states) '### Alaska'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('AK' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_AK"))){
   neff <- readRDS(file.to.table("eff_sample_size_cum_AK"))
@@ -792,7 +812,26 @@ if(file.exists(file.to.table("eff_sample_size_cum_AK"))){
 }
 ```
 
+#### WAIC
+```{r, include=('AK' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_AK"))){
+  apply(readRDS(file.to.table("WAIC_AK")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('AK' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_AK"))){
+  apply(readRDS(file.to.table("LOO_AK")), 2, sum)
+}
+```
+
+
 `r if ('AZ' %in% args$states) '### Arizona'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('AZ' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_AZ"))){
   neff <- readRDS(file.to.table("eff_sample_size_cum_AZ"))
@@ -800,7 +839,25 @@ if(file.exists(file.to.table("eff_sample_size_cum_AZ"))){
 }
 ```
 
+#### WAIC
+```{r, include=('AZ' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_AZ"))){
+  apply(readRDS(file.to.table("WAIC_AZ")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('AZ' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_AZ"))){
+  apply(readRDS(file.to.table("LOO_AZ")), 2, sum)
+}
+```
+
 `r if ('AR' %in% args$states) '### Arkansas'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('AR' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_AR"))){
   neff <- readRDS(file.to.table("eff_sample_size_cum_AR"))
@@ -808,7 +865,25 @@ if(file.exists(file.to.table("eff_sample_size_cum_AR"))){
 }
 ```
 
+#### WAIC
+```{r, include=('AR' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_AR"))){
+  apply(readRDS(file.to.table("WAIC_AR")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('AR' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_AR"))){
+  apply(readRDS(file.to.table("LOO_AR")), 2, sum)
+}
+```
+
 `r if ('CA' %in% args$states) '### California'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('CA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_CA"))){
   neff <- readRDS(file.to.table("eff_sample_size_cum_CA"))
@@ -816,7 +891,25 @@ if(file.exists(file.to.table("eff_sample_size_cum_CA"))){
 }
 ```
 
+#### WAIC
+```{r, include=('CA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_CA"))){
+  apply(readRDS(file.to.table("WAIC_CA")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('CA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_CA"))){
+  apply(readRDS(file.to.table("LOO_CA")), 2, sum)
+}
+```
+
 `r if ('CO' %in% args$states) '### Colorado'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('CO' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_CO"))){
   neff <- readRDS(file.to.table("eff_sample_size_cum_CO"))
@@ -824,371 +917,1214 @@ if(file.exists(file.to.table("eff_sample_size_cum_CO"))){
 }
 ```
 
+#### WAIC
+```{r, include=('CO' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_CO"))){
+  apply(readRDS(file.to.table("WAIC_CO")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('CO' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_CO"))){
+  apply(readRDS(file.to.table("LOO_CO")), 2, sum)
+}
+```
+
 `r if ('CT' %in% args$states) '### Connecticut'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('CT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_CT"))){
- neff <- readRDS(file.to.table("eff_sample_size_cum_CT"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_CT"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('CT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_CT"))){
+  apply(readRDS(file.to.table("WAIC_CT")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('CT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_CT"))){
+  apply(readRDS(file.to.table("LOO_CT")), 2, sum)
 }
 ```
 
 `r if ('DE' %in% args$states) '### Delaware'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('DE' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_DE"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_DE"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_DE"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('DE' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_DE"))){
+  apply(readRDS(file.to.table("WAIC_DE")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('DE' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_DE"))){
+  apply(readRDS(file.to.table("LOO_DE")), 2, sum)
 }
 ```
 
 `r if ('DC' %in% args$states) '### District of Columbia'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('DC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_DC"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_DC"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_DC"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('DC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_DC"))){
+  apply(readRDS(file.to.table("WAIC_DC")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('DC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_DC"))){
+  apply(readRDS(file.to.table("LOO_DC")), 2, sum)
 }
 ```
 
 `r if ('FL' %in% args$states) '### Florida'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('FL' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_FL"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_FL"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_FL"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('FL' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_FL"))){
+  apply(readRDS(file.to.table("WAIC_FL")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('FL' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_FL"))){
+  apply(readRDS(file.to.table("LOO_FL")), 2, sum)
 }
 ```
 
 `r if ('GA' %in% args$states) '### Georgia'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('GA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_GA"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_GA"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_GA"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('GA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_GA"))){
+  apply(readRDS(file.to.table("WAIC_GA")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('GA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_GA"))){
+  apply(readRDS(file.to.table("LOO_GA")), 2, sum)
 }
 ```
 
 `r if ('HI' %in% args$states) '### Hawaii'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('HI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_HI"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_HI"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_HI"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('HI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_HI"))){
+  apply(readRDS(file.to.table("WAIC_HI")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('HI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_HI"))){
+  apply(readRDS(file.to.table("LOO_HI")), 2, sum)
 }
 ```
 
 `r if ('ID' %in% args$states) '### Indiana'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('ID' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_ID"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_ID"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_ID"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('ID' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_ID"))){
+  apply(readRDS(file.to.table("WAIC_ID")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('ID' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_ID"))){
+  apply(readRDS(file.to.table("LOO_ID")), 2, sum)
 }
 ```
 
 `r if ('IL' %in% args$states) '### Illinois'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('IL' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_IL"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_IL"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_IL"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('IL' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_IL"))){
+  apply(readRDS(file.to.table("WAIC_IL")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('IL' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_IL"))){
+  apply(readRDS(file.to.table("LOO_IL")), 2, sum)
 }
 ```
 
 `r if ('IN' %in% args$states) '### Indiana'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('IN' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_IN"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_IN"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_IN"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('IN' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_IN"))){
+  apply(readRDS(file.to.table("WAIC_IN")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('IN' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_IN"))){
+  apply(readRDS(file.to.table("LOO_IN")), 2, sum)
 }
 ```
 
 `r if ('IA' %in% args$states) '### Iowa'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('IA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_IA"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_IA"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_IA"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('IA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_IA"))){
+  apply(readRDS(file.to.table("WAIC_IA")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('IA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_IA"))){
+  apply(readRDS(file.to.table("LOO_IA")), 2, sum)
 }
 ```
 
 `r if ('KS' %in% args$states) '### Kansas'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('KS' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_KS"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_KS"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_KS"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('KS' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_KS"))){
+  apply(readRDS(file.to.table("WAIC_KS")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('KS' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_KS"))){
+  apply(readRDS(file.to.table("LOO_KS")), 2, sum)
 }
 ```
 
 `r if ('KY' %in% args$states) '### Kentucky'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('KY' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_KY"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_KY"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_KY"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('KY' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_KY"))){
+  apply(readRDS(file.to.table("WAIC_KY")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('KY' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_KY"))){
+  apply(readRDS(file.to.table("LOO_KY")), 2, sum)
 }
 ```
 
 `r if ('LA' %in% args$states) '### Louisiana'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('LA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_LA"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_LA"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_LA"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('LA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_LA"))){
+  apply(readRDS(file.to.table("WAIC_LA")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('LA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_LA"))){
+  apply(readRDS(file.to.table("LOO_LA")), 2, sum)
 }
 ```
 
 `r if ('ME' %in% args$states) '### Maine'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('ME' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_ME"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_ME"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_ME"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('ME' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_ME"))){
+  apply(readRDS(file.to.table("WAIC_ME")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('ME' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_ME"))){
+  apply(readRDS(file.to.table("LOO_ME")), 2, sum)
 }
 ```
 
 `r if ('MD' %in% args$states) '### Maryland'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('MD' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_MD"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_MD"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_MD"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('MD' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_MD"))){
+  apply(readRDS(file.to.table("WAIC_MD")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('MD' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_MD"))){
+  apply(readRDS(file.to.table("LOO_MD")), 2, sum)
 }
 ```
 
 `r if ('MA' %in% args$states) '### Massachusetts'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('MA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_MA"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_MA"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_MA"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('MA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_MA"))){
+  apply(readRDS(file.to.table("WAIC_MA")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('MA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_MA"))){
+  apply(readRDS(file.to.table("LOO_MA")), 2, sum)
 }
 ```
 
 `r if ('MI' %in% args$states) '### Michigan'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('MI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_MI"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_MI"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_MI"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('MI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_MI"))){
+  apply(readRDS(file.to.table("WAIC_MI")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('MI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_MI"))){
+  apply(readRDS(file.to.table("LOO_MI")), 2, sum)
 }
 ```
 
 `r if ('MN' %in% args$states) '### Minnesota'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('MN' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_MN"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_MN"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_MN"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('MN' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_MN"))){
+  apply(readRDS(file.to.table("WAIC_MN")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('MN' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_MN"))){
+  apply(readRDS(file.to.table("LOO_MN")), 2, sum)
 }
 ```
 
 `r if ('MS' %in% args$states) '### Mississippi'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('MS' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_MS"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_MS"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_MS"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('MS' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_MS"))){
+  apply(readRDS(file.to.table("WAIC_MS")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('MS' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_MS"))){
+  apply(readRDS(file.to.table("LOO_MS")), 2, sum)
 }
 ```
 
 `r if ('MO' %in% args$states) '### Missouri'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('MO' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_MO"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_MO"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_MO"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('MO' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_MO"))){
+  apply(readRDS(file.to.table("WAIC_MO")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('MO' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_MO"))){
+  apply(readRDS(file.to.table("LOO_MO")), 2, sum)
 }
 ```
 
 `r if ('MT' %in% args$states) '### Montana'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('MT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_MT"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_MT"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_MT"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('MT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_MT"))){
+  apply(readRDS(file.to.table("WAIC_MT")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('MT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_MT"))){
+  apply(readRDS(file.to.table("LOO_MT")), 2, sum)
 }
 ```
 
 `r if ('NE' %in% args$states) '### Nebraska'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('NE' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_NE"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_NE"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_NE"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('NE' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_NE"))){
+  apply(readRDS(file.to.table("WAIC_NE")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('NE' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_NE"))){
+  apply(readRDS(file.to.table("LOO_NE")), 2, sum)
 }
 ```
 
 `r if ('NV' %in% args$states) '### Nevada'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('NV' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_NV"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_NV"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_NV"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('NV' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_NV"))){
+  apply(readRDS(file.to.table("WAIC_NV")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('NV' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_NV"))){
+  apply(readRDS(file.to.table("LOO_NV")), 2, sum)
 }
 ```
 
 `r if ('NH' %in% args$states) '### New Hampshire'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('NH' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_NH"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_NH"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_NH"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('NH' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_NH"))){
+  apply(readRDS(file.to.table("WAIC_NH")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('NH' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_NH"))){
+  apply(readRDS(file.to.table("LOO_NH")), 2, sum)
 }
 ```
 
 `r if ('NJ' %in% args$states) '### New Jersey'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('NJ' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_NJ"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_NJ"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_NJ"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('NJ' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_NJ"))){
+  apply(readRDS(file.to.table("WAIC_NJ")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('NJ' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_NJ"))){
+  apply(readRDS(file.to.table("LOO_NJ")), 2, sum)
 }
 ```
 
 `r if ('NM' %in% args$states) '### New Mexico'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('NM' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_NM"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_NM"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_NM"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('NM' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_NM"))){
+  apply(readRDS(file.to.table("WAIC_NM")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('NM' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_NM"))){
+  apply(readRDS(file.to.table("LOO_NM")), 2, sum)
 }
 ```
 
 `r if ('NY' %in% args$states) '### New York'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('NY' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_NY"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_NY"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_NY"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('NY' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_NY"))){
+  apply(readRDS(file.to.table("WAIC_NY")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('NY' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_NY"))){
+  apply(readRDS(file.to.table("LOO_NY")), 2, sum)
 }
 ```
 
 `r if ('NYC' %in% args$states) '### New York City'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('NYC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_NYC"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_NYC"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_NYC"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('NYC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_NYC"))){
+  apply(readRDS(file.to.table("WAIC_NYC")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('NYC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_NYC"))){
+  apply(readRDS(file.to.table("LOO_NYC")), 2, sum)
 }
 ```
 
 `r if ('NC' %in% args$states) '### North Carolina'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('NC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_NC"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_NC"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_NC"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('NC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_NC"))){
+  apply(readRDS(file.to.table("WAIC_NC")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('NC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_NC"))){
+  apply(readRDS(file.to.table("LOO_NC")), 2, sum)
 }
 ```
 
 `r if ('ND' %in% args$states) '### North Dakota'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('ND' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_ND"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_ND"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_ND"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('ND' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_ND"))){
+  apply(readRDS(file.to.table("WAIC_ND")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('ND' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_ND"))){
+  apply(readRDS(file.to.table("LOO_ND")), 2, sum)
 }
 ```
 
 `r if ('OH' %in% args$states) '### Ohio'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('OH' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_OH"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_OH"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_OH"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('OH' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_OH"))){
+  apply(readRDS(file.to.table("WAIC_OH")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('OH' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_OH"))){
+  apply(readRDS(file.to.table("LOO_OH")), 2, sum)
 }
 ```
 
 `r if ('OK' %in% args$states) '### Oklahoma'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('OK' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_OK"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_OK"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_OK"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('OK' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_OK"))){
+  apply(readRDS(file.to.table("WAIC_OK")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('OK' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_OK"))){
+  apply(readRDS(file.to.table("LOO_OK")), 2, sum)
 }
 ```
 
 `r if ('OR' %in% args$states) '### Oregon'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('OR' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_OR"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_OR"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_OR"))
   neff[which(neff<500)]
 }
 ```
 
+#### WAIC
+```{r, include=('OR' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_OR"))){
+  apply(readRDS(file.to.table("WAIC_OR")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('OR' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_OR"))){
+  apply(readRDS(file.to.table("LOO_OR")), 2, sum)
+}
+```
+
+
 `r if ('PA' %in% args$states) '### Pennsylvania'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('PA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_PA"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_PA"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_PA"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('PA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_PA"))){
+  apply(readRDS(file.to.table("WAIC_PA")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('PA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_PA"))){
+  apply(readRDS(file.to.table("LOO_PA")), 2, sum)
 }
 ```
 
 `r if ('RI' %in% args$states) '### Rhode Island'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('RI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_RI"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_RI"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_RI"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('RI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_RI"))){
+  apply(readRDS(file.to.table("WAIC_RI")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('RI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_RI"))){
+  apply(readRDS(file.to.table("LOO_RI")), 2, sum)
 }
 ```
 
 `r if ('SC' %in% args$states) '### South Carolina'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('SC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_SC"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_SC"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_SC"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('SC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_SC"))){
+  apply(readRDS(file.to.table("WAIC_SC")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('SC' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_SC"))){
+  apply(readRDS(file.to.table("LOO_SC")), 2, sum)
 }
 ```
 
 `r if ('SD' %in% args$states) '### South Dakota'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('SD' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_SD"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_SD"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_SD"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('SD' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_SD"))){
+  apply(readRDS(file.to.table("WAIC_SD")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('SD' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_SD"))){
+  apply(readRDS(file.to.table("LOO_SD")), 2, sum)
 }
 ```
 
 `r if ('TN' %in% args$states) '### Tennessee'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('TN' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_TN"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_TN"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_TN"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('TN' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_TN"))){
+  apply(readRDS(file.to.table("WAIC_TN")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('TN' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_TN"))){
+  apply(readRDS(file.to.table("LOO_TN")), 2, sum)
 }
 ```
 
 `r if ('TX' %in% args$states) '### Texas'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('TX' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_TX"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_TX"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_TX"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('TX' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_TX"))){
+  apply(readRDS(file.to.table("WAIC_TX")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('TX' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_TX"))){
+  apply(readRDS(file.to.table("LOO_TX")), 2, sum)
 }
 ```
 
 `r if ('UT' %in% args$states) '### Utah'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('UT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_UT"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_UT"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_UT"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('UT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_UT"))){
+  apply(readRDS(file.to.table("WAIC_UT")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('UT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_UT"))){
+  apply(readRDS(file.to.table("LOO_UT")), 2, sum)
 }
 ```
 
 `r if ('VT' %in% args$states) '### Vermont'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('VT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_VT"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_VT"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_VT"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('VT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_VT"))){
+  apply(readRDS(file.to.table("WAIC_VT")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('VT' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_VT"))){
+  apply(readRDS(file.to.table("LOO_VT")), 2, sum)
 }
 ```
 
 `r if ('VA' %in% args$states) '### Virginia'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('VA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_VA"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_VA"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_VA"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('VA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_VA"))){
+  apply(readRDS(file.to.table("WAIC_VA")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('VA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_VA"))){
+  apply(readRDS(file.to.table("LOO_VA")), 2, sum)
 }
 ```
 
 `r if ('WA' %in% args$states) '### Washington'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('WA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_WA"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_WA"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_WA"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('WA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_WA"))){
+  apply(readRDS(file.to.table("WAIC_WA")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('WA' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_WA"))){
+  apply(readRDS(file.to.table("LOO_WA")), 2, sum)
 }
 ```
 
 `r if ('WV' %in% args$states) '### West Virginia'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('WV' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_WV"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_WV"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_WV"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('WV' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_WV"))){
+  apply(readRDS(file.to.table("WAIC_WV")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('WV' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_WV"))){
+  apply(readRDS(file.to.table("LOO_WV")), 2, sum)
 }
 ```
 
 `r if ('WI' %in% args$states) '### Wisconsin'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('WI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_WI"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_WI"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_WI"))
   neff[which(neff<500)]
 }
 ```
 
+#### WAIC
+```{r, include=('WI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_WI"))){
+  apply(readRDS(file.to.table("WAIC_WI")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('WI' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_WI"))){
+  apply(readRDS(file.to.table("LOO_WI")), 2, sum)
+}
+```
+
 `r if ('WY' %in% args$states) '### Wyoming'`
+
+#### Effective sample size
+Listed below are the parameters with an effective sample size smaller than 500.
+
 ```{r, include=('WY' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
 if(file.exists(file.to.table("eff_sample_size_cum_WY"))){
-neff <- readRDS(file.to.table("eff_sample_size_cum_WY"))
+  neff <- readRDS(file.to.table("eff_sample_size_cum_WY"))
   neff[which(neff<500)]
+}
+```
+
+#### WAIC
+```{r, include=('WY' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("WAIC_WY"))){
+  apply(readRDS(file.to.table("WAIC_WY")), 2, sum)
+}
+```
+
+#### LOO
+```{r, include=('WY' %in% args$states), out.width="120%", fig.show='hold', fig.align='centre', echo=FALSE}
+if(file.exists(file.to.table("LOO_WY"))){
+  apply(readRDS(file.to.table("LOO_WY")), 2, sum)
 }
 ```
 
