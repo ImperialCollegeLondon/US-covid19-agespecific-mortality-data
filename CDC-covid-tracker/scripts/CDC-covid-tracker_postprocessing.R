@@ -30,10 +30,6 @@ source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-sum
 source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-postprocessing-plotting_functions.R"))
 source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-postprocessing-summary_functions.R"))
 
-
-# path to JHU data
-path.to.JHU.data = file.path(indir, "data", "official", paste0("jhu_death_data_padded_210308.rds"))
-
 # set directories
 run_tag = paste0(stan_model, "-", JOBID)
 outdir.fit = file.path(outdir, run_tag, "fits")
@@ -42,9 +38,6 @@ outdir.table = file.path(outdir, run_tag, "table", run_tag)
 
 # max age considered
 age_max = 105
-
-# load JHU data
-JHUData = readRDS(path.to.JHU.data)
 
 # Prepare CDC data
 last.day = as.Date("2021-03-11")
@@ -62,7 +55,7 @@ cat("Location ", as.character(loc_name), "\n")
 
 # stan data
 cat("Prepare stan data \n")
-stan_data = prepare_stan_data(deathByAge, JHUData, loc_name)
+stan_data = prepare_stan_data(deathByAge, loc_name)
 
 # load fit cumulative deaths
 cat("Load fits \n")

@@ -36,6 +36,7 @@ path.to.JHU.data = file.path(indir, "data", "official", paste0("jhu_death_data_p
 
 # load functions
 source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-summary_functions.R"))
+source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-plotting_functions.R"))
 source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-stan_utility_functions.R"))
 
 # tag and directories
@@ -48,14 +49,17 @@ cat("\n outfile.dir is ", file.path(outdir, run_tag), '\n')
 
 # max age considered
 age_max = 105
-
-# load JHU data
-JHUData = readRDS(path.to.JHU.data)
   
 # Gather CDC data
 # last.day = Sys.Date() - 1 # yesterday 
 last.day = as.Date('2021-03-03')
 deathByAge = prepare_CDC_data(last.day, age_max, indir)
+
+# compare to JHU data
+JHUData = readRDS(path.to.JHU.data)
+compare_CDC_JHU_error_plot(CDC_data = deathByAge, JHU_data = JHUData, 
+                           var.cum.deaths.CDC = 'COVID.19.Deaths', 
+                           outdir = file.path(outdir, run_tag, 'figure', run_tag))
 
 # Create age maps
 create_map_age(age_max)
@@ -70,7 +74,7 @@ cat("Location ", as.character(loc_name), "\n")
 
 # stan data
 cat("\n Prepare stan data \n")
-stan_data = prepare_stan_data(deathByAge, JHUData, loc_name)
+stan_data = prepare_stan_data(deathByAge, loc_name)
 
 if(grepl('210319d2|210319d3', stan_model)){
   cat("\n Using a GP \n")

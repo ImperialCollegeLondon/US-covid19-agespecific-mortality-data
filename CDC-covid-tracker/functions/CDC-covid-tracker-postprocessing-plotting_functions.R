@@ -78,3 +78,34 @@ plot_posterior_predictive_checks = function(data, variable, variable_abbr, lab, 
   ggsave(p1, file = paste0(outdir, "-posterior_predictive_checks_", Code,".png") , w= 10, h = 6*n_row / 2, limitsize = FALSE)
   
 }
+
+
+compare_CDC_JHU_error_plot_uncertainty = function(CDC_data, JHU_data, outdir)
+{
+  # prepare JHU data
+  JHUData = select(as.data.table(JHUData), code, date, cumulative_deaths)
+  JHUData[, CL_cumulative_deaths := NA]
+  JHUData[, CU_cumulative_deaths := NA]
+  
+  # prepare  predicted CDC data
+  CDCdata = CDC_data[, list(cumulative_deaths = sum( M_deaths_cum ),
+                            CL_cumulative_deaths = sum( CL_deaths_cum ),
+                            CU_cumulative_deaths = sum( CU_deaths_cum )), by = c('code', 'date')]
+  
+  # plot
+  JHUData[, source := 'JHU']
+  CDCdata[, source := 'CDC']
+  
+  tmp2 = rbind(JHUData, CDCdata)
+  tmp2 = subset(tmp2, code %in% unique(CDCdata$code) & date <= max(CDCdata$date))
+  
+  p = ggplot(tmp2, aes(x = date, y = cumulative_deaths)) + 
+    geom_ribbon(aes(ymin = CL_cumulative_deaths, ymax = CU_cumulative_deaths, fill = source), alpha = 0.5) +
+    geom_line(aes(col = source), size = 1) +
+    facet_wrap(~code, nrow = length(unique(tmp2$code)), scale = 'free') + 
+    theme_bw() + 
+    scale_color_viridis_d(option = "B", direction = -1, end = 0.8) + 
+    scale_fill_viridis_d(option = "B", direction = -1, end = 0.8)
+  ggsave(p, file = paste0(outdir, '-comparison_JHU_CDC_uncertainty.png'), w = 9, h = 110, limitsize = F)
+}
+

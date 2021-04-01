@@ -4,16 +4,6 @@ library(scales)
 library(gridExtra)
 library(tidyverse)
 
-# jhu
-death_data_jhu = readRDS(file.path("data", "official", "jhu_death_data_padded_210321.rds"))
-
-# NYC
-death_data_nyc = read.csv(file.path("data", "official", "NYC_deaths_210321.csv"))
-
-
-# processed data
-data_US = read.csv(file.path("data", "processed", last.day, paste0("DeathsByAge_", 'US', ".csv")))
-
 
 make.comparison.plot = function(State, Code, with_CDC = 0){
   
@@ -50,7 +40,7 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
       theme(legend.position="right")+ 
       guides(fill = guide_legend(title="Age")) +
       labs(title = State, y = "Cumulative deaths (overall population)") 
-    ggsave(file.path("figures", last.day, paste0("comparison.jhu.depthealth_cum_", Code, ".pdf")), p, w = 8, h =6)
+    ggsave(file.path(outdir, paste0("comparison.jhu.depthealth_cum_", Code, ".pdf")), p, w = 8, h =6)
     
     p2 = ggplot(data = death_data, aes(x = date, y = daily_deaths, col = source)) +
       geom_line()  +
@@ -62,7 +52,7 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
       theme(legend.position="right")+ 
       guides(fill = guide_legend(title="Age")) +
       labs(title = State, y = "Daily deaths (overall population)") 
-    ggsave(file.path("figures", last.day, paste0("comparison.jhu.depthealth_daily_", Code, ".pdf")), p2, w = 8, h =6)
+    ggsave(file.path(outdir, paste0("comparison.jhu.depthealth_daily_", Code, ".pdf")), p2, w = 8, h =6)
   } else{
     
     # else use the JHU data
@@ -106,7 +96,7 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
       theme(legend.position="right")+ 
       guides(fill = guide_legend(title="Age")) +
       labs(title = State, y = "Daily deaths (overall population)") 
-    ggsave(file.path("figures", last.day, paste0("comparison.jhu.depthealth_cum_", Code, ".pdf")), p, w = 8, h =6)
+    ggsave(file.path(outdir, paste0("comparison.jhu.depthealth_cum_", Code, ".pdf")), p, w = 8, h =6)
     
     p2 = ggplot(data = death_data, aes(x = date, y = daily_deaths, col = source)) +
       geom_line(size = 0.5)  +
@@ -118,7 +108,7 @@ make.comparison.plot = function(State, Code, with_CDC = 0){
       theme(legend.position="right")+ 
       guides(fill = guide_legend(title="Age")) +
       labs(title = State, y = "Daily deaths (overall population)") 
-    ggsave(file.path("figures", last.day, paste0("comparison.jhu.depthealth_daily_", Code, ".pdf")), p2, w = 8, h =6)
+    ggsave(file.path(outdir, paste0("comparison.jhu.depthealth_daily_", Code, ".pdf")), p2, w = 8, h =6)
   }
   
   return(list(p, p2))
@@ -131,9 +121,9 @@ make.comparison.plots = function(names, codes){
     p[[i]] = plots[[1]]; p2[[i]] = plots[[2]]
   }
   q = do.call(grid.arrange, c(p, ncol =1))
-  ggsave(file.path("figures", last.day, "comparison.ihme.jhu.depthealth_cum_overall.pdf"), q, w = 8, h = 110, limitsize = FALSE)
+  ggsave(file.path(outdir, "comparison.ihme.jhu.depthealth_cum_overall.pdf"), q, w = 8, h = 110, limitsize = FALSE)
   q = do.call(grid.arrange, c(p2, ncol =1))
-  ggsave(file.path("figures", last.day, "comparison.ihme.jhu.depthealth_daily_overall.pdf"), q, w = 8, h = 110, limitsize = FALSE)
+  ggsave(file.path(outdir, "comparison.ihme.jhu.depthealth_daily_overall.pdf"), q, w = 8, h = 110, limitsize = FALSE)
 }
 
 make.time.series.plots = function(codes){
@@ -172,7 +162,7 @@ make.time.series.plots = function(codes){
     theme(legend.position="right")+ 
     guides(fill = guide_legend(title="Age")) +
     labs(title = "Time series from Dept of Health", y = "Daily or weekly deaths (overall population)") 
-  ggsave(file.path("figures", last.day, "time.series_allstates.pdf"), p, w = 8, h = 100,limitsize = FALSE)
+  ggsave(file.path(outdir, "time.series_allstates.pdf"), p, w = 8, h = 100,limitsize = FALSE)
   
   databyage$date = as.Date(databyage$date)
   p = ggplot(databyage, aes(x = date, y = daily.deaths, linetype = update, color = age)) +
@@ -187,7 +177,7 @@ make.time.series.plots = function(codes){
     theme(legend.position="bottom")+ 
     guides(fill = guide_legend(title="Age")) +
     labs(title = "Time series from Dept of Health", y = "Daily or weekly deaths (overall population)") 
-  ggsave(file.path("figures", last.day, "time.series_allstates_byage.pdf"), p, w = 5, h = 100,limitsize = FALSE)
+  ggsave(file.path(outdir, "time.series_allstates_byage.pdf"), p, w = 5, h = 100,limitsize = FALSE)
 }
 
 make.death.among.young.plot = function(){
@@ -204,5 +194,5 @@ make.death.among.young.plot = function(){
   ggplot(tmp, aes(x = code, y = cum.deaths, col = age)) +
     geom_point(size = 4) +
     theme_bw()
-  ggsave(file.path("figures", last.day, "death.among.young.pdf"), w = 15, h = 10)
+  ggsave(file.path(outdir, "death.among.young.pdf"), w = 15, h = 10)
 }

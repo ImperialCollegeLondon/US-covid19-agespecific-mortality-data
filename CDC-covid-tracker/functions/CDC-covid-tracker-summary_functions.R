@@ -141,7 +141,7 @@ create_map_age = function(age_max){
   df_ntl_age_strata[, age_to_index := which(df_age_continuous$age_to == age_to), by = "age_cat"]
 }
 
-prepare_stan_data = function(deathByAge, JHUData, loc_name){
+prepare_stan_data = function(deathByAge, loc_name){
   
   tmp = subset(deathByAge, loc_label == loc_name)
   tmp = tmp[order(date, age_from)]
@@ -233,6 +233,7 @@ prepare_stan_data = function(deathByAge, JHUData, loc_name){
   
   return(stan_data)
 }
+
 
 map_statename_code = data.table(State = c(
   "Alabama"         ,         
