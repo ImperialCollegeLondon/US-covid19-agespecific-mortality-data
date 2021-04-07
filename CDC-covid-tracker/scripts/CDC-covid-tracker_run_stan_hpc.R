@@ -7,7 +7,7 @@ library(doParallel)
 indir = "~/git/US-covid19-data-scraping" # path to the repo
 outdir = file.path(indir, 'CDC-covid-tracker', "results")
 location.index = 1
-stan_model = "210329b"
+stan_model = "210406d"
 JOBID = 12
 
 args_line <-  as.list(commandArgs(trailingOnly=TRUE))
@@ -28,7 +28,7 @@ if(length(args_line) > 0)
 
 # stan model
 #options(mc.cores = parallel::detectCores())
-#rstan_options(auto_write = TRUE)
+rstan_options(auto_write = TRUE)
 path.to.stan.model = file.path(indir, 'CDC-covid-tracker', "stan-models", paste0("CDC-covid-tracker_", stan_model, ".stan"))
 
 # path to JHU data
@@ -80,19 +80,23 @@ if(grepl('210319d2|210319d3', stan_model)){
   cat("\n Using a GP \n")
   stan_data$age = matrix(stan_data$age, nrow = 106, ncol = 1)
 }
-if(grepl('210326|210329|210330', stan_model)){
+if(grepl('210326|210329|210330|210406', stan_model)){
   cat("\n Using splines \n")
   stan_data = add_splines_stan_data(stan_data)
 }
-  
- 
+if(grepl('210406', stan_model)){
+  cat("\n Using CAR \n")
+  stan_data = add_adjacency_matrix_stan_data(stan_data)
+}
+
+
 cat("\n Start sampling \n")
 
 # fit cumulative deaths
 
 model = rstan::stan_model(path.to.stan.model)
 
-fit_cum <- rstan::sampling(model,data=stan_data,iter=1000,warmup=100,chains=3, seed=JOBID,verbose=TRUE)
+fit_cum <- rstan::sampling(model,data=stan_data,iter=5000,warmup=500,chains=3, seed=JOBID,verbose=TRUE, control = list(max_treedepth = 15))
 
 file = file.path(outdir.fit, paste0("fit_cumulative_deaths_", Code, "_",run_tag,".rds"))
 cat('\n Save file', file, '\n')
