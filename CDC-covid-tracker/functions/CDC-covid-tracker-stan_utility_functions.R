@@ -108,7 +108,6 @@ add_splines_stan_data = function(stan_data, spline_degree = 3, n_knots = 8)
 }
 
 
-
 bspline = function(x, k, degree, intervals){
   
   if(degree == 1){
@@ -128,7 +127,7 @@ bspline = function(x, k, degree, intervals){
   return(spline)
 }
 
-find_intervals = function(knots, degree, repeating = F){
+find_intervals = function(knots, degree, repeating = T){
   
   K = length(knots)
   

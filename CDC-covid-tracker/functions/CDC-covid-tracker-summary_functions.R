@@ -122,7 +122,7 @@ create_map_age = function(age_max){
   df_age_continuous <<- data.table(age_from = 0:age_max,
                                    age_to = 0:age_max,
                                    age_index = 0:age_max,
-                                   age = c(0.1, 1:age_max))
+                                   age = 0:age_max)
   
   # create map for reporting age groups
   df_age_reporting <<- data.table(age_from = c(0,5,10,18,30,50,65,75,85),

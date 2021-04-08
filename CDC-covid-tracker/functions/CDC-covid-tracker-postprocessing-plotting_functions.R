@@ -79,7 +79,6 @@ plot_posterior_predictive_checks = function(data, variable, variable_abbr, lab, 
   
 }
 
-
 compare_CDC_JHU_error_plot_uncertainty = function(CDC_data, JHU_data, outdir)
 {
   # prepare JHU data
@@ -107,5 +106,100 @@ compare_CDC_JHU_error_plot_uncertainty = function(CDC_data, JHU_data, outdir)
     scale_color_viridis_d(option = "B", direction = -1, end = 0.8) + 
     scale_fill_viridis_d(option = "B", direction = -1, end = 0.8)
   ggsave(p, file = paste0(outdir, '-comparison_JHU_CDC_uncertainty.png'), w = 9, h = 110, limitsize = F)
+}
+
+plot_estimated_cov_matrix = function()
+{
+  samples = extract(fit_cum)
+  
+  D = diag( apply(stan_data$Adj, 2, sum) )
+  tau_m = median(samples$tau)
+  p_m = median(samples$p)
+  cov_m = tau_m * solve(D - p_m * stan_data$Adj)
+  
+  tmp1 = as.data.table( reshape2::melt( stan_data$Adj ))
+  ggplot(tmp1, aes(x = Var1, y = Var2)) + 
+    geom_raster(aes(fill = as.factor(value)))+
+    scale_fill_manual(values = c('beige',"blue")) + 
+    labs(x = expression(s[j]), y = expression(s[i]), fill = '') + 
+    scale_y_reverse(expand = c(0,0))  +
+    scale_x_continuous(expand = c(0,0)) +
+    theme(legend.position = 'none')
+  ggsave(file = '~/Box\ Sync/2021/CDC/beta_Adj.png', w = 4, h = 4)
+  
+  tmp1 = as.data.table( reshape2::melt( D ))
+  ggplot(tmp1, aes(x = Var1, y = Var2)) + 
+    geom_raster(aes(fill = value)) +
+    labs(x = expression(s[j]), y = expression(s[i]), fill = '') + 
+    scale_y_reverse(expand = c(0,0))  +
+    scale_x_continuous(expand = c(0,0)) +
+    theme(legend.position = 'none') + 
+    scale_fill_viridis_c() 
+  ggsave(file = '~/Box\ Sync/2021/CDC/beta_D.png', w = 4, h = 4)
+  
+  tmp1 = as.data.table( reshape2::melt( cov_m ))
+  ggplot(tmp1, aes(x = Var1, y = Var2)) + 
+    geom_raster(aes(fill = value)) +
+    labs(x = expression(s[j]), y = expression(s[i]), fill = 'Estimated posterior value') + 
+    scale_y_reverse(expand = c(0,0))  +
+    scale_x_continuous(expand = c(0,0)) +
+    theme(legend.position = 'none') + 
+    scale_fill_viridis_c(begin = 0, end = 1, limits = c(0,0.62), breaks = seq(0,0.6,0.2)) 
+  ggsave(file = '~/Box\ Sync/2021/CDC/beta_cov.png', w = 4, h = 4)
+  
+  map = data.table(idx = 1:(stan_data$W * stan_data$num_basis), 
+                   idx_week = rep(1:stan_data$W, each = stan_data$num_basis),
+                   idx_basis = rep(1:stan_data$num_basis, stan_data$W))
+  tmp1 = merge(tmp1, map, by.x = 'Var1', by.y = 'idx')
+  setnames(tmp1, c('idx_week', 'idx_basis'), c('idx_week_column', 'idx_basis_column'))
+  tmp1 = merge(tmp1, map, by.x = 'Var2', by.y = 'idx')
+  setnames(tmp1, c('idx_week', 'idx_basis'), c('idx_week_row', 'idx_basis_row'))
+  
+  tmp2 = subset(tmp1, idx_week_row %in% 1 & idx_week_column %in% 1)
+  ggplot(tmp2, aes(x = Var1, y = Var2)) + 
+    geom_raster(aes(fill = value)) +
+    labs(x = 'basis function index', y = 'basis function index', fill = 'Estimated posterior value') + 
+    scale_y_reverse(expand = c(0,0), breaks = seq(1, 10, 2))  +
+    scale_x_continuous(expand = c(0,0), breaks = seq(1, 10, 2)) +
+    theme(legend.position = 'none') + 
+    scale_fill_viridis_c(begin = 0, end = 1, limits = c(0,0.62), breaks = seq(0,0.6,0.2)) 
+  ggsave(file = '~/Box\ Sync/2021/CDC/beta_cov_w1.png', w = 4, h = 4)
+  
+  tmp2 = subset(tmp1, idx_basis_column %in% 5 & idx_basis_row %in% 5)
+  ggplot(tmp2, aes(x = idx_week_row, y = idx_week_column)) + 
+    geom_raster(aes(fill = value)) +
+    labs(x = 'week index', y = 'week index', fill = 'Estimated posterior value') + 
+    scale_y_reverse(expand = c(0,0))  +
+    scale_x_continuous(expand = c(0,0)) +
+    theme(legend.position = 'none') + 
+    scale_fill_viridis_c(begin = 0, end = 1, limits = c(0,0.62), breaks = seq(0,0.6,0.2)) 
+  ggsave(file = '~/Box\ Sync/2021/CDC/beta_cov_k5.png', w = 4, h = 4)
+  
+}
+
+plot_beta_posterior_plane = function()
+{
+  samples = extract(fit_cum)
+  
+  ps <- c(0.5, 0.025, 0.975)
+  p_labs <- c('M','CL','CU')
+  tmp1 = as.data.table( reshape2::melt( samples$beta ))
+  setnames(tmp1, c('Var2', 'Var3'), c('week_index', 'basis_idx'))
+  tmp1 = tmp1[, list( 	q= quantile(value, prob=ps),
+                       q_label=p_labs), 
+              by=c('basis_idx', 'week_index')]	
+  tmp1 = dcast(tmp1, week_index + basis_idx ~ q_label, value.var = "q")
+  
+  tmp1 = merge(tmp1, df_week, by = 'week_index')
+  
+  ggplot(tmp1, aes(x = week_index, y = basis_idx)) +
+    geom_raster(aes(fill = M))  + 
+    labs(x = 'week index', y = 'basis function index', fill = 'Estimated posterior value') + 
+    scale_y_reverse(expand = c(0,0), breaks = seq(1,stan_data$num_basis,2))  +
+    scale_x_continuous(expand = c(0,0)) + 
+    scale_fill_viridis_c(option = "A") + 
+    theme(legend.position='bottom')
+  ggsave(file = '~/Box\ Sync/2021/CDC/beta_posterior.png', w = 6, h = 6.5)
+  
 }
 
