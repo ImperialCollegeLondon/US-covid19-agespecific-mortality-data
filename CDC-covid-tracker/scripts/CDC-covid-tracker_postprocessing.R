@@ -29,6 +29,7 @@ if(length(args_line) > 0)
 source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-summary_functions.R"))
 source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-postprocessing-plotting_functions.R"))
 source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-postprocessing-summary_functions.R"))
+source(file.path(indir, 'CDC-covid-tracker', "functions", "CDC-covid-tracker-stan_utility_functions.R"))
 
 # set directories
 run_tag = paste0(stan_model, "-", JOBID)
