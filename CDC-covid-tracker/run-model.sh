@@ -9,7 +9,7 @@ cat > $CWD/bash_$STAN_MODEL-$JOBID.pbs <<EOF
 
 #!/bin/sh
 #PBS -l walltime=30:59:00
-#PBS -l select=1:ncpus=50:ompthreads=1:mem=300gb
+#PBS -l select=1:ncpus=50:ompthreads=1:mem=500gb
 #PBS -j oe
 #PBS -q pqcovid19c
 module load anaconda3/personal
