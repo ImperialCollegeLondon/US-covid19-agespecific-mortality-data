@@ -7,7 +7,7 @@ library(doParallel)
 indir = "~/git/US-covid19-data-scraping" # path to the repo
 outdir = file.path(indir, 'CDC-covid-tracker', "results")
 location.index = 1
-stan_model = "210406d"
+stan_model = "210409"
 JOBID = 12
 
 args_line <-  as.list(commandArgs(trailingOnly=TRUE))
@@ -80,19 +80,26 @@ if(grepl('210319d2|210319d3', stan_model)){
   cat("\n Using a GP \n")
   stan_data$age = matrix(stan_data$age, nrow = 106, ncol = 1)
 }
-if(grepl('210326|210329|210330|210406', stan_model)){
+if(grepl('210326|210329|210330|210406|210409', stan_model)){
   cat("\n Using splines \n")
   stan_data = add_splines_stan_data(stan_data)
 }
-if(grepl('210406', stan_model)){
-  cat("\n Using CAR \n")
-  stan_data = add_adjacency_matrix_stan_data(stan_data)
+if(grepl('210406|210409', stan_model)){
+  cat("\n Adding adjacency matrix on splines parameters \n")
+  stan_data = add_adjacency_matrix_stan_data(stan_data, n = stan_data$W, m = stan_data$num_basis)
+}
+if(grepl('210408', stan_model)){
+  cat("\n Adding adjacency matrix on week and age \n")
+  stan_data = add_adjacency_matrix_stan_data(stan_data, n = stan_data$W, m = stan_data$A)
+}
+if(grepl('210408b|210409', stan_model)){
+  cat("\n Adding nodes index on week and age \n")
+  stan_data = add_nodes_stan_data(stan_data)
 }
 
 
-cat("\n Start sampling \n")
-
 # fit cumulative deaths
+cat("\n Start sampling \n")
 
 model = rstan::stan_model(path.to.stan.model)
 

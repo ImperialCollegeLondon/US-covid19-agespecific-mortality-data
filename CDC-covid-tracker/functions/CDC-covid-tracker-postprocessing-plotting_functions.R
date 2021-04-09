@@ -112,6 +112,8 @@ plot_estimated_cov_matrix = function()
 {
   samples = extract(fit_cum)
   
+  suffix = '_ICAR'
+  
   D = diag( apply(stan_data$Adj, 2, sum) )
   tau_m = median(samples$tau)
   p_m = median(samples$p)
@@ -138,14 +140,15 @@ plot_estimated_cov_matrix = function()
   ggsave(file = '~/Box\ Sync/2021/CDC/beta_D.png', w = 4, h = 4)
   
   tmp1 = as.data.table( reshape2::melt( cov_m ))
+  range_value = range(tmp1$value)
   ggplot(tmp1, aes(x = Var1, y = Var2)) + 
     geom_raster(aes(fill = value)) +
     labs(x = expression(s[j]), y = expression(s[i]), fill = 'Estimated posterior value') + 
     scale_y_reverse(expand = c(0,0))  +
     scale_x_continuous(expand = c(0,0)) +
     theme(legend.position = 'none') + 
-    scale_fill_viridis_c(begin = 0, end = 1, limits = c(0,0.62), breaks = seq(0,0.6,0.2)) 
-  ggsave(file = '~/Box\ Sync/2021/CDC/beta_cov.png', w = 4, h = 4)
+    scale_fill_viridis_c(begin = 0, end = 1, limits = range_value, breaks = seq(0,0.6,0.2)) 
+  ggsave(file = paste0('~/Box\ Sync/2021/CDC/beta_cov', suffix, '.png'), w = 4, h = 4)
   
   map = data.table(idx = 1:(stan_data$W * stan_data$num_basis), 
                    idx_week = rep(1:stan_data$W, each = stan_data$num_basis),
@@ -162,8 +165,8 @@ plot_estimated_cov_matrix = function()
     scale_y_reverse(expand = c(0,0), breaks = seq(1, 10, 2))  +
     scale_x_continuous(expand = c(0,0), breaks = seq(1, 10, 2)) +
     theme(legend.position = 'none') + 
-    scale_fill_viridis_c(begin = 0, end = 1, limits = c(0,0.62), breaks = seq(0,0.6,0.2)) 
-  ggsave(file = '~/Box\ Sync/2021/CDC/beta_cov_w1.png', w = 4, h = 4)
+    scale_fill_viridis_c(begin = 0, end = 1, limits = range_value, breaks = seq(0,0.6,0.2)) 
+  ggsave(file = paste0('~/Box\ Sync/2021/CDC/beta_cov_w1', suffix, '.png'), w = 4, h = 4)
   
   tmp2 = subset(tmp1, idx_basis_column %in% 5 & idx_basis_row %in% 5)
   ggplot(tmp2, aes(x = idx_week_row, y = idx_week_column)) + 
@@ -172,8 +175,8 @@ plot_estimated_cov_matrix = function()
     scale_y_reverse(expand = c(0,0))  +
     scale_x_continuous(expand = c(0,0)) +
     theme(legend.position = 'none') + 
-    scale_fill_viridis_c(begin = 0, end = 1, limits = c(0,0.62), breaks = seq(0,0.6,0.2)) 
-  ggsave(file = '~/Box\ Sync/2021/CDC/beta_cov_k5.png', w = 4, h = 4)
+    scale_fill_viridis_c(begin = 0, end = 1, limits = range_value, breaks = seq(0,0.6,0.2)) 
+  ggsave(file = paste0('~/Box\ Sync/2021/CDC/beta_cov_k5', suffix, '.png'), w = 4, h = 4)
   
 }
 
@@ -181,25 +184,88 @@ plot_beta_posterior_plane = function()
 {
   samples = extract(fit_cum)
   
+  row_name = 'week_index'
+  column_name = 'age'
+  
+  suffix = '_ICAR_2'
+  
   ps <- c(0.5, 0.025, 0.975)
   p_labs <- c('M','CL','CU')
   tmp1 = as.data.table( reshape2::melt( samples$beta ))
-  setnames(tmp1, c('Var2', 'Var3'), c('week_index', 'basis_idx'))
+  setnames(tmp1, c('Var2', 'Var3'), c(row_name, column_name))
   tmp1 = tmp1[, list( 	q= quantile(value, prob=ps),
                        q_label=p_labs), 
-              by=c('basis_idx', 'week_index')]	
-  tmp1 = dcast(tmp1, week_index + basis_idx ~ q_label, value.var = "q")
+              by=c(column_name, row_name)]	
+  tmp1 = dcast(tmp1, get(row_name) + get(column_name) ~ q_label, value.var = "q")
+  setnames(tmp1, c('row_name', 'column_name'), c(row_name, column_name))
   
-  tmp1 = merge(tmp1, df_week, by = 'week_index')
-  
-  ggplot(tmp1, aes(x = week_index, y = basis_idx)) +
+  tmp1 = merge(tmp1, df_week, by = row_name)
+
+  ggplot(tmp1, aes(x = date, y = get(column_name))) +
     geom_raster(aes(fill = M))  + 
-    labs(x = 'week index', y = 'basis function index', fill = 'Estimated posterior value') + 
-    scale_y_reverse(expand = c(0,0), breaks = seq(1,stan_data$num_basis,2))  +
-    scale_x_continuous(expand = c(0,0)) + 
+    labs(x = 'Date', y = column_name, fill = 'Estimated posterior value') + 
+    scale_y_reverse(expand = c(0,0))  +
+    scale_x_date(expand = c(0,0)) + 
     scale_fill_viridis_c(option = "A") + 
     theme(legend.position='bottom')
-  ggsave(file = '~/Box\ Sync/2021/CDC/beta_posterior.png', w = 6, h = 6.5)
+  ggsave(file = paste0('~/Box\ Sync/2021/CDC/beta_posterior', suffix, '.png'), w = 6, h = 6.5)
   
 }
 
+plot_prediction = function()
+{
+  source(file.path(indir, "CDC-covid-tracker", "functions", "CDC-covid-tracker-postprocessing-summary_functions.R"))
+  
+  suffix = '_ICAR_2'
+  
+  predictive_checks_table = make_predictive_checks_table(fit_cum, "deaths_cum", df_week, df_age_reporting, tmp)
+  
+  tmp = subset(predictive_checks_table, week_index %in% c(1, stan_data$W))
+  
+  ggplot(tmp, aes(x = age)) + 
+    geom_point(aes(y = M_deaths_cum)) + 
+    geom_errorbar(aes(ymin = CL_deaths_cum, ymax = CU_deaths_cum)) + 
+    geom_point(aes(y = COVID.19.Deaths), col = 'red') + 
+    facet_wrap(~date, ncol = 1) + 
+    theme_bw() + 
+    labs(y = 'Cumulative deaths', x = '')
+  ggsave(file = paste0('~/Box\ Sync/2021/CDC/posterior_predictive_checks_AL', suffix, '.png'), w = 6, h = 5)
+}
+
+plot_contribution = function()
+{
+  samples = extract(fit_cum)
+  
+  suffix = '_ICAR_2'
+  
+  ps <- c(0.5, 0.025, 0.975)
+  p_labs <- c('M','CL','CU')
+  tmp1 = as.data.table( reshape2::melt( samples$phi ))
+  setnames(tmp1, c('Var2', 'Var3'), c('age', 'week_index'))
+  tmp1 = tmp1[, list( 	q= quantile(value, prob=ps),
+                       q_label=p_labs), 
+              by=c('age', 'week_index')]	
+  tmp1 = dcast(tmp1, week_index + age ~ q_label, value.var = "q")
+
+  tmp1 = merge(tmp1, df_week, by = row_name)
+  
+  ggplot(tmp1, aes(x = date, y = age)) +
+    geom_raster(aes(fill = M))  + 
+    labs(x = 'Date', y = 'Age', fill = 'Estimated posterior value') + 
+    scale_y_continuous(expand = c(0,0))  +
+    scale_x_date(expand = c(0,0)) + 
+    scale_fill_viridis_c(option = "E") + 
+    theme(legend.position='bottom')
+  ggsave(file = paste0('~/Box\ Sync/2021/CDC/continuous_contribution_AL_all_week', suffix, '.png'), w = 6, h = 6.2)
+  
+  tmp1 = subset(tmp1, week_index %in% c(1, stan_data$W))
+  
+  ggplot(tmp1, aes(x = age)) + 
+    geom_line(aes(y = M)) + 
+    geom_ribbon(aes(ymin = CL, ymax = CU), alpha  = 0.5) + 
+    facet_wrap(~date, ncol = 1) + 
+    theme_bw() + 
+    labs(y = 'Probability that one additional deaths \n falls in a', x = 'a')
+  ggsave(file = paste0('~/Box\ Sync/2021/CDC/continuous_contribution_AL', suffix, '.png'), w = 6, h = 5)
+  
+}

@@ -170,9 +170,8 @@ bsplines = function(data, knots, degree)
 }
 
 
-add_adjacency_matrix_stan_data = function(stan_data){
+add_adjacency_matrix_stan_data = function(stan_data, n, m){
   
-  n = stan_data$W; m = stan_data$num_basis
   N = n * m
   A = matrix(nrow = N, ncol = N, 0)
   
@@ -212,3 +211,18 @@ add_adjacency_matrix_stan_data = function(stan_data){
   
   return(stan_data)
 }
+
+add_nodes_stan_data = function(stan_data)
+{
+  tmp = reshape2::melt( stan_data$Adj )
+  tmp = subset(tmp, value == 1)
+  
+  stan_data$node1 = tmp$Var2
+  stan_data$node2 = tmp$Var1
+  stan_data$N_edges = nrow(tmp)
+  
+  return(stan_data)
+}
+
+
+
