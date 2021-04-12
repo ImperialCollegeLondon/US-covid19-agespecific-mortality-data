@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="en" class="ie ie7"> <![endif]-->
+<!--[if IE 8]> <html lang="en" class="ie ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <!--[if lte ie 8]><script type="text/javascript" src="/fanstatic/vendor/:version:2021-03-16T22:56:24/html5.min.js"></script><![endif]-->
+<link rel="stylesheet" type="text/css" href="/fanstatic/vendor/:version:2021-03-16T22:56:24/select2/select2.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/css/:version:2021-03-16T22:56:24/main.min.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/vendor/:version:2021-03-16T22:56:24/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/ckanext-geoview/:version:2021-03-18T15:28:08/css/geo-resource-styles.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/ckanext-harvest/:version:2021-03-18T15:27:55/styles/harvest.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/pages/:version:2021-03-18T15:27:58/:bundle:css/bootstrap.css;css/medium-editor.css" />
+
+    <meta charset="utf-8" />
+      <meta name="generator" content="ckan 2.7.3" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 500 - California Health and Human Services Open Data Portal</title>
+
+    
+    
+    
+  <link rel="shortcut icon" href="/img/favicon.ico" />
+    
+  
+    <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56144207-1', 'auto', {});
+  
+  ga('create', 'UA-113803653-1', 'auto', 'secondary');
+  
+     
+  ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+  
+  ga('secondary.send', 'pageview');
+  
+</script>
+  
+
+
+    <!--[if IE]>
+    <script src="/classList.min.js"></script>
+    <![endif]-->
+
+    
+    
+    
+    
+
+    
+    
+  
+  
+      
+    
+  <link href='//fonts.googleapis.com/css?family=Lato:400italic,400,900' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+
+  
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css" />
+  
+  <link rel="stylesheet" href="/css/layout3.css" />
+
+
+  <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+
+  
+
+
+    
+    
+
+
+    
+
+
+    
+      
+      
+    <style>
+        [data-module-context="package"] span.actor {
+  display: none;
+}
+[data-module-context="package"] .item p {
+    margin: 5px 0 0 50px;
+}
+a[data-module="api-info"],
+a[data-module="api-info"]:hover {
+    border-radius: 5px;
+}
+.btn-success, .btn-success:hover, .btn-success:active,
+ .actions a.btn.btn-success:hover, .actions a.btn.btn-success:focus, .actions a.btn.btn-success:active {
+    background: #4f6aaf none;
+}
+.ckanext-datapreview>iframe {
+    min-height: 550px;
+}
+.format-label[data-format=html], .format-label[data-format*=html] {
+  width: 30px;
+}
+.nav-tabs li i.fa.fa-picture {
+  display: none;
+}
+.slick-prev:before,
+.slick-next:before {
+  color: #379ED8;
+}
+@media (max-width: 639px) {
+  .dataset-list .dataset-item .dataset-resources,
+  .dataset-list .dataset-item .package-item-note,
+  .dataset-list .dataset-item .package-item-date {
+    padding-left: 0;
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  .nav.nav-pills{
+     display: flex;
+     flex-direction: row;
+  }
+
+  .nav.nav-pills :nth-child(1) { order: 1; }
+  .nav.nav-pills :nth-child(2) { order: 2; }
+  .nav.nav-pills :nth-child(3) { order: 4; }
+  .nav.nav-pills :nth-child(4) { order: 5; }
+  .nav.nav-pills :nth-child(5) { order: 4; }
+}
+      </style>
+    
+  </head>
+
+  
+  <body data-site-root="https://data.chhs.ca.gov/" data-locale-root="https://data.chhs.ca.gov/" >
+
+    
+    <div class="hide"><a href="#content">Skip to content</a></div>
+  
+
+  
+  
+
+  
+
+  <header class="account-masthead">
+    <div class="container">
+      
+        
+          <nav class="account not-authed">
+            <ul class="unstyled">
+              
+              <li><a href="/user/login">Log in</a></li>
+              
+                <li><a class="sub" href="/user/register">Register</a></li>
+              
+              <li>
+                <a href="http://chhs.us5.list-manage.com/subscribe?u=952bf4f788634d2ab0bde1737&id=71852e8cec" target="_blank" title="Subscribe">Subscribe</a>
+              </li>
+              <li>
+                <a href="/contact" title="Contact">Contact</a>
+              </li>
+              <li><a href="https://www.chhs.ca.gov/blog/tag/data/" target="_blank" title="News">News</a></li>
+              <li><a href="/about" title="About">About</a></li>
+              
+            </ul>
+          </nav>
+        
+      
+    </div>
+  </header>
+
+<header class="navbar navbar-static-top masthead">
+  
+    
+  
+  <div class="container">
+    <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+      <span class="fa fa-bars fa-2x"></span>
+    </button>
+    
+    <hgroup class="header-image pull-left">
+
+      
+        
+          <a class="logo" href="/"><img src="/uploads/admin/2018-10-01-235442.294278CHHS-Open-Data-Logo-Final.png" alt="California Health and Human Services Open Data Portal" title="California Health and Human Services Open Data Portal" /></a>
+        
+      
+
+    </hgroup>
+
+    <div class="nav-collapse collapse">
+
+      
+        <nav class="section navigation">
+          <ul class="nav nav-pills">
+            
+              <li><a href="/dataset">Datasets</a></li><li><a href="/group">Topics</a></li><li><a href="/organization">Departments</a></li><li><a href="/pages/training">Training</a></li>
+            
+            <li>
+              <a href="https://data-chhsagency.opendata.arcgis.com/">GeoHub</a>
+            </li>
+          </ul>
+        </nav>
+      
+
+      
+        <form class="section site-search simple-input" action="/dataset" method="get">
+          <div class="field">
+            <label for="field-sitewide-search">Search Datasets</label>
+            <input id="field-sitewide-search" name="q" type="text"/>
+            <label for="sitewide-search-button">Search Button</label>
+            <button class="btn-search" type="submit" id="sitewide-search-button" title="Search"><i class="fa fa-search"></i></button>
+          </div>
+        </form>
+      
+
+    </div>
+  </div>
+</header>
+
+
+    <div role="main">
+      <div id="content" class="container">
+        
+          
+  
+  
+
+
+          
+            <div class="toolbar">
+              
+
+            </div>
+          
+
+          <div class="row wrapper no-nav">
+
+            
+            
+            
+
+            
+  <article class="module">
+    <div class="module-content">
+      
+        
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="en" class="ie ie7"> <![endif]-->
+<!--[if IE 8]> <html lang="en" class="ie ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <!--[if lte ie 8]><script type="text/javascript" src="/fanstatic/vendor/:version:2021-03-16T22:56:24/html5.min.js"></script><![endif]-->
+<link rel="stylesheet" type="text/css" href="/fanstatic/vendor/:version:2021-03-16T22:56:24/select2/select2.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/css/:version:2021-03-16T22:56:24/main.min.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/vendor/:version:2021-03-16T22:56:24/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/ckanext-geoview/:version:2021-03-18T15:28:08/css/geo-resource-styles.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/ckanext-harvest/:version:2021-03-18T15:27:55/styles/harvest.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/pages/:version:2021-03-18T15:27:58/:bundle:css/bootstrap.css;css/medium-editor.css" />
+
+    <meta charset="utf-8" />
+      <meta name="generator" content="ckan 2.7.3" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 500 - California Health and Human Services Open Data Portal</title>
+
+    
+    
+    
+  <link rel="shortcut icon" href="/img/favicon.ico" />
+    
+  
+    <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56144207-1', 'auto', {});
+  
+  ga('create', 'UA-113803653-1', 'auto', 'secondary');
+  
+     
+  ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+  
+  ga('secondary.send', 'pageview');
+  
+</script>
+  
+
+
+    <!--[if IE]>
+    <script src="/classList.min.js"></script>
+    <![endif]-->
+
+    
+    
+    
+    
+
+    
+    
+  
+  
+      
+    
+  <link href='//fonts.googleapis.com/css?family=Lato:400italic,400,900' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+
+  
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css" />
+  
+  <link rel="stylesheet" href="/css/layout3.css" />
+
+
+  <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+
+  
+
+
+    
+    
+
+
+    
+
+
+    
+      
+      
+    <style>
+        [data-module-context="package"] span.actor {
+  display: none;
+}
+[data-module-context="package"] .item p {
+    margin: 5px 0 0 50px;
+}
+a[data-module="api-info"],
+a[data-module="api-info"]:hover {
+    border-radius: 5px;
+}
+.btn-success, .btn-success:hover, .btn-success:active,
+ .actions a.btn.btn-success:hover, .actions a.btn.btn-success:focus, .actions a.btn.btn-success:active {
+    background: #4f6aaf none;
+}
+.ckanext-datapreview>iframe {
+    min-height: 550px;
+}
+.format-label[data-format=html], .format-label[data-format*=html] {
+  width: 30px;
+}
+.nav-tabs li i.fa.fa-picture {
+  display: none;
+}
+.slick-prev:before,
+.slick-next:before {
+  color: #379ED8;
+}
+@media (max-width: 639px) {
+  .dataset-list .dataset-item .dataset-resources,
+  .dataset-list .dataset-item .package-item-note,
+  .dataset-list .dataset-item .package-item-date {
+    padding-left: 0;
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  .nav.nav-pills{
+     display: flex;
+     flex-direction: row;
+  }
+
+  .nav.nav-pills :nth-child(1) { order: 1; }
+  .nav.nav-pills :nth-child(2) { order: 2; }
+  .nav.nav-pills :nth-child(3) { order: 4; }
+  .nav.nav-pills :nth-child(4) { order: 5; }
+  .nav.nav-pills :nth-child(5) { order: 4; }
+}
+      </style>
+    
+  </head>
+
+  
+  <body data-site-root="https://data.chhs.ca.gov/" data-locale-root="https://data.chhs.ca.gov/" >
+
+    
+    <div class="hide"><a href="#content">Skip to content</a></div>
+  
+
+  
+  
+
+  
+
+  <header class="account-masthead">
+    <div class="container">
+      
+        
+          <nav class="account not-authed">
+            <ul class="unstyled">
+              
+              <li><a href="/user/login">Log in</a></li>
+              
+                <li><a class="sub" href="/user/register">Register</a></li>
+              
+              <li>
+                <a href="http://chhs.us5.list-manage.com/subscribe?u=952bf4f788634d2ab0bde1737&id=71852e8cec" target="_blank" title="Subscribe">Subscribe</a>
+              </li>
+              <li>
+                <a href="/contact" title="Contact">Contact</a>
+              </li>
+              <li><a href="https://www.chhs.ca.gov/blog/tag/data/" target="_blank" title="News">News</a></li>
+              <li><a href="/about" title="About">About</a></li>
+              
+            </ul>
+          </nav>
+        
+      
+    </div>
+  </header>
+
+<header class="navbar navbar-static-top masthead">
+  
+    
+  
+  <div class="container">
+    <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+      <span class="fa fa-bars fa-2x"></span>
+    </button>
+    
+    <hgroup class="header-image pull-left">
+
+      
+        
+          <a class="logo" href="/"><img src="/uploads/admin/2018-10-01-235442.294278CHHS-Open-Data-Logo-Final.png" alt="California Health and Human Services Open Data Portal" title="California Health and Human Services Open Data Portal" /></a>
+        
+      
+
+    </hgroup>
+
+    <div class="nav-collapse collapse">
+
+      
+        <nav class="section navigation">
+          <ul class="nav nav-pills">
+            
+              <li><a href="/dataset">Datasets</a></li><li><a href="/group">Topics</a></li><li><a href="/organization">Departments</a></li><li><a href="/pages/training">Training</a></li>
+            
+            <li>
+              <a href="https://data-chhsagency.opendata.arcgis.com/">GeoHub</a>
+            </li>
+          </ul>
+        </nav>
+      
+
+      
+        <form class="section site-search simple-input" action="/dataset" method="get">
+          <div class="field">
+            <label for="field-sitewide-search">Search Datasets</label>
+            <input id="field-sitewide-search" name="q" type="text"/>
+            <label for="sitewide-search-button">Search Button</label>
+            <button class="btn-search" type="submit" id="sitewide-search-button" title="Search"><i class="fa fa-search"></i></button>
+          </div>
+        </form>
+      
+
+    </div>
+  </div>
+</header>
+
+
+    <div role="main">
+      <div id="content" class="container">
+        
+          
+  
+  
+
+
+          
+            <div class="toolbar">
+              
+
+            </div>
+          
+
+          <div class="row wrapper no-nav">
+
+            
+            
+            
+
+            
+  <article class="module">
+    <div class="module-content">
+      
+        
+    <html>
+    <head>
+    <title>Server Error</title>
+    
+    </head>
+    <body>
+    <h1>Server Error</h1>
+    An internal server error occurred
+    
+    <script>document.getElementsByTagName('html')[0].className += ' js';</script>
+<script type="text/javascript" src="/fanstatic/vendor/:version:2021-03-16T22:56:24/jquery.min.js"></script>
+<script type="text/javascript" src="/fanstatic/vendor/:version:2021-03-16T22:56:24/:bundle:bootstrap/js/bootstrap.min.js;jed.min.js;moment-with-locales.js;select2/select2.min.js"></script>
+<script type="text/javascript" src="/fanstatic/base/:version:2021-03-16T22:56:24/:bundle:plugins/jquery.inherit.min.js;plugins/jquery.proxy-all.min.js;plugins/jquery.url-helpers.min.js;plugins/jquery.date-helpers.min.js;plugins/jquery.slug.min.js;plugins/jquery.slug-preview.min.js;plugins/jquery.truncator.min.js;plugins/jquery.masonry.min.js;plugins/jquery.form-warning.min.js;sandbox.min.js;module.min.js;pubsub.min.js;client.min.js;notify.min.js;i18n.min.js;main.min.js;modules/select-switch.min.js;modules/slug-preview.min.js;modules/basic-form.min.js;modules/confirm-action.min.js;modules/api-info.min.js;modules/autocomplete.min.js;modules/custom-fields.min.js;modules/data-viewer.min.js;modules/table-selectable-rows.min.js;modules/resource-form.min.js;modules/resource-upload-field.min.js;modules/resource-reorder.min.js;modules/resource-view-reorder.min.js;modules/follow.min.js;modules/activity-stream.min.js;modules/dashboard.min.js;modules/resource-view-embed.min.js;view-filters.min.js;modules/resource-view-filters-form.min.js;modules/resource-view-filters.min.js;modules/table-toggle-more.min.js;modules/dataset-visibility.min.js;modules/media-grid.min.js;modules/image-upload.min.js"></script>
+<script type="text/javascript" src="/fanstatic/base/:version:2021-03-16T22:56:24/tracking.min.js"></script>
+<script type="text/javascript" src="/fanstatic/ckanext-googleanalytics/:version:2021-03-18T15:28:33/googleanalytics_event_tracking.js"></script>
+<script type="text/javascript" src="/fanstatic/cloudstorage-js/:version:2021-03-18T15:28:12/:bundle:vendor/jquery-widget.js;vendor/file-upload.js;cloudstorage-multipart-upload.js"></script>
+<script type="text/javascript" src="/fanstatic/og_theme/:version:2021-03-18T17:12:02/favorite.js"></script>
+<script type="text/javascript" src="/fanstatic/pages/:version:2021-03-18T15:27:58/:bundle:js/medium-editor.min.js;js/pages-editor.js"></script>
+<script type="text/javascript" src="/fanstatic/showcase/:version:2021-03-18T15:28:05/slick.js"></script><script>document.getElementsByTagName('html')[0].className += ' js';</script>
+<script type="text/javascript" src="/fanstatic/vendor/:version:2021-03-16T22:56:24/jquery.min.js"></script>
+<script type="text/javascript" src="/fanstatic/vendor/:version:2021-03-16T22:56:24/:bundle:bootstrap/js/bootstrap.min.js;jed.min.js;moment-with-locales.js;select2/select2.min.js"></script>
+<script type="text/javascript" src="/fanstatic/base/:version:2021-03-16T22:56:24/:bundle:plugins/jquery.inherit.min.js;plugins/jquery.proxy-all.min.js;plugins/jquery.url-helpers.min.js;plugins/jquery.date-helpers.min.js;plugins/jquery.slug.min.js;plugins/jquery.slug-preview.min.js;plugins/jquery.truncator.min.js;plugins/jquery.masonry.min.js;plugins/jquery.form-warning.min.js;sandbox.min.js;module.min.js;pubsub.min.js;client.min.js;notify.min.js;i18n.min.js;main.min.js;modules/select-switch.min.js;modules/slug-preview.min.js;modules/basic-form.min.js;modules/confirm-action.min.js;modules/api-info.min.js;modules/autocomplete.min.js;modules/custom-fields.min.js;modules/data-viewer.min.js;modules/table-selectable-rows.min.js;modules/resource-form.min.js;modules/resource-upload-field.min.js;modules/resource-reorder.min.js;modules/resource-view-reorder.min.js;modules/follow.min.js;modules/activity-stream.min.js;modules/dashboard.min.js;modules/resource-view-embed.min.js;view-filters.min.js;modules/resource-view-filters-form.min.js;modules/resource-view-filters.min.js;modules/table-toggle-more.min.js;modules/dataset-visibility.min.js;modules/media-grid.min.js;modules/image-upload.min.js"></script>
+<script type="text/javascript" src="/fanstatic/base/:version:2021-03-16T22:56:24/tracking.min.js"></script>
+<script type="text/javascript" src="/fanstatic/ckanext-googleanalytics/:version:2021-03-18T15:28:33/googleanalytics_event_tracking.js"></script>
+<script type="text/javascript" src="/fanstatic/cloudstorage-js/:version:2021-03-18T15:28:12/:bundle:vendor/jquery-widget.js;vendor/file-upload.js;cloudstorage-multipart-upload.js"></script>
+<script type="text/javascript" src="/fanstatic/og_theme/:version:2021-03-18T17:12:02/favorite.js"></script>
+<script type="text/javascript" src="/fanstatic/pages/:version:2021-03-18T15:27:58/:bundle:js/medium-editor.min.js;js/pages-editor.js"></script>
+<script type="text/javascript" src="/fanstatic/showcase/:version:2021-03-18T15:28:05/slick.js"></script></body>
+    </html>
+      
+    </div>
+  </article>
+
+
+            
+          </div>
+        
+      </div>
+    </div>
+  
+    <footer class="site-footer">
+  <div class="container">
+
+    
+    <div class="row">
+      <div class="span12">
+        <div style="white-space:nowrap; padding-bottom:16px;text-align:center">
+          <a class="hide-text" href="/">
+            <img src="/img/CHHS_footer.png" style="height:60px;width:auto;margin-bottom=8px;" alt="CHHS"></img>
+          </a>
+        </div>
+      </div>
+      <div class="span12" style="margin-bottom:10px;">
+        <ul style="display:block; text-align:center;">
+          <li class="footer-link"><a href="/">Home</a></li>
+          <li class="footer-link"><a href="/pages/terms">Terms of Use</a></li>
+          <li class="footer-link"><a href="/pages/privacy">Privacy Policy</a></li>
+          <li class="footer-link"><a href="/contact">Contact</a></li>
+          <li class="footer-link"><a href="/about">About</a></li>
+        </ul>
+      </div>
+      <div class="span8 footer-links" style="padding-bottom:12px; text-align:center;">
+        
+          <ul class="unstyled">
+            
+              
+              <li><a target="_blank" href="/docs/api/index.html">API Documentation</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="span4 attribution">
+        
+          <p>
+             <strong>Powered by</strong> <div style="white-space:nowrap; padding-bottom:16px;"> <a class="hide-text" target="_blank" href="https://opengov.com/?utm_campaign=Footer-Product-OpenData&utm_source=OpenGov&utm_medium=product&utm_term=PO-OGOV-1274&utm_content=logo" style="float:left;"> <img src="/img/OpenGov_Logo.png" style="max-height:24px" alt="OpenGov"></img> </a> <a class="hide-text ckan-footer-logo" target="_blank" href="http://ckan.org" style="margin-left:144px;">CKAN</a> </div> 
+          </p>
+        
+
+      </div>
+    </div>
+    
+  </div>
+</footer>
+  
+    
+    
+    
+    
+      
+    
+  
+  
+    
+  
+    
+    <div class="js-hide" data-module="google-analytics"
+      data-module-googleanalytics_resource_prefix="">
+    </div>
+  
+
+
+    
+
+
+      
+  </body>
+</html>
+      
+    </div>
+  </article>
+
+
+            
+          </div>
+        
+      </div>
+    </div>
+  
+    <footer class="site-footer">
+  <div class="container">
+
+    
+    <div class="row">
+      <div class="span12">
+        <div style="white-space:nowrap; padding-bottom:16px;text-align:center">
+          <a class="hide-text" href="/">
+            <img src="/img/CHHS_footer.png" style="height:60px;width:auto;margin-bottom=8px;" alt="CHHS"></img>
+          </a>
+        </div>
+      </div>
+      <div class="span12" style="margin-bottom:10px;">
+        <ul style="display:block; text-align:center;">
+          <li class="footer-link"><a href="/">Home</a></li>
+          <li class="footer-link"><a href="/pages/terms">Terms of Use</a></li>
+          <li class="footer-link"><a href="/pages/privacy">Privacy Policy</a></li>
+          <li class="footer-link"><a href="/contact">Contact</a></li>
+          <li class="footer-link"><a href="/about">About</a></li>
+        </ul>
+      </div>
+      <div class="span8 footer-links" style="padding-bottom:12px; text-align:center;">
+        
+          <ul class="unstyled">
+            
+              
+              <li><a target="_blank" href="/docs/api/index.html">API Documentation</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="span4 attribution">
+        
+          <p>
+             <strong>Powered by</strong> <div style="white-space:nowrap; padding-bottom:16px;"> <a class="hide-text" target="_blank" href="https://opengov.com/?utm_campaign=Footer-Product-OpenData&utm_source=OpenGov&utm_medium=product&utm_term=PO-OGOV-1274&utm_content=logo" style="float:left;"> <img src="/img/OpenGov_Logo.png" style="max-height:24px" alt="OpenGov"></img> </a> <a class="hide-text ckan-footer-logo" target="_blank" href="http://ckan.org" style="margin-left:144px;">CKAN</a> </div> 
+          </p>
+        
+
+      </div>
+    </div>
+    
+  </div>
+</footer>
+  
+    
+    
+    
+    
+      
+    
+  
+  
+    
+  
+    
+    <div class="js-hide" data-module="google-analytics"
+      data-module-googleanalytics_resource_prefix="">
+    </div>
+  
+
+
+    
+
+
+      
+  </body>
+</html>
