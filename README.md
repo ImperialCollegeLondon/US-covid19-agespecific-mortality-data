@@ -2,7 +2,16 @@
 
 # Age-specific COVID-19 mortality data in the United-States
 
-## Version 1 Release [![DOI](https://zenodo.org/badge/259326890.svg)](https://zenodo.org/badge/latestdoi/259326890)
+## Updates
+
+* 2021-04-02
+This repository is now no longer maintained. What does this mean?
+1. Some of the states, which required manual extraction, will no longer be updated.
+2. The automatic extraction, for the rest of the states, will continue to be run daily and updated in the update-data branch. However, we do not guarantee the accuracy of this data as they are no longer checked.
+3. The processed data, gathering all sources across the states, is no longer updated.
+
+* 2021-01-28
+Version 1 Release [![DOI](https://zenodo.org/badge/259326890.svg)](https://zenodo.org/badge/latestdoi/259326890)
 This is the release related to our [upcoming peer-reviewed age paper](https://www.medrxiv.org/content/10.1101/2020.09.18.20197376v1), where we use age-specific mobility data to estimate the epidemic in the USA by accounting for age-specific heterogeneity.
 
 One may directly get:
