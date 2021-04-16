@@ -55,9 +55,9 @@ prepare_CDC_data = function(last.day,age_max,age.specification,sex,indir, check_
   
   #check which age specification (1 or 2) and censored the data accordingly
   if(age.specification == 1){
-    tmp = subset(tmp, date < as.Date("2020-09-02"))
+    tmp = subset(tmp, date < as.Date("2020-09-05") + 7)
   } else {
-    tmp = subset(tmp, date >= as.Date("2020-09-02"))
+    tmp = subset(tmp, date >= as.Date("2020-09-05"))
   }
   
   # boundaries if deaths is missing
