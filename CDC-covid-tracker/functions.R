@@ -268,7 +268,7 @@ sum_over_2_age_groups = function(tmp, age_1, age_2, age_output)
   return(tmp)
 }
 
-find_daily_deaths = function(tmp)
+find_daily_deaths = function(tmp, rm.COVID.19.Deaths= T)
   {
 
   # ensure incrinsing cumulative deaths
@@ -333,8 +333,10 @@ find_daily_deaths = function(tmp)
   tmp2 = subset(tmp1, !is.na(sum.daily.deaths))
   stopifnot(all(tmp2$sum.daily.deaths >= 0))
   
-  tmp = select(tmp, -COVID.19.Deaths, -min_COVID.19.Deaths, -max_COVID.19.Deaths, -min_idx_NA, -max_idx_NA)
+  tmp = select(tmp, -min_COVID.19.Deaths, -max_COVID.19.Deaths, -min_idx_NA, -max_idx_NA)
   
+  if(rm.COVID.19.Deaths)
+    tmp = select(tmp, -COVID.19.Deaths)
   
   return(tmp)
 }
@@ -858,9 +860,141 @@ merge_deathByAge_over_Sex = function(tmp1, tmp2)
   tmp3 = subset(tmp1, !is.na(sum.daily.deaths))
   stopifnot(all(tmp3$sum.daily.deaths >= 0))
   
+  for(Loc in unique(tmp1$loc_label)){
+    for(Age in unique(tmp1$age)){
+      tmp3 = subset(tmp1, loc_label == Loc & age == Age)
+      .idx_missing = which(is.na(tmp3$daily.deaths))
+      
+      if(length(.idx_missing) == 0)
+        next
+      stopifnot( length(unique(tmp3$min.sum.daily.deaths[.idx_missing])) == 1)
+      stopifnot( length(unique(tmp3$max.sum.daily.deaths[.idx_missing])) == 1)
+      stopifnot( length(unique(tmp3$sum.daily.deaths[.idx_missing])) == 1)
+    }
+  }
+  
   # final
   tmp1 = select(tmp1, 'date', 'loc_label', 'age', 'min.sum.daily.deaths', 'max.sum.daily.deaths', 'sum.daily.deaths', 'daily.deaths')
   tmp = merge(tmp, tmp1, by = c('age', 'loc_label'))
+  
+  return(tmp)
+}
+
+incorporate_AllSexes_information = function(tmp)
+{
+  
+  for(Loc in unique(tmp$loc_label)){
+    for(Age in unique(tmp$age)){
+      
+      tmp3 = subset(tmp, loc_label == Loc & age == Age)
+      .idx_missing = which(is.na(tmp3$daily.deaths))
+      
+      if(length(.idx_missing) == 0)
+        next
+      
+      if(all(!is.na(tmp3$sum.daily.deaths[.idx_missing])))
+        next
+      
+      stopifnot( length(unique(tmp3$min.sum.daily.deaths[.idx_missing])) <= 2)
+      stopifnot( length(unique(tmp3$max.sum.daily.deaths[.idx_missing])) <= 2)
+      
+      stopifnot(tmp3[.idx_missing]$min.sum.daily.deaths[1] >= tmp3[.idx_missing]$min.sum.daily.deaths[length(.idx_missing)])
+      stopifnot(tmp3[.idx_missing]$max.sum.daily.deaths[1] >= tmp3[.idx_missing]$max.sum.daily.deaths[length(.idx_missing)])
+      
+      if(tmp3[.idx_missing]$min.sum.daily.deaths[1] > tmp3[.idx_missing]$min.sum.daily.deaths[length(.idx_missing)])
+        tmp3[.idx_missing]$min.sum.daily.deaths = tmp3[.idx_missing]$min.sum.daily.deaths[length(.idx_missing)]
+      
+      if(tmp3[.idx_missing]$max.sum.daily.deaths[1] > tmp3[.idx_missing]$max.sum.daily.deaths[length(.idx_missing)])
+        tmp3[.idx_missing]$max.sum.daily.deaths =  tmp3[.idx_missing]$max.sum.daily.deaths[length(.idx_missing)]
+      
+      tmp = anti_join(tmp, tmp3, by = c('loc_label', 'age'))
+      tmp = rbind(tmp, tmp3)
+    }
+  }
+  
+  tmp = tmp[order(loc_label, age, date)]
+  return(tmp)
+}
+
+incorporate_AllSexes_boundary_information = function(tmp1, tmp2)
+{
+  locations = unique(tmp1$loc_label)
+  ages = unique(tmp1$age)
+  
+  for(Loc in locations){
+    for(Age in ages){
+      
+      tmp3 = subset(tmp1, loc_label == Loc & age == Age)
+      tmp4 = subset(tmp2, loc_label == Loc & age == Age)
+      tmp3 = subset(tmp3, date < min(tmp4$date))
+      
+      .idx_missing.daily = which(is.na(tmp3$daily.deaths))
+      .idx_missing.daily2 = which(is.na(tmp4$daily.deaths))
+      .idx_non_missing.cum = which(!is.na(tmp4$COVID.19.Deaths))
+      
+      if(length(.idx_missing.daily) == 0)
+        next
+      if(length(.idx_non_missing.cum) == 0)
+        next
+      if(!nrow(tmp3) %in% .idx_missing.daily)
+        next
+      if(!is.na(tmp3[nrow(tmp3)]$sum.daily.deaths) & !is.na(tmp4[1]$COVID.19.Deaths))
+      {
+        if(is.na(tmp4[1]$daily.deaths)){
+          tmp4[1]$daily.deaths = tmp3[nrow(tmp3)]$sum.daily.deaths
+          tmp2 = anti_join(tmp2, tmp4, by = c('loc_label', 'age'))
+          tmp2 = rbind(tmp2, tmp4)
+        }
+        if(tmp3[nrow(tmp3)]$sum.daily.deaths == tmp4[1]$COVID.19.Deaths)
+          next
+        if(tmp3[nrow(tmp3)]$sum.daily.deaths != tmp4[1]$COVID.19.Deaths){
+          tmp3[.idx_missing.daily]$sum.daily.deaths = tmp4[1]$COVID.19.Deaths
+          tmp1 = anti_join(tmp1, tmp3, by = c('loc_label', 'age'))
+          tmp1 = rbind(tmp1, tmp3)
+        }
+      }
+
+      
+      if(1 %in% .idx_missing.daily)
+      {
+        first_non_missing_cum = tmp4$COVID.19.Deaths[.idx_non_missing.cum[1]]
+        stopifnot(all(is.na(tmp3[.idx_missing.daily]$sum.daily.deaths )))
+        tmp3[.idx_missing.daily]$max.sum.daily.deaths = first_non_missing_cum
+        
+        .idx_missing.daily2 = c(.idx_missing.daily2, .idx_non_missing.cum[1])
+        stopifnot(all(is.na(tmp4[.idx_missing.daily2]$sum.daily.deaths )))
+        tmp4[.idx_missing.daily2]$min.sum.daily.deaths = unique(tmp3[.idx_missing.daily]$min.sum.daily.deaths)
+        tmp4[.idx_missing.daily2]$max.sum.daily.deaths = first_non_missing_cum
+        tmp4[.idx_non_missing.cum[1]]$daily.deaths = NA
+      } else {
+        first_non_missing_cum = tmp4$COVID.19.Deaths[.idx_non_missing.cum[1]]
+        tmp3[.idx_missing.daily]$sum.daily.deaths = first_non_missing_cum
+        tmp3[.idx_missing.daily]$min.sum.daily.deaths = NA
+        tmp3[.idx_missing.daily]$max.sum.daily.deaths = NA
+        .idx_missing.daily2 = c(.idx_missing.daily2, .idx_non_missing.cum[1])
+        tmp4[.idx_missing.daily2]$sum.daily.deaths = first_non_missing_cum
+        tmp4[.idx_missing.daily2]$min.sum.daily.deaths = NA
+        tmp4[.idx_missing.daily2]$max.sum.daily.deaths = NA
+        tmp4[.idx_non_missing.cum[1]]$daily.deaths = NA
+      }
+      
+      tmp1 = anti_join(tmp1, tmp3, by = c('loc_label', 'age'))
+      tmp1 = rbind(tmp1, tmp3)
+      
+      tmp2 = anti_join(tmp2, tmp4, by = c('loc_label', 'age'))
+      tmp2 = rbind(tmp2, tmp4)
+      
+      # tmp5 = subset(tmp2, loc_label == 'Alabama' & age == '15-24')
+      # stopifnot(tmp5$sum.daily.deaths[1] == 10)
+    }
+  }
+  
+  tmp2 = select(tmp2,  - COVID.19.Deaths )
+  tmp1 = anti_join(tmp1, tmp2, by = c('loc_label', 'age', 'date'))
+  tmp = rbind(tmp1, select(tmp2, -Sex))
+  tmp = tmp[order(loc_label, age, date)]
+  
+  tmp = incorporate_AllSexes_information(tmp)
   
   return(tmp)
 }
