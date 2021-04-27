@@ -1,0 +1,20 @@
+<html>
+<head>
+<title>Full Screen - Mississippi State Department of Health</title>
+ <link rel="stylesheet" type="text/css" href="https://msdh.ms.gov/msdhsite/styles/normalize.css">
+<link rel="stylesheet" type="text/css" href="https://msdh.ms.gov/msdhsite/styles/style.css">
+<link rel="stylesheet" type="text/css" href="https://msdh.ms.gov/msdhsite/styles/page.css">
+<style type="text/css">
+   img: max-width: 100%;
+</style>
+</head>
+
+<body>
+
+
+   <p style="text-align:right; margin-top: 1em"><a href="javascript:window.history.back();" style="padding: 5px; margin: 1em; background-color: white"><strong>CLOSE</strong></a></p>
+   
+   <p style="text-align: center"><img src="https://msdh.ms.gov/msdhsite/_static/images/graphics/covid19-chart-age-2021-04-27.png"></p> 
+
+</body>
+</html>
