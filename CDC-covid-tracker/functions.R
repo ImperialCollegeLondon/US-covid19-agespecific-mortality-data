@@ -740,7 +740,7 @@ merge_deathByAge_over_Sex = function(tmp1, tmp2)
          min.sum.daily.deaths.sex_2, by = c('age', 'loc_label')]
   tmp1[min_idx_NA.sex_1 == min_date_idx & min_idx_NA.sex_2 != min_date_idx & 
          max_idx_NA.sex_1 == max_date_idx & max_idx_NA.sex_2 == max_date_idx, 
-       max.sum.daily.deaths := ifelse(is.na(unique(sum.daily.deaths.sex_1)), min.sum.daily.deaths.sex_1, sum.daily.deaths.sex_1) + 
+       max.sum.daily.deaths := ifelse(is.na(unique(sum.daily.deaths.sex_1)), max.sum.daily.deaths.sex_1, sum.daily.deaths.sex_1) + 
          max.sum.daily.deaths.sex_2, by = c('age', 'loc_label')]
 
   # sex 2 is at the beginning
@@ -751,7 +751,7 @@ merge_deathByAge_over_Sex = function(tmp1, tmp2)
   tmp1[min_idx_NA.sex_1 != min_date_idx & min_idx_NA.sex_2 == min_date_idx & 
          max_idx_NA.sex_1 == max_date_idx & max_idx_NA.sex_2 == max_date_idx, 
        max.sum.daily.deaths := max.sum.daily.deaths.sex_1 + 
-         ifelse(is.na(unique(sum.daily.deaths.sex_2)), min.sum.daily.deaths.sex_2, sum.daily.deaths.sex_2), by = c('age', 'loc_label')]
+         ifelse(is.na(unique(sum.daily.deaths.sex_2)), max.sum.daily.deaths.sex_2, sum.daily.deaths.sex_2), by = c('age', 'loc_label')]
   
   # one is at the beginning of the period and one finish after the period
   # sex 1 is at the beginning and sex 1 finish after the period
@@ -779,7 +779,7 @@ merge_deathByAge_over_Sex = function(tmp1, tmp2)
          sum(daily.deaths.sex_1[(unique(max_idx_NA.sex_1)+1):(unique(max_idx_NA.sex_2)-1)]), by = c('age', 'loc_label')]
   tmp1[min_idx_NA.sex_1 == min_date_idx & min_idx_NA.sex_2 != min_date_idx & 
          max_idx_NA.sex_1 != max_date_idx & max_idx_NA.sex_2 == max_date_idx,
-         max.sum.daily.deaths := ifelse(is.na(unique(sum.daily.deaths.sex_1)), min.sum.daily.deaths.sex_1, sum.daily.deaths.sex_1) + 
+         max.sum.daily.deaths := ifelse(is.na(unique(sum.daily.deaths.sex_1)), max.sum.daily.deaths.sex_1, sum.daily.deaths.sex_1) + 
          max.sum.daily.deaths.sex_2 + 
          sum(daily.deaths.sex_1[(unique(max_idx_NA.sex_1)+1):(unique(max_idx_NA.sex_2)-1)]), by = c('age', 'loc_label')]
 
@@ -906,6 +906,11 @@ incorporate_AllSexes_information = function(tmp)
       
       if(tmp3[.idx_missing]$max.sum.daily.deaths[1] > tmp3[.idx_missing]$max.sum.daily.deaths[length(.idx_missing)])
         tmp3[.idx_missing]$max.sum.daily.deaths =  tmp3[.idx_missing]$max.sum.daily.deaths[length(.idx_missing)]
+      
+      if(max(.idx_missing) == nrow(tmp3) & min(.idx_missing) != 1){
+        tmp3[.idx_missing]$min.sum.daily.deaths = 1
+        tmp3[.idx_missing]$max.sum.daily.deaths = 9
+      }
       
       tmp = anti_join(tmp, tmp3, by = c('loc_label', 'age'))
       tmp = rbind(tmp, tmp3)
